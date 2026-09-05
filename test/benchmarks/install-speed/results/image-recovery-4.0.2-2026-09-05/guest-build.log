@@ -1,0 +1,39 @@
+==> WARNING: /run/image-recovery/mnt/omarchy-root is not a mountpoint. This may have undesirable side effects.
+{
+  "schema_version": 1,
+  "status": "verified",
+  "source_checks_sha256": "bb18e91d8dc81731d625ffbf29ba11bd43fe8b1cea655ac8967548e11aefd0d4",
+  "catalog_sha256": "81a0adb227380bac17ce96a1597814d8d1dcfdc117c39ce0864b57b8a60b8d51",
+  "verified_package_count": 941,
+  "expected_package_count": 941,
+  "fields": [
+    "NAME",
+    "VERSION",
+    "file count",
+    "canonical file-list SHA256",
+    "raw MTREE SHA256",
+    "INSTALL presence/SHA256"
+  ],
+  "problems": []
+}
+{
+  "schema_version": 1,
+  "status": "verified",
+  "packages": [
+    "zbar",
+    "zoxide",
+    "zram-generator",
+    "yay",
+    "yaru-icon-theme",
+    "xournalpp"
+  ],
+  "expected_regular_files": 11085,
+  "verified_regular_files": 11085,
+  "verified_bytes": 89621120,
+  "source_checks_sha256": "d2ef3c8dbe7ae4966485b563568b85d99b639d20aa0093870a62d13c5ebc0349",
+  "excluded": [],
+  "elapsed_s": 16.66114272899995,
+  "errors": []
+}
+Resize device id 1 (/dev/vdb) from 24.00GiB to 5.75GiB
+Build complete: 6174015488 virtual bytes. Copy small output files, shut down this VM, then compress the raw disk on the host.

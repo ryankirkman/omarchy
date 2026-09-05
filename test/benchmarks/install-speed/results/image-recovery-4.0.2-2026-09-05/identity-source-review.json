@@ -1,0 +1,715 @@
+{
+  "schema_version": 1,
+  "review_kind": "Source and saved-evidence review; does not replace lstat of the sealed root image",
+  "source_iso_sha256": "2ef8e624aa1bec7e277e28056b8535a6c9373ba48d7ede3f1a01cb6d2373cfb8",
+  "source_iso_path": "/tmp/omarchy-bench/downloads/omarchy-4.0.2.iso",
+  "baseline_package_count": 941,
+  "scope": {
+    "install_scriptlets": 43,
+    "tmpfiles_configs": 47,
+    "tmpfiles_usr_configs": 46,
+    "tmpfiles_etc_configs": 1,
+    "additional_payloads": 8,
+    "payload_members_total": 55,
+    "payload_hashes_verified_against_archive_mtree": 55,
+    "install_hashes_verified_against_archive_mtree": 43,
+    "execution": "Native host read-only extraction of selected original archive members; no VM, root-image, or repository changes"
+  },
+  "conclusion": "The reviewed install and chroot-hook paths contain no writer of a persistent random-seed or machine-info. The systemd package generates /etc/machine-id during installation, and dbus tmpfiles subsequently links its compatibility path to that file. Saved physical evidence confirms /etc/machine-id was emptied after setup. The sealed image still needs direct checks of random-seed absence, dbus symlink-versus-regular state, and machine-info absence/content before these three properties can be called verified.",
+  "findings": [
+    {
+      "subject": "/etc/machine-id",
+      "status": "generation observed; cleanup physically checked",
+      "evidence": "systemd 261.2-1 INSTALL post_install calls systemd-machine-id-setup. interrupted-pacman.log records initialization from a random generator. image-identity-hygiene.json records machine_id_bytes=0 after cleanup.",
+      "implication": "Clearing this generated installation-time value is necessary and was checked in saved evidence."
+    },
+    {
+      "subject": "/var/lib/dbus/machine-id",
+      "status": "expected symlink; sealed-image type unobserved",
+      "evidence": "dbus tmpfiles creates the directory and uses L to create /var/lib/dbus/machine-id -> /etc/machine-id if no object already occupies the path. dbus has no INSTALL script. dbus-broker INSTALL only has a pre_upgrade service-copy action, unused in the all-install transaction.",
+      "implication": "The normal fresh-root path shares /etc/machine-id rather than retaining a second value. L preserves an existing regular file, so the source rule alone cannot rule one out. A separate nonempty dbus value could repopulate the emptied etc identity at boot."
+    },
+    {
+      "subject": "/var/lib/systemd/random-seed",
+      "status": "no generation path found in reviewed install/chroot setup; sealed-image existence unobserved",
+      "evidence": "None of the 43 INSTALL scripts or 47 tmpfiles configs invokes systemd-random-seed or bootctl random-seed, nor writes the persistent random-seed path. The exact systemd-random-seed.service invokes load at service start and save at stop. systemd-boot-random-seed.service separately invokes bootctl random-seed. Those are boot/service actions, not systemd-hook tmpfiles behavior.",
+      "implication": "A never-booted image built through these paths should not receive this seed, but that is an inference. Check that no file, symlink, or other object exists in the sealed image. The packaged manual recommends removing a seed from replicated images."
+    },
+    {
+      "subject": "/etc/machine-info",
+      "status": "no creation path found; sealed-image existence unobserved",
+      "evidence": "No reviewed INSTALL script or tmpfiles rule writes or copies this path. The packaged machine-info manual describes administrator-set metadata normally changed through hostnamectl, and permits the file to be absent.",
+      "implication": "Absence is expected for this build path; presence remains possible through an unreviewed manual/custom action. If present, inspect its content for builder-specific metadata. It is not a substitute for machine-id."
+    },
+    {
+      "subject": "Chroot hooks",
+      "status": "saved execution evidence agrees with exact script",
+      "evidence": "systemd-hook executes systemd-tmpfiles --create without --boot. Its service-control operations call systemd-detect-virt --chroot and exit before contacting the booted service manager. Saved hook replay records tmpfiles success and chroot skips for binfmt, sysctl, both daemon reloads, udev reload, and dbus reload.",
+      "implication": "Enabling services in package scriptlets does not run random-seed service start/stop. Tmpfiles still runs and therefore can create the dbus symlink."
+    },
+    {
+      "subject": "Other temporary identity-dependent paths",
+      "status": "reviewed with narrow saved physical check",
+      "evidence": "systemd tmpfiles contains journal paths using %m; saved hygiene evidence shows no journal directory children. A separate tmpfiles rule can copy /.extra/boot-secret to /run/systemd/stub/boot-secret if that source exists; it does not create /var/lib/systemd/random-seed.",
+      "implication": "No inference about the sealed image random-seed path is based merely on package file lists or journal absence."
+    }
+  ],
+  "direct_checks_still_needed": [
+    {
+      "path": "/var/lib/systemd/random-seed",
+      "check": "lstat within the unbooted sealed root: require absence, including no dangling symlink. Do not publish seed bytes if unexpectedly present."
+    },
+    {
+      "path": "/var/lib/dbus/machine-id",
+      "check": "lstat plus readlink inside the unbooted sealed root. Expected symlink resolves within that root to /etc/machine-id, whose size is zero. An absent path is also acceptable before first-boot tmpfiles. Inspect any separate regular file; a nonempty value is not acceptable for a reusable image."
+    },
+    {
+      "path": "/etc/machine-info",
+      "check": "lstat within the unbooted sealed root. Expected absence; if present, inspect metadata and distinguish generic configuration from builder-specific values."
+    }
+  ],
+  "limits": [
+    "The raw image was already reclaimed; this reviewer did not mount or inspect the sealed image.",
+    "Exact source and execution-path review supports expectations, not filesystem-absence claims.",
+    "Compiled systemd binary internals were not audited or executed in this subtask; relevant behavior is supported by the exact packaged manual, scripts, units and saved logs."
+  ],
+  "saved_runtime_evidence": [
+    {
+      "file": "image-identity-hygiene.json",
+      "sha256": "72f9748214caca4d7c3843e81baf9d4695717e81ae411968eaa0003785502dd9"
+    },
+    {
+      "file": "interrupted-pacman.log",
+      "sha256": "9d68d032b09d7e5e2892c27ca8bcf310ecc899173363d83bbaab9de025cd571a"
+    },
+    {
+      "file": "hook-replay.log",
+      "sha256": "9d03d2fdc567ea8c79c93c4dadad0d33e7f4642866f19dbdea57c67dce1de18d"
+    }
+  ],
+  "key_payload_sources": [
+    {
+      "package": "dbus",
+      "archive_path": "var/cache/omarchy/mirror/offline/dbus-1.16.2-1-x86_64.pkg.tar.zst",
+      "member": "usr/lib/tmpfiles.d/dbus.conf",
+      "filetype": 32768,
+      "bytes": 365,
+      "sha256": "d1b15f34a0590f6535dbff91727dd6bbf10752e8abb2cab73fa66a6184f9df1a",
+      "matches_original_mtree_sha256": true,
+      "version": "1.16.2-1"
+    },
+    {
+      "package": "systemd",
+      "archive_path": "var/cache/omarchy/mirror/offline/systemd-261.2-1-x86_64.pkg.tar.zst",
+      "member": "usr/lib/systemd/system/systemd-boot-random-seed.service",
+      "filetype": 32768,
+      "bytes": 1029,
+      "sha256": "a3fc62425342926bcd0097b2eb4d096ae3ccbda2d242031fc25b17568ea04621",
+      "matches_original_mtree_sha256": true,
+      "version": "261.2-1"
+    },
+    {
+      "package": "systemd",
+      "archive_path": "var/cache/omarchy/mirror/offline/systemd-261.2-1-x86_64.pkg.tar.zst",
+      "member": "usr/lib/systemd/system/systemd-random-seed.service",
+      "filetype": 32768,
+      "bytes": 1187,
+      "sha256": "e4b935cc3c5aa680af2addebc0af1507d46c0f0f638bed3497a46b1db0ee51f6",
+      "matches_original_mtree_sha256": true,
+      "version": "261.2-1"
+    },
+    {
+      "package": "systemd",
+      "archive_path": "var/cache/omarchy/mirror/offline/systemd-261.2-1-x86_64.pkg.tar.zst",
+      "member": "usr/lib/tmpfiles.d/20-systemd-stub.conf",
+      "filetype": 32768,
+      "bytes": 848,
+      "sha256": "bf6d6e9d5b8fc2e76d213f070c5e2e4f943565233befe309af18adee0aff8b0b",
+      "matches_original_mtree_sha256": true,
+      "version": "261.2-1"
+    },
+    {
+      "package": "systemd",
+      "archive_path": "var/cache/omarchy/mirror/offline/systemd-261.2-1-x86_64.pkg.tar.zst",
+      "member": "usr/lib/tmpfiles.d/etc.conf",
+      "filetype": 32768,
+      "bytes": 547,
+      "sha256": "e819001e4ce10527081861713def4018b031fefcd9f6249ed652dd630280a014",
+      "matches_original_mtree_sha256": true,
+      "version": "261.2-1"
+    },
+    {
+      "package": "systemd",
+      "archive_path": "var/cache/omarchy/mirror/offline/systemd-261.2-1-x86_64.pkg.tar.zst",
+      "member": "usr/lib/tmpfiles.d/provision.conf",
+      "filetype": 32768,
+      "bytes": 852,
+      "sha256": "dbb85f57c2e24e703d2cc103b21634a4b53aa4d0f58dac59af74a3f12cddc73a",
+      "matches_original_mtree_sha256": true,
+      "version": "261.2-1"
+    },
+    {
+      "package": "systemd",
+      "archive_path": "var/cache/omarchy/mirror/offline/systemd-261.2-1-x86_64.pkg.tar.zst",
+      "member": "usr/lib/tmpfiles.d/systemd.conf",
+      "filetype": 32768,
+      "bytes": 1968,
+      "sha256": "6b458361cd76f40ecff2079fac7732f819f7078cd7eac34d57f2ae7985704024",
+      "matches_original_mtree_sha256": true,
+      "version": "261.2-1"
+    },
+    {
+      "package": "systemd",
+      "archive_path": "var/cache/omarchy/mirror/offline/systemd-261.2-1-x86_64.pkg.tar.zst",
+      "member": "usr/share/libalpm/scripts/systemd-hook",
+      "filetype": 32768,
+      "bytes": 1799,
+      "sha256": "90e00dd01359565be85a8cdd93b424b4c1c89563300d16eaf0e7eedc349bf9fc",
+      "matches_original_mtree_sha256": true,
+      "version": "261.2-1"
+    },
+    {
+      "package": "systemd",
+      "archive_path": "var/cache/omarchy/mirror/offline/systemd-261.2-1-x86_64.pkg.tar.zst",
+      "member": "usr/share/man/man1/systemd-machine-id-setup.1.gz",
+      "filetype": 32768,
+      "bytes": 2088,
+      "sha256": "37bad46bedf228321170ee097591455f819145c342c1e3369e9ec88bcd3caebe",
+      "matches_original_mtree_sha256": true,
+      "version": "261.2-1"
+    },
+    {
+      "package": "systemd",
+      "archive_path": "var/cache/omarchy/mirror/offline/systemd-261.2-1-x86_64.pkg.tar.zst",
+      "member": "usr/share/man/man5/machine-id.5.gz",
+      "filetype": 32768,
+      "bytes": 3384,
+      "sha256": "96c9fbb83f7f48f98c6e92abf16fd0c81e59e6a753176f37e2b7b3ae1f634ebd",
+      "matches_original_mtree_sha256": true,
+      "version": "261.2-1"
+    },
+    {
+      "package": "systemd",
+      "archive_path": "var/cache/omarchy/mirror/offline/systemd-261.2-1-x86_64.pkg.tar.zst",
+      "member": "usr/share/man/man5/machine-info.5.gz",
+      "filetype": 32768,
+      "bytes": 2586,
+      "sha256": "8b6790d3e756990792670c0842e8f0c6737a9a090faa19f4a33e9e404aa33372",
+      "matches_original_mtree_sha256": true,
+      "version": "261.2-1"
+    },
+    {
+      "package": "systemd",
+      "archive_path": "var/cache/omarchy/mirror/offline/systemd-261.2-1-x86_64.pkg.tar.zst",
+      "member": "usr/share/man/man8/systemd-random-seed.service.8.gz",
+      "filetype": 32768,
+      "bytes": 1765,
+      "sha256": "5bf362e7207ce7ff0d04f908131d14366dd78a66800413d836e86a538e3133e9",
+      "matches_original_mtree_sha256": true,
+      "version": "261.2-1"
+    }
+  ],
+  "all_install_source_hashes": [
+    {
+      "package": "alsa-lib",
+      "sha256": "743fa10c1f7b0cb14b3a6b4f79607b41f82b251fbf57764190c974d450cfc446",
+      "bytes": 279,
+      "matches_original_mtree_sha256": true
+    },
+    {
+      "package": "archlinux-keyring",
+      "sha256": "3cc9988527b2a866d1ab81035c84a9bb4b1a3a3f6dda578528af17c702798c31",
+      "bytes": 626,
+      "matches_original_mtree_sha256": true
+    },
+    {
+      "package": "bash",
+      "sha256": "a041703891b00fc7c2109d004ac548de8e3f684a910887d7d463adcc4984548d",
+      "bytes": 454,
+      "matches_original_mtree_sha256": true
+    },
+    {
+      "package": "btrfs-progs",
+      "sha256": "f413d71bf8fa4231a3d1137ec2873cdf9e84c92983f10ca09fe415d2c8d37923",
+      "bytes": 497,
+      "matches_original_mtree_sha256": true
+    },
+    {
+      "package": "ca-certificates-utils",
+      "sha256": "581c4f5c03f144298e2f9fe72d99a9e6d98cdbeea076f20d687559de701fd5c0",
+      "bytes": 523,
+      "matches_original_mtree_sha256": true
+    },
+    {
+      "package": "cups",
+      "sha256": "a3a753ff14fa087a8366fa693f54861ee08b57b253038119233219b7de99a855",
+      "bytes": 1292,
+      "matches_original_mtree_sha256": true
+    },
+    {
+      "package": "dbus-broker",
+      "sha256": "1c28569503c3f1ac4f2db1eb0b4d05d846d70e4503af32b5731fc3f9619f48c4",
+      "bytes": 363,
+      "matches_original_mtree_sha256": true
+    },
+    {
+      "package": "dconf",
+      "sha256": "1c8fdb65c96aa1fb86a571106eb694f45670ab6dd4afc6314d6510703479e306",
+      "bytes": 144,
+      "matches_original_mtree_sha256": true
+    },
+    {
+      "package": "fontconfig",
+      "sha256": "a40149f547b3753fc1b1a67dc8d4c002945c7f023fd73df8fe31252bb3c14538",
+      "bytes": 737,
+      "matches_original_mtree_sha256": true
+    },
+    {
+      "package": "gcr",
+      "sha256": "f7fcf986ccf0f70c0f08cc1e24c4c21a04b242b2fe9d9767dec25f8c44fef701",
+      "bytes": 169,
+      "matches_original_mtree_sha256": true
+    },
+    {
+      "package": "gdk-pixbuf2",
+      "sha256": "84f84cd1f3771598fc52416f9a2509d064349af2cbd00a9332fb2ce07fb8fa5f",
+      "bytes": 71,
+      "matches_original_mtree_sha256": true
+    },
+    {
+      "package": "git",
+      "sha256": "afe63da01ad0808371c99bb21865bd56a5cd2fee3efdd0372d98cde9310f3ca5",
+      "bytes": 324,
+      "matches_original_mtree_sha256": true
+    },
+    {
+      "package": "gnome-keyring",
+      "sha256": "c991ee5d599352fb6230e543d4ff992db72fc0151c695d2f6bc8ee440e498008",
+      "bytes": 304,
+      "matches_original_mtree_sha256": true
+    },
+    {
+      "package": "gnupg",
+      "sha256": "f76c4354ba1602d686244bbe4122f877e95ed4a7d7e9736ce0308196b050e9e0",
+      "bytes": 330,
+      "matches_original_mtree_sha256": true
+    },
+    {
+      "package": "gpu-screen-recorder",
+      "sha256": "7f5000a57608727655964ef706a78bb7a109a909e65b6be560cd08c57f388b5c",
+      "bytes": 128,
+      "matches_original_mtree_sha256": true
+    },
+    {
+      "package": "gstreamer",
+      "sha256": "cc4bd2b6784dc31c3a0d9b86c2a80a3f8294b5bd0106e49899f6cb17d81d9729",
+      "bytes": 144,
+      "matches_original_mtree_sha256": true
+    },
+    {
+      "package": "gtk3",
+      "sha256": "fd320efcaecbea2bada4322d1fe08525bce30e649acc8dee8333020c9ae4deff",
+      "bytes": 66,
+      "matches_original_mtree_sha256": true
+    },
+    {
+      "package": "gvfs-nfs",
+      "sha256": "0a74a1b2ea16bd6c00233ab6c582e127e83a66042761160004381bbd3ee24be3",
+      "bytes": 108,
+      "matches_original_mtree_sha256": true
+    },
+    {
+      "package": "inetutils",
+      "sha256": "5ab24fb7773f6ac3942225f575a5d2c541ef2ac9e837eb934e9e02c3d72e4234",
+      "bytes": 308,
+      "matches_original_mtree_sha256": true
+    },
+    {
+      "package": "libxcrypt",
+      "sha256": "b6b5b7c5c611db403c26c53adabaee30f1f1ac9b3f550213d00dc4554d88a1b7",
+      "bytes": 530,
+      "matches_original_mtree_sha256": true
+    },
+    {
+      "package": "limine",
+      "sha256": "68d3d5e3b16e96d21d824acd082d76f453d3da83e659854c95c1ef9f4a1c74b4",
+      "bytes": 285,
+      "matches_original_mtree_sha256": true
+    },
+    {
+      "package": "lua-luarocks",
+      "sha256": "a37a6d55268c61bc3a4440f517d7e4b9bf801be0e39daf58ac28bf79fa9dba66",
+      "bytes": 506,
+      "matches_original_mtree_sha256": true
+    },
+    {
+      "package": "luarocks",
+      "sha256": "a37a6d55268c61bc3a4440f517d7e4b9bf801be0e39daf58ac28bf79fa9dba66",
+      "bytes": 506,
+      "matches_original_mtree_sha256": true
+    },
+    {
+      "package": "nftables",
+      "sha256": "20052200a4f62c544294061e498afd4ca67f4b293a7134346f3a87e295d3a0b4",
+      "bytes": 470,
+      "matches_original_mtree_sha256": true
+    },
+    {
+      "package": "obsidian",
+      "sha256": "4893dc21ea3ff8ab50504455ca2ac2b9c037a64891bf86ed5829c70408958051",
+      "bytes": 151,
+      "matches_original_mtree_sha256": true
+    },
+    {
+      "package": "omacalc",
+      "sha256": "ddb234b61ffb550ea14ebc495b1dc6df5e362e7881f1d14687f63f184d7d9b4d",
+      "bytes": 280,
+      "matches_original_mtree_sha256": true
+    },
+    {
+      "package": "omacut",
+      "sha256": "ddb234b61ffb550ea14ebc495b1dc6df5e362e7881f1d14687f63f184d7d9b4d",
+      "bytes": 280,
+      "matches_original_mtree_sha256": true
+    },
+    {
+      "package": "omarchy-keyring",
+      "sha256": "5e8498cdd2455761bec2aefc3e88b1513b8f4446f9e14a2798ab18c72be3adf6",
+      "bytes": 352,
+      "matches_original_mtree_sha256": true
+    },
+    {
+      "package": "omarchy-settings",
+      "sha256": "43d2ee952beffc023b5b81b8acb5eca2419bb4c15151e4f70041be202e50cff8",
+      "bytes": 2105,
+      "matches_original_mtree_sha256": true
+    },
+    {
+      "package": "omawrite",
+      "sha256": "ddb234b61ffb550ea14ebc495b1dc6df5e362e7881f1d14687f63f184d7d9b4d",
+      "bytes": 280,
+      "matches_original_mtree_sha256": true
+    },
+    {
+      "package": "p11-kit",
+      "sha256": "4aa0b86bcfac03bb1616419c7a7cab8b741a876f3ccd362fb7f689e8571c9b22",
+      "bytes": 468,
+      "matches_original_mtree_sha256": true
+    },
+    {
+      "package": "pipewire",
+      "sha256": "6273955909650638a70fe6592a3f5a11c47a288a8a79d63ec2b312afe077e9de",
+      "bytes": 305,
+      "matches_original_mtree_sha256": true
+    },
+    {
+      "package": "pipewire-pulse",
+      "sha256": "96bb31292f93db26c3755e7e9a9f4e7a4a95738c614d45d556bbd788c6a77712",
+      "bytes": 286,
+      "matches_original_mtree_sha256": true
+    },
+    {
+      "package": "plymouth",
+      "sha256": "a1e66916bbd8ae7649c7647ea35036ac01572e3d5fb3f264d8a3e66ae420ef39",
+      "bytes": 538,
+      "matches_original_mtree_sha256": true
+    },
+    {
+      "package": "polkit",
+      "sha256": "8da91bbb6fd6568ca2e6dabb19e2a3f7b77793c4dd57270abc83f9216e6f5fd5",
+      "bytes": 291,
+      "matches_original_mtree_sha256": true
+    },
+    {
+      "package": "sudo",
+      "sha256": "8c764c770a40d169c1cc53c0a84977795fb514ae54c7f56a4b5a9f5e2dbf0c48",
+      "bytes": 245,
+      "matches_original_mtree_sha256": true
+    },
+    {
+      "package": "systemd",
+      "sha256": "f77f2674915cb85721e8c13b12902d52f4e5a3438e9a6dcfa2789dd63af71702",
+      "bytes": 2113,
+      "matches_original_mtree_sha256": true
+    },
+    {
+      "package": "tar",
+      "sha256": "a298b7061400c08e9040e044820928a668aabeba003e8499f197e1a58408d939",
+      "bytes": 427,
+      "matches_original_mtree_sha256": true
+    },
+    {
+      "package": "ufw-docker",
+      "sha256": "a731e57874386e0d2e4855682afdca08d821ed1e9148bf2ee0bcd91450e87302",
+      "bytes": 182,
+      "matches_original_mtree_sha256": true
+    },
+    {
+      "package": "wireplumber",
+      "sha256": "39a066419d41b71a34ac911f34c62424728bc66563bfd2d4d7c16cfc61830fa6",
+      "bytes": 839,
+      "matches_original_mtree_sha256": true
+    },
+    {
+      "package": "woff2-font-awesome",
+      "sha256": "8b0c2f178c9baa4a01e5b403ee4f0a2108c09577fe53534e132f45604e78cd04",
+      "bytes": 513,
+      "matches_original_mtree_sha256": true
+    },
+    {
+      "package": "xdg-user-dirs",
+      "sha256": "a054a9515d7123ada3028cda2bed105b813c7a225d06a97886c42046f1a7d2e5",
+      "bytes": 408,
+      "matches_original_mtree_sha256": true
+    },
+    {
+      "package": "xorg-server",
+      "sha256": "57316bf08e1934f983b03d085ca318dc27eaca9dc137c61ca62074ecfd5ede11",
+      "bytes": 507,
+      "matches_original_mtree_sha256": true
+    }
+  ],
+  "all_tmpfiles_source_hashes": [
+    {
+      "package": "alsa-utils",
+      "member": "usr/lib/tmpfiles.d/alsa-utils.conf",
+      "sha256": "18b3aff0e6f60ce701dabf20b74fe481546b153cc81456e43734f814aa04e70b"
+    },
+    {
+      "package": "audit",
+      "member": "usr/lib/tmpfiles.d/audit.conf",
+      "sha256": "5d032b5612a037027d196f70de16e93c1c939adcaf3692244265ea7856e05fa8"
+    },
+    {
+      "package": "cryptsetup",
+      "member": "usr/lib/tmpfiles.d/cryptsetup.conf",
+      "sha256": "d6bb4b689200c2348945700a6b0dad5df92bc2015860d15f36a25590814d77b0"
+    },
+    {
+      "package": "dbus",
+      "member": "usr/lib/tmpfiles.d/dbus.conf",
+      "sha256": "d1b15f34a0590f6535dbff91727dd6bbf10752e8abb2cab73fa66a6184f9df1a"
+    },
+    {
+      "package": "filesystem",
+      "member": "usr/lib/tmpfiles.d/arch.conf",
+      "sha256": "f1b45f29b1a6b6796190bea821aebdd85ea5107115d6e95a4f9f2f5c9292b575"
+    },
+    {
+      "package": "gvfs",
+      "member": "usr/lib/tmpfiles.d/gvfsd-fuse-tmpfiles.conf",
+      "sha256": "df341f1a5b7da2e9624e2eddbd1ba074f94a87cc916ffe8357e018d0223518b2"
+    },
+    {
+      "package": "kernel-modules-hook",
+      "member": "usr/lib/tmpfiles.d/linux-modules-cleanup.conf",
+      "sha256": "4169b44c297ddb7aad2220c6eba7c7942e3396f92528c59617955ab5560cb4cf"
+    },
+    {
+      "package": "libutempter",
+      "member": "usr/lib/tmpfiles.d/libutempter.conf",
+      "sha256": "8fc708052bab79f707bacaa66fa1529808bc7e72316faf4038ad9c763ec7e80d"
+    },
+    {
+      "package": "man-db",
+      "member": "usr/lib/tmpfiles.d/man-db.conf",
+      "sha256": "ddddbf894073eaf20b62ca40160668919719527012c3fff249a9a6e05ea1b0ce"
+    },
+    {
+      "package": "mkinitcpio",
+      "member": "usr/lib/tmpfiles.d/20-mkinitcpio.conf",
+      "sha256": "707f58ea2337e9cd84f1ca733963be3d40e38796678d800e6f1097dbba4f49b2"
+    },
+    {
+      "package": "omarchy-settings",
+      "member": "etc/tmpfiles.d/omarchy-zswap.conf",
+      "sha256": "f68add7be20beab2ac93bea052f20a27eeca015492638423e9d858260b8fa28e"
+    },
+    {
+      "package": "openssh",
+      "member": "usr/lib/tmpfiles.d/openssh.conf",
+      "sha256": "fadd31c107aee3fc6b501ca046aeb5e6fb1b0256cc5cdcade4e2c95205823a28"
+    },
+    {
+      "package": "pam",
+      "member": "usr/lib/tmpfiles.d/pam.conf",
+      "sha256": "5631f224e90c4f0459361c2a5b250112e3a91ba849754bb6f67d69d683a2e5ac"
+    },
+    {
+      "package": "plocate",
+      "member": "usr/lib/tmpfiles.d/plocate.conf",
+      "sha256": "adda399ac42f0faa002caab5bf932777c0006ae7c4387add859c9f77321b4202"
+    },
+    {
+      "package": "plymouth",
+      "member": "usr/lib/tmpfiles.d/50-plymouth.conf",
+      "sha256": "f895de71fce0cbf480527cd7f1bd9d2c81b255e0848cfb64e8fc4b37dc599d17"
+    },
+    {
+      "package": "polkit",
+      "member": "usr/lib/tmpfiles.d/polkit-tmpfiles.conf",
+      "sha256": "50f4e9c849bee5120546109b288ff7a631004dd2a7bfb27062181aa684b517c2"
+    },
+    {
+      "package": "sddm",
+      "member": "usr/lib/tmpfiles.d/sddm.conf",
+      "sha256": "79fbb52c626b94653fc2d3b213bda81e559fdc645bf8496e57d22a83bc3e565e"
+    },
+    {
+      "package": "sudo",
+      "member": "usr/lib/tmpfiles.d/sudo.conf",
+      "sha256": "8b5ca911b7e0db3ca947da704ebd5acd95ae3f12832a3a2569082600600008be"
+    },
+    {
+      "package": "systemd",
+      "member": "usr/lib/tmpfiles.d/20-systemd-osc-context.conf",
+      "sha256": "8052bc32765fa96b831d414256e5d9c8369c185bc61d10fb4088d6871cba3ffb"
+    },
+    {
+      "package": "systemd",
+      "member": "usr/lib/tmpfiles.d/20-systemd-shell-extra.conf",
+      "sha256": "2239913f1b4d343818aef1ba684219c46c3e291c89b1cf2dec1bb2f5e1ff29f6"
+    },
+    {
+      "package": "systemd",
+      "member": "usr/lib/tmpfiles.d/20-systemd-ssh-generator.conf",
+      "sha256": "004f4e38ecf838f2967df497bc500f5ae05c265c6daf5318cdeff252722b0dee"
+    },
+    {
+      "package": "systemd",
+      "member": "usr/lib/tmpfiles.d/20-systemd-stub.conf",
+      "sha256": "bf6d6e9d5b8fc2e76d213f070c5e2e4f943565233befe309af18adee0aff8b0b"
+    },
+    {
+      "package": "systemd",
+      "member": "usr/lib/tmpfiles.d/20-systemd-userdb.conf",
+      "sha256": "bd88d5f80ae0e3e3e4ae5cf92147956684f36d7362bb80f6a3493664eb7edc9e"
+    },
+    {
+      "package": "systemd",
+      "member": "usr/lib/tmpfiles.d/20-systemd-varlink.conf",
+      "sha256": "8834cba041877946659d8d08886d3539a2fb3a78d07b5000565189e80e59448a"
+    },
+    {
+      "package": "systemd",
+      "member": "usr/lib/tmpfiles.d/credstore.conf",
+      "sha256": "2bafed09323dcb75c9c59ffd863510c2d05b6939fbcda267a82198875d1b4ddb"
+    },
+    {
+      "package": "systemd",
+      "member": "usr/lib/tmpfiles.d/etc.conf",
+      "sha256": "e819001e4ce10527081861713def4018b031fefcd9f6249ed652dd630280a014"
+    },
+    {
+      "package": "systemd",
+      "member": "usr/lib/tmpfiles.d/home.conf",
+      "sha256": "fcc7434662a40ed081eec2c608dd1a3ac8c909440359a7890c08175fb685ff68"
+    },
+    {
+      "package": "systemd",
+      "member": "usr/lib/tmpfiles.d/journal-nocow.conf",
+      "sha256": "b0cfe7fb70a62747fd4002a8c5945f7b2a1784a7b482e65da6512987d0ba307d"
+    },
+    {
+      "package": "systemd",
+      "member": "usr/lib/tmpfiles.d/portables.conf",
+      "sha256": "00c398c1f82a0908f1cb45ce482dafcd99c2287a9432acdb385cc9d9a27cdd43"
+    },
+    {
+      "package": "systemd",
+      "member": "usr/lib/tmpfiles.d/provision.conf",
+      "sha256": "dbb85f57c2e24e703d2cc103b21634a4b53aa4d0f58dac59af74a3f12cddc73a"
+    },
+    {
+      "package": "systemd",
+      "member": "usr/lib/tmpfiles.d/root.conf",
+      "sha256": "fe30db76d281cb109f68d0502fb9e7a29c660c1017a55895dc9630794f4ebfe3"
+    },
+    {
+      "package": "systemd",
+      "member": "usr/lib/tmpfiles.d/static-nodes-permissions.conf",
+      "sha256": "a7c394eee2a442337d71cedf426d789daebf73879ebe1a8037be2651a5e270b2"
+    },
+    {
+      "package": "systemd",
+      "member": "usr/lib/tmpfiles.d/systemd-network.conf",
+      "sha256": "4e60ef3d3cc3466ebab75561d70f6e58b7e22cc0a2b7e7e3dfbd083d24b988b6"
+    },
+    {
+      "package": "systemd",
+      "member": "usr/lib/tmpfiles.d/systemd-nologin.conf",
+      "sha256": "b97c3f92a569dd84957eb263f3438cc7d98ea2a4ffe5f5e9d090c04d14b725b9"
+    },
+    {
+      "package": "systemd",
+      "member": "usr/lib/tmpfiles.d/systemd-nspawn.conf",
+      "sha256": "29464830fe7050c98670a1560d76df2672ea1792e5d4ba00d13e16a15801808c"
+    },
+    {
+      "package": "systemd",
+      "member": "usr/lib/tmpfiles.d/systemd-pstore.conf",
+      "sha256": "cdb3efb34ea12ef62140dc86ffbe90045729f3e8227698848e44bed4fdd5fe2f"
+    },
+    {
+      "package": "systemd",
+      "member": "usr/lib/tmpfiles.d/systemd-resolve.conf",
+      "sha256": "12e573ce01b47cde7cf7867a74d0ca04152fb083962a9ae5ba4989eb305a84ca"
+    },
+    {
+      "package": "systemd",
+      "member": "usr/lib/tmpfiles.d/systemd-tmp.conf",
+      "sha256": "224e8d4145ed4a049d7a0ffb7c7d20f5278c60f08eff6369f4e82f2397abc2bc"
+    },
+    {
+      "package": "systemd",
+      "member": "usr/lib/tmpfiles.d/systemd.conf",
+      "sha256": "6b458361cd76f40ecff2079fac7732f819f7078cd7eac34d57f2ae7985704024"
+    },
+    {
+      "package": "systemd",
+      "member": "usr/lib/tmpfiles.d/tmp.conf",
+      "sha256": "a1dae3c409fab42c6e48d93ad36364cd6b35ac4705488f1e91b8593ef41ea931"
+    },
+    {
+      "package": "systemd",
+      "member": "usr/lib/tmpfiles.d/var.conf",
+      "sha256": "138662fd2276f09362f4da672f7a33cbc92b6d100e3ba7a753c66c871526d6a5"
+    },
+    {
+      "package": "systemd",
+      "member": "usr/lib/tmpfiles.d/x11.conf",
+      "sha256": "12f002545e3d091184e05d360faaef938eceb8b4843ddb2ea1aeda0a9bd8da36"
+    },
+    {
+      "package": "tpm2-tss",
+      "member": "usr/lib/tmpfiles.d/tpm2-tss-fapi.conf",
+      "sha256": "a3c6fb9822f4a1f14ced8e17dd06eea0ee90bb63aaeeab31146dd1969990230e"
+    },
+    {
+      "package": "tpm2-tss",
+      "member": "usr/lib/tmpfiles.d/tpm2-tss.conf",
+      "sha256": "4899ab4237af3ad8f0ba662058075e1257088ba4aa79c9babfe2ccd94806de0e"
+    },
+    {
+      "package": "udisks2",
+      "member": "usr/lib/tmpfiles.d/udisks2.conf",
+      "sha256": "27a7496ddf7e465995059a0410d47387b9e82ccd7aac9c3763f2ac6659ca9c21"
+    },
+    {
+      "package": "util-linux",
+      "member": "usr/lib/tmpfiles.d/lastlog2.conf",
+      "sha256": "465d9c226ada2d203a63f9a8e12882fbeac5301e4479b04b1d3617075d7ea3ae"
+    },
+    {
+      "package": "util-linux",
+      "member": "usr/lib/tmpfiles.d/uuidd.conf",
+      "sha256": "9a96f64c463d613e2733f6fd91e9a515bdbf3ff690abe18356f4fa1a6366d67b"
+    }
+  ],
+  "review_reader_provenance": {
+    "catalog_script_sha256": "17a40c36965a6f7633e1e54160a0f27599759a530e16a5cb0a55d59f4203f25c",
+    "payload_reader_sha256": "959f73669026758ad1a125473f4425897acf68b88713ac1444e9b67fac8ec1cd",
+    "payload_index_sha256": "b717bc0224323c71acbd1731bd04019a85f21350f1e932f702d5460eae09750b",
+    "scriptlet_index_sha256": "4ca18e32ffe46c76266528c57a62f27e8f5702e5bfc036055c31860a71db3844"
+  }
+}

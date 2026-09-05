@@ -1,0 +1,71 @@
+{
+  "iso": "/tmp/omarchy-bench/fast-image.iso",
+  "member": "/arch/x86_64/omarchy-root.btrfs.qcow2",
+  "offset_bytes": 67584,
+  "size_bytes": 3681644544,
+  "qemu_image_opts": "driver=qcow2,file.driver=raw,file.offset=67584,file.size=3681644544,file.file.driver=file,file.file.filename=/tmp/omarchy-bench/fast-image.iso",
+  "qemu_info": {
+    "children": [
+      {
+        "name": "file",
+        "info": {
+          "children": [
+            {
+              "name": "file",
+              "info": {
+                "children": [],
+                "virtual-size": 3697973248,
+                "filename": "/tmp/omarchy-bench/fast-image.iso",
+                "format": "file",
+                "actual-size": 3697979392,
+                "format-specific": {
+                  "type": "file",
+                  "data": {}
+                },
+                "dirty-flag": false
+              }
+            }
+          ],
+          "virtual-size": 3681644544,
+          "filename": "json:{\"offset\": \"67584\", \"driver\": \"raw\", \"size\": \"3681644544\", \"file\": {\"driver\": \"file\", \"filename\": \"/tmp/omarchy-bench/fast-image.iso\"}}",
+          "format": "raw",
+          "actual-size": 3697979392,
+          "dirty-flag": false
+        }
+      }
+    ],
+    "virtual-size": 6174015488,
+    "filename": "json:{\"driver\": \"qcow2\", \"file\": {\"offset\": \"67584\", \"driver\": \"raw\", \"size\": \"3681644544\", \"file\": {\"driver\": \"file\", \"filename\": \"/tmp/omarchy-bench/fast-image.iso\"}}}",
+    "cluster-size": 1048576,
+    "format": "qcow2",
+    "actual-size": 3697979392,
+    "format-specific": {
+      "type": "qcow2",
+      "data": {
+        "compat": "1.1",
+        "compression-type": "zstd",
+        "lazy-refcounts": true,
+        "refcount-bits": 16,
+        "corrupt": false,
+        "extended-l2": false
+      }
+    },
+    "dirty-flag": false
+  },
+  "read_only_blockdev": {
+    "driver": "qcow2",
+    "node-name": "omarchy-sealed-source",
+    "read-only": true,
+    "file": {
+      "driver": "raw",
+      "read-only": true,
+      "offset": 67584,
+      "size": 3681644544,
+      "file": {
+        "driver": "file",
+        "read-only": true,
+        "filename": "/tmp/omarchy-bench/fast-image.iso"
+      }
+    }
+  }
+}

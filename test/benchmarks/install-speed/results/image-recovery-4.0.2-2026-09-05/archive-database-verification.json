@@ -1,0 +1,17 @@
+{
+  "schema_version": 1,
+  "status": "verified",
+  "source_checks_sha256": "bb18e91d8dc81731d625ffbf29ba11bd43fe8b1cea655ac8967548e11aefd0d4",
+  "catalog_sha256": "81a0adb227380bac17ce96a1597814d8d1dcfdc117c39ce0864b57b8a60b8d51",
+  "verified_package_count": 941,
+  "expected_package_count": 941,
+  "fields": [
+    "NAME",
+    "VERSION",
+    "file count",
+    "canonical file-list SHA256",
+    "raw MTREE SHA256",
+    "INSTALL presence/SHA256"
+  ],
+  "problems": []
+}

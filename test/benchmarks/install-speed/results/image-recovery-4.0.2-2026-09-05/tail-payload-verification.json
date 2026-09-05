@@ -1,0 +1,19 @@
+{
+  "schema_version": 1,
+  "status": "verified",
+  "packages": [
+    "zbar",
+    "zoxide",
+    "zram-generator",
+    "yay",
+    "yaru-icon-theme",
+    "xournalpp"
+  ],
+  "expected_regular_files": 11085,
+  "verified_regular_files": 11085,
+  "verified_bytes": 89621120,
+  "source_checks_sha256": "d2ef3c8dbe7ae4966485b563568b85d99b639d20aa0093870a62d13c5ebc0349",
+  "excluded": [],
+  "elapsed_s": 16.66114272899995,
+  "errors": []
+}

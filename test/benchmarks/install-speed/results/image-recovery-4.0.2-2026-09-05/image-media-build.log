@@ -1,0 +1,16 @@
+xorriso 1.5.6 : RockRidge filesystem manipulator, libburnia project.
+
+Drive current: -outdev 'stdio:/tmp/omarchy-bench/fast-image.iso'
+Media current: stdio file, overwriteable
+Media status : is blank
+Media summary: 0 sessions, 0 data blocks, 0 data, 15.4g free
+xorriso : WARNING : -volid text is too long for Joliet (18 > 16)
+Added to ISO image: directory '/'='/tmp/omarchy-bench/image-media'
+xorriso : UPDATE :      12 files added in 1 seconds
+xorriso : UPDATE :      12 files added in 1 seconds
+xorriso : UPDATE :  4.56% done
+xorriso : UPDATE :  45.78% done
+ISO image produced: 1805651 sectors
+Written to medium : 1805651 sectors at LBA 0
+Writing to 'stdio:/tmp/omarchy-bench/fast-image.iso' completed successfully.
+

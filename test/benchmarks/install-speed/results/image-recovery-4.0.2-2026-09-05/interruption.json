@@ -1,0 +1,19 @@
+{
+  "schema_version": 1,
+  "status": "interrupted-before-build-complete",
+  "observed_at": 1788637195.8610168,
+  "old_builder_run": "/tmp/omarchy-bench/builder-01",
+  "raw_path": "/tmp/omarchy-bench/root-build.raw",
+  "raw_virtual_bytes": 25769803776,
+  "raw_allocated_bytes": 4440883200,
+  "btrfs_primary_superblock_sha256": "d8f898cd4e294b8941f9cc2945e79484d411d218139ce878534decd5d1661be6",
+  "btrfs_magic": "_BHRfS_M",
+  "btrfs_fsid_hex": "51a18a797bde4aeb8895181970407957",
+  "last_driver_progress": {
+    "ActiveState": "active",
+    "Result": "success",
+    "ExecMainStatus": "0",
+    "host_elapsed_s": 3609.3612438400014
+  },
+  "reason": "Both original unified exec sessions were unavailable and filesystem progress stopped; no BUILD_COMPLETE marker exists."
+}
