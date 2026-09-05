@@ -24,6 +24,7 @@ INITRD_SHA256 = '6e3e15b983da69df4e18df2f1489fa854980b395b28546355d0f6dc13914694
 FAST_PIN = 'dbffaa6c65344d644627a023c28661e08382b8fa'
 HARNESS_PIN = '2673c613d9a71e23920e43fbb951238145e0f1e8'
 CMDLINE = 'archisobasedir=arch archisosearchuuid=2026-08-31-03-24-58-00 quiet splash xe.enable_panel_replay=0 initramfs_async=0 copytoram=n'
+EARLY_VERIFY_VARIANT = 'image-no-package-prefetch-fast-reboot-early-verify'
 EVIDENCE_FILES = {
   'manifest.json', 'validation.json', 'install-timing.json', 'package-manifest.txt',
   'package-explicit.txt', 'package-files.txt', 'package-files.stderr', 'identity.json',
@@ -80,12 +81,25 @@ def save_json(path, value):
   path.write_text(json.dumps(value, indent=2) + '\n')
 
 
-def disk_budget(work, boot_method):
+def disk_budget(work, boot_method, variants=()):
   required = (44 if boot_method == 'firmware' else 28) * 1024**3
+  if EARLY_VERIFY_VARIANT in variants:
+    # The early experiment needs its own matched control ISO. When several
+    # variants are requested, their immutable fixtures remain available too.
+    required += 6 * max(0, len(variants) - 1) * 1024**3
   free = shutil.disk_usage(work).free
   if free < required:
     raise RuntimeError(f'{boot_method} mode requires {required // 1024**3} GiB free before preparation; found {free / 1024**3:.2f} GiB')
   return {'boot_method': boot_method, 'minimum_free_bytes': required, 'observed_free_bytes': free}
+
+
+def early_preflight_pair(make_initrd, payload, preflight):
+  # The control includes the same early service and completion check, with
+  # the existing no-op preflight. Only the candidate activates/verifies media.
+  control = make_initrd('control', label='control-early-preflight', early_preflight=True)
+  candidate = make_initrd('candidate', payload, preflight,
+    label='candidate-no-prefetch-fast-reboot-early-verify', disable_prefetch=True, early_preflight=True)
+  return control, candidate
 
 
 def boot_arguments(boot_method, iso, kernel, initrd, *, builder=False, firmware_iso=None):
@@ -140,7 +154,7 @@ def execute(args):
     raise ValueError('Use a new empty work path; no reuse of disks or NVRAM')
   work.mkdir(parents=True)
   evidence.mkdir(parents=True, exist_ok=True)
-  save_json(evidence / 'disk-budget.json', disk_budget(work, args.boot_method))
+  save_json(evidence / 'disk-budget.json', disk_budget(work, args.boot_method, args.variants))
   fd = os.open('/dev/kvm', os.O_RDWR | os.O_CLOEXEC)
   if fcntl.ioctl(fd, 0xae00, 0) != 12:
     raise RuntimeError('KVM API mismatch')
@@ -181,7 +195,7 @@ def execute(args):
   if digest(initrd) != INITRD_SHA256:
     raise ValueError('Official initramfs checksum mismatch')
 
-  def make_initrd(mode, payload=None, preflight=None, *, label=None, disable_prefetch=False):
+  def make_initrd(mode, payload=None, preflight=None, *, label=None, disable_prefetch=False, early_preflight=False):
     label = label or mode
     output = work / f'initramfs-{label}.img'
     argv = [sys.executable, overlay / 'make-initramfs.py', '--initramfs', initrd,
@@ -192,8 +206,13 @@ def execute(args):
       argv += ['--preflight-script', preflight]
     if disable_prefetch:
       argv += ['--disable-package-prefetch']
+    if early_preflight:
+      argv += ['--early-preflight']
     command(argv)
-    shutil.copyfile(output.with_suffix(output.suffix + '.manifest.json'), evidence / f'initramfs-{label}.manifest.json')
+    manifest = output.with_suffix(output.suffix + '.manifest.json')
+    if early_preflight and json.loads(manifest.read_text()).get('early_preflight') is not True:
+      raise RuntimeError('Early-preflight initramfs lacks explicit opt-in provenance')
+    shutil.copyfile(manifest, evidence / f'initramfs-{label}.manifest.json')
     return output
 
   control_initrd = make_initrd('control')
@@ -339,13 +358,17 @@ def execute(args):
   control_launch = work / 'control-launch.json'
   save_json(control_launch, vm_args('control-template', control_initrd, same_media))
 
-  def measure_variant(label, selected_initrd, output_name):
+  def measure_variant(label, selected_initrd, output_name, *, selected_control_initrd=None):
+    selected_control_launch = control_launch
+    if selected_control_initrd is not None:
+      selected_control_launch = work / f'{label}-control-launch.json'
+      save_json(selected_control_launch, vm_args('control-template', selected_control_initrd, same_media))
     candidate_launch = work / f'{label}-launch.json'
     save_json(candidate_launch, vm_args('candidate-template', selected_initrd, same_media))
     # repeat-installs owns fresh-run allocation, complete validation, evidence
     # sealing, alternating order, shutdown and target disk reclamation.
     repeat_argv = list(map(str, [sys.executable, bench / 'install-speed/repeat-installs.py',
-      '--control-launch', control_launch, '--candidate-launch', candidate_launch,
+      '--control-launch', selected_control_launch, '--candidate-launch', candidate_launch,
       '--run-root', work / f'fresh-installs-{label}', '--evidence-root', evidence / output_name, '--pairs', '3']))
     result = subprocess.Popen(repeat_argv, start_new_session=True)
     try:
@@ -365,6 +388,27 @@ def execute(args):
     save_json(evidence / 'experiment.json', provenance)
     return result.returncode
 
+  fast_reboot = bench / 'install-speed/fast-reboot'
+  fast_reboot_payload = None
+
+  def prepare_fast_reboot_payload():
+    nonlocal fast_reboot_payload
+    if fast_reboot_payload is None:
+      # Both opt-in variants use exactly the same pinned dashboard payload.
+      # Never rebuild it over an existing payload or mutate a previous fixture.
+      output = work / 'candidate-fast-reboot-payload'
+      with (evidence / 'fast-reboot-contract.log').open('w') as log:
+        command([sys.executable, fast_reboot / 'contract-test.py', '--iso-source', fast],
+          stdout=log, stderr=subprocess.STDOUT, timeout=120)
+      command([sys.executable, fast_reboot / 'prepare-payload.py', '--iso-source', fast,
+        '--base-payload', candidate_payload, '--output', output])
+      source_manifest = output.with_name(output.name + '.manifest.json')
+      shutil.copyfile(source_manifest, evidence / 'fast-reboot.manifest.json')
+      provenance['fast_reboot_variant'] = json.loads(source_manifest.read_text())
+      save_json(evidence / 'experiment.json', provenance)
+      fast_reboot_payload = output
+    return fast_reboot_payload
+
   for variant in args.variants:
     if variant == 'upstream-image':
       candidate_initrd = make_initrd('candidate', candidate_payload, image / 'candidate-preflight.sh')
@@ -376,23 +420,29 @@ def execute(args):
       no_prefetch_initrd = make_initrd('candidate', candidate_payload, image / 'candidate-preflight.sh',
         label='candidate-no-prefetch', disable_prefetch=True)
       measure_variant(variant, no_prefetch_initrd, 'no-prefetch-repetitions')
-    elif variant == 'image-no-package-prefetch-fast-reboot':
+    elif variant in ('image-no-package-prefetch-fast-reboot', EARLY_VERIFY_VARIANT):
       # Separate opt-in experiment: retain PR145's release-gated dashboard,
       # which the original image overlay deliberately does not replace.
-      fast_reboot = bench / 'install-speed/fast-reboot'
-      fast_reboot_payload = work / 'candidate-fast-reboot-payload'
-      with (evidence / 'fast-reboot-contract.log').open('w') as log:
-        command([sys.executable, fast_reboot / 'contract-test.py', '--iso-source', fast],
-          stdout=log, stderr=subprocess.STDOUT, timeout=120)
-      command([sys.executable, fast_reboot / 'prepare-payload.py', '--iso-source', fast,
-        '--base-payload', candidate_payload, '--output', fast_reboot_payload])
-      source_manifest = fast_reboot_payload.with_name(fast_reboot_payload.name + '.manifest.json')
-      shutil.copyfile(source_manifest, evidence / 'fast-reboot.manifest.json')
-      provenance['fast_reboot_variant'] = json.loads(source_manifest.read_text())
-      save_json(evidence / 'experiment.json', provenance)
-      fast_reboot_initrd = make_initrd('candidate', fast_reboot_payload, fast_reboot / 'candidate-preflight.sh',
-        label='candidate-no-prefetch-fast-reboot', disable_prefetch=True)
-      measure_variant(variant, fast_reboot_initrd, 'no-prefetch-fast-reboot-repetitions')
+      payload = prepare_fast_reboot_payload()
+      if variant == EARLY_VERIFY_VARIANT:
+        early_control, early_candidate = early_preflight_pair(make_initrd, payload, fast_reboot / 'candidate-preflight.sh')
+        provenance['early_preflight_variant'] = {
+          'variant': variant, 'base_variant': 'image-no-package-prefetch-fast-reboot',
+          'control_initramfs_sha256': digest(early_control),
+          'candidate_initramfs_sha256': digest(early_candidate),
+          'fast_reboot_manifest': 'fast-reboot.manifest.json',
+          'preflight_script_sha256': digest(fast_reboot / 'candidate-preflight.sh'),
+          'matched_control': 'early service with no-op preflight',
+          'source_cache': args.source_cache, 'boot_method': args.boot_method,
+          'pairs': 3, 'comparison': 'no-prefetch-fast-reboot-early-verify-repetitions/comparison.json',
+        }
+        save_json(evidence / 'experiment.json', provenance)
+        measure_variant(variant, early_candidate, 'no-prefetch-fast-reboot-early-verify-repetitions',
+          selected_control_initrd=early_control)
+      else:
+        fast_reboot_initrd = make_initrd('candidate', payload, fast_reboot / 'candidate-preflight.sh',
+          label='candidate-no-prefetch-fast-reboot', disable_prefetch=True)
+        measure_variant(variant, fast_reboot_initrd, 'no-prefetch-fast-reboot-repetitions')
   provenance['status'] = 'comparisons-complete'
   save_json(evidence / 'experiment.json', provenance)
   # Each variant's actual result remains separate. Never present a failed
@@ -416,11 +466,13 @@ def parse_arguments(argv=None):
     help='Direct kernel boot (default), or verified ISO repacking with firmware boot and standalone reboot validation')
   parser.add_argument('--source-cache', choices=('conditioned', 'cold'), default='conditioned',
     help='Source media cache policy; cold requires verified eviction in the VM runner')
-  parser.add_argument('--variants', nargs='+', choices=('upstream-image', 'image-no-package-prefetch', 'image-no-package-prefetch-fast-reboot'),
+  parser.add_argument('--variants', nargs='+', choices=('upstream-image', 'image-no-package-prefetch', 'image-no-package-prefetch-fast-reboot', EARLY_VERIFY_VARIANT),
     default=['upstream-image', 'image-no-package-prefetch'], help='Variants to measure, in order; three fresh pairs each')
   args = parser.parse_args(argv)
   if len(set(args.variants)) != len(args.variants):
     parser.error('variants must be distinct')
+  if EARLY_VERIFY_VARIANT in args.variants and (args.source_cache != 'cold' or args.boot_method != 'firmware'):
+    parser.error(f'{EARLY_VERIFY_VARIANT} requires --source-cache cold --boot-method firmware')
   return args
 
 

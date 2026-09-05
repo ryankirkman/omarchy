@@ -4,6 +4,7 @@ import importlib.util
 import contextlib
 import io
 import os
+import stat
 from pathlib import Path
 import subprocess
 import sys
@@ -122,6 +123,66 @@ class NativeContract(unittest.TestCase):
       self.assertEqual(module.disk_budget(Path('/tmp'), 'direct')['minimum_free_bytes'], 28 * 1024**3)
     with patch.object(module.shutil, 'disk_usage', return_value=SimpleNamespace(free=44 * 1024**3)):
       self.assertEqual(module.disk_budget(Path('/tmp'), 'firmware')['minimum_free_bytes'], 44 * 1024**3)
+
+  def test_early_verify_requires_cold_firmware_and_preserves_defaults(self):
+    base = ['--repo', '/repo', '--work', '/new-work', '--evidence', '/evidence']
+    selected = base + ['--variants', module.EARLY_VERIFY_VARIANT]
+    for options in ([], ['--source-cache', 'cold'], ['--boot-method', 'firmware']):
+      with contextlib.redirect_stderr(io.StringIO()):
+        with self.assertRaises(SystemExit) as result:
+          module.parse_arguments(selected + options)
+      self.assertEqual(result.exception.code, 1)
+    accepted = module.parse_arguments(selected + ['--source-cache', 'cold', '--boot-method', 'firmware'])
+    self.assertEqual(accepted.variants, [module.EARLY_VERIFY_VARIANT])
+    self.assertEqual(module.parse_arguments(base).variants, ['upstream-image', 'image-no-package-prefetch'])
+    with patch.object(module.shutil, 'disk_usage', return_value=SimpleNamespace(free=61 * 1024**3)):
+      self.assertEqual(module.disk_budget(Path('/tmp'), 'firmware', accepted.variants)['minimum_free_bytes'], 44 * 1024**3)
+      with self.assertRaisesRegex(RuntimeError, '62 GiB'):
+        module.disk_budget(Path('/tmp'), 'firmware', ['upstream-image', 'image-no-package-prefetch',
+          'image-no-package-prefetch-fast-reboot', module.EARLY_VERIFY_VARIANT])
+
+  def test_early_verify_builds_matched_control_and_fast_reboot_candidate(self):
+    # Exercise native fixture selection against the real overlay builder on a
+    # tiny valid newc input. This establishes wiring, not real systemd timing.
+    location = DIRECTORY.parent / 'boot-overlay/make-initramfs.py'
+    spec = importlib.util.spec_from_file_location('native_early_overlay', location)
+    overlay = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(overlay)
+    original = overlay.make_cpio({
+      'config': (stat.S_IFREG | 0o644, b'LATEHOOKS=""\n'),
+      'init': (stat.S_IFREG | 0o755, b'"$mount_handler" /new_root\nrun_hookfunctions \'run_latehook\'\n'),
+    })
+    with tempfile.TemporaryDirectory() as temporary:
+      root = Path(temporary)
+      payload = root / 'payload'
+      scripts = payload / 'usr/local/lib/omarchy-benchmark'
+      scripts.mkdir(parents=True)
+      (scripts / 'dashboard').write_text('immutable pinned dashboard fixture')
+      preflight = DIRECTORY.parent / 'fast-reboot/candidate-preflight.sh'
+      outputs = {}
+      def make_initrd(mode, selected_payload=None, selected_preflight=None, *, label=None,
+          disable_prefetch=False, early_preflight=False):
+        script = selected_preflight.read_bytes() if selected_preflight else b'#!/bin/bash\ntrue\n'
+        data, manifest = overlay.build(original, mode, script, selected_payload,
+          disable_package_prefetch=disable_prefetch, early_preflight=early_preflight)
+        path = root / (label + '.img')
+        outputs[path] = (overlay.initramfs_files(data), manifest)
+        return path
+      control, candidate = module.early_preflight_pair(make_initrd, payload, preflight)
+      self.assertNotEqual(control, candidate)
+      control_files, control_manifest = outputs[control]
+      candidate_files, candidate_manifest = outputs[candidate]
+      self.assertTrue(control_manifest['early_preflight'])
+      self.assertTrue(candidate_manifest['early_preflight'])
+      self.assertFalse(control_manifest['disable_package_prefetch'])
+      self.assertTrue(candidate_manifest['disable_package_prefetch'])
+      prefix = 'omarchy-benchmark-payload/'
+      for name in ('etc/systemd/system/omarchy-benchmark-preflight.service',
+          'etc/systemd/system/getty@tty1.service.d/50-omarchy-benchmark-preflight.conf'):
+        self.assertEqual(control_files[prefix + name], candidate_files[prefix + name])
+      self.assertEqual(candidate_files[prefix + 'usr/local/lib/omarchy-benchmark/preflight.sh'][1], preflight.read_bytes())
+      self.assertNotIn(prefix + 'usr/local/lib/omarchy-benchmark/dashboard', control_files)
+      self.assertIn(prefix + 'usr/local/lib/omarchy-benchmark/dashboard', candidate_files)
 
   def test_pinned_sources(self):
     self.assertEqual(module.HARNESS_PIN, '2673c613d9a71e23920e43fbb951238145e0f1e8')

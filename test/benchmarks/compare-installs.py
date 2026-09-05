@@ -275,6 +275,8 @@ def read_run(directory):
   explicit_packages = (directory / "package-explicit.txt").read_text().splitlines()
   if manifest.get("status") != "installed-and-booted":
     raise ValueError(f"{directory}: install has not booted successfully")
+  if type(manifest.get("qemu_exit_status")) is not int or manifest["qemu_exit_status"] != 0:
+    raise ValueError(f"{directory}: QEMU did not exit cleanly")
   if manifest.get("mode") != "install":
     raise ValueError(f"{directory}: builder or unrecorded run mode is not an installation sample")
   if manifest.get("measurement_interrupted") is not False:

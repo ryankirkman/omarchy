@@ -45,7 +45,7 @@ with tempfile.TemporaryDirectory() as directory:
   root = Path(directory)
   manifest = {
     "status": "installed-and-booted", "mode": "install", "fresh_target": True, "fresh_nvram": True,
-    "measurement_interrupted": False,
+    "measurement_interrupted": False, "qemu_exit_status": 0,
     "accelerator": "tcg", "cpu_count": 4, "memory_mib": 8192,
     "disk_format": "qcow2", "disk_virtual_bytes": 40 * 1024**3,
     "disk_cache": "writeback", "iso_cache": "writeback", "qemu_version": "fixture",
@@ -131,7 +131,7 @@ with tempfile.TemporaryDirectory() as directory:
   for key, value in (("booted_installed_root", False), ("package_files_exit_status", 1),
                      ("package_files_exit_status", False)):
     rejects_artifacts({"validation.json": {**validation, key: value}}, "invalid installation accepted")
-  for key, value in (("status", "timeout"), ("measurement_interrupted", True),
+  for key, value in (("status", "timeout"), ("qemu_exit_status", 1), ("measurement_interrupted", True),
                      ("mode", "builder"), ("media_cache_preconditioning", "unknown"),
                      ("extra_media", None), ("extra_media", {}),
                      ("measurement_interrupted", 0), ("fresh_target", False), ("fresh_nvram", False),
@@ -145,7 +145,7 @@ with tempfile.TemporaryDirectory() as directory:
                      ("readiness_poll_uncertainty_s", -1), ("readiness_poll_uncertainty_s", float("nan")),
                      ("readiness_poll_uncertainty_s", 30)):
     rejects_artifacts({"manifest.json": {**manifest, key: value}}, f"invalid {key} accepted")
-  for key in ("measurement_interrupted", "encryption", "filesystem", "cidata_configuration_sha256", "test_overlay_sha256",
+  for key in ("measurement_interrupted", "qemu_exit_status", "encryption", "filesystem", "cidata_configuration_sha256", "test_overlay_sha256",
               "direct_kernel_boot", "direct_kernel_sha256", "direct_initrd_sha256", "direct_kernel_command_line",
               "reboot_strategy", "first_installed_ssh_wall_s", "last_failed_installed_ssh_probe_started_wall_s",
               "readiness_poll_uncertainty_s", "mode", "extra_media", "media_cache_preconditioning"):
