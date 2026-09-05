@@ -131,6 +131,7 @@ class Supervisor:
     self.env["QEMU_MODULE_DIR"] = str(args.toolchain / "usr/lib/x86_64-linux-gnu/qemu")
     self.qmp_socket = None
     self.qmp_stream = None
+    self.qmp_events = []
     self.manifest = {}
     self.vm = None
     self.started = time.monotonic()
@@ -158,6 +159,8 @@ class Supervisor:
       if not line:
         raise QMPDisconnected("QMP disconnected")
       response = json.loads(line)
+      if "event" in response:
+        self.qmp_events.append(response)
       if response.get("id") == identifier:
         if "error" in response:
           raise RuntimeError(str(response["error"]))
@@ -258,7 +261,7 @@ class Supervisor:
     capture("registers", lambda: self.qmp("human-monitor-command", {"command-line": "info registers"}))
     raise RuntimeError(reason + "; failed measurement and diagnostic evidence retained")
 
-  def collect_identity(self):
+  def collect_identity(self, prefix=""):
     evidence = {}
     for name, command in (
       ("machine-id", "cat /etc/machine-id"),
@@ -269,8 +272,8 @@ class Supervisor:
       ("uki-files", "find /boot -type f -printf '%P %s bytes\\n' | LC_ALL=C sort"),
     ):
       result = self.ssh(command, sudo=True, timeout=180)
-      (self.directory / (name + ".txt")).write_text(result.stdout)
-      (self.directory / (name + ".stderr")).write_text(result.stderr)
+      (self.directory / (prefix + name + ".txt")).write_text(result.stdout)
+      (self.directory / (prefix + name + ".stderr")).write_text(result.stderr)
       evidence[name] = require_success(result, "collect " + name)
     fingerprints = []
     primary = False
@@ -285,12 +288,152 @@ class Supervisor:
         primary = False
     if len(fingerprints) != 1:
       raise RuntimeError(f"Expected one pacman local master signing identity, found {len(fingerprints)}")
-    write_json(self.directory / "identity.json", {
+    identity = {
       "machine_id": evidence["machine-id"].strip(),
       "ssh_host_key_fingerprints": [line.split()[1] for line in evidence["ssh-host-fingerprints"].splitlines() if line.strip()],
       "pacman_master_key_fingerprint": fingerprints[0],
       "btrfs_uuid": evidence["btrfs-uuid"].strip(),
-    })
+    }
+    write_json(self.directory / (prefix + "identity.json"), identity)
+    return identity
+
+  def standalone_media_plan(self, extra):
+    """Only explicitly named CD-ROM extras can enter the optional proof."""
+    if len(extra) % 2 or any(extra[index] not in {"-drive", "-device"} for index in range(0, len(extra), 2)):
+      raise ValueError("Standalone reboot supports only explicit -drive/-device CD-ROM extras")
+    drives, devices = {}, {}
+    reserved = {"target", "iso", "cidata", "installer-cd", "cidata-usb"}
+    for index in range(0, len(extra), 2):
+      pieces = extra[index + 1].split(",")
+      options = dict(piece.split("=", 1) for piece in pieces if "=" in piece)
+      identifier = options.get("id")
+      if not identifier or identifier in reserved or identifier in drives or identifier in devices:
+        raise ValueError("Standalone reboot requires unique explicit IDs for every extra drive and device")
+      if extra[index] == "-drive":
+        if options.get("media") != "cdrom" or options.get("if") != "none" or "file" not in options:
+          raise ValueError("Standalone reboot extra drives require media=cdrom,if=none,file=...")
+        drives[identifier] = options
+      else:
+        if pieces[0] != "ide-cd":
+          raise ValueError("Standalone reboot currently supports only ide-cd extra devices")
+        devices[identifier] = options
+    plan = [{"drive_id": "iso", "device_id": "installer-cd", "kind": "cdrom"}]
+    for drive_id in drives:
+      matching = [identifier for identifier, options in devices.items() if options.get("drive") == drive_id]
+      if len(matching) != 1:
+        raise ValueError("Every standalone extra drive requires exactly one named ide-cd device")
+      plan.append({"drive_id": drive_id, "device_id": matching[0], "kind": "cdrom"})
+    if len(devices) != len(drives):
+      raise ValueError("Standalone extra devices must reference their explicit extra drives")
+    plan.append({"drive_id": "cidata", "device_id": "cidata-usb", "kind": "usb-storage"})
+    return plan
+
+  def assert_standalone_media_absent(self, plan):
+    blocks = self.qmp("query-block")
+    for medium in plan:
+      rows = [row for row in blocks if row.get("device") == medium["drive_id"]]
+      if medium["kind"] == "cdrom":
+        if len(rows) != 1 or rows[0].get("inserted") is not None:
+          raise RuntimeError(f"CD-ROM medium remains present: {medium['drive_id']}")
+      elif any(row.get("qdev") for row in rows):
+        raise RuntimeError(f"CIDATA backend remains connected to a guest device: {rows}")
+    return blocks
+
+  def remove_standalone_media(self, plan):
+    for medium in plan:
+      if medium["kind"] == "cdrom":
+        self.qmp("blockdev-open-tray", {"id": medium["device_id"], "force": True})
+        self.qmp("blockdev-remove-medium", {"id": medium["device_id"]})
+    event_start = len(self.qmp_events)
+    self.qmp("device_del", {"id": "cidata-usb"})
+    deadline = time.monotonic() + 30
+    while True:
+      # Each response also drains preceding asynchronous QMP events. The
+      # DEVICE_DELETED event proves actual unplug, not just request acceptance.
+      self.qmp("query-block")
+      deleted = [event for event in self.qmp_events[event_start:]
+                 if event.get("event") == "DEVICE_DELETED" and event.get("data", {}).get("device") == "cidata-usb"]
+      if deleted:
+        break
+      if time.monotonic() >= deadline:
+        raise RuntimeError("CIDATA device removal did not complete within 30s")
+      time.sleep(0.1)
+    return {"device_deleted_event": deleted[-1], "query_block": self.assert_standalone_media_absent(plan)}
+
+  def verify_standalone_reboot(self, roots, identity):
+    proof_path = self.directory / "standalone-reboot.json"
+    proof = {
+      "schema_version": 1, "passed": False,
+      "outside_install_timing": True,
+      "original_first_installed_ssh_wall_s": self.manifest["first_installed_ssh_wall_s"],
+      "validation_started_host_wall_s": time.monotonic() - self.started,
+      "qemu_pid_before": self.vm.pid, "root_before": roots, "identity_before": identity,
+      "media_plan": self.manifest["standalone_media_plan"],
+      "observed_ssh_disconnect": False,
+    }
+    self.manifest.update(status="validating-standalone-reboot", validation_passed=False,
+                         standalone_reboot_passed=False)
+    write_json(self.directory / "manifest.json", self.manifest)
+    write_json(proof_path, proof)
+    try:
+      before = require_success(self.ssh("cat /proc/sys/kernel/random/boot_id"), "read original boot ID").strip()
+      uuid.UUID(before)
+      proof["boot_id_before"] = before
+      proof["media_removal"] = self.remove_standalone_media(proof["media_plan"])
+      proof["media_removed_host_wall_s"] = time.monotonic() - self.started
+      write_json(proof_path, proof)
+      reboot = self.ssh("systemctl reboot", sudo=True, timeout=20)
+      proof["reboot_command"] = {"returncode": reboot.returncode, "stdout": reboot.stdout, "stderr": reboot.stderr}
+      # An SSH connection may close after systemd accepted reboot. It cannot
+      # establish success; a changed boot ID after observed downtime must do so.
+      if reboot.returncode not in (0, 255):
+        raise RuntimeError(f"Ordinary guest reboot failed: {reboot.stderr}")
+      proof["reboot_requested_host_wall_s"] = time.monotonic() - self.started
+      deadline = time.monotonic() + self.args.standalone_reboot_timeout
+      while time.monotonic() < deadline:
+        if self.vm.poll() is not None or self.vm.pid != proof["qemu_pid_before"]:
+          raise RuntimeError("Standalone reboot requires the original QEMU process to remain alive")
+        status = self.qmp("query-status")
+        if status.get("status") != "running":
+          raise RuntimeError(f"Unexpected QEMU state during standalone reboot: {status}")
+        response = self.ssh("cat /proc/sys/kernel/random/boot_id", timeout=8)
+        if response.returncode:
+          proof["observed_ssh_disconnect"] = True
+          proof["last_disconnected_host_wall_s"] = time.monotonic() - self.started
+        elif response.stdout.strip() != before:
+          after = response.stdout.strip()
+          uuid.UUID(after)
+          if not proof["observed_ssh_disconnect"]:
+            raise RuntimeError("Boot ID changed without an observed SSH disconnection")
+          proof["boot_id_after"] = after
+          proof["standalone_ssh_ready_host_wall_s"] = time.monotonic() - self.started
+          break
+        write_json(proof_path, proof)
+        time.sleep(1)
+      else:
+        raise RuntimeError(f"Standalone reboot did not become ready within {self.args.standalone_reboot_timeout}s")
+      root = require_success(self.ssh("findmnt --json -o SOURCE,FSTYPE,TARGET /"), "check standalone installed root")
+      (self.directory / "standalone-root.json").write_text(root)
+      proof["root_after"] = json.loads(root).get("filesystems", [])
+      if proof["root_after"] != roots:
+        raise RuntimeError("Standalone reboot changed the installed root mount")
+      proof["identity_after"] = self.collect_identity(prefix="standalone-")
+      if proof["identity_after"] != identity:
+        raise RuntimeError("Standalone reboot changed installed system identities")
+      proof["media_after_reboot"] = self.assert_standalone_media_absent(proof["media_plan"])
+      proof["qemu_pid_after"] = self.vm.pid
+      if self.vm.poll() is not None or proof["qemu_pid_after"] != proof["qemu_pid_before"]:
+        raise RuntimeError("QEMU process changed or exited before standalone validation completed")
+      proof["passed"] = True
+      proof["validation_finished_host_wall_s"] = time.monotonic() - self.started
+      self.manifest["standalone_reboot_passed"] = True
+    except Exception as error:
+      proof["failure"] = str(error)
+      self.manifest.update(status="standalone-reboot-failed", validation_passed=False)
+      raise
+    finally:
+      write_json(proof_path, proof)
+      write_json(self.directory / "manifest.json", self.manifest)
 
   def collect(self):
     root = require_success(self.ssh("findmnt --json -o SOURCE,FSTYPE,TARGET /"), "check installed root")
@@ -320,7 +463,15 @@ class Supervisor:
       "booted_installed_root": booted, "package_files_exit_status": files.returncode,
       "root_mount": roots, "validated_at": time.time(),
     })
-    self.collect_identity()
+    identity = self.collect_identity()
+    if self.args.verify_standalone_reboot:
+      phases = json.loads(timing)
+      if (files.returncode != 0 or not phases.get("finished_at")
+          or phases.get("current_phase") != "Installation complete"
+          or not phases.get("phases") or len(phases["phases"]) != phases.get("total_phases")
+          or any(phase.get("status") != "ok" for phase in phases["phases"])):
+        raise RuntimeError("Standalone reboot requires complete successful phases and package validation first")
+      self.verify_standalone_reboot(roots, identity)
     self.manifest["status"] = "installed-and-booted"
     self.manifest["validation_passed"] = files.returncode == 0
     self.manifest["collected_at"] = time.time()
@@ -444,9 +595,9 @@ class Supervisor:
       "-qmp", f"tcp:127.0.0.1:{args.qmp_port},server=on,wait=off",
       "-serial", f"file:{self.directory / 'serial.log'}",
       "-drive", f"file={args.iso},media=cdrom,if=none,format=raw,id=iso,cache=writeback,readonly=on",
-      "-device", "ide-cd,drive=iso,bootindex=2",
+      "-device", "ide-cd,drive=iso,bootindex=2" + (",id=installer-cd" if args.verify_standalone_reboot else ""),
       "-drive", f"file={self.directory / 'cidata.img'},format=raw,if=none,id=cidata",
-      "-device", "usb-storage,drive=cidata"]
+      "-device", "usb-storage,drive=cidata" + (",id=cidata-usb" if args.verify_standalone_reboot else "")]
     # The installed-system validation boots with no installation media or
     # test-only extra devices. Firmware must not fall back into autoinstall.
     installed_argv_template = []
@@ -490,7 +641,13 @@ class Supervisor:
       "direct_initrd_sha256": hashlib.sha256(args.initrd.read_bytes()).hexdigest() if args.initrd else None,
       "direct_kernel_command_line": args.append if args.kernel else None,
       "reboot_strategy": "qemu-no-reboot-then-disk" if args.kernel and args.mode == "install" else "guest-firmware-reboot",
+      "verify_standalone_reboot": args.verify_standalone_reboot,
+      "standalone_reboot_timeout_s": args.standalone_reboot_timeout if args.verify_standalone_reboot else None,
     }
+    if args.verify_standalone_reboot:
+      self.manifest["reboot_strategy"] = "guest-firmware-reboot-with-standalone-validation"
+      self.manifest["standalone_media_plan"] = self.standalone_media_plan(extra)
+      self.manifest["standalone_reboot_passed"] = False
     self.prepare_source_cache()
     write_json(self.directory / "manifest.json", self.manifest)
     self.started = time.monotonic()
@@ -619,6 +776,10 @@ def main():
   run.add_argument("--timeout", type=int, default=7200)
   run.add_argument("--installed-boot-timeout", type=int,
                    help="Optional SSH readiness deadline after the direct installer restarts from disk")
+  run.add_argument("--verify-standalone-reboot", action="store_true",
+                   help="After a firmware install, require another ordinary reboot with all install media removed")
+  run.add_argument("--standalone-reboot-timeout", type=int, default=600,
+                   help="Separate post-install standalone reboot deadline (default: 600s)")
   run.add_argument("--runtime-package", default="omarchy")
   run.add_argument("--settings-package", default="omarchy-settings")
   run.add_argument("--keep-running", action="store_true")
@@ -646,6 +807,10 @@ def main():
     parser.error("--kernel and --initrd are required together")
   if args.installed_boot_timeout is not None and args.installed_boot_timeout <= 0:
     parser.error("--installed-boot-timeout must be positive")
+  if args.verify_standalone_reboot and (args.kernel or args.mode != "install"):
+    parser.error("--verify-standalone-reboot requires firmware boot without --kernel in install mode")
+  if args.standalone_reboot_timeout <= 0:
+    parser.error("--standalone-reboot-timeout must be positive")
   supervisor = Supervisor(args)
   try:
     supervisor.start()

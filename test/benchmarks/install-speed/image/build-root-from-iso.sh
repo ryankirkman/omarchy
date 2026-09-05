@@ -104,8 +104,34 @@ rm -rf "$root/etc/pacman.d/gnupg"
 : >"$root/etc/machine-id"
 # openssh package should not seed keys, but an image must never share them.
 rm -f "$root"/etc/ssh/ssh_host_*_key "$root"/etc/ssh/ssh_host_*_key.pub
-find "$root/var/log" -mindepth 1 ! -name pacman.log -delete
-rm -rf "$root/var/cache/pacman/pkg"/* "$root/etc/resolv.conf"
+# Keep package-owned log directories; Qk must still validate the baked image.
+# Empty unowned directories (including build-machine journal IDs) can go.
+python - "$root" <<'PY'
+import sys
+from pathlib import Path
+root = Path(sys.argv[1])
+owned = set()
+for record in (root / "var/lib/pacman/local").glob("*/files"):
+    text = record.read_text()
+    if "%FILES%\n" in text:
+        owned.update(text.split("%FILES%\n", 1)[1].split("\n\n", 1)[0].splitlines())
+for path in sorted((root / "var/log").rglob("*"), key=lambda p: len(p.parts), reverse=True):
+    relative = path.relative_to(root).as_posix()
+    if path.is_dir() and not path.is_symlink():
+        if relative + "/" not in owned:
+            path.rmdir()
+    elif relative != "var/log/pacman.log":
+        if relative in owned:
+            if path.is_file() and not path.is_symlink():
+                path.write_bytes(b"")
+        else:
+            path.unlink()
+PY
+rm -rf "$root/var/cache/pacman/pkg"/*
+# filesystem owns this file. Restore its packaged default, not the live guest's
+# resolver copied by pacstrap; deleting it leaves an incomplete package.
+rm -f "$root/etc/resolv.conf"
+cp -a "$root/usr/share/factory/etc/resolv.conf" "$root/etc/resolv.conf"
 
 pacman --root "$root" -Q | LC_ALL=C sort >"$output/image-package-manifest.txt"
 python "$bundle/validate-image-manifest.py" "$baseline" "$output"

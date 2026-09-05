@@ -33,6 +33,10 @@ EVIDENCE_FILES = {
   'serial.log', 'live-serial.log', 'qemu.log', 'progress.json', 'latest-screen.png',
   'last-failed-ssh-probe.json', 'timeout-diagnostics.json',
   'timeout-before-keys.png', 'timeout-after-escape.png', 'timeout-after-tty2.png',
+  'standalone-reboot.json',
+  'standalone-root.json', 'standalone-identity.json', 'standalone-machine-id.txt',
+  'standalone-ssh-host-fingerprints.txt', 'standalone-pacman-master-keys.txt',
+  'standalone-btrfs-uuid.txt', 'standalone-btrfs-subvolumes.txt', 'standalone-uki-files.txt',
 }
 
 
@@ -74,6 +78,22 @@ def digest(path):
 
 def save_json(path, value):
   path.write_text(json.dumps(value, indent=2) + '\n')
+
+
+def disk_budget(work, boot_method):
+  required = (44 if boot_method == 'firmware' else 28) * 1024**3
+  free = shutil.disk_usage(work).free
+  if free < required:
+    raise RuntimeError(f'{boot_method} mode requires {required // 1024**3} GiB free before preparation; found {free / 1024**3:.2f} GiB')
+  return {'boot_method': boot_method, 'minimum_free_bytes': required, 'observed_free_bytes': free}
+
+
+def boot_arguments(boot_method, iso, kernel, initrd, *, builder=False, firmware_iso=None):
+  if boot_method == 'firmware' and not builder:
+    if firmware_iso is None:
+      raise ValueError('Firmware installs require a separately verified derived ISO')
+    return ['--iso', firmware_iso, '--verify-standalone-reboot']
+  return ['--iso', iso, '--kernel', kernel, '--initrd', initrd, '--append', CMDLINE]
 
 
 def git_checkout(destination, revision):
@@ -120,6 +140,7 @@ def execute(args):
     raise ValueError('Use a new empty work path; no reuse of disks or NVRAM')
   work.mkdir(parents=True)
   evidence.mkdir(parents=True, exist_ok=True)
+  save_json(evidence / 'disk-budget.json', disk_budget(work, args.boot_method))
   fd = os.open('/dev/kvm', os.O_RDWR | os.O_CLOEXEC)
   if fcntl.ioctl(fd, 0xae00, 0) != 12:
     raise RuntimeError('KVM API mismatch')
@@ -144,6 +165,7 @@ def execute(args):
     'github_run_id': os.getenv('GITHUB_RUN_ID'), 'github_run_attempt': os.getenv('GITHUB_RUN_ATTEMPT'),
     'accelerator': 'kvm', 'cpus': 4, 'memory_mib': 8192, 'pairs_per_variant': 3,
     'variants': args.variants, 'comparisons': {},
+    'boot_method': args.boot_method, 'firmware_fixtures': {},
     'source_cache': args.source_cache,
     'cache_policy': ('Integrity pre-reads condition source media before timing' if args.source_cache == 'conditioned' else 'Require verified source-page eviction after integrity reads and before timing; see per-run evidence'),
     'build_time_in_install_time': False,
@@ -176,12 +198,44 @@ def execute(args):
 
   control_initrd = make_initrd('control')
 
+  firmware_isos = {}
+
+  def firmware_iso(selected_initrd, initrd_digest):
+    # A completed fixture is reused only for the exact immutable initramfs.
+    # Each VM still verifies source media digests before its own timer starts.
+    if initrd_digest not in firmware_isos:
+      output = work / f'firmware-{selected_initrd.stem}.iso'
+      repack_log = output.with_suffix('.iso.repack.log')
+      try:
+        command([sys.executable, bench / 'install-speed/firmware-fixture/repack-iso.py',
+          '--source', iso, '--initramfs', selected_initrd, '--output', output])
+      finally:
+        if repack_log.is_file() and repack_log.stat().st_size <= 20 * 1024**2:
+          shutil.copyfile(repack_log, evidence / repack_log.name)
+      source_manifest = output.with_suffix('.iso.manifest.json')
+      fixture = json.loads(source_manifest.read_text())
+      if (fixture.get('source_sha256') != ISO_SHA256 or
+          fixture.get('initramfs_sha256') != initrd_digest or
+          fixture.get('status') != 'verified-content-not-yet-boot-tested'):
+        raise RuntimeError('Firmware fixture failed source/initramfs provenance checks')
+      shutil.copyfile(source_manifest, evidence / source_manifest.name)
+      provenance['firmware_fixtures'][initrd_digest] = {
+        'iso_sha256': fixture['output_sha256'], 'manifest': source_manifest.name,
+        'iso_bytes': fixture['output_bytes'], 'standalone_reboot_required': True,
+      }
+      save_json(evidence / 'experiment.json', provenance)
+      firmware_isos[initrd_digest] = output
+    return firmware_isos[initrd_digest]
+
   def vm_args(name, selected_initrd, extra=None, builder=False, key=None):
-    argv = [sys.executable, bench / 'iso-vm.py', 'run', '--iso', iso, '--iso-source', harness,
+    initrd_digest = digest(selected_initrd)
+    selected_iso = firmware_iso(selected_initrd, initrd_digest) if args.boot_method == 'firmware' and not builder else None
+    argv = [sys.executable, bench / 'iso-vm.py', 'run', '--iso-source', harness,
         '--run-dir', work / name, '--cpus', '4', '--memory', '8192', '--accelerator', 'kvm',
         '--poll-interval', '2', '--timeout', '5400' if builder else '1800',
-        '--kernel', kernel, '--initrd', selected_initrd, '--append', CMDLINE,
-        '--test-overlay-sha256', digest(selected_initrd)]
+        '--test-overlay-sha256', initrd_digest]
+    argv += boot_arguments(args.boot_method, iso, kernel, selected_initrd,
+      builder=builder, firmware_iso=selected_iso)
     if extra:
       argv += ['--extra-qemu-args-json', json.dumps(extra)]
     if builder:
@@ -193,11 +247,15 @@ def execute(args):
   def install(name, selected_initrd, extra=None):
     run = work / name
     try:
-      command(vm_args(name, selected_initrd, extra), timeout=2100)
+      command(vm_args(name, selected_initrd, extra), timeout=2700 if args.boot_method == 'firmware' else 2100)
       manifest = json.loads((run / 'manifest.json').read_text())
       validation = json.loads((run / 'validation.json').read_text())
       if manifest['status'] != 'installed-and-booted' or manifest.get('qemu_exit_status') != 0 or validation.get('package_files_exit_status') != 0:
         raise RuntimeError(f'Installation not validated: {name}')
+      if args.boot_method == 'firmware':
+        proof = json.loads((run / 'standalone-reboot.json').read_text())
+        if manifest.get('standalone_reboot_passed') is not True or proof.get('passed') is not True:
+          raise RuntimeError('Firmware installation lacks a successful standalone reboot proof')
     except Exception:
       # The failed supervisor and QEMU must be stopped before the same target
       # is attached read-only to a separate live VM. Rescue never makes a
@@ -277,7 +335,7 @@ def execute(args):
   (candidate_payload / 'usr/local/lib/omarchy-benchmark').mkdir(parents=True)
   shutil.copyfile(image / 'activate-installer-overlay.sh', candidate_payload / 'usr/local/lib/omarchy-benchmark/activate-installer-overlay.sh')
   same_media = ['-drive', f'file={supplemental},if=none,id=fastimage,format=raw,readonly=on,cache=writeback,media=cdrom',
-         '-device', 'ide-cd,drive=fastimage']
+         '-device', 'ide-cd,drive=fastimage,bus=ide.1' + (',id=fastimage-cd' if args.boot_method == 'firmware' else '')]
   control_launch = work / 'control-launch.json'
   save_json(control_launch, vm_args('control-template', control_initrd, same_media))
 
@@ -337,6 +395,8 @@ def parse_arguments(argv=None):
   parser.add_argument('--repo', required=True, type=Path)
   parser.add_argument('--work', required=True, type=Path)
   parser.add_argument('--evidence', required=True, type=Path)
+  parser.add_argument('--boot-method', choices=('direct', 'firmware'), default='direct',
+    help='Direct kernel boot (default), or verified ISO repacking with firmware boot and standalone reboot validation')
   parser.add_argument('--source-cache', choices=('conditioned', 'cold'), default='conditioned',
     help='Source media cache policy; cold requires verified eviction in the VM runner')
   parser.add_argument('--variants', nargs='+', choices=('upstream-image', 'image-no-package-prefetch'),

@@ -77,6 +77,7 @@ with tempfile.TemporaryDirectory() as directory:
     "validation.json": validation,
     "identity.json": identity,
     "package-manifest.txt": "kernel 1.0\nshell 2.0\n",
+    "package-files.txt": "kernel: 64 total files, 0 missing files\nshell: 31 total files, 0 missing files\n",
     "package-explicit.txt": "shell\n",
   }
 
@@ -119,6 +120,14 @@ with tempfile.TemporaryDirectory() as directory:
   assert run["identity"]["machine_id"] == identity["machine_id"]
   assert run["ssh_poll_uncertainty_seconds"] == 2  # Never substitute the nominal 30 seconds.
   assert run["source_cache"] == "conditioned"
+  assert run["package_file_counts"] == {"kernel": 64, "shell": 31}
+  for value in (None, "", "kernel: 64 total files, 0 missing files\n",
+                "kernel: 64 total files, 1 missing files\nshell: 31 total files, 0 missing files\n",
+                "kernel: 64 total files, 0 missing files\nkernel: 64 total files, 0 missing files\n",
+                "kernel: zero total files, 0 missing files\nshell: 31 total files, 0 missing files\n"):
+    rejects_artifacts({"package-files.txt": value}, "invalid package file inventory accepted")
+  write_artifacts({"package-files.txt": "kernel: 0 total files, 0 missing files\nshell: 31 total files, 0 missing files\n"})
+  assert module.read_run(root)["package_file_counts"]["kernel"] == 0  # Metapackages may own no files.
   for key, value in (("booted_installed_root", False), ("package_files_exit_status", 1),
                      ("package_files_exit_status", False)):
     rejects_artifacts({"validation.json": {**validation, key: value}}, "invalid installation accepted")
@@ -244,6 +253,72 @@ with tempfile.TemporaryDirectory() as directory:
   rejects_artifacts({"manifest.json": {**manifest, "source_cache_evidence": cold["source_cache_evidence"]}},
                     "conditioned mode unexpectedly included conflicting cold proof")
 
+  # Normal firmware boot must also survive removal of every installer medium.
+  standalone_manifest = {**firmware, "verify_standalone_reboot": True,
+                         "standalone_reboot_passed": True,
+                         "reboot_strategy": "guest-firmware-reboot-with-standalone-validation",
+                         "extra_media": [copy.deepcopy(manifest["extra_media"][0])]}
+  standalone_manifest["extra_media"][0]["device"] = "ide-cd,drive=root-image,bus=ide.1,id=root-image-cd"
+  plan = [{"drive_id": "iso", "device_id": "installer-cd", "kind": "cdrom"},
+          {"drive_id": "root-image", "device_id": "root-image-cd", "kind": "cdrom"},
+          {"drive_id": "cidata", "device_id": "cidata-usb", "kind": "usb-storage"}]
+  standalone_manifest["standalone_media_plan"] = plan
+  roots = [{"source": "/dev/vda2[/@]", "fstype": "btrfs", "target": "/"}]
+  empty_media = [{"device": "iso"}, {"device": "root-image"}, {"device": "cidata"}]
+  proof = {
+    "schema_version": 1, "passed": True, "outside_install_timing": True,
+    "observed_ssh_disconnect": True, "original_first_installed_ssh_wall_s": 96,
+    "validation_started_host_wall_s": 100, "media_removed_host_wall_s": 101,
+    "reboot_requested_host_wall_s": 102, "last_disconnected_host_wall_s": 103,
+    "standalone_ssh_ready_host_wall_s": 110, "validation_finished_host_wall_s": 111,
+    "qemu_pid_before": 123, "qemu_pid_after": 123,
+    "boot_id_before": str(uuid.uuid4()), "boot_id_after": str(uuid.uuid4()),
+    "root_before": roots, "root_after": roots, "identity_before": identity, "identity_after": identity,
+    "media_plan": plan, "media_removal": {
+      "device_deleted_event": {"event": "DEVICE_DELETED", "data": {"device": "cidata-usb"}},
+      "query_block": empty_media}, "media_after_reboot": empty_media,
+  }
+  standalone_artifacts = {"manifest.json": standalone_manifest, "standalone-reboot.json": proof,
+                          "installed-root.json": {"filesystems": roots}}
+  write_artifacts(standalone_artifacts)
+  standalone_run = module.read_run(root)
+  assert standalone_run["boot_to_ssh_seconds"] == 96
+  assert standalone_run["boot_fixture"]["verify_standalone_reboot"]
+  assert standalone_run["standalone_reboot"]["passed"]
+  for key in proof:
+    incomplete = {name: value for name, value in proof.items() if name != key}
+    rejects_artifacts({**standalone_artifacts, "standalone-reboot.json": incomplete},
+                      f"standalone proof missing {key} accepted")
+  for key, value in (("passed", False), ("outside_install_timing", False), ("observed_ssh_disconnect", False),
+                     ("original_first_installed_ssh_wall_s", 97), ("qemu_pid_after", 124),
+                     ("qemu_pid_before", True), ("boot_id_after", proof["boot_id_before"]),
+                     ("boot_id_after", "0" * 32), ("identity_after", fixture_identity("changed")),
+                     ("root_after", [{"source": "/dev/vda20[/@]", "fstype": "btrfs", "target": "/"}]),
+                     ("validation_started_host_wall_s", 95), ("media_removed_host_wall_s", 105),
+                     ("standalone_ssh_ready_host_wall_s", float("nan")), ("media_plan", plan[:-1])):
+    rejects_artifacts({**standalone_artifacts, "standalone-reboot.json": {**proof, key: value}},
+                      f"invalid standalone {key} accepted")
+  for stage in ("before", "after"):
+    for bad_blocks in ([{"device": "iso", "inserted": {"file": "installer.iso"}}, *empty_media[1:]],
+                       [*empty_media[:2], {"device": "cidata", "qdev": "/machine/peripheral/cidata-usb"}],
+                       empty_media[1:], [*empty_media, empty_media[0]]):
+      altered = copy.deepcopy(proof)
+      if stage == "before":
+        altered["media_removal"]["query_block"] = bad_blocks
+      else:
+        altered["media_after_reboot"] = bad_blocks
+      rejects_artifacts({**standalone_artifacts, "standalone-reboot.json": altered},
+                        f"retained or missing media evidence {stage} reboot accepted")
+  altered = copy.deepcopy(proof)
+  altered["media_removal"]["device_deleted_event"]["data"]["device"] = "another-device"
+  rejects_artifacts({**standalone_artifacts, "standalone-reboot.json": altered}, "wrong unplug event accepted")
+  rejects_artifacts({**standalone_artifacts, "standalone-reboot.json": None}, "missing standalone proof accepted")
+  for key, value in (("verify_standalone_reboot", False), ("verify_standalone_reboot", 1),
+                     ("standalone_reboot_passed", False), ("standalone_media_plan", plan[:-1]),
+                     ("reboot_strategy", "guest-firmware-reboot")):
+    rejects_artifacts({**standalone_artifacts, "manifest.json": {**standalone_manifest, key: value}},
+                      f"inconsistent standalone manifest {key} accepted")
+
 
 def sample(name, seconds):
   result = copy.deepcopy(run)
@@ -295,6 +370,7 @@ for source in (baseline[0], candidate[1]):
   altered[0]["identity"]["ssh_host_key_fingerprints"][0] = source["identity"]["ssh_host_key_fingerprints"][0]
   rejects(lambda: module.compare(baseline, altered), "partially cloned SSH host keys accepted")
 for key, value in (("packages", ["kernel 1.0"]), ("packages", ["kernel 2.0", "shell 2.0"]),
+                   ("package_file_counts", {"kernel": 0, "shell": 31}),
                    ("explicit_packages", ["kernel", "shell"]), ("iso_sha256", "e" * 64),
                    ("test_overlay_sha256", None), ("direct_initrd_sha256", "4" * 64)):
   altered = copy.deepcopy(candidate)

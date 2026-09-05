@@ -25,6 +25,9 @@ EVIDENCE_FILES = (
   "pacman-master-keys.txt", "btrfs-uuid.txt", "btrfs-subvolumes.txt", "uki-files.txt",
   "serial.log", "live-serial.log", "qemu.log", "installed-screen.png",
   "systemd-analyze-blame.txt", "systemd-analyze-critical-chain.txt",
+  "standalone-reboot.json", "standalone-root.json", "standalone-identity.json",
+  "standalone-machine-id.txt", "standalone-ssh-host-fingerprints.txt", "standalone-pacman-master-keys.txt",
+  "standalone-btrfs-uuid.txt", "standalone-btrfs-subvolumes.txt", "standalone-uki-files.txt",
 )
 MAX_FILE_BYTES = 16 * 1024 * 1024
 MAX_EVIDENCE_BYTES = 64 * 1024 * 1024

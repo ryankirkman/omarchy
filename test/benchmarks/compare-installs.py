@@ -26,6 +26,20 @@ def finite_number(value):
   return isinstance(value, (int, float)) and not isinstance(value, bool) and math.isfinite(value)
 
 
+def package_file_counts(directory, package_names):
+  counts = {}
+  for line in (directory / "package-files.txt").read_text().splitlines():
+    match = re.fullmatch(r"([^\s:]+): ([0-9]+) total files, ([0-9]+) missing files", line)
+    if not match or match[1] in counts or int(match[3]) != 0:
+      raise ValueError(f"{directory}: malformed, duplicate or failed package file check")
+    counts[match[1]] = int(match[2])
+  if set(counts) != package_names:
+    raise ValueError(f"{directory}: package file checks do not cover the installed inventory")
+  # Empty metapackages are valid. Equality across treatments detects a damaged
+  # package database reporting zero files (and thus Qk success) for real content.
+  return dict(sorted(counts.items()))
+
+
 def identity_evidence(directory):
   identity = json.loads((directory / "identity.json").read_text())
   if not isinstance(identity, dict):
@@ -169,13 +183,87 @@ def boot_evidence(manifest, directory):
   strategy = manifest["reboot_strategy"]
   if not isinstance(strategy, str) or not strategy:
     raise ValueError(f"{directory}: reboot strategy is missing")
+  standalone = manifest.get("verify_standalone_reboot", False)
+  if type(standalone) is not bool:
+    raise ValueError(f"{directory}: standalone reboot setting must be boolean")
+  if standalone != (strategy == "guest-firmware-reboot-with-standalone-validation") or (standalone and direct):
+    raise ValueError(f"{directory}: inconsistent standalone firmware boot strategy")
   return {
     "boot_fixture": {"direct_kernel_boot": direct, "direct_kernel_sha256": kernel,
-                     "direct_kernel_command_line": command_line, "reboot_strategy": strategy},
+                     "direct_kernel_command_line": command_line, "reboot_strategy": strategy,
+                     "verify_standalone_reboot": standalone},
     "direct_initrd_sha256": initrd,
     "boot_to_ssh_seconds": upper, "ssh_readiness_lower_bound_seconds": lower,
     "ssh_poll_uncertainty_seconds": uncertainty,
   }
+
+
+def standalone_evidence(manifest, extra_media, directory):
+  if not manifest.get("verify_standalone_reboot", False):
+    if manifest.get("standalone_reboot_passed") is True:
+      raise ValueError(f"{directory}: standalone proof passed without requested validation")
+    return {}
+  proof = json.loads((directory / "standalone-reboot.json").read_text())
+  if (not isinstance(proof, dict) or type(proof.get("schema_version")) is not int
+      or proof["schema_version"] != 1 or proof.get("passed") is not True
+      or proof.get("outside_install_timing") is not True
+      or proof.get("observed_ssh_disconnect") is not True
+      or manifest.get("standalone_reboot_passed") is not True):
+    raise ValueError(f"{directory}: missing successful independent reboot proof")
+  times = [proof[key] for key in (
+    "original_first_installed_ssh_wall_s", "validation_started_host_wall_s",
+    "media_removed_host_wall_s", "reboot_requested_host_wall_s", "last_disconnected_host_wall_s",
+    "standalone_ssh_ready_host_wall_s", "validation_finished_host_wall_s")]
+  if (not all(finite_number(value) and value > 0 for value in times) or times != sorted(times)
+      or times[0] != manifest["first_installed_ssh_wall_s"]):
+    raise ValueError(f"{directory}: standalone reboot changed install timing or has invalid chronology")
+  before = proof["qemu_pid_before"]
+  if type(before) is not int or before <= 0 or type(proof["qemu_pid_after"]) is not int or before != proof["qemu_pid_after"]:
+    raise ValueError(f"{directory}: standalone reboot replaced the QEMU process")
+  boot_ids = [proof[key] for key in ("boot_id_before", "boot_id_after")]
+  for boot_id in boot_ids:
+    if (not isinstance(boot_id, str) or not re.fullmatch(r"[0-9a-f]{8}(?:-[0-9a-f]{4}){3}-[0-9a-f]{12}", boot_id)
+        or uuid.UUID(boot_id).int == 0):
+      raise ValueError(f"{directory}: invalid standalone boot ID")
+  if boot_ids[0] == boot_ids[1]:
+    raise ValueError(f"{directory}: standalone validation did not reboot")
+  roots = json.loads((directory / "installed-root.json").read_text())["filesystems"]
+  if (not isinstance(roots, list) or len(roots) != 1 or not isinstance(roots[0], dict)
+      or roots[0].get("target") != "/" or roots[0].get("fstype") != "btrfs"
+      or not re.fullmatch(r"/dev/vda2(?:\[[^\]]+\])?", roots[0].get("source", ""))
+      or proof["root_before"] != roots or proof["root_after"] != roots):
+    raise ValueError(f"{directory}: standalone reboot did not preserve the installed root")
+  identity = json.loads((directory / "identity.json").read_text())
+  if proof["identity_before"] != identity or proof["identity_after"] != identity:
+    raise ValueError(f"{directory}: standalone reboot changed installed identities")
+  plan = [{"drive_id": "iso", "device_id": "installer-cd", "kind": "cdrom"}]
+  for medium in extra_media:
+    device = medium["device"]
+    if not isinstance(device, str) or device.split(",")[0] != "ide-cd":
+      raise ValueError(f"{directory}: standalone supplementary media is not an explicit CD-ROM")
+    options = dict(piece.split("=", 1) for piece in device.split(",")[1:] if "=" in piece)
+    if not options.get("id") or options.get("drive") != medium["drive_id"]:
+      raise ValueError(f"{directory}: standalone supplementary media lacks matching device IDs")
+    plan.append({"drive_id": medium["drive_id"], "device_id": options["id"], "kind": "cdrom"})
+  plan.append({"drive_id": "cidata", "device_id": "cidata-usb", "kind": "usb-storage"})
+  identifiers = [row[key] for row in plan for key in ("drive_id", "device_id")]
+  if (any(not isinstance(value, str) or not value for value in identifiers)
+      or len(set(identifiers)) != len(identifiers)
+      or manifest["standalone_media_plan"] != plan or proof["media_plan"] != plan):
+    raise ValueError(f"{directory}: standalone proof does not cover the launched installation media")
+  removal = proof["media_removal"]
+  event = removal["device_deleted_event"]
+  if event.get("event") != "DEVICE_DELETED" or event.get("data", {}).get("device") != "cidata-usb":
+    raise ValueError(f"{directory}: CIDATA removal did not complete")
+  for blocks in (removal["query_block"], proof["media_after_reboot"]):
+    if not isinstance(blocks, list) or any(not isinstance(row, dict) for row in blocks):
+      raise ValueError(f"{directory}: malformed standalone block device evidence")
+    for medium in plan:
+      rows = [row for row in blocks if row.get("device") == medium["drive_id"]]
+      if (len(rows) > 1 or (medium["kind"] == "cdrom" and (len(rows) != 1 or "inserted" in rows[0]))
+          or (medium["kind"] == "usb-storage" and any(row.get("qdev") for row in rows))):
+        raise ValueError(f"{directory}: installation media remained available during standalone reboot")
+  return {"standalone_reboot": proof}
 
 
 def read_run(directory):
@@ -249,11 +337,13 @@ def read_run(directory):
   return {
     "directory": str(directory.resolve()), "fixture": fixture,
     "packages": sorted(" ".join(line.split()) for line in packages),
+    "package_file_counts": package_file_counts(directory, package_names),
     "explicit_packages": sorted(explicit_packages), "elapsed": elapsed,
     "elapsed_clock": elapsed_clock, "guest_wall_clock_delta_seconds": wall_elapsed,
     "phase_seconds": {phase["name"]: phase["elapsed"] for phase in phases},
     "identity": identity_evidence(directory),
     **boot_evidence(manifest, directory),
+    **standalone_evidence(manifest, extra_media, directory),
     "iso_sha256": sha256(manifest["iso_sha256"], f"{directory}: ISO"),
     "test_overlay_sha256": overlay,
     "extra_media": extra_media,
@@ -278,6 +368,8 @@ def compare(baseline, candidate):
       raise ValueError("hardware, VM I/O, media topology/cache policy, encryption, filesystem or cidata configuration differ between runs")
     if run["packages"] != baseline[0]["packages"]:
       raise ValueError("installed package names or versions differ between runs")
+    if run["package_file_counts"] != baseline[0]["package_file_counts"]:
+      raise ValueError("installed package file counts differ; package database damage or content changes are possible")
     if run["explicit_packages"] != baseline[0]["explicit_packages"]:
       raise ValueError("installed package explicit/dependency reasons differ between runs")
   for group in (baseline, candidate):
@@ -299,7 +391,7 @@ def compare(baseline, candidate):
   boot_conservative = min(boot_lower["baseline"]) / max(boot_upper["candidate"]) if boot_comparable else None
   repeated = len(baseline) >= 3 and len(candidate) >= 3
   return {
-    "schema_version": 7, "kind": "validated_full_install_comparison",
+    "schema_version": 9, "kind": "validated_full_install_comparison",
     "fixture": baseline[0]["fixture"],
     "scope": "Host VM start through live boot, installation, reboot and first successful SSH to the independently verified installed root. Package files are checked afterward.",
     "clock": "Host monotonic clock across any QEMU restart, with actual SSH probe uncertainty. Guest installer duration is a separate component metric, preferring its recorded monotonic duration over the stock wall-clock fallback.",

@@ -49,6 +49,24 @@ The runner accepts `--kernel`, `--initrd`, and `--append` for a matched control 
 
 For accurate readiness uncertainty, the runner records the start of the last failed SSH probe and the end of the first successful probe. The interval between these observations brackets installed SSH readiness; the nominal poll interval alone is not an adequate uncertainty bound. Guest installer timings remain separate from the complete host boot/install/reboot total.
 
+### Firmware boot and independent standalone reboot
+
+`--verify-standalone-reboot` is an optional gate for install mode without `--kernel`/`--initrd`. The ISO boots through its normal firmware and GRUB path. The fresh target has boot priority 1 and the installation CD has priority 2; the installer's normal reboot can therefore reach the installed disk in the same QEMU instance. A repacked benchmark ISO can place a matched control/candidate initramfs overlay inside the normal ISO boot path; see `install-speed/firmware-fixture/README.md`.
+
+The first installed SSH observation retains exactly the same timing boundary and uncertainty fields as other runs. Before accepting that observation, the runner checks the installed Btrfs root, complete successful installer phases, package inventory, package-file validation and unique system identities. It then opens and removes all installation CD media, requests CIDATA USB device removal, waits for QMP's actual `DEVICE_DELETED` event, and checks that no installation medium remains connected to the guest. CD removal uses QMP's documented [`blockdev-open-tray` and `blockdev-remove-medium`](https://qemu.readthedocs.io/en/v8.2.10/interop/qemu-qmp-ref.html#command-blockdev-remove-medium) commands.
+
+The runner asks the installed guest to perform an ordinary `systemctl reboot`, observes SSH becoming unavailable, and requires SSH to return with a different kernel boot ID. The original QEMU process must remain alive; the root mount, machine ID, SSH host fingerprints, pacman master fingerprint and Btrfs UUID must remain the same. It checks media absence again after reboot. Only then can `manifest.json` reach `installed-and-booted` with `standalone_reboot_passed=true`. This additional proof is outside the first installation's timing interval, and its separately timestamped evidence is stored in `standalone-reboot.json`; failure invalidates the entire sample. `--standalone-reboot-timeout` defaults to 600 seconds and is independent of the original installation deadline.
+
+This gate supports only explicit `-drive`/`-device` pairs for supplementary IDE CD-ROMs. Each requires a unique drive ID, `media=cdrom,if=none`, an `ide-cd` device with its own explicit ID, and the correct free IDE bus. For example:
+
+```json
+["-drive", "file=/tmp/omarchy-bench/root-image.iso,format=raw,if=none,media=cdrom,id=fastimage,readonly=on,cache=writeback", "-device", "ide-cd,drive=fastimage,id=fastimage-cd,bus=ide.1"]
+```
+
+The installation CD occupies `ide.0`; a second CD without `bus=ide.1` cannot start on this Q35 fixture. Other supplementary device types or unnamed devices are rejected by the standalone gate. Default/direct-kernel mode remains available. Do not mix these boot strategies in one comparison: the manifest records both `verify_standalone_reboot` and `reboot_strategy`, and accepted proof retains the original first-SSH timestamp without adding the second reboot's duration to it.
+
+`OMARCHY_QEMU_TOOLCHAIN=/tmp/omarchy-bench/toolchain bash test/shell.d/iso-vm-standalone-reboot-test.sh` exercises the gate's acceptance/failure conditions and real QMP CD ejection plus USB removal on a tiny stopped VM. This tests device-control behavior; it is not an installation performance measurement or a substitute for the required complete fresh install.
+
 For native runs, `--installed-boot-timeout 300` adds a five-minute SSH readiness deadline beginning at the direct installer's restart from the installed disk. The default adds no separate deadline, preserving longer TCG boot allowances. It does not shorten the live installer deadline or alter successful timings. Every unsuccessful readiness probe saves its actual return code, stderr, and host observation interval in `last-failed-ssh-probe.json`.
 
 When either deadline expires, the runner first marks the measurement `timeout` with `validation_passed=false`. Only then does it save a console screenshot, send Escape to reveal Plymouth output, switch to tty2, save both resulting screenshots, and collect QMP CPU/register diagnostics. These bounded diagnostic operations are recorded in `timeout-diagnostics.json`; a guest that becomes responsive afterward cannot qualify as a completed sample. The runner then terminates its own QEMU process cleanly and retains the failed target for separate investigation. Diagnostic failure does not erase prior evidence or change the sample's failed status.

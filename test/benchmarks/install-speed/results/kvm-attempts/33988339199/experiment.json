@@ -1,0 +1,23 @@
+{
+  "schema_version": 1,
+  "status": "preparing",
+  "iso_url": "https://iso.omarchy.org/omarchy-4.0.2.iso",
+  "iso_sha256": "2ef8e624aa1bec7e277e28056b8535a6c9373ba48d7ede3f1a01cb6d2373cfb8",
+  "upstream_fast_pin": "dbffaa6c65344d644627a023c28661e08382b8fa",
+  "cidata_harness_pin": "2673c613d9a71e23920e43fbb951238145e0f1e8",
+  "repository_commit": "94977d6352f24591fecad0cbffd63c090b076b33",
+  "github_run_id": "33988339199",
+  "github_run_attempt": "1",
+  "accelerator": "kvm",
+  "cpus": 4,
+  "memory_mib": 8192,
+  "pairs_per_variant": 3,
+  "variants": [
+    "upstream-image",
+    "image-no-package-prefetch"
+  ],
+  "comparisons": {},
+  "source_cache": "conditioned",
+  "cache_policy": "Integrity pre-reads condition source media before timing",
+  "build_time_in_install_time": false
+}

@@ -56,6 +56,20 @@ class NativeContract(unittest.TestCase):
       module.collect_small(run, output)
       self.assertEqual({p.name for p in output.iterdir()}, {'manifest.json', 'package-manifest.txt'})
 
+  def test_standalone_public_evidence_is_preserved(self):
+    with tempfile.TemporaryDirectory() as temporary:
+      root = Path(temporary)
+      run, output = root / 'run', root / 'output'
+      run.mkdir()
+      for name in ('standalone-reboot.json', 'standalone-root.json', 'standalone-identity.json',
+          'standalone-machine-id.txt', 'standalone-ssh-host-fingerprints.txt',
+          'standalone-pacman-master-keys.txt', 'standalone-btrfs-uuid.txt',
+          'standalone-btrfs-subvolumes.txt', 'standalone-uki-files.txt', 'id_ed25519'):
+        (run / name).write_text('fixture')
+      module.collect_small(run, output)
+      self.assertEqual(len(list(output.iterdir())), 9)
+      self.assertFalse((output / 'id_ed25519').exists())
+
   def test_rejects_oversized_evidence(self):
     with tempfile.TemporaryDirectory() as temporary:
       root = Path(temporary)
@@ -76,16 +90,36 @@ class NativeContract(unittest.TestCase):
   def test_cache_and_variant_selection(self):
     base = ['--repo', '/repo', '--work', '/new-work', '--evidence', '/evidence']
     default = module.parse_arguments(base)
+    self.assertEqual(default.boot_method, 'direct')
     self.assertEqual(default.source_cache, 'conditioned')
     self.assertEqual(default.variants, ['upstream-image', 'image-no-package-prefetch'])
     selected = module.parse_arguments(base + ['--source-cache', 'cold', '--variants', 'image-no-package-prefetch'])
     self.assertEqual(selected.source_cache, 'cold')
     self.assertEqual(selected.variants, ['image-no-package-prefetch'])
-    for invalid in (['--source-cache', 'warm'], ['--variants', 'upstream-image', 'upstream-image']):
+    self.assertEqual(module.parse_arguments(base + ['--boot-method', 'firmware']).boot_method, 'firmware')
+    for invalid in (['--source-cache', 'warm'], ['--boot-method', 'automatic'], ['--variants', 'upstream-image', 'upstream-image']):
       with contextlib.redirect_stderr(io.StringIO()):
         with self.assertRaises(SystemExit) as result:
           module.parse_arguments(base + invalid)
       self.assertEqual(result.exception.code, 1)
+
+  def test_firmware_keeps_builder_direct_and_requires_standalone_proof(self):
+    source, derived, kernel, initrd = map(Path, ('/original.iso', '/derived.iso', '/kernel', '/initrd'))
+    firmware = module.boot_arguments('firmware', source, kernel, initrd, firmware_iso=derived)
+    self.assertEqual(firmware, ['--iso', derived, '--verify-standalone-reboot'])
+    for method in ('firmware', 'direct'):
+      builder = module.boot_arguments(method, source, kernel, initrd, builder=True)
+      self.assertEqual(builder, ['--iso', source, '--kernel', kernel, '--initrd', initrd, '--append', module.CMDLINE])
+    with self.assertRaisesRegex(ValueError, 'verified derived ISO'):
+      module.boot_arguments('firmware', source, kernel, initrd)
+
+  def test_firmware_disk_headroom_fails_before_preparation(self):
+    with patch.object(module.shutil, 'disk_usage', return_value=SimpleNamespace(free=43 * 1024**3)):
+      with self.assertRaisesRegex(RuntimeError, '44 GiB'):
+        module.disk_budget(Path('/tmp'), 'firmware')
+      self.assertEqual(module.disk_budget(Path('/tmp'), 'direct')['minimum_free_bytes'], 28 * 1024**3)
+    with patch.object(module.shutil, 'disk_usage', return_value=SimpleNamespace(free=44 * 1024**3)):
+      self.assertEqual(module.disk_budget(Path('/tmp'), 'firmware')['minimum_free_bytes'], 44 * 1024**3)
 
   def test_pinned_sources(self):
     self.assertEqual(module.HARNESS_PIN, '2673c613d9a71e23920e43fbb951238145e0f1e8')
