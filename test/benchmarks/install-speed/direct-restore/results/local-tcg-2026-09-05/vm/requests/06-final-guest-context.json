@@ -1,0 +1,1 @@
+{"action": "ssh", "command": "uname -a; systemd-detect-virt --vm; lsblk -o NAME,TYPE,SIZE,LOG-SEC,PHY-SEC,RO,SERIAL,MOUNTPOINTS; systemctl show omarchy-direct-restore-test -p ActiveState -p SubState -p ExecMainStatus; findmnt -rn -o SOURCE,TARGET,FSTYPE,OPTIONS", "timeout": 60}

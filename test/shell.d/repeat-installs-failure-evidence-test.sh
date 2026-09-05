@@ -25,6 +25,8 @@ with tempfile.TemporaryDirectory(prefix='omarchy-failed-sample-') as temporary:
   template.write_text(json.dumps([sys.executable, str(module.RUNNER), 'run', '--iso', '/unused-test-fixture.iso']))
   launches = []
   warning = 'warning: cups: /var/log/cups/ (No such file or directory)\n'
+  standalone_files = ('standalone-last-failed-ssh-probe.json', 'standalone-timeout-diagnostics.json',
+    'standalone-timeout-before-keys.png', 'standalone-timeout-after-escape.png', 'standalone-timeout-after-tty2.png')
   def execute(argv, run, log, timeout):
     # This regression runs the actual series/comparison/copy logic with two
     # captured-data fixtures; no VM or synthetic performance claim is involved.
@@ -40,6 +42,8 @@ with tempfile.TemporaryDirectory(prefix='omarchy-failed-sample-') as temporary:
       manifest['validation_passed'] = False
       (run / 'manifest.json').write_text(json.dumps(manifest))
       (run / 'package-files.stderr').write_text(warning)
+      for name in standalone_files:
+        (run / name).write_bytes(b'bounded diagnostic evidence')
     return 0
   argv = [str(script), '--control-launch', str(template), '--candidate-launch', str(template),
     '--run-root', str(run_root), '--evidence-root', str(evidence), '--vm-state-root', str(state)]
@@ -61,6 +65,9 @@ with tempfile.TemporaryDirectory(prefix='omarchy-failed-sample-') as temporary:
   assert 'package file validation failed' in record['failure']
   assert (failed / 'package-files.stderr').read_text() == warning
   assert record['files']['package-files.stderr']['sha256'] == module.digest(candidate / 'package-files.stderr')
+  for name in standalone_files:
+    assert (failed / name).read_bytes() == b'bounded diagnostic evidence'
+    assert record['files'][name]['sha256'] == module.digest(candidate / name)
   assert not (failed / 'id_ed25519').exists() and not (failed / 'target.qcow2').exists()
   assert not (failed / 'seal.json').exists()
   assert not (evidence / 'runs' / candidate.name).exists()

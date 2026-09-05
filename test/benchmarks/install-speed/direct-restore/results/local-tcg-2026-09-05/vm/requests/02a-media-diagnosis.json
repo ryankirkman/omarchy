@@ -1,0 +1,1 @@
+{"action": "ssh", "command": "lsblk -o NAME,TYPE,FSTYPE,LABEL,SERIAL,MOUNTPOINTS; find /tmp/omarchy-direct-restore/media -maxdepth 3 -type f | head -40; findmnt /tmp/omarchy-direct-restore/media", "timeout": 60}

@@ -1,0 +1,80 @@
+[
+  {
+    "argv": [
+      "/tmp/omarchy-bench/toolchain/usr/bin/qemu-img",
+      "convert",
+      "-c",
+      "-f",
+      "raw",
+      "-O",
+      "qcow2",
+      "-o",
+      "compression_type=zstd,cluster_size=1048576",
+      "/tmp/omarchy-bench/direct-restore-01/expected.raw",
+      "/tmp/omarchy-bench/direct-restore-01/source.qcow2"
+    ],
+    "returncode": 0,
+    "stdout": "",
+    "stderr": ""
+  },
+  {
+    "argv": [
+      "/tmp/omarchy-bench/toolchain/usr/bin/qemu-io",
+      "-f",
+      "qcow2",
+      "-c",
+      "write -P 0 16M 8M",
+      "/tmp/omarchy-bench/direct-restore-01/source.qcow2"
+    ],
+    "returncode": 0,
+    "stdout": "wrote 8388608/8388608 bytes at offset 16777216\n8 MiB, 1 ops; 00.03 sec (319.084 MiB/sec and 39.8855 ops/sec)\n",
+    "stderr": ""
+  },
+  {
+    "argv": [
+      "/tmp/omarchy-bench/toolchain/usr/bin/qemu-img",
+      "info",
+      "--output=json",
+      "/tmp/omarchy-bench/direct-restore-01/source.qcow2"
+    ],
+    "returncode": 0,
+    "stdout": "{\n    \"children\": [\n        {\n            \"name\": \"file\",\n            \"info\": {\n                \"children\": [\n                ],\n                \"virtual-size\": 14680064,\n                \"filename\": \"/tmp/omarchy-bench/direct-restore-01/source.qcow2\",\n                \"format\": \"file\",\n                \"actual-size\": 12599296,\n                \"format-specific\": {\n                    \"type\": \"file\",\n                    \"data\": {\n                    }\n                },\n                \"dirty-flag\": false\n            }\n        }\n    ],\n    \"virtual-size\": 67108864,\n    \"filename\": \"/tmp/omarchy-bench/direct-restore-01/source.qcow2\",\n    \"cluster-size\": 1048576,\n    \"format\": \"qcow2\",\n    \"actual-size\": 12599296,\n    \"format-specific\": {\n        \"type\": \"qcow2\",\n        \"data\": {\n            \"compat\": \"1.1\",\n            \"compression-type\": \"zstd\",\n            \"lazy-refcounts\": false,\n            \"refcount-bits\": 16,\n            \"corrupt\": false,\n            \"extended-l2\": false\n        }\n    },\n    \"dirty-flag\": false\n}\n",
+    "stderr": ""
+  },
+  {
+    "argv": [
+      "/tmp/omarchy-bench/toolchain/usr/bin/qemu-img",
+      "map",
+      "--output=json",
+      "/tmp/omarchy-bench/direct-restore-01/source.qcow2"
+    ],
+    "returncode": 0,
+    "stdout": "[{ \"start\": 0, \"length\": 16777216, \"depth\": 0, \"present\": true, \"zero\": false, \"data\": true, \"compressed\": true},\n{ \"start\": 16777216, \"length\": 8388608, \"depth\": 0, \"present\": true, \"zero\": false, \"data\": true, \"compressed\": false, \"offset\": 6291456},\n{ \"start\": 25165824, \"length\": 16777216, \"depth\": 0, \"present\": false, \"zero\": true, \"data\": false, \"compressed\": false},\n{ \"start\": 41943040, \"length\": 8388608, \"depth\": 0, \"present\": true, \"zero\": false, \"data\": true, \"compressed\": true},\n{ \"start\": 50331648, \"length\": 15728640, \"depth\": 0, \"present\": false, \"zero\": true, \"data\": false, \"compressed\": false},\n{ \"start\": 66060288, \"length\": 1048576, \"depth\": 0, \"present\": true, \"zero\": false, \"data\": true, \"compressed\": true}]\n",
+    "stderr": ""
+  },
+  {
+    "argv": [
+      "/tmp/omarchy-bench/toolchain/usr/bin/qemu-img",
+      "check",
+      "/tmp/omarchy-bench/direct-restore-01/source.qcow2"
+    ],
+    "returncode": 0,
+    "stdout": "No errors were found on the image.\n33/64 = 51.56% allocated, 75.76% fragmented, 75.76% compressed clusters\nImage end offset: 14680064\n",
+    "stderr": ""
+  },
+  {
+    "argv": [
+      "/tmp/omarchy-bench/toolchain/usr/bin/qemu-img",
+      "compare",
+      "-f",
+      "raw",
+      "-F",
+      "qcow2",
+      "/tmp/omarchy-bench/direct-restore-01/expected.raw",
+      "/tmp/omarchy-bench/direct-restore-01/source.qcow2"
+    ],
+    "returncode": 0,
+    "stdout": "Images are identical.\n",
+    "stderr": ""
+  }
+]

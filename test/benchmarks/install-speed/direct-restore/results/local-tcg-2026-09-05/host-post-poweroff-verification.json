@@ -1,0 +1,45 @@
+{
+  "status": "passed",
+  "qemu_exit_status": 0,
+  "targets": [
+    {
+      "case": "512-on",
+      "path": "/tmp/omarchy-bench/direct-restore-01/target-512-on.raw",
+      "bytes": 100663296,
+      "allocated_bytes": 54550528,
+      "image_sha256": "0de5c726016e9f2163a43a42d97020f32ffacb759f28d915a86281a5059ae8ea",
+      "trailing_sha256": "70c4eaba55c4010d636ac5b46ee640423ddcd44736057ad95429ea4fa4440e8a",
+      "whole_device_sha256": "4f8a1ead17aacf473f9d77918aaf97ce596dd5a27d08bd335471a00996b67da5"
+    },
+    {
+      "case": "512-off",
+      "path": "/tmp/omarchy-bench/direct-restore-01/target-512-off.raw",
+      "bytes": 100663296,
+      "allocated_bytes": 100663296,
+      "image_sha256": "0de5c726016e9f2163a43a42d97020f32ffacb759f28d915a86281a5059ae8ea",
+      "trailing_sha256": "70c4eaba55c4010d636ac5b46ee640423ddcd44736057ad95429ea4fa4440e8a",
+      "whole_device_sha256": "4f8a1ead17aacf473f9d77918aaf97ce596dd5a27d08bd335471a00996b67da5"
+    },
+    {
+      "case": "4096-on",
+      "path": "/tmp/omarchy-bench/direct-restore-01/target-4096-on.raw",
+      "bytes": 100663296,
+      "allocated_bytes": 54550528,
+      "image_sha256": "0de5c726016e9f2163a43a42d97020f32ffacb759f28d915a86281a5059ae8ea",
+      "trailing_sha256": "70c4eaba55c4010d636ac5b46ee640423ddcd44736057ad95429ea4fa4440e8a",
+      "whole_device_sha256": "4f8a1ead17aacf473f9d77918aaf97ce596dd5a27d08bd335471a00996b67da5"
+    },
+    {
+      "case": "4096-off",
+      "path": "/tmp/omarchy-bench/direct-restore-01/target-4096-off.raw",
+      "bytes": 100663296,
+      "allocated_bytes": 100663296,
+      "image_sha256": "0de5c726016e9f2163a43a42d97020f32ffacb759f28d915a86281a5059ae8ea",
+      "trailing_sha256": "70c4eaba55c4010d636ac5b46ee640423ddcd44736057ad95429ea4fa4440e8a",
+      "whole_device_sha256": "4f8a1ead17aacf473f9d77918aaf97ce596dd5a27d08bd335471a00996b67da5"
+    }
+  ],
+  "host_source_unchanged": true,
+  "scope": "Clean guest poweroff and full host-file readback; no host-crash durability claim",
+  "unused_runner_target_allocated_bytes": 200704
+}

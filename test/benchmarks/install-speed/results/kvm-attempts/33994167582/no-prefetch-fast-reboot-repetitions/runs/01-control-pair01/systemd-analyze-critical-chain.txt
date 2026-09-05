@@ -1,0 +1,24 @@
+Startup finished in 1.371s (firmware) + 8.056s (loader) + 1.946s (kernel) + 5.554s (userspace) = 16.928s 
+graphical.target reached after 5.439s in userspace.
+The time when unit became active or started is printed after the "@" character.
+The time the unit took to start is printed after the "+" character.
+
+graphical.target @5.439s
+└─power-profiles-daemon.service @5.317s +121ms
+  └─multi-user.target @5.310s
+    └─getty.target @5.310s
+      └─serial-getty@ttyS0.service @5.310s
+        └─plymouth-quit-wait.service @5.273s +34ms
+          └─systemd-user-sessions.service @5.254s +17ms
+            └─network.target @5.243s
+              └─NetworkManager.service @5.039s +203ms
+                └─basic.target @5.038s
+                  └─dbus-broker.service @5.009s +29ms
+                    └─dbus.socket @4.965s +26us
+                      └─sysinit.target @4.963s
+                        └─systemd-update-done.service @4.946s +16ms
+                          └─ldconfig.service @2.972s +1.971s
+                            └─systemd-tmpfiles-setup.service @2.899s +72ms
+                              └─systemd-journal-flush.service @2.768s +127ms
+                                └─var-log.mount @2.755s +11ms
+                                  └─dev-vda2.device @694ms +1.377s

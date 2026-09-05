@@ -1,0 +1,5 @@
+{
+  "boot_method": "firmware",
+  "minimum_free_bytes": 53687091200,
+  "observed_free_bytes": 92044173312
+}

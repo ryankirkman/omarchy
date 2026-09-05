@@ -223,6 +223,21 @@ class Supervisor:
       "returncode": result.returncode, "stderr": result.stderr[-16384:],
     })
 
+  def record_standalone_probe(self, result, started, finished):
+    # Standalone checks must never replace the install readiness interval.
+    def bounded(value):
+      if isinstance(value, bytes):
+        value = value.decode(errors="replace")
+      return (value or "")[-16384:]
+    evidence = {
+      "started_host_wall_s": started, "finished_host_wall_s": finished,
+      "returncode": getattr(result, "returncode", None),
+      "stdout": bounded(result.stdout), "stderr": bounded(result.stderr),
+    }
+    if isinstance(result, subprocess.TimeoutExpired):
+      evidence["error"] = f"SSH command timed out after {result.timeout}s"
+    write_json(self.directory / "standalone-last-failed-ssh-probe.json", evidence)
+
   def timeout_reason(self, elapsed):
     if self.collected:
       return None
@@ -240,6 +255,12 @@ class Supervisor:
     self.manifest.update(status="timeout", validation_passed=False, failure=reason,
                          measurement_failed_host_wall_s=time.monotonic() - self.started)
     write_json(self.directory / "manifest.json", self.manifest)
+    self.capture_timeout_diagnostics(reason)
+    raise RuntimeError(reason + "; failed measurement and diagnostic evidence retained")
+
+  def capture_timeout_diagnostics(self, reason, prefix=""):
+    # Call only after persisting the failed measurement or validation status.
+    # Prefix every output so a later boot cannot overwrite initial evidence.
     self.qmp_socket.settimeout(2)
     diagnostics = {"reason": reason, "after_measurement_failure": True, "steps": []}
     def capture(label, action):
@@ -249,19 +270,18 @@ class Supervisor:
       except Exception as error:
         step["error"] = str(error)
       diagnostics["steps"].append(step)
-      write_json(self.directory / "timeout-diagnostics.json", diagnostics)
+      write_json(self.directory / (prefix + "timeout-diagnostics.json"), diagnostics)
     capture("usernet", lambda: self.qmp("human-monitor-command", {"command-line": "info usernet"}))
     capture("network", lambda: self.qmp("human-monitor-command", {"command-line": "info network"}))
-    capture("before-keys", lambda: self.screenshot("timeout-before-keys.png"))
+    capture("before-keys", lambda: self.screenshot(prefix + "timeout-before-keys.png"))
     for label, keys in (("escape", ("esc",)), ("tty2", ("ctrl", "alt", "f2"))):
       capture("send-" + label, lambda keys=keys: self.qmp("send-key", {
         "keys": [{"type": "qcode", "data": key} for key in keys], "hold-time": 100,
       }))
       time.sleep(1)
-      capture("after-" + label, lambda label=label: self.screenshot("timeout-after-" + label + ".png"))
+      capture("after-" + label, lambda label=label: self.screenshot(prefix + "timeout-after-" + label + ".png"))
     capture("cpus", lambda: self.qmp("query-cpus-fast"))
     capture("registers", lambda: self.qmp("human-monitor-command", {"command-line": "info registers"}))
-    raise RuntimeError(reason + "; failed measurement and diagnostic evidence retained")
 
   def collect_identity(self, prefix=""):
     evidence = {}
@@ -398,10 +418,17 @@ class Supervisor:
         status = self.qmp("query-status")
         if status.get("status") != "running":
           raise RuntimeError(f"Unexpected QEMU state during standalone reboot: {status}")
-        response = self.ssh("cat /proc/sys/kernel/random/boot_id", timeout=8)
+        probe_started = time.monotonic() - self.started
+        try:
+          response = self.ssh("cat /proc/sys/kernel/random/boot_id", timeout=8)
+        except subprocess.TimeoutExpired as error:
+          self.record_standalone_probe(error, probe_started, time.monotonic() - self.started)
+          raise
+        probe_finished = time.monotonic() - self.started
         if response.returncode:
+          self.record_standalone_probe(response, probe_started, probe_finished)
           proof["observed_ssh_disconnect"] = True
-          proof["last_disconnected_host_wall_s"] = time.monotonic() - self.started
+          proof["last_disconnected_host_wall_s"] = probe_finished
         elif response.stdout.strip() != before:
           after = response.stdout.strip()
           uuid.UUID(after)
@@ -410,6 +437,8 @@ class Supervisor:
           proof["boot_id_after"] = after
           proof["standalone_ssh_ready_host_wall_s"] = time.monotonic() - self.started
           break
+        else:
+          self.record_standalone_probe(response, probe_started, probe_finished)
         write_json(proof_path, proof)
         time.sleep(1)
       else:
@@ -431,7 +460,15 @@ class Supervisor:
       self.manifest["standalone_reboot_passed"] = True
     except Exception as error:
       proof["failure"] = str(error)
-      self.manifest.update(status="standalone-reboot-failed", validation_passed=False)
+      self.manifest.update(status="standalone-reboot-failed", validation_passed=False,
+                           failure=str(error), standalone_reboot_passed=False)
+      write_json(proof_path, proof)
+      write_json(self.directory / "manifest.json", self.manifest)
+      try:
+        self.capture_timeout_diagnostics(str(error), prefix="standalone-")
+      except Exception as diagnostics_error:
+        # A broken monitor must not replace the actual validation failure.
+        proof["diagnostics_error"] = str(diagnostics_error)
       raise
     finally:
       write_json(proof_path, proof)

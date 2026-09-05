@@ -1,0 +1,138 @@
+{
+  "schema_version": 1,
+  "purpose": "real block-device correctness; no performance claim",
+  "source_sha256": "418d9577ed74d2c59587cace353605baf7e7688f964b50ad4ca62b8c417d286b",
+  "source_bytes": 14680064,
+  "virtual_size": 67108864,
+  "expected_raw_sha256": "0de5c726016e9f2163a43a42d97020f32ffacb759f28d915a86281a5059ae8ea",
+  "target_size": 100663296,
+  "prefill_byte": 167,
+  "map": [
+    {
+      "start": 0,
+      "length": 16777216,
+      "depth": 0,
+      "present": true,
+      "zero": false,
+      "data": true,
+      "compressed": true
+    },
+    {
+      "start": 16777216,
+      "length": 8388608,
+      "depth": 0,
+      "present": true,
+      "zero": false,
+      "data": true,
+      "compressed": false,
+      "offset": 6291456
+    },
+    {
+      "start": 25165824,
+      "length": 16777216,
+      "depth": 0,
+      "present": false,
+      "zero": true,
+      "data": false,
+      "compressed": false
+    },
+    {
+      "start": 41943040,
+      "length": 8388608,
+      "depth": 0,
+      "present": true,
+      "zero": false,
+      "data": true,
+      "compressed": true
+    },
+    {
+      "start": 50331648,
+      "length": 15728640,
+      "depth": 0,
+      "present": false,
+      "zero": true,
+      "data": false,
+      "compressed": false
+    },
+    {
+      "start": 66060288,
+      "length": 1048576,
+      "depth": 0,
+      "present": true,
+      "zero": false,
+      "data": true,
+      "compressed": true
+    }
+  ],
+  "info": {
+    "children": [
+      {
+        "name": "file",
+        "info": {
+          "children": [],
+          "virtual-size": 14680064,
+          "filename": "/tmp/omarchy-bench/direct-restore-01/source.qcow2",
+          "format": "file",
+          "actual-size": 12599296,
+          "format-specific": {
+            "type": "file",
+            "data": {}
+          },
+          "dirty-flag": false
+        }
+      }
+    ],
+    "virtual-size": 67108864,
+    "filename": "/tmp/omarchy-bench/direct-restore-01/source.qcow2",
+    "cluster-size": 1048576,
+    "format": "qcow2",
+    "actual-size": 12599296,
+    "format-specific": {
+      "type": "qcow2",
+      "data": {
+        "compat": "1.1",
+        "compression-type": "zstd",
+        "lazy-refcounts": false,
+        "refcount-bits": 16,
+        "corrupt": false,
+        "extended-l2": false
+      }
+    },
+    "dirty-flag": false
+  },
+  "phases_sha256": "8787646c45b164b4fde2abb894c87ece46e9c8f180ff96fede9ed23b2723a458",
+  "upstream_source_sha256": "4088b7e930d2da7729f69c4506483d8e9c661a0488de913255c868f1154de977",
+  "host_qemu_img_sha256": "634320b91165669917123e8e79cce1c4d00cee0a4aa4d662d7c0a8186479b3fb",
+  "host_qemu_io_sha256": "71b3d50189aae57b2d01a5f16c46c1c48d006bf27403b7033478b9a6f013d414",
+  "added_disk_logical_bytes": 484442112,
+  "recipe": {
+    "nonzero_3d": [
+      0,
+      8388608
+    ],
+    "repeating_0_to_255": [
+      8388608,
+      16777216
+    ],
+    "allocated_zero": [
+      16777216,
+      25165824
+    ],
+    "sparse_hole": [
+      25165824,
+      41943040
+    ],
+    "alternating_4096_6b_zero": [
+      41943040,
+      50331648
+    ],
+    "unaligned_95": [
+      66060800,
+      66064384
+    ],
+    "last_512_e1": [
+      67108352,
+      67108864
+    ]
+  }
+}

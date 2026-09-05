@@ -1,0 +1,5 @@
+{
+  "action": "ssh",
+  "command": "python3 -c 'import base64,json,pathlib\np=pathlib.Path('\"'\"'/tmp/omarchy-direct-restore'\"'\"')\nnames=['\"'\"'results.json'\"'\"','\"'\"'qemu-provenance.json'\"'\"','\"'\"'test.log'\"'\"','\"'\"'readonly-error.json'\"'\"']+[f'\"'\"'case-{s}-{z}.json'\"'\"' for s in (512,4096) for z in ('\"'\"'on'\"'\"','\"'\"'off'\"'\"')]\nprint(json.dumps({n:base64.b64encode((p/n).read_bytes()).decode() for n in names if (p/n).is_file()}))\n'",
+  "timeout": 120
+}

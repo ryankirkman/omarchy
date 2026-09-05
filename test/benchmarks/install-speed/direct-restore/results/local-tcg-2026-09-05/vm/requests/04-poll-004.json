@@ -1,0 +1,5 @@
+{
+  "action": "ssh",
+  "command": "systemctl show omarchy-direct-restore-test -p ActiveState -p SubState -p ExecMainStatus",
+  "timeout": 120
+}

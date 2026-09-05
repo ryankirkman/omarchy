@@ -77,7 +77,8 @@ jobs:
           python3 test/benchmarks/install-speed/native-ci/run-native-experiment.py \
             --repo "$GITHUB_WORKSPACE" --work "$BENCH_WORK" --evidence "$BENCH_EVIDENCE" \
             --boot-method firmware --source-cache cold --install-timeout 600 \
-            --variants image-no-package-prefetch-fast-reboot image-no-package-prefetch-fast-reboot-early-verify
+            --standalone-reboot-timeout 180 \
+            --variants image-no-package-prefetch-fast-reboot-early-verify image-no-package-prefetch-fast-reboot-early-verify-direct-restore
 
       - name: Retain small validation and timing evidence
         if: always()

@@ -1,0 +1,14 @@
+{
+  "bundle_sha256": "52534a252d99fc157bf1febd1380c09633e1a39b30c94cbef60e5b9fcd6a949b",
+  "files": [
+    {
+      "path": "/tmp/omarchy-direct-restore/qemu/qemu-img",
+      "sha256": "45105926cdeecd9fcfe1f2a6dfee55c371d7e3d80cee99957b3624fe81edc475"
+    },
+    {
+      "path": "/tmp/omarchy-direct-restore/qemu/bin/qemu-img",
+      "sha256": "634320b91165669917123e8e79cce1c4d00cee0a4aa4d662d7c0a8186479b3fb"
+    }
+  ],
+  "version": "qemu-img version 8.2.2 (Debian 1:8.2.2+ds-0ubuntu1.18)\nCopyright (c) 2003-2023 Fabrice Bellard and the QEMU Project developers\n"
+}

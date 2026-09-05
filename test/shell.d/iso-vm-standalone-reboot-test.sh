@@ -117,6 +117,81 @@ with tempfile.TemporaryDirectory(prefix='omarchy-standalone-test-') as temporary
   exercise(changed_identity=True)
   exercise(failed_process=True)
 
+  # Reproduce a successful initial boot followed by a standalone SSH timeout.
+  # Persist failure before diagnostic keys, and keep the original timing/probe.
+  instance = supervisor(directory)
+  instance.args.standalone_reboot_timeout = 2
+  original = {
+    'last-failed-ssh-probe.json': b'initial readiness probe',
+    'timeout-diagnostics.json': b'initial diagnostics',
+    'timeout-before-keys.png': b'initial screenshot',
+  }
+  for name, data in original.items():
+    (directory / name).write_bytes(data)
+  instance.last_failed_probe_start = 38
+  instance.last_failed_probe_end = 41
+  clock = [100.0]
+  instance.started = 50
+  requests = []
+  def timeout_ssh(command, **kwargs):
+    requests.append(command)
+    if command == 'systemctl reboot':
+      return subprocess.CompletedProcess([], 0, '', '')
+    if requests.count('cat /proc/sys/kernel/random/boot_id') == 1:
+      return subprocess.CompletedProcess([], 0, before, '')
+    clock[0] += 1
+    return subprocess.CompletedProcess([], 255, 'x' * 20000, 'Connection timed out during banner exchange')
+  diagnostic_calls = []
+  instance.qmp_socket = SimpleNamespace(settimeout=lambda value: diagnostic_calls.append(('socket-timeout', value)))
+  def timeout_monitor(command, arguments=None):
+    if command == 'query-status':
+      return {'status': 'running'}
+    saved = json.loads((directory / 'manifest.json').read_text())
+    saved_proof = json.loads((directory / 'standalone-reboot.json').read_text())
+    assert saved['status'] == 'standalone-reboot-failed' and not saved['validation_passed']
+    assert not saved_proof['passed'] and 'within 2s' in saved_proof['failure']
+    diagnostic_calls.append((command, arguments))
+    if command == 'query-cpus-fast':
+      raise ConnectionError('diagnostic socket closed')
+    return 'retained network state'
+  def timeout_screen(name):
+    (directory / name).write_bytes(b'fresh standalone screen')
+    return name
+  instance.qmp = timeout_monitor
+  instance.screenshot = timeout_screen
+  instance.ssh = timeout_ssh
+  instance.remove_standalone_media = lambda _: {'query_block': []}
+  with patch.object(module.time, 'monotonic', side_effect=lambda: clock[0]), patch.object(module.time, 'sleep'):
+    try:
+      instance.verify_standalone_reboot(roots, identity)
+    except RuntimeError as error:
+      assert str(error) == 'Standalone reboot did not become ready within 2s'
+    else:
+      raise AssertionError('standalone timeout was accepted')
+  probe = json.loads((directory / 'standalone-last-failed-ssh-probe.json').read_text())
+  assert probe['returncode'] == 255 and len(probe['stdout']) == 16384
+  assert probe['stderr'] == 'Connection timed out during banner exchange'
+  assert probe['finished_host_wall_s'] >= probe['started_host_wall_s']
+  diagnostics = json.loads((directory / 'standalone-timeout-diagnostics.json').read_text())
+  assert diagnostics['after_measurement_failure'] and len(diagnostics['steps']) == 9
+  assert [step['label'] for step in diagnostics['steps'][:2]] == ['usernet', 'network']
+  assert diagnostics['steps'][-1]['label'] == 'registers'
+  assert any(step.get('error') == 'diagnostic socket closed' for step in diagnostics['steps'])
+  assert diagnostic_calls[0] == ('socket-timeout', 2)
+  for stage in ('before-keys', 'after-escape', 'after-tty2'):
+    assert (directory / f'standalone-timeout-{stage}.png').read_bytes() == b'fresh standalone screen'
+  for name, data in original.items():
+    assert (directory / name).read_bytes() == data, 'standalone diagnostics overwrote initial evidence'
+  assert instance.last_failed_probe_start == 38 and instance.last_failed_probe_end == 41
+  assert instance.manifest['first_installed_ssh_wall_s'] == 42.125 and not instance.collected
+  assert not instance.manifest['standalone_reboot_passed']
+
+  # subprocess timeouts can contain bytes, or no partial output at all.
+  instance.record_standalone_probe(subprocess.TimeoutExpired(['ssh'], 8, output=b'partial', stderr=None), 70, 78)
+  probe = json.loads((directory / 'standalone-last-failed-ssh-probe.json').read_text())
+  assert probe['returncode'] is None and probe['stdout'] == 'partial' and probe['stderr'] == ''
+  assert probe['error'] == 'SSH command timed out after 8s'
+
   toolchain = os.environ.get('OMARCHY_QEMU_TOOLCHAIN')
   if toolchain:
     prefix = Path(toolchain)

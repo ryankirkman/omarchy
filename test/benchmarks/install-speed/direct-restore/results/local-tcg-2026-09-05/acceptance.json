@@ -1,0 +1,40 @@
+{
+  "status": "passed",
+  "measurement_valid": false,
+  "speedup_claim": false,
+  "scope": "Actual prepared direct-I/O restore function on real disposable guest block devices; no full install or performance claim",
+  "prepared_phases_sha256": "8787646c45b164b4fde2abb894c87ece46e9c8f180ff96fede9ed23b2723a458",
+  "guest_qemu_img_sha256": "634320b91165669917123e8e79cce1c4d00cee0a4aa4d662d7c0a8186479b3fb",
+  "supervisor_session": 75478,
+  "supervisor_exit_status": 0,
+  "qemu_exit_status": 0,
+  "harness_sha256": {
+    "exercise.py": "4e18704c8e51fa5c7daf3b6895b60909debb3493d9c91ea612cdc8defee8892e",
+    "verify-stopped.py": "f9f6b3d93573b2aa0c43bf523709d28cb4d5a84f7085f2caefba8b0d0844a7a2",
+    "guest-test.py": "193472db6ea04d44755867095a9fde7e0b82da02482cae5d9b87afd37a0f8d7f",
+    "block-test.py": "95728c73e15219f5427aecaa46774d8fdd1c720237c90dcfc06e31eb3f6fe787"
+  },
+  "positive_cases": 4,
+  "bytes_compared_per_case": 100663296,
+  "logical_sectors": [
+    512,
+    4096
+  ],
+  "observed_zero_and_discard_maxima": {
+    "on": 2147483136,
+    "off": 0
+  },
+  "readonly_failure_propagated": true,
+  "readonly_failure_commands": 1,
+  "host_post_poweroff_readback_passed": true,
+  "source_unchanged": true,
+  "target_repair_or_restore_fallback": false,
+  "pretest_setup_failures_preserved": 2,
+  "pretest_failures_scope": "Both before tool execution or target writes; wrong CD enumeration and tar path stripping caught by SHA guards. See pretest-media-correction.json and original mailbox records.",
+  "large_mutable_artifacts_retained_until_publication": true,
+  "limitations": [
+    "TCG virtual block devices backed by host raw files",
+    "QCOW2 input presented via read-only raw block device, not ISO regular file",
+    "No full installer, Btrfs finalization, mounted filesystem, physical hardware, power-loss or native timing claim"
+  ]
+}

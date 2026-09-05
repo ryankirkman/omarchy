@@ -14,7 +14,7 @@ The job begins only with at least 28 GiB free in the default direct-kernel mode.
 
 The upload directory contains a fixed whitelist of timing, manifests, public identity evidence, validation output, logs and screenshots, plus small image-build provenance. Private SSH keys, cidata images/configuration, target/build disks, NVRAM and ISO files stay in temporary work storage. Evidence uploads run even after failure and expire after seven days. Supervisor timeouts and interrupts terminate only their own process groups and preserve small failure evidence.
 
-The driver defaults to `--install-timeout 1800` for calibration and measured installations. The next workflow explicitly selects `--install-timeout 600`; this limits failed-attempt waiting and does not make a timed-out installation valid. Failure evidence remains retained. Direct-kernel installs also allow 300 seconds for SSH after the installer hands off to the installed disk. Firmware installations retain a separate 600-second standalone reboot deadline. Image-build and rescue deadlines remain independent.
+The driver defaults to `--install-timeout 1800` for calibration and measured installations. The next workflow explicitly selects `--install-timeout 600`; this limits failed-attempt waiting and does not make a timed-out installation valid. Failure evidence remains retained. Direct-kernel installs also allow 300 seconds for SSH after the installer hands off to the installed disk. Firmware installations have a separate positive `--standalone-reboot-timeout`, defaulting to 600 seconds. The next trial selects 180 seconds for that gate, shared by calibration, controls and candidates and recorded as `standalone_reboot_timeout_seconds` in `experiment.json`. A standalone timeout remains an invalid sample, retains failure evidence and proceeds to bounded read-only rescue without retrying the sample. The first installed-readiness timing boundary, image-build deadline and rescue deadline remain unchanged.
 
 A failed calibration triggers one bounded rescue attempt before the ephemeral runner disappears. The original supervisor and QEMU must have stopped first. A fresh live ISO boot uses the existing builder overlay to disable autoinstall and authorize a new disposable public SSH key. The failed target is attached with QEMU `readonly=on` and serial `OMARCHY_RESCUE`; the guest independently checks the disk and all partitions are read-only before mounting Btrfs with `ro,rescue=nologreplay,subvolid=5,nosuid,nodev` and the EFI partition read-only. It never unlocks encryption or changes the failed installation.
 
@@ -47,7 +47,7 @@ Each variant keeps a separate comparison, all requested variants run even when a
 ```bash
 python3 test/benchmarks/install-speed/native-ci/run-native-experiment.py \
   --repo "$GITHUB_WORKSPACE" --work "$BENCH_WORK" --evidence "$BENCH_EVIDENCE" \
-  --boot-method firmware --source-cache cold --install-timeout 600 \
+  --boot-method firmware --source-cache cold --install-timeout 600 --standalone-reboot-timeout 180 \
   --variants image-no-package-prefetch-fast-reboot image-no-package-prefetch-fast-reboot-early-verify
 ```
 
@@ -56,6 +56,19 @@ The driver CLI retains direct/conditioned defaults and the original two default 
 `--variants image-no-package-prefetch-fast-reboot` explicitly selects a separate experiment using PR145's pinned dashboard after the normal image overlay, with both release-helper `sync` calls guarded against failure. This can reduce the live shutdown part of the complete host clock after the target has been safely released. The default two variants retain their existing payloads and dashboard. Preparation runs the release/fallback contracts and retains `fast-reboot.manifest.json`; results go to `no-prefetch-fast-reboot-repetitions`. See [the variant's protocol, upstream credit and failure gates](../fast-reboot/README.md). Selecting the option does not change workflow configuration or trigger Actions.
 
 `image-no-package-prefetch-fast-reboot-early-verify` uses that same pinned payload and image, but starts preflight before the live tty1 login. Its separate control uses early activation with the normal empty control preflight. `experiment.json` records the early fixture's hashes, control and base variant. The original asynchronous image verifier still runs once and must pass before disk preparation; its work remains inside the complete host clock. See [the activation order and failure gates](../early-verifier/README.md). Starting earlier may overlap hashing with live boot, but only fresh matched comparisons can establish a benefit.
+
+`image-no-package-prefetch-fast-reboot-early-verify-direct-restore` is a further explicit opt-in variant. It adds only `-t none` to the image restore's existing `qemu-img convert` command, using direct target I/O while retaining zero writes, full image verification and the final sync/release gates. It requires firmware boot and cold source pages. It reuses the existing supplemental ISO and root image; its small initramfs payload runs ordinary image activation and the guarded fast-reboot preflight first, requires live `phases_impl.py` SHA256 `8c802ec9ad8b94478ad16d4ca434fa6197741b4d1b3195b0a78d0c876b8682bf`, then installs and verifies direct-restore SHA256 `8787646c45b164b4fde2abb894c87ece46e9c8f180ff96fede9ed23b2723a458`. This order prevents ordinary overlay extraction from overwriting the final patch. A corrupt payload, unexpected live source or failed activation aborts preflight.
+
+Preparation retains `direct-restore.manifest.json` with the pinned source, full payload file hashes/modes, base payload manifest hash and activation order. `experiment.json` keeps a separate `direct_restore_variant` record, and results go to `no-prefetch-fast-reboot-early-verify-direct-restore-repetitions/comparison.json`. The matched early control fixture can be reused unchanged across both early variants, while each comparison still gets three fresh alternating control/candidate pairs and the same standalone boot gate. No second supplemental ISO is built. Existing default variants, labels and comparison paths remain unchanged. To select only this experiment in a fresh work directory:
+
+```bash
+python3 test/benchmarks/install-speed/native-ci/run-native-experiment.py \
+  --repo "$GITHUB_WORKSPACE" --work "$BENCH_WORK" --evidence "$BENCH_EVIDENCE" \
+  --boot-method firmware --source-cache cold --install-timeout 600 --standalone-reboot-timeout 180 \
+  --variants image-no-package-prefetch-fast-reboot-early-verify-direct-restore
+```
+
+`python3 test/benchmarks/install-speed/image/direct-restore-payload-test.py --iso-source /tmp/omarchy-iso-fast` checks actual staged activation ordering, corruption and failure propagation using temporary paths. The native contract also checks distinct early candidate initramfs contents, provenance and comparison paths. These checks validate the opt-in wiring; only successful fresh native comparisons can establish its installation speed.
 
 ## Trigger and capability gates
 

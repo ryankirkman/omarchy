@@ -25,6 +25,7 @@ FAST_PIN = 'dbffaa6c65344d644627a023c28661e08382b8fa'
 HARNESS_PIN = '2673c613d9a71e23920e43fbb951238145e0f1e8'
 CMDLINE = 'archisobasedir=arch archisosearchuuid=2026-08-31-03-24-58-00 quiet splash xe.enable_panel_replay=0 initramfs_async=0 copytoram=n'
 EARLY_VERIFY_VARIANT = 'image-no-package-prefetch-fast-reboot-early-verify'
+DIRECT_RESTORE_VARIANT = EARLY_VERIFY_VARIANT + '-direct-restore'
 EVIDENCE_FILES = {
   'manifest.json', 'validation.json', 'install-timing.json', 'package-manifest.txt',
   'package-explicit.txt', 'package-files.txt', 'package-files.stderr', 'identity.json',
@@ -34,6 +35,9 @@ EVIDENCE_FILES = {
   'serial.log', 'live-serial.log', 'qemu.log', 'progress.json', 'latest-screen.png',
   'last-failed-ssh-probe.json', 'timeout-diagnostics.json',
   'timeout-before-keys.png', 'timeout-after-escape.png', 'timeout-after-tty2.png',
+  'standalone-last-failed-ssh-probe.json', 'standalone-timeout-diagnostics.json',
+  'standalone-timeout-before-keys.png', 'standalone-timeout-after-escape.png',
+  'standalone-timeout-after-tty2.png',
   'standalone-reboot.json',
   'standalone-root.json', 'standalone-identity.json', 'standalone-machine-id.txt',
   'standalone-ssh-host-fingerprints.txt', 'standalone-pacman-master-keys.txt',
@@ -83,7 +87,7 @@ def save_json(path, value):
 
 def disk_budget(work, boot_method, variants=()):
   required = (44 if boot_method == 'firmware' else 28) * 1024**3
-  if EARLY_VERIFY_VARIANT in variants:
+  if any(variant in variants for variant in (EARLY_VERIFY_VARIANT, DIRECT_RESTORE_VARIANT)):
     # The early experiment needs its own matched control ISO. When several
     # variants are requested, their immutable fixtures remain available too.
     required += 6 * max(0, len(variants) - 1) * 1024**3
@@ -93,20 +97,50 @@ def disk_budget(work, boot_method, variants=()):
   return {'boot_method': boot_method, 'minimum_free_bytes': required, 'observed_free_bytes': free}
 
 
-def early_preflight_pair(make_initrd, payload, preflight):
+def early_variant_configuration(variant):
+  if variant not in (EARLY_VERIFY_VARIANT, DIRECT_RESTORE_VARIANT):
+    raise ValueError('Not an early-preflight variant')
+  suffix = '-direct-restore' if variant == DIRECT_RESTORE_VARIANT else ''
+  return {'candidate_label': 'candidate-no-prefetch-fast-reboot-early-verify' + suffix,
+    'output_name': 'no-prefetch-fast-reboot-early-verify' + suffix + '-repetitions',
+    'provenance_key': 'direct_restore_variant' if suffix else 'early_preflight_variant'}
+
+
+def early_preflight_pair(make_initrd, payload, preflight, *, variant=EARLY_VERIFY_VARIANT, control=None):
   # The control includes the same early service and completion check, with
   # the existing no-op preflight. Only the candidate activates/verifies media.
-  control = make_initrd('control', label='control-early-preflight', early_preflight=True)
+  if control is None:
+    control = make_initrd('control', label='control-early-preflight', early_preflight=True)
   candidate = make_initrd('candidate', payload, preflight,
-    label='candidate-no-prefetch-fast-reboot-early-verify', disable_prefetch=True, early_preflight=True)
+    label=early_variant_configuration(variant)['candidate_label'], disable_prefetch=True, early_preflight=True)
   return control, candidate
 
 
-def boot_arguments(boot_method, iso, kernel, initrd, *, builder=False, firmware_iso=None):
+def early_preflight_provenance(variant, control, candidate, preflight, source_cache, boot_method):
+  configuration = early_variant_configuration(variant)
+  record = {
+    'variant': variant, 'base_variant': 'image-no-package-prefetch-fast-reboot',
+    'control_initramfs_sha256': digest(control),
+    'candidate_initramfs_sha256': digest(candidate),
+    'fast_reboot_manifest': 'fast-reboot.manifest.json',
+    'preflight_script_sha256': digest(preflight),
+    'matched_control': 'early service with no-op preflight',
+    'source_cache': source_cache, 'boot_method': boot_method,
+    'pairs': 3, 'comparison': configuration['output_name'] + '/comparison.json',
+  }
+  if variant == DIRECT_RESTORE_VARIANT:
+    record.update({'base_variant': EARLY_VERIFY_VARIANT,
+      'payload_manifest': 'direct-restore.manifest.json',
+      'supplemental_image_changed': False, 'target_cache': 'none'})
+  return record
+
+
+def boot_arguments(boot_method, iso, kernel, initrd, *, builder=False, firmware_iso=None, standalone_reboot_timeout=600):
   if boot_method == 'firmware' and not builder:
     if firmware_iso is None:
       raise ValueError('Firmware installs require a separately verified derived ISO')
-    return ['--iso', firmware_iso, '--verify-standalone-reboot']
+    return ['--iso', firmware_iso, '--verify-standalone-reboot',
+      '--standalone-reboot-timeout', str(standalone_reboot_timeout)]
   return ['--iso', iso, '--kernel', kernel, '--initrd', initrd, '--append', CMDLINE]
 
 
@@ -325,6 +359,7 @@ def execute(args):
     'variants': args.variants, 'comparisons': {},
     'boot_method': args.boot_method, 'firmware_fixtures': {},
     'install_timeout_seconds': args.install_timeout,
+    'standalone_reboot_timeout_seconds': args.standalone_reboot_timeout,
     'source_cache': args.source_cache,
     'cache_policy': ('Integrity pre-reads condition source media before timing' if args.source_cache == 'conditioned' else 'Require verified source-page eviction after integrity reads and before timing; see per-run evidence'),
     'build_time_in_install_time': False,
@@ -400,7 +435,7 @@ def execute(args):
         '--test-overlay-sha256', initrd_digest]
     argv += timeout_arguments(args.install_timeout, builder=builder)
     argv += boot_arguments(args.boot_method, iso, kernel, selected_initrd,
-      builder=builder, firmware_iso=selected_iso)
+      builder=builder, firmware_iso=selected_iso, standalone_reboot_timeout=args.standalone_reboot_timeout)
     if extra:
       argv += ['--extra-qemu-args-json', json.dumps(extra)]
     if builder:
@@ -416,7 +451,7 @@ def execute(args):
     run = work / name
     try:
       command(vm_args(name, selected_initrd, extra),
-        timeout=args.install_timeout + (900 if args.boot_method == 'firmware' else 300))
+        timeout=args.install_timeout + 300 + (args.standalone_reboot_timeout if args.boot_method == 'firmware' else 0))
       manifest = json.loads((run / 'manifest.json').read_text())
       validation = json.loads((run / 'validation.json').read_text())
       if manifest['status'] != 'installed-and-booted' or manifest.get('qemu_exit_status') != 0 or validation.get('package_files_exit_status') != 0:
@@ -533,11 +568,12 @@ def execute(args):
 
   fast_reboot = bench / 'install-speed/fast-reboot'
   fast_reboot_payload = None
+  early_control_initrd = None
 
   def prepare_fast_reboot_payload():
     nonlocal fast_reboot_payload
     if fast_reboot_payload is None:
-      # Both opt-in variants use exactly the same pinned dashboard payload.
+      # All opt-in variants use exactly the same pinned dashboard payload.
       # Never rebuild it over an existing payload or mutate a previous fixture.
       output = work / 'candidate-fast-reboot-payload'
       with (evidence / 'fast-reboot-contract.log').open('w') as log:
@@ -563,25 +599,36 @@ def execute(args):
       no_prefetch_initrd = make_initrd('candidate', candidate_payload, image / 'candidate-preflight.sh',
         label='candidate-no-prefetch', disable_prefetch=True)
       measure_variant(variant, no_prefetch_initrd, 'no-prefetch-repetitions')
-    elif variant in ('image-no-package-prefetch-fast-reboot', EARLY_VERIFY_VARIANT):
+    elif variant in ('image-no-package-prefetch-fast-reboot', EARLY_VERIFY_VARIANT, DIRECT_RESTORE_VARIANT):
       # Separate opt-in experiment: retain PR145's release-gated dashboard,
       # which the original image overlay deliberately does not replace.
       payload = prepare_fast_reboot_payload()
-      if variant == EARLY_VERIFY_VARIANT:
-        early_control, early_candidate = early_preflight_pair(make_initrd, payload, fast_reboot / 'candidate-preflight.sh')
-        provenance['early_preflight_variant'] = {
-          'variant': variant, 'base_variant': 'image-no-package-prefetch-fast-reboot',
-          'control_initramfs_sha256': digest(early_control),
-          'candidate_initramfs_sha256': digest(early_candidate),
-          'fast_reboot_manifest': 'fast-reboot.manifest.json',
-          'preflight_script_sha256': digest(fast_reboot / 'candidate-preflight.sh'),
-          'matched_control': 'early service with no-op preflight',
-          'source_cache': args.source_cache, 'boot_method': args.boot_method,
-          'pairs': 3, 'comparison': 'no-prefetch-fast-reboot-early-verify-repetitions/comparison.json',
-        }
+      preflight = fast_reboot / 'candidate-preflight.sh'
+      if variant == DIRECT_RESTORE_VARIANT:
+        direct_payload = work / 'candidate-direct-restore-payload'
+        with (evidence / 'direct-restore-contract.log').open('w') as log:
+          command([sys.executable, image / 'direct-restore-payload-test.py', '--iso-source', fast],
+            stdout=log, stderr=subprocess.STDOUT, timeout=120)
+        command([sys.executable, image / 'direct-restore-payload.py', '--iso-source', fast,
+          '--base-payload', payload, '--output', direct_payload])
+        source_manifest = direct_payload.with_name(direct_payload.name + '.manifest.json')
+        shutil.copyfile(source_manifest, evidence / 'direct-restore.manifest.json')
+        payload = direct_payload
+        preflight = image / 'direct-restore-preflight.sh'
+        # The supplemental ISO retains its ordinary overlay. This small,
+        # verified initramfs payload installs the direct patch only after
+        # ordinary activation, without building another root-image ISO.
+      if variant in (EARLY_VERIFY_VARIANT, DIRECT_RESTORE_VARIANT):
+        configuration = early_variant_configuration(variant)
+        early_control_initrd, early_candidate = early_preflight_pair(make_initrd, payload, preflight,
+          variant=variant, control=early_control_initrd)
+        provenance[configuration['provenance_key']] = early_preflight_provenance(variant,
+          early_control_initrd, early_candidate, preflight, args.source_cache, args.boot_method)
+        if variant == DIRECT_RESTORE_VARIANT:
+          provenance[configuration['provenance_key']]['payload_manifest_sha256'] = digest(source_manifest)
         save_json(evidence / 'experiment.json', provenance)
-        measure_variant(variant, early_candidate, 'no-prefetch-fast-reboot-early-verify-repetitions',
-          selected_control_initrd=early_control)
+        measure_variant(variant, early_candidate, configuration['output_name'],
+          selected_control_initrd=early_control_initrd)
       else:
         fast_reboot_initrd = make_initrd('candidate', payload, fast_reboot / 'candidate-preflight.sh',
           label='candidate-no-prefetch-fast-reboot', disable_prefetch=True)
@@ -607,19 +654,24 @@ def parse_arguments(argv=None):
   parser.add_argument('--evidence', required=True, type=Path)
   parser.add_argument('--install-timeout', type=int, default=1800, metavar='SECONDS',
     help='Positive readiness timeout shared by all installation VMs; builder timeout remains 5400 seconds')
+  parser.add_argument('--standalone-reboot-timeout', type=int, default=600, metavar='SECONDS',
+    help='Positive standalone reboot timeout shared by firmware calibration and measured installations')
   parser.add_argument('--boot-method', choices=('direct', 'firmware'), default='direct',
     help='Direct kernel boot (default), or verified ISO repacking with firmware boot and standalone reboot validation')
   parser.add_argument('--source-cache', choices=('conditioned', 'cold'), default='conditioned',
     help='Source media cache policy; cold requires verified eviction in the VM runner')
-  parser.add_argument('--variants', nargs='+', choices=('upstream-image', 'image-no-package-prefetch', 'image-no-package-prefetch-fast-reboot', EARLY_VERIFY_VARIANT),
+  parser.add_argument('--variants', nargs='+', choices=('upstream-image', 'image-no-package-prefetch', 'image-no-package-prefetch-fast-reboot', EARLY_VERIFY_VARIANT, DIRECT_RESTORE_VARIANT),
     default=['upstream-image', 'image-no-package-prefetch'], help='Variants to measure, in order; three fresh pairs each')
   args = parser.parse_args(argv)
   if args.install_timeout <= 0:
     parser.error('--install-timeout must be a positive integer')
+  if args.standalone_reboot_timeout <= 0:
+    parser.error('--standalone-reboot-timeout must be a positive integer')
   if len(set(args.variants)) != len(args.variants):
     parser.error('variants must be distinct')
-  if EARLY_VERIFY_VARIANT in args.variants and (args.source_cache != 'cold' or args.boot_method != 'firmware'):
-    parser.error(f'{EARLY_VERIFY_VARIANT} requires --source-cache cold --boot-method firmware')
+  for variant in (EARLY_VERIFY_VARIANT, DIRECT_RESTORE_VARIANT):
+    if variant in args.variants and (args.source_cache != 'cold' or args.boot_method != 'firmware'):
+      parser.error(f'{variant} requires --source-cache cold --boot-method firmware')
   return args
 
 

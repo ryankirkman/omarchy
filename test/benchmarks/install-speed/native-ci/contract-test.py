@@ -100,10 +100,13 @@ class NativeContract(unittest.TestCase):
       for name in ('standalone-reboot.json', 'standalone-root.json', 'standalone-identity.json',
           'standalone-machine-id.txt', 'standalone-ssh-host-fingerprints.txt',
           'standalone-pacman-master-keys.txt', 'standalone-btrfs-uuid.txt',
-          'standalone-btrfs-subvolumes.txt', 'standalone-uki-files.txt', 'id_ed25519'):
+          'standalone-btrfs-subvolumes.txt', 'standalone-uki-files.txt',
+          'standalone-last-failed-ssh-probe.json', 'standalone-timeout-diagnostics.json',
+          'standalone-timeout-before-keys.png', 'standalone-timeout-after-escape.png',
+          'standalone-timeout-after-tty2.png', 'id_ed25519'):
         (run / name).write_text('fixture')
       module.collect_small(run, output)
-      self.assertEqual(len(list(output.iterdir())), 9)
+      self.assertEqual(len(list(output.iterdir())), 14)
       self.assertFalse((output / 'id_ed25519').exists())
 
   def test_rejects_oversized_evidence(self):
@@ -144,7 +147,8 @@ class NativeContract(unittest.TestCase):
   def test_firmware_keeps_builder_direct_and_requires_standalone_proof(self):
     source, derived, kernel, initrd = map(Path, ('/original.iso', '/derived.iso', '/kernel', '/initrd'))
     firmware = module.boot_arguments('firmware', source, kernel, initrd, firmware_iso=derived)
-    self.assertEqual(firmware, ['--iso', derived, '--verify-standalone-reboot'])
+    self.assertEqual(firmware, ['--iso', derived, '--verify-standalone-reboot',
+      '--standalone-reboot-timeout', '600'])
     for method in ('firmware', 'direct'):
       builder = module.boot_arguments(method, source, kernel, initrd, builder=True)
       self.assertEqual(builder, ['--iso', source, '--kernel', kernel, '--initrd', initrd, '--append', module.CMDLINE])
@@ -164,6 +168,29 @@ class NativeContract(unittest.TestCase):
           module.parse_arguments(base + ['--install-timeout', invalid])
       self.assertEqual(result.exception.code, 1)
 
+  def test_standalone_timeout_is_shared_and_leaves_builder_unchanged(self):
+    base = ['--repo', '/repo', '--work', '/new-work', '--evidence', '/evidence']
+    self.assertEqual(module.parse_arguments(base).standalone_reboot_timeout, 600)
+    selected = module.parse_arguments(base + ['--standalone-reboot-timeout', '180'])
+    self.assertEqual(selected.standalone_reboot_timeout, 180)
+    source, kernel = Path('/original.iso'), Path('/kernel')
+    for label in ('calibration', 'control', 'candidate'):
+      initrd, derived = Path(f'/{label}.img'), Path(f'/{label}.iso')
+      argv = module.boot_arguments('firmware', source, kernel, initrd, firmware_iso=derived,
+        standalone_reboot_timeout=selected.standalone_reboot_timeout)
+      self.assertEqual(argv, ['--iso', derived, '--verify-standalone-reboot',
+        '--standalone-reboot-timeout', '180'])
+    for method in ('direct', 'firmware'):
+      builder = module.boot_arguments(method, source, kernel, initrd, builder=True,
+        standalone_reboot_timeout=selected.standalone_reboot_timeout)
+      self.assertEqual(builder, ['--iso', source, '--kernel', kernel, '--initrd', initrd,
+        '--append', module.CMDLINE])
+    for invalid in ('0', '-1', '180.5', 'invalid'):
+      with contextlib.redirect_stderr(io.StringIO()):
+        with self.assertRaises(SystemExit) as result:
+          module.parse_arguments(base + ['--standalone-reboot-timeout', invalid])
+      self.assertEqual(result.exception.code, 1)
+
   def test_firmware_disk_headroom_fails_before_preparation(self):
     with patch.object(module.shutil, 'disk_usage', return_value=SimpleNamespace(free=43 * 1024**3)):
       with self.assertRaisesRegex(RuntimeError, '44 GiB'):
@@ -174,20 +201,23 @@ class NativeContract(unittest.TestCase):
 
   def test_early_verify_requires_cold_firmware_and_preserves_defaults(self):
     base = ['--repo', '/repo', '--work', '/new-work', '--evidence', '/evidence']
-    selected = base + ['--variants', module.EARLY_VERIFY_VARIANT]
-    for options in ([], ['--source-cache', 'cold'], ['--boot-method', 'firmware']):
-      with contextlib.redirect_stderr(io.StringIO()):
-        with self.assertRaises(SystemExit) as result:
-          module.parse_arguments(selected + options)
-      self.assertEqual(result.exception.code, 1)
-    accepted = module.parse_arguments(selected + ['--source-cache', 'cold', '--boot-method', 'firmware'])
-    self.assertEqual(accepted.variants, [module.EARLY_VERIFY_VARIANT])
+    for variant in (module.EARLY_VERIFY_VARIANT, module.DIRECT_RESTORE_VARIANT):
+      selected = base + ['--variants', variant]
+      for options in ([], ['--source-cache', 'cold'], ['--boot-method', 'firmware']):
+        with contextlib.redirect_stderr(io.StringIO()):
+          with self.assertRaises(SystemExit) as result:
+            module.parse_arguments(selected + options)
+        self.assertEqual(result.exception.code, 1)
+      accepted = module.parse_arguments(selected + ['--source-cache', 'cold', '--boot-method', 'firmware'])
+      self.assertEqual(accepted.variants, [variant])
     self.assertEqual(module.parse_arguments(base).variants, ['upstream-image', 'image-no-package-prefetch'])
     with patch.object(module.shutil, 'disk_usage', return_value=SimpleNamespace(free=61 * 1024**3)):
       self.assertEqual(module.disk_budget(Path('/tmp'), 'firmware', accepted.variants)['minimum_free_bytes'], 44 * 1024**3)
       with self.assertRaisesRegex(RuntimeError, '62 GiB'):
         module.disk_budget(Path('/tmp'), 'firmware', ['upstream-image', 'image-no-package-prefetch',
           'image-no-package-prefetch-fast-reboot', module.EARLY_VERIFY_VARIANT])
+      self.assertEqual(module.disk_budget(Path('/tmp'), 'firmware',
+        [module.EARLY_VERIFY_VARIANT, module.DIRECT_RESTORE_VARIANT])['minimum_free_bytes'], 50 * 1024**3)
 
   def test_early_verify_builds_matched_control_and_fast_reboot_candidate(self):
     # Exercise native fixture selection against the real overlay builder on a
@@ -214,6 +244,8 @@ class NativeContract(unittest.TestCase):
         data, manifest = overlay.build(original, mode, script, selected_payload,
           disable_package_prefetch=disable_prefetch, early_preflight=early_preflight)
         path = root / (label + '.img')
+        self.assertNotIn(path, outputs, 'immutable fixtures must not be rebuilt over earlier variants')
+        path.write_bytes(data)
         outputs[path] = (overlay.initramfs_files(data), manifest)
         return path
       control, candidate = module.early_preflight_pair(make_initrd, payload, preflight)
@@ -231,6 +263,56 @@ class NativeContract(unittest.TestCase):
       self.assertEqual(candidate_files[prefix + 'usr/local/lib/omarchy-benchmark/preflight.sh'][1], preflight.read_bytes())
       self.assertNotIn(prefix + 'usr/local/lib/omarchy-benchmark/dashboard', control_files)
       self.assertIn(prefix + 'usr/local/lib/omarchy-benchmark/dashboard', candidate_files)
+      self.assertEqual(control.name, 'control-early-preflight.img')
+      self.assertEqual(candidate.name, 'candidate-no-prefetch-fast-reboot-early-verify.img')
+
+      # The additional candidate shares the immutable early control fixture,
+      # but stages its final patch in a distinct initramfs after normal image
+      # activation. The two variants must never overwrite evidence paths.
+      direct_payload = root / 'direct-payload'
+      module.shutil.copytree(payload, direct_payload)
+      phase_path = 'usr/local/lib/omarchy-benchmark/direct-restore/phases_impl.py'
+      (direct_payload / phase_path).parent.mkdir()
+      (direct_payload / phase_path).write_text('pinned direct phases fixture')
+      direct_preflight = DIRECTORY.parent / 'image/direct-restore-preflight.sh'
+      shared_control, direct_candidate = module.early_preflight_pair(make_initrd,
+        direct_payload, direct_preflight, variant=module.DIRECT_RESTORE_VARIANT, control=control)
+      self.assertEqual(shared_control, control)
+      self.assertEqual(len(outputs), 3)
+      self.assertEqual(direct_candidate.name,
+        'candidate-no-prefetch-fast-reboot-early-verify-direct-restore.img')
+      direct_files, direct_manifest = outputs[direct_candidate]
+      self.assertTrue(direct_manifest['early_preflight'])
+      self.assertTrue(direct_manifest['disable_package_prefetch'])
+      self.assertIn(prefix + phase_path, direct_files)
+      self.assertNotIn(prefix + phase_path, candidate_files)
+      self.assertEqual(direct_files[prefix + 'usr/local/lib/omarchy-benchmark/preflight.sh'][1],
+        direct_preflight.read_bytes())
+      records = []
+      for variant, selected, script in ((module.EARLY_VERIFY_VARIANT, candidate, preflight),
+          (module.DIRECT_RESTORE_VARIANT, direct_candidate, direct_preflight)):
+        record = module.early_preflight_provenance(variant, control, selected, script, 'cold', 'firmware')
+        self.assertEqual(record['candidate_initramfs_sha256'], module.digest(selected))
+        self.assertEqual(record['control_initramfs_sha256'], module.digest(control))
+        self.assertEqual(record['pairs'], 3)
+        self.assertEqual(record['source_cache'], 'cold')
+        self.assertEqual(record['boot_method'], 'firmware')
+        selected_iso = selected.with_suffix('.iso')
+        launch = module.boot_arguments('firmware', root / 'original.iso', root / 'kernel', selected,
+          firmware_iso=selected_iso)
+        self.assertEqual(launch, ['--iso', selected_iso, '--verify-standalone-reboot',
+          '--standalone-reboot-timeout', '600'])
+        records.append(record)
+      self.assertNotEqual(records[0]['comparison'], records[1]['comparison'])
+      self.assertNotEqual(records[0]['candidate_initramfs_sha256'], records[1]['candidate_initramfs_sha256'])
+      self.assertNotIn('payload_manifest', records[0])
+      self.assertEqual(records[1]['payload_manifest'], 'direct-restore.manifest.json')
+      self.assertFalse(records[1]['supplemental_image_changed'])
+      self.assertEqual(records[1]['target_cache'], 'none')
+      self.assertEqual(module.early_variant_configuration(module.EARLY_VERIFY_VARIANT)['provenance_key'],
+        'early_preflight_variant')
+      self.assertEqual(module.early_variant_configuration(module.DIRECT_RESTORE_VARIANT)['provenance_key'],
+        'direct_restore_variant')
 
   def test_pinned_sources(self):
     self.assertEqual(module.HARNESS_PIN, '2673c613d9a71e23920e43fbb951238145e0f1e8')
