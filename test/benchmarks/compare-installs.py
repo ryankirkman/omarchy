@@ -163,9 +163,17 @@ def read_run(directory):
     raise ValueError(f"{directory}: package inventory disagrees with installer count")
   if not all(finite_number(timing[key]) for key in ("started_at", "finished_at")):
     raise ValueError(f"{directory}: invalid installer timestamps")
-  elapsed = timing["finished_at"] - timing["started_at"]
-  if not math.isfinite(elapsed) or elapsed <= 0:
-    raise ValueError(f"{directory}: invalid installer elapsed time")
+  wall_elapsed = timing["finished_at"] - timing["started_at"]
+  if not math.isfinite(wall_elapsed):
+    raise ValueError(f"{directory}: invalid installer wall-clock delta")
+  if "duration_seconds" in timing:
+    elapsed = timing["duration_seconds"]
+    elapsed_clock = "guest-monotonic"
+  else:
+    elapsed = wall_elapsed
+    elapsed_clock = "guest-wall-clock"
+  if not finite_number(elapsed) or elapsed <= 0:
+    raise ValueError(f"{directory}: invalid positive installer duration ({elapsed_clock})")
   names = set()
   for phase in phases:
     if not finite_number(phase.get("elapsed")) or phase["elapsed"] < 0:
@@ -192,6 +200,7 @@ def read_run(directory):
     "directory": str(directory.resolve()), "fixture": fixture,
     "packages": sorted(" ".join(line.split()) for line in packages),
     "explicit_packages": sorted(explicit_packages), "elapsed": elapsed,
+    "elapsed_clock": elapsed_clock, "guest_wall_clock_delta_seconds": wall_elapsed,
     "phase_seconds": {phase["name"]: phase["elapsed"] for phase in phases},
     "identity": identity_evidence(directory),
     **boot_evidence(manifest, directory),
@@ -239,10 +248,10 @@ def compare(baseline, candidate):
   boot_conservative = min(boot_lower["baseline"]) / max(boot_upper["candidate"]) if boot_comparable else None
   repeated = len(baseline) >= 3 and len(candidate) >= 3
   return {
-    "schema_version": 5, "kind": "validated_full_install_comparison",
+    "schema_version": 6, "kind": "validated_full_install_comparison",
     "fixture": baseline[0]["fixture"],
     "scope": "Host VM start through live boot, installation, reboot and first successful SSH to the independently verified installed root. Package files are checked afterward.",
-    "clock": "Host monotonic clock across any QEMU restart, with actual SSH probe uncertainty. Guest installer wall clock is a separate component metric.",
+    "clock": "Host monotonic clock across any QEMU restart, with actual SSH probe uncertainty. Guest installer duration is a separate component metric, preferring its recorded monotonic duration over the stock wall-clock fallback.",
     "package_count": len(baseline[0]["packages"]),
     "package_manifest_sha256": hashlib.sha256(("\n".join(baseline[0]["packages"]) + "\n").encode()).hexdigest(),
     "explicit_package_count": len(baseline[0]["explicit_packages"]),
@@ -253,6 +262,8 @@ def compare(baseline, candidate):
       "median_speedup": medians["baseline"] / medians["candidate"],
       "fastest_baseline_over_slowest_candidate": conservative,
       "twofold_verified_for_this_fixture": repeated and conservative >= 2,
+      "clock_sources": {"baseline": [run["elapsed_clock"] for run in baseline],
+                        "candidate": [run["elapsed_clock"] for run in candidate]},
       "scope": "Guest installer phases only; excludes work performed during live boot or after phase completion.",
     },
     "host_boot_to_installed_ssh": {

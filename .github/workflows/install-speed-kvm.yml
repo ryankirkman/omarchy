@@ -53,7 +53,13 @@ jobs:
           PY
           # These are unused SDKs in GitHub's fresh disposable runner.
           # Do not run this cleanup on a user workstation or self-hosted runner.
-          sudo rm -rf -- /usr/share/dotnet /usr/local/lib/android /opt/ghc /opt/hostedtoolcache/CodeQL
+          if ! python3 - <<'PYSPACE'
+          import os, shutil
+          raise SystemExit(0 if shutil.disk_usage(os.environ['RUNNER_TEMP']).free >= 30 * 1024**3 else 1)
+          PYSPACE
+          then
+            sudo rm -rf -- /usr/share/dotnet /usr/local/lib/android /opt/ghc /opt/hostedtoolcache/CodeQL
+          fi
           sudo apt-get update
           sudo apt-get install -y --no-install-recommends qemu-system-x86 qemu-utils ovmf seabios dosfstools mtools jq openssh-client openssl xorriso zstd python3-pil
           df -h > "$BENCH_EVIDENCE/runner-after.txt"

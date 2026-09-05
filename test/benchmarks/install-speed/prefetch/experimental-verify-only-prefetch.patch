@@ -1,0 +1,20 @@
+diff --git a/configs/airootfs/root/.automated_script.sh b/configs/airootfs/root/.automated_script.sh
+--- a/configs/airootfs/root/.automated_script.sh
++++ b/configs/airootfs/root/.automated_script.sh
+@@ -76,7 +76,16 @@
+
+   [[ ${OMARCHY_NO_PREFETCH:-} == 1 ]] && return 0
+
++  # Image installs already read the entire qcow2 through the checksum service.
++  # Avoid rereading the old stream or evicting image pages with package reads.
++  # Image presence selects this cache policy; the foreground verification gate
++  # still rejects a missing checksum, failed hash, or invalid qcow2 before writes.
++  if [[ ${OMARCHY_EXPERIMENTAL_VERIFY_ONLY_PREFETCH:-} == "1" &&
++    -f /run/archiso/bootmnt/arch/x86_64/omarchy-root.btrfs.qcow2 ]]; then
++    return 0
++  fi
++
+   budget_kb=$(($(awk '/^MemAvailable:/ { print $2 }' /proc/meminfo) / 2))
+   ((budget_kb > 262144)) || return 0
+
+   # omarchy-root-image-verify.service (started at boot) reads the whole image

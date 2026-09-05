@@ -95,6 +95,8 @@ with tempfile.TemporaryDirectory() as directory:
   write_artifacts()
   run = module.read_run(root)
   assert run["elapsed"] == 12
+  assert run["elapsed_clock"] == "guest-wall-clock"
+  assert run["guest_wall_clock_delta_seconds"] == 12
   assert run["explicit_packages"] == ["shell"]
   assert run["identity"]["machine_id"] == identity["machine_id"]
   assert run["ssh_poll_uncertainty_seconds"] == 2  # Never substitute the nominal 30 seconds.
@@ -129,6 +131,17 @@ with tempfile.TemporaryDirectory() as directory:
                      ("phases", []), ("started_at", float("nan")), ("finished_at", float("inf")),
                      ("finished_at", True), ("finished_at", 100), ("finished_at", 99)):
     rejects_artifacts({"install-timing.json": {**timing, key: value}}, "incomplete or invalid timing accepted")
+  for value in (0, -1, True, "12", float("nan"), float("inf")):
+    rejects_artifacts({"install-timing.json": {**timing, "duration_seconds": value}},
+                      "invalid authoritative monotonic duration silently fell back to wall clock")
+  for finished_at in (99, 500):
+    write_artifacts({"install-timing.json": {**timing, "finished_at": finished_at, "duration_seconds": 12.5}})
+    monotonic_run = module.read_run(root)
+    assert monotonic_run["elapsed"] == 12.5
+    assert monotonic_run["elapsed_clock"] == "guest-monotonic"
+    assert monotonic_run["guest_wall_clock_delta_seconds"] == finished_at - timing["started_at"]
+  rejects_artifacts({"install-timing.json": {**timing, "duration_seconds": 12.5, "started_at": float("nan")}},
+                    "monotonic duration hid missing valid start/end timestamps")
   for phase in ({"name": "Install", "status": "failed", "elapsed": 12},
                 {"name": "Install", "status": "ok", "elapsed": -1},
                 {"name": "Install", "status": "ok", "elapsed": float("nan")},
@@ -194,11 +207,14 @@ candidate = [sample(f"candidate-{index}", 5) for index in range(3)]
 # Different candidate inputs are expected; each group still needs one revision.
 for result in candidate:
   result.update(iso_sha256="c" * 64, test_overlay_sha256="d" * 64, direct_initrd_sha256="3" * 64)
+  result["elapsed_clock"] = "guest-monotonic"
   for index, medium in enumerate(result["extra_media"]):
     medium["sha256"] = hashlib.sha256(f"candidate-media-{index}".encode()).hexdigest()
 comparison = module.compare(baseline, candidate)
 assert comparison["twofold_target_verified_for_this_fixture"]
 assert comparison["guest_installer"]["twofold_verified_for_this_fixture"]
+assert comparison["guest_installer"]["clock_sources"]["baseline"] == ["guest-wall-clock"] * 3
+assert comparison["guest_installer"]["clock_sources"]["candidate"] == ["guest-monotonic"] * 3
 assert comparison["host_boot_to_installed_ssh"]["conservative_speedup_lower_bound"] == 94 / 40
 assert comparison["explicit_package_count"] == 1
 assert comparison["distinct_installation_identities_verified"]
