@@ -1,0 +1,125 @@
+{
+  "schema_version": 1,
+  "status": "failed-package-validation",
+  "measurement_valid": false,
+  "speedup_claim": false,
+  "source_run": "/tmp/omarchy-bench/candidate-firmware-smoke-01",
+  "runner_exit_status": 1,
+  "runner_failure": "Standalone reboot requires complete successful phases and package validation first",
+  "standalone_reboot_performed": false,
+  "package_versions_match_baseline": true,
+  "package_reasons_match_baseline": true,
+  "missing_package_owned_paths": [
+    "/var/log/cups/",
+    "/var/log/old/"
+  ],
+  "root_cause": "Pinned PR145 restores only pacman.log into the new @log subvolume, hiding other image log directories on mount replay.",
+  "disposable_target_retained_pending_publication": true,
+  "saved_at": 1788641272.8870304,
+  "files": {
+    "manifest.json": {
+      "bytes": 4510,
+      "sha256": "a5d2eae56889ab27d3b91b16d70cd5fcbbfbff0beccc63cc59e953ab5831a95e"
+    },
+    "install-timing.json": {
+      "bytes": 3064,
+      "sha256": "14f9dd5cd0518de3cea920cc1f9013642a406da5274b5246733d69f41bfe7eca"
+    },
+    "validation.json": {
+      "bytes": 220,
+      "sha256": "194544f975440b18fd7a3dd701f1dcb31b0c3705c0e98d1e5d20a1a713aa3b8a"
+    },
+    "identity.json": {
+      "bytes": 459,
+      "sha256": "7ae5adc29f0f16596411407b5a1193fbbffa04efd91ae323cbcb4cb968370dc6"
+    },
+    "package-manifest.txt": {
+      "bytes": 18343,
+      "sha256": "f69fe12f4d2b530f56f28b6f350380eaae2e0ea679d88abedd0d032f0b0df89d"
+    },
+    "package-explicit.txt": {
+      "bytes": 1705,
+      "sha256": "37d06fc7de2487901f81513bf70f3e592d7245cd656d6c34089ccc1f258055f9"
+    },
+    "package-files.txt": {
+      "bytes": 41161,
+      "sha256": "9d979e3ed36103f7e614f63479f9ee08ce3aff7096bc45f3b506e2cbfcab3043"
+    },
+    "package-files.stderr": {
+      "bytes": 421,
+      "sha256": "e00bcbce8e0cefe4b701f52ca19ce5c264e84c66005569cb8df2c33d66825629"
+    },
+    "installed-root.json": {
+      "bytes": 132,
+      "sha256": "cebc725cbd245afc4139ebbe70d7a3010beb56dc36ead369327bb8504f5a9c59"
+    },
+    "installed-boot.txt": {
+      "bytes": 776,
+      "sha256": "ae7a7ac384d9b84f6db07edb0bf74e902fc0b7000ecb858d12538c6c3d46028f"
+    },
+    "machine-id.txt": {
+      "bytes": 33,
+      "sha256": "5038bbe57e2c65440810552c4b958c1f2697adf7f735ed69e22477aafde3c685"
+    },
+    "ssh-host-fingerprints.txt": {
+      "bytes": 355,
+      "sha256": "0843c85d363066e6e1199309214b27b109d65fbbe22bcda7c4f4cdd78aac7e1a"
+    },
+    "pacman-master-keys.txt": {
+      "bytes": 293,
+      "sha256": "6338b8eb81b441d45c6413c44f5cc9ff757c596fb85ff27e27d2c1c640db3013"
+    },
+    "btrfs-uuid.txt": {
+      "bytes": 37,
+      "sha256": "e625912463af02b14fc7e8cf537b9395d5b43ced95c6599be189c6b5b2ceeff7"
+    },
+    "btrfs-subvolumes.txt": {
+      "bytes": 2305,
+      "sha256": "33544e9edffed66665ac64edfd37f8a5d7c62887e795fc56292a29fae3de50d3"
+    },
+    "uki-files.txt": {
+      "bytes": 266,
+      "sha256": "2a5f50a368711cb8cb4da49440f7116b62ff87f4798a23263f65f04aff0c2e42"
+    },
+    "serial.log": {
+      "bytes": 9462,
+      "sha256": "79041a9ffddfe5fe10b68d17d95be9d82a77e4e9ca72845be40936109a8e4ed6"
+    },
+    "qemu.log": {
+      "bytes": 76,
+      "sha256": "6052710bfb5e11af3e6e62aac7b3c020fe2a354dc4cb9caefbb29d38362d8ea3"
+    },
+    "systemd-analyze-blame.txt": {
+      "bytes": 3414,
+      "sha256": "a8f9352db6dd7554be327628c32b8ecc9b0e21c68734b19bb1e4cc8cac55462a"
+    },
+    "systemd-analyze-critical-chain.txt": {
+      "bytes": 1164,
+      "sha256": "a419cc278f97b8e6a36e8f5ff535b1477e0dee3c5336dc001dbd2c51cd42cf84"
+    },
+    "latest-screen.png": {
+      "bytes": 37159,
+      "sha256": "c67a9e03a5f2ea83d6d413066e390e6cef34a2619a9640a976ec95cb2ca491f5"
+    },
+    "last-failed-ssh-probe.json": {
+      "bytes": 174,
+      "sha256": "fe306a03ef9414eea6e480d5bb600318a4cfa55981c83c6a6f432ee3b0627cf3"
+    },
+    "progress.json": {
+      "bytes": 249,
+      "sha256": "89056b9399d27b4f75b1606dfc17747c6285e30f16f3b1823f0a8a5df654007c"
+    },
+    "smoke-preflight.json": {
+      "bytes": 3780,
+      "sha256": "a2c3598cb894ba70287879e2e32a9501b4bdd1b86230f2a177ab82a2bdefce98"
+    },
+    "firmware-iso-manifest.json": {
+      "bytes": 20069,
+      "sha256": "338d05b149ca692e5178f3811c647548220130e09fd46f20b2cd6de749e3fba3"
+    },
+    "supplementary-media-verification.json": {
+      "bytes": 1113,
+      "sha256": "5fcf7625a0e4d477ba3821e08d1cb87fa57ace6b2cf4729add23a799637e43db"
+    }
+  }
+}

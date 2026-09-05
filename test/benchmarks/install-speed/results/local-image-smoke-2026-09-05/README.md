@@ -1,0 +1,7 @@
+# Local image installation smoke
+
+`failed-01` is a failed functional test, excluded from performance comparisons. The candidate booted through the original firmware/GRUB path, completed all nine upstream image-installer phases, and booted the installed Btrfs root. Its 941 package versions and 158 explicit-package reasons matched the stock calibration exactly. Package-file validation then correctly failed because `/var/log/cups/` and `/var/log/old/` were missing. The standalone reboot gate did not run, and the supervisor exited with status 1.
+
+The validated source image contained both directories with their package-owned metadata. The pinned upstream restore code created a fresh `@log` subvolume and copied only `pacman.log` into it, then mounted it over the image's remaining log directories. The correction initializes every image-backed Btrfs child mount from its source subtree before replaying mounts; it does not recreate individual paths after installation.
+
+`failure-evidence.json` identifies the failure and hashes the preserved evidence. The source ISO, root image, supplemental media, initramfs, launch arguments and recovered-build provenance are recorded separately. No private SSH keys, credentials, VM disks or mutable firmware files are included. The failed target remains disposable diagnostic state until the evidence has been published. A new target must pass all validation and reboot gates before this correction can be called successful.

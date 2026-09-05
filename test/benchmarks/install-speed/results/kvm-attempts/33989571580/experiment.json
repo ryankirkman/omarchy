@@ -1,0 +1,38 @@
+{
+  "schema_version": 1,
+  "status": "preparing",
+  "iso_url": "https://iso.omarchy.org/omarchy-4.0.2.iso",
+  "iso_sha256": "2ef8e624aa1bec7e277e28056b8535a6c9373ba48d7ede3f1a01cb6d2373cfb8",
+  "upstream_fast_pin": "dbffaa6c65344d644627a023c28661e08382b8fa",
+  "cidata_harness_pin": "2673c613d9a71e23920e43fbb951238145e0f1e8",
+  "repository_commit": "65d0548fdfcaca2577f68393391ab2f01f0d7a4f",
+  "github_run_id": "33989571580",
+  "github_run_attempt": "1",
+  "accelerator": "kvm",
+  "cpus": 4,
+  "memory_mib": 8192,
+  "pairs_per_variant": 3,
+  "variants": [
+    "upstream-image",
+    "image-no-package-prefetch"
+  ],
+  "comparisons": {},
+  "boot_method": "firmware",
+  "firmware_fixtures": {
+    "192b782af42c164e78453f2b3b122b5ac1849dbbc5e382b76780827c0dcc38c2": {
+      "iso_sha256": "2943f710bdad1394a9994712248d5c369e1002d8b0c6b1192cced412724e806c",
+      "manifest": "firmware-initramfs-control.iso.manifest.json",
+      "iso_bytes": 6227886080,
+      "standalone_reboot_required": true
+    },
+    "85e27405fe4a797191a765d9381e6ae32303f848d4f2502ea6beb7a78b312fc2": {
+      "iso_sha256": "74d967afc6e80a9ea2789aa012d163123e8b8f7bea8e5f9e645aed61c2be1ce0",
+      "manifest": "firmware-initramfs-candidate.iso.manifest.json",
+      "iso_bytes": 6227886080,
+      "standalone_reboot_required": true
+    }
+  },
+  "source_cache": "cold",
+  "cache_policy": "Require verified source-page eviction after integrity reads and before timing; see per-run evidence",
+  "build_time_in_install_time": false
+}

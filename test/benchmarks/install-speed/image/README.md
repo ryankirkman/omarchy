@@ -17,6 +17,17 @@ python3 test/benchmarks/install-speed/image/prepare-bundles.py \
 
 The source checkout must be clean and exactly the pin above. The builder bundle contains the pinned `archinstall.packages` and `image.packages` lists. The larger base list and runtime package names are read inside the guest from the official ISO, so a newer Omarchy checkout cannot change the experiment's package snapshot. Package archives are not copied into the image cache, and no online repository is configured.
 
+The installer bundle applies one recorded correction to the pinned `phases_impl.py`. The original restore path creates empty Btrfs child subvolumes and copies only `pacman.log` into `@log`; mounting them hides the image's other files and directory metadata. An actual fresh candidate boot exposed missing package-owned `/var/log/cups/` and `/var/log/old/`, despite their presence in the validated source image. The correction seeds every image-backed Btrfs child mount from its corresponding image subtree before replaying the mount table. This preserves home defaults, log directories, cache directory metadata, existing files, owners, modes and xattrs without hardcoding package names. The root mount and independent filesystems such as the ESP retain their existing handling. Image cleanup and the sealed root image remain unchanged.
+
+`root_image_mounts.py` checks the exact upstream source hash and expected replacement site before producing the patched module. The installer bundle manifest records both upstream and patched hashes and describes the correction. All copy paths are validated before the first write; genuinely absent image directories remain empty, while symlink traversal, overlapping/self-copies, ambiguous layouts and copy failures abort restoration. Source subvolume roots, nested Btrfs subvolumes and snapshot stubs also abort: archive copying cannot preserve their subvolume identity and properties. These are detected through Btrfs's reserved directory inode numbers, [256 and 2](https://btrfs.readthedocs.io/en/latest/Subvolumes.html). The standard home, log and package-cache source directories are ordinary directories. The focused test executes the actual injected function and real archive copies:
+
+```bash
+python3 test/benchmarks/install-speed/image/root-image-mounts-test.py \
+  --iso-source /tmp/omarchy-iso-fast
+```
+
+The failed installed system must remain a failed sample. Validate this correction on a new target with complete package-file checks and both boot gates; repairing directories after installation cannot establish success.
+
 ## Guest filesystem build
 
 Create a fresh sparse raw disk outside the synced workspace and attach it to a disposable official-ISO live guest:

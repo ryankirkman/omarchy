@@ -1,0 +1,37 @@
+ID 256 gen 21 parent 5 top level 5 parent_uuid -                                    uuid ddc0362d-82e8-da41-b963-0ba6a99998dd path @
+ID 257 gen 20 parent 5 top level 5 parent_uuid -                                    uuid 02437282-af41-5f4a-acf2-4cae4035f8e7 path @home
+ID 258 gen 20 parent 5 top level 5 parent_uuid -                                    uuid 46a26912-b5be-0b47-9c2c-fb9138741267 path @log
+ID 259 gen 9 parent 5 top level 5 parent_uuid -                                    uuid ffd27e1d-52c9-ba47-9a46-4f77a13850d6 path @pkg
+ID 260 gen 12 parent 256 top level 256 parent_uuid -                                    uuid aec3bf1d-81fa-694c-aa02-825e8d2ba9d9 path var/lib/portables
+ID 261 gen 12 parent 256 top level 256 parent_uuid -                                    uuid c7bc6658-92c9-1e46-9b1a-1be8f68929ee path var/lib/machines
+ID 262 gen 17 parent 256 top level 256 parent_uuid -                                    uuid c414ad6b-206c-7945-b70b-d9cfd7e919ed path swap
+ID 263 gen 18 parent 256 top level 256 parent_uuid -                                    uuid 60ea1124-e1b9-d443-adc4-a5d1363bdb72 path .snapshots
+ID 264 gen 18 parent 5 top level 5 parent_uuid ddc0362d-82e8-da41-b963-0ba6a99998dd uuid 45f14a2d-ff82-294c-bb35-dd31e6295197 path @factory
+{
+   "filesystems": [
+      {
+         "target": "/",
+         "source": "/dev/vda2[/@]",
+         "fstype": "btrfs",
+         "options": "rw,relatime,compress=zstd:3,discard=async,space_cache=v2,subvolid=256,subvol=/@",
+         "children": [
+            {
+               "target": "/home",
+               "source": "/dev/vda2[/@home]",
+               "fstype": "btrfs",
+               "options": "rw,relatime,compress=zstd:3,discard=async,space_cache=v2,subvolid=257,subvol=/@home"
+            },{
+               "target": "/var/cache/pacman/pkg",
+               "source": "/dev/vda2[/@pkg]",
+               "fstype": "btrfs",
+               "options": "rw,relatime,compress=zstd:3,discard=async,space_cache=v2,subvolid=259,subvol=/@pkg"
+            },{
+               "target": "/var/log",
+               "source": "/dev/vda2[/@log]",
+               "fstype": "btrfs",
+               "options": "rw,relatime,compress=zstd:3,discard=async,space_cache=v2,subvolid=258,subvol=/@log"
+            }
+         ]
+      }
+   ]
+}

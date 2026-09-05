@@ -31,6 +31,10 @@ EVIDENCE_FILES = (
 )
 MAX_FILE_BYTES = 16 * 1024 * 1024
 MAX_EVIDENCE_BYTES = 64 * 1024 * 1024
+FAILED_EVIDENCE_FILES = (*EVIDENCE_FILES,
+  "progress.json", "latest-screen.png", "last-failed-ssh-probe.json", "timeout-diagnostics.json",
+  "timeout-before-keys.png", "timeout-after-escape.png", "timeout-after-tty2.png",
+)
 
 
 def write_json(path, value):
@@ -160,6 +164,42 @@ def seal_run(source, destination, comparator, provenance):
   return verify_seal(destination)
 
 
+def retain_failed_run(source, destination, error, runner_exit_status, provenance):
+  # A failed comparator must not prevent CI from exporting the diagnostics.
+  # This directory is never a valid seal, never added to series.runs, and never
+  # permits disk reclamation. Original guest files keep their original contents.
+  if destination.exists():
+    raise ValueError(f"Refusing to overwrite failed-run evidence: {destination}")
+  destination.mkdir(parents=True)
+  record = {"schema_version": 1, "status": "failed", "measurement_valid": False,
+            "failure": str(error), "runner_exit_status": runner_exit_status,
+            "source_run_directory": str(source), "captured_at": time.time(),
+            "private_keys_and_virtual_disks_excluded": True, "files": {},
+            "capture_errors": {}, **provenance}
+  write_json(destination / "failure-record.json", record)
+  total = 0
+  for name in FAILED_EVIDENCE_FILES:
+    original = source / name
+    if not original.exists():
+      continue
+    try:
+      if original.is_symlink() or not original.is_file():
+        raise ValueError("Evidence must be a regular file")
+      size = original.stat().st_size
+      if size > MAX_FILE_BYTES or total + size > MAX_EVIDENCE_BYTES:
+        raise ValueError("Evidence exceeds small-artifact limits")
+      expected = digest(original)
+      shutil.copyfile(original, destination / name)
+      total += size
+      if digest(destination / name) != expected:
+        raise ValueError("Evidence changed during capture")
+      record["files"][name] = {"sha256": expected, "bytes": size}
+    except (OSError, ValueError) as capture_error:
+      record["capture_errors"][name] = str(capture_error)
+    write_json(destination / "failure-record.json", record)
+  return record
+
+
 def reclaim_target(run, evidence, runner_returncode):
   # No recursive cleanup: only this exact freshly created target is eligible.
   # Never delete firmware, a source image, an active disk, or a failed run.
@@ -278,10 +318,13 @@ def main():
     write_json(series_path, series)
   comparator = load_comparator()
   completed = {row["name"]: row for row in series["runs"]}
+  current_run = None
+  current_result = None
   try:
     for row in rows:
       name = row["name"]
       run = args.run_root / name
+      current_run, current_result = run, None
       evidence = args.evidence_root / "runs" / name
       if name in completed:
         verify_seal(evidence)
@@ -310,9 +353,11 @@ def main():
         write_json(args.run_root / (name + "-launch.json"), argv)
         print(json.dumps({"event": "sample-started", **row, "run_dir": str(run)}), flush=True)
         result = execute_sample(argv, run, args.run_root / (name + "-supervisor.log"), args.shutdown_timeout)
+        current_result = result
         if result != 0:
           raise RuntimeError(f"Runner failed with exit {result}; evidence/disk retained at {run}")
         seal_run(run, evidence, comparator, provenance)
+      current_result = result
       # Cross-run package, identity, media and fixture checks run before freeing
       # the newest disk as soon as both revisions have one sample.
       trial = [*series["runs"], {**row, "evidence": str(evidence)}]
@@ -339,6 +384,14 @@ def main():
     return 0 if achieved else 2
   except BaseException as error:
     series.update(status="failed", failure=str(error), failed_at=time.time())
+    if current_run is not None and current_run.is_dir():
+      destination = args.evidence_root / "failed-runs" / current_run.name
+      try:
+        retain_failed_run(current_run, destination, error, current_result, provenance)
+        series["failed_run_evidence"] = str(destination)
+      except (OSError, ValueError) as capture_error:
+        # The original installation/comparison error remains authoritative.
+        series["failed_run_capture_error"] = str(capture_error)
     write_json(series_path, series)
     raise
 
