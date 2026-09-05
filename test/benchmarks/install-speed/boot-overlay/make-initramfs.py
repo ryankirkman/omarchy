@@ -81,12 +81,14 @@ def make_cpio(files):
 
 HOOK = b'''# This file is sourced by mkinitcpio's BusyBox ash, not Bash.
 copy_benchmark_payload() {
-  find /omarchy-benchmark-payload -type f | while IFS= read -r source; do
-    relative=${source#/omarchy-benchmark-payload/}
+  while IFS= read -r relative; do
+    source=/omarchy-benchmark-payload/$relative
     # mkdir -p leaves existing live directory modes (especially /root) intact.
-    mkdir -p "/new_root/${relative%/*}" || return 1
+    parent=${relative%/*}
+    [ "$parent" != "$relative" ] || parent=.
+    mkdir -p "/new_root/$parent" || return 1
     cp -p "$source" "/new_root/$relative" || return 1
-  done
+  done </omarchy-benchmark-files
 }
 
 run_latehook() {
@@ -158,6 +160,7 @@ def build(original, mode, preflight, payload=None):
   files = {
     "config": (stat.S_IFREG | 0o644, config + b'\nLATEHOOKS="$LATEHOOKS omarchy_benchmark"\n'),
     "hooks/omarchy_benchmark": (stat.S_IFREG | 0o755, HOOK),
+    "omarchy-benchmark-files": (stat.S_IFREG | 0o644, ("\n".join(sorted(contents)) + "\n").encode()),
   }
   files.update({f"omarchy-benchmark-payload/{name}": value for name, value in contents.items()})
   for name in list(files):

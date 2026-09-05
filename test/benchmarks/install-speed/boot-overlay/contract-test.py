@@ -5,6 +5,7 @@ import gzip
 import importlib.util
 from pathlib import Path
 import stat
+import subprocess
 import tempfile
 import unittest
 
@@ -62,9 +63,22 @@ class OverlayContracts(unittest.TestCase):
     self.assertIn("if [[ 'builder' == 'builder' ]]", overlay.wrapper("builder").decode())
 
   def test_hook_keeps_existing_directory_permissions(self):
-    self.assertIn(b'mkdir -p "/new_root/${relative%/*}"', overlay.HOOK)
-    self.assertIn(b'cp -p "$source" "/new_root/$relative"', overlay.HOOK)
-    self.assertNotIn(b"cp -a", overlay.HOOK)
+    with tempfile.TemporaryDirectory() as directory:
+      base = Path(directory)
+      root, payload = base / "new_root", base / "payload"
+      (root / "root").mkdir(parents=True, mode=0o700)
+      (payload / "root").mkdir(parents=True)
+      (payload / "root/script").write_text("preserved")
+      (payload / "root/script").chmod(0o755)
+      (payload / "top-level").write_text("also copied")
+      filelist = base / "files"
+      filelist.write_text("root/script\ntop-level\n")
+      copy_function = overlay.HOOK.decode().split("\nrun_latehook()", 1)[0]
+      copy_function = copy_function.replace("/omarchy-benchmark-payload", str(payload)).replace("/new_root", str(root)).replace("/omarchy-benchmark-files", str(filelist))
+      subprocess.run(["sh", "-c", copy_function + "\ncopy_benchmark_payload\n"], check=True)
+      self.assertEqual(stat.S_IMODE((root / "root").stat().st_mode), 0o700)
+      self.assertEqual(stat.S_IMODE((root / "root/script").stat().st_mode), 0o755)
+      self.assertEqual((root / "top-level").read_text(), "also copied")
 
   def test_truncated_archive_rejected(self):
     with self.assertRaises(ValueError):

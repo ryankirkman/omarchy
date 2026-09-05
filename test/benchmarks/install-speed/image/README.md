@@ -57,6 +57,17 @@ xorriso -as mkisofs -r -J -V OMARCHY_FAST_IMAGE \
   -o /tmp/omarchy-bench/fast-image.iso /tmp/omarchy-bench/image-media
 ```
 
+Before reclaiming the loose image's disk space, verify the actual bytes embedded in the ISO against the validated root-image manifest:
+
+```bash
+python3 test/benchmarks/install-speed/image/verify-image-media.py \
+  /tmp/omarchy-bench/fast-image.iso \
+  /tmp/omarchy-bench/image-media/arch/x86_64/omarchy-root.btrfs.qcow2.json \
+  /tmp/omarchy-bench/image-media-verification.json
+```
+
+The tool uses xorriso's reported file extents, hashes every embedded byte and also records the whole-ISO digest. It supports multiple extents without extracting a second large copy. A failed comparison must leave the loose validated image available for rebuilding the ISO.
+
 Record the ISO digest. If the original live ISO lacks `qemu-img`, `bundle-qemu-img.py` prepares a live-only binary with its exact ELF loader and linked libraries. It records every input digest and tests a truly zstd-compressed qcow2, including conversion, integrity checking and content comparison using only its bundled loader/libraries. Example for the extracted Ubuntu host toolchain:
 
 ```bash

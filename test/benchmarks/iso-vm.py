@@ -132,6 +132,40 @@ class Supervisor:
     except ImportError:
       return str(ppm)
 
+  def collect_identity(self):
+    evidence = {}
+    for name, command in (
+      ("machine-id", "cat /etc/machine-id"),
+      ("ssh-host-fingerprints", 'for key in /etc/ssh/ssh_host_*_key.pub; do ssh-keygen -E sha256 -lf "$key"; done'),
+      ("pacman-master-keys", "gpg --homedir /etc/pacman.d/gnupg --with-colons --list-secret-keys"),
+      ("btrfs-uuid", "findmnt -n -o UUID /"),
+      ("btrfs-subvolumes", "btrfs subvolume list -puq /; findmnt --json -t btrfs"),
+      ("uki-files", "find /boot -type f -printf '%P %s bytes\\n' | LC_ALL=C sort"),
+    ):
+      result = self.ssh(command, sudo=True, timeout=180)
+      (self.directory / (name + ".txt")).write_text(result.stdout)
+      (self.directory / (name + ".stderr")).write_text(result.stderr)
+      evidence[name] = require_success(result, "collect " + name)
+    fingerprints = []
+    primary = False
+    for line in evidence["pacman-master-keys"].splitlines():
+      fields = line.split(":")
+      if fields[0] == "sec":
+        primary = True
+      elif fields[0] == "ssb":
+        primary = False
+      elif fields[0] == "fpr" and primary:
+        fingerprints.append(fields[9])
+        primary = False
+    if len(fingerprints) != 1:
+      raise RuntimeError(f"Expected one pacman local master signing identity, found {len(fingerprints)}")
+    write_json(self.directory / "identity.json", {
+      "machine_id": evidence["machine-id"].strip(),
+      "ssh_host_key_fingerprints": [line.split()[1] for line in evidence["ssh-host-fingerprints"].splitlines() if line.strip()],
+      "pacman_master_key_fingerprint": fingerprints[0],
+      "btrfs_uuid": evidence["btrfs-uuid"].strip(),
+    })
+
   def collect(self):
     root = require_success(self.ssh("findmnt --json -o SOURCE,FSTYPE,TARGET /"), "check installed root")
     (self.directory / "installed-root.json").write_text(root)
@@ -160,6 +194,7 @@ class Supervisor:
       "booted_installed_root": booted, "package_files_exit_status": files.returncode,
       "root_mount": roots, "validated_at": time.time(),
     })
+    self.collect_identity()
     self.manifest["status"] = "installed-and-booted"
     self.manifest["validation_passed"] = files.returncode == 0
     self.manifest["collected_at"] = time.time()
