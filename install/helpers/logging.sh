@@ -17,16 +17,19 @@ start_install_log() {
     chmod 666 "$OMARCHY_INSTALL_LOG_FILE" 2>/dev/null || true
   fi
 
-  export OMARCHY_START_TIME="${OMARCHY_START_TIME:-$(date '+%Y-%m-%d %H:%M:%S')}"
-  export OMARCHY_START_EPOCH="${OMARCHY_START_EPOCH:-$(date +%s)}"
+  if [[ -z ${OMARCHY_START_TIME:-} ]]; then
+    printf -v OMARCHY_START_TIME '%(%Y-%m-%d %H:%M:%S)T' -1
+  fi
+  export OMARCHY_START_TIME
+  export OMARCHY_START_EPOCH="${OMARCHY_START_EPOCH:-$EPOCHSECONDS}"
 
   omarchy_log_line "=== Omarchy Setup Started: $OMARCHY_START_TIME ==="
 }
 
 stop_install_log() {
   local end_time end_epoch duration mins secs
-  end_time=$(date '+%Y-%m-%d %H:%M:%S')
-  end_epoch=$(date +%s)
+  printf -v end_time '%(%Y-%m-%d %H:%M:%S)T' -1
+  end_epoch=$EPOCHSECONDS
 
   omarchy_log_line "=== Omarchy Setup Completed: $end_time ==="
 
@@ -40,9 +43,11 @@ stop_install_log() {
 
 run_logged() {
   local script="$1"
-  local exit_code errexit_was_set=0
+  local exit_code timestamp errexit_was_set=0
 
-  omarchy_log_line "[$(date '+%Y-%m-%d %H:%M:%S')] Starting: $script"
+  # Bash's clock formatter avoids two date processes for every setup leaf.
+  printf -v timestamp '%(%Y-%m-%d %H:%M:%S)T' -1
+  omarchy_log_line "[$timestamp] Starting: $script"
 
   case $- in
     *e*)
@@ -67,10 +72,11 @@ run_logged() {
   exit_code=$?
   (( errexit_was_set )) && set -e
 
+  printf -v timestamp '%(%Y-%m-%d %H:%M:%S)T' -1
   if (( exit_code == 0 )); then
-    omarchy_log_line "[$(date '+%Y-%m-%d %H:%M:%S')] Completed: $script"
+    omarchy_log_line "[$timestamp] Completed: $script"
   else
-    omarchy_log_line "[$(date '+%Y-%m-%d %H:%M:%S')] Failed: $script (exit code: $exit_code)"
+    omarchy_log_line "[$timestamp] Failed: $script (exit code: $exit_code)"
   fi
 
   return $exit_code

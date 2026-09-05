@@ -1,0 +1,41 @@
+{
+  "schema_version": 1,
+  "kind": "logging_microbenchmark",
+  "scope": "Real Bash subprocesses and logging; trivial leaves isolate logging overhead. Not full installation.",
+  "baseline_commit": "e8e92c5092c9bbbf3d7fc5240f8551fd1eeaced9",
+  "platform": "Linux-6.18.35-x86_64-with-glibc2.39",
+  "bash_version": "GNU bash, version 5.2.21(1)-release (x86_64-pc-linux-gnu)",
+  "leaves_per_sample": 80,
+  "warmup_pairs": 2,
+  "sample_seconds": {
+    "baseline": [
+      0.8009517030004645,
+      0.9841244560011546,
+      0.8802296579960966,
+      0.8334413179982221,
+      1.1162343060059357,
+      0.9345298010011902,
+      0.9887914059945615
+    ],
+    "candidate": [
+      0.4109938229958061,
+      1.1218816039981903,
+      0.43437486099719536,
+      0.38640590800059726,
+      0.5099187759988126,
+      0.4295858479963499,
+      0.36162949400022626
+    ]
+  },
+  "median_seconds": {
+    "baseline": 0.9345298010011902,
+    "candidate": 0.4295858479963499
+  },
+  "speedup": 2.175420362099849,
+  "identical_log_content_except_timestamps": true,
+  "source_sha256": {
+    "baseline": "61a13abcc44fd5241e9882f1bcfed833e10e0ed19ad42c34a08efe1973b70d27",
+    "candidate": "1d8151adb150bc1dfe930b30e7039978591add500a132b9951152d7a8a23d715"
+  },
+  "concurrency_note": "Other agents prepared tooling during this run; individual samples include scheduling noise. This is not a full-install measurement."
+}

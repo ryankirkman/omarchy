@@ -49,3 +49,38 @@ grep -q "about to fail" "$stdout_log" || fail "stdout logging mode emits script 
 grep -q "Failed: $failing_script (exit code: 1)" "$stdout_log" || fail "stdout logging mode emits failure marker"
 
 pass "run_logged records failures under errexit"
+
+success_script="$work_dir/success.sh"
+cat >"$success_script" <<'SCRIPT'
+echo "setup output"
+SCRIPT
+
+(
+  set -euo pipefail
+  export OMARCHY_LOG_TO_STDOUT=1 TZ=UTC
+  unset OMARCHY_START_TIME OMARCHY_START_EPOCH
+  source "$ROOT/install/helpers/logging.sh"
+  start_install_log
+  [[ $OMARCHY_START_EPOCH =~ ^[0-9]+$ ]] || exit 1
+  run_logged "$success_script"
+  [[ $- == *e* ]] || exit 1
+  stop_install_log
+) >"$work_dir/success.log"
+grep -qE '^\[[0-9]{4}-[0-9]{2}-[0-9]{2} [0-9]{2}:[0-9]{2}:[0-9]{2}\] Completed:' "$work_dir/success.log" ||
+  fail "successful setup keeps timestamped completion records"
+grep -qE '^Omarchy setup: [0-9]+m [0-9]+s$' "$work_dir/success.log" ||
+  fail "setup keeps the elapsed-time summary"
+
+(
+  set +e
+  set -uo pipefail
+  export OMARCHY_LOG_TO_STDOUT=1
+  export OMARCHY_START_TIME="existing setup" OMARCHY_START_EPOCH=123
+  source "$ROOT/install/helpers/logging.sh"
+  start_install_log
+  [[ $OMARCHY_START_TIME == "existing setup" && $OMARCHY_START_EPOCH == "123" ]] || exit 1
+  run_logged "$success_script"
+  [[ $- != *e* ]] || exit 1
+) >/dev/null
+
+pass "logging preserves timestamps, inherited start time, and shell error mode"
