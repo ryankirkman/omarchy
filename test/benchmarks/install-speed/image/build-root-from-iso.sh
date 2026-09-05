@@ -23,6 +23,9 @@ subvolume=omarchy-root
 [[ -f $baseline/package-manifest.txt && -f $baseline/package-explicit.txt ]] || {
   echo 'Requires baseline pacman -Q and pacman -Qqe output' >&2; exit 1;
 }
+[[ ! -e $output ]] || {
+  echo 'Build output already exists; use a fresh directory to avoid stale success metadata' >&2; exit 1;
+}
 [[ -z $(lsblk -nro MOUNTPOINTS "$device" | tr -d '[:space:]') ]] || {
   echo 'Build disk or child is mounted; refusing to format it' >&2; exit 1;
 }

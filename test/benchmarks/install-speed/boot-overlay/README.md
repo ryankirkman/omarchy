@@ -23,6 +23,10 @@ For builder mode, use `--preflight-script test/benchmarks/install-speed/boot-ove
 
 The output's adjacent `.manifest.json` records the original initramfs digest, config and hook digests, each payload file's content and permissions, and the appended and final image digests. Record the extracted kernel digest and the complete QEMU command line in each run manifest as well. All large generated images and mutable VM disks should live under `/tmp`.
 
+### Optional package-prefetch experiment
+
+`--disable-package-prefetch` exports the existing upstream `OMARCHY_NO_PREFETCH=1` switch before the original automated script starts. The default stays unchanged. This option works for either control or candidate, records `disable_package_prefetch` in the manifest, and changes the wrapper's content digest. It does not disable or bypass root-image verification: the candidate preflight still runs first, and the upstream installer still requires successful verification. Generate this as a separate candidate artifact and measure it against the ordinary candidate; do not silently replace the first candidate or claim a performance benefit before measurement. The experiment asks whether reading the old package mirror competes with root-image verification/restoration for storage bandwidth and page cache.
+
 ## Direct boot and the first installed boot
 
 Use the official extracted kernel, the generated initramfs, and the same command line in both benchmark groups:

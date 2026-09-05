@@ -2,12 +2,17 @@
 """Compare validated fresh VM installs; never promote component results to installs."""
 
 import argparse
+import base64
 import hashlib
 import json
 import math
 from pathlib import Path
 import re
 import statistics
+import uuid
+
+
+MEDIA_CACHE_PRECONDITIONING = "sha256-read-iso-then-extra-media-in-array-order-then-kernel-then-initrd-before-vm-start"
 
 
 def sha256(value, description):
@@ -18,6 +23,70 @@ def sha256(value, description):
 
 def finite_number(value):
   return isinstance(value, (int, float)) and not isinstance(value, bool) and math.isfinite(value)
+
+
+def identity_evidence(directory):
+  identity = json.loads((directory / "identity.json").read_text())
+  if not isinstance(identity, dict):
+    raise ValueError(f"{directory}: machine identity evidence must be an object")
+  machine = identity["machine_id"]
+  if not isinstance(machine, str) or not re.fullmatch(r"[0-9a-f]{32}", machine) or int(machine, 16) == 0:
+    raise ValueError(f"{directory}: missing or invalid machine ID")
+  master = identity["pacman_master_key_fingerprint"]
+  if (not isinstance(master, str) or not re.fullmatch(r"(?:[0-9a-fA-F]{40}|[0-9a-fA-F]{64})", master)
+      or int(master, 16) == 0):
+    raise ValueError(f"{directory}: missing or invalid local pacman master public-key fingerprint")
+  filesystem = identity["btrfs_uuid"]
+  if not isinstance(filesystem, str) or not re.fullmatch(r"[0-9a-fA-F]{8}(?:-[0-9a-fA-F]{4}){3}-[0-9a-fA-F]{12}", filesystem):
+    raise ValueError(f"{directory}: missing or invalid Btrfs filesystem UUID")
+  filesystem = uuid.UUID(filesystem)
+  if filesystem.int == 0:
+    raise ValueError(f"{directory}: Btrfs filesystem UUID is empty")
+  keys = identity["ssh_host_key_fingerprints"]
+  if not isinstance(keys, list) or not keys:
+    raise ValueError(f"{directory}: SSH host public-key fingerprints are missing")
+  for key in keys:
+    if not isinstance(key, str) or not re.fullmatch(r"SHA256:[A-Za-z0-9+/]{43}", key):
+      raise ValueError(f"{directory}: invalid SSH host public-key fingerprint")
+    digest = base64.b64decode(key[7:] + "=", validate=True)
+    if not any(digest) or base64.b64encode(digest).decode().rstrip("=") != key[7:]:
+      raise ValueError(f"{directory}: empty or noncanonical SSH host public-key fingerprint")
+  if len(set(keys)) != len(keys):
+    raise ValueError(f"{directory}: duplicate SSH host public-key fingerprints")
+  # Only public identifiers enter reports. The pacman fingerprint identifies
+  # this installation's local primary signing key, not imported distro keys.
+  return {"machine_id": machine, "pacman_master_key_fingerprint": master.upper(),
+          "btrfs_uuid": str(filesystem), "ssh_host_key_fingerprints": sorted(keys)}
+
+
+def media_evidence(manifest, directory):
+  if manifest["media_cache_preconditioning"] != MEDIA_CACHE_PRECONDITIONING:
+    raise ValueError(f"{directory}: unsupported or missing media cache preconditioning policy")
+  media = manifest["extra_media"]
+  if not isinstance(media, list):
+    raise ValueError(f"{directory}: supplementary media must be an ordered list")
+  recorded = []
+  identifiers = set()
+  for medium in media:
+    if not isinstance(medium, dict) or medium.get("readonly") is not True:
+      raise ValueError(f"{directory}: supplementary install media must be read-only")
+    path = medium["path"]
+    if not isinstance(path, str) or not Path(path).is_absolute():
+      raise ValueError(f"{directory}: supplementary media requires an absolute source path")
+    topology = {key: medium[key] for key in ("drive_id", "format", "cache", "interface", "device", "readonly")}
+    for key in ("format", "cache", "interface"):
+      if not isinstance(topology[key], str) or not topology[key]:
+        raise ValueError(f"{directory}: supplementary media {key} is missing")
+    for key in ("drive_id", "device"):
+      if topology[key] is not None and (not isinstance(topology[key], str) or not topology[key]):
+        raise ValueError(f"{directory}: invalid supplementary media {key}")
+    identifier = topology["drive_id"]
+    if identifier is not None:
+      if identifier in identifiers:
+        raise ValueError(f"{directory}: duplicate supplementary media drive ID")
+      identifiers.add(identifier)
+    recorded.append({"path": path, "sha256": sha256(medium["sha256"], f"{directory}: supplementary media"), **topology})
+  return recorded
 
 
 def boot_evidence(manifest, directory):
@@ -68,6 +137,8 @@ def read_run(directory):
   explicit_packages = (directory / "package-explicit.txt").read_text().splitlines()
   if manifest.get("status") != "installed-and-booted":
     raise ValueError(f"{directory}: install has not booted successfully")
+  if manifest.get("mode") != "install":
+    raise ValueError(f"{directory}: builder or unrecorded run mode is not an installation sample")
   if manifest.get("measurement_interrupted") is not False:
     raise ValueError(f"{directory}: uninterrupted measurement was not recorded")
   if validation.get("booted_installed_root") is not True:
@@ -111,6 +182,9 @@ def read_run(directory):
     if fixture[key] is None or fixture[key] == "":
       raise ValueError(f"{directory}: missing fixture setting {key}")
   fixture["cidata_configuration_sha256"] = sha256(manifest["cidata_configuration_sha256"], f"{directory}: cidata configuration")
+  extra_media = media_evidence(manifest, directory)
+  fixture["extra_media_topology"] = [{key: value for key, value in medium.items() if key not in {"path", "sha256"}} for medium in extra_media]
+  fixture["media_cache_preconditioning"] = manifest["media_cache_preconditioning"]
   overlay = manifest["test_overlay_sha256"]
   if overlay is not None:
     overlay = sha256(overlay, f"{directory}: test overlay")
@@ -119,9 +193,11 @@ def read_run(directory):
     "packages": sorted(" ".join(line.split()) for line in packages),
     "explicit_packages": sorted(explicit_packages), "elapsed": elapsed,
     "phase_seconds": {phase["name"]: phase["elapsed"] for phase in phases},
+    "identity": identity_evidence(directory),
     **boot_evidence(manifest, directory),
     "iso_sha256": sha256(manifest["iso_sha256"], f"{directory}: ISO"),
     "test_overlay_sha256": overlay,
+    "extra_media": extra_media,
   }
 
 
@@ -131,9 +207,15 @@ def compare(baseline, candidate):
   all_runs = baseline + candidate
   if len({run["directory"] for run in all_runs}) != len(all_runs):
     raise ValueError("each sample must be a distinct fresh installation")
+  for key in ("machine_id", "pacman_master_key_fingerprint", "btrfs_uuid"):
+    if len({run["identity"][key] for run in all_runs}) != len(all_runs):
+      raise ValueError(f"fresh installations share {key}; cloned machine identity is not acceptable")
+  host_keys = [key for run in all_runs for key in run["identity"]["ssh_host_key_fingerprints"]]
+  if len(set(host_keys)) != len(host_keys):
+    raise ValueError("fresh installations share an SSH host public-key fingerprint")
   for run in all_runs:
     if run["fixture"] != baseline[0]["fixture"]:
-      raise ValueError("hardware, VM I/O, encryption, filesystem or cidata configuration differ between runs")
+      raise ValueError("hardware, VM I/O, media topology/cache policy, encryption, filesystem or cidata configuration differ between runs")
     if run["packages"] != baseline[0]["packages"]:
       raise ValueError("installed package names or versions differ between runs")
     if run["explicit_packages"] != baseline[0]["explicit_packages"]:
@@ -141,8 +223,9 @@ def compare(baseline, candidate):
   for group in (baseline, candidate):
     # A candidate is allowed to change its ISO or overlay. Repetitions of each
     # revision must still measure the same input, never a mixture of candidates.
-    if len({(run["iso_sha256"], run["test_overlay_sha256"], run["direct_initrd_sha256"]) for run in group}) != 1:
-      raise ValueError("a revision group contains multiple ISO images, test overlays or initrds")
+    if len({(run["iso_sha256"], run["test_overlay_sha256"], run["direct_initrd_sha256"],
+             tuple(medium["sha256"] for medium in run["extra_media"])) for run in group}) != 1:
+      raise ValueError("a revision group contains multiple ISO images, test overlays, initrds or supplementary media")
   durations = {"baseline": [run["elapsed"] for run in baseline],
                "candidate": [run["elapsed"] for run in candidate]}
   medians = {key: statistics.median(values) for key, values in durations.items()}
@@ -156,7 +239,7 @@ def compare(baseline, candidate):
   boot_conservative = min(boot_lower["baseline"]) / max(boot_upper["candidate"]) if boot_comparable else None
   repeated = len(baseline) >= 3 and len(candidate) >= 3
   return {
-    "schema_version": 3, "kind": "validated_full_install_comparison",
+    "schema_version": 5, "kind": "validated_full_install_comparison",
     "fixture": baseline[0]["fixture"],
     "scope": "Host VM start through live boot, installation, reboot and first successful SSH to the independently verified installed root. Package files are checked afterward.",
     "clock": "Host monotonic clock across any QEMU restart, with actual SSH probe uncertainty. Guest installer wall clock is a separate component metric.",
@@ -164,6 +247,7 @@ def compare(baseline, candidate):
     "package_manifest_sha256": hashlib.sha256(("\n".join(baseline[0]["packages"]) + "\n").encode()).hexdigest(),
     "explicit_package_count": len(baseline[0]["explicit_packages"]),
     "explicit_package_manifest_sha256": hashlib.sha256("".join(name + "\n" for name in baseline[0]["explicit_packages"]).encode()).hexdigest(),
+    "distinct_installation_identities_verified": True,
     "guest_installer": {
       "seconds": durations, "median_seconds": medians,
       "median_speedup": medians["baseline"] / medians["candidate"],

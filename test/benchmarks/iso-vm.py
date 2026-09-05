@@ -233,6 +233,40 @@ class Supervisor:
         write_json(response, {"ok": False, "error": str(error)})
       write_json(self.directory / "manifest.json", self.manifest)
 
+  def extra_media(self, extra):
+    devices = []
+    drives = []
+    for index, item in enumerate(extra):
+      if item in {"-drive", "-device"} and index + 1 < len(extra):
+        pieces = extra[index + 1].split(",")
+        options = dict(piece.split("=", 1) for piece in pieces if "=" in piece)
+        if item == "-drive":
+          drives.append(options)
+        else:
+          devices.append((pieces[0], options, extra[index + 1]))
+    result = []
+    for drive in drives:
+      if "file" not in drive:
+        raise ValueError("Extra benchmark drives require an explicit file path")
+      readonly = drive.get("readonly") in {"on", "yes", "true"} or drive.get("media") == "cdrom"
+      if not readonly:
+        if self.args.mode == "install":
+          raise ValueError("Extra install benchmark media must be read-only; writable build disks require builder mode")
+        continue
+      path = Path(drive["file"]).resolve()
+      drive_id = drive.get("id")
+      matching = [(name, specification) for name, options, specification in devices if options.get("drive") == drive_id]
+      interface = matching[0][0] if len(matching) == 1 else drive.get("if", "ide")
+      device = matching[0][1] if len(matching) == 1 else None
+      with path.open("rb") as source:
+        digest = hashlib.file_digest(source, "sha256").hexdigest()
+      result.append({
+        "path": str(path), "sha256": digest, "drive_id": drive_id,
+        "format": drive.get("format", "auto"), "cache": drive.get("cache", "writeback"),
+        "interface": interface, "device": device, "readonly": readonly,
+      })
+    return result
+
   def start(self):
     args = self.args
     if self.directory.exists() and any(self.directory.iterdir()):
@@ -285,6 +319,7 @@ class Supervisor:
       argv.extend(["-kernel", str(args.kernel.resolve()), "-initrd", str(args.initrd.resolve()), "-append", args.append])
       if args.mode == "install":
         argv.append("-no-reboot")
+    extra = []
     if args.extra_qemu_args_json:
       extra = json.loads(args.extra_qemu_args_json)
       if not isinstance(extra, list) or not all(isinstance(item, str) for item in extra):
@@ -301,6 +336,8 @@ class Supervisor:
       "encryption": False, "filesystem": "btrfs compress=zstd", "interventions": [],
       "cidata_configuration_sha256": hashlib.sha256((self.directory / "cidata/user_configuration.json").read_bytes()).hexdigest(),
       "test_overlay_sha256": args.test_overlay_sha256,
+      "extra_media": self.extra_media(extra),
+      "media_cache_preconditioning": "sha256-read-iso-then-extra-media-in-array-order-then-kernel-then-initrd-before-vm-start",
       "direct_kernel_boot": bool(args.kernel),
       "direct_kernel_sha256": hashlib.sha256(args.kernel.read_bytes()).hexdigest() if args.kernel else None,
       "direct_initrd_sha256": hashlib.sha256(args.initrd.read_bytes()).hexdigest() if args.initrd else None,

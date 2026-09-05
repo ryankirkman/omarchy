@@ -3,6 +3,7 @@
 
 import gzip
 import importlib.util
+import os
 from pathlib import Path
 import stat
 import subprocess
@@ -83,6 +84,33 @@ class OverlayContracts(unittest.TestCase):
   def test_truncated_archive_rejected(self):
     with self.assertRaises(ValueError):
       overlay.cpio_entries(self.fixture()[:120])
+
+  def test_prefetch_switch_reaches_original_after_preflight(self):
+    for mode in ("candidate", "control"):
+      for disabled in (False, True):
+        with self.subTest(mode=mode, disabled=disabled), tempfile.TemporaryDirectory() as directory:
+          base = Path(directory)
+          (base / "bin").mkdir()
+          (base / "bin/tty").write_text("#!/bin/bash\necho /dev/tty1\n")
+          (base / "bin/tty").chmod(0o755)
+          (base / "preflight").write_text(f"#!/bin/bash\necho verified >'{base}/verified'\n")
+          (base / "preflight").chmod(0o755)
+          (base / "original").write_text(f"#!/bin/bash\n[[ -f '{base}/verified' ]] || exit 1\nprintf '%s' \"${{OMARCHY_NO_PREFETCH-unset}}\" >'{base}/prefetch'\n")
+          (base / "original").chmod(0o755)
+          script = overlay.wrapper(mode, disabled).decode()
+          for source, target in {
+            "/usr/local/lib/omarchy-benchmark/preflight.sh": str(base / "preflight"),
+            "/root/.automated_script.benchmark-original.sh": str(base / "original"),
+            "/run/omarchy-benchmark": str(base / "run"),
+            "/var/log": str(base / "log"),
+          }.items():
+            script = script.replace(source, target)
+          environment = dict(os.environ, PATH=str(base / "bin") + ":" + os.environ["PATH"])
+          environment.pop("OMARCHY_NO_PREFETCH", None)
+          subprocess.run(["bash", "-c", script], env=environment, check=True)
+          self.assertEqual((base / "prefetch").read_text(), "1" if disabled else "unset")
+          _, metadata = overlay.build(self.fixture(), mode, (base / "preflight").read_bytes(), disable_package_prefetch=disabled)
+          self.assertEqual(metadata["disable_package_prefetch"], disabled)
 
 
 if __name__ == "__main__":

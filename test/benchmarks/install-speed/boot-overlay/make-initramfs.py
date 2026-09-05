@@ -106,7 +106,8 @@ run_latehook() {
 '''
 
 
-def wrapper(mode):
+def wrapper(mode, disable_package_prefetch=False):
+  prefetch = "export OMARCHY_NO_PREFETCH=1\n" if disable_package_prefetch else ""
   return f'''#!/bin/bash
 set -euo pipefail
 [[ $(tty) == /dev/tty1 ]] || exit 0
@@ -117,6 +118,7 @@ if ! /usr/local/lib/omarchy-benchmark/preflight.sh >/var/log/omarchy-benchmark-p
   exit 1
 fi
 printf '%s\\n' '{mode}' >/run/omarchy-benchmark/preflight-complete
+{prefetch}\
 if [[ '{mode}' == 'builder' ]]; then
   echo 'Benchmark builder is ready. Autoinstall is disabled for this boot.'
 else
@@ -125,7 +127,7 @@ fi
 '''.encode()
 
 
-def build(original, mode, preflight, payload=None):
+def build(original, mode, preflight, payload=None, disable_package_prefetch=False):
   source_files = initramfs_files(original)
   config = source_files.get("config", (0, b""))[1]
   init = source_files.get("init", (0, b""))[1]
@@ -134,7 +136,7 @@ def build(original, mode, preflight, payload=None):
   if b"omarchy_benchmark" in config:
     raise ValueError("Input already contains a benchmark hook")
   contents = {
-    "root/.automated_script.sh": (stat.S_IFREG | 0o755, wrapper(mode)),
+    "root/.automated_script.sh": (stat.S_IFREG | 0o755, wrapper(mode, disable_package_prefetch)),
     "usr/local/lib/omarchy-benchmark/preflight.sh": (stat.S_IFREG | 0o755, preflight),
   }
   if payload:
@@ -151,6 +153,7 @@ def build(original, mode, preflight, payload=None):
   metadata = {
     "schema_version": 1,
     "mode": mode,
+    "disable_package_prefetch": disable_package_prefetch,
     "original_initramfs_sha256": sha256(original),
     "original_config_sha256": sha256(config),
     "hook_sha256": sha256(HOOK),
@@ -180,6 +183,7 @@ def main():
   parser.add_argument("--mode", choices=("control", "candidate", "builder"), required=True)
   parser.add_argument("--preflight-script", type=Path)
   parser.add_argument("--payload-dir", type=Path)
+  parser.add_argument("--disable-package-prefetch", action="store_true", help="Experimental: export upstream OMARCHY_NO_PREFETCH=1; image verification remains enabled")
   parser.add_argument("--expected-initramfs-sha256")
   args = parser.parse_args()
   if args.initramfs.resolve() == args.output.resolve():
@@ -192,7 +196,7 @@ def main():
   if args.expected_initramfs_sha256 and sha256(original) != args.expected_initramfs_sha256:
     parser.error("Original initramfs checksum mismatch")
   preflight = args.preflight_script.read_bytes() if args.preflight_script else b"#!/bin/bash\nset -euo pipefail\necho 'Matched control preflight'\n"
-  combined, metadata = build(original, args.mode, preflight, args.payload_dir)
+  combined, metadata = build(original, args.mode, preflight, args.payload_dir, args.disable_package_prefetch)
   args.output.parent.mkdir(parents=True, exist_ok=True)
   args.output.write_bytes(combined)
   manifest = args.output.with_suffix(args.output.suffix + ".manifest.json")

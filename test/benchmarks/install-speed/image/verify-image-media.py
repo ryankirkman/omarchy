@@ -13,6 +13,8 @@ parser.add_argument("root_image_manifest", type=Path)
 parser.add_argument("output", type=Path)
 parser.add_argument("--xorriso", default="xorriso")
 args = parser.parse_args()
+if args.output.exists():
+    parser.error("verification output already exists; use a fresh path")
 image_path = "/arch/x86_64/omarchy-root.btrfs.qcow2"
 reference = json.loads(args.root_image_manifest.read_text())
 expected_bytes, expected_sha256 = reference["file_bytes"], reference["sha256"]
