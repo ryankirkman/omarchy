@@ -1,0 +1,11 @@
+# Official Omarchy 4.0.2 install calibration
+
+The unmodified official ISO installed successfully in a fresh 40 GiB QEMU TCG VM with four virtual CPUs, 8192 MiB RAM, Btrfs compression, no encryption and a fresh OVMF variables file. All fourteen installer phases succeeded, the guest rebooted automatically into the target Btrfs root, and `pacman -Qk` returned zero for the 941 installed packages. The original ISO SHA256 is recorded in `manifest.json`.
+
+Guest installer start-to-completion was 1300.3847 seconds. First successful installed SSH was observed 1597.4471 host seconds after QEMU launch. These are separate observations; the earlier runner did not save the exact final failed SSH probe bound. This run is calibration and package/identity evidence, not a final matched control sample for the overlay boot experiment or proof of a 2× improvement. Later runner/comparator fields have deliberately not been retrofitted into its original manifest. The run used ordinary ISO firmware boot, whereas planned matched control/candidate runs use the same injected initrd and automatic QEMU restart onto a disk with installation media removed.
+
+The largest installer phases were package installation (927.5783 seconds), finalizing Limine boot (229.8752 seconds), finalizing the user (64.3315 seconds), and system configuration (56.0524 seconds). The saved JSON contains every phase. Post-boot `systemd-analyze` reported 12.034 seconds for `ldconfig.service` on the critical path and 4.818 seconds for SSH host-key generation.
+
+Identity, Btrfs/UKI and systemd diagnostics were collected read-only after original boot/package validation; `post-collection-provenance.json` records their later collection separately. Only public SSH fingerprints and local signing-key fingerprint metadata are retained; no SSH private keys, GPG private-key bytes, disk image, firmware variables, CIDATA credentials or ISO are included.
+
+The serial boot log includes a nonfatal resume/encryption mapping warning for the unencrypted fixture, followed by successful normal boot. Preserve this as a stock behavior diagnostic rather than silently changing the baseline. TCG and explicit host caching conditions limit any generalization to physical hardware.

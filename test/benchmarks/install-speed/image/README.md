@@ -38,6 +38,16 @@ The default Btrfs compression is upstream's `compress-force=zstd:15`. An experim
 
 The builder runs pacstrap and its normal non-boot package hooks. It masks only upstream's five deferred boot hooks, restores the masks afterward, strips machine ID, pacman keyring, SSH host keys and build resolver state, checks package files, seals the source subvolume read-only, shrinks Btrfs and checks every data checksum. Required per-machine identities, keyring population, UKI creation and configuration remain the installer's responsibility.
 
+When the builder guest is managed by `iso-vm.py --mode builder`, the host driver transfers baseline manifests, launches the build as a systemd unit, preserves progress and failure logs, and retrieves the small completed evidence automatically:
+
+```bash
+python3 test/benchmarks/install-speed/image/drive-guest-build.py \
+  /tmp/omarchy-bench/builder-01 /tmp/omarchy-bench/baseline-03 \
+  /tmp/omarchy-bench/image-build-output
+```
+
+Its default timeout is four hours; set the supervisor's timeout at least as long. A timeout or failed guest unit is a failed build, and must not lead to native compression. This driver expects the builder scripts at `/usr/local/lib/omarchy-benchmark/image-builder`, as supplied by the builder initramfs payload. It leaves the VM running so failures can be inspected.
+
 Copy `/run/image-build-output` to the host, then shut the builder VM down completely. Compress with the native host binary, avoiding expensive software-emulated compression:
 
 ```bash

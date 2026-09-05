@@ -56,3 +56,21 @@ bash test/shell.d/install-comparison-test.sh
 ```
 
 The available development environment is an Ubuntu container with no KVM device and no mount privileges. A disposable QEMU VM using software emulation is being used to exercise the real installer. Its results must remain labeled as software-emulation measurements, especially on a shared CPU host. No independently measured twofold complete-install result is recorded in this document yet.
+
+## First successful calibration install
+
+The official 4.0.2 ISO completed a real fresh installation on September 5, 2026: QEMU 8.2.2, four emulated CPUs, 8 GiB RAM, a fresh 40 GiB qcow2 disk, fresh UEFI variables, Btrfs and no encryption. All 14 installer phases succeeded. The installed `/dev/vda2[/@]` root booted, all 941 installed packages were inventoried, and `pacman -Qk` returned zero. [The retained evidence](../test/benchmarks/install-speed/results/iso-calibration-4.0.2-2026-09-05/) includes original timings and validation records.
+
+| Calibration measurement | Seconds | Share of installer time |
+| --- | ---: | ---: |
+| Installing Arch + Omarchy | 927.58 | 71.3% |
+| Finalizing Limine boot | 229.88 | 17.7% |
+| Finalizing user | 64.33 | 4.9% |
+| Configuring system | 56.05 | 4.3% |
+| Remaining phases | 22.55 | 1.7% |
+| Complete guest installer | 1,300.38 | 100% |
+| VM start to first installed SSH response | 1,597.45 | Separate host clock |
+
+This is a calibration result, not a paired speedup measurement. It uses the ISO's original firmware/GRUB boot path. The experimental candidate needs an appended-initramfs overlay, so its final comparison must use fresh controls with the same direct-kernel boot and automatic transition to the installed disk. This earlier runner also did not record the newer readiness-bound and media-preconditioning fields; those must not be retroactively invented. Post-boot identity and service diagnostics are marked as later collection.
+
+The profile supports moving invariant package installation into the reusable image and overlapping independent finalization work. Package installation alone accounts for over fifteen minutes here; boot finalization remains a substantial cost after that is removed. The candidate must retain the same package versions and installation reasons, complete all per-machine setup, pass file checks and boot independently without installation media.

@@ -43,6 +43,7 @@ def write_bundle(name, paths):
 
 build_paths = [(args.iso_checkout / "builder" / name, name) for name in ("image.packages", "archinstall.packages")]
 build_paths += [(local / name, name) for name in ("build-root-from-iso.sh", "select-image-packages.py", "validate-image-manifest.py")]
+build_paths.append((args.iso_checkout / "LICENSE", "LICENSE.omarchy-iso"))
 write_bundle("builder-bundle.tar", build_paths)
 
 airootfs = args.iso_checkout / "configs/airootfs"
@@ -50,5 +51,6 @@ overlay_paths = [(path, str(path.relative_to(airootfs))) for path in (airootfs /
 for name in ("omarchy-iso-install", "omarchy-iso-cleanup-disk", "omarchy-release-install-target", "omarchy-wait-root-image-verify"):
     overlay_paths.append((airootfs / "usr/local/bin" / name, "usr/local/bin/" + name))
 overlay_paths.append((airootfs / "etc/systemd/system/omarchy-root-image-verify.service", "etc/systemd/system/omarchy-root-image-verify.service"))
+overlay_paths.append((args.iso_checkout / "LICENSE", "usr/share/omarchy-iso/LICENSE"))
 write_bundle("installer-overlay.tar", overlay_paths)
 print(f"Wrote reproducible bundles at {args.output_directory}")

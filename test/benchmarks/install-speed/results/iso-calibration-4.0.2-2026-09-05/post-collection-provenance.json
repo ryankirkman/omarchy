@@ -1,0 +1,18 @@
+{
+  "kind": "read-only evidence gathered after original installed-boot collection",
+  "collected_at": 1788632370.209778,
+  "collector_source_sha256": "0a234b5f37d54baefc46ba1b0d4b8982c28989b87b5e4966f647a28e5aa70109",
+  "original_collected_at": 1788632318.6637967,
+  "original_timing_and_manifest_fields_were_not_retrofitted": true,
+  "artifacts": [
+    "identity.json",
+    "machine-id.txt",
+    "ssh-host-fingerprints.txt",
+    "pacman-master-keys.txt",
+    "btrfs-uuid.txt",
+    "btrfs-subvolumes.txt",
+    "uki-files.txt",
+    "systemd-analyze-blame.txt",
+    "systemd-analyze-critical-chain.txt"
+  ]
+}
