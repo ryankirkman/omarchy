@@ -1,0 +1,147 @@
+{
+  "recorded_at_utc": "2026-09-05T10:17:39.948875+00:00",
+  "scope": "exact SHA-256 phase on native host CPU, not install time or VM time",
+  "image_name": "omarchy-4.0.2.iso",
+  "image_bytes": 6227752960,
+  "expected_sha256": "2ef8e624aa1bec7e277e28056b8535a6c9373ba48d7ede3f1a01cb6d2373cfb8",
+  "cache_policy": "read the complete file before timing; warm intended, no cache eviction or global cache dropping",
+  "kernel": "Linux-6.18.35-x86_64-with-glibc2.39",
+  "cpu_model": "AMD EPYC 9V74 80-Core Processor",
+  "cpu_affinity": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8
+  ],
+  "cpu_quota": "800000 100000",
+  "memory_limit": "21474836480",
+  "initial_load_average": [
+    32.1318359375,
+    30.8642578125,
+    28.6572265625
+  ],
+  "versions": {
+    "arch_sha256sum": "sha256sum (GNU coreutils) 9.11\nCopyright (C) 2026 Free Software Foundation, Inc.\nLicense GPLv3+: GNU GPL version 3 or later <https://gnu.org/licenses/gpl.html>.\nThis is free software: you are free to change and redistribute it.\nThere is NO WARRANTY, to the extent permitted by law.\n\nWritten by Ulrich Drepper, Scott Miller, and David Madore.",
+    "arch_openssl": "OpenSSL 3.6.3 9 Jun 2026 (Library: OpenSSL 3.6.3 9 Jun 2026)\nbuilt on: Tue Jun  9 16:12:05 2026 UTC\nplatform: linux-x86_64\noptions:  bn(64,64)\ncompiler: gcc -fPIC -pthread -m64 -Wa,--noexecstack -march=x86-64 -mtune=generic -O2 -pipe -fno-plt -fexceptions         -Wp,-D_FORTIFY_SOURCE=3 -Wformat -Werror=format-security         -fstack-clash-protection -fcf-protection         -fno-omit-frame-pointer -mno-omit-leaf-frame-pointer -g -ffile-prefix-map=/build/openssl/src=/usr/src/debug/openssl -flto=auto -DOPENSSL_USE_NODELETE -DL_ENDIAN -DOPENSSL_PIC -DOPENSSL_BUILDING_OPENSSL -DBROTLI -DZLIB -DZSTD -DNDEBUG\nOPENSSLDIR: \"/etc/ssl\"\nENGINESDIR: \"/usr/lib/engines-3\"\nMODULESDIR: \"/usr/lib/ossl-modules\"\nSeeding source: os-specific\nCPUINFO: OPENSSL_ia32cap=0xfffa3203078bffff:0x00405fc6f1bf07ab:0x0000002020000010:0x0000000000000000:0x0000000000000000",
+    "host_sha256sum": "sha256sum (GNU coreutils) 9.4\nCopyright (C) 2023 Free Software Foundation, Inc.\nLicense GPLv3+: GNU GPL version 3 or later <https://gnu.org/licenses/gpl.html>.\nThis is free software: you are free to change and redistribute it.\nThere is NO WARRANTY, to the extent permitted by law.\n\nWritten by Ulrich Drepper, Scott Miller, and David Madore."
+  },
+  "runs": [
+    {
+      "round": 1,
+      "implementation": "arch_sha256sum",
+      "elapsed_seconds": 12.026553845003946,
+      "user_seconds": 3.7475330000000002,
+      "system_seconds": 0.698843,
+      "input_blocks": 0,
+      "mib_per_second": 493.8445479410774,
+      "sha256": "2ef8e624aa1bec7e277e28056b8535a6c9373ba48d7ede3f1a01cb6d2373cfb8"
+    },
+    {
+      "round": 1,
+      "implementation": "arch_openssl",
+      "elapsed_seconds": 17.909682072997384,
+      "user_seconds": 3.739385,
+      "system_seconds": 1.1957529999999998,
+      "input_blocks": 0,
+      "mib_per_second": 331.6221931057987,
+      "sha256": "2ef8e624aa1bec7e277e28056b8535a6c9373ba48d7ede3f1a01cb6d2373cfb8"
+    },
+    {
+      "round": 1,
+      "implementation": "host_sha256sum",
+      "elapsed_seconds": 20.865789788003895,
+      "user_seconds": 3.764552,
+      "system_seconds": 0.9883959999999998,
+      "input_blocks": 0,
+      "mib_per_second": 284.64046207776795,
+      "sha256": "2ef8e624aa1bec7e277e28056b8535a6c9373ba48d7ede3f1a01cb6d2373cfb8"
+    },
+    {
+      "round": 2,
+      "implementation": "host_sha256sum",
+      "elapsed_seconds": 12.706915044000198,
+      "user_seconds": 3.6587820000000004,
+      "system_seconds": 0.9683020000000004,
+      "input_blocks": 0,
+      "mib_per_second": 467.40282958603115,
+      "sha256": "2ef8e624aa1bec7e277e28056b8535a6c9373ba48d7ede3f1a01cb6d2373cfb8"
+    },
+    {
+      "round": 2,
+      "implementation": "arch_openssl",
+      "elapsed_seconds": 11.053876282996498,
+      "user_seconds": 3.6957169999999984,
+      "system_seconds": 1.0774919999999995,
+      "input_blocks": 0,
+      "mib_per_second": 537.3000289510189,
+      "sha256": "2ef8e624aa1bec7e277e28056b8535a6c9373ba48d7ede3f1a01cb6d2373cfb8"
+    },
+    {
+      "round": 2,
+      "implementation": "arch_sha256sum",
+      "elapsed_seconds": 10.364968335001322,
+      "user_seconds": 3.5720670000000005,
+      "system_seconds": 1.0621460000000003,
+      "input_blocks": 0,
+      "mib_per_second": 573.0116923578853,
+      "sha256": "2ef8e624aa1bec7e277e28056b8535a6c9373ba48d7ede3f1a01cb6d2373cfb8"
+    },
+    {
+      "round": 3,
+      "implementation": "arch_sha256sum",
+      "elapsed_seconds": 20.953360683997744,
+      "user_seconds": 3.630711999999999,
+      "system_seconds": 0.7097519999999999,
+      "input_blocks": 0,
+      "mib_per_second": 283.4508571892648,
+      "sha256": "2ef8e624aa1bec7e277e28056b8535a6c9373ba48d7ede3f1a01cb6d2373cfb8"
+    },
+    {
+      "round": 3,
+      "implementation": "arch_openssl",
+      "elapsed_seconds": 11.973621313998592,
+      "user_seconds": 3.5792070000000002,
+      "system_seconds": 0.8913720000000005,
+      "input_blocks": 0,
+      "mib_per_second": 496.02771718956154,
+      "sha256": "2ef8e624aa1bec7e277e28056b8535a6c9373ba48d7ede3f1a01cb6d2373cfb8"
+    },
+    {
+      "round": 3,
+      "implementation": "host_sha256sum",
+      "elapsed_seconds": 14.035474397001963,
+      "user_seconds": 3.5802130000000005,
+      "system_seconds": 0.6053869999999995,
+      "input_blocks": 0,
+      "mib_per_second": 423.1597649555507,
+      "sha256": "2ef8e624aa1bec7e277e28056b8535a6c9373ba48d7ede3f1a01cb6d2373cfb8"
+    }
+  ],
+  "median_seconds": {
+    "arch_sha256sum": 12.026553845003946,
+    "arch_openssl": 11.973621313998592,
+    "host_sha256sum": 14.035474397001963
+  },
+  "arch_openssl_speedup": 1.0044207620750014,
+  "median_cpu_seconds": {
+    "arch_sha256sum": 4.446376,
+    "arch_openssl": 4.773208999999998,
+    "host_sha256sum": 4.627084000000001
+  },
+  "concurrency_note": "Other QEMU/benchmark work was active in the shared environment. Wide wall-time variation means small differences are not statistically meaningful.",
+  "binary_dependencies": {
+    "arch_sha256sum": [
+      "libcrypto.so.3",
+      "libc.so.6"
+    ],
+    "host_sha256sum": [
+      "libcrypto.so.3",
+      "libc.so.6"
+    ]
+  }
+}

@@ -1,0 +1,159 @@
+{
+  "scope": "Verification phase only; warmed 512-MiB slice from official ISO; host binaries; not an install-speed result.",
+  "fixture": {
+    "path": "/workspace/scratch/38a4d12ea30d/hash-fixture.bin",
+    "bytes": 536870912,
+    "sha256": "7a7e6ef32e35d272c6923d6ece01105f8e546660485ee36c8f4a4f88ce1cea67"
+  },
+  "runtime": {
+    "python": "3.12.13 (main, Aug  7 2026, 02:25:39) [Clang 22.1.3 ]",
+    "platform": "Linux-6.18.35-x86_64-with-glibc2.39",
+    "affinity_cpu_count": 9,
+    "openssl": "OpenSSL 3.0.13 30 Jan 2024 (Library: OpenSSL 3.0.13 30 Jan 2024)",
+    "sha256sum": "sha256sum (GNU coreutils) 9.4"
+  },
+  "seed": 20260905,
+  "repeats": 5,
+  "trials": [
+    {
+      "repeat": 0,
+      "method": "chunk_sha256_workers2",
+      "seconds": 0.795336167
+    },
+    {
+      "repeat": 0,
+      "method": "host_openssl_sha256",
+      "seconds": 0.895825105
+    },
+    {
+      "repeat": 0,
+      "method": "host_sha256sum",
+      "seconds": 0.768713968
+    },
+    {
+      "repeat": 0,
+      "method": "chunk_sha256_workers1",
+      "seconds": 0.903932534
+    },
+    {
+      "repeat": 0,
+      "method": "chunk_sha256_workers4",
+      "seconds": 0.616395381
+    },
+    {
+      "repeat": 1,
+      "method": "host_openssl_sha256",
+      "seconds": 0.816305519
+    },
+    {
+      "repeat": 1,
+      "method": "chunk_sha256_workers4",
+      "seconds": 0.590186361
+    },
+    {
+      "repeat": 1,
+      "method": "chunk_sha256_workers1",
+      "seconds": 0.996481675
+    },
+    {
+      "repeat": 1,
+      "method": "host_sha256sum",
+      "seconds": 0.786874286
+    },
+    {
+      "repeat": 1,
+      "method": "chunk_sha256_workers2",
+      "seconds": 0.753364522
+    },
+    {
+      "repeat": 2,
+      "method": "host_openssl_sha256",
+      "seconds": 0.839893021
+    },
+    {
+      "repeat": 2,
+      "method": "chunk_sha256_workers2",
+      "seconds": 0.738144556
+    },
+    {
+      "repeat": 2,
+      "method": "chunk_sha256_workers4",
+      "seconds": 0.629122824
+    },
+    {
+      "repeat": 2,
+      "method": "chunk_sha256_workers1",
+      "seconds": 1.138935906
+    },
+    {
+      "repeat": 2,
+      "method": "host_sha256sum",
+      "seconds": 0.978745023
+    },
+    {
+      "repeat": 3,
+      "method": "chunk_sha256_workers2",
+      "seconds": 0.743657805
+    },
+    {
+      "repeat": 3,
+      "method": "chunk_sha256_workers1",
+      "seconds": 1.324094618
+    },
+    {
+      "repeat": 3,
+      "method": "chunk_sha256_workers4",
+      "seconds": 0.846199744
+    },
+    {
+      "repeat": 3,
+      "method": "host_openssl_sha256",
+      "seconds": 0.886874139
+    },
+    {
+      "repeat": 3,
+      "method": "host_sha256sum",
+      "seconds": 0.849046427
+    },
+    {
+      "repeat": 4,
+      "method": "chunk_sha256_workers1",
+      "seconds": 1.192041518
+    },
+    {
+      "repeat": 4,
+      "method": "chunk_sha256_workers2",
+      "seconds": 0.895042032
+    },
+    {
+      "repeat": 4,
+      "method": "host_sha256sum",
+      "seconds": 1.231578601
+    },
+    {
+      "repeat": 4,
+      "method": "chunk_sha256_workers4",
+      "seconds": 1.04087923
+    },
+    {
+      "repeat": 4,
+      "method": "host_openssl_sha256",
+      "seconds": 1.823916297
+    }
+  ],
+  "medians_seconds": {
+    "host_sha256sum": 0.849046427,
+    "host_openssl_sha256": 0.886874139,
+    "chunk_sha256_workers1": 1.138935906,
+    "chunk_sha256_workers2": 0.753364522,
+    "chunk_sha256_workers4": 0.629122824
+  },
+  "speedup_vs_host_sha256sum": {
+    "host_sha256sum": 1.0,
+    "host_openssl_sha256": 0.9573471473160184,
+    "chunk_sha256_workers1": 0.7454734041899633,
+    "chunk_sha256_workers2": 1.127006120152815,
+    "chunk_sha256_workers4": 1.3495718079368235
+  },
+  "manifest_bytes": 8671
+}
