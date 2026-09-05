@@ -1,0 +1,40 @@
+{
+  "schema_version": 1,
+  "type": "untimed post-validation sealed source inspection",
+  "source_filesystem_uuid": "51a18a79-7bde-4aeb-8895-181970407957",
+  "installed_root_filesystem_uuid": "d5393516-d4e4-4c53-a691-efe97d251b4b",
+  "device_readonly_asserted": true,
+  "source_subvolume_readonly_asserted": true,
+  "mount_options": "ro,rescue=nologreplay,subvolid=5",
+  "observations": {
+    "etc/machine-id": {
+      "exists": true,
+      "bytes": 0,
+      "mode": "0o444",
+      "type": "regular"
+    },
+    "var/lib/systemd/random-seed": {
+      "exists": false
+    },
+    "etc/machine-info": {
+      "exists": false
+    },
+    "var/lib/dbus/machine-id": {
+      "exists": true,
+      "bytes": 15,
+      "mode": "0o777",
+      "type": "symlink",
+      "target": "/etc/machine-id",
+      "source_namespace_target": "/etc/machine-id",
+      "links_to_source_machine_id": true,
+      "source_target_observation": {
+        "exists": true,
+        "bytes": 0,
+        "mode": "0o444",
+        "type": "regular"
+      }
+    }
+  },
+  "source_file_contents_read": false,
+  "requires_review": []
+}

@@ -70,7 +70,7 @@ jobs:
           dpkg-query -W > "$BENCH_EVIDENCE/host-packages.txt"
           printf '%s\n' "$ImageOS" "$ImageVersion" > "$BENCH_EVIDENCE/runner-image.txt"
 
-      - name: Build once, then measure three alternating fresh install pairs
+      - name: Build once, then measure three alternating fresh pairs per variant
         shell: bash
         run: |
           set -euo pipefail

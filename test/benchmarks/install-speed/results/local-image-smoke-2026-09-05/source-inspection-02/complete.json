@@ -1,0 +1,10 @@
+{
+  "status": "complete",
+  "observed_after_all_install_gates": true,
+  "source_unmounted": true,
+  "usb_detached": true,
+  "backend_deleted": true,
+  "requires_review": [],
+  "script_sha256": "80dbcdbb9fcd9c1aca5e19c79ea9bf915b60539830099655170c34bd07d7533a",
+  "completed_at": 1788642888.5729434
+}

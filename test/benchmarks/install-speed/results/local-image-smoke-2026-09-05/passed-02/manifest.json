@@ -1,0 +1,205 @@
+{
+  "schema_version": 1,
+  "status": "installed-and-booted",
+  "mode": "install",
+  "iso": "/tmp/omarchy-bench/omarchy-candidate-firmware-smoke.iso",
+  "iso_sha256": "d57c4a348843ae246fe54b3ab9da0cb863b2bcdb400ed1f66af796abb7592b6a",
+  "qemu_version": "QEMU emulator version 8.2.2 (Debian 1:8.2.2+ds-0ubuntu1.18)",
+  "qemu_argv": [
+    "/tmp/omarchy-bench/toolchain/usr/bin/qemu-system-x86_64",
+    "-L",
+    "/tmp/omarchy-bench/toolchain/usr/share/qemu",
+    "-machine",
+    "q35,accel=tcg",
+    "-cpu",
+    "max",
+    "-smp",
+    "4",
+    "-m",
+    "8192",
+    "-drive",
+    "if=pflash,format=raw,readonly=on,file=/tmp/omarchy-bench/toolchain/usr/share/OVMF/OVMF_CODE_4M.fd",
+    "-drive",
+    "if=pflash,format=raw,file=/tmp/omarchy-bench/candidate-firmware-smoke-02/OVMF_VARS_4M.fd",
+    "-drive",
+    "file=/tmp/omarchy-bench/candidate-firmware-smoke-02/target.qcow2,format=qcow2,if=none,id=target,cache=writeback",
+    "-device",
+    "virtio-blk-pci,drive=target,bootindex=1",
+    "-device",
+    "virtio-vga,romfile=/tmp/omarchy-bench/toolchain/usr/share/seabios/vgabios-virtio.bin",
+    "-display",
+    "none",
+    "-usb",
+    "-device",
+    "usb-tablet",
+    "-object",
+    "rng-random,id=rng0,filename=/dev/urandom",
+    "-device",
+    "virtio-rng-pci,rng=rng0",
+    "-netdev",
+    "user,id=net0,hostfwd=tcp:127.0.0.1:24022-:22",
+    "-device",
+    "virtio-net-pci,netdev=net0,romfile=",
+    "-qmp",
+    "tcp:127.0.0.1:24444,server=on,wait=off",
+    "-serial",
+    "file:/tmp/omarchy-bench/candidate-firmware-smoke-02/serial.log",
+    "-drive",
+    "file=/tmp/omarchy-bench/omarchy-candidate-firmware-smoke.iso,media=cdrom,if=none,format=raw,id=iso,cache=writeback,readonly=on",
+    "-device",
+    "ide-cd,drive=iso,bootindex=2,id=installer-cd",
+    "-drive",
+    "file=/tmp/omarchy-bench/candidate-firmware-smoke-02/cidata.img,format=raw,if=none,id=cidata",
+    "-device",
+    "usb-storage,drive=cidata,id=cidata-usb",
+    "-drive",
+    "file=/tmp/omarchy-bench/fast-image-fixed.iso,media=cdrom,format=raw,if=none,id=fastimage,readonly=on,cache=writeback",
+    "-device",
+    "ide-cd,drive=fastimage,id=fastimage-cd,bus=ide.1"
+  ],
+  "accelerator": "tcg",
+  "cpu_count": 4,
+  "memory_mib": 8192,
+  "fresh_target": true,
+  "fresh_nvram": true,
+  "disk_format": "qcow2",
+  "disk_virtual_bytes": 42949672960,
+  "disk_cache": "writeback",
+  "iso_cache": "writeback",
+  "readiness_poll_interval_s": 10,
+  "installed_boot_timeout_s": 900,
+  "started_at": 1788641894.0884433,
+  "hostname": "omarchy-benchmark",
+  "measurement_interrupted": false,
+  "network": "QEMU user networking; ISO installs packages from its own bundled mirror",
+  "encryption": false,
+  "filesystem": "btrfs compress=zstd",
+  "interventions": [
+    {
+      "at_host_wall_s": 972.2307050969976,
+      "action": "qmp",
+      "execute": "blockdev-add",
+      "arguments": {
+        "driver": "qcow2",
+        "node-name": "omarchy-sealed-source",
+        "read-only": true,
+        "file": {
+          "driver": "raw",
+          "read-only": true,
+          "offset": 116736,
+          "size": 3681644544,
+          "file": {
+            "driver": "file",
+            "read-only": true,
+            "filename": "/tmp/omarchy-bench/fast-image-fixed.iso"
+          }
+        }
+      }
+    },
+    {
+      "at_host_wall_s": 973.2348094990011,
+      "action": "qmp",
+      "execute": "device_add",
+      "arguments": {
+        "driver": "usb-storage",
+        "drive": "omarchy-sealed-source",
+        "id": "omarchy-sealed-source-usb",
+        "serial": "OMARCHY_SEALED_SOURCE"
+      }
+    },
+    {
+      "at_host_wall_s": 974.2886879809957,
+      "action": "ssh",
+      "sudo": true,
+      "command": "set -euo pipefail\nfor attempt in {1..100}; do\n mapfile -t devices < <(lsblk -dnro PATH,SERIAL | awk '$2 == \"OMARCHY_SEALED_SOURCE\" {print $1}')\n (( ${#devices[@]} == 1 )) && break\n sleep .2\ndone\n(( ${#devices[@]} == 1 ))\ndevice=${devices[0]}\nbash -c '#!/bin/bash\n# Run only after smoke timing, installed boot and standalone reboot are sealed.\nset -euo pipefail\nif (( $# != 1 )); then echo '\"'\"'Usage: inspect-sealed-source.sh <read-only-hotplug-device>'\"'\"' >&2; exit 2; fi\ndevice=$(readlink -f \"$1\")\n[[ -b $device ]]\n[[ $(systemd-detect-virt --vm) =~ ^(qemu|kvm)$ ]]\n[[ $(lsblk -dnro SERIAL \"$device\" | tr -d '\"'\"'[:space:]'\"'\"') == OMARCHY_SEALED_SOURCE ]]\n[[ $(blockdev --getro \"$device\") == 1 ]]\nsource_uuid=$(blkid -s UUID -o value \"$device\")\ninstalled_uuid=$(findmnt -no UUID /)\n[[ $source_uuid == 51a18a79-7bde-4aeb-8895-181970407957 ]]\n[[ -n $installed_uuid && $installed_uuid != \"$source_uuid\" ]]\n[[ -z $(lsblk -nro MOUNTPOINTS \"$device\" | tr -d '\"'\"'[:space:]'\"'\"') ]]\nmount_dir=$(mktemp -d /run/omarchy-sealed-inspect.XXXXXX)\ncleanup() { status=$?; set +e; if mountpoint -q \"$mount_dir\"; then umount \"$mount_dir\"; fi; rmdir \"$mount_dir\"; exit \"$status\"; }\ntrap cleanup EXIT\nmount -o ro,rescue=nologreplay,subvolid=5 \"$device\" \"$mount_dir\"\n[[ $(btrfs property get -ts \"$mount_dir/omarchy-root\" ro) == '\"'\"'ro=true'\"'\"' ]]\npython - \"$mount_dir/omarchy-root\" \"$source_uuid\" \"$installed_uuid\" <<'\"'\"'PY'\"'\"'\nimport json,posixpath,stat,sys\nfrom pathlib import Path\nroot=Path(sys.argv[1]);source_uuid=sys.argv[2];installed_uuid=sys.argv[3]\ndef observe(relative):\n path=root/relative\n parent=root\n for part in Path(relative).parts[:-1]:\n  parent=parent/part\n  try:parent_info=parent.lstat()\n  except FileNotFoundError:return {'\"'\"'exists'\"'\"':False}\n  if not stat.S_ISDIR(parent_info.st_mode):return {'\"'\"'exists'\"'\"':None,'\"'\"'blocked_parent'\"'\"':str(parent.relative_to(root))}\n try:info=path.lstat()\n except FileNotFoundError:return {'\"'\"'exists'\"'\"':False}\n result={'\"'\"'exists'\"'\"':True,'\"'\"'bytes'\"'\"':info.st_size,'\"'\"'mode'\"'\"':oct(stat.S_IMODE(info.st_mode))}\n if stat.S_ISLNK(info.st_mode):result.update(type='\"'\"'symlink'\"'\"',target=str(path.readlink()))\n elif stat.S_ISREG(info.st_mode):result['\"'\"'type'\"'\"']='\"'\"'regular'\"'\"'\n elif stat.S_ISDIR(info.st_mode):result['\"'\"'type'\"'\"']='\"'\"'directory'\"'\"'\n else:result['\"'\"'type'\"'\"']='\"'\"'other'\"'\"'\n return result\nobservations={name:observe(name) for name in ['\"'\"'etc/machine-id'\"'\"','\"'\"'var/lib/systemd/random-seed'\"'\"','\"'\"'etc/machine-info'\"'\"','\"'\"'var/lib/dbus/machine-id'\"'\"']}\ndbus=observations['\"'\"'var/lib/dbus/machine-id'\"'\"']\nif dbus.get('\"'\"'type'\"'\"')=='\"'\"'symlink'\"'\"':\n target=dbus['\"'\"'target'\"'\"']\n # Resolve lexically in the source filesystem namespace. Never follow an\n # absolute source symlink with host/installed-root Path.resolve/open.\n if target.startswith('\"'\"'/'\"'\"'):\n  resolved=posixpath.normpath(target)\n else:\n  resolved=posixpath.normpath('\"'\"'/var/lib/dbus/'\"'\"'+target)\n dbus['\"'\"'source_namespace_target'\"'\"']=resolved\n dbus['\"'\"'links_to_source_machine_id'\"'\"']=resolved=='\"'\"'/etc/machine-id'\"'\"'\n if resolved=='\"'\"'/etc/machine-id'\"'\"':dbus['\"'\"'source_target_observation'\"'\"']=observations['\"'\"'etc/machine-id'\"'\"']\nseed=observations['\"'\"'var/lib/systemd/random-seed'\"'\"'];machine=observations['\"'\"'etc/machine-id'\"'\"']\nissues=[name+'\"'\"': parent path is not a source directory'\"'\"' for name,value in observations.items() if '\"'\"'blocked_parent'\"'\"' in value]\nif machine.get('\"'\"'type'\"'\"')!='\"'\"'regular'\"'\"' or machine.get('\"'\"'bytes'\"'\"')!=0:issues.append('\"'\"'source machine ID is not an empty regular file'\"'\"')\nif seed.get('\"'\"'exists'\"'\"') and not(seed.get('\"'\"'type'\"'\"')=='\"'\"'regular'\"'\"' and seed.get('\"'\"'bytes'\"'\"')==0):issues.append('\"'\"'random seed exists; inspect its role before accepting cloned identities'\"'\"')\nif observations['\"'\"'etc/machine-info'\"'\"'].get('\"'\"'exists'\"'\"'):issues.append('\"'\"'machine-info exists; its content has not been inspected'\"'\"')\nif not dbus.get('\"'\"'links_to_source_machine_id'\"'\"'):issues.append('\"'\"'dbus identity is not the expected link to the empty source machine ID'\"'\"')\nresult={'\"'\"'schema_version'\"'\"':1,'\"'\"'type'\"'\"':'\"'\"'untimed post-validation sealed source inspection'\"'\"','\"'\"'source_filesystem_uuid'\"'\"':source_uuid,'\"'\"'installed_root_filesystem_uuid'\"'\"':installed_uuid,'\"'\"'device_readonly_asserted'\"'\"':True,'\"'\"'source_subvolume_readonly_asserted'\"'\"':True,'\"'\"'mount_options'\"'\"':'\"'\"'ro,rescue=nologreplay,subvolid=5'\"'\"','\"'\"'observations'\"'\"':observations,'\"'\"'source_file_contents_read'\"'\"':False,'\"'\"'requires_review'\"'\"':issues}\nprint(json.dumps(result,indent=2))\nPY\n' -- \"$device\"",
+      "timeout": 120
+    },
+    {
+      "at_host_wall_s": 984.0427995060018,
+      "action": "ssh",
+      "sudo": true,
+      "command": "set -euo pipefail\nfor attempt in {1..100}; do\n mapfile -t devices < <(lsblk -dnro PATH,SERIAL | awk '$2 == \"OMARCHY_SEALED_SOURCE\" {print $1}')\n (( ${#devices[@]} == 1 )) && break\n sleep .2\ndone\n(( ${#devices[@]} == 1 ))\ndevice=${devices[0]}\n[[ -z $(lsblk -nro MOUNTPOINTS \"$device\" | tr -d '[:space:]') ]]\nmounted_uuids=$(findmnt -rn -o UUID)\nwhile IFS= read -r uuid; do [[ $uuid != 51a18a79-7bde-4aeb-8895-181970407957 ]] || exit 1; done <<< \"$mounted_uuids\"\nfor path in /run/omarchy-sealed-inspect.*; do [[ ! -e $path ]]; done\nprintf 'SOURCE_UNMOUNTED\n'\n",
+      "timeout": 60
+    },
+    {
+      "at_host_wall_s": 987.4096567629895,
+      "action": "qmp",
+      "execute": "device_del",
+      "arguments": {
+        "id": "omarchy-sealed-source-usb"
+      }
+    },
+    {
+      "at_host_wall_s": 988.4113066269929,
+      "action": "ssh",
+      "sudo": true,
+      "command": "set -euo pipefail; udevadm settle; [[ -z $(lsblk -dnro SERIAL | awk '$1 == \"OMARCHY_SEALED_SOURCE\" {print $1}') ]]; printf 'SOURCE_DETACHED\\n'",
+      "timeout": 60
+    },
+    {
+      "at_host_wall_s": 991.7350799220003,
+      "action": "qmp",
+      "execute": "blockdev-del",
+      "arguments": {
+        "node-name": "omarchy-sealed-source"
+      }
+    },
+    {
+      "at_host_wall_s": 1036.8692014120024,
+      "action": "ssh",
+      "sudo": true,
+      "command": "systemctl poweroff",
+      "timeout": 60
+    }
+  ],
+  "cidata_configuration_sha256": "f777e75252acfa5f08a706c785d9582138ac43305b51e0be5d8ab6ed166273b3",
+  "test_overlay_sha256": "7fe1bd0921c25d830cae6f28724dddb209eb2f003caba75322432d727c76ce34",
+  "extra_media": [
+    {
+      "path": "/tmp/omarchy-bench/fast-image-fixed.iso",
+      "sha256": "19de1071bc7825078324c21243b4371f5bb6f4d9f47608b16c11288d22919e97",
+      "drive_id": "fastimage",
+      "format": "raw",
+      "cache": "writeback",
+      "interface": "ide-cd",
+      "device": "ide-cd,drive=fastimage,id=fastimage-cd,bus=ide.1",
+      "readonly": true
+    }
+  ],
+  "source_cache": "conditioned",
+  "media_cache_preconditioning": "sha256-read-iso-then-extra-media-in-array-order-then-kernel-then-initrd-before-vm-start",
+  "direct_kernel_boot": false,
+  "direct_kernel_sha256": null,
+  "direct_initrd_sha256": null,
+  "direct_kernel_command_line": null,
+  "reboot_strategy": "guest-firmware-reboot-with-standalone-validation",
+  "verify_standalone_reboot": true,
+  "standalone_reboot_timeout_s": 1200,
+  "standalone_media_plan": [
+    {
+      "drive_id": "iso",
+      "device_id": "installer-cd",
+      "kind": "cdrom"
+    },
+    {
+      "drive_id": "fastimage",
+      "device_id": "fastimage-cd",
+      "kind": "cdrom"
+    },
+    {
+      "drive_id": "cidata",
+      "device_id": "cidata-usb",
+      "kind": "usb-storage"
+    }
+  ],
+  "standalone_reboot_passed": true,
+  "vm_started_at_monotonic_s": 94286.413333082,
+  "first_installed_ssh_wall_s": 739.7344648849976,
+  "last_failed_installed_ssh_probe_started_wall_s": 725.8535969039949,
+  "last_failed_installed_ssh_wall_s": 728.8785012379958,
+  "actual_readiness_uncertainty_s": 13.880867981002666,
+  "readiness_poll_uncertainty_s": 13.880867981002666,
+  "validation_passed": true,
+  "collected_at": 1788642834.903029,
+  "qemu_exit_status": 0
+}

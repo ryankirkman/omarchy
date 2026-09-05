@@ -1,0 +1,1353 @@
+Sep 05 21:10:01 omarchy-benchmark kernel: Linux version 7.1.9-arch1-2 (linux@archlinux) (gcc (GCC) 16.2.1 20260810, GNU ld (GNU Binutils) 2.47) #1 SMP PREEMPT_DYNAMIC Fri, 21 Aug 2026 22:18:59 +0000
+Sep 05 21:10:01 omarchy-benchmark kernel: Command line: root=PARTUUID=75aa4b6f-24b5-4f4f-ac99-d07d61177e93 zswap.enabled=0 rootflags=subvol=@ rw rootfstype=btrfs  resume=/dev/vda2 resume_offset=1322761 initramfs_async=0 quiet splash loglevel=0 systemd.show_status=false rd.udev.log_level=0 vt.global_cursor_default=0 console=uart,io,0x3f8 console=tty0
+Sep 05 21:10:01 omarchy-benchmark kernel: BIOS-provided physical RAM map:
+Sep 05 21:10:01 omarchy-benchmark kernel: BIOS-e820: [mem 0x0000000000000000-0x000000000009ffff]  System RAM
+Sep 05 21:10:01 omarchy-benchmark kernel: BIOS-e820: [gap 0x00000000000a0000-0x00000000000fffff]
+Sep 05 21:10:01 omarchy-benchmark kernel: BIOS-e820: [mem 0x0000000000100000-0x00000000007fffff]  System RAM
+Sep 05 21:10:01 omarchy-benchmark kernel: BIOS-e820: [mem 0x0000000000800000-0x0000000000807fff]  ACPI NVS
+Sep 05 21:10:01 omarchy-benchmark kernel: BIOS-e820: [mem 0x0000000000808000-0x000000000080afff]  System RAM
+Sep 05 21:10:01 omarchy-benchmark kernel: BIOS-e820: [mem 0x000000000080b000-0x000000000080bfff]  ACPI NVS
+Sep 05 21:10:01 omarchy-benchmark kernel: BIOS-e820: [mem 0x000000000080c000-0x000000000080ffff]  System RAM
+Sep 05 21:10:01 omarchy-benchmark kernel: BIOS-e820: [mem 0x0000000000810000-0x00000000008fffff]  ACPI NVS
+Sep 05 21:10:01 omarchy-benchmark kernel: BIOS-e820: [mem 0x0000000000900000-0x000000007ed3efff]  System RAM
+Sep 05 21:10:01 omarchy-benchmark kernel: BIOS-e820: [mem 0x000000007ed3f000-0x000000007edfffff]  device reserved
+Sep 05 21:10:01 omarchy-benchmark kernel: BIOS-e820: [mem 0x000000007ee00000-0x000000007f8ecfff]  System RAM
+Sep 05 21:10:01 omarchy-benchmark kernel: BIOS-e820: [mem 0x000000007f8ed000-0x000000007fb6cfff]  device reserved
+Sep 05 21:10:01 omarchy-benchmark kernel: BIOS-e820: [mem 0x000000007fb6d000-0x000000007fb7efff]  ACPI data
+Sep 05 21:10:01 omarchy-benchmark kernel: BIOS-e820: [mem 0x000000007fb7f000-0x000000007fbfefff]  ACPI NVS
+Sep 05 21:10:01 omarchy-benchmark kernel: BIOS-e820: [mem 0x000000007fbff000-0x000000007fedbfff]  System RAM
+Sep 05 21:10:01 omarchy-benchmark kernel: BIOS-e820: [mem 0x000000007fedc000-0x000000007ff5ffff]  device reserved
+Sep 05 21:10:01 omarchy-benchmark kernel: BIOS-e820: [mem 0x000000007ff60000-0x000000007fffffff]  ACPI NVS
+Sep 05 21:10:01 omarchy-benchmark kernel: BIOS-e820: [gap 0x0000000080000000-0x00000000dfffffff]
+Sep 05 21:10:01 omarchy-benchmark kernel: BIOS-e820: [mem 0x00000000e0000000-0x00000000efffffff]  device reserved
+Sep 05 21:10:01 omarchy-benchmark kernel: BIOS-e820: [gap 0x00000000f0000000-0x00000000ffbfffff]
+Sep 05 21:10:01 omarchy-benchmark kernel: BIOS-e820: [mem 0x00000000ffc00000-0x00000000ffffffff]  device reserved
+Sep 05 21:10:01 omarchy-benchmark kernel: BIOS-e820: [mem 0x0000000100000000-0x000000027fffffff]  System RAM
+Sep 05 21:10:01 omarchy-benchmark kernel: BIOS-e820: [gap 0x0000000280000000-0x000000fcffffffff]
+Sep 05 21:10:01 omarchy-benchmark kernel: BIOS-e820: [mem 0x000000fd00000000-0x000000ffffffffff]  device reserved
+Sep 05 21:10:01 omarchy-benchmark kernel: earlycon: uart0 at I/O port 0x3f8 (options '')
+Sep 05 21:10:01 omarchy-benchmark kernel: printk: legacy bootconsole [uart0] enabled
+Sep 05 21:10:01 omarchy-benchmark kernel: NX (Execute Disable) protection: active
+Sep 05 21:10:01 omarchy-benchmark kernel: APIC: Static calls initialized
+Sep 05 21:10:01 omarchy-benchmark kernel: efi: EFI v2.7 by Ubuntu distribution of EDK II
+Sep 05 21:10:01 omarchy-benchmark kernel: efi: SMBIOS=0x7f988000 SMBIOS 3.0=0x7f986000 ACPI=0x7fb7e000 ACPI 2.0=0x7fb7e014 MEMATTR=0x7ea30018 RNG=0x7fb73f18 INITRD=0x7dddd218 
+Sep 05 21:10:01 omarchy-benchmark kernel: random: crng init done
+Sep 05 21:10:01 omarchy-benchmark kernel: efi: Remove mem133: MMIO range=[0xffc00000-0xffffffff] (4MB) from e820 map
+Sep 05 21:10:01 omarchy-benchmark kernel: e820: remove [mem 0xffc00000-0xffffffff] device reserved
+Sep 05 21:10:01 omarchy-benchmark kernel: DMI: SMBIOS 3.0.0 present.
+Sep 05 21:10:01 omarchy-benchmark kernel: DMI: QEMU Standard PC (Q35 + ICH9, 2009), BIOS 2024.02-2ubuntu0.9 06/02/2026
+Sep 05 21:10:01 omarchy-benchmark kernel: DMI: Memory slots populated: 1/1
+Sep 05 21:10:01 omarchy-benchmark kernel: tsc: Fast TSC calibration using PIT
+Sep 05 21:10:01 omarchy-benchmark kernel: tsc: Detected 2596.067 MHz processor
+Sep 05 21:10:01 omarchy-benchmark kernel: e820: update [mem 0x00000000-0x00000fff] System RAM ==> device reserved
+Sep 05 21:10:01 omarchy-benchmark kernel: e820: remove [mem 0x000a0000-0x000fffff] System RAM
+Sep 05 21:10:01 omarchy-benchmark kernel: last_pfn = 0x280000 max_arch_pfn = 0x10000000000
+Sep 05 21:10:01 omarchy-benchmark kernel: MTRR map: 4 entries (2 fixed + 2 variable; max 18), built from 8 variable MTRRs
+Sep 05 21:10:01 omarchy-benchmark kernel: x86/PAT: Configuration [0-7]: WB  WC  UC- UC  WB  WP  UC- WT  
+Sep 05 21:10:01 omarchy-benchmark kernel: last_pfn = 0x7fedc max_arch_pfn = 0x10000000000
+Sep 05 21:10:01 omarchy-benchmark kernel: Using GB pages for direct mapping
+Sep 05 21:10:01 omarchy-benchmark kernel: Secure boot disabled
+Sep 05 21:10:01 omarchy-benchmark kernel: RAMDISK: [mem 0x7681e000-0x77a5cfff]
+Sep 05 21:10:01 omarchy-benchmark kernel: ACPI: Early table checksum verification disabled
+Sep 05 21:10:01 omarchy-benchmark kernel: ACPI: RSDP 0x000000007FB7E014 000024 (v02 BOCHS )
+Sep 05 21:10:01 omarchy-benchmark kernel: ACPI: XSDT 0x000000007FB7D0E8 000054 (v01 BOCHS  BXPC     00000001      01000013)
+Sep 05 21:10:01 omarchy-benchmark kernel: ACPI: FACP 0x000000007FB79000 0000F4 (v03 BOCHS  BXPC     00000001 BXPC 00000001)
+Sep 05 21:10:01 omarchy-benchmark kernel: ACPI: DSDT 0x000000007FB7A000 002210 (v01 BOCHS  BXPC     00000001 BXPC 00000001)
+Sep 05 21:10:01 omarchy-benchmark kernel: ACPI: FACS 0x000000007FBDD000 000040
+Sep 05 21:10:01 omarchy-benchmark kernel: ACPI: APIC 0x000000007FB78000 000090 (v03 BOCHS  BXPC     00000001 BXPC 00000001)
+Sep 05 21:10:01 omarchy-benchmark kernel: ACPI: HPET 0x000000007FB77000 000038 (v01 BOCHS  BXPC     00000001 BXPC 00000001)
+Sep 05 21:10:01 omarchy-benchmark kernel: ACPI: MCFG 0x000000007FB76000 00003C (v01 BOCHS  BXPC     00000001 BXPC 00000001)
+Sep 05 21:10:01 omarchy-benchmark kernel: ACPI: WAET 0x000000007FB75000 000028 (v01 BOCHS  BXPC     00000001 BXPC 00000001)
+Sep 05 21:10:01 omarchy-benchmark kernel: ACPI: BGRT 0x000000007FB74000 000038 (v01 INTEL  EDK2     00000002      01000013)
+Sep 05 21:10:01 omarchy-benchmark kernel: ACPI: Reserving FACP table memory at [mem 0x7fb79000-0x7fb790f3]
+Sep 05 21:10:01 omarchy-benchmark kernel: ACPI: Reserving DSDT table memory at [mem 0x7fb7a000-0x7fb7c20f]
+Sep 05 21:10:01 omarchy-benchmark kernel: ACPI: Reserving FACS table memory at [mem 0x7fbdd000-0x7fbdd03f]
+Sep 05 21:10:01 omarchy-benchmark kernel: ACPI: Reserving APIC table memory at [mem 0x7fb78000-0x7fb7808f]
+Sep 05 21:10:01 omarchy-benchmark kernel: ACPI: Reserving HPET table memory at [mem 0x7fb77000-0x7fb77037]
+Sep 05 21:10:01 omarchy-benchmark kernel: ACPI: Reserving MCFG table memory at [mem 0x7fb76000-0x7fb7603b]
+Sep 05 21:10:01 omarchy-benchmark kernel: ACPI: Reserving WAET table memory at [mem 0x7fb75000-0x7fb75027]
+Sep 05 21:10:01 omarchy-benchmark kernel: ACPI: Reserving BGRT table memory at [mem 0x7fb74000-0x7fb74037]
+Sep 05 21:10:01 omarchy-benchmark kernel: No NUMA configuration found
+Sep 05 21:10:01 omarchy-benchmark kernel: Faking a node at [mem 0x0000000000000000-0x000000027fffffff]
+Sep 05 21:10:01 omarchy-benchmark kernel: NODE_DATA(0) allocated [mem 0x27ffd4f80-0x27fffffff]
+Sep 05 21:10:01 omarchy-benchmark kernel: ACPI: PM-Timer IO Port: 0x608
+Sep 05 21:10:01 omarchy-benchmark kernel: ACPI: LAPIC_NMI (acpi_id[0xff] dfl dfl lint[0x1])
+Sep 05 21:10:01 omarchy-benchmark kernel: IOAPIC[0]: apic_id 0, version 32, address 0xfec00000, GSI 0-23
+Sep 05 21:10:01 omarchy-benchmark kernel: ACPI: INT_SRC_OVR (bus 0 bus_irq 0 global_irq 2 dfl dfl)
+Sep 05 21:10:01 omarchy-benchmark kernel: ACPI: INT_SRC_OVR (bus 0 bus_irq 5 global_irq 5 high level)
+Sep 05 21:10:01 omarchy-benchmark kernel: ACPI: INT_SRC_OVR (bus 0 bus_irq 9 global_irq 9 high level)
+Sep 05 21:10:01 omarchy-benchmark kernel: ACPI: INT_SRC_OVR (bus 0 bus_irq 10 global_irq 10 high level)
+Sep 05 21:10:01 omarchy-benchmark kernel: ACPI: INT_SRC_OVR (bus 0 bus_irq 11 global_irq 11 high level)
+Sep 05 21:10:01 omarchy-benchmark kernel: ACPI: Using ACPI (MADT) for SMP configuration information
+Sep 05 21:10:01 omarchy-benchmark kernel: ACPI: HPET id: 0x8086a201 base: 0xfed00000
+Sep 05 21:10:01 omarchy-benchmark kernel: e820: update [mem 0x7de99000-0x7dea1fff] System RAM ==> device reserved
+Sep 05 21:10:01 omarchy-benchmark kernel: CPU topo: Max. logical packages:   1
+Sep 05 21:10:01 omarchy-benchmark kernel: CPU topo: Max. logical nodes:      1
+Sep 05 21:10:01 omarchy-benchmark kernel: CPU topo: Num. nodes per package:  1
+Sep 05 21:10:01 omarchy-benchmark kernel: CPU topo: Max. logical dies:       1
+Sep 05 21:10:01 omarchy-benchmark kernel: CPU topo: Max. dies per package:   1
+Sep 05 21:10:01 omarchy-benchmark kernel: CPU topo: Max. threads per core:   1
+Sep 05 21:10:01 omarchy-benchmark kernel: CPU topo: Num. cores per package:     4
+Sep 05 21:10:01 omarchy-benchmark kernel: CPU topo: Num. threads per package:   4
+Sep 05 21:10:01 omarchy-benchmark kernel: CPU topo: Allowing 4 present CPUs plus 0 hotplug CPUs
+Sep 05 21:10:01 omarchy-benchmark kernel: PM: hibernation: Registered nosave memory: [mem 0x00000000-0x00000fff]
+Sep 05 21:10:01 omarchy-benchmark kernel: PM: hibernation: Registered nosave memory: [mem 0x000a0000-0x000fffff]
+Sep 05 21:10:01 omarchy-benchmark kernel: PM: hibernation: Registered nosave memory: [mem 0x00800000-0x00807fff]
+Sep 05 21:10:01 omarchy-benchmark kernel: PM: hibernation: Registered nosave memory: [mem 0x0080b000-0x0080bfff]
+Sep 05 21:10:01 omarchy-benchmark kernel: PM: hibernation: Registered nosave memory: [mem 0x00810000-0x008fffff]
+Sep 05 21:10:01 omarchy-benchmark kernel: PM: hibernation: Registered nosave memory: [mem 0x7de99000-0x7dea1fff]
+Sep 05 21:10:01 omarchy-benchmark kernel: PM: hibernation: Registered nosave memory: [mem 0x7ed3f000-0x7edfffff]
+Sep 05 21:10:01 omarchy-benchmark kernel: PM: hibernation: Registered nosave memory: [mem 0x7f8ed000-0x7fbfefff]
+Sep 05 21:10:01 omarchy-benchmark kernel: PM: hibernation: Registered nosave memory: [mem 0x7fedc000-0xffffffff]
+Sep 05 21:10:01 omarchy-benchmark kernel: [gap 0x80000000-0xdfffffff] available for PCI devices
+Sep 05 21:10:01 omarchy-benchmark kernel: Booting paravirtualized kernel on bare hardware
+Sep 05 21:10:01 omarchy-benchmark kernel: clocksource: refined-jiffies: mask: 0xffffffff max_cycles: 0xffffffff, max_idle_ns: 1910969940391419 ns
+Sep 05 21:10:01 omarchy-benchmark kernel: Zone ranges:
+Sep 05 21:10:01 omarchy-benchmark kernel:   DMA      [mem 0x0000000000001000-0x0000000000ffffff]
+Sep 05 21:10:01 omarchy-benchmark kernel:   DMA32    [mem 0x0000000001000000-0x00000000ffffffff]
+Sep 05 21:10:01 omarchy-benchmark kernel:   Normal   [mem 0x0000000100000000-0x000000027fffffff]
+Sep 05 21:10:01 omarchy-benchmark kernel:   Device   empty
+Sep 05 21:10:01 omarchy-benchmark kernel: Movable zone start for each node
+Sep 05 21:10:01 omarchy-benchmark kernel: Early memory node ranges
+Sep 05 21:10:01 omarchy-benchmark kernel:   node   0: [mem 0x0000000000001000-0x000000000009ffff]
+Sep 05 21:10:01 omarchy-benchmark kernel:   node   0: [mem 0x0000000000100000-0x00000000007fffff]
+Sep 05 21:10:01 omarchy-benchmark kernel:   node   0: [mem 0x0000000000808000-0x000000000080afff]
+Sep 05 21:10:01 omarchy-benchmark kernel:   node   0: [mem 0x000000000080c000-0x000000000080ffff]
+Sep 05 21:10:01 omarchy-benchmark kernel:   node   0: [mem 0x0000000000900000-0x000000007ed3efff]
+Sep 05 21:10:01 omarchy-benchmark kernel:   node   0: [mem 0x000000007ee00000-0x000000007f8ecfff]
+Sep 05 21:10:01 omarchy-benchmark kernel:   node   0: [mem 0x000000007fbff000-0x000000007fedbfff]
+Sep 05 21:10:01 omarchy-benchmark kernel:   node   0: [mem 0x0000000100000000-0x000000027fffffff]
+Sep 05 21:10:01 omarchy-benchmark kernel: Initmem setup node 0 [mem 0x0000000000001000-0x000000027fffffff]
+Sep 05 21:10:01 omarchy-benchmark kernel: On node 0, zone DMA: 1 pages in unavailable ranges
+Sep 05 21:10:01 omarchy-benchmark kernel: On node 0, zone DMA: 96 pages in unavailable ranges
+Sep 05 21:10:01 omarchy-benchmark kernel: On node 0, zone DMA: 8 pages in unavailable ranges
+Sep 05 21:10:01 omarchy-benchmark kernel: On node 0, zone DMA: 1 pages in unavailable ranges
+Sep 05 21:10:01 omarchy-benchmark kernel: On node 0, zone DMA: 240 pages in unavailable ranges
+Sep 05 21:10:01 omarchy-benchmark kernel: On node 0, zone DMA32: 193 pages in unavailable ranges
+Sep 05 21:10:01 omarchy-benchmark kernel: On node 0, zone DMA32: 786 pages in unavailable ranges
+Sep 05 21:10:01 omarchy-benchmark kernel: On node 0, zone Normal: 292 pages in unavailable ranges
+Sep 05 21:10:01 omarchy-benchmark kernel: setup_percpu: NR_CPUS:8192 nr_cpumask_bits:4 nr_cpu_ids:4 nr_node_ids:1
+Sep 05 21:10:01 omarchy-benchmark kernel: percpu: Embedded 63 pages/cpu s221184 r8192 d28672 u524288
+Sep 05 21:10:01 omarchy-benchmark kernel: pcpu-alloc: s221184 r8192 d28672 u524288 alloc=1*2097152
+Sep 05 21:10:01 omarchy-benchmark kernel: pcpu-alloc: [0] 0 1 2 3 
+Sep 05 21:10:01 omarchy-benchmark kernel: Kernel command line: root=PARTUUID=75aa4b6f-24b5-4f4f-ac99-d07d61177e93 zswap.enabled=0 rootflags=subvol=@ rw rootfstype=btrfs  resume=/dev/vda2 resume_offset=1322761 initramfs_async=0 quiet splash loglevel=0 systemd.show_status=false rd.udev.log_level=0 vt.global_cursor_default=0 console=uart,io,0x3f8 console=tty0
+Sep 05 21:10:01 omarchy-benchmark kernel: Unknown kernel command line parameters "splash", will be passed to user space.
+Sep 05 21:10:01 omarchy-benchmark kernel: printk: log buffer data + meta data: 131072 + 557056 = 688128 bytes
+Sep 05 21:10:01 omarchy-benchmark kernel: Dentry cache hash table entries: 1048576 (order: 11, 8388608 bytes, linear)
+Sep 05 21:10:01 omarchy-benchmark kernel: Inode-cache hash table entries: 524288 (order: 10, 4194304 bytes, linear)
+Sep 05 21:10:01 omarchy-benchmark kernel: software IO TLB: area num 4.
+Sep 05 21:10:01 omarchy-benchmark kernel: Fallback order for Node 0: 0 
+Sep 05 21:10:01 omarchy-benchmark kernel: Built 1 zonelists, mobility grouping on.  Total pages: 2095535
+Sep 05 21:10:01 omarchy-benchmark kernel: Policy zone: Normal
+Sep 05 21:10:01 omarchy-benchmark kernel: mem auto-init: stack:all(zero), heap alloc:on, heap free:off
+Sep 05 21:10:01 omarchy-benchmark kernel: SLUB: HWalign=64, Order=0-3, MinObjects=0, CPUs=4, Nodes=1
+Sep 05 21:10:01 omarchy-benchmark kernel: ftrace: allocating 58206 entries in 228 pages
+Sep 05 21:10:01 omarchy-benchmark kernel: ftrace: allocated 228 pages with 4 groups
+Sep 05 21:10:01 omarchy-benchmark kernel: Dynamic Preempt: full
+Sep 05 21:10:01 omarchy-benchmark kernel: rcu: Preemptible hierarchical RCU implementation.
+Sep 05 21:10:01 omarchy-benchmark kernel: rcu:         RCU restricting CPUs from NR_CPUS=8192 to nr_cpu_ids=4.
+Sep 05 21:10:01 omarchy-benchmark kernel: rcu:         RCU priority boosting: priority 1 delay 500 ms.
+Sep 05 21:10:01 omarchy-benchmark kernel:         Trampoline variant of Tasks RCU enabled.
+Sep 05 21:10:01 omarchy-benchmark kernel:         Rude variant of Tasks RCU enabled.
+Sep 05 21:10:01 omarchy-benchmark kernel:         Tracing variant of Tasks RCU enabled.
+Sep 05 21:10:01 omarchy-benchmark kernel: rcu: RCU calculated value of scheduler-enlistment delay is 100 jiffies.
+Sep 05 21:10:01 omarchy-benchmark kernel: rcu: Adjusting geometry for rcu_fanout_leaf=16, nr_cpu_ids=4
+Sep 05 21:10:01 omarchy-benchmark kernel: RCU Tasks: Setting shift to 2 and lim to 1 rcu_task_cb_adjust=1 rcu_task_cpu_ids=4.
+Sep 05 21:10:01 omarchy-benchmark kernel: RCU Tasks Rude: Setting shift to 2 and lim to 1 rcu_task_cb_adjust=1 rcu_task_cpu_ids=4.
+Sep 05 21:10:01 omarchy-benchmark kernel: NR_IRQS: 524544, nr_irqs: 456, preallocated irqs: 16
+Sep 05 21:10:01 omarchy-benchmark kernel: rcu: srcu_init: Setting srcu_struct sizes based on contention.
+Sep 05 21:10:01 omarchy-benchmark kernel: clocksource: jiffies: mask: 0xffffffff max_cycles: 0xffffffff, max_idle_ns: 1911260446275000 ns
+Sep 05 21:10:01 omarchy-benchmark kernel: kfence: initialized - using 2097152 bytes for 255 objects at 0x(____ptrval____)-0x(____ptrval____)
+Sep 05 21:10:01 omarchy-benchmark kernel: Console: colour dummy device 80x25
+Sep 05 21:10:01 omarchy-benchmark kernel: printk: legacy console [tty0] enabled
+Sep 05 21:10:01 omarchy-benchmark kernel: printk: legacy bootconsole [uart0] disabled
+Sep 05 21:10:01 omarchy-benchmark kernel: printk: legacy console [ttyS0] enabled
+Sep 05 21:10:01 omarchy-benchmark kernel: ACPI: Core revision 20251212
+Sep 05 21:10:01 omarchy-benchmark kernel: clocksource: hpet: mask: 0xffffffff max_cycles: 0xffffffff, max_idle_ns: 19112604467 ns
+Sep 05 21:10:01 omarchy-benchmark kernel: APIC: Switch to symmetric I/O mode setup
+Sep 05 21:10:01 omarchy-benchmark kernel: ..TIMER: vector=0x30 apic1=0 pin1=2 apic2=-1 pin2=-1
+Sep 05 21:10:01 omarchy-benchmark kernel: clocksource: tsc-early: mask: 0xffffffffffffffff max_cycles: 0x256bb8e6fcf, max_idle_ns: 440795286358 ns
+Sep 05 21:10:01 omarchy-benchmark kernel: Calibrating delay loop (skipped), value calculated using timer frequency.. 5192.13 BogoMIPS (lpj=2596067)
+Sep 05 21:10:01 omarchy-benchmark kernel: x86/cpu: User Mode Instruction Prevention (UMIP) activated
+Sep 05 21:10:01 omarchy-benchmark kernel: Last level iTLB entries: 4KB 0, 2MB 0, 4MB 0
+Sep 05 21:10:01 omarchy-benchmark kernel: Last level dTLB entries: 4KB 0, 2MB 0, 4MB 0, 1GB 0
+Sep 05 21:10:01 omarchy-benchmark kernel: mitigations: Enabled attack vectors: user_kernel, user_user, guest_host, guest_guest, SMT mitigations: auto
+Sep 05 21:10:01 omarchy-benchmark kernel: Speculative Store Bypass: Vulnerable
+Sep 05 21:10:01 omarchy-benchmark kernel: Spectre V2 : Mitigation: Retpolines
+Sep 05 21:10:01 omarchy-benchmark kernel: Spectre V1 : Mitigation: usercopy/swapgs barriers and __user pointer sanitization
+Sep 05 21:10:01 omarchy-benchmark kernel: Spectre V2 : Spectre v2 / SpectreRSB: Filling RSB on context switch and VMEXIT
+Sep 05 21:10:01 omarchy-benchmark kernel: x86/fpu: Supporting XSAVE feature 0x001: 'x87 floating point registers'
+Sep 05 21:10:01 omarchy-benchmark kernel: x86/fpu: Supporting XSAVE feature 0x002: 'SSE registers'
+Sep 05 21:10:01 omarchy-benchmark kernel: x86/fpu: Supporting XSAVE feature 0x004: 'AVX registers'
+Sep 05 21:10:01 omarchy-benchmark kernel: x86/fpu: Supporting XSAVE feature 0x008: 'MPX bounds registers'
+Sep 05 21:10:01 omarchy-benchmark kernel: x86/fpu: Supporting XSAVE feature 0x010: 'MPX CSR'
+Sep 05 21:10:01 omarchy-benchmark kernel: x86/fpu: Supporting XSAVE feature 0x200: 'Protection Keys User registers'
+Sep 05 21:10:01 omarchy-benchmark kernel: x86/fpu: xstate_offset[2]:  576, xstate_sizes[2]:  256
+Sep 05 21:10:01 omarchy-benchmark kernel: x86/fpu: xstate_offset[3]:  960, xstate_sizes[3]:   64
+Sep 05 21:10:01 omarchy-benchmark kernel: x86/fpu: xstate_offset[4]: 1024, xstate_sizes[4]:   64
+Sep 05 21:10:01 omarchy-benchmark kernel: x86/fpu: xstate_offset[9]: 2688, xstate_sizes[9]:    8
+Sep 05 21:10:01 omarchy-benchmark kernel: x86/fpu: Enabled xstate features 0x21f, context size is 2696 bytes, using 'standard' format.
+Sep 05 21:10:01 omarchy-benchmark kernel: pid_max: default: 32768 minimum: 301
+Sep 05 21:10:01 omarchy-benchmark kernel: landlock: Up and running.
+Sep 05 21:10:01 omarchy-benchmark kernel: Yama: becoming mindful.
+Sep 05 21:10:01 omarchy-benchmark kernel: LSM support for eBPF active
+Sep 05 21:10:01 omarchy-benchmark kernel: Mount-cache hash table entries: 16384 (order: 5, 131072 bytes, linear)
+Sep 05 21:10:01 omarchy-benchmark kernel: Mountpoint-cache hash table entries: 16384 (order: 5, 131072 bytes, linear)
+Sep 05 21:10:01 omarchy-benchmark kernel: VFS: Finished mounting rootfs on nullfs
+Sep 05 21:10:01 omarchy-benchmark kernel: smpboot: CPU0: AMD QEMU TCG CPU version 2.5+ (family: 0x6, model: 0x6, stepping: 0x3)
+Sep 05 21:10:01 omarchy-benchmark kernel: Performance Events: PMU not available due to virtualization, using software events only.
+Sep 05 21:10:01 omarchy-benchmark kernel: signal: max sigframe size: 3632
+Sep 05 21:10:01 omarchy-benchmark kernel: rcu: Hierarchical SRCU implementation.
+Sep 05 21:10:01 omarchy-benchmark kernel: rcu:         Max phase no-delay instances is 400.
+Sep 05 21:10:01 omarchy-benchmark kernel: Timer migration: 1 hierarchy levels; 8 children per group; 1 crossnode level
+Sep 05 21:10:01 omarchy-benchmark kernel: NMI watchdog: Perf NMI watchdog permanently disabled
+Sep 05 21:10:01 omarchy-benchmark kernel: smp: Bringing up secondary CPUs ...
+Sep 05 21:10:01 omarchy-benchmark kernel: smpboot: x86: Booting SMP configuration:
+Sep 05 21:10:01 omarchy-benchmark kernel: .... node  #0, CPUs:      #1 #2 #3
+Sep 05 21:10:01 omarchy-benchmark kernel: smp: Brought up 1 node, 4 CPUs
+Sep 05 21:10:01 omarchy-benchmark kernel: smpboot: Total of 4 processors activated (20847.70 BogoMIPS)
+Sep 05 21:10:01 omarchy-benchmark kernel: Memory: 8039056K/8382140K available (22034K kernel code, 3015K rwdata, 17504K rodata, 4908K init, 5152K bss, 336768K reserved, 0K cma-reserved)
+Sep 05 21:10:01 omarchy-benchmark kernel: devtmpfs: initialized
+Sep 05 21:10:01 omarchy-benchmark kernel: x86/mm: Memory block size: 128MB
+Sep 05 21:10:01 omarchy-benchmark kernel: ACPI: PM: Registering ACPI NVS region [mem 0x00800000-0x00807fff] (32768 bytes)
+Sep 05 21:10:01 omarchy-benchmark kernel: ACPI: PM: Registering ACPI NVS region [mem 0x0080b000-0x0080bfff] (4096 bytes)
+Sep 05 21:10:01 omarchy-benchmark kernel: ACPI: PM: Registering ACPI NVS region [mem 0x00810000-0x008fffff] (983040 bytes)
+Sep 05 21:10:01 omarchy-benchmark kernel: ACPI: PM: Registering ACPI NVS region [mem 0x7fb7f000-0x7fbfefff] (524288 bytes)
+Sep 05 21:10:01 omarchy-benchmark kernel: ACPI: PM: Registering ACPI NVS region [mem 0x7ff60000-0x7fffffff] (655360 bytes)
+Sep 05 21:10:01 omarchy-benchmark kernel: posixtimers hash table entries: 2048 (order: 3, 32768 bytes, linear)
+Sep 05 21:10:01 omarchy-benchmark kernel: futex hash table entries: 1024 (65536 bytes on 1 NUMA nodes, total 64 KiB, linear).
+Sep 05 21:10:01 omarchy-benchmark kernel: xor: automatically using best checksumming function   avx       
+Sep 05 21:10:01 omarchy-benchmark kernel: PM: RTC time: 21:09:46, date: 2026-09-05
+Sep 05 21:10:01 omarchy-benchmark kernel: NET: Registered PF_NETLINK/PF_ROUTE protocol family
+Sep 05 21:10:01 omarchy-benchmark kernel: DMA: preallocated 1024 KiB GFP_KERNEL pool for atomic allocations
+Sep 05 21:10:01 omarchy-benchmark kernel: DMA: preallocated 1024 KiB GFP_KERNEL|GFP_DMA pool for atomic allocations
+Sep 05 21:10:01 omarchy-benchmark kernel: DMA: preallocated 1024 KiB GFP_KERNEL|GFP_DMA32 pool for atomic allocations
+Sep 05 21:10:01 omarchy-benchmark kernel: audit: initializing netlink subsys (disabled)
+Sep 05 21:10:01 omarchy-benchmark kernel: audit: type=2000 audit(1788642585.834:1): state=initialized audit_enabled=0 res=1
+Sep 05 21:10:01 omarchy-benchmark kernel: thermal_sys: Registered thermal governor 'fair_share'
+Sep 05 21:10:01 omarchy-benchmark kernel: thermal_sys: Registered thermal governor 'bang_bang'
+Sep 05 21:10:01 omarchy-benchmark kernel: thermal_sys: Registered thermal governor 'step_wise'
+Sep 05 21:10:01 omarchy-benchmark kernel: thermal_sys: Registered thermal governor 'user_space'
+Sep 05 21:10:01 omarchy-benchmark kernel: thermal_sys: Registered thermal governor 'power_allocator'
+Sep 05 21:10:01 omarchy-benchmark kernel: cpuidle: using governor ladder
+Sep 05 21:10:01 omarchy-benchmark kernel: cpuidle: using governor menu
+Sep 05 21:10:01 omarchy-benchmark kernel: Freeing SMP alternatives memory: 56K
+Sep 05 21:10:01 omarchy-benchmark kernel: efi: Freeing EFI boot services memory: 43620K
+Sep 05 21:10:01 omarchy-benchmark kernel: acpiphp: ACPI Hot Plug PCI Controller Driver version: 0.5
+Sep 05 21:10:01 omarchy-benchmark kernel: PCI: ECAM [mem 0xe0000000-0xefffffff] (base 0xe0000000) for domain 0000 [bus 00-ff]
+Sep 05 21:10:01 omarchy-benchmark kernel: PCI: Using configuration type 1 for base access
+Sep 05 21:10:01 omarchy-benchmark kernel: mtrr: your CPUs had inconsistent fixed MTRR settings
+Sep 05 21:10:01 omarchy-benchmark kernel: mtrr: your CPUs had inconsistent variable MTRR settings
+Sep 05 21:10:01 omarchy-benchmark kernel: mtrr: your CPUs had inconsistent MTRRdefType settings
+Sep 05 21:10:01 omarchy-benchmark kernel: mtrr: probably your BIOS does not setup all CPUs.
+Sep 05 21:10:01 omarchy-benchmark kernel: mtrr: corrected configuration.
+Sep 05 21:10:01 omarchy-benchmark kernel: virt/tdx: TDX not supported by the host platform
+Sep 05 21:10:01 omarchy-benchmark kernel: kprobes: kprobe jump-optimization is enabled. All kprobes are optimized if possible.
+Sep 05 21:10:01 omarchy-benchmark kernel: HugeTLB: registered 1.00 GiB page size, pre-allocated 0 pages
+Sep 05 21:10:01 omarchy-benchmark kernel: HugeTLB: 16380 KiB vmemmap can be freed for a 1.00 GiB page
+Sep 05 21:10:01 omarchy-benchmark kernel: HugeTLB: registered 2.00 MiB page size, pre-allocated 0 pages
+Sep 05 21:10:01 omarchy-benchmark kernel: HugeTLB: 28 KiB vmemmap can be freed for a 2.00 MiB page
+Sep 05 21:10:01 omarchy-benchmark kernel: raid6: skipped pq benchmark and selected avx2x4
+Sep 05 21:10:01 omarchy-benchmark kernel: raid6: using avx2x2 recovery algorithm
+Sep 05 21:10:01 omarchy-benchmark kernel: ACPI: Added _OSI(Module Device)
+Sep 05 21:10:01 omarchy-benchmark kernel: ACPI: Added _OSI(Processor Device)
+Sep 05 21:10:01 omarchy-benchmark kernel: ACPI: Added _OSI(Processor Aggregator Device)
+Sep 05 21:10:01 omarchy-benchmark kernel: ACPI: 1 ACPI AML tables successfully acquired and loaded
+Sep 05 21:10:01 omarchy-benchmark kernel: ACPI: \_SB_: platform _OSC: OS support mask [006e7eff]
+Sep 05 21:10:01 omarchy-benchmark kernel: ACPI: Interpreter enabled
+Sep 05 21:10:01 omarchy-benchmark kernel: ACPI: PM: (supports S0 S3 S4 S5)
+Sep 05 21:10:01 omarchy-benchmark kernel: ACPI: Using IOAPIC for interrupt routing
+Sep 05 21:10:01 omarchy-benchmark kernel: PCI: Using host bridge windows from ACPI; if necessary, use "pci=nocrs" and report a bug
+Sep 05 21:10:01 omarchy-benchmark kernel: PCI: Ignoring E820 reservations for host bridge windows
+Sep 05 21:10:01 omarchy-benchmark kernel: ACPI: Enabled 2 GPEs in block 00 to 3F
+Sep 05 21:10:01 omarchy-benchmark kernel: ACPI: PCI Root Bridge [PCI0] (domain 0000 [bus 00-ff])
+Sep 05 21:10:01 omarchy-benchmark kernel: acpi PNP0A08:00: _OSC: OS supports [ExtendedConfig ASPM ClockPM Segments MSI EDR HPX-Type3]
+Sep 05 21:10:01 omarchy-benchmark kernel: acpi PNP0A08:00: _OSC: platform does not support [PCIeHotplug LTR DPC]
+Sep 05 21:10:01 omarchy-benchmark kernel: acpi PNP0A08:00: _OSC: OS now controls [SHPCHotplug PME AER PCIeCapability]
+Sep 05 21:10:01 omarchy-benchmark kernel: PCI host bridge to bus 0000:00
+Sep 05 21:10:01 omarchy-benchmark kernel: pci_bus 0000:00: root bus resource [io  0x0000-0x0cf7 window]
+Sep 05 21:10:01 omarchy-benchmark kernel: pci_bus 0000:00: root bus resource [io  0x0d00-0xffff window]
+Sep 05 21:10:01 omarchy-benchmark kernel: pci_bus 0000:00: root bus resource [mem 0x000a0000-0x000bffff window]
+Sep 05 21:10:01 omarchy-benchmark kernel: pci_bus 0000:00: root bus resource [mem 0x80000000-0xdfffffff window]
+Sep 05 21:10:01 omarchy-benchmark kernel: pci_bus 0000:00: root bus resource [mem 0xf0000000-0xfebfffff window]
+Sep 05 21:10:01 omarchy-benchmark kernel: pci_bus 0000:00: root bus resource [mem 0xc000000000-0xc7ffffffff window]
+Sep 05 21:10:01 omarchy-benchmark kernel: pci_bus 0000:00: root bus resource [bus 00-ff]
+Sep 05 21:10:01 omarchy-benchmark kernel: pci 0000:00:00.0: [8086:29c0] type 00 class 0x060000 conventional PCI endpoint
+Sep 05 21:10:01 omarchy-benchmark kernel: pci 0000:00:01.0: [1af4:1001] type 00 class 0x010000 conventional PCI endpoint
+Sep 05 21:10:01 omarchy-benchmark kernel: pci 0000:00:01.0: BAR 0 [io  0x6000-0x607f]
+Sep 05 21:10:01 omarchy-benchmark kernel: pci 0000:00:01.0: BAR 1 [mem 0x80815000-0x80815fff]
+Sep 05 21:10:01 omarchy-benchmark kernel: pci 0000:00:01.0: BAR 4 [mem 0xc000000000-0xc000003fff 64bit pref]
+Sep 05 21:10:01 omarchy-benchmark kernel: pci 0000:00:02.0: [1af4:1050] type 00 class 0x030000 conventional PCI endpoint
+Sep 05 21:10:01 omarchy-benchmark kernel: pci 0000:00:02.0: BAR 0 [mem 0x80000000-0x807fffff pref]
+Sep 05 21:10:01 omarchy-benchmark kernel: pci 0000:00:02.0: BAR 2 [mem 0xc000004000-0xc000007fff 64bit pref]
+Sep 05 21:10:01 omarchy-benchmark kernel: pci 0000:00:02.0: BAR 4 [mem 0x80814000-0x80814fff]
+Sep 05 21:10:01 omarchy-benchmark kernel: pci 0000:00:02.0: ROM [mem 0xffff0000-0xffffffff pref]
+Sep 05 21:10:01 omarchy-benchmark kernel: pci 0000:00:02.0: Video device with shadowed ROM at [mem 0x000c0000-0x000dffff]
+Sep 05 21:10:01 omarchy-benchmark kernel: pci 0000:00:03.0: [1af4:1005] type 00 class 0x00ff00 conventional PCI endpoint
+Sep 05 21:10:01 omarchy-benchmark kernel: pci 0000:00:03.0: BAR 0 [io  0x6160-0x617f]
+Sep 05 21:10:01 omarchy-benchmark kernel: pci 0000:00:03.0: BAR 1 [mem 0x80813000-0x80813fff]
+Sep 05 21:10:01 omarchy-benchmark kernel: pci 0000:00:03.0: BAR 4 [mem 0xc000008000-0xc00000bfff 64bit pref]
+Sep 05 21:10:01 omarchy-benchmark kernel: pci 0000:00:04.0: [1af4:1000] type 00 class 0x020000 conventional PCI endpoint
+Sep 05 21:10:01 omarchy-benchmark kernel: pci 0000:00:04.0: BAR 0 [io  0x6140-0x615f]
+Sep 05 21:10:01 omarchy-benchmark kernel: pci 0000:00:04.0: BAR 1 [mem 0x80812000-0x80812fff]
+Sep 05 21:10:01 omarchy-benchmark kernel: pci 0000:00:04.0: BAR 4 [mem 0xc00000c000-0xc00000ffff 64bit pref]
+Sep 05 21:10:01 omarchy-benchmark kernel: pci 0000:00:1d.0: [8086:2934] type 00 class 0x0c0300 conventional PCI endpoint
+Sep 05 21:10:01 omarchy-benchmark kernel: pci 0000:00:1d.0: BAR 4 [io  0x6120-0x613f]
+Sep 05 21:10:01 omarchy-benchmark kernel: pci 0000:00:1d.1: [8086:2935] type 00 class 0x0c0300 conventional PCI endpoint
+Sep 05 21:10:01 omarchy-benchmark kernel: pci 0000:00:1d.1: BAR 4 [io  0x6100-0x611f]
+Sep 05 21:10:01 omarchy-benchmark kernel: pci 0000:00:1d.2: [8086:2936] type 00 class 0x0c0300 conventional PCI endpoint
+Sep 05 21:10:01 omarchy-benchmark kernel: pci 0000:00:1d.2: BAR 4 [io  0x60e0-0x60ff]
+Sep 05 21:10:01 omarchy-benchmark kernel: pci 0000:00:1d.7: [8086:293a] type 00 class 0x0c0320 conventional PCI endpoint
+Sep 05 21:10:01 omarchy-benchmark kernel: pci 0000:00:1d.7: BAR 0 [mem 0x80811000-0x80811fff]
+Sep 05 21:10:01 omarchy-benchmark kernel: pci 0000:00:1f.0: [8086:2918] type 00 class 0x060100 conventional PCI endpoint
+Sep 05 21:10:01 omarchy-benchmark kernel: pci 0000:00:1f.0: quirk: [io  0x0600-0x067f] claimed by ICH6 ACPI/GPIO/TCO
+Sep 05 21:10:01 omarchy-benchmark kernel: pci 0000:00:1f.2: [8086:2922] type 00 class 0x010601 conventional PCI endpoint
+Sep 05 21:10:01 omarchy-benchmark kernel: pci 0000:00:1f.2: BAR 4 [io  0x60c0-0x60df]
+Sep 05 21:10:01 omarchy-benchmark kernel: pci 0000:00:1f.2: BAR 5 [mem 0x80810000-0x80810fff]
+Sep 05 21:10:01 omarchy-benchmark kernel: pci 0000:00:1f.3: [8086:2930] type 00 class 0x0c0500 conventional PCI endpoint
+Sep 05 21:10:01 omarchy-benchmark kernel: pci 0000:00:1f.3: BAR 4 [io  0x6080-0x60bf]
+Sep 05 21:10:01 omarchy-benchmark kernel: ACPI: PCI: Interrupt link LNKA configured for IRQ 10
+Sep 05 21:10:01 omarchy-benchmark kernel: ACPI: PCI: Interrupt link LNKB configured for IRQ 10
+Sep 05 21:10:01 omarchy-benchmark kernel: ACPI: PCI: Interrupt link LNKC configured for IRQ 11
+Sep 05 21:10:01 omarchy-benchmark kernel: ACPI: PCI: Interrupt link LNKD configured for IRQ 11
+Sep 05 21:10:01 omarchy-benchmark kernel: ACPI: PCI: Interrupt link LNKE configured for IRQ 10
+Sep 05 21:10:01 omarchy-benchmark kernel: ACPI: PCI: Interrupt link LNKF configured for IRQ 10
+Sep 05 21:10:01 omarchy-benchmark kernel: ACPI: PCI: Interrupt link LNKG configured for IRQ 11
+Sep 05 21:10:01 omarchy-benchmark kernel: ACPI: PCI: Interrupt link LNKH configured for IRQ 11
+Sep 05 21:10:01 omarchy-benchmark kernel: ACPI: PCI: Interrupt link GSIA configured for IRQ 16
+Sep 05 21:10:01 omarchy-benchmark kernel: ACPI: PCI: Interrupt link GSIB configured for IRQ 17
+Sep 05 21:10:01 omarchy-benchmark kernel: ACPI: PCI: Interrupt link GSIC configured for IRQ 18
+Sep 05 21:10:01 omarchy-benchmark kernel: ACPI: PCI: Interrupt link GSID configured for IRQ 19
+Sep 05 21:10:01 omarchy-benchmark kernel: ACPI: PCI: Interrupt link GSIE configured for IRQ 20
+Sep 05 21:10:01 omarchy-benchmark kernel: ACPI: PCI: Interrupt link GSIF configured for IRQ 21
+Sep 05 21:10:01 omarchy-benchmark kernel: ACPI: PCI: Interrupt link GSIG configured for IRQ 22
+Sep 05 21:10:01 omarchy-benchmark kernel: ACPI: PCI: Interrupt link GSIH configured for IRQ 23
+Sep 05 21:10:01 omarchy-benchmark kernel: iommu: Default domain type: Translated
+Sep 05 21:10:01 omarchy-benchmark kernel: iommu: DMA domain TLB invalidation policy: lazy mode
+Sep 05 21:10:01 omarchy-benchmark kernel: SCSI subsystem initialized
+Sep 05 21:10:01 omarchy-benchmark kernel: libata version 3.00 loaded.
+Sep 05 21:10:01 omarchy-benchmark kernel: ACPI: bus type USB registered
+Sep 05 21:10:01 omarchy-benchmark kernel: usbcore: registered new interface driver usbfs
+Sep 05 21:10:01 omarchy-benchmark kernel: usbcore: registered new interface driver hub
+Sep 05 21:10:01 omarchy-benchmark kernel: usbcore: registered new device driver usb
+Sep 05 21:10:01 omarchy-benchmark kernel: EDAC MC: Ver: 3.0.0
+Sep 05 21:10:01 omarchy-benchmark kernel: efivars: Registered efivars operations
+Sep 05 21:10:01 omarchy-benchmark kernel: NetLabel: Initializing
+Sep 05 21:10:01 omarchy-benchmark kernel: NetLabel:  domain hash size = 128
+Sep 05 21:10:01 omarchy-benchmark kernel: NetLabel:  protocols = UNLABELED CIPSOv4 CALIPSO
+Sep 05 21:10:01 omarchy-benchmark kernel: NetLabel:  unlabeled traffic allowed by default
+Sep 05 21:10:01 omarchy-benchmark kernel: mctp: management component transport protocol core
+Sep 05 21:10:01 omarchy-benchmark kernel: NET: Registered PF_MCTP protocol family
+Sep 05 21:10:01 omarchy-benchmark kernel: PCI: Using ACPI for IRQ routing
+Sep 05 21:10:01 omarchy-benchmark kernel: PCI: pci_cache_line_size set to 64 bytes
+Sep 05 21:10:01 omarchy-benchmark kernel: e820: register RAM buffer resource [mem 0x0080b000-0x008fffff]
+Sep 05 21:10:01 omarchy-benchmark kernel: e820: register RAM buffer resource [mem 0x00810000-0x008fffff]
+Sep 05 21:10:01 omarchy-benchmark kernel: e820: register RAM buffer resource [mem 0x7de99000-0x7fffffff]
+Sep 05 21:10:01 omarchy-benchmark kernel: e820: register RAM buffer resource [mem 0x7ed3f000-0x7fffffff]
+Sep 05 21:10:01 omarchy-benchmark kernel: e820: register RAM buffer resource [mem 0x7f8ed000-0x7fffffff]
+Sep 05 21:10:01 omarchy-benchmark kernel: e820: register RAM buffer resource [mem 0x7fedc000-0x7fffffff]
+Sep 05 21:10:01 omarchy-benchmark kernel: pci 0000:00:02.0: vgaarb: setting as boot VGA device
+Sep 05 21:10:01 omarchy-benchmark kernel: pci 0000:00:02.0: vgaarb: bridge control possible
+Sep 05 21:10:01 omarchy-benchmark kernel: pci 0000:00:02.0: vgaarb: VGA device added: decodes=io+mem,owns=io+mem,locks=none
+Sep 05 21:10:01 omarchy-benchmark kernel: vgaarb: loaded
+Sep 05 21:10:01 omarchy-benchmark kernel: hpet0: at MMIO 0xfed00000, IRQs 2, 8, 0
+Sep 05 21:10:01 omarchy-benchmark kernel: hpet0: 3 comparators, 64-bit 100.000000 MHz counter
+Sep 05 21:10:01 omarchy-benchmark kernel: clocksource: Switched to clocksource tsc-early
+Sep 05 21:10:01 omarchy-benchmark kernel: VFS: Disk quotas dquot_6.6.0
+Sep 05 21:10:01 omarchy-benchmark kernel: VFS: Dquot-cache hash table entries: 512 (order 0, 4096 bytes)
+Sep 05 21:10:01 omarchy-benchmark kernel: acpi PNP0C01:00: Reserved [mem 0xe0000000-0xefffffff]
+Sep 05 21:10:01 omarchy-benchmark kernel: pnp: PnP ACPI init
+Sep 05 21:10:01 omarchy-benchmark kernel: pnp: PnP ACPI: found 4 devices
+Sep 05 21:10:01 omarchy-benchmark kernel: clocksource: acpi_pm: mask: 0xffffff max_cycles: 0xffffff, max_idle_ns: 2085701024 ns
+Sep 05 21:10:01 omarchy-benchmark kernel: NET: Registered PF_INET protocol family
+Sep 05 21:10:01 omarchy-benchmark kernel: IP idents hash table entries: 131072 (order: 8, 1048576 bytes, linear)
+Sep 05 21:10:01 omarchy-benchmark kernel: tcp_listen_portaddr_hash hash table entries: 4096 (order: 4, 65536 bytes, linear)
+Sep 05 21:10:01 omarchy-benchmark kernel: Table-perturb hash table entries: 65536 (order: 6, 262144 bytes, linear)
+Sep 05 21:10:01 omarchy-benchmark kernel: TCP established hash table entries: 65536 (order: 7, 524288 bytes, linear)
+Sep 05 21:10:01 omarchy-benchmark kernel: TCP bind hash table entries: 65536 (order: 9, 2097152 bytes, linear)
+Sep 05 21:10:01 omarchy-benchmark kernel: TCP: Hash tables configured (established 65536 bind 65536)
+Sep 05 21:10:01 omarchy-benchmark kernel: MPTCP token hash table entries: 8192 (order: 6, 196608 bytes, linear)
+Sep 05 21:10:01 omarchy-benchmark kernel: UDP hash table entries: 4096 (order: 6, 262144 bytes, linear)
+Sep 05 21:10:01 omarchy-benchmark kernel: NET: Registered PF_UNIX/PF_LOCAL protocol family
+Sep 05 21:10:01 omarchy-benchmark kernel: NET: Registered PF_XDP protocol family
+Sep 05 21:10:01 omarchy-benchmark kernel: pci_bus 0000:00: resource 4 [io  0x0000-0x0cf7 window]
+Sep 05 21:10:01 omarchy-benchmark kernel: pci_bus 0000:00: resource 5 [io  0x0d00-0xffff window]
+Sep 05 21:10:01 omarchy-benchmark kernel: pci_bus 0000:00: resource 6 [mem 0x000a0000-0x000bffff window]
+Sep 05 21:10:01 omarchy-benchmark kernel: pci_bus 0000:00: resource 7 [mem 0x80000000-0xdfffffff window]
+Sep 05 21:10:01 omarchy-benchmark kernel: pci_bus 0000:00: resource 8 [mem 0xf0000000-0xfebfffff window]
+Sep 05 21:10:01 omarchy-benchmark kernel: pci_bus 0000:00: resource 9 [mem 0xc000000000-0xc7ffffffff window]
+Sep 05 21:10:01 omarchy-benchmark kernel: ACPI: \_SB_.GSIA: Enabled at IRQ 16
+Sep 05 21:10:01 omarchy-benchmark kernel: pci 0000:00:1d.0: quirk_usb_early_handoff+0x0/0x830 took 12118 usecs
+Sep 05 21:10:01 omarchy-benchmark kernel: ACPI: \_SB_.GSIB: Enabled at IRQ 17
+Sep 05 21:10:01 omarchy-benchmark kernel: ACPI: \_SB_.GSIC: Enabled at IRQ 18
+Sep 05 21:10:01 omarchy-benchmark kernel: ACPI: \_SB_.GSID: Enabled at IRQ 19
+Sep 05 21:10:01 omarchy-benchmark kernel: PCI: CLS 0 bytes, default 64
+Sep 05 21:10:01 omarchy-benchmark kernel: Trying to unpack rootfs image as initramfs...
+Sep 05 21:10:01 omarchy-benchmark kernel: Freeing initrd memory: 18684K
+Sep 05 21:10:01 omarchy-benchmark kernel: PCI-DMA: Using software bounce buffering for IO (SWIOTLB)
+Sep 05 21:10:01 omarchy-benchmark kernel: software IO TLB: mapped [mem 0x0000000077f5d000-0x000000007bf5d000] (64MB)
+Sep 05 21:10:01 omarchy-benchmark kernel: Initialise system trusted keyrings
+Sep 05 21:10:01 omarchy-benchmark kernel: Key type blacklist registered
+Sep 05 21:10:01 omarchy-benchmark kernel: workingset: timestamp_bits=36 (anon: 32) max_order=21 bucket_order=0 (anon: 0)
+Sep 05 21:10:01 omarchy-benchmark kernel: fuse: init (API version 7.45)
+Sep 05 21:10:01 omarchy-benchmark kernel: integrity: Platform Keyring initialized
+Sep 05 21:10:01 omarchy-benchmark kernel: integrity: Machine keyring initialized
+Sep 05 21:10:01 omarchy-benchmark kernel: Key type asymmetric registered
+Sep 05 21:10:01 omarchy-benchmark kernel: Asymmetric key parser 'x509' registered
+Sep 05 21:10:01 omarchy-benchmark kernel: Block layer SCSI generic (bsg) driver version 0.4 loaded (major 245)
+Sep 05 21:10:01 omarchy-benchmark kernel: io scheduler mq-deadline registered
+Sep 05 21:10:01 omarchy-benchmark kernel: io scheduler kyber registered
+Sep 05 21:10:01 omarchy-benchmark kernel: io scheduler bfq registered
+Sep 05 21:10:01 omarchy-benchmark kernel: ledtrig-cpu: registered to indicate activity on CPUs
+Sep 05 21:10:01 omarchy-benchmark kernel: input: Power Button as /devices/platform/LNXPWRBN:00/input/input0
+Sep 05 21:10:01 omarchy-benchmark kernel: ACPI: button: Power Button [PWRF]
+Sep 05 21:10:01 omarchy-benchmark kernel: ACPI: \_SB_.GSIF: Enabled at IRQ 21
+Sep 05 21:10:01 omarchy-benchmark kernel: ACPI: \_SB_.GSIG: Enabled at IRQ 22
+Sep 05 21:10:01 omarchy-benchmark kernel: ACPI: \_SB_.GSIH: Enabled at IRQ 23
+Sep 05 21:10:01 omarchy-benchmark kernel: ACPI: \_SB_.GSIE: Enabled at IRQ 20
+Sep 05 21:10:01 omarchy-benchmark kernel: Serial: 8250/16550 driver, 32 ports, IRQ sharing enabled
+Sep 05 21:10:01 omarchy-benchmark kernel: 00:03: ttyS0 at I/O 0x3f8 (irq = 4, base_baud = 115200) is a 16550A
+Sep 05 21:10:01 omarchy-benchmark kernel: Non-volatile memory driver v1.3
+Sep 05 21:10:01 omarchy-benchmark kernel: ACPI: bus type drm_connector registered
+Sep 05 21:10:01 omarchy-benchmark kernel: virtio_blk virtio0: 4/0/0 default/read/poll queues
+Sep 05 21:10:01 omarchy-benchmark kernel: virtio_blk virtio0: [vda] 83886080 512-byte logical blocks (42.9 GB/40.0 GiB)
+Sep 05 21:10:01 omarchy-benchmark kernel:  vda: vda1 vda2
+Sep 05 21:10:01 omarchy-benchmark kernel: ahci 0000:00:1f.2: AHCI vers 0001.0000, 32 command slots, 1.5 Gbps, SATA mode
+Sep 05 21:10:02 omarchy-benchmark kernel: ahci 0000:00:1f.2: 6/6 ports implemented (port mask 0x3f)
+Sep 05 21:10:02 omarchy-benchmark kernel: ahci 0000:00:1f.2: flags: 64bit ncq only 
+Sep 05 21:10:02 omarchy-benchmark kernel: scsi host0: ahci
+Sep 05 21:10:02 omarchy-benchmark kernel: scsi host1: ahci
+Sep 05 21:10:02 omarchy-benchmark kernel: scsi host2: ahci
+Sep 05 21:10:02 omarchy-benchmark kernel: scsi host3: ahci
+Sep 05 21:10:02 omarchy-benchmark kernel: scsi host4: ahci
+Sep 05 21:10:02 omarchy-benchmark kernel: scsi host5: ahci
+Sep 05 21:10:02 omarchy-benchmark kernel: ata1: SATA max UDMA/133 abar m4096@0x80810000 port 0x80810100 irq 29 lpm-pol 1
+Sep 05 21:10:02 omarchy-benchmark kernel: ata2: SATA max UDMA/133 abar m4096@0x80810000 port 0x80810180 irq 29 lpm-pol 1
+Sep 05 21:10:02 omarchy-benchmark kernel: ata3: SATA max UDMA/133 abar m4096@0x80810000 port 0x80810200 irq 29 lpm-pol 1
+Sep 05 21:10:02 omarchy-benchmark kernel: ata4: SATA max UDMA/133 abar m4096@0x80810000 port 0x80810280 irq 29 lpm-pol 1
+Sep 05 21:10:02 omarchy-benchmark kernel: ata5: SATA max UDMA/133 abar m4096@0x80810000 port 0x80810300 irq 29 lpm-pol 1
+Sep 05 21:10:02 omarchy-benchmark kernel: ata6: SATA max UDMA/133 abar m4096@0x80810000 port 0x80810380 irq 29 lpm-pol 1
+Sep 05 21:10:02 omarchy-benchmark kernel: uhci_hcd 0000:00:1d.0: UHCI Host Controller
+Sep 05 21:10:02 omarchy-benchmark kernel: uhci_hcd 0000:00:1d.0: new USB bus registered, assigned bus number 1
+Sep 05 21:10:02 omarchy-benchmark kernel: uhci_hcd 0000:00:1d.0: detected 2 ports
+Sep 05 21:10:02 omarchy-benchmark kernel: uhci_hcd 0000:00:1d.0: irq 16, io port 0x00006120
+Sep 05 21:10:02 omarchy-benchmark kernel: usb usb1: New USB device found, idVendor=1d6b, idProduct=0001, bcdDevice= 7.01
+Sep 05 21:10:02 omarchy-benchmark kernel: usb usb1: New USB device strings: Mfr=3, Product=2, SerialNumber=1
+Sep 05 21:10:02 omarchy-benchmark kernel: usb usb1: Product: UHCI Host Controller
+Sep 05 21:10:02 omarchy-benchmark kernel: usb usb1: Manufacturer: Linux 7.1.9-arch1-2 uhci_hcd
+Sep 05 21:10:02 omarchy-benchmark kernel: usb usb1: SerialNumber: 0000:00:1d.0
+Sep 05 21:10:02 omarchy-benchmark kernel: hub 1-0:1.0: USB hub found
+Sep 05 21:10:02 omarchy-benchmark kernel: hub 1-0:1.0: 2 ports detected
+Sep 05 21:10:02 omarchy-benchmark kernel: ehci-pci 0000:00:1d.7: EHCI Host Controller
+Sep 05 21:10:02 omarchy-benchmark kernel: ehci-pci 0000:00:1d.7: new USB bus registered, assigned bus number 2
+Sep 05 21:10:02 omarchy-benchmark kernel: ehci-pci 0000:00:1d.7: irq 19, io mem 0x80811000
+Sep 05 21:10:02 omarchy-benchmark kernel: ehci-pci 0000:00:1d.7: USB 2.0 started, EHCI 1.00
+Sep 05 21:10:02 omarchy-benchmark kernel: usb usb2: New USB device found, idVendor=1d6b, idProduct=0002, bcdDevice= 7.01
+Sep 05 21:10:02 omarchy-benchmark kernel: usb usb2: New USB device strings: Mfr=3, Product=2, SerialNumber=1
+Sep 05 21:10:02 omarchy-benchmark kernel: usb usb2: Product: EHCI Host Controller
+Sep 05 21:10:02 omarchy-benchmark kernel: usb usb2: Manufacturer: Linux 7.1.9-arch1-2 ehci_hcd
+Sep 05 21:10:02 omarchy-benchmark kernel: usb usb2: SerialNumber: 0000:00:1d.7
+Sep 05 21:10:02 omarchy-benchmark kernel: hub 2-0:1.0: USB hub found
+Sep 05 21:10:02 omarchy-benchmark kernel: hub 2-0:1.0: 6 ports detected
+Sep 05 21:10:02 omarchy-benchmark kernel: hub 1-0:1.0: USB hub found
+Sep 05 21:10:02 omarchy-benchmark kernel: hub 1-0:1.0: 2 ports detected
+Sep 05 21:10:02 omarchy-benchmark kernel: uhci_hcd 0000:00:1d.1: UHCI Host Controller
+Sep 05 21:10:02 omarchy-benchmark kernel: uhci_hcd 0000:00:1d.1: new USB bus registered, assigned bus number 3
+Sep 05 21:10:02 omarchy-benchmark kernel: uhci_hcd 0000:00:1d.1: detected 2 ports
+Sep 05 21:10:02 omarchy-benchmark kernel: uhci_hcd 0000:00:1d.1: irq 17, io port 0x00006100
+Sep 05 21:10:02 omarchy-benchmark kernel: usb usb3: New USB device found, idVendor=1d6b, idProduct=0001, bcdDevice= 7.01
+Sep 05 21:10:02 omarchy-benchmark kernel: usb usb3: New USB device strings: Mfr=3, Product=2, SerialNumber=1
+Sep 05 21:10:02 omarchy-benchmark kernel: usb usb3: Product: UHCI Host Controller
+Sep 05 21:10:02 omarchy-benchmark kernel: usb usb3: Manufacturer: Linux 7.1.9-arch1-2 uhci_hcd
+Sep 05 21:10:02 omarchy-benchmark kernel: usb usb3: SerialNumber: 0000:00:1d.1
+Sep 05 21:10:02 omarchy-benchmark kernel: hub 3-0:1.0: USB hub found
+Sep 05 21:10:02 omarchy-benchmark kernel: hub 3-0:1.0: 2 ports detected
+Sep 05 21:10:02 omarchy-benchmark kernel: uhci_hcd 0000:00:1d.2: UHCI Host Controller
+Sep 05 21:10:02 omarchy-benchmark kernel: uhci_hcd 0000:00:1d.2: new USB bus registered, assigned bus number 4
+Sep 05 21:10:02 omarchy-benchmark kernel: uhci_hcd 0000:00:1d.2: detected 2 ports
+Sep 05 21:10:02 omarchy-benchmark kernel: uhci_hcd 0000:00:1d.2: irq 18, io port 0x000060e0
+Sep 05 21:10:02 omarchy-benchmark kernel: usb usb4: New USB device found, idVendor=1d6b, idProduct=0001, bcdDevice= 7.01
+Sep 05 21:10:02 omarchy-benchmark kernel: usb usb4: New USB device strings: Mfr=3, Product=2, SerialNumber=1
+Sep 05 21:10:02 omarchy-benchmark kernel: usb usb4: Product: UHCI Host Controller
+Sep 05 21:10:02 omarchy-benchmark kernel: usb usb4: Manufacturer: Linux 7.1.9-arch1-2 uhci_hcd
+Sep 05 21:10:02 omarchy-benchmark kernel: usb usb4: SerialNumber: 0000:00:1d.2
+Sep 05 21:10:02 omarchy-benchmark kernel: hub 4-0:1.0: USB hub found
+Sep 05 21:10:02 omarchy-benchmark kernel: hub 4-0:1.0: 2 ports detected
+Sep 05 21:10:02 omarchy-benchmark kernel: usbcore: registered new interface driver usbserial_generic
+Sep 05 21:10:02 omarchy-benchmark kernel: usbserial: USB Serial support registered for generic
+Sep 05 21:10:02 omarchy-benchmark kernel: i8042: PNP: PS/2 Controller [PNP0303:KBD,PNP0f13:MOU] at 0x60,0x64 irq 1,12
+Sep 05 21:10:02 omarchy-benchmark kernel: serio: i8042 KBD port at 0x60,0x64 irq 1
+Sep 05 21:10:02 omarchy-benchmark kernel: serio: i8042 AUX port at 0x60,0x64 irq 12
+Sep 05 21:10:02 omarchy-benchmark kernel: rtc_cmos PNP0B00:00: RTC can wake from S4
+Sep 05 21:10:02 omarchy-benchmark kernel: input: AT Translated Set 2 keyboard as /devices/platform/i8042/serio0/input/input1
+Sep 05 21:10:02 omarchy-benchmark kernel: rtc_cmos PNP0B00:00: registered as rtc0
+Sep 05 21:10:02 omarchy-benchmark kernel: rtc_cmos PNP0B00:00: setting system clock to 2026-09-05T21:09:48 UTC (1788642588)
+Sep 05 21:10:02 omarchy-benchmark kernel: rtc_cmos PNP0B00:00: alarms up to one day, y3k, 242 bytes nvram
+Sep 05 21:10:02 omarchy-benchmark kernel: amd_pstate: the _CPC object is not present in SBIOS or ACPI disabled
+Sep 05 21:10:02 omarchy-benchmark kernel: simple-framebuffer simple-framebuffer.0: [drm] Registered 1 planes with drm panic
+Sep 05 21:10:02 omarchy-benchmark kernel: [drm] Initialized simpledrm 1.0.0 for simple-framebuffer.0 on minor 0
+Sep 05 21:10:02 omarchy-benchmark kernel: fbcon: Deferring console take-over
+Sep 05 21:10:02 omarchy-benchmark kernel: simple-framebuffer simple-framebuffer.0: [drm] fb0: simpledrmdrmfb frame buffer device
+Sep 05 21:10:02 omarchy-benchmark kernel: hid: raw HID events driver (C) Jiri Kosina
+Sep 05 21:10:02 omarchy-benchmark kernel: usbcore: registered new interface driver usbhid
+Sep 05 21:10:02 omarchy-benchmark kernel: usbhid: USB HID core driver
+Sep 05 21:10:02 omarchy-benchmark kernel: drop_monitor: Initializing network drop monitor service
+Sep 05 21:10:02 omarchy-benchmark kernel: NET: Registered PF_INET6 protocol family
+Sep 05 21:10:02 omarchy-benchmark kernel: Segment Routing with IPv6
+Sep 05 21:10:02 omarchy-benchmark kernel: RPL Segment Routing with IPv6
+Sep 05 21:10:02 omarchy-benchmark kernel: In-situ OAM (IOAM) with IPv6
+Sep 05 21:10:02 omarchy-benchmark kernel: NET: Registered PF_PACKET protocol family
+Sep 05 21:10:02 omarchy-benchmark kernel: IPI shorthand broadcast: enabled
+Sep 05 21:10:02 omarchy-benchmark kernel: sched_clock: Marking stable (3173043708, 30865635)->(3230763995, -26854652)
+Sep 05 21:10:02 omarchy-benchmark kernel: registered taskstats version 1
+Sep 05 21:10:02 omarchy-benchmark kernel: Loading compiled-in X.509 certificates
+Sep 05 21:10:02 omarchy-benchmark kernel: usb 2-1: new high-speed USB device number 2 using ehci-pci
+Sep 05 21:10:02 omarchy-benchmark kernel: ata1: SATA link down (SStatus 0 SControl 300)
+Sep 05 21:10:02 omarchy-benchmark kernel: ata4: SATA link down (SStatus 0 SControl 300)
+Sep 05 21:10:02 omarchy-benchmark kernel: ata6: SATA link up 1.5 Gbps (SStatus 113 SControl 300)
+Sep 05 21:10:02 omarchy-benchmark kernel: ata2: SATA link up 1.5 Gbps (SStatus 113 SControl 300)
+Sep 05 21:10:02 omarchy-benchmark kernel: ata3: SATA link down (SStatus 0 SControl 300)
+Sep 05 21:10:02 omarchy-benchmark kernel: ata2.00: ATAPI: QEMU DVD-ROM, 2.5+, max UDMA/100
+Sep 05 21:10:02 omarchy-benchmark kernel: ata2.00: applying bridge limits
+Sep 05 21:10:02 omarchy-benchmark kernel: ata6.00: ATAPI: QEMU DVD-ROM, 2.5+, max UDMA/100
+Sep 05 21:10:02 omarchy-benchmark kernel: ata6.00: applying bridge limits
+Sep 05 21:10:02 omarchy-benchmark kernel: ata5: SATA link down (SStatus 0 SControl 300)
+Sep 05 21:10:02 omarchy-benchmark kernel: ata6.00: configured for UDMA/100
+Sep 05 21:10:02 omarchy-benchmark kernel: ata2.00: configured for UDMA/100
+Sep 05 21:10:02 omarchy-benchmark kernel: scsi 1:0:0:0: CD-ROM            QEMU     QEMU DVD-ROM     2.5+ PQ: 0 ANSI: 5
+Sep 05 21:10:02 omarchy-benchmark kernel: scsi 5:0:0:0: CD-ROM            QEMU     QEMU DVD-ROM     2.5+ PQ: 0 ANSI: 5
+Sep 05 21:10:02 omarchy-benchmark kernel: usb 2-1: New USB device found, idVendor=0627, idProduct=0001, bcdDevice= 0.00
+Sep 05 21:10:02 omarchy-benchmark kernel: usb 2-1: New USB device strings: Mfr=1, Product=3, SerialNumber=10
+Sep 05 21:10:02 omarchy-benchmark kernel: usb 2-1: Product: QEMU USB Tablet
+Sep 05 21:10:02 omarchy-benchmark kernel: usb 2-1: Manufacturer: QEMU
+Sep 05 21:10:02 omarchy-benchmark kernel: usb 2-1: SerialNumber: 28754-0000:00:1d.7-1
+Sep 05 21:10:02 omarchy-benchmark kernel: Loaded X.509 cert 'Build time autogenerated kernel key: 288df3867ef99a291c85e5bbaa43007d89abf5e5'
+Sep 05 21:10:02 omarchy-benchmark kernel: input: QEMU QEMU USB Tablet as /devices/pci0000:00/0000:00:1d.7/usb2/2-1/2-1:1.0/0003:0627:0001.0001/input/input3
+Sep 05 21:10:02 omarchy-benchmark kernel: hid-generic 0003:0627:0001.0001: input,hidraw0: USB HID v0.01 Mouse [QEMU QEMU USB Tablet] on usb-0000:00:1d.7-1/input0
+Sep 05 21:10:02 omarchy-benchmark kernel: Demotion targets for Node 0: null
+Sep 05 21:10:02 omarchy-benchmark kernel: Key type .fscrypt registered
+Sep 05 21:10:02 omarchy-benchmark kernel: Key type fscrypt-provisioning registered
+Sep 05 21:10:02 omarchy-benchmark kernel: Btrfs loaded, zoned=yes, fsverity=yes
+Sep 05 21:10:02 omarchy-benchmark kernel: Key type big_key registered
+Sep 05 21:10:02 omarchy-benchmark kernel: PM:   Magic number: 10:239:196
+Sep 05 21:10:02 omarchy-benchmark kernel: drm card0: hash matches
+Sep 05 21:10:02 omarchy-benchmark kernel: RAS: Correctable Errors collector initialized.
+Sep 05 21:10:02 omarchy-benchmark kernel: PM: Image not found (code -22)
+Sep 05 21:10:02 omarchy-benchmark kernel: clk: Disabling unused clocks
+Sep 05 21:10:02 omarchy-benchmark kernel: PM: genpd: Disabling unused power domains
+Sep 05 21:10:02 omarchy-benchmark kernel: Freeing unused decrypted memory: 2028K
+Sep 05 21:10:02 omarchy-benchmark kernel: usb 2-2: new high-speed USB device number 3 using ehci-pci
+Sep 05 21:10:02 omarchy-benchmark kernel: usb 2-2: New USB device found, idVendor=46f4, idProduct=0001, bcdDevice= 0.00
+Sep 05 21:10:02 omarchy-benchmark kernel: usb 2-2: New USB device strings: Mfr=1, Product=2, SerialNumber=3
+Sep 05 21:10:02 omarchy-benchmark kernel: usb 2-2: Product: QEMU USB HARDDRIVE
+Sep 05 21:10:02 omarchy-benchmark kernel: usb 2-2: Manufacturer: QEMU
+Sep 05 21:10:02 omarchy-benchmark kernel: usb 2-2: SerialNumber: 1-0000:00:1d.7-2
+Sep 05 21:10:02 omarchy-benchmark kernel: tsc: Refined TSC clocksource calibration: 2596.148 MHz
+Sep 05 21:10:02 omarchy-benchmark kernel: clocksource: tsc: mask: 0xffffffffffffffff max_cycles: 0x256c05247e1, max_idle_ns: 440795271171 ns
+Sep 05 21:10:02 omarchy-benchmark kernel: clocksource: Switched to clocksource tsc
+Sep 05 21:10:02 omarchy-benchmark kernel: Freeing unused kernel image (initmem) memory: 4908K
+Sep 05 21:10:02 omarchy-benchmark kernel: Write protecting the kernel read-only data: 40960k
+Sep 05 21:10:02 omarchy-benchmark kernel: Freeing unused kernel image (text/rodata gap) memory: 492K
+Sep 05 21:10:02 omarchy-benchmark kernel: Freeing unused kernel image (rodata/data gap) memory: 928K
+Sep 05 21:10:02 omarchy-benchmark kernel: x86/mm: Checked W+X mappings: passed, no W+X pages found.
+Sep 05 21:10:02 omarchy-benchmark kernel: rodata_test: all tests were successful
+Sep 05 21:10:02 omarchy-benchmark kernel: Run /init as init process
+Sep 05 21:10:02 omarchy-benchmark kernel:   with arguments:
+Sep 05 21:10:02 omarchy-benchmark kernel:     /init
+Sep 05 21:10:02 omarchy-benchmark kernel:     splash
+Sep 05 21:10:02 omarchy-benchmark kernel:   with environment:
+Sep 05 21:10:02 omarchy-benchmark kernel:     HOME=/
+Sep 05 21:10:02 omarchy-benchmark kernel:     TERM=linux
+Sep 05 21:10:02 omarchy-benchmark kernel: ACPI: bus type thunderbolt registered
+Sep 05 21:10:02 omarchy-benchmark kernel: lpc_ich 0000:00:1f.0: I/O space for GPIO uninitialized
+Sep 05 21:10:02 omarchy-benchmark kernel: [drm] pci: virtio-vga detected at 0000:00:02.0
+Sep 05 21:10:02 omarchy-benchmark kernel: virtio-pci 0000:00:02.0: vgaarb: deactivate vga console
+Sep 05 21:10:02 omarchy-benchmark kernel: [drm] features: -virgl +edid -resource_blob -host_visible
+Sep 05 21:10:02 omarchy-benchmark kernel: [drm] features: -context_init
+Sep 05 21:10:02 omarchy-benchmark kernel: [drm] number of scanouts: 1
+Sep 05 21:10:02 omarchy-benchmark kernel: [drm] number of cap sets: 0
+Sep 05 21:10:02 omarchy-benchmark kernel: sr 1:0:0:0: [sr0] scsi3-mmc drive: 4x/4x cd/rw xa/form2 tray
+Sep 05 21:10:02 omarchy-benchmark kernel: usb-storage 2-2:1.0: USB Mass Storage device detected
+Sep 05 21:10:02 omarchy-benchmark kernel: scsi host6: usb-storage 2-2:1.0
+Sep 05 21:10:02 omarchy-benchmark kernel: usbcore: registered new interface driver usb-storage
+Sep 05 21:10:02 omarchy-benchmark kernel: virtio-pci 0000:00:02.0: [drm] Registered 1 planes with drm panic
+Sep 05 21:10:02 omarchy-benchmark kernel: [drm] Initialized virtio_gpu 0.1.0 for 0000:00:02.0 on minor 1
+Sep 05 21:10:02 omarchy-benchmark kernel: usbcore: registered new interface driver uas
+Sep 05 21:10:02 omarchy-benchmark kernel: cdrom: Uniform CD-ROM driver Revision: 3.20
+Sep 05 21:10:02 omarchy-benchmark kernel: sr 1:0:0:0: Attached scsi CD-ROM sr0
+Sep 05 21:10:02 omarchy-benchmark kernel: sr 5:0:0:0: [sr1] scsi3-mmc drive: 4x/4x cd/rw xa/form2 tray
+Sep 05 21:10:02 omarchy-benchmark kernel: fbcon: virtio_gpudrmfb (fb0) is primary device
+Sep 05 21:10:02 omarchy-benchmark kernel: fbcon: Deferring console take-over
+Sep 05 21:10:02 omarchy-benchmark kernel: virtio-pci 0000:00:02.0: [drm] fb0: virtio_gpudrmfb frame buffer device
+Sep 05 21:10:02 omarchy-benchmark kernel: sr 5:0:0:0: Attached scsi CD-ROM sr1
+Sep 05 21:10:02 omarchy-benchmark kernel: scsi 6:0:0:0: Direct-Access     QEMU     QEMU HARDDISK    2.5+ PQ: 0 ANSI: 5
+Sep 05 21:10:02 omarchy-benchmark kernel: sd 6:0:0:0: Power-on or device reset occurred
+Sep 05 21:10:02 omarchy-benchmark kernel: sd 6:0:0:0: [sda] 8192 512-byte logical blocks: (4.19 MB/4.00 MiB)
+Sep 05 21:10:02 omarchy-benchmark kernel: sd 6:0:0:0: [sda] Write Protect is off
+Sep 05 21:10:02 omarchy-benchmark kernel: sd 6:0:0:0: [sda] Mode Sense: 63 00 00 08
+Sep 05 21:10:02 omarchy-benchmark kernel: sd 6:0:0:0: [sda] Write cache: enabled, read cache: enabled, doesn't support DPO or FUA
+Sep 05 21:10:02 omarchy-benchmark kernel:  sda:
+Sep 05 21:10:02 omarchy-benchmark kernel: sd 6:0:0:0: [sda] Attached SCSI disk
+Sep 05 21:10:02 omarchy-benchmark kernel: fbcon: Taking over console
+Sep 05 21:10:02 omarchy-benchmark kernel: Console: switching to colour frame buffer device 160x50
+Sep 05 21:10:02 omarchy-benchmark kernel: PM: Image not found (code -22)
+Sep 05 21:10:02 omarchy-benchmark kernel: BTRFS: device label omarchy-root-image devid 1 transid 173 /dev/vda2 (254:2) scanned by mount (256)
+Sep 05 21:10:02 omarchy-benchmark kernel: BTRFS info (device vda2): first mount of filesystem d5393516-d4e4-4c53-a691-efe97d251b4b
+Sep 05 21:10:02 omarchy-benchmark kernel: BTRFS info (device vda2): using crc32c checksum algorithm
+Sep 05 21:10:02 omarchy-benchmark kernel: BTRFS info (device vda2): turning on async discard
+Sep 05 21:10:02 omarchy-benchmark kernel: BTRFS info (device vda2): enabling free space tree
+Sep 05 21:10:02 omarchy-benchmark kernel: clocksource: Watchdog remote CPU 2 read timed out
+Sep 05 21:10:02 omarchy-benchmark kernel: NET: Registered PF_VSOCK protocol family
+Sep 05 21:10:02 omarchy-benchmark systemd[1]: systemd 261.2-1-arch running in system mode (+PAM +AUDIT -SELINUX +APPARMOR -IMA +IPE +SMACK +SECCOMP +GCRYPT +GNUTLS +OPENSSL +ACL +BLKID +CURL +ELFUTILS +FIDO2 +IDN2 +KMOD +LIBCRYPTSETUP +LIBCRYPTSETUP_PLUGINS +LIBFDISK +PCRE2 +PWQUALITY +P11KIT +QRENCODE +TPM2 +BZIP2 +LZ4 +XZ +ZLIB +ZSTD +BPF_FRAMEWORK +BTF +XKBCOMMON +UTMP +LIBARCHIVE)
+Sep 05 21:10:02 omarchy-benchmark systemd[1]: Detected virtualization qemu.
+Sep 05 21:10:02 omarchy-benchmark systemd[1]: Detected architecture x86-64.
+Sep 05 21:10:02 omarchy-benchmark systemd[1]: Hostname set to <omarchy-benchmark>.
+Sep 05 21:10:02 omarchy-benchmark systemd[1]: bpf-restrict-fs: LSM BPF program attached
+Sep 05 21:10:02 omarchy-benchmark kernel: zram: Added device: zram0
+Sep 05 21:10:02 omarchy-benchmark systemd[1]: Queued start job for default target Graphical Interface.
+Sep 05 21:10:02 omarchy-benchmark systemd[1]: Created slice CUPS Slice.
+Sep 05 21:10:02 omarchy-benchmark systemd[1]: Created slice Slice /system/dirmngr.
+Sep 05 21:10:02 omarchy-benchmark systemd[1]: Created slice Slice /system/getty.
+Sep 05 21:10:02 omarchy-benchmark systemd[1]: Created slice Slice /system/gpg-agent.
+Sep 05 21:10:02 omarchy-benchmark systemd[1]: Created slice Slice /system/gpg-agent-browser.
+Sep 05 21:10:02 omarchy-benchmark systemd[1]: Created slice Slice /system/gpg-agent-extra.
+Sep 05 21:10:02 omarchy-benchmark systemd[1]: Created slice Slice /system/gpg-agent-ssh.
+Sep 05 21:10:02 omarchy-benchmark systemd[1]: Created slice Slice /system/keyboxd.
+Sep 05 21:10:02 omarchy-benchmark systemd[1]: Created slice Slice /system/modprobe.
+Sep 05 21:10:02 omarchy-benchmark systemd[1]: Created slice Slice /system/serial-getty.
+Sep 05 21:10:02 omarchy-benchmark systemd[1]: Created slice Slice /system/systemd-fsck.
+Sep 05 21:10:02 omarchy-benchmark systemd[1]: Created slice Slice /system/systemd-zram-setup.
+Sep 05 21:10:02 omarchy-benchmark systemd[1]: Created slice User and Session Slice.
+Sep 05 21:10:02 omarchy-benchmark systemd[1]: Started Forward Password Requests to Wall Directory Watch.
+Sep 05 21:10:02 omarchy-benchmark systemd[1]: Set up automount Arbitrary Executable File Formats File System Automount Point.
+Sep 05 21:10:02 omarchy-benchmark systemd[1]: Expecting device /dev/disk/by-uuid/323D-53DD...
+Sep 05 21:10:02 omarchy-benchmark systemd[1]: Expecting device /dev/disk/by-uuid/d5393516-d4e4-4c53-a691-efe97d251b4b...
+Sep 05 21:10:02 omarchy-benchmark systemd[1]: Expecting device /dev/ttyS0...
+Sep 05 21:10:02 omarchy-benchmark systemd[1]: Expecting device /dev/zram0...
+Sep 05 21:10:02 omarchy-benchmark systemd[1]: Reached target Image Downloads.
+Sep 05 21:10:02 omarchy-benchmark systemd[1]: Reached target Local Integrity Protected Volumes.
+Sep 05 21:10:02 omarchy-benchmark systemd[1]: Reached target Remote File Systems.
+Sep 05 21:10:02 omarchy-benchmark systemd[1]: Reached target Slice Units.
+Sep 05 21:10:02 omarchy-benchmark systemd[1]: Reached target Local Verity Protected Volumes.
+Sep 05 21:10:02 omarchy-benchmark systemd[1]: Listening on Device-mapper event daemon FIFOs.
+Sep 05 21:10:02 omarchy-benchmark systemd[1]: Listening on Query the User Interactively for a Password.
+Sep 05 21:10:02 omarchy-benchmark systemd[1]: Listening on Process Core Dump Socket.
+Sep 05 21:10:02 omarchy-benchmark systemd[1]: Listening on Credential Encryption/Decryption.
+Sep 05 21:10:02 omarchy-benchmark systemd[1]: Listening on Factory Reset Management.
+Sep 05 21:10:02 omarchy-benchmark systemd[1]: Listening on Hostname Service Socket.
+Sep 05 21:10:02 omarchy-benchmark systemd[1]: Listening on Journal Socket (/dev/log).
+Sep 05 21:10:02 omarchy-benchmark systemd[1]: Listening on Journal Sockets.
+Sep 05 21:10:02 omarchy-benchmark systemd[1]: Listening on Console Output Muting Service Socket.
+Sep 05 21:10:02 omarchy-benchmark systemd[1]: Listening on Userspace Out-Of-Memory (OOM) Killer Socket.
+Sep 05 21:10:02 omarchy-benchmark systemd[1]: TPM PCR Measurements skipped, unmet condition check ConditionSecurity=measured-os
+Sep 05 21:10:02 omarchy-benchmark systemd[1]: Make TPM PCR Policy skipped, unmet condition check ConditionSecurity=measured-uki
+Sep 05 21:10:02 omarchy-benchmark systemd[1]: Listening on Disk Repartitioning Service Socket.
+Sep 05 21:10:02 omarchy-benchmark systemd[1]: Listening on Resolve Monitor Varlink Socket.
+Sep 05 21:10:02 omarchy-benchmark systemd[1]: Listening on Resolve Service Varlink Socket.
+Sep 05 21:10:02 omarchy-benchmark systemd[1]: Listening on Simple Block Device Backed Storage Provider.
+Sep 05 21:10:02 omarchy-benchmark systemd[1]: Listening on Simple File System Backed Storage Provider.
+Sep 05 21:10:02 omarchy-benchmark systemd[1]: Listening on udev Control Socket.
+Sep 05 21:10:02 omarchy-benchmark systemd[1]: Listening on udev Kernel Socket.
+Sep 05 21:10:02 omarchy-benchmark systemd[1]: Listening on udev Varlink Socket.
+Sep 05 21:10:02 omarchy-benchmark systemd[1]: Listening on User Database Manager Socket.
+Sep 05 21:10:02 omarchy-benchmark systemd[1]: Mounting Huge Pages File System...
+Sep 05 21:10:02 omarchy-benchmark systemd[1]: Mounting POSIX Message Queue File System...
+Sep 05 21:10:02 omarchy-benchmark systemd[1]: Mounting Kernel Debug File System...
+Sep 05 21:10:02 omarchy-benchmark systemd[1]: Mounting Kernel Trace File System...
+Sep 05 21:10:02 omarchy-benchmark systemd[1]: Starting Create List of Static Device Nodes...
+Sep 05 21:10:02 omarchy-benchmark systemd[1]: Load Kernel Module configfs skipped, unmet condition check ConditionKernelModuleLoaded=!configfs
+Sep 05 21:10:02 omarchy-benchmark systemd[1]: Mounting Kernel Configuration File System...
+Sep 05 21:10:02 omarchy-benchmark systemd[1]: Load Kernel Module drm skipped, unmet condition check ConditionKernelModuleLoaded=!drm
+Sep 05 21:10:02 omarchy-benchmark systemd[1]: Load Kernel Module fuse skipped, unmet condition check ConditionKernelModuleLoaded=!fuse
+Sep 05 21:10:02 omarchy-benchmark systemd[1]: Mounting FUSE Control File System...
+Sep 05 21:10:02 omarchy-benchmark systemd[1]: Clear Stale Hibernate Storage Info skipped, unmet condition check ConditionPathExists=/sys/firmware/efi/efivars/HibernateLocation-8cf2644b-4b0b-428f-9387-6d876050dc67
+Sep 05 21:10:02 omarchy-benchmark systemd[1]: Starting Journal Service...
+Sep 05 21:10:02 omarchy-benchmark systemd[1]: Starting Load Kernel Modules...
+Sep 05 21:10:02 omarchy-benchmark systemd[1]: TPM PCR Machine ID Measurement skipped, unmet condition check ConditionSecurity=measured-os
+Sep 05 21:10:02 omarchy-benchmark systemd[1]: TPM PCR OS Separator skipped, unmet condition check ConditionSecurity=measured-os
+Sep 05 21:10:02 omarchy-benchmark systemd[1]: Starting Remount Root and Kernel File Systems...
+Sep 05 21:10:02 omarchy-benchmark systemd[1]: Early TPM SRK Setup skipped, unmet condition check ConditionSecurity=measured-os
+Sep 05 21:10:02 omarchy-benchmark systemd[1]: TPM PCR NvPCR Initialization Separator skipped, unmet condition check ConditionPathExists=/etc/initrd-release
+Sep 05 21:10:02 omarchy-benchmark systemd[1]: TPM NvPCR Product ID Measurement skipped, unmet condition check ConditionSecurity=measured-os
+Sep 05 21:10:02 omarchy-benchmark systemd[1]: Starting Load udev Rules from Credentials...
+Sep 05 21:10:02 omarchy-benchmark systemd[1]: Starting Coldplug All udev Devices...
+Sep 05 21:10:02 omarchy-benchmark systemd[1]: Starting Virtual Console Setup...
+Sep 05 21:10:02 omarchy-benchmark systemd[1]: Mounted Huge Pages File System.
+Sep 05 21:10:02 omarchy-benchmark systemd[1]: Mounted POSIX Message Queue File System.
+Sep 05 21:10:02 omarchy-benchmark systemd[1]: Mounted Kernel Debug File System.
+Sep 05 21:10:02 omarchy-benchmark systemd[1]: Mounted Kernel Trace File System.
+Sep 05 21:10:02 omarchy-benchmark systemd[1]: Mounted Kernel Configuration File System.
+Sep 05 21:10:02 omarchy-benchmark systemd[1]: Mounted FUSE Control File System.
+Sep 05 21:10:02 omarchy-benchmark systemd[1]: Finished Create List of Static Device Nodes.
+Sep 05 21:10:02 omarchy-benchmark systemd[1]: Starting Create Static Device Nodes in /dev gracefully...
+Sep 05 21:10:02 omarchy-benchmark systemd[1]: Finished Load udev Rules from Credentials.
+Sep 05 21:10:02 omarchy-benchmark kernel: i2c_dev: i2c /dev entries driver
+Sep 05 21:10:02 omarchy-benchmark systemd-journald[328]: Collecting audit messages is disabled.
+Sep 05 21:10:02 omarchy-benchmark systemd[1]: Finished Load Kernel Modules.
+Sep 05 21:10:02 omarchy-benchmark systemd[1]: Starting Apply Kernel Variables...
+Sep 05 21:10:02 omarchy-benchmark systemd[1]: Starting User Database Manager...
+Sep 05 21:10:02 omarchy-benchmark systemd[1]: Finished Virtual Console Setup.
+Sep 05 21:10:02 omarchy-benchmark systemd[1]: Finished Apply Kernel Variables.
+Sep 05 21:10:02 omarchy-benchmark systemd[1]: Starting CLI Netfilter Manager...
+Sep 05 21:10:02 omarchy-benchmark systemd[1]: proc-sys-fs-binfmt_misc.automount: Got automount request for /proc/sys/fs/binfmt_misc, triggered by 341 ((systemd-userd))
+Sep 05 21:10:02 omarchy-benchmark systemd[1]: Mounting Arbitrary Executable File Formats File System...
+Sep 05 21:10:02 omarchy-benchmark systemd-journald[328]: Journal started
+Sep 05 21:10:02 omarchy-benchmark systemd-journald[328]: Runtime Journal (/run/log/journal/4f44a4d6cf97461eb34e72e7637f3ce6) is 8M, max 396.2M, 388.2M free.
+Sep 05 21:10:01 omarchy-benchmark systemd-modules-load[329]: Using 2 probe threads
+Sep 05 21:10:02 omarchy-benchmark systemd[1]: Started Journal Service.
+Sep 05 21:10:01 omarchy-benchmark systemd-modules-load[329]: Inserted module 'crypto_user'
+Sep 05 21:10:01 omarchy-benchmark systemd-modules-load[329]: Inserted module 'i2c_dev'
+Sep 05 21:10:02 omarchy-benchmark systemd[1]: Mounted Arbitrary Executable File Formats File System.
+Sep 05 21:10:02 omarchy-benchmark kernel: BTRFS info (device vda2 state M): use zstd compression, level 3
+Sep 05 21:10:02 omarchy-benchmark systemd[1]: Finished Remount Root and Kernel File Systems.
+Sep 05 21:10:02 omarchy-benchmark systemd[1]: Activating swap /swap/swapfile...
+Sep 05 21:10:02 omarchy-benchmark systemd[1]: Rebuild Hardware Database skipped, no trigger condition checks were met.
+Sep 05 21:10:02 omarchy-benchmark systemd[1]: Starting Load/Save OS Random Seed...
+Sep 05 21:10:02 omarchy-benchmark systemd[1]: TPM SRK Setup skipped, unmet condition check ConditionSecurity=measured-os
+Sep 05 21:10:02 omarchy-benchmark systemd[1]: Started User Database Manager.
+Sep 05 21:10:02 omarchy-benchmark kernel: Adding 8116096k swap on /swap/swapfile.  Priority:0 extents:2 across:8367964k 
+Sep 05 21:10:02 omarchy-benchmark systemd[1]: Activated swap /swap/swapfile.
+Sep 05 21:10:02 omarchy-benchmark systemd[1]: Finished Load/Save OS Random Seed.
+Sep 05 21:10:03 omarchy-benchmark systemd[1]: Finished Create Static Device Nodes in /dev gracefully.
+Sep 05 21:10:03 omarchy-benchmark systemd[1]: Starting Create System Users...
+Sep 05 21:10:03 omarchy-benchmark systemd[1]: Finished Coldplug All udev Devices.
+Sep 05 21:10:03 omarchy-benchmark systemd[1]: Finished Create System Users.
+Sep 05 21:10:03 omarchy-benchmark systemd[1]: Starting Journal Log Access Socket...
+Sep 05 21:10:03 omarchy-benchmark systemd[1]: Starting Network Name Resolution...
+Sep 05 21:10:03 omarchy-benchmark systemd[1]: Starting Network Time Synchronization...
+Sep 05 21:10:03 omarchy-benchmark systemd[1]: Starting Create Static Device Nodes in /dev...
+Sep 05 21:10:03 omarchy-benchmark systemd[1]: Listening on Journal Log Access Socket.
+Sep 05 21:10:04 omarchy-benchmark systemd-resolved[387]: Positive Trust Anchors:
+Sep 05 21:10:04 omarchy-benchmark systemd-resolved[387]: . IN DS 20326 8 2 e06d44b80b8f1d39a95c0b0d7c65d08458e880409bbc683457104237c7f8ec8d
+Sep 05 21:10:04 omarchy-benchmark systemd-resolved[387]: . IN DS 38696 8 2 683d2d0acb8c9b712a1948b27f741219298d0a450d612c483af444a4c0fb2b16
+Sep 05 21:10:04 omarchy-benchmark systemd-resolved[387]: Negative trust anchors: home.arpa 10.in-addr.arpa 16.172.in-addr.arpa 17.172.in-addr.arpa 18.172.in-addr.arpa 19.172.in-addr.arpa 20.172.in-addr.arpa 21.172.in-addr.arpa 22.172.in-addr.arpa 23.172.in-addr.arpa 24.172.in-addr.arpa 25.172.in-addr.arpa 26.172.in-addr.arpa 27.172.in-addr.arpa 28.172.in-addr.arpa 29.172.in-addr.arpa 30.172.in-addr.arpa 31.172.in-addr.arpa 170.0.0.192.in-addr.arpa 171.0.0.192.in-addr.arpa 168.192.in-addr.arpa d.f.ip6.arpa ipv4only.arpa resolver.arpa corp home internal intranet lan local private test
+Sep 05 21:10:04 omarchy-benchmark systemd[1]: Finished Create Static Device Nodes in /dev.
+Sep 05 21:10:04 omarchy-benchmark systemd[1]: Reached target Preparation for Local File Systems.
+Sep 05 21:10:04 omarchy-benchmark systemd[1]: Virtual Machine and Container Storage (Compatibility) skipped, unmet condition check ConditionPathExists=/var/lib/machines.raw
+Sep 05 21:10:04 omarchy-benchmark systemd[1]: Listening on Disk Image Download Service Socket.
+Sep 05 21:10:04 omarchy-benchmark systemd[1]: Repartition Root Disk skipped, no trigger condition checks were met.
+Sep 05 21:10:04 omarchy-benchmark systemd[1]: Starting Rule-based Manager for Device Events and Files...
+Sep 05 21:10:04 omarchy-benchmark systemd[1]: Started Network Time Synchronization.
+Sep 05 21:10:04 omarchy-benchmark systemd[1]: Reached target System Time Set.
+Sep 05 21:10:04 omarchy-benchmark systemd-resolved[387]: Using system hostname 'omarchy-benchmark'.
+Sep 05 21:10:04 omarchy-benchmark systemd[1]: Started Network Name Resolution.
+Sep 05 21:10:04 omarchy-benchmark systemd[1]: Reached target Host and Network Name Lookups.
+Sep 05 21:10:04 omarchy-benchmark systemd-resolved[387]: Switching to fallback DNS server 9.9.9.9#dns.quad9.net.
+Sep 05 21:10:04 omarchy-benchmark systemd-udevd[404]: Using default interface naming scheme 'v261'.
+Sep 05 21:10:05 omarchy-benchmark systemd[1]: Started Rule-based Manager for Device Events and Files.
+Sep 05 21:10:05 omarchy-benchmark systemd[1]: Starting Show Plymouth Boot Screen...
+Sep 05 21:10:05 omarchy-benchmark systemd[1]: Started Show Plymouth Boot Screen.
+Sep 05 21:10:05 omarchy-benchmark systemd[1]: Dispatch Password Requests to Console Directory Watch skipped, unmet condition check ConditionPathExists=!/run/plymouth/pid
+Sep 05 21:10:05 omarchy-benchmark systemd[1]: Started Forward Password Requests to Plymouth Directory Watch.
+Sep 05 21:10:05 omarchy-benchmark systemd[1]: Reached target Local Encrypted Volumes.
+Sep 05 21:10:06 omarchy-benchmark systemd[1]: Found device /dev/zram0.
+Sep 05 21:10:06 omarchy-benchmark systemd[1]: Starting Create swap on /dev/zram0...
+Sep 05 21:10:06 omarchy-benchmark systemd[1]: Finished CLI Netfilter Manager.
+Sep 05 21:10:06 omarchy-benchmark kernel: virtio_net virtio3 enp0s4: renamed from eth0
+Sep 05 21:10:06 omarchy-benchmark kernel: zram0: detected capacity change from 0 to 16230400
+Sep 05 21:10:06 omarchy-benchmark systemd-makefs[479]: Formatting /dev/zram0 as swap
+Sep 05 21:10:06 omarchy-benchmark systemd[1]: Found device /dev/ttyS0.
+Sep 05 21:10:06 omarchy-benchmark mtp-probe[477]: checking bus 2, device 3: "/sys/devices/pci0000:00/0000:00:1d.7/usb2/2-2"
+Sep 05 21:10:06 omarchy-benchmark mtp-probe[477]: bus: 2, device: 3 was not an MTP device
+Sep 05 21:10:06 omarchy-benchmark systemd-makefs[479]: /dev/zram0 successfully formatted as swap (label "zram0", uuid c7e35702-53fe-45eb-90e1-25c2237b3eec)
+Sep 05 21:10:06 omarchy-benchmark systemd[1]: Finished Create swap on /dev/zram0.
+Sep 05 21:10:06 omarchy-benchmark systemd[1]: Activating swap Compressed Swap on /dev/zram0...
+Sep 05 21:10:07 omarchy-benchmark mtp-probe[487]: checking bus 2, device 2: "/sys/devices/pci0000:00/0000:00:1d.7/usb2/2-1"
+Sep 05 21:10:07 omarchy-benchmark mtp-probe[487]: bus: 2, device: 2 was not an MTP device
+Sep 05 21:10:07 omarchy-benchmark systemd[1]: Found device /dev/disk/by-uuid/323D-53DD.
+Sep 05 21:10:07 omarchy-benchmark kernel: Adding 8115196k swap on /dev/zram0.  Priority:100 extents:1 across:8115196k SSDsc
+Sep 05 21:10:07 omarchy-benchmark systemd[1]: Activated swap Compressed Swap on /dev/zram0.
+Sep 05 21:10:07 omarchy-benchmark systemd[1]: Reached target Swaps.
+Sep 05 21:10:07 omarchy-benchmark systemd[1]: Mounting Temporary Directory /tmp...
+Sep 05 21:10:07 omarchy-benchmark systemd[1]: Starting File System Check on /dev/disk/by-uuid/323D-53DD...
+Sep 05 21:10:07 omarchy-benchmark systemd[1]: Starting Userspace Out-Of-Memory (OOM) Killer...
+Sep 05 21:10:07 omarchy-benchmark systemd-timesyncd[390]: Network configuration changed, trying to establish connection.
+Sep 05 21:10:07 omarchy-benchmark systemd[1]: Mounted Temporary Directory /tmp.
+Sep 05 21:10:08 omarchy-benchmark systemd[1]: Started Userspace Out-Of-Memory (OOM) Killer.
+Sep 05 21:10:08 omarchy-benchmark systemd[1]: Found device /dev/disk/by-uuid/d5393516-d4e4-4c53-a691-efe97d251b4b.
+Sep 05 21:10:08 omarchy-benchmark systemd[1]: Mounting /home...
+Sep 05 21:10:08 omarchy-benchmark systemd-fsck[497]: fsck.fat 4.2 (2021-01-31)
+Sep 05 21:10:08 omarchy-benchmark systemd-fsck[497]: /dev/vda1: 13 files, 9161/523260 clusters
+Sep 05 21:10:08 omarchy-benchmark systemd[1]: Mounting /var/cache/pacman/pkg...
+Sep 05 21:10:08 omarchy-benchmark systemd[1]: var-log.mount: Directory /var/log to mount over is not empty, mounting anyway.
+Sep 05 21:10:08 omarchy-benchmark systemd[1]: Mounting /var/log...
+Sep 05 21:10:08 omarchy-benchmark systemd[1]: Finished File System Check on /dev/disk/by-uuid/323D-53DD.
+Sep 05 21:10:08 omarchy-benchmark kernel: mousedev: PS/2 mouse device common for all mice
+Sep 05 21:10:08 omarchy-benchmark systemd[1]: Mounting /boot...
+Sep 05 21:10:08 omarchy-benchmark systemd[1]: Mounted /home.
+Sep 05 21:10:08 omarchy-benchmark systemd[1]: Mounted /var/log.
+Sep 05 21:10:08 omarchy-benchmark systemd[1]: Starting Flush Journal to Persistent Storage...
+Sep 05 21:10:08 omarchy-benchmark systemd[1]: Mounted /var/cache/pacman/pkg.
+Sep 05 21:10:08 omarchy-benchmark systemd[1]: Mounted /boot.
+Sep 05 21:10:08 omarchy-benchmark systemd[1]: Reached target Local File Systems.
+Sep 05 21:10:08 omarchy-benchmark systemd-timesyncd[390]: Network configuration changed, trying to establish connection.
+Sep 05 21:10:08 omarchy-benchmark systemd[1]: Listening on Boot Loader Control Service Socket.
+Sep 05 21:10:08 omarchy-benchmark systemd-timesyncd[390]: Network configuration changed, trying to establish connection.
+Sep 05 21:10:08 omarchy-benchmark systemd[1]: Listening on System Extension Image Management.
+Sep 05 21:10:08 omarchy-benchmark systemd[1]: Starting Tell Plymouth To Write Out Runtime Data...
+Sep 05 21:10:08 omarchy-benchmark systemd[1]: Starting Set Up Additional Binary Formats...
+Sep 05 21:10:08 omarchy-benchmark systemd[1]: Starting Update Boot Loader Random Seed...
+Sep 05 21:10:08 omarchy-benchmark systemd[1]: Starting Load JSON user/group Records from Credentials...
+Sep 05 21:10:09 omarchy-benchmark systemd-journald[328]: Time spent on flushing to /var/log/journal/4f44a4d6cf97461eb34e72e7637f3ce6 is 136.845ms for 790 entries.
+Sep 05 21:10:09 omarchy-benchmark systemd-journald[328]: System Journal (/var/log/journal/4f44a4d6cf97461eb34e72e7637f3ce6) is 8M, max 3.7G, 3.7G free.
+Sep 05 21:10:09 omarchy-benchmark systemd-journald[328]: Received client request to flush runtime journal.
+Sep 05 21:10:09 omarchy-benchmark systemd[1]: Received SIGRTMIN+20 from PID 184 (plymouthd).
+Sep 05 21:10:09 omarchy-benchmark systemd-journald[328]: Creating journal file /var/log/journal/4f44a4d6cf97461eb34e72e7637f3ce6/system.journal on a btrfs file system, and copy-on-write is enabled. This is likely to slow down journal access substantially, please consider turning off the copy-on-write file attribute on the journal directory, using chattr +C.
+Sep 05 21:10:09 omarchy-benchmark systemd-timesyncd[390]: Network configuration changed, trying to establish connection.
+Sep 05 21:10:09 omarchy-benchmark systemd[1]: Finished Tell Plymouth To Write Out Runtime Data.
+Sep 05 21:10:09 omarchy-benchmark systemd[1]: Finished Set Up Additional Binary Formats.
+Sep 05 21:10:09 omarchy-benchmark systemd[1]: Finished Flush Journal to Persistent Storage.
+Sep 05 21:10:09 omarchy-benchmark systemd[1]: Finished Load JSON user/group Records from Credentials.
+Sep 05 21:10:09 omarchy-benchmark systemd[1]: Starting Create System Files and Directories...
+Sep 05 21:10:09 omarchy-benchmark bootctl[513]: Random seed file /boot/loader/random-seed successfully refreshed (32 bytes).
+Sep 05 21:10:09 omarchy-benchmark bootctl[513]: Successfully initialized system token in EFI variable with 32 bytes.
+Sep 05 21:10:09 omarchy-benchmark systemd[1]: Finished Update Boot Loader Random Seed.
+Sep 05 21:10:09 omarchy-benchmark kernel: parport_pc 00:02: reported by Plug and Play ACPI
+Sep 05 21:10:09 omarchy-benchmark kernel: parport0: PC-style at 0x378, irq 7 [PCSPP,TRISTATE]
+Sep 05 21:10:09 omarchy-benchmark kernel: input: PC Speaker as /devices/platform/pcspkr/input/input5
+Sep 05 21:10:09 omarchy-benchmark kernel: iTCO_wdt iTCO_wdt.1.auto: Found a ICH9 TCO device (Version=2, TCOBASE=0x0660)
+Sep 05 21:10:09 omarchy-benchmark kernel: iTCO_wdt iTCO_wdt.1.auto: initialized. heartbeat=30 sec (nowayout=0)
+Sep 05 21:10:09 omarchy-benchmark kernel: i801_smbus 0000:00:1f.3: Enabling SMBus device
+Sep 05 21:10:09 omarchy-benchmark kernel: i801_smbus 0000:00:1f.3: SMBus using PCI interrupt
+Sep 05 21:10:09 omarchy-benchmark kernel: i2c i2c-0: Memory type 0x07 not supported yet, not instantiating SPD
+Sep 05 21:10:10 omarchy-benchmark kernel: input: ImExPS/2 Generic Explorer Mouse as /devices/platform/i8042/serio1/input/input4
+Sep 05 21:10:10 omarchy-benchmark systemd[1]: systemd-vconsole-setup.service: Deactivated successfully.
+Sep 05 21:10:10 omarchy-benchmark systemd[1]: Stopped Virtual Console Setup.
+Sep 05 21:10:10 omarchy-benchmark systemd[1]: Stopping Virtual Console Setup...
+Sep 05 21:10:10 omarchy-benchmark systemd[1]: Starting Virtual Console Setup...
+Sep 05 21:10:10 omarchy-benchmark systemd[1]: systemd-vconsole-setup.service: Deactivated successfully.
+Sep 05 21:10:10 omarchy-benchmark systemd[1]: Stopped Virtual Console Setup.
+Sep 05 21:10:10 omarchy-benchmark systemd[1]: Starting Virtual Console Setup...
+Sep 05 21:10:11 omarchy-benchmark kernel: ppdev: user-space parallel port driver
+Sep 05 21:10:11 omarchy-benchmark systemd-timesyncd[390]: Network configuration changed, trying to establish connection.
+Sep 05 21:10:11 omarchy-benchmark systemd-timesyncd[390]: Network configuration changed, trying to establish connection.
+Sep 05 21:10:11 omarchy-benchmark kernel: kvm_amd: Nested Virtualization enabled
+Sep 05 21:10:11 omarchy-benchmark kernel: kvm_amd: Nested Paging enabled
+Sep 05 21:10:11 omarchy-benchmark kernel: kvm_amd: Virtual GIF supported
+Sep 05 21:10:11 omarchy-benchmark kernel: kvm_amd: PMU virtualization is disabled
+Sep 05 21:10:11 omarchy-benchmark kernel: zswap: loaded using pool zstd
+Sep 05 21:10:11 omarchy-benchmark systemd[1]: Finished Virtual Console Setup.
+Sep 05 21:10:11 omarchy-benchmark systemd[1]: Finished Create System Files and Directories.
+Sep 05 21:10:11 omarchy-benchmark systemd[1]: Starting Rebuild Dynamic Linker Cache...
+Sep 05 21:10:11 omarchy-benchmark systemd[1]: Initial Setup skipped, unmet condition check ConditionFirstBoot=yes
+Sep 05 21:10:11 omarchy-benchmark systemd[1]: First Boot Complete skipped, unmet condition check ConditionFirstBoot=yes
+Sep 05 21:10:11 omarchy-benchmark systemd[1]: Starting Rebuild Journal Catalog...
+Sep 05 21:10:11 omarchy-benchmark systemd[1]: Save Transient machine-id to Disk skipped, unmet condition check ConditionPathIsMountPoint=/etc/machine-id
+Sep 05 21:10:12 omarchy-benchmark systemd[1]: Starting Record System Boot/Shutdown in UTMP...
+Sep 05 21:10:12 omarchy-benchmark systemd[1]: Finished Record System Boot/Shutdown in UTMP.
+Sep 05 21:10:12 omarchy-benchmark systemd[1]: Finished Rebuild Journal Catalog.
+Sep 05 21:10:24 omarchy-benchmark systemd[1]: Finished Rebuild Dynamic Linker Cache.
+Sep 05 21:10:24 omarchy-benchmark systemd[1]: Starting Update is Completed...
+Sep 05 21:10:25 omarchy-benchmark systemd[1]: Finished Update is Completed.
+Sep 05 21:10:25 omarchy-benchmark systemd[1]: Reached target System Initialization.
+Sep 05 21:10:25 omarchy-benchmark systemd[1]: Started CUPS Scheduler.
+Sep 05 21:10:25 omarchy-benchmark systemd[1]: Started Refresh existing PGP keys of archlinux-keyring regularly.
+Sep 05 21:10:25 omarchy-benchmark systemd[1]: Started Daily man-db regeneration.
+Sep 05 21:10:25 omarchy-benchmark systemd[1]: Started Update the plocate database daily.
+Sep 05 21:10:25 omarchy-benchmark systemd[1]: Started Daily verification of password and group files.
+Sep 05 21:10:25 omarchy-benchmark systemd[1]: Started Hourly Cleanup of Snapper Snapshots.
+Sep 05 21:10:25 omarchy-benchmark systemd[1]: Started Daily Cleanup of Temporary Directories.
+Sep 05 21:10:25 omarchy-benchmark systemd[1]: Reached target Path Units.
+Sep 05 21:10:25 omarchy-benchmark systemd[1]: Reached target Timer Units.
+Sep 05 21:10:25 omarchy-benchmark systemd[1]: Listening on Avahi mDNS/DNS-SD Stack Activation Socket.
+Sep 05 21:10:25 omarchy-benchmark systemd[1]: Listening on CUPS Scheduler.
+Sep 05 21:10:25 omarchy-benchmark systemd[1]: Listening on D-Bus System Message Bus Socket.
+Sep 05 21:10:25 omarchy-benchmark systemd[1]: Listening on GnuPG network certificate management daemon for /etc/pacman.d/gnupg.
+Sep 05 21:10:25 omarchy-benchmark systemd[1]: Starting Docker Socket for the API...
+Sep 05 21:10:25 omarchy-benchmark systemd[1]: Listening on GnuPG cryptographic agent and passphrase cache (access for web browsers) for /etc/pacman.d/gnupg.
+Sep 05 21:10:25 omarchy-benchmark systemd[1]: Listening on GnuPG cryptographic agent and passphrase cache (restricted) for /etc/pacman.d/gnupg.
+Sep 05 21:10:25 omarchy-benchmark systemd[1]: Listening on GnuPG cryptographic agent (ssh-agent emulation) for /etc/pacman.d/gnupg.
+Sep 05 21:10:25 omarchy-benchmark systemd[1]: Listening on GnuPG cryptographic agent and passphrase cache for /etc/pacman.d/gnupg.
+Sep 05 21:10:25 omarchy-benchmark systemd[1]: Listening on GnuPG public key management service for /etc/pacman.d/gnupg.
+Sep 05 21:10:25 omarchy-benchmark systemd[1]: Listening on Authorization Manager Agent Helper.
+Sep 05 21:10:25 omarchy-benchmark systemd[1]: Listening on OpenSSH Server Socket (systemd-ssh-generator, AF_UNIX Local).
+Sep 05 21:10:25 omarchy-benchmark systemd[1]: Listening on User Login Management Varlink Socket.
+Sep 05 21:10:25 omarchy-benchmark systemd[1]: Listening on Virtual Machine and Container Registration Service Socket.
+Sep 05 21:10:25 omarchy-benchmark systemd[1]: Starting D-Bus System Message Bus...
+Sep 05 21:10:25 omarchy-benchmark systemd[1]: TPM PCR Barrier (Initialization) skipped, unmet condition check ConditionSecurity=measured-os
+Sep 05 21:10:25 omarchy-benchmark systemd[1]: Listening on Docker Socket for the API.
+Sep 05 21:10:25 omarchy-benchmark systemd[1]: Reached target Socket Units.
+Sep 05 21:10:25 omarchy-benchmark systemd[1]: Started D-Bus System Message Bus.
+Sep 05 21:10:25 omarchy-benchmark systemd[1]: Reached target Basic System.
+Sep 05 21:10:25 omarchy-benchmark systemd[1]: Starting Network Manager...
+Sep 05 21:10:25 omarchy-benchmark systemd[1]: Starting Avahi mDNS/DNS-SD Stack...
+Sep 05 21:10:25 omarchy-benchmark systemd[1]: Started [limine-snapper-sync.service] automatically synchronizes boot entries with the Snapper snapshot list..
+Sep 05 21:10:25 omarchy-benchmark systemd[1]: Starting Clean up modules from old kernels...
+Sep 05 21:10:25 omarchy-benchmark systemd[1]: Starting SSH Key Generation...
+Sep 05 21:10:25 omarchy-benchmark systemd[1]: Starting User Login Management...
+Sep 05 21:10:25 omarchy-benchmark systemd[1]: TPM PCR Barrier (User) skipped, unmet condition check ConditionSecurity=measured-os
+Sep 05 21:10:26 omarchy-benchmark dbus-broker-launch[548]: Ready
+Sep 05 21:10:26 omarchy-benchmark bash[553]: + for i in /usr/lib/modules/[0-9]*
+Sep 05 21:10:26 omarchy-benchmark bash[553]: + [[ 7.1.9-arch1-2 = 7\.1\.9\-arch1\-2 ]]
+Sep 05 21:10:26 omarchy-benchmark bash[553]: + continue
+Sep 05 21:10:26 omarchy-benchmark systemd[1]: linux-modules-cleanup.service: Deactivated successfully.
+Sep 05 21:10:26 omarchy-benchmark systemd[1]: Finished Clean up modules from old kernels.
+Sep 05 21:10:26 omarchy-benchmark NetworkManager[550]: <info>  [1788642626.8343] NetworkManager (version 1.58.1-1) is starting... (boot:5c8d966a-2617-4189-88e7-148ae7896e85)
+Sep 05 21:10:26 omarchy-benchmark NetworkManager[550]: <info>  [1788642626.8436] Read config: /etc/NetworkManager/NetworkManager.conf, /usr/lib/NetworkManager/conf.d/20-connectivity.conf, /etc/NetworkManager/conf.d/omarchy-wifi-powersave.conf
+Sep 05 21:10:27 omarchy-benchmark NetworkManager[550]: <info>  [1788642627.1203] manager[0x55d486c4f0d0]: monitoring kernel firmware directory '/lib/firmware'.
+Sep 05 21:10:27 omarchy-benchmark systemd-logind[555]: New seat seat0.
+Sep 05 21:10:27 omarchy-benchmark systemd[1]: Starting Hostname Service...
+Sep 05 21:10:27 omarchy-benchmark systemd-logind[555]: Watching system buttons on /dev/input/event0 (Power Button)
+Sep 05 21:10:27 omarchy-benchmark systemd-logind[555]: Watching system buttons on /dev/input/event1 (AT Translated Set 2 keyboard)
+Sep 05 21:10:27 omarchy-benchmark systemd[1]: Started User Login Management.
+Sep 05 21:10:27 omarchy-benchmark avahi-daemon[551]: Found user 'avahi' (UID 979) and group 'avahi' (GID 979).
+Sep 05 21:10:27 omarchy-benchmark avahi-daemon[551]: Successfully dropped root privileges.
+Sep 05 21:10:27 omarchy-benchmark avahi-daemon[551]: avahi-daemon 0.9-rc5 starting up.
+Sep 05 21:10:27 omarchy-benchmark systemd[1]: Started Avahi mDNS/DNS-SD Stack.
+Sep 05 21:10:27 omarchy-benchmark avahi-daemon[551]: Successfully called chroot().
+Sep 05 21:10:27 omarchy-benchmark avahi-daemon[551]: Successfully dropped remaining capabilities.
+Sep 05 21:10:27 omarchy-benchmark avahi-daemon[551]: No service file found in /etc/avahi/services.
+Sep 05 21:10:27 omarchy-benchmark avahi-daemon[551]: Joining mDNS multicast group on interface lo.IPv6 with address ::1.
+Sep 05 21:10:27 omarchy-benchmark avahi-daemon[551]: New relevant interface lo.IPv6 for mDNS.
+Sep 05 21:10:27 omarchy-benchmark avahi-daemon[551]: Joining mDNS multicast group on interface lo.IPv4 with address 127.0.0.1.
+Sep 05 21:10:27 omarchy-benchmark avahi-daemon[551]: New relevant interface lo.IPv4 for mDNS.
+Sep 05 21:10:27 omarchy-benchmark avahi-daemon[551]: Network interface enumeration completed.
+Sep 05 21:10:27 omarchy-benchmark avahi-daemon[551]: Registering new address record for ::1 on lo.*.
+Sep 05 21:10:27 omarchy-benchmark avahi-daemon[551]: Registering new address record for 127.0.0.1 on lo.IPv4.
+Sep 05 21:10:28 omarchy-benchmark systemd[1]: Started Hostname Service.
+Sep 05 21:10:28 omarchy-benchmark NetworkManager[550]: <info>  [1788642628.1922] hostname: hostname: using hostnamed
+Sep 05 21:10:28 omarchy-benchmark NetworkManager[550]: <info>  [1788642628.1929] hostname: static hostname changed from (none) to "omarchy-benchmark"
+Sep 05 21:10:28 omarchy-benchmark NetworkManager[550]: <info>  [1788642628.2015] dns-mgr: init: dns=systemd-resolved rc-manager=symlink, plugin=systemd-resolved
+Sep 05 21:10:28 omarchy-benchmark avahi-daemon[551]: Server startup complete. Host name is omarchy-benchmark.local. Local service cookie is 3261760376.
+Sep 05 21:10:28 omarchy-benchmark NetworkManager[550]: <info>  [1788642628.3579] manager[0x55d486c4f0d0]: rfkill: Wi-Fi hardware radio set enabled
+Sep 05 21:10:28 omarchy-benchmark NetworkManager[550]: <info>  [1788642628.3633] manager[0x55d486c4f0d0]: rfkill: WWAN hardware radio set enabled
+Sep 05 21:10:28 omarchy-benchmark systemd[1]: Listening on Load/Save RF Kill Switch Status /dev/rfkill Watch.
+Sep 05 21:10:28 omarchy-benchmark NetworkManager[550]: <info>  [1788642628.4277] Loaded device plugin: NMAtmManager (/usr/lib/NetworkManager/1.58.1-1/libnm-device-plugin-adsl.so)
+Sep 05 21:10:28 omarchy-benchmark NetworkManager[550]: <info>  [1788642628.4585] Loaded device plugin: NMBluezManager (/usr/lib/NetworkManager/1.58.1-1/libnm-device-plugin-bluetooth.so)
+Sep 05 21:10:28 omarchy-benchmark NetworkManager[550]: <info>  [1788642628.4715] Loaded device plugin: NMOvsFactory (/usr/lib/NetworkManager/1.58.1-1/libnm-device-plugin-ovs.so)
+Sep 05 21:10:28 omarchy-benchmark NetworkManager[550]: <info>  [1788642628.5694] Loaded device plugin: NMTeamFactory (/usr/lib/NetworkManager/1.58.1-1/libnm-device-plugin-team.so)
+Sep 05 21:10:28 omarchy-benchmark NetworkManager[550]: <info>  [1788642628.5823] Loaded device plugin: NMWifiFactory (/usr/lib/NetworkManager/1.58.1-1/libnm-device-plugin-wifi.so)
+Sep 05 21:10:28 omarchy-benchmark NetworkManager[550]: <info>  [1788642628.5877] Loaded device plugin: NMWwanFactory (/usr/lib/NetworkManager/1.58.1-1/libnm-device-plugin-wwan.so)
+Sep 05 21:10:28 omarchy-benchmark NetworkManager[550]: <info>  [1788642628.5944] manager: rfkill: Wi-Fi enabled by radio killswitch; enabled by state file
+Sep 05 21:10:28 omarchy-benchmark NetworkManager[550]: <info>  [1788642628.5952] manager: rfkill: WWAN enabled by radio killswitch; enabled by state file
+Sep 05 21:10:28 omarchy-benchmark NetworkManager[550]: <info>  [1788642628.5957] manager: Networking is enabled by state file
+Sep 05 21:10:28 omarchy-benchmark NetworkManager[550]: <info>  [1788642628.6014] settings: Loaded settings plugin: keyfile (internal)
+Sep 05 21:10:28 omarchy-benchmark NetworkManager[550]: <info>  [1788642628.6319] dhcp: init: Using DHCP client 'internal'
+Sep 05 21:10:28 omarchy-benchmark NetworkManager[550]: <info>  [1788642628.6391] manager: (lo): new Loopback device (/org/freedesktop/NetworkManager/Devices/1)
+Sep 05 21:10:28 omarchy-benchmark systemd[1]: Starting Network Manager Script Dispatcher Service...
+Sep 05 21:10:28 omarchy-benchmark NetworkManager[550]: <info>  [1788642628.6998] device (lo): state change: unmanaged -> unavailable (reason 'connection-assumed', managed-type: 'external')
+Sep 05 21:10:28 omarchy-benchmark NetworkManager[550]: <info>  [1788642628.7102] device (lo): state change: unavailable -> disconnected (reason 'connection-assumed', managed-type: 'external')
+Sep 05 21:10:28 omarchy-benchmark NetworkManager[550]: <info>  [1788642628.7248] device (lo): Activation: starting connection 'lo' (b3bf716d-4fe6-4d53-bff4-df7cc0d3a548)
+Sep 05 21:10:28 omarchy-benchmark NetworkManager[550]: <info>  [1788642628.7395] manager: (enp0s4): new Ethernet device (/org/freedesktop/NetworkManager/Devices/2)
+Sep 05 21:10:28 omarchy-benchmark NetworkManager[550]: <info>  [1788642628.7619] settings: (enp0s4): created default wired connection 'Wired connection 1'
+Sep 05 21:10:28 omarchy-benchmark NetworkManager[550]: <info>  [1788642628.7627] device (enp0s4): state change: unmanaged -> unavailable (reason 'managed', managed-type: 'external')
+Sep 05 21:10:28 omarchy-benchmark NetworkManager[550]: <info>  [1788642628.8199] bus-manager: acquired D-Bus service "org.freedesktop.NetworkManager"
+Sep 05 21:10:28 omarchy-benchmark systemd[1]: Started Network Manager.
+Sep 05 21:10:28 omarchy-benchmark systemd[1]: Reached target Network.
+Sep 05 21:10:28 omarchy-benchmark NetworkManager[550]: <info>  [1788642628.8393] ovsdb: disconnected from ovsdb
+Sep 05 21:10:28 omarchy-benchmark NetworkManager[550]: <info>  [1788642628.8449] device (lo): state change: disconnected -> prepare (reason 'none', managed-type: 'external')
+Sep 05 21:10:28 omarchy-benchmark NetworkManager[550]: <info>  [1788642628.8504] device (lo): state change: prepare -> config (reason 'none', managed-type: 'external')
+Sep 05 21:10:28 omarchy-benchmark systemd[1]: Starting CUPS Scheduler...
+Sep 05 21:10:28 omarchy-benchmark NetworkManager[550]: <info>  [1788642628.8615] device (lo): state change: config -> ip-config (reason 'none', managed-type: 'external')
+Sep 05 21:10:28 omarchy-benchmark NetworkManager[550]: <info>  [1788642628.8774] device (enp0s4): carrier: link connected
+Sep 05 21:10:28 omarchy-benchmark systemd[1]: Starting Permit User Sessions...
+Sep 05 21:10:28 omarchy-benchmark NetworkManager[550]: <info>  [1788642628.9074] device (lo): state change: ip-config -> ip-check (reason 'none', managed-type: 'external')
+Sep 05 21:10:28 omarchy-benchmark NetworkManager[550]: <info>  [1788642628.9393] device (enp0s4): state change: unavailable -> disconnected (reason 'carrier-changed', managed-type: 'full')
+Sep 05 21:10:28 omarchy-benchmark NetworkManager[550]: <info>  [1788642628.9542] policy: auto-activating connection 'Wired connection 1' (4da0ba14-4028-3f36-90e4-7760c6a98f0c)
+Sep 05 21:10:28 omarchy-benchmark NetworkManager[550]: <info>  [1788642628.9634] device (enp0s4): Activation: starting connection 'Wired connection 1' (4da0ba14-4028-3f36-90e4-7760c6a98f0c)
+Sep 05 21:10:28 omarchy-benchmark NetworkManager[550]: <info>  [1788642628.9646] device (enp0s4): state change: disconnected -> prepare (reason 'none', managed-type: 'full')
+Sep 05 21:10:28 omarchy-benchmark NetworkManager[550]: <info>  [1788642628.9730] manager: NetworkManager state is now CONNECTING
+Sep 05 21:10:28 omarchy-benchmark NetworkManager[550]: <info>  [1788642628.9786] device (enp0s4): state change: prepare -> config (reason 'none', managed-type: 'full')
+Sep 05 21:10:28 omarchy-benchmark NetworkManager[550]: <info>  [1788642628.9931] device (enp0s4): state change: config -> ip-config (reason 'none', managed-type: 'full')
+Sep 05 21:10:29 omarchy-benchmark NetworkManager[550]: <info>  [1788642629.0126] dhcp4 (enp0s4): activation: beginning transaction (timeout in 45 seconds)
+Sep 05 21:10:29 omarchy-benchmark systemd[1]: Started Network Manager Script Dispatcher Service.
+Sep 05 21:10:29 omarchy-benchmark NetworkManager[550]: <info>  [1788642629.0597] dhcp4 (enp0s4): state changed new lease, address=10.0.2.15, acd pending
+Sep 05 21:10:29 omarchy-benchmark NetworkManager[550]: <info>  [1788642629.1365] device (lo): state change: ip-check -> secondaries (reason 'none', managed-type: 'external')
+Sep 05 21:10:29 omarchy-benchmark NetworkManager[550]: <info>  [1788642629.1418] device (lo): state change: secondaries -> activated (reason 'none', managed-type: 'external')
+Sep 05 21:10:29 omarchy-benchmark systemd[1]: Finished Permit User Sessions.
+Sep 05 21:10:29 omarchy-benchmark NetworkManager[550]: <info>  [1788642629.1595] device (lo): Activation: successful, device activated.
+Sep 05 21:10:29 omarchy-benchmark systemd[1]: Starting Hold until boot process finishes up...
+Sep 05 21:10:29 omarchy-benchmark systemd[1]: Starting Terminate Plymouth Boot Screen...
+Sep 05 21:10:29 omarchy-benchmark NetworkManager[550]: <info>  [1788642629.2962] dhcp4 (enp0s4): state changed new lease, address=10.0.2.15
+Sep 05 21:10:29 omarchy-benchmark avahi-daemon[551]: Joining mDNS multicast group on interface enp0s4.IPv4 with address 10.0.2.15.
+Sep 05 21:10:29 omarchy-benchmark avahi-daemon[551]: New relevant interface enp0s4.IPv4 for mDNS.
+Sep 05 21:10:29 omarchy-benchmark avahi-daemon[551]: Registering new address record for 10.0.2.15 on enp0s4.IPv4.
+Sep 05 21:10:29 omarchy-benchmark NetworkManager[550]: <info>  [1788642629.3565] policy: set 'Wired connection 1' (enp0s4) as default for IPv4 routing and DNS
+Sep 05 21:10:29 omarchy-benchmark systemd[1]: Started CUPS Scheduler.
+Sep 05 21:10:29 omarchy-benchmark systemd-resolved[387]: enp0s4: Bus client set default route setting: yes
+Sep 05 21:10:29 omarchy-benchmark systemd-resolved[387]: enp0s4: Bus client set DNS server list to: 10.0.2.3
+Sep 05 21:10:29 omarchy-benchmark NetworkManager[550]: <info>  [1788642629.4316] device (enp0s4): state change: ip-config -> ip-check (reason 'none', managed-type: 'full')
+Sep 05 21:10:29 omarchy-benchmark NetworkManager[550]: <info>  [1788642629.4467] device (enp0s4): state change: ip-check -> secondaries (reason 'none', managed-type: 'full')
+Sep 05 21:10:29 omarchy-benchmark NetworkManager[550]: <info>  [1788642629.4490] device (enp0s4): state change: secondaries -> activated (reason 'none', managed-type: 'full')
+Sep 05 21:10:29 omarchy-benchmark NetworkManager[550]: <info>  [1788642629.4520] manager: NetworkManager state is now CONNECTED_SITE
+Sep 05 21:10:29 omarchy-benchmark NetworkManager[550]: <info>  [1788642629.4537] device (enp0s4): Activation: successful, device activated.
+Sep 05 21:10:29 omarchy-benchmark NetworkManager[550]: <info>  [1788642629.4576] manager: startup complete
+Sep 05 21:10:29 omarchy-benchmark systemd[1]: Received SIGRTMIN+21 from PID 184 (plymouthd).
+Sep 05 21:10:29 omarchy-benchmark systemd[1]: Finished Hold until boot process finishes up.
+Sep 05 21:10:29 omarchy-benchmark systemd[1]: Finished Terminate Plymouth Boot Screen.
+Sep 05 21:10:29 omarchy-benchmark systemd[1]: Started Simple Desktop Display Manager.
+Sep 05 21:10:29 omarchy-benchmark systemd[1]: Started Serial Getty on ttyS0.
+Sep 05 21:10:29 omarchy-benchmark systemd[1]: Reached target Login Prompts.
+Sep 05 21:10:29 omarchy-benchmark systemd-resolved[387]: Using degraded feature set UDP instead of UDP+EDNS0 for DNS server 10.0.2.3.
+Sep 05 21:10:29 omarchy-benchmark systemd-resolved[387]: Using degraded feature set TCP instead of UDP for DNS server 10.0.2.3.
+Sep 05 21:10:29 omarchy-benchmark systemd-resolved[387]: Using degraded feature set UDP instead of TCP for DNS server 10.0.2.3.
+Sep 05 21:10:29 omarchy-benchmark sddm[608]: Initializing...
+Sep 05 21:10:30 omarchy-benchmark sddm[608]: Starting...
+Sep 05 21:10:30 omarchy-benchmark sddm[608]: Logind interface found
+Sep 05 21:10:30 omarchy-benchmark sddm[608]: Adding new display...
+Sep 05 21:10:30 omarchy-benchmark sddm[608]: Loaded empty theme configuration
+Sep 05 21:10:30 omarchy-benchmark sddm[608]: Using VT 1
+Sep 05 21:10:30 omarchy-benchmark sddm[608]: Display server started.
+Sep 05 21:10:30 omarchy-benchmark sddm[608]: Socket server starting...
+Sep 05 21:10:30 omarchy-benchmark sddm[608]: Socket server started.
+Sep 05 21:10:30 omarchy-benchmark sddm[608]: Loading theme configuration from "/usr/share/sddm/themes/omarchy/theme.conf"
+Sep 05 21:10:30 omarchy-benchmark sddm[608]: Greeter starting...
+Sep 05 21:10:30 omarchy-benchmark ssh-keygen[554]: ssh-keygen: generating new host keys: RSA ECDSA ED25519 MLDSA44-ED25519
+Sep 05 21:10:30 omarchy-benchmark systemd[1]: sshdgenkeys.service: Deactivated successfully.
+Sep 05 21:10:30 omarchy-benchmark systemd[1]: Finished SSH Key Generation.
+Sep 05 21:10:30 omarchy-benchmark systemd[1]: sshdgenkeys.service: Consumed 3.496s CPU time over 4.694s wall clock time, 2.1M memory peak.
+Sep 05 21:10:30 omarchy-benchmark systemd[1]: Starting OpenSSH Daemon...
+Sep 05 21:10:30 omarchy-benchmark sddm-helper[612]: [PAM] Starting...
+Sep 05 21:10:30 omarchy-benchmark sddm-helper[612]: [PAM] Authenticating...
+Sep 05 21:10:30 omarchy-benchmark sddm-helper[612]: [PAM] returning.
+Sep 05 21:10:30 omarchy-benchmark sddm-helper[612]: pam_unix(sddm-greeter:session): session opened for user sddm(uid=961) by (uid=0)
+Sep 05 21:10:30 omarchy-benchmark systemd-logind[555]: New session 'c1' of user 'sddm' with class 'greeter' and type 'wayland'.
+Sep 05 21:10:30 omarchy-benchmark sshd[614]: Server listening on 0.0.0.0 port 22.
+Sep 05 21:10:30 omarchy-benchmark sshd[614]: Server listening on :: port 22.
+Sep 05 21:10:30 omarchy-benchmark systemd[1]: Created slice User Slice of UID 961.
+Sep 05 21:10:30 omarchy-benchmark systemd[1]: Starting User Runtime Directory /run/user/961...
+Sep 05 21:10:30 omarchy-benchmark systemd[1]: Started OpenSSH Daemon.
+Sep 05 21:10:30 omarchy-benchmark systemd[1]: Reached target Multi-User System.
+Sep 05 21:10:30 omarchy-benchmark systemd[1]: Reached target SSH Access Available.
+Sep 05 21:10:30 omarchy-benchmark systemd[1]: Starting Power Profiles daemon...
+Sep 05 21:10:30 omarchy-benchmark avahi-daemon[551]: Joining mDNS multicast group on interface enp0s4.IPv6 with address fe80::fd19:4078:4f17:76af.
+Sep 05 21:10:30 omarchy-benchmark avahi-daemon[551]: New relevant interface enp0s4.IPv6 for mDNS.
+Sep 05 21:10:30 omarchy-benchmark avahi-daemon[551]: Registering new address record for fe80::fd19:4078:4f17:76af on enp0s4.*.
+Sep 05 21:10:31 omarchy-benchmark systemd[1]: Finished User Runtime Directory /run/user/961.
+Sep 05 21:10:31 omarchy-benchmark systemd[1]: Starting User Manager for UID 961...
+Sep 05 21:10:31 omarchy-benchmark NetworkManager[550]: <info>  [1788642631.0905] policy: set 'Wired connection 1' (enp0s4) as default for IPv6 routing and DNS
+Sep 05 21:10:31 omarchy-benchmark dbus-broker-launch[548]: Activation request for 'org.freedesktop.home1' failed: The systemd unit 'dbus-org.freedesktop.home1.service' could not be found.
+Sep 05 21:10:31 omarchy-benchmark (systemd)[623]: pam_warn(systemd-user:setcred): function=[pam_sm_setcred] flags=0x8002 service=[systemd-user] terminal=[] user=[sddm] ruser=[<unknown>] rhost=[<unknown>]
+Sep 05 21:10:31 omarchy-benchmark (systemd)[623]: pam_unix(systemd-user:session): session opened for user sddm(uid=961) by sddm(uid=0)
+Sep 05 21:10:31 omarchy-benchmark systemd-logind[555]: New session '1' of user 'sddm' with class 'manager-early' and type 'unspecified'.
+Sep 05 21:10:31 omarchy-benchmark systemd-resolved[387]: Using degraded feature set TCP instead of UDP for DNS server 10.0.2.3.
+Sep 05 21:10:31 omarchy-benchmark systemd-resolved[387]: Using degraded feature set UDP instead of TCP for DNS server 10.0.2.3.
+Sep 05 21:10:31 omarchy-benchmark systemd-resolved[387]: Using degraded feature set TCP instead of UDP for DNS server 10.0.2.3.
+Sep 05 21:10:31 omarchy-benchmark systemd-resolved[387]: Using degraded feature set UDP instead of TCP for DNS server 10.0.2.3.
+Sep 05 21:10:31 omarchy-benchmark systemd[1]: Starting Authorization Manager...
+Sep 05 21:10:31 omarchy-benchmark sshd-session[625]: Connection closed by 10.0.2.2 port 53886 [preauth]
+Sep 05 21:10:32 omarchy-benchmark polkitd[632]: Started polkitd version 127
+Sep 05 21:10:32 omarchy-benchmark systemd[1]: Started Authorization Manager.
+Sep 05 21:10:32 omarchy-benchmark systemd[1]: Started Power Profiles daemon.
+Sep 05 21:10:32 omarchy-benchmark systemd[1]: Reached target Graphical Interface.
+Sep 05 21:10:32 omarchy-benchmark sshd-session[637]: Accepted publickey for omarchy from 10.0.2.2 port 60286 ssh2: ED25519 SHA256:cxKX9reHaqt3DjqQ6nXEW0AeBXEFdRAroZr5szJrWAg
+Sep 05 21:10:32 omarchy-benchmark sshd-session[637]: pam_unix(sshd:session): session opened for user omarchy(uid=1000) by omarchy(uid=0)
+Sep 05 21:10:32 omarchy-benchmark avahi-daemon[551]: Leaving mDNS multicast group on interface enp0s4.IPv6 with address fe80::fd19:4078:4f17:76af.
+Sep 05 21:10:32 omarchy-benchmark avahi-daemon[551]: Joining mDNS multicast group on interface enp0s4.IPv6 with address fec0::5b0d:39df:12b2:6ea3.
+Sep 05 21:10:32 omarchy-benchmark avahi-daemon[551]: Registering new address record for fec0::5b0d:39df:12b2:6ea3 on enp0s4.*.
+Sep 05 21:10:32 omarchy-benchmark avahi-daemon[551]: Withdrawing address record for fe80::fd19:4078:4f17:76af on enp0s4.
+Sep 05 21:10:32 omarchy-benchmark systemd[1]: Created slice User Slice of UID 1000.
+Sep 05 21:10:32 omarchy-benchmark systemd[1]: Starting User Runtime Directory /run/user/1000...
+Sep 05 21:10:32 omarchy-benchmark systemd-logind[555]: New session '2' of user 'omarchy' with class 'user' and type 'tty'.
+Sep 05 21:10:33 omarchy-benchmark systemd[623]: Queued start job for default target Main User Target.
+Sep 05 21:10:33 omarchy-benchmark systemd[623]: Created slice User Application Slice.
+Sep 05 21:10:33 omarchy-benchmark systemd[623]: Reached target Paths.
+Sep 05 21:10:33 omarchy-benchmark systemd[623]: Reached target Timers.
+Sep 05 21:10:33 omarchy-benchmark systemd[623]: Starting D-Bus User Message Bus Socket...
+Sep 05 21:10:33 omarchy-benchmark systemd[623]: Listening on GnuPG network certificate management daemon.
+Sep 05 21:10:33 omarchy-benchmark systemd[623]: Listening on GNOME Keyring daemon.
+Sep 05 21:10:33 omarchy-benchmark systemd[623]: Listening on GnuPG cryptographic agent and passphrase cache (access for web browsers).
+Sep 05 21:10:33 omarchy-benchmark systemd[623]: Listening on GnuPG cryptographic agent and passphrase cache (restricted).
+Sep 05 21:10:33 omarchy-benchmark systemd[623]: Listening on GnuPG cryptographic agent (ssh-agent emulation).
+Sep 05 21:10:33 omarchy-benchmark systemd[623]: Listening on GnuPG cryptographic agent and passphrase cache.
+Sep 05 21:10:33 omarchy-benchmark systemd[623]: Listening on GnuPG public key management service.
+Sep 05 21:10:33 omarchy-benchmark systemd[623]: Listening on p11-kit server.
+Sep 05 21:10:33 omarchy-benchmark systemd[623]: Listening on PipeWire PulseAudio.
+Sep 05 21:10:33 omarchy-benchmark systemd[623]: Listening on PipeWire Multimedia System Sockets.
+Sep 05 21:10:33 omarchy-benchmark systemd[623]: Listening on Query the User Interactively for a Password.
+Sep 05 21:10:33 omarchy-benchmark systemd[623]: Listening on Disk Image Download Service Socket.
+Sep 05 21:10:33 omarchy-benchmark systemd[623]: Listening on Journal Log Access Socket.
+Sep 05 21:10:33 omarchy-benchmark systemd[623]: Listening on Virtual Machine and Container Registration Service Socket.
+Sep 05 21:10:33 omarchy-benchmark systemd[623]: Listening on Simple File System Backed Storage Provider.
+Sep 05 21:10:33 omarchy-benchmark systemd-user-runtime-dir[653]: Successfully configured disk quota for UID 1000 on /tmp to 3G
+Sep 05 21:10:33 omarchy-benchmark systemd-user-runtime-dir[653]: Successfully configured disk quota for UID 1000 on /dev/shm to 3G
+Sep 05 21:10:33 omarchy-benchmark systemd[1]: Finished User Runtime Directory /run/user/1000.
+Sep 05 21:10:33 omarchy-benchmark systemd[1]: Starting User Manager for UID 1000...
+Sep 05 21:10:33 omarchy-benchmark systemd[623]: Listening on D-Bus User Message Bus Socket.
+Sep 05 21:10:33 omarchy-benchmark systemd[623]: Reached target Sockets.
+Sep 05 21:10:33 omarchy-benchmark systemd[623]: Reached target Basic System.
+Sep 05 21:10:33 omarchy-benchmark systemd[1]: Started User Manager for UID 961.
+Sep 05 21:10:33 omarchy-benchmark systemd[623]: Reached target Main User Target.
+Sep 05 21:10:33 omarchy-benchmark systemd[623]: Startup finished in 1.842s.
+Sep 05 21:10:33 omarchy-benchmark systemd[1]: Started Session c1 of User sddm.
+Sep 05 21:10:33 omarchy-benchmark sddm-helper[660]: Jumping to VT 1
+Sep 05 21:10:33 omarchy-benchmark sddm-helper[660]: VT mode fixed
+Sep 05 21:10:33 omarchy-benchmark sddm[608]: Greeter session started successfully
+Sep 05 21:10:33 omarchy-benchmark (systemd)[657]: pam_warn(systemd-user:setcred): function=[pam_sm_setcred] flags=0x8002 service=[systemd-user] terminal=[] user=[omarchy] ruser=[<unknown>] rhost=[<unknown>]
+Sep 05 21:10:33 omarchy-benchmark (systemd)[657]: pam_unix(systemd-user:session): session opened for user omarchy(uid=1000) by omarchy(uid=0)
+Sep 05 21:10:33 omarchy-benchmark sshd-session[655]: Connection closed by 10.0.2.2 port 45670 [preauth]
+Sep 05 21:10:33 omarchy-benchmark systemd-logind[555]: New session '3' of user 'omarchy' with class 'manager' and type 'unspecified'.
+Sep 05 21:10:33 omarchy-benchmark sddm-helper-start-wayland[660]: Starting Wayland process "start-hyprland -- --config /usr/share/sddm/hyprland.lua" "sddm"
+Sep 05 21:10:33 omarchy-benchmark sddm-helper-start-wayland[660]: started succesfully "start-hyprland -- --config /usr/share/sddm/hyprland.lua"
+Sep 05 21:10:33 omarchy-benchmark sddm-helper-start-wayland[660]: "\x1B[1;33mWARN \x1B[0mfrom start-hyprland ]: Arguments after -- are passed to Hyprland\n"
+Sep 05 21:10:35 omarchy-benchmark systemd[657]: Queued start job for default target Main User Target.
+Sep 05 21:10:35 omarchy-benchmark systemd[657]: Created slice User Application Slice.
+Sep 05 21:10:35 omarchy-benchmark systemd[657]: Created slice User Core Session Slice.
+Sep 05 21:10:35 omarchy-benchmark systemd[657]: Reached target Paths.
+Sep 05 21:10:35 omarchy-benchmark systemd[657]: Reached target Timers.
+Sep 05 21:10:35 omarchy-benchmark systemd[657]: Starting D-Bus User Message Bus Socket...
+Sep 05 21:10:35 omarchy-benchmark systemd[657]: Listening on GnuPG network certificate management daemon.
+Sep 05 21:10:35 omarchy-benchmark systemd[657]: Listening on GNOME Keyring daemon.
+Sep 05 21:10:35 omarchy-benchmark systemd[657]: Listening on GnuPG cryptographic agent and passphrase cache (access for web browsers).
+Sep 05 21:10:35 omarchy-benchmark systemd[657]: Listening on GnuPG cryptographic agent and passphrase cache (restricted).
+Sep 05 21:10:35 omarchy-benchmark systemd[657]: Listening on GnuPG cryptographic agent (ssh-agent emulation).
+Sep 05 21:10:35 omarchy-benchmark systemd[657]: Listening on GnuPG cryptographic agent and passphrase cache.
+Sep 05 21:10:35 omarchy-benchmark systemd[657]: Listening on GnuPG public key management service.
+Sep 05 21:10:35 omarchy-benchmark systemd[657]: Listening on p11-kit server.
+Sep 05 21:10:35 omarchy-benchmark systemd[657]: Listening on PipeWire PulseAudio.
+Sep 05 21:10:35 omarchy-benchmark systemd[657]: Listening on PipeWire Multimedia System Sockets.
+Sep 05 21:10:35 omarchy-benchmark systemd[657]: Listening on Query the User Interactively for a Password.
+Sep 05 21:10:35 omarchy-benchmark systemd[657]: Listening on Disk Image Download Service Socket.
+Sep 05 21:10:35 omarchy-benchmark systemd[657]: Listening on Journal Log Access Socket.
+Sep 05 21:10:35 omarchy-benchmark systemd[657]: Listening on Virtual Machine and Container Registration Service Socket.
+Sep 05 21:10:35 omarchy-benchmark systemd[657]: Listening on Simple File System Backed Storage Provider.
+Sep 05 21:10:35 omarchy-benchmark systemd[657]: Listening on D-Bus User Message Bus Socket.
+Sep 05 21:10:35 omarchy-benchmark systemd[657]: Reached target Sockets.
+Sep 05 21:10:35 omarchy-benchmark systemd[657]: Starting D-Bus User Message Bus...
+Sep 05 21:10:35 omarchy-benchmark systemd-resolved[387]: Using degraded feature set TCP instead of UDP for DNS server 10.0.2.3.
+Sep 05 21:10:35 omarchy-benchmark systemd-resolved[387]: Using degraded feature set UDP instead of TCP for DNS server 10.0.2.3.
+Sep 05 21:10:35 omarchy-benchmark systemd-resolved[387]: Using degraded feature set TCP instead of UDP for DNS server 10.0.2.3.
+Sep 05 21:10:35 omarchy-benchmark systemd-resolved[387]: Using degraded feature set UDP instead of TCP for DNS server 10.0.2.3.
+Sep 05 21:10:35 omarchy-benchmark systemd-resolved[387]: Using degraded feature set TCP instead of UDP for DNS server 10.0.2.3.
+Sep 05 21:10:35 omarchy-benchmark systemd-resolved[387]: Using degraded feature set UDP instead of TCP for DNS server 10.0.2.3.
+Sep 05 21:10:35 omarchy-benchmark sshd-session[674]: Connection closed by 10.0.2.2 port 58902 [preauth]
+Sep 05 21:10:35 omarchy-benchmark dbus-broker-launch[676]: Policy to allow eavesdropping in /usr/share/dbus-1/session.conf +31: Eavesdropping is deprecated and ignored
+Sep 05 21:10:35 omarchy-benchmark dbus-broker-launch[676]: Policy to allow eavesdropping in /usr/share/dbus-1/session.conf +33: Eavesdropping is deprecated and ignored
+Sep 05 21:10:35 omarchy-benchmark systemd[657]: Started D-Bus User Message Bus.
+Sep 05 21:10:35 omarchy-benchmark systemd[657]: Reached target Basic System.
+Sep 05 21:10:35 omarchy-benchmark systemd[1]: Started User Manager for UID 1000.
+Sep 05 21:10:35 omarchy-benchmark systemd[1]: Started Session 2 of User omarchy.
+Sep 05 21:10:35 omarchy-benchmark systemd[1]: Startup finished in 9min 50.499s (firmware) + 1min 36.199s (loader) + 10.807s (kernel) + 39.416s (userspace) = 12min 16.923s.
+Sep 05 21:10:35 omarchy-benchmark systemd[657]: Started PipeWire Multimedia Service.
+Sep 05 21:10:35 omarchy-benchmark systemd[657]: Started Multimedia Service Session Manager.
+Sep 05 21:10:35 omarchy-benchmark dbus-broker-launch[676]: Ready
+Sep 05 21:10:35 omarchy-benchmark systemd[657]: Started PipeWire PulseAudio.
+Sep 05 21:10:35 omarchy-benchmark systemd[657]: Reached target Main User Target.
+Sep 05 21:10:35 omarchy-benchmark systemd[657]: Startup finished in 2.001s.
+Sep 05 21:10:35 omarchy-benchmark sshd-session[680]: Received disconnect from 10.0.2.2 port 60286:11: disconnected by user
+Sep 05 21:10:35 omarchy-benchmark sshd-session[680]: Disconnected from user omarchy 10.0.2.2 port 60286
+Sep 05 21:10:35 omarchy-benchmark sshd-session[637]: pam_unix(sshd:session): session closed for user omarchy
+Sep 05 21:10:35 omarchy-benchmark sddm-helper-start-wayland[660]: "\x1B[1;32mDEBUG \x1B[0m]: User-specified config location: '/usr/share/sddm/hyprland.lua'\n"
+Sep 05 21:10:35 omarchy-benchmark sddm-helper-start-wayland[660]: "Welcome to Hyprland!\n\n                                                  \n                     YY    UJ                     \n                    YYY    UUJ                    \n                   XXXY    UUUU                   \n                  zXXXX    UUUUU                  \n                zzzzX        UUUUJ                \n               cczzz          UUUUJ               \n             vccccz            UUUUUJ             \n            vvcccc              UUUUUJ            \n           vvvvv                  UUUUJ           \n          uuuvv                    UUUUJ          \n         uuuuu                      UUUUU         \n        nnnuu                        UUUUU        \n       nnnnn                          YUUUU       \n       xxnn                            YUUU       \n       xxxn                            YYUU       \n      xxxx                              YYUU      \n      rxxx                              YYYY      \n      rrrx                              YYYY      \n       rrrx                            XXXY       \n       rrrr                            XXXX       \n        rrrr                          zzXX        \n         rrrr                        zzzz         \n          rrrrr                    ccczz          \n           rrrrrx                vccccc           \n             rrrrxxxx        uuvvvvvc             \n                rrxxxxxxnnnnuuuuuv                \n                    xxxxxnnnnu                    \n\n\n\n\x1B[1;33mWARN \x1B[0m]: Failed to change process scheduling strategy\n"
+Sep 05 21:10:35 omarchy-benchmark sddm-helper-start-wayland[660]: Directory "/run/user/961" has changed, checking for Wayland socket
+Sep 05 21:10:35 omarchy-benchmark systemd[1]: session-2.scope: Deactivated successfully.
+Sep 05 21:10:35 omarchy-benchmark systemd-logind[555]: Session 2 logged out. Waiting for processes to exit.
+Sep 05 21:10:35 omarchy-benchmark sddm-helper-start-wayland[660]: "DEBUG ]: Old rlimit: soft -> 65536, hard -> 524288\nDEBUG ]: New rlimit: soft -> 524288, hard -> 524288\nDEBUG ]: Creating the EventLoopManager!\nDEBUG ]: Creating the KeybindManager!\nDEBUG ]: Creating the AnimationManager!\nDEBUG ]: Creating the DynamicPermissionManager!\nDEBUG ]: Creating the MonitorState!\nDEBUG ]: Creating the WorkspaceState!\nDEBUG ]: Creating the ConfigManager!\nDEBUG ]: [cfg] Config is either explicit or special.\nDEBUG ]: [cfg] Config is lua, loading lua mgr\nDEBUG ]: Creating the Error Overlay!\n"
+Sep 05 21:10:35 omarchy-benchmark sddm-helper-start-wayland[660]: "DEBUG ]: Creating the LayoutManager!\n"
+Sep 05 21:10:35 omarchy-benchmark sddm-helper-start-wayland[660]: "DEBUG ]: Creating the TokenManager!\n"
+Sep 05 21:10:35 omarchy-benchmark sddm-helper-start-wayland[660]: "DEBUG ]: Creating the EventManager!\n"
+Sep 05 21:10:35 omarchy-benchmark systemd-logind[555]: Removed session 2.
+Sep 05 21:10:35 omarchy-benchmark sddm-helper-start-wayland[660]: "DEBUG ]: Disabling stdout logs (debug.enable_stdout_logs = 0). Further logs will be written to /run/user/961/hypr/efb50993780079460b0cbed1363e2166a2de1d9f_1788642635_478222409/hyprland.log\n"
+Sep 05 21:10:35 omarchy-benchmark sddm-helper-start-wayland[660]: "DEBUG ]: Creating the PointerManager!\n"
+Sep 05 21:10:35 omarchy-benchmark sddm-helper-start-wayland[660]: "DEBUG ]: Creating the AsyncResourceGatherer!\n"
+Sep 05 21:10:36 omarchy-benchmark pipewire[679]: mod.rt: RTKit error: org.freedesktop.DBus.Error.ServiceUnknown
+Sep 05 21:10:36 omarchy-benchmark pipewire[679]: mod.rt: RTKit does not give us MaxRealtimePriority, using 1
+Sep 05 21:10:36 omarchy-benchmark pipewire[679]: mod.rt: RTKit error: org.freedesktop.DBus.Error.ServiceUnknown
+Sep 05 21:10:36 omarchy-benchmark pipewire[679]: mod.rt: RTKit does not give us MinNiceLevel, using 0
+Sep 05 21:10:36 omarchy-benchmark pipewire[679]: mod.rt: RTKit error: org.freedesktop.DBus.Error.ServiceUnknown
+Sep 05 21:10:36 omarchy-benchmark pipewire[679]: mod.rt: RTKit does not give us RTTimeUSecMax, using -1
+Sep 05 21:10:36 omarchy-benchmark wireplumber[681]: mod.rt: RTKit error: org.freedesktop.DBus.Error.ServiceUnknown
+Sep 05 21:10:36 omarchy-benchmark wireplumber[681]: mod.rt: RTKit does not give us MaxRealtimePriority, using 1
+Sep 05 21:10:36 omarchy-benchmark wireplumber[681]: mod.rt: RTKit error: org.freedesktop.DBus.Error.ServiceUnknown
+Sep 05 21:10:36 omarchy-benchmark wireplumber[681]: mod.rt: RTKit does not give us MinNiceLevel, using 0
+Sep 05 21:10:36 omarchy-benchmark wireplumber[681]: mod.rt: RTKit error: org.freedesktop.DBus.Error.ServiceUnknown
+Sep 05 21:10:36 omarchy-benchmark wireplumber[681]: mod.rt: RTKit does not give us RTTimeUSecMax, using -1
+Sep 05 21:10:36 omarchy-benchmark pipewire-pulse[683]: mod.rt: RTKit error: org.freedesktop.DBus.Error.ServiceUnknown
+Sep 05 21:10:36 omarchy-benchmark pipewire-pulse[683]: mod.rt: RTKit does not give us MaxRealtimePriority, using 1
+Sep 05 21:10:36 omarchy-benchmark pipewire-pulse[683]: mod.rt: RTKit error: org.freedesktop.DBus.Error.ServiceUnknown
+Sep 05 21:10:36 omarchy-benchmark pipewire-pulse[683]: mod.rt: RTKit does not give us MinNiceLevel, using 0
+Sep 05 21:10:36 omarchy-benchmark pipewire-pulse[683]: mod.rt: RTKit error: org.freedesktop.DBus.Error.ServiceUnknown
+Sep 05 21:10:36 omarchy-benchmark pipewire-pulse[683]: mod.rt: RTKit does not give us RTTimeUSecMax, using -1
+Sep 05 21:10:36 omarchy-benchmark sshd-session[684]: Accepted publickey for omarchy from 10.0.2.2 port 60302 ssh2: ED25519 SHA256:cxKX9reHaqt3DjqQ6nXEW0AeBXEFdRAroZr5szJrWAg
+Sep 05 21:10:36 omarchy-benchmark sshd-session[684]: pam_unix(sshd:session): session opened for user omarchy(uid=1000) by omarchy(uid=0)
+Sep 05 21:10:36 omarchy-benchmark systemd-logind[555]: New session '4' of user 'omarchy' with class 'user' and type 'tty'.
+Sep 05 21:10:36 omarchy-benchmark systemd[1]: Started Session 4 of User omarchy.
+Sep 05 21:10:37 omarchy-benchmark sshd-session[700]: Received disconnect from 10.0.2.2 port 60302:11: disconnected by user
+Sep 05 21:10:37 omarchy-benchmark sshd-session[700]: Disconnected from user omarchy 10.0.2.2 port 60302
+Sep 05 21:10:37 omarchy-benchmark sshd-session[684]: pam_unix(sshd:session): session closed for user omarchy
+Sep 05 21:10:37 omarchy-benchmark systemd-logind[555]: Session 4 logged out. Waiting for processes to exit.
+Sep 05 21:10:37 omarchy-benchmark systemd[1]: session-4.scope: Deactivated successfully.
+Sep 05 21:10:37 omarchy-benchmark systemd-logind[555]: Removed session 4.
+Sep 05 21:10:37 omarchy-benchmark sshd-session[704]: Connection closed by 10.0.2.2 port 50478 [preauth]
+Sep 05 21:10:37 omarchy-benchmark wireplumber[681]: wp-device: SPA handle 'api.libcamera.enum.manager' could not be loaded; is it installed?
+Sep 05 21:10:37 omarchy-benchmark wireplumber[681]: s-monitors-libcamera: PipeWire's libcamera SPA plugin is missing or broken. Some camera types may not be supported.
+Sep 05 21:10:38 omarchy-benchmark sshd-session[702]: Accepted publickey for omarchy from 10.0.2.2 port 60308 ssh2: ED25519 SHA256:cxKX9reHaqt3DjqQ6nXEW0AeBXEFdRAroZr5szJrWAg
+Sep 05 21:10:38 omarchy-benchmark sshd-session[702]: pam_unix(sshd:session): session opened for user omarchy(uid=1000) by omarchy(uid=0)
+Sep 05 21:10:38 omarchy-benchmark systemd-logind[555]: New session '5' of user 'omarchy' with class 'user' and type 'tty'.
+Sep 05 21:10:38 omarchy-benchmark systemd[1]: Started Session 5 of User omarchy.
+Sep 05 21:10:38 omarchy-benchmark sddm-helper-start-wayland[660]: "MESA-EGL: warning: egl: failed to create dri2 screen\n"
+Sep 05 21:10:38 omarchy-benchmark sddm-helper-start-wayland[660]: "MESA-EGL: warning: egl: failed to create dri2 screen\n"
+Sep 05 21:10:38 omarchy-benchmark sddm-helper-start-wayland[660]: "MESA-EGL: warning: NEEDS EXTENSION: falling back to kms_swrast\n"
+Sep 05 21:10:39 omarchy-benchmark systemd[1]: NetworkManager-dispatcher.service: Deactivated successfully.
+Sep 05 21:10:39 omarchy-benchmark sudo[711]:  omarchy : PWD=/home/omarchy ; USER=root ; COMMAND=/usr/bin/bash -c 'cat /var/log/omarchy-install-timing.json'
+Sep 05 21:10:39 omarchy-benchmark sudo[711]: pam_unix(sudo:session): session opened for user root(uid=0) by omarchy(uid=1000)
+Sep 05 21:10:39 omarchy-benchmark sudo[711]: pam_unix(sudo:session): session closed for user root
+Sep 05 21:10:39 omarchy-benchmark sshd-session[708]: Received disconnect from 10.0.2.2 port 60308:11: disconnected by user
+Sep 05 21:10:39 omarchy-benchmark sshd-session[708]: Disconnected from user omarchy 10.0.2.2 port 60308
+Sep 05 21:10:39 omarchy-benchmark sshd-session[702]: pam_unix(sshd:session): session closed for user omarchy
+Sep 05 21:10:39 omarchy-benchmark systemd[1]: session-5.scope: Deactivated successfully.
+Sep 05 21:10:39 omarchy-benchmark systemd-logind[555]: Session 5 logged out. Waiting for processes to exit.
+Sep 05 21:10:39 omarchy-benchmark systemd-logind[555]: Removed session 5.
+Sep 05 21:10:40 omarchy-benchmark sshd-session[729]: Connection closed by 10.0.2.2 port 56852 [preauth]
+Sep 05 21:10:40 omarchy-benchmark sshd-session[726]: Accepted publickey for omarchy from 10.0.2.2 port 60312 ssh2: ED25519 SHA256:cxKX9reHaqt3DjqQ6nXEW0AeBXEFdRAroZr5szJrWAg
+Sep 05 21:10:40 omarchy-benchmark sshd-session[726]: pam_unix(sshd:session): session opened for user omarchy(uid=1000) by omarchy(uid=0)
+Sep 05 21:10:41 omarchy-benchmark systemd-logind[555]: New session '6' of user 'omarchy' with class 'user' and type 'tty'.
+Sep 05 21:10:41 omarchy-benchmark systemd[1]: Started Session 6 of User omarchy.
+Sep 05 21:10:41 omarchy-benchmark systemd-resolved[387]: Using degraded feature set TCP instead of UDP for DNS server 10.0.2.3.
+Sep 05 21:10:41 omarchy-benchmark systemd-resolved[387]: Using degraded feature set UDP instead of TCP for DNS server 10.0.2.3.
+Sep 05 21:10:41 omarchy-benchmark systemd-resolved[387]: Using degraded feature set TCP instead of UDP for DNS server 10.0.2.3.
+Sep 05 21:10:41 omarchy-benchmark systemd-resolved[387]: Using degraded feature set UDP instead of TCP for DNS server 10.0.2.3.
+Sep 05 21:10:41 omarchy-benchmark systemd-resolved[387]: Using degraded feature set TCP instead of UDP for DNS server 10.0.2.3.
+Sep 05 21:10:41 omarchy-benchmark systemd-resolved[387]: Using degraded feature set UDP instead of TCP for DNS server 10.0.2.3.
+Sep 05 21:10:41 omarchy-benchmark systemd-resolved[387]: Using degraded feature set TCP instead of UDP for DNS server 10.0.2.3.
+Sep 05 21:10:41 omarchy-benchmark systemd-resolved[387]: Using degraded feature set UDP instead of TCP for DNS server 10.0.2.3.
+Sep 05 21:10:41 omarchy-benchmark systemd-resolved[387]: Using degraded feature set TCP instead of UDP for DNS server 10.0.2.3.
+Sep 05 21:10:41 omarchy-benchmark systemd-resolved[387]: Using degraded feature set UDP instead of TCP for DNS server 10.0.2.3.
+Sep 05 21:10:41 omarchy-benchmark systemd-resolved[387]: Using degraded feature set TCP instead of UDP for DNS server 10.0.2.3.
+Sep 05 21:10:41 omarchy-benchmark systemd-resolved[387]: Using degraded feature set UDP instead of TCP for DNS server 10.0.2.3.
+Sep 05 21:10:41 omarchy-benchmark systemd-resolved[387]: Using degraded feature set TCP instead of UDP for DNS server 10.0.2.3.
+Sep 05 21:10:41 omarchy-benchmark systemd-resolved[387]: Using degraded feature set UDP instead of TCP for DNS server 10.0.2.3.
+Sep 05 21:10:41 omarchy-benchmark systemd-resolved[387]: Using degraded feature set TCP instead of UDP for DNS server 10.0.2.3.
+Sep 05 21:10:41 omarchy-benchmark systemd-resolved[387]: Using degraded feature set UDP instead of TCP for DNS server 10.0.2.3.
+Sep 05 21:10:41 omarchy-benchmark systemd-resolved[387]: Using degraded feature set TCP instead of UDP for DNS server 10.0.2.3.
+Sep 05 21:10:41 omarchy-benchmark systemd-resolved[387]: Using degraded feature set UDP instead of TCP for DNS server 10.0.2.3.
+Sep 05 21:10:41 omarchy-benchmark systemd-resolved[387]: Using degraded feature set TCP instead of UDP for DNS server 10.0.2.3.
+Sep 05 21:10:41 omarchy-benchmark sshd-session[736]: Connection closed by 10.0.2.2 port 55206 [preauth]
+Sep 05 21:10:41 omarchy-benchmark systemd-resolved[387]: Using degraded feature set UDP instead of TCP for DNS server 10.0.2.3.
+Sep 05 21:10:41 omarchy-benchmark systemd-resolved[387]: Using degraded feature set TCP instead of UDP for DNS server 10.0.2.3.
+Sep 05 21:10:41 omarchy-benchmark systemd-resolved[387]: Using degraded feature set UDP instead of TCP for DNS server 10.0.2.3.
+Sep 05 21:10:41 omarchy-benchmark systemd-resolved[387]: Using degraded feature set TCP instead of UDP for DNS server 10.0.2.3.
+Sep 05 21:10:41 omarchy-benchmark systemd-resolved[387]: Using degraded feature set UDP instead of TCP for DNS server 10.0.2.3.
+Sep 05 21:10:41 omarchy-benchmark systemd-resolved[387]: Using degraded feature set TCP instead of UDP for DNS server 10.0.2.3.
+Sep 05 21:10:41 omarchy-benchmark systemd-resolved[387]: Using degraded feature set UDP instead of TCP for DNS server 10.0.2.3.
+Sep 05 21:10:41 omarchy-benchmark systemd-resolved[387]: Using degraded feature set TCP instead of UDP for DNS server 10.0.2.3.
+Sep 05 21:10:41 omarchy-benchmark systemd-resolved[387]: Using degraded feature set UDP instead of TCP for DNS server 10.0.2.3.
+Sep 05 21:10:41 omarchy-benchmark systemd-resolved[387]: Using degraded feature set TCP instead of UDP for DNS server 10.0.2.3.
+Sep 05 21:10:41 omarchy-benchmark systemd-resolved[387]: Using degraded feature set UDP instead of TCP for DNS server 10.0.2.3.
+Sep 05 21:10:41 omarchy-benchmark systemd-resolved[387]: Using degraded feature set TCP instead of UDP for DNS server 10.0.2.3.
+Sep 05 21:10:41 omarchy-benchmark systemd-resolved[387]: Using degraded feature set UDP instead of TCP for DNS server 10.0.2.3.
+Sep 05 21:10:41 omarchy-benchmark systemd-resolved[387]: Using degraded feature set TCP instead of UDP for DNS server 10.0.2.3.
+Sep 05 21:10:41 omarchy-benchmark systemd-resolved[387]: Using degraded feature set UDP instead of TCP for DNS server 10.0.2.3.
+Sep 05 21:10:41 omarchy-benchmark sddm-helper-start-wayland[660]: "MESA-EGL: warning: egl: failed to create dri2 screen\n"
+Sep 05 21:10:41 omarchy-benchmark sshd-session[732]: Received disconnect from 10.0.2.2 port 60312:11: disconnected by user
+Sep 05 21:10:41 omarchy-benchmark sshd-session[732]: Disconnected from user omarchy 10.0.2.2 port 60312
+Sep 05 21:10:41 omarchy-benchmark sshd-session[726]: pam_unix(sshd:session): session closed for user omarchy
+Sep 05 21:10:41 omarchy-benchmark sddm-helper-start-wayland[660]: "MESA-EGL: warning: egl: failed to create dri2 screen\n"
+Sep 05 21:10:41 omarchy-benchmark sddm-helper-start-wayland[660]: "MESA-EGL: warning: NEEDS EXTENSION: falling back to kms_swrast\n"
+Sep 05 21:10:42 omarchy-benchmark systemd[1]: session-6.scope: Deactivated successfully.
+Sep 05 21:10:42 omarchy-benchmark systemd-logind[555]: Session 6 logged out. Waiting for processes to exit.
+Sep 05 21:10:42 omarchy-benchmark systemd-logind[555]: Removed session 6.
+Sep 05 21:10:42 omarchy-benchmark sddm-helper-start-wayland[660]: Directory "/run/user/961" has changed, checking for Wayland socket
+Sep 05 21:10:42 omarchy-benchmark sddm-helper-start-wayland[660]: Found Wayland socket "/run/user/961/wayland-1"
+Sep 05 21:10:42 omarchy-benchmark sshd-session[739]: Accepted publickey for omarchy from 10.0.2.2 port 55142 ssh2: ED25519 SHA256:cxKX9reHaqt3DjqQ6nXEW0AeBXEFdRAroZr5szJrWAg
+Sep 05 21:10:42 omarchy-benchmark sshd-session[739]: pam_unix(sshd:session): session opened for user omarchy(uid=1000) by omarchy(uid=0)
+Sep 05 21:10:42 omarchy-benchmark systemd-logind[555]: New session '7' of user 'omarchy' with class 'user' and type 'tty'.
+Sep 05 21:10:42 omarchy-benchmark systemd[1]: Started Session 7 of User omarchy.
+Sep 05 21:10:42 omarchy-benchmark sddm-greeter-qt6[754]: High-DPI autoscaling Enabled
+Sep 05 21:10:43 omarchy-benchmark systemd[623]: Created slice User Core Session Slice.
+Sep 05 21:10:43 omarchy-benchmark systemd[623]: Starting D-Bus User Message Bus...
+Sep 05 21:10:43 omarchy-benchmark systemd-resolved[387]: Using degraded feature set TCP instead of UDP for DNS server 10.0.2.3.
+Sep 05 21:10:43 omarchy-benchmark systemd-resolved[387]: Using degraded feature set UDP instead of TCP for DNS server 10.0.2.3.
+Sep 05 21:10:43 omarchy-benchmark systemd-resolved[387]: Using degraded feature set TCP instead of UDP for DNS server 10.0.2.3.
+Sep 05 21:10:43 omarchy-benchmark systemd-resolved[387]: Using degraded feature set UDP instead of TCP for DNS server 10.0.2.3.
+Sep 05 21:10:43 omarchy-benchmark systemd-resolved[387]: Using degraded feature set TCP instead of UDP for DNS server 10.0.2.3.
+Sep 05 21:10:43 omarchy-benchmark systemd-resolved[387]: Using degraded feature set UDP instead of TCP for DNS server 10.0.2.3.
+Sep 05 21:10:43 omarchy-benchmark sshd-session[756]: Received disconnect from 10.0.2.2 port 55142:11: disconnected by user
+Sep 05 21:10:43 omarchy-benchmark sshd-session[756]: Disconnected from user omarchy 10.0.2.2 port 55142
+Sep 05 21:10:43 omarchy-benchmark sshd-session[739]: pam_unix(sshd:session): session closed for user omarchy
+Sep 05 21:10:43 omarchy-benchmark dbus-broker-launch[763]: Policy to allow eavesdropping in /usr/share/dbus-1/session.conf +31: Eavesdropping is deprecated and ignored
+Sep 05 21:10:43 omarchy-benchmark dbus-broker-launch[763]: Policy to allow eavesdropping in /usr/share/dbus-1/session.conf +33: Eavesdropping is deprecated and ignored
+Sep 05 21:10:43 omarchy-benchmark systemd[623]: Started D-Bus User Message Bus.
+Sep 05 21:10:43 omarchy-benchmark systemd[1]: session-7.scope: Deactivated successfully.
+Sep 05 21:10:43 omarchy-benchmark systemd-logind[555]: Session 7 logged out. Waiting for processes to exit.
+Sep 05 21:10:43 omarchy-benchmark systemd-logind[555]: Removed session 7.
+Sep 05 21:10:43 omarchy-benchmark dbus-broker-launch[763]: Ready
+Sep 05 21:10:43 omarchy-benchmark systemd[623]: Starting User preferences database...
+Sep 05 21:10:44 omarchy-benchmark systemd[623]: Started User preferences database.
+Sep 05 21:10:44 omarchy-benchmark sshd-session[764]: Accepted publickey for omarchy from 10.0.2.2 port 55158 ssh2: ED25519 SHA256:cxKX9reHaqt3DjqQ6nXEW0AeBXEFdRAroZr5szJrWAg
+Sep 05 21:10:44 omarchy-benchmark sshd-session[764]: pam_unix(sshd:session): session opened for user omarchy(uid=1000) by omarchy(uid=0)
+Sep 05 21:10:44 omarchy-benchmark systemd-logind[555]: New session '8' of user 'omarchy' with class 'user' and type 'tty'.
+Sep 05 21:10:44 omarchy-benchmark systemd[1]: Started Session 8 of User omarchy.
+Sep 05 21:10:45 omarchy-benchmark sudo[779]:  omarchy : PWD=/home/omarchy ; USER=root ; COMMAND=/usr/bin/bash -c 'findmnt /boot; ls -l /boot; cat /proc/cmdline; uname -a'
+Sep 05 21:10:45 omarchy-benchmark sudo[779]: pam_unix(sudo:session): session opened for user root(uid=0) by omarchy(uid=1000)
+Sep 05 21:10:45 omarchy-benchmark sudo[779]: pam_unix(sudo:session): session closed for user root
+Sep 05 21:10:45 omarchy-benchmark sshd-session[775]: Received disconnect from 10.0.2.2 port 55158:11: disconnected by user
+Sep 05 21:10:45 omarchy-benchmark sshd-session[775]: Disconnected from user omarchy 10.0.2.2 port 55158
+Sep 05 21:10:45 omarchy-benchmark sshd-session[764]: pam_unix(sshd:session): session closed for user omarchy
+Sep 05 21:10:45 omarchy-benchmark systemd[1]: session-8.scope: Deactivated successfully.
+Sep 05 21:10:45 omarchy-benchmark systemd-logind[555]: Session 8 logged out. Waiting for processes to exit.
+Sep 05 21:10:45 omarchy-benchmark systemd-logind[555]: Removed session 8.
+Sep 05 21:10:46 omarchy-benchmark sshd-session[787]: Accepted publickey for omarchy from 10.0.2.2 port 55168 ssh2: ED25519 SHA256:cxKX9reHaqt3DjqQ6nXEW0AeBXEFdRAroZr5szJrWAg
+Sep 05 21:10:46 omarchy-benchmark sshd-session[787]: pam_unix(sshd:session): session opened for user omarchy(uid=1000) by omarchy(uid=0)
+Sep 05 21:10:46 omarchy-benchmark systemd-logind[555]: New session '9' of user 'omarchy' with class 'user' and type 'tty'.
+Sep 05 21:10:46 omarchy-benchmark systemd[1]: Started Session 9 of User omarchy.
+Sep 05 21:10:48 omarchy-benchmark sddm-helper-start-wayland[660]: "\x1B[1;32mDEBUG \x1B[0mfrom start-hyprland ]: got an event from hyprland\n"
+Sep 05 21:10:49 omarchy-benchmark sddm-greeter-qt6[754]: Reading from "/usr/local/share/wayland-sessions/omarchy.desktop"
+Sep 05 21:10:49 omarchy-benchmark sddm-greeter-qt6[754]: Reading from "/usr/local/share/wayland-sessions/hyprland-uwsm.desktop"
+Sep 05 21:10:49 omarchy-benchmark sddm-greeter-qt6[754]: Reading from "/usr/share/wayland-sessions/hyprland-uwsm.desktop"
+Sep 05 21:10:49 omarchy-benchmark sddm-greeter-qt6[754]: Reading from "/usr/local/share/wayland-sessions/hyprland.desktop"
+Sep 05 21:10:49 omarchy-benchmark sddm-greeter-qt6[754]: Reading from "/usr/share/wayland-sessions/hyprland.desktop"
+Sep 05 21:10:49 omarchy-benchmark sddm-greeter-qt6[754]: Loading theme configuration from "/usr/share/sddm/themes/omarchy/theme.conf"
+Sep 05 21:10:50 omarchy-benchmark sddm-greeter-qt6[754]: Connected to the daemon.
+Sep 05 21:10:50 omarchy-benchmark sddm[608]: Message received from greeter: Connect
+Sep 05 21:10:50 omarchy-benchmark sddm-helper-start-wayland[660]: "Refusing to try glamor on llvmpipe\n"
+Sep 05 21:10:50 omarchy-benchmark sddm-helper-start-wayland[660]: "XWAYLAND: Disabling GLAMOR support\n"
+Sep 05 21:10:50 omarchy-benchmark sddm-helper-start-wayland[660]: "EGL setup failed, disabling glamor\nFailed to initialize glamor, falling back to sw\n"
+Sep 05 21:10:51 omarchy-benchmark sddm-helper-start-wayland[660]: "MESA-EGL: warning: egl: failed to create dri2 screen\n"
+Sep 05 21:10:51 omarchy-benchmark sddm-helper-start-wayland[660]: "MESA-EGL: warning: egl: failed to create dri2 screen\n"
+Sep 05 21:10:51 omarchy-benchmark sddm-greeter-qt6[754]: Loading file:///usr/share/sddm/themes/omarchy/Main.qml...
+Sep 05 21:10:51 omarchy-benchmark sddm-helper-start-wayland[660]: "The XKEYBOARD keymap compiler (xkbcomp) reports:\n> Warning:          "
+Sep 05 21:10:51 omarchy-benchmark sddm-helper-start-wayland[660]: "Multiple symbols for level 1/group 1 on key <FK23>\n>                   Using F23, ignoring XF86TouchpadOff\n> Warning:          Symbol map for key <FK23> redefined\n>                   Using last definition for conflicting fields\n> Warning:          Symbol map for key <FK24> redefined\n>                   Using last definition for conflicting fields\n"
+Sep 05 21:10:51 omarchy-benchmark sddm-helper-start-wayland[660]: "> Warning:          Could not resolve keysym XF86ElectronicPrivacyScreenOn\n> Warning:          Could not resolve keysym XF86ElectronicPrivacyScreenOff\n> Warning:          Could not resolve keysym XF86ActionOnSelection\n> Warning:          Could not resolve keysym XF86ContextualInsert\n> Warning:          Could not resolve keysym XF86ContextualQuery\n"
+Sep 05 21:10:51 omarchy-benchmark sddm-helper-start-wayland[660]: "Errors from xkbcomp are not fatal to the X server\n"
+Sep 05 21:10:51 omarchy-benchmark sddm-helper-start-wayland[660]: "The XKEYBOARD keymap compiler (xkbcomp) reports:\n> Warning:          Unsupported maximum keycode 709, clipping.\n"
+Sep 05 21:10:51 omarchy-benchmark sddm-helper-start-wayland[660]: ">                   X11 cannot support keycodes above 255.\n"
+Sep 05 21:10:51 omarchy-benchmark sddm-helper-start-wayland[660]: "> Warning:          Virtual modifier Hyper multiply defined\n>                   Using 0, ignoring 0\n> Warning:          Virtual modifier ScrollLock multiply defined\n>                   Using 0, ignoring 0\n"
+Sep 05 21:10:51 omarchy-benchmark sddm-helper-start-wayland[660]: "Errors from xkbcomp are not fatal to the X server\n"
+Sep 05 21:10:52 omarchy-benchmark sddm-greeter-qt6[754]: Adding view for "Virtual-1" QRect(0,0 1280x800)
+Sep 05 21:10:52 omarchy-benchmark sddm-greeter-qt6[754]: Message received from daemon: Capabilities
+Sep 05 21:10:52 omarchy-benchmark sddm-greeter-qt6[754]: Message received from daemon: HostName
+Sep 05 21:10:55 omarchy-benchmark sshd-session[792]: Received disconnect from 10.0.2.2 port 55168:11: disconnected by user
+Sep 05 21:10:55 omarchy-benchmark sshd-session[792]: Disconnected from user omarchy 10.0.2.2 port 55168
+Sep 05 21:10:55 omarchy-benchmark sshd-session[787]: pam_unix(sshd:session): session closed for user omarchy
+Sep 05 21:10:55 omarchy-benchmark systemd[1]: session-9.scope: Deactivated successfully.
+Sep 05 21:10:55 omarchy-benchmark systemd[1]: session-9.scope: Consumed 1.407s CPU time over 9.442s wall clock time, 3.4M memory peak.
+Sep 05 21:10:55 omarchy-benchmark systemd-logind[555]: Session 9 logged out. Waiting for processes to exit.
+Sep 05 21:10:55 omarchy-benchmark systemd-logind[555]: Removed session 9.
+Sep 05 21:10:56 omarchy-benchmark sshd-session[824]: Accepted publickey for omarchy from 10.0.2.2 port 36666 ssh2: ED25519 SHA256:cxKX9reHaqt3DjqQ6nXEW0AeBXEFdRAroZr5szJrWAg
+Sep 05 21:10:56 omarchy-benchmark sshd-session[824]: pam_unix(sshd:session): session opened for user omarchy(uid=1000) by omarchy(uid=0)
+Sep 05 21:10:56 omarchy-benchmark systemd-logind[555]: New session '10' of user 'omarchy' with class 'user' and type 'tty'.
+Sep 05 21:10:56 omarchy-benchmark systemd[1]: Started Session 10 of User omarchy.
+Sep 05 21:10:58 omarchy-benchmark systemd[1]: systemd-hostnamed.service: Deactivated successfully.
+Sep 05 21:10:59 omarchy-benchmark systemd-resolved[387]: Using degraded feature set TCP instead of UDP for DNS server 10.0.2.3.
+Sep 05 21:10:59 omarchy-benchmark systemd-resolved[387]: Using degraded feature set UDP instead of TCP for DNS server 10.0.2.3.
+Sep 05 21:10:59 omarchy-benchmark systemd-resolved[387]: Using degraded feature set TCP instead of UDP for DNS server 10.0.2.3.
+Sep 05 21:10:59 omarchy-benchmark systemd-resolved[387]: Using degraded feature set UDP instead of TCP for DNS server 10.0.2.3.
+Sep 05 21:10:59 omarchy-benchmark systemd-resolved[387]: Using degraded feature set TCP instead of UDP for DNS server 10.0.2.3.
+Sep 05 21:10:59 omarchy-benchmark systemd-resolved[387]: Using degraded feature set UDP instead of TCP for DNS server 10.0.2.3.
+Sep 05 21:11:04 omarchy-benchmark sshd-session[828]: Received disconnect from 10.0.2.2 port 36666:11: disconnected by user
+Sep 05 21:11:04 omarchy-benchmark sshd-session[828]: Disconnected from user omarchy 10.0.2.2 port 36666
+Sep 05 21:11:04 omarchy-benchmark sshd-session[824]: pam_unix(sshd:session): session closed for user omarchy
+Sep 05 21:11:04 omarchy-benchmark systemd[1]: session-10.scope: Deactivated successfully.
+Sep 05 21:11:04 omarchy-benchmark systemd[1]: session-10.scope: Consumed 1.822s CPU time over 7.498s wall clock time, 3M memory peak.
+Sep 05 21:11:04 omarchy-benchmark systemd-logind[555]: Session 10 logged out. Waiting for processes to exit.
+Sep 05 21:11:04 omarchy-benchmark systemd-logind[555]: Removed session 10.
+Sep 05 21:11:05 omarchy-benchmark sshd-session[835]: Accepted publickey for omarchy from 10.0.2.2 port 42996 ssh2: ED25519 SHA256:cxKX9reHaqt3DjqQ6nXEW0AeBXEFdRAroZr5szJrWAg
+Sep 05 21:11:05 omarchy-benchmark sshd-session[835]: pam_unix(sshd:session): session opened for user omarchy(uid=1000) by omarchy(uid=0)
+Sep 05 21:11:05 omarchy-benchmark systemd-logind[555]: New session '11' of user 'omarchy' with class 'user' and type 'tty'.
+Sep 05 21:11:05 omarchy-benchmark systemd[1]: Started Session 11 of User omarchy.
+Sep 05 21:11:06 omarchy-benchmark sudo[842]:  omarchy : PWD=/home/omarchy ; USER=root ; COMMAND=/usr/bin/bash -c 'cat /var/log/omarchy-install.log'
+Sep 05 21:11:06 omarchy-benchmark sudo[842]: pam_unix(sudo:session): session opened for user root(uid=0) by omarchy(uid=1000)
+Sep 05 21:11:06 omarchy-benchmark sudo[842]: pam_unix(sudo:session): session closed for user root
+Sep 05 21:11:06 omarchy-benchmark sshd-session[839]: Received disconnect from 10.0.2.2 port 42996:11: disconnected by user
+Sep 05 21:11:06 omarchy-benchmark sshd-session[839]: Disconnected from user omarchy 10.0.2.2 port 42996
+Sep 05 21:11:06 omarchy-benchmark sshd-session[835]: pam_unix(sshd:session): session closed for user omarchy
+Sep 05 21:11:06 omarchy-benchmark systemd-logind[555]: Session 11 logged out. Waiting for processes to exit.
+Sep 05 21:11:06 omarchy-benchmark systemd[1]: session-11.scope: Deactivated successfully.
+Sep 05 21:11:06 omarchy-benchmark systemd-logind[555]: Removed session 11.
+Sep 05 21:11:07 omarchy-benchmark sshd-session[847]: Accepted publickey for omarchy from 10.0.2.2 port 43004 ssh2: ED25519 SHA256:cxKX9reHaqt3DjqQ6nXEW0AeBXEFdRAroZr5szJrWAg
+Sep 05 21:11:07 omarchy-benchmark sshd-session[847]: pam_unix(sshd:session): session opened for user omarchy(uid=1000) by omarchy(uid=0)
+Sep 05 21:11:08 omarchy-benchmark systemd-logind[555]: New session '12' of user 'omarchy' with class 'user' and type 'tty'.
+Sep 05 21:11:08 omarchy-benchmark systemd[1]: Started Session 12 of User omarchy.
+Sep 05 21:11:09 omarchy-benchmark sudo[854]:  omarchy : PWD=/home/omarchy ; USER=root ; COMMAND=/usr/bin/bash -c 'journalctl -b --no-pager'
+Sep 05 21:11:09 omarchy-benchmark sudo[854]: pam_unix(sudo:session): session opened for user root(uid=0) by omarchy(uid=1000)

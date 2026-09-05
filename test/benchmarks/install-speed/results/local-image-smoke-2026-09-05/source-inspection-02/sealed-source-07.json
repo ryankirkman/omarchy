@@ -1,0 +1,13 @@
+{
+  "request": {
+    "action": "qmp",
+    "execute": "blockdev-del",
+    "arguments": {
+      "node-name": "omarchy-sealed-source"
+    }
+  },
+  "response": {
+    "ok": true,
+    "result": {}
+  }
+}

@@ -1,0 +1,26 @@
+{
+  "request": {
+    "action": "qmp",
+    "execute": "blockdev-add",
+    "arguments": {
+      "driver": "qcow2",
+      "node-name": "omarchy-sealed-source",
+      "read-only": true,
+      "file": {
+        "driver": "raw",
+        "read-only": true,
+        "offset": 116736,
+        "size": 3681644544,
+        "file": {
+          "driver": "file",
+          "read-only": true,
+          "filename": "/tmp/omarchy-bench/fast-image-fixed.iso"
+        }
+      }
+    }
+  },
+  "response": {
+    "ok": true,
+    "result": {}
+  }
+}

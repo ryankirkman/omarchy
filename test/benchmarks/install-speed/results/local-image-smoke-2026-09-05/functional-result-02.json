@@ -1,0 +1,36 @@
+{
+  "schema_version": 1,
+  "status": "passed-unpaired-functional-validation",
+  "speedup_claim": false,
+  "runner_exit_status": 0,
+  "qemu_exit_status": 0,
+  "first_installed_ssh_wall_s": 739.7344648849976,
+  "installer_duration_seconds": 431.572226882,
+  "package_count": 941,
+  "explicit_package_count": 158,
+  "package_files_exit_status": 0,
+  "package_versions_and_reasons_match_stock": true,
+  "all_nine_phases_ok": true,
+  "standalone_reboot_passed": true,
+  "same_qemu_process_for_reboots": true,
+  "sealed_source_identity_inspection_passed": true,
+  "source_image_unchanged": true,
+  "sealed_evidence_files": 33,
+  "first_boot_profiles_preserved": true,
+  "boot_profile_scope": "First installed boot only; second reboot independently verifies root and identities",
+  "captured_at": 1788642993.205784,
+  "fresh_identity_comparisons": {
+    "baseline-03": {
+      "machine_id_distinct": true,
+      "pacman_master_key_distinct": true,
+      "filesystem_uuid_distinct": true,
+      "ssh_host_key_fingerprints_disjoint": true
+    },
+    "candidate-firmware-smoke-01": {
+      "machine_id_distinct": true,
+      "pacman_master_key_distinct": true,
+      "filesystem_uuid_distinct": true,
+      "ssh_host_key_fingerprints_disjoint": true
+    }
+  }
+}

@@ -1,0 +1,16 @@
+{
+  "request": {
+    "action": "qmp",
+    "execute": "device_add",
+    "arguments": {
+      "driver": "usb-storage",
+      "drive": "omarchy-sealed-source",
+      "id": "omarchy-sealed-source-usb",
+      "serial": "OMARCHY_SEALED_SOURCE"
+    }
+  },
+  "response": {
+    "ok": true,
+    "result": {}
+  }
+}

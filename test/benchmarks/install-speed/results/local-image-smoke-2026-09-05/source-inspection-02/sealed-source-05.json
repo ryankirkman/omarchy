@@ -1,0 +1,13 @@
+{
+  "request": {
+    "action": "qmp",
+    "execute": "device_del",
+    "arguments": {
+      "id": "omarchy-sealed-source-usb"
+    }
+  },
+  "response": {
+    "ok": true,
+    "result": {}
+  }
+}
