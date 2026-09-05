@@ -6,7 +6,18 @@ import hashlib
 import json
 import math
 from pathlib import Path
+import re
 import statistics
+
+
+def sha256(value, description):
+  if not isinstance(value, str) or not re.fullmatch(r"[0-9a-fA-F]{64}", value):
+    raise ValueError(f"{description}: expected a SHA256 digest")
+  return value.lower()
+
+
+def finite_number(value):
+  return isinstance(value, (int, float)) and not isinstance(value, bool) and math.isfinite(value)
 
 
 def read_run(directory):
@@ -15,11 +26,14 @@ def read_run(directory):
   timing = json.loads((directory / "install-timing.json").read_text())
   validation = json.loads((directory / "validation.json").read_text())
   packages = (directory / "package-manifest.txt").read_text().splitlines()
+  explicit_packages = (directory / "package-explicit.txt").read_text().splitlines()
   if manifest.get("status") != "installed-and-booted":
     raise ValueError(f"{directory}: install has not booted successfully")
+  if manifest.get("measurement_interrupted") is not False:
+    raise ValueError(f"{directory}: uninterrupted measurement was not recorded")
   if validation.get("booted_installed_root") is not True:
     raise ValueError(f"{directory}: installed root was not independently verified")
-  if validation.get("package_files_exit_status") != 0:
+  if type(validation.get("package_files_exit_status")) is not int or validation["package_files_exit_status"] != 0:
     raise ValueError(f"{directory}: package file validation failed")
   phases = timing.get("phases", [])
   if (timing.get("current_phase") != "Installation complete" or not phases
@@ -28,64 +42,90 @@ def read_run(directory):
     raise ValueError(f"{directory}: missing or failed installer phases")
   if not packages or any(len(line.split()) != 2 for line in packages):
     raise ValueError(f"{directory}: empty or malformed package manifest")
-  if len({line.split()[0] for line in packages}) != len(packages):
+  package_names = {line.split()[0] for line in packages}
+  if len(package_names) != len(packages):
     raise ValueError(f"{directory}: duplicate package names")
+  if (any(len(line.split()) != 1 or line != line.strip() for line in explicit_packages)
+      or len(set(explicit_packages)) != len(explicit_packages)
+      or not set(explicit_packages).issubset(package_names)):
+    raise ValueError(f"{directory}: malformed or inconsistent explicit package inventory")
   if len(packages) != timing.get("installed_packages"):
     raise ValueError(f"{directory}: package inventory disagrees with installer count")
+  if not all(finite_number(timing[key]) for key in ("started_at", "finished_at")):
+    raise ValueError(f"{directory}: invalid installer timestamps")
   elapsed = timing["finished_at"] - timing["started_at"]
   if not math.isfinite(elapsed) or elapsed <= 0:
     raise ValueError(f"{directory}: invalid installer elapsed time")
+  names = set()
   for phase in phases:
-    if not math.isfinite(phase.get("elapsed", -1)) or phase["elapsed"] < 0:
+    if not finite_number(phase.get("elapsed")) or phase["elapsed"] < 0:
       raise ValueError(f"{directory}: invalid phase timing")
+    name = phase.get("name")
+    if not isinstance(name, str) or not name or name in names:
+      raise ValueError(f"{directory}: missing or duplicate installer phase name")
+    names.add(name)
   fixture = {key: manifest[key] for key in ("accelerator", "cpu_count", "memory_mib")}
-  # QEMU options include host paths and ports, so retain them in source artifacts
-  # and require the caller to inspect disk/cache/media settings before a claim.
   if manifest.get("fresh_target") is not True or manifest.get("fresh_nvram") is not True:
     raise ValueError(f"{directory}: fresh disk and NVRAM are not recorded")
-  for key in ("disk_format", "disk_virtual_bytes", "disk_cache", "iso_cache", "qemu_version"):
+  for key in ("disk_format", "disk_virtual_bytes", "disk_cache", "iso_cache", "qemu_version", "encryption", "filesystem"):
     fixture[key] = manifest[key]
+    if fixture[key] is None or fixture[key] == "":
+      raise ValueError(f"{directory}: missing fixture setting {key}")
+  fixture["cidata_configuration_sha256"] = sha256(manifest["cidata_configuration_sha256"], f"{directory}: cidata configuration")
+  overlay = manifest["test_overlay_sha256"]
+  if overlay is not None:
+    overlay = sha256(overlay, f"{directory}: test overlay")
   return {
     "directory": str(directory.resolve()), "fixture": fixture,
-    "packages": sorted(packages), "elapsed": elapsed,
+    "packages": sorted(" ".join(line.split()) for line in packages),
+    "explicit_packages": sorted(explicit_packages), "elapsed": elapsed,
     "phase_seconds": {phase["name"]: phase["elapsed"] for phase in phases},
     "boot_to_ssh_seconds": manifest.get("first_installed_ssh_wall_s"),
     "ssh_poll_uncertainty_seconds": manifest.get("readiness_poll_interval_s"),
-    "iso_sha256": manifest["iso_sha256"],
+    "iso_sha256": sha256(manifest["iso_sha256"], f"{directory}: ISO"),
+    "test_overlay_sha256": overlay,
   }
 
 
 def compare(baseline, candidate):
+  if not baseline or not candidate:
+    raise ValueError("both revisions require at least one validated installation")
   all_runs = baseline + candidate
   if len({run["directory"] for run in all_runs}) != len(all_runs):
     raise ValueError("each sample must be a distinct fresh installation")
   for run in all_runs:
     if run["fixture"] != baseline[0]["fixture"]:
-      raise ValueError("hardware or VM I/O settings differ between runs")
+      raise ValueError("hardware, VM I/O, encryption, filesystem or cidata configuration differ between runs")
     if run["packages"] != baseline[0]["packages"]:
       raise ValueError("installed package names or versions differ between runs")
+    if run["explicit_packages"] != baseline[0]["explicit_packages"]:
+      raise ValueError("installed package explicit/dependency reasons differ between runs")
   for group in (baseline, candidate):
-    if len({run["iso_sha256"] for run in group}) != 1:
-      raise ValueError("a revision group contains multiple ISO images")
+    # A candidate is allowed to change its ISO or overlay. Repetitions of each
+    # revision must still measure the same input, never a mixture of candidates.
+    if len({(run["iso_sha256"], run["test_overlay_sha256"]) for run in group}) != 1:
+      raise ValueError("a revision group contains multiple ISO images or test overlays")
   durations = {"baseline": [run["elapsed"] for run in baseline],
                "candidate": [run["elapsed"] for run in candidate]}
   medians = {key: statistics.median(values) for key, values in durations.items()}
   conservative = min(durations["baseline"]) / max(durations["candidate"])
   repeated = len(baseline) >= 3 and len(candidate) >= 3
   return {
-    "schema_version": 1, "kind": "validated_full_install_comparison",
+    "schema_version": 2, "kind": "validated_full_install_comparison",
     "fixture": baseline[0]["fixture"],
     "scope": "Guest installer start through completion, then independently verified installed boot and package files.",
     "clock": "Existing guest installer wall clock; boot-to-SSH uses host monotonic clock separately.",
     "package_count": len(baseline[0]["packages"]),
     "package_manifest_sha256": hashlib.sha256(("\n".join(baseline[0]["packages"]) + "\n").encode()).hexdigest(),
+    "explicit_package_count": len(baseline[0]["explicit_packages"]),
+    "explicit_package_manifest_sha256": hashlib.sha256("".join(name + "\n" for name in baseline[0]["explicit_packages"]).encode()).hexdigest(),
     "installer_seconds": durations, "median_seconds": medians,
     "median_speedup": medians["baseline"] / medians["candidate"],
     "fastest_baseline_over_slowest_candidate": conservative,
     "at_least_three_fresh_samples_per_revision": repeated,
     "twofold_target_verified_for_this_fixture": repeated and conservative >= 2,
     "limitations": "No generalization across hardware, media, encryption modes or thermal states. Software-emulation results do not establish physical-machine speedups.",
-    "runs": [{key: value for key, value in run.items() if key != "packages"} for run in all_runs],
+    "runs": [{key: value for key, value in run.items() if key not in {"packages", "explicit_packages"}} for run in all_runs],
   }
 
 

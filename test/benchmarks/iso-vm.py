@@ -52,7 +52,12 @@ def build_cidata(args, env):
   start = harness.index("build_cidata() {")
   end = harness.index("\n# The dev/local ISO", start)
   key = args.run_dir / "id_ed25519"
-  require_success(run_command(["ssh-keygen", "-q", "-t", "ed25519", "-N", "", "-C", "disposable-omarchy-benchmark", "-f", str(key)]), "generate disposable SSH key")
+  if args.ssh_key:
+    shutil.copyfile(args.ssh_key, key)
+    key.chmod(0o600)
+    (key.with_suffix(".pub")).write_text(require_success(run_command(["ssh-keygen", "-y", "-f", str(key)]), "read SSH public key"))
+  else:
+    require_success(run_command(["ssh-keygen", "-q", "-t", "ed25519", "-N", "", "-C", "disposable-omarchy-benchmark", "-f", str(key)]), "generate disposable SSH key")
   child_env = dict(env, BASE_DIR=str(args.run_dir), SSH_KEY=str(key),
                    CIDATA_IMG=str(args.run_dir / "cidata.img"),
                    GUEST_PASSWORD="omarchy", GUEST_USER="omarchy", GUEST_HOSTNAME="omarchy-benchmark",
@@ -70,12 +75,16 @@ class Supervisor:
     self.env["LD_LIBRARY_PATH"] = lib + ":" + self.env.get("LD_LIBRARY_PATH", "")
     self.env["PATH"] = ":".join(str(args.toolchain / p) for p in ("usr/bin", "usr/sbin", "sbin")) + ":" + self.env["PATH"]
     self.env["OMP_THREAD_LIMIT"] = "1"
+    self.env["QEMU_MODULE_DIR"] = str(args.toolchain / "usr/lib/x86_64-linux-gnu/qemu")
     self.qmp_socket = None
     self.qmp_stream = None
     self.manifest = {}
     self.vm = None
     self.started = time.monotonic()
     self.collected = False
+    self.restarted_for_installed_boot = False
+    self.last_failed_probe_start = 0.0
+    self.last_failed_probe_end = 0.0
 
   def connect_qmp(self):
     self.qmp_socket = socket.create_connection(("127.0.0.1", self.args.qmp_port), timeout=10)
@@ -102,13 +111,13 @@ class Supervisor:
         return response.get("return")
 
   def ssh(self, command, *, sudo=False, timeout=120):
-    if sudo:
+    if sudo and self.args.guest_user != "root":
       command = "printf '%s\\n' omarchy | sudo -S -p '' bash -c " + shlex.quote(command)
     return run_command([
       "ssh", "-i", str(self.directory / "id_ed25519"), "-p", str(self.args.ssh_port),
       "-o", "BatchMode=yes", "-o", "IdentitiesOnly=yes", "-o", "StrictHostKeyChecking=no",
       "-o", "UserKnownHostsFile=/dev/null", "-o", "ConnectTimeout=3", "-o", "LogLevel=ERROR",
-      "omarchy@127.0.0.1", command,
+      f"{self.args.guest_user}@127.0.0.1", command,
     ], timeout=timeout)
 
   def screenshot(self, name="latest-screen.png"):
@@ -224,8 +233,17 @@ class Supervisor:
       "-device", "ide-cd,drive=iso,bootindex=2",
       "-drive", f"file={self.directory / 'cidata.img'},format=raw,if=none,id=cidata",
       "-device", "usb-storage,drive=cidata"]
+    if args.kernel:
+      argv.extend(["-kernel", str(args.kernel.resolve()), "-initrd", str(args.initrd.resolve()), "-append", args.append])
+      if args.mode == "install":
+        argv.append("-no-reboot")
+    if args.extra_qemu_args_json:
+      extra = json.loads(args.extra_qemu_args_json)
+      if not isinstance(extra, list) or not all(isinstance(item, str) for item in extra):
+        raise ValueError("extra QEMU arguments must be a JSON array of strings")
+      argv.extend(extra)
     self.manifest = {
-      "schema_version": 1, "status": "running", "iso": str(args.iso), "iso_sha256": iso_hash,
+      "schema_version": 1, "status": "running", "mode": args.mode, "iso": str(args.iso), "iso_sha256": iso_hash,
       "qemu_version": version, "qemu_argv": argv, "accelerator": args.accelerator,
       "cpu_count": args.cpus, "memory_mib": args.memory, "fresh_target": True, "fresh_nvram": True,
       "disk_format": "qcow2", "disk_virtual_bytes": 40 * 1024 ** 3, "disk_cache": "writeback",
@@ -233,6 +251,13 @@ class Supervisor:
       "started_at": time.time(), "hostname": "omarchy-benchmark", "measurement_interrupted": False,
       "network": "QEMU user networking; ISO installs packages from its own bundled mirror",
       "encryption": False, "filesystem": "btrfs compress=zstd", "interventions": [],
+      "cidata_configuration_sha256": hashlib.sha256((self.directory / "cidata/user_configuration.json").read_bytes()).hexdigest(),
+      "test_overlay_sha256": args.test_overlay_sha256,
+      "direct_kernel_boot": bool(args.kernel),
+      "direct_kernel_sha256": hashlib.sha256(args.kernel.read_bytes()).hexdigest() if args.kernel else None,
+      "direct_initrd_sha256": hashlib.sha256(args.initrd.read_bytes()).hexdigest() if args.initrd else None,
+      "direct_kernel_command_line": args.append if args.kernel else None,
+      "reboot_strategy": "qemu-no-reboot-then-disk" if args.kernel and args.mode == "install" else "guest-firmware-reboot",
     }
     write_json(self.directory / "manifest.json", self.manifest)
     self.started = time.monotonic()
@@ -252,25 +277,88 @@ class Supervisor:
         raise RuntimeError("QMP did not become ready")
       print(json.dumps({"event": "started", "run_dir": str(self.directory), "pid": self.vm.pid}), flush=True)
       next_poll = 0
-      while self.vm.poll() is None:
+      while True:
+        if self.vm.poll() is not None:
+          if args.kernel and args.mode == "install" and not self.restarted_for_installed_boot and self.vm.returncode == 0:
+            # -no-reboot exits when the live installer requests a reboot. Remove
+            # direct-boot inputs before validating the installed disk, retaining
+            # the original monotonic start and both writable disk/NVRAM files.
+            previous_exit = self.vm.returncode
+            installed_argv = []
+            skip = False
+            for item in argv:
+              if skip:
+                skip = False
+              elif item in {"-kernel", "-initrd", "-append"}:
+                skip = True
+              elif item != "-no-reboot":
+                installed_argv.append(item)
+            self.qmp_stream.close()
+            self.qmp_socket.close()
+            self.vm = subprocess.Popen(installed_argv, env=self.env, stdout=log, stderr=subprocess.STDOUT)
+            (self.directory / "qemu.pid").write_text(str(self.vm.pid) + "\n")
+            self.restarted_for_installed_boot = True
+            self.manifest["installed_boot_qemu_argv"] = installed_argv
+            self.manifest["installed_boot_restart_host_wall_s"] = time.monotonic() - self.started
+            self.manifest["installer_qemu_exit_status"] = previous_exit
+            write_json(self.directory / "manifest.json", self.manifest)
+            for attempt in range(30):
+              try:
+                self.connect_qmp()
+                break
+              except (OSError, RuntimeError):
+                if self.vm.poll() is not None:
+                  raise RuntimeError("Installed-disk QEMU exited before QMP connected")
+                time.sleep(1)
+            else:
+              raise RuntimeError("Installed-disk QMP did not become ready")
+            print(json.dumps({"event": "restarted-for-installed-disk", "host_wall_s": time.monotonic() - self.started}), flush=True)
+          else:
+            break
         self.mailbox()
         elapsed = time.monotonic() - self.started
         if elapsed >= next_poll:
           next_poll = elapsed + args.poll_interval
-          self.screenshot()
+          try:
+            self.screenshot()
+            vm_status = self.qmp("query-status")
+          except (OSError, RuntimeError):
+            if self.vm.poll() is not None:
+              continue
+            raise
+          if not self.collected and vm_status.get("status") != "running":
+            self.manifest["measurement_interrupted"] = True
+            self.manifest.setdefault("unexpected_vm_states", []).append({"host_wall_s": elapsed, **vm_status})
+            write_json(self.directory / "manifest.json", self.manifest)
           progress = {"event": "progress", "host_wall_s": elapsed,
                       "target_allocated_bytes": disk.stat().st_blocks * 512,
                       "host_free_bytes": shutil.disk_usage(self.directory).free,
-                      "collected": self.collected}
+                      "collected": self.collected, "vm_status": vm_status}
           write_json(self.directory / "progress.json", progress)
           print(json.dumps(progress), flush=True)
           if not self.collected:
+            probe_started = time.monotonic() - self.started
             ready = self.ssh("true", timeout=8)
+            probe_finished = time.monotonic() - self.started
+            if ready.returncode != 0:
+              self.last_failed_probe_start = probe_started
+              self.last_failed_probe_end = probe_finished
             if ready.returncode == 0:
-              self.manifest["first_installed_ssh_wall_s"] = time.monotonic() - self.started
-              self.collect()
-              if not args.keep_running:
-                self.ssh("systemctl poweroff", sudo=True)
+              if args.mode == "builder":
+                self.manifest["first_builder_ssh_wall_s"] = time.monotonic() - self.started
+                self.manifest["status"] = "builder-ssh-ready"
+                self.collected = True
+                write_json(self.directory / "manifest.json", self.manifest)
+                print(json.dumps({"event": "builder-ssh-ready", "run_dir": str(self.directory)}), flush=True)
+              else:
+                self.manifest["first_installed_ssh_wall_s"] = probe_finished
+                self.manifest["last_failed_installed_ssh_probe_started_wall_s"] = self.last_failed_probe_start
+                self.manifest["last_failed_installed_ssh_wall_s"] = self.last_failed_probe_end
+                self.manifest["actual_readiness_uncertainty_s"] = probe_finished - self.last_failed_probe_start
+                self.manifest["readiness_poll_uncertainty_s"] = probe_finished - self.last_failed_probe_start
+                self.collect()
+                if not args.keep_running:
+                  self.ssh("systemctl poweroff", sudo=True)
           if elapsed > args.timeout and not self.collected:
             self.manifest["status"] = "timeout"
             write_json(self.directory / "manifest.json", self.manifest)
@@ -286,6 +374,9 @@ def main():
   parser = argparse.ArgumentParser(description=__doc__)
   commands = parser.add_subparsers(dest="subcommand", required=True)
   run = commands.add_parser("run")
+  run.add_argument("--mode", choices=("install", "builder"), default="install")
+  run.add_argument("--ssh-key", type=Path, help="Existing disposable private key, copied into this run")
+  run.add_argument("--guest-user", help="Defaults to omarchy for install mode, root for builder mode")
   run.add_argument("--iso", type=Path, required=True)
   run.add_argument("--iso-source", type=Path, required=True)
   run.add_argument("--run-dir", type=Path, required=True)
@@ -300,6 +391,11 @@ def main():
   run.add_argument("--runtime-package", default="omarchy")
   run.add_argument("--settings-package", default="omarchy-settings")
   run.add_argument("--keep-running", action="store_true")
+  run.add_argument("--test-overlay-sha256", help="SHA256 of candidate test overlay; omitted for unmodified ISO")
+  run.add_argument("--kernel", type=Path)
+  run.add_argument("--initrd", type=Path)
+  run.add_argument("--append", default="")
+  run.add_argument("--extra-qemu-args-json", help="JSON argv array for extra devices; retain identical settings in comparison fixtures")
   request = commands.add_parser("request")
   request.add_argument("--run-dir", type=Path, required=True)
   request.add_argument("--json", required=True, help="JSON request, such as {\"action\":\"screenshot\"}")
@@ -313,6 +409,10 @@ def main():
     return
   for key in ("iso", "iso_source", "toolchain"):
     setattr(args, key, getattr(args, key).resolve())
+  if not args.guest_user:
+    args.guest_user = "root" if args.mode == "builder" else "omarchy"
+  if bool(args.kernel) != bool(args.initrd):
+    parser.error("--kernel and --initrd are required together")
   supervisor = Supervisor(args)
   try:
     supervisor.start()
