@@ -1,0 +1,44 @@
+diff --git a/configs/airootfs/usr/share/omarchy-iso/orchestrator/phases_impl.py b/configs/airootfs/usr/share/omarchy-iso/orchestrator/phases_impl.py
+index 4843cc6..c0d40d1 100644
+--- a/configs/airootfs/usr/share/omarchy-iso/orchestrator/phases_impl.py
++++ b/configs/airootfs/usr/share/omarchy-iso/orchestrator/phases_impl.py
+@@ -625,10 +625,13 @@ def _install_root_image(ctx: InstallContext) -> None:
+         _restore_root_image(stream, device)
+         # A byte-for-byte filesystem clone must never keep the image's FSID:
+         # two installed disks can be connected to the same machine, and Btrfs
+-        # identifies filesystems by this value. -u rewrites the full UUID (not
+-        # the lighter metadata_uuid compatibility mode) and -f is the command's
+-        # non-interactive acknowledgement.
+-        subprocess.run(["btrfstune", "-f", "-u", device], check=True)
++        # identifies filesystems by this value. Keep the full metadata rewrite
++        # by default. The opt-in experiment changes only the filesystem ID in
++        # the superblocks, using the metadata_uuid feature (Linux >= 5.0).
++        # Before enabling that default, validate two clones mounted together,
++        # installed boot, and snapshot rollback with this exact ISO/kernel.
++        uuid_mode = "-m" if os.environ.get("OMARCHY_EXPERIMENTAL_FAST_UUID") == "1" else "-u"
++        subprocess.run(["btrfstune", "-f", uuid_mode, device], check=True)
+ 
+         subprocess.run(["mount", "-o", "subvolid=5", device, str(top)], check=True)
+         top_mounted = True
+diff --git a/test/unit/test_root_image.py b/test/unit/test_root_image.py
+index d6dd292..25653cf 100644
+--- a/test/unit/test_root_image.py
++++ b/test/unit/test_root_image.py
+@@ -335,6 +335,17 @@ class InstallRootImageTest(unittest.TestCase):
+         self.assertTrue((self.top / "@" / "etc").is_dir())
+         self.assertFalse((self.top / phases_impl.ROOT_IMAGE_SUBVOLUME).exists())
+ 
++    def test_fast_uuid_feature_requires_explicit_opt_in(self):
++        with mock.patch.dict(phases_impl.os.environ, {"OMARCHY_EXPERIMENTAL_FAST_UUID": "1"}):
++            phases_impl._install_root_image(self.ctx)
++        self.assertIn(["btrfstune", "-f", "-m", "/dev/mapper/omarchy_root"], self.calls)
++        self.assertNotIn(["btrfstune", "-f", "-u", "/dev/mapper/omarchy_root"], self.calls)
++
++    def test_other_uuid_setting_keeps_compatible_full_rewrite(self):
++        with mock.patch.dict(phases_impl.os.environ, {"OMARCHY_EXPERIMENTAL_FAST_UUID": "yes"}):
++            phases_impl._install_root_image(self.ctx)
++        self.assertIn(["btrfstune", "-f", "-u", "/dev/mapper/omarchy_root"], self.calls)
++
+     def test_preserves_nested_directories_without_snapshotting_or_deleting_root(self):
+         nested = self.top / phases_impl.ROOT_IMAGE_SUBVOLUME / "var/lib/machines"
+         original_run = phases_impl.subprocess.run.side_effect
