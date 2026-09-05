@@ -20,6 +20,45 @@ def finite_number(value):
   return isinstance(value, (int, float)) and not isinstance(value, bool) and math.isfinite(value)
 
 
+def boot_evidence(manifest, directory):
+  upper = manifest["first_installed_ssh_wall_s"]
+  lower = manifest["last_failed_installed_ssh_probe_started_wall_s"]
+  uncertainty = manifest["readiness_poll_uncertainty_s"]
+  if (not all(finite_number(value) for value in (lower, upper, uncertainty))
+      or upper <= 0 or lower < 0 or lower > upper or uncertainty < 0
+      or not math.isclose(uncertainty, upper - lower, rel_tol=1e-9, abs_tol=1e-6)):
+    raise ValueError(f"{directory}: invalid actual SSH readiness bracket")
+  # A failed probe may return after readiness changes, so its start is the
+  # conservative lower bound. Nominal polling frequency is not an error bound.
+  if "last_failed_installed_ssh_wall_s" in manifest:
+    failed_end = manifest["last_failed_installed_ssh_wall_s"]
+    if not finite_number(failed_end) or not lower <= failed_end <= upper:
+      raise ValueError(f"{directory}: invalid failed SSH probe chronology")
+  direct = manifest["direct_kernel_boot"]
+  if type(direct) is not bool:
+    raise ValueError(f"{directory}: direct kernel boot must be recorded explicitly")
+  kernel = manifest["direct_kernel_sha256"]
+  initrd = manifest["direct_initrd_sha256"]
+  command_line = manifest["direct_kernel_command_line"]
+  if direct:
+    kernel = sha256(kernel, f"{directory}: direct boot kernel")
+    initrd = sha256(initrd, f"{directory}: direct boot initrd")
+    if not isinstance(command_line, str) or not command_line:
+      raise ValueError(f"{directory}: direct boot kernel command line is missing")
+  elif any(value is not None for value in (kernel, initrd, command_line)):
+    raise ValueError(f"{directory}: firmware boot unexpectedly records direct boot inputs")
+  strategy = manifest["reboot_strategy"]
+  if not isinstance(strategy, str) or not strategy:
+    raise ValueError(f"{directory}: reboot strategy is missing")
+  return {
+    "boot_fixture": {"direct_kernel_boot": direct, "direct_kernel_sha256": kernel,
+                     "direct_kernel_command_line": command_line, "reboot_strategy": strategy},
+    "direct_initrd_sha256": initrd,
+    "boot_to_ssh_seconds": upper, "ssh_readiness_lower_bound_seconds": lower,
+    "ssh_poll_uncertainty_seconds": uncertainty,
+  }
+
+
 def read_run(directory):
   directory = Path(directory)
   manifest = json.loads((directory / "manifest.json").read_text())
@@ -80,8 +119,7 @@ def read_run(directory):
     "packages": sorted(" ".join(line.split()) for line in packages),
     "explicit_packages": sorted(explicit_packages), "elapsed": elapsed,
     "phase_seconds": {phase["name"]: phase["elapsed"] for phase in phases},
-    "boot_to_ssh_seconds": manifest.get("first_installed_ssh_wall_s"),
-    "ssh_poll_uncertainty_seconds": manifest.get("readiness_poll_interval_s"),
+    **boot_evidence(manifest, directory),
     "iso_sha256": sha256(manifest["iso_sha256"], f"{directory}: ISO"),
     "test_overlay_sha256": overlay,
   }
@@ -103,27 +141,47 @@ def compare(baseline, candidate):
   for group in (baseline, candidate):
     # A candidate is allowed to change its ISO or overlay. Repetitions of each
     # revision must still measure the same input, never a mixture of candidates.
-    if len({(run["iso_sha256"], run["test_overlay_sha256"]) for run in group}) != 1:
-      raise ValueError("a revision group contains multiple ISO images or test overlays")
+    if len({(run["iso_sha256"], run["test_overlay_sha256"], run["direct_initrd_sha256"]) for run in group}) != 1:
+      raise ValueError("a revision group contains multiple ISO images, test overlays or initrds")
   durations = {"baseline": [run["elapsed"] for run in baseline],
                "candidate": [run["elapsed"] for run in candidate]}
   medians = {key: statistics.median(values) for key, values in durations.items()}
   conservative = min(durations["baseline"]) / max(durations["candidate"])
+  boot_comparable = all(run["boot_fixture"] == baseline[0]["boot_fixture"] for run in all_runs)
+  boot_upper = {"baseline": [run["boot_to_ssh_seconds"] for run in baseline],
+                "candidate": [run["boot_to_ssh_seconds"] for run in candidate]}
+  boot_lower = {"baseline": [run["ssh_readiness_lower_bound_seconds"] for run in baseline],
+                "candidate": [run["ssh_readiness_lower_bound_seconds"] for run in candidate]}
+  boot_medians = {key: statistics.median(values) for key, values in boot_upper.items()}
+  boot_conservative = min(boot_lower["baseline"]) / max(boot_upper["candidate"]) if boot_comparable else None
   repeated = len(baseline) >= 3 and len(candidate) >= 3
   return {
-    "schema_version": 2, "kind": "validated_full_install_comparison",
+    "schema_version": 3, "kind": "validated_full_install_comparison",
     "fixture": baseline[0]["fixture"],
-    "scope": "Guest installer start through completion, then independently verified installed boot and package files.",
-    "clock": "Existing guest installer wall clock; boot-to-SSH uses host monotonic clock separately.",
+    "scope": "Host VM start through live boot, installation, reboot and first successful SSH to the independently verified installed root. Package files are checked afterward.",
+    "clock": "Host monotonic clock across any QEMU restart, with actual SSH probe uncertainty. Guest installer wall clock is a separate component metric.",
     "package_count": len(baseline[0]["packages"]),
     "package_manifest_sha256": hashlib.sha256(("\n".join(baseline[0]["packages"]) + "\n").encode()).hexdigest(),
     "explicit_package_count": len(baseline[0]["explicit_packages"]),
     "explicit_package_manifest_sha256": hashlib.sha256("".join(name + "\n" for name in baseline[0]["explicit_packages"]).encode()).hexdigest(),
-    "installer_seconds": durations, "median_seconds": medians,
-    "median_speedup": medians["baseline"] / medians["candidate"],
-    "fastest_baseline_over_slowest_candidate": conservative,
+    "guest_installer": {
+      "seconds": durations, "median_seconds": medians,
+      "median_speedup": medians["baseline"] / medians["candidate"],
+      "fastest_baseline_over_slowest_candidate": conservative,
+      "twofold_verified_for_this_fixture": repeated and conservative >= 2,
+      "scope": "Guest installer phases only; excludes work performed during live boot or after phase completion.",
+    },
+    "host_boot_to_installed_ssh": {
+      "comparable": boot_comparable,
+      "incomparable_reason": None if boot_comparable else "Direct kernel boot, kernel digest, kernel command line or reboot strategy differs between runs.",
+      "readiness_upper_bound_seconds": boot_upper, "readiness_lower_bound_seconds": boot_lower,
+      "median_observed_seconds": boot_medians,
+      "median_observed_speedup": boot_medians["baseline"] / boot_medians["candidate"] if boot_comparable else None,
+      "conservative_speedup_lower_bound": boot_conservative,
+      "bound": "Fastest baseline readiness lower bound divided by slowest candidate readiness upper bound; includes actual polling uncertainty.",
+    },
     "at_least_three_fresh_samples_per_revision": repeated,
-    "twofold_target_verified_for_this_fixture": repeated and conservative >= 2,
+    "twofold_target_verified_for_this_fixture": repeated and boot_comparable and boot_conservative >= 2,
     "limitations": "No generalization across hardware, media, encryption modes or thermal states. Software-emulation results do not establish physical-machine speedups.",
     "runs": [{key: value for key, value in run.items() if key not in {"packages", "explicit_packages"}} for run in all_runs],
   }

@@ -233,6 +233,19 @@ class Supervisor:
       "-device", "ide-cd,drive=iso,bootindex=2",
       "-drive", f"file={self.directory / 'cidata.img'},format=raw,if=none,id=cidata",
       "-device", "usb-storage,drive=cidata"]
+    # The installed-system validation boots with no installation media or
+    # test-only extra devices. Firmware must not fall back into autoinstall.
+    installed_argv_template = []
+    position = 0
+    while position < len(argv):
+      item = argv[position]
+      if item in {"-drive", "-device"} and position + 1 < len(argv):
+        value = argv[position + 1]
+        if (item == "-drive" and ("id=iso," in value or value.endswith("id=iso") or "id=cidata" in value)) or (item == "-device" and ("drive=iso" in value or "drive=cidata" in value)):
+          position += 2
+          continue
+      installed_argv_template.append(item)
+      position += 1
     if args.kernel:
       argv.extend(["-kernel", str(args.kernel.resolve()), "-initrd", str(args.initrd.resolve()), "-append", args.append])
       if args.mode == "install":
@@ -284,15 +297,8 @@ class Supervisor:
             # direct-boot inputs before validating the installed disk, retaining
             # the original monotonic start and both writable disk/NVRAM files.
             previous_exit = self.vm.returncode
-            installed_argv = []
-            skip = False
-            for item in argv:
-              if skip:
-                skip = False
-              elif item in {"-kernel", "-initrd", "-append"}:
-                skip = True
-              elif item != "-no-reboot":
-                installed_argv.append(item)
+            shutil.copyfile(self.directory / "serial.log", self.directory / "live-serial.log")
+            installed_argv = list(installed_argv_template)
             self.qmp_stream.close()
             self.qmp_socket.close()
             self.vm = subprocess.Popen(installed_argv, env=self.env, stdout=log, stderr=subprocess.STDOUT)
@@ -416,7 +422,12 @@ def main():
   supervisor = Supervisor(args)
   try:
     supervisor.start()
-  except BaseException:
+  except BaseException as error:
+    if supervisor.manifest:
+      supervisor.manifest["failure"] = str(error)
+      if not supervisor.collected and supervisor.manifest.get("status") == "running":
+        supervisor.manifest["status"] = "failed"
+      write_json(args.run_dir / "manifest.json", supervisor.manifest)
     if supervisor.vm and supervisor.vm.poll() is None:
       supervisor.vm.terminate()
       supervisor.vm.wait(timeout=30)

@@ -37,6 +37,12 @@ with tempfile.TemporaryDirectory() as directory:
     "encryption": False, "filesystem": "btrfs compress=zstd",
     "cidata_configuration_sha256": "a" * 64,
     "iso_sha256": "b" * 64, "test_overlay_sha256": None,
+    "direct_kernel_boot": True, "direct_kernel_sha256": "1" * 64,
+    "direct_initrd_sha256": "2" * 64, "direct_kernel_command_line": "archisobasedir=arch",
+    "reboot_strategy": "qemu-no-reboot-then-disk",
+    "first_installed_ssh_wall_s": 96, "last_failed_installed_ssh_probe_started_wall_s": 94,
+    "last_failed_installed_ssh_wall_s": 95, "readiness_poll_uncertainty_s": 2,
+    "readiness_poll_interval_s": 30,
   }
   timing = {"current_phase": "Installation complete", "total_phases": 1,
             "phases": [{"name": "Install", "status": "ok", "elapsed": 12}],
@@ -66,15 +72,26 @@ with tempfile.TemporaryDirectory() as directory:
   run = module.read_run(root)
   assert run["elapsed"] == 12
   assert run["explicit_packages"] == ["shell"]
+  assert run["ssh_poll_uncertainty_seconds"] == 2  # Never substitute the nominal 30 seconds.
   for key, value in (("booted_installed_root", False), ("package_files_exit_status", 1),
                      ("package_files_exit_status", False)):
     rejects_artifacts({"validation.json": {**validation, key: value}}, "invalid installation accepted")
   for key, value in (("status", "timeout"), ("measurement_interrupted", True),
                      ("measurement_interrupted", 0), ("fresh_target", False), ("fresh_nvram", False),
                      ("cidata_configuration_sha256", "unknown"), ("test_overlay_sha256", "unknown"),
-                     ("iso_sha256", "unknown")):
+                     ("iso_sha256", "unknown"), ("direct_kernel_boot", 1),
+                     ("direct_kernel_sha256", None), ("direct_initrd_sha256", "unknown"),
+                     ("direct_kernel_command_line", None), ("reboot_strategy", ""),
+                     ("first_installed_ssh_wall_s", float("inf")), ("first_installed_ssh_wall_s", 0),
+                     ("first_installed_ssh_wall_s", 90), ("last_failed_installed_ssh_probe_started_wall_s", -1),
+                     ("last_failed_installed_ssh_wall_s", 93), ("last_failed_installed_ssh_wall_s", 97),
+                     ("readiness_poll_uncertainty_s", -1), ("readiness_poll_uncertainty_s", float("nan")),
+                     ("readiness_poll_uncertainty_s", 30)):
     rejects_artifacts({"manifest.json": {**manifest, key: value}}, f"invalid {key} accepted")
-  for key in ("measurement_interrupted", "encryption", "filesystem", "cidata_configuration_sha256", "test_overlay_sha256"):
+  for key in ("measurement_interrupted", "encryption", "filesystem", "cidata_configuration_sha256", "test_overlay_sha256",
+              "direct_kernel_boot", "direct_kernel_sha256", "direct_initrd_sha256", "direct_kernel_command_line",
+              "reboot_strategy", "first_installed_ssh_wall_s", "last_failed_installed_ssh_probe_started_wall_s",
+              "readiness_poll_uncertainty_s"):
     incomplete = {name: value for name, value in manifest.items() if name != key}
     rejects_artifacts({"manifest.json": incomplete}, f"missing {key} accepted")
   for text in ("", "kernel 1.0\nkernel 2.0\n", "kernel\n", "kernel 1.0 extra\n"):
@@ -93,11 +110,19 @@ with tempfile.TemporaryDirectory() as directory:
     rejects_artifacts({"install-timing.json": {**timing, "phases": [phase]}}, "failed or malformed phase accepted")
   rejects_artifacts({"install-timing.json": {**timing, "total_phases": 2, "phases": timing["phases"] * 2}},
                     "duplicate phase names silently collapsed")
+  firmware = {**manifest, "direct_kernel_boot": False, "direct_kernel_sha256": None,
+              "direct_initrd_sha256": None, "direct_kernel_command_line": None,
+              "reboot_strategy": "guest-firmware-reboot"}
+  write_artifacts({"manifest.json": firmware})
+  assert not module.read_run(root)["boot_fixture"]["direct_kernel_boot"]
+  rejects_artifacts({"manifest.json": {**firmware, "direct_kernel_sha256": "1" * 64}},
+                    "firmware boot accepted inconsistent direct kernel metadata")
 
 
 def sample(name, seconds):
   result = copy.deepcopy(run)
-  result.update(directory=name, elapsed=seconds)
+  result.update(directory=name, elapsed=seconds, boot_to_ssh_seconds=seconds * 8,
+                ssh_readiness_lower_bound_seconds=seconds * 8 - 2)
   return result
 
 
@@ -105,9 +130,11 @@ baseline = [sample(f"baseline-{index}", 12) for index in range(3)]
 candidate = [sample(f"candidate-{index}", 5) for index in range(3)]
 # Different candidate inputs are expected; each group still needs one revision.
 for result in candidate:
-  result.update(iso_sha256="c" * 64, test_overlay_sha256="d" * 64)
+  result.update(iso_sha256="c" * 64, test_overlay_sha256="d" * 64, direct_initrd_sha256="3" * 64)
 comparison = module.compare(baseline, candidate)
 assert comparison["twofold_target_verified_for_this_fixture"]
+assert comparison["guest_installer"]["twofold_verified_for_this_fixture"]
+assert comparison["host_boot_to_installed_ssh"]["conservative_speedup_lower_bound"] == 94 / 40
 assert comparison["explicit_package_count"] == 1
 assert comparison["runs"][3]["test_overlay_sha256"] == "d" * 64
 assert comparison["runs"][0]["test_overlay_sha256"] is None
@@ -118,7 +145,7 @@ rejects(lambda: module.compare(baseline, []), "empty candidate accepted")
 rejects(lambda: module.compare(baseline, baseline), "same runs accepted twice")
 for key, value in (("packages", ["kernel 1.0"]), ("packages", ["kernel 2.0", "shell 2.0"]),
                    ("explicit_packages", ["kernel", "shell"]), ("iso_sha256", "e" * 64),
-                   ("test_overlay_sha256", None)):
+                   ("test_overlay_sha256", None), ("direct_initrd_sha256", "4" * 64)):
   altered = copy.deepcopy(candidate)
   altered[0][key] = value
   rejects(lambda: module.compare(baseline, altered), f"incomparable {key} accepted")
@@ -129,10 +156,37 @@ for key, value in (("accelerator", "kvm"), ("disk_cache", "none"), ("encryption"
   for result in altered:
     result["fixture"][key] = value
   rejects(lambda: module.compare(baseline, altered), f"incomparable {key} accepted")
-candidate[-1]["elapsed"] = 7
-comparison = module.compare(baseline, candidate)
-assert comparison["median_speedup"] > 2
+for key, value in (("direct_kernel_boot", False), ("direct_kernel_sha256", "5" * 64),
+                   ("direct_kernel_command_line", "archisobasedir=arch skip-work=1"),
+                   ("reboot_strategy", "guest-firmware-reboot")):
+  altered = copy.deepcopy(candidate)
+  for result in altered:
+    result["boot_fixture"][key] = value
+  comparison = module.compare(baseline, altered)
+  assert comparison["guest_installer"]["twofold_verified_for_this_fixture"]
+  assert not comparison["host_boot_to_installed_ssh"]["comparable"]
+  assert comparison["host_boot_to_installed_ssh"]["conservative_speedup_lower_bound"] is None
+  assert not comparison["twofold_target_verified_for_this_fixture"]
+# Moving work before the guest installer clock cannot satisfy the whole goal.
+altered = copy.deepcopy(candidate)
+for result in altered:
+  result.update(boot_to_ssh_seconds=90, ssh_readiness_lower_bound_seconds=88)
+comparison = module.compare(baseline, altered)
+assert comparison["guest_installer"]["twofold_verified_for_this_fixture"]
 assert not comparison["twofold_target_verified_for_this_fixture"]
+# Even an observed median above 2x is insufficient when actual polling
+# uncertainty makes a sub-2x improvement consistent with the measurements.
+altered = copy.deepcopy(baseline)
+for result in altered:
+  result.update(ssh_readiness_lower_bound_seconds=79, ssh_poll_uncertainty_seconds=17)
+comparison = module.compare(altered, candidate)
+assert comparison["host_boot_to_installed_ssh"]["median_observed_speedup"] > 2
+assert not comparison["twofold_target_verified_for_this_fixture"]
+altered = copy.deepcopy(candidate)
+altered[-1]["elapsed"] = 7
+comparison = module.compare(baseline, altered)
+assert comparison["guest_installer"]["median_speedup"] > 2
+assert not comparison["guest_installer"]["twofold_verified_for_this_fixture"]
 PYTEST
 
 pass "install comparison rejects interrupted, incomplete, repeated, or incomparable results"
