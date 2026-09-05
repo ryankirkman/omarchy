@@ -1,0 +1,59 @@
+{
+  "schema_version": 1,
+  "workflow_run_id": 33996768275,
+  "workflow_job_id": 101388565710,
+  "repository": "ryankirkman/omarchy",
+  "commit": "e6a157e9e229f6079696726d4a61cc253e5533d5",
+  "artifact_id": 9978755331,
+  "artifact_zip_sha256": "2438031cfe1d3af95cbdfe2368d242b9e7792f9fe54a3115adf14ff4223acceb",
+  "artifact_original_file_count": 164,
+  "status": "second-candidate-initial-ssh-timeout",
+  "completed_valid_pairs": 1,
+  "required_valid_pairs": 3,
+  "twofold_target_verified": false,
+  "boot_method": "firmware",
+  "source_cache": "cold",
+  "image_build_host_seconds": 576.054354636,
+  "one_pair_host_comparison": {
+    "comparable": true,
+    "incomparable_reason": null,
+    "readiness_upper_bound_seconds": {
+      "baseline": [
+        205.67595916399978
+      ],
+      "candidate": [
+        91.89424632800001
+      ]
+    },
+    "readiness_lower_bound_seconds": {
+      "baseline": [
+        201.29053752999994
+      ],
+      "candidate": [
+        87.50722584300001
+      ]
+    },
+    "median_observed_seconds": {
+      "baseline": 205.67595916399978,
+      "candidate": 91.89424632800001
+    },
+    "median_observed_speedup": 2.238181032900323,
+    "conservative_speedup_lower_bound": 2.1904585496194127,
+    "bound": "Fastest baseline readiness lower bound divided by slowest candidate readiness upper bound; includes actual polling uncertainty."
+  },
+  "packages": 941,
+  "explicit_packages": 158,
+  "complete_qk_rows_per_valid_run": 941,
+  "original_seal_hashes_rechecked": 60,
+  "current_strict_comparator_reproduced_result": true,
+  "failed_candidate": {
+    "path": "no-prefetch-fast-reboot-early-verify-repetitions/failed-runs/03-candidate-pair02",
+    "accepted_measurement": false,
+    "initial_installed_ssh_ready": false,
+    "installed_tty2_login_observed_after_timeout": true,
+    "rescue_status": "collected",
+    "last_probe_error": "Connection timed out during banner exchange",
+    "qmp_forward_destination": "10.0.2.15:22",
+    "qmp_forward_connections_state": "SYN_SENT"
+  }
+}

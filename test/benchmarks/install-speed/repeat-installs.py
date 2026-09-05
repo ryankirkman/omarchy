@@ -116,20 +116,13 @@ def active_runs(root, excluded=None):
 
 
 def verify_seal(directory):
-  seal = json.loads((directory / "seal.json").read_text())
-  for name, record in seal["files"].items():
-    path = directory / name
-    if Path(name).name != name or path.is_symlink() or not path.is_file():
-      raise ValueError(f"Unsafe or missing sealed evidence file: {path}")
-    if path.stat().st_size != record["bytes"] or digest(path) != record["sha256"]:
-      raise ValueError(f"Sealed evidence changed: {path}")
-  return seal
+  return load_comparator().verify_seal(directory)
 
 
 def seal_run(source, destination, comparator, provenance):
   # The real comparator validates completeness before any source disk can be
   # deleted. A staging directory prevents partial copies looking like success.
-  comparator.read_run(source)
+  comparator.read_run(source, allow_unsealed=True)
   manifest = json.loads((source / "manifest.json").read_text())
   if manifest.get("qemu_exit_status") != 0:
     raise ValueError("QEMU must exit cleanly before evidence sealing or disk reclamation")

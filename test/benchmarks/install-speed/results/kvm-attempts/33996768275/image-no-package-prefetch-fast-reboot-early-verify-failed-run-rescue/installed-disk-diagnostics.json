@@ -1,0 +1,312 @@
+{
+  "schema_version": 1,
+  "measurement_valid": false,
+  "purpose": "Read-only failure forensics after the installation timer failed",
+  "status": "collected",
+  "block_read_only": true,
+  "block_devices": {
+    "blockdevices": [
+      {
+        "name": "/dev/vdb",
+        "type": "disk",
+        "fstype": null,
+        "ro": true,
+        "children": [
+          {
+            "name": "/dev/vdb1",
+            "type": "part",
+            "fstype": "vfat",
+            "ro": true
+          },
+          {
+            "name": "/dev/vdb2",
+            "type": "part",
+            "fstype": "btrfs",
+            "ro": true
+          }
+        ]
+      }
+    ]
+  },
+  "files": {
+    "etc/fstab": {
+      "text": "# Static information about the filesystems.\n# See fstab(5) for details.\n\n# <file system> <dir> <type> <options> <dump> <pass>\n# /dev/vda2 LABEL=omarchy-root-image\nUUID=ee14094c-02c7-4748-a748-2753bbad79af\t/         \tbtrfs     \trw,relatime,compress=zstd:3,discard=async,space_cache=v2,subvol=/@\t0 0\n\n# /dev/vda2 LABEL=omarchy-root-image\nUUID=ee14094c-02c7-4748-a748-2753bbad79af\t/home     \tbtrfs     \trw,relatime,compress=zstd:3,discard=async,space_cache=v2,subvol=/@home\t0 0\n\n# /dev/vda2 LABEL=omarchy-root-image\nUUID=ee14094c-02c7-4748-a748-2753bbad79af\t/var/cache/pacman/pkg\tbtrfs     \trw,relatime,compress=zstd:3,discard=async,space_cache=v2,subvol=/@pkg\t0 0\n\n# /dev/vda2 LABEL=omarchy-root-image\nUUID=ee14094c-02c7-4748-a748-2753bbad79af\t/var/log  \tbtrfs     \trw,relatime,compress=zstd:3,discard=async,space_cache=v2,subvol=/@log\t0 0\n\n# /dev/vda1\nUUID=18C0-A337      \t/boot     \tvfat      \trw,relatime,fmask=0077,dmask=0077,codepage=437,iocharset=ascii,shortname=mixed,utf8,errors=remount-ro\t0 2\n\n\n# Btrfs swapfile for system hibernation\n/swap/swapfile none swap defaults,pri=0 0 0",
+      "bytes": 1086,
+      "truncated": false
+    },
+    "etc/kernel/cmdline": {
+      "text": "root=PARTUUID=b1dbd285-a189-43f7-9867-991231e345f0 zswap.enabled=0 rootflags=subvol=@ rw rootfstype=btrfs",
+      "bytes": 106,
+      "truncated": false
+    },
+    "etc/limine.conf": {
+      "missing_or_unsafe": true
+    },
+    "boot/limine.conf": {
+      "missing_or_unsafe": true
+    },
+    "etc/ssh/sshd_config": {
+      "text": "# Include drop-in configurations\nInclude /etc/ssh/sshd_config.d/*.conf\n\n# This is the sshd server system-wide configuration file.  See\n# sshd_config(5) for more information.\n\n# This sshd was compiled with PATH=/usr/local/sbin:/usr/local/bin:/usr/bin\n\n# The strategy used for options in the default sshd_config shipped with\n# OpenSSH is to specify options with their default value where\n# possible, but leave them commented.  Uncommented options override the\n# default value.\n\n#Port 22\n#AddressFamily any\n#ListenAddress 0.0.0.0\n#ListenAddress ::\n\n#HostKey /etc/ssh/ssh_host_rsa_key\n#HostKey /etc/ssh/ssh_host_ecdsa_key\n#HostKey /etc/ssh/ssh_host_ed25519_key\n#HostKey /etc/ssh/ssh_host_mldsa44_ed25519_key\n\n# Ciphers and keying\n#RekeyLimit default none\n\n# Logging\n#SyslogFacility AUTH\n#LogLevel INFO\n\n# Authentication:\n\n#LoginGraceTime 2m\n[CREDENTIAL LINE REDACTED]\n#StrictModes yes\n#MaxAuthTries 6\n#MaxSessions 10\n\n#PubkeyAuthentication yes\n\n[CREDENTIAL LINE REDACTED]\n[CREDENTIAL LINE REDACTED]\n[CREDENTIAL LINE REDACTED]\n\n#AuthorizedPrincipalsFile none\n\n#AuthorizedKeysCommand none\n#AuthorizedKeysCommandUser nobody\n\n# For this to work you will also need host keys in /etc/ssh/ssh_known_hosts\n#HostbasedAuthentication no\n# Change to yes if you don't trust ~/.ssh/known_hosts for\n# HostbasedAuthentication\n#IgnoreUserKnownHosts no\n# Don't read the user's ~/.rhosts and ~/.shosts files\n#IgnoreRhosts yes\n\n[CREDENTIAL LINE REDACTED]\n[CREDENTIAL LINE REDACTED]\n[CREDENTIAL LINE REDACTED]\n\n# Change to \"no\" to disable keyboard-interactive authentication.  Depending on\n[CREDENTIAL LINE REDACTED]\n[CREDENTIAL LINE REDACTED]\n#KbdInteractiveAuthentication yes\n\n# Kerberos options\n#KerberosAuthentication no\n[CREDENTIAL LINE REDACTED]\n#KerberosTicketCleanup yes\n[CREDENTIAL LINE REDACTED]\n\n# GSSAPI options\n#GSSAPIAuthentication no\n#GSSAPICleanupCredentials yes\n\n# Set this to 'yes' to enable PAM authentication, account processing,\n# and session processing. If this is enabled, PAM authentication will\n# be allowed through the KbdInteractiveAuthentication and\n[CREDENTIAL LINE REDACTED]\n# PAM authentication via KbdInteractiveAuthentication may bypass\n[CREDENTIAL LINE REDACTED]\n# If you just want the PAM account and session checks to run without\n[CREDENTIAL LINE REDACTED]\n# and KbdInteractiveAuthentication to 'no'.\n#UsePAM no\n\n#AllowAgentForwarding yes\n#AllowTcpForwarding yes\n#GatewayPorts no\n#X11Forwarding no\n#X11DisplayOffset 10\n#X11UseLocalhost yes\n#PermitTTY yes\n#PrintMotd yes\n#PrintLastLog yes\n#TCPKeepAlive yes\n#PermitUserEnvironment no\n#Compression delayed\n#ClientAliveInterval 0\n#ClientAliveCountMax 3\n#UseDNS no\n#PidFile /run/sshd.pid\n#MaxStartups 10:30:100\n#PermitTunnel no\n#ChrootDirectory none\n#VersionAddendum none\n\n# no default banner path\n#Banner none\n\n# override default of no subsystems\nSubsystem\tsftp\t/usr/lib/ssh/sftp-server\n\n# Example of overriding settings on a per-user basis\n#Match User anoncvs\n#\tX11Forwarding no\n#\tAllowTcpForwarding no\n#\tPermitTTY no\n#\tForceCommand cvs server",
+      "bytes": 3360,
+      "truncated": false
+    },
+    "etc/systemd/system/default.target": {
+      "missing_or_unsafe": true
+    },
+    "etc/ufw/ufw.conf": {
+      "text": "# /etc/ufw/ufw.conf\n#\n\n# Set to yes to start on boot. If setting this remotely, be sure to add a rule\n# to allow your remote connection before starting ufw. Eg: 'ufw allow 22/tcp'\nENABLED=yes\n\n# Please use the 'ufw' command to set the loglevel. Eg: 'ufw logging medium'.\n# See 'man ufw' for details.\nLOGLEVEL=low",
+      "bytes": 313,
+      "truncated": false
+    },
+    "etc/ufw/user.rules": {
+      "text": "*filter\n:ufw-user-input - [0:0]\n:ufw-user-output - [0:0]\n:ufw-user-forward - [0:0]\n:ufw-before-logging-input - [0:0]\n:ufw-before-logging-output - [0:0]\n:ufw-before-logging-forward - [0:0]\n:ufw-user-logging-input - [0:0]\n:ufw-user-logging-output - [0:0]\n:ufw-user-logging-forward - [0:0]\n:ufw-after-logging-input - [0:0]\n:ufw-after-logging-output - [0:0]\n:ufw-after-logging-forward - [0:0]\n:ufw-logging-deny - [0:0]\n:ufw-logging-allow - [0:0]\n:ufw-user-limit - [0:0]\n:ufw-user-limit-accept - [0:0]\n### RULES ###\n\n### tuple ### allow udp 53317 0.0.0.0/0 any 0.0.0.0/0 in\n-A ufw-user-input -p udp --dport 53317 -j ACCEPT\n\n### tuple ### allow tcp 53317 0.0.0.0/0 any 0.0.0.0/0 in\n-A ufw-user-input -p tcp --dport 53317 -j ACCEPT\n\n### tuple ### allow udp 53 172.17.0.1 any 172.16.0.0/12 in comment=616c6c6f772d646f636b65722d646e73\n-A ufw-user-input -p udp -d 172.17.0.1 --dport 53 -s 172.16.0.0/12 -j ACCEPT\n\n### tuple ### allow udp 53 172.17.0.1 any 192.168.0.0/16 in comment=616c6c6f772d646f636b65722d646e73\n-A ufw-user-input -p udp -d 172.17.0.1 --dport 53 -s 192.168.0.0/16 -j ACCEPT\n\n### tuple ### allow any 22 0.0.0.0/0 any 0.0.0.0/0 in\n-A ufw-user-input -p tcp --dport 22 -j ACCEPT\n-A ufw-user-input -p udp --dport 22 -j ACCEPT\n\n### END RULES ###\n\n### LOGGING ###\n-A ufw-after-logging-input -j LOG --log-prefix \"[UFW BLOCK] \" -m limit --limit 3/min --limit-burst 10\n-A ufw-after-logging-forward -j LOG --log-prefix \"[UFW BLOCK] \" -m limit --limit 3/min --limit-burst 10\n-I ufw-logging-deny -m conntrack --ctstate INVALID -j RETURN -m limit --limit 3/min --limit-burst 10\n-A ufw-logging-deny -j LOG --log-prefix \"[UFW BLOCK] \" -m limit --limit 3/min --limit-burst 10\n-A ufw-logging-allow -j LOG --log-prefix \"[UFW ALLOW] \" -m limit --limit 3/min --limit-burst 10\n### END LOGGING ###\n\n### RATE LIMITING ###\n-A ufw-user-limit -m limit --limit 3/minute -j LOG --log-prefix \"[UFW LIMIT BLOCK] \"\n-A ufw-user-limit -j REJECT\n-A ufw-user-limit-accept -j ACCEPT\n### END RATE LIMITING ###\nCOMMIT",
+      "bytes": 1988,
+      "truncated": false
+    },
+    "etc/ufw/user6.rules": {
+      "text": "*filter\n:ufw6-user-input - [0:0]\n:ufw6-user-output - [0:0]\n:ufw6-user-forward - [0:0]\n:ufw6-before-logging-input - [0:0]\n:ufw6-before-logging-output - [0:0]\n:ufw6-before-logging-forward - [0:0]\n:ufw6-user-logging-input - [0:0]\n:ufw6-user-logging-output - [0:0]\n:ufw6-user-logging-forward - [0:0]\n:ufw6-after-logging-input - [0:0]\n:ufw6-after-logging-output - [0:0]\n:ufw6-after-logging-forward - [0:0]\n:ufw6-logging-deny - [0:0]\n:ufw6-logging-allow - [0:0]\n:ufw6-user-limit - [0:0]\n:ufw6-user-limit-accept - [0:0]\n### RULES ###\n\n### tuple ### allow udp 53317 ::/0 any ::/0 in\n-A ufw6-user-input -p udp --dport 53317 -j ACCEPT\n\n### tuple ### allow tcp 53317 ::/0 any ::/0 in\n-A ufw6-user-input -p tcp --dport 53317 -j ACCEPT\n\n### END RULES ###\n\n### LOGGING ###\n-A ufw6-after-logging-input -j LOG --log-prefix \"[UFW BLOCK] \" -m limit --limit 3/min --limit-burst 10\n-A ufw6-after-logging-forward -j LOG --log-prefix \"[UFW BLOCK] \" -m limit --limit 3/min --limit-burst 10\n-I ufw6-logging-deny -m conntrack --ctstate INVALID -j RETURN -m limit --limit 3/min --limit-burst 10\n-A ufw6-logging-deny -j LOG --log-prefix \"[UFW BLOCK] \" -m limit --limit 3/min --limit-burst 10\n-A ufw6-logging-allow -j LOG --log-prefix \"[UFW ALLOW] \" -m limit --limit 3/min --limit-burst 10\n### END LOGGING ###\n\n### RATE LIMITING ###\n-A ufw6-user-limit -m limit --limit 3/minute -j LOG --log-prefix \"[UFW LIMIT BLOCK] \"\n-A ufw6-user-limit -j REJECT\n-A ufw6-user-limit-accept -j ACCEPT\n### END RATE LIMITING ###\nCOMMIT",
+      "bytes": 1489,
+      "truncated": false
+    },
+    "etc/ufw/before.rules": {
+      "text": "#\n# rules.before\n#\n# Rules that should be run before the ufw command line added rules. Custom\n# rules should be added to one of these chains:\n#   ufw-before-input\n#   ufw-before-output\n#   ufw-before-forward\n#\n\n# Don't delete these required lines, otherwise there will be errors\n*filter\n:ufw-before-input - [0:0]\n:ufw-before-output - [0:0]\n:ufw-before-forward - [0:0]\n:ufw-not-local - [0:0]\n# End required lines\n\n\n# allow all on loopback\n-A ufw-before-input -i lo -j ACCEPT\n-A ufw-before-output -o lo -j ACCEPT\n\n# quickly process packets for which we already have a connection\n-A ufw-before-input -m conntrack --ctstate RELATED,ESTABLISHED -j ACCEPT\n-A ufw-before-output -m conntrack --ctstate RELATED,ESTABLISHED -j ACCEPT\n-A ufw-before-forward -m conntrack --ctstate RELATED,ESTABLISHED -j ACCEPT\n\n# drop INVALID packets (logs these in loglevel medium and higher)\n-A ufw-before-input -m conntrack --ctstate INVALID -j ufw-logging-deny\n-A ufw-before-input -m conntrack --ctstate INVALID -j DROP\n\n# ok icmp codes for INPUT\n-A ufw-before-input -p icmp --icmp-type destination-unreachable -j ACCEPT\n-A ufw-before-input -p icmp --icmp-type time-exceeded -j ACCEPT\n-A ufw-before-input -p icmp --icmp-type parameter-problem -j ACCEPT\n-A ufw-before-input -p icmp --icmp-type echo-request -j ACCEPT\n\n# ok icmp code for FORWARD\n-A ufw-before-forward -p icmp --icmp-type destination-unreachable -j ACCEPT\n-A ufw-before-forward -p icmp --icmp-type time-exceeded -j ACCEPT\n-A ufw-before-forward -p icmp --icmp-type parameter-problem -j ACCEPT\n-A ufw-before-forward -p icmp --icmp-type echo-request -j ACCEPT\n\n# allow dhcp client to work\n-A ufw-before-input -p udp --sport 67 --dport 68 -j ACCEPT\n\n#\n# ufw-not-local\n#\n-A ufw-before-input -j ufw-not-local\n\n# if LOCAL, RETURN\n-A ufw-not-local -m addrtype --dst-type LOCAL -j RETURN\n\n# if MULTICAST, RETURN\n-A ufw-not-local -m addrtype --dst-type MULTICAST -j RETURN\n\n# if BROADCAST, RETURN\n-A ufw-not-local -m addrtype --dst-type BROADCAST -j RETURN\n\n# all other non-local packets are dropped\n-A ufw-not-local -m limit --limit 3/min --limit-burst 10 -j ufw-logging-deny\n-A ufw-not-local -j DROP\n\n# allow MULTICAST mDNS for service discovery (be sure the MULTICAST line above\n# is uncommented)\n-A ufw-before-input -p udp -d 224.0.0.251 --dport 5353 -j ACCEPT\n\n# allow MULTICAST UPnP for service discovery (be sure the MULTICAST line above\n# is uncommented)\n-A ufw-before-input -p udp -d 239.255.255.250 --dport 1900 -j ACCEPT\n\n# don't delete the 'COMMIT' line or these rules won't be processed\nCOMMIT",
+      "bytes": 2537,
+      "truncated": false
+    },
+    "etc/default/ufw": {
+      "text": "# /etc/default/ufw\n#\n\n# Set to yes to apply rules to support IPv6 (no means only IPv6 on loopback\n# accepted). You will need to 'disable' and then 'enable' the firewall for\n# the changes to take affect.\nIPV6=yes\n\n# Set the default input policy to ACCEPT, DROP, or REJECT. Please note that if\n# you change this you will most likely want to adjust your rules.\nDEFAULT_INPUT_POLICY=\"DROP\"\n\n# Set the default output policy to ACCEPT, DROP, or REJECT. Please note that if\n# you change this you will most likely want to adjust your rules.\nDEFAULT_OUTPUT_POLICY=\"ACCEPT\"\n\n# Set the default forward policy to ACCEPT, DROP or REJECT.  Please note that\n# if you change this you will most likely want to adjust your rules\nDEFAULT_FORWARD_POLICY=\"DROP\"\n\n# Set the default application policy to ACCEPT, DROP, REJECT or SKIP. Please\n# note that setting this to ACCEPT may be a security risk. See 'man ufw' for\n# details\nDEFAULT_APPLICATION_POLICY=\"SKIP\"\n\n# By default, ufw only touches its own chains. Set this to 'yes' to have ufw\n# manage the built-in chains too. Warning: setting this to 'yes' will break\n# non-ufw managed firewall rules\nMANAGE_BUILTINS=no\n\n#\n# IPT backend\n#\n# only enable if using iptables backend\nIPT_SYSCTL=/etc/ufw/sysctl.conf\n\n# Extra connection tracking modules to load. IPT_MODULES should typically be\n# empty for new installations and modules added only as needed. See\n# 'CONNECTION HELPERS' from 'man ufw-framework' for details. Complete list can\n# be found in net/netfilter/Kconfig of your kernel source. Some common modules:\n# nf_conntrack_irc, nf_nat_irc: DCC (Direct Client to Client) support\n# nf_conntrack_netbios_ns: NetBIOS (samba) client support\n# nf_conntrack_pptp, nf_nat_pptp: PPTP over stateful firewall/NAT\n# nf_conntrack_ftp, nf_nat_ftp: active FTP support\n# nf_conntrack_tftp, nf_nat_tftp: TFTP support (server side)\n# nf_conntrack_sane: sane support\nIPT_MODULES=\"\"",
+      "bytes": 1897,
+      "truncated": false
+    },
+    "etc/ssh/sshd_config.d/20-systemd-userdb.conf": {
+      "text": "# SPDX-License-Identifier: LGPL-2.1-or-later\n#\n# Make sure SSH authorized keys recorded in user records can be consumed by SSH\n#\nAuthorizedKeysCommand /usr/bin/userdbctl ssh-authorized-keys %u\nAuthorizedKeysCommandUser root",
+      "bytes": 224,
+      "truncated": false
+    },
+    "etc/ssh/sshd_config.d/99-archlinux.conf": {
+      "text": "# sshd_config defaults on Arch Linux\nKbdInteractiveAuthentication no\nUsePAM yes\nPrintMotd no",
+      "bytes": 93,
+      "truncated": false
+    },
+    "@log/omarchy-install.log": {
+      "text": "Autoinstall configuration found on cidata drive; skipping the configurator.\n\n    Installing Omarchy for omarchy \u2192 /mnt\n\n    \u203a Preparing live environment\n\n    \u203a cleaning up holders on install disk: /dev/vda\nCleaning up existing holders on install disk: /dev/vda\n\n    \u203a loading configurator output\n\n    \u203a Preparing install target\n\n    \u203a boot medium: /dev/sr1 on /dev/sr1, scheduler: none [mq-deadline] kyber bfq\n\n    \u203a Installing Arch + Omarchy\n\n    \u203a partitioning + formatting + encrypting\nWiping partitions and metadata: /dev/vda\nCreating partitions: /dev/vda\nCreating subvolumes: /dev/vda2\n\n    \u203a timing: partition, format, and encrypt: 0.298s\n\n    \u203a opening installer context\nSkipping waiting for automatic time sync (this can cause issues if time is out of sync during installation)\nSkipped reflector...\n\n    \u203a timing: mount and validate target: 0.062s\n\n    \u203a restoring root filesystem (3499 MiB qcow2, 5888 MiB virtual)\nCurrent fsid: 63a0b5ee-7aee-423f-8461-e8cee3df4087\nNew fsid: ee14094c-02c7-4748-a748-2753bbad79af\nSet superblock flag CHANGING_FSID\nChange fsid in extent tree\nChange fsid in chunk tree\nClear superblock flag CHANGING_FSID\nFsid change finished\n\n    \u203a making the image the root subvolume\n\n    \u203a timing: unpack root image: 22.790s\n\n    \u203a installing per-machine packages (mkinitcpio deferred to final Limine UKI build)\nWrote to /mnt/etc/vconsole.conf using  and default8x16\nSetting keyboard language to \nKeyboard language was not changed from default (no language specified)\n\n    \u203a timing: per-machine package delta: 1.303s\nEnabling service systemd-zram-setup@zram0.service\n\n    \u203a installing bootloader (Limine)\nBootCurrent: 0001\nTimeout: 0 seconds\nBootOrder: 0004,0002,0001,0000,0003\nBoot0000* UiApp\tFvVol(7cb8bdc9-f8eb-4f34-aaea-3ee4af6516a1)/FvFile(462caa21-7614-4503-836e-8ab6f4662331)\n      dp: 04 07 14 00 c9 bd b8 7c eb f8 34 4f aa ea 3e e4 af 65 16 a1 / 04 06 14 00 21 aa 2c 46 14 76 03 45 83 6e 8a b6 f4 66 23 31 / 7f ff 04 00\nBoot0001* UEFI QEMU DVD-ROM QM00011 \tPciRoot(0x0)/Pci(0x1f,0x2)/Sata(5,65535,0)\uac4e\u8108\u9f11\u4d59\u0e85\u1ae2\u2c52\ub259\n      dp: 02 01 0c 00 d0 41 03 0a 00 00 00 00 / 01 01 06 00 02 1f / 03 12 0a 00 05 00 ff ff 00 00 / 7f ff 04 00\n    data: 4e ac 08 81 11 9f 59 4d 85 0e e2 1a 52 2c 59 b2\nBoot0002* UEFI Misc Device\tPciRoot(0x0)/Pci(0x1,0x0)\uac4e\u8108\u9f11\u4d59\u0e85\u1ae2\u2c52\ub259\n      dp: 02 01 0c 00 d0 41 03 0a 00 00 00 00 / 01 01 06 00 00 01 / 7f ff 04 00\n    data: 4e ac 08 81 11 9f 59 4d 85 0e e2 1a 52 2c 59 b2\nBoot0003* EFI Internal Shell\tFvVol(7cb8bdc9-f8eb-4f34-aaea-3ee4af6516a1)/FvFile(7c04a583-9e3e-4f1c-ad65-e05268d0b4d1)\n      dp: 04 07 14 00 c9 bd b8 7c eb f8 34 4f aa ea 3e e4 af 65 16 a1 / 04 06 14 00 83 a5 04 7c 3e 9e 1c 4f ad 65 e0 52 68 d0 b4 d1 / 7f ff 04 00\nBoot0004* Limine\tHD(1,GPT,5994d62b-0de9-4fb6-9ea7-83b8c8c9312c,0x800,0x400000)/\\EFI\\limine\\limine_x64.efi\n      dp: 04 01 2a 00 01 00 00 00 00 08 00 00 00 00 00 00 00 00 40 00 00 00 00 00 2b d6 94 59 e9 0d b6 4f 9e a7 83 b8 c8 c9 31 2c 02 02 / 04 04 3a 00 5c 00 45 00 46 00 49 00 5c 00 6c 00 69 00 6d 00 69 00 6e 00 65 00 5c 00 6c 00 69 00 6d 00 69 00 6e 00 65 00 5f 00 78 00 36 00 34 00 2e 00 65 00 66 00 69 00 00 00 / 7f ff 04 00\n\n    \u203a writing Limine config\n\n    \u203a timing: configure Limine: 0.091s\n\n    \u203a creating user (with /etc/skel populated)\nCreating user omarchy\n[CREDENTIAL LINE REDACTED]\nEnabling sudo permissions for omarchy\n\n    \u203a timing: create user: 2.542s\n\n    \u203a applying archinstall application selections\n\n    \u203a initializing per-machine pacman keyring (background unit)\n\n    \u203a timing: write target metadata: 0.255s\n\n\n    \u203a Configuring hibernation\nCreating Btrfs subvolume\nCreate subvolume '//swap'\nCreating swapfile in Btrfs subvolume\ncreate swapfile /swap/swapfile size 7.74GiB (8311922688) page size 4096\nAdding swapfile to /etc/fstab\nEnabling swap on /swap/swapfile\nAdding resume hook to /etc/mkinitcpio.conf.d/omarchy_resume.conf\nAdding resume kernel parameters\n\n    \u203a Configuring system\n=== Omarchy Target Setup Started: 2026-09-05 23:11:37 ===\n=== Omarchy Setup Started: 2026-09-05 23:11:37 ===\n[2026-09-05 23:11:37] Starting: /usr/share/omarchy/install/config/theme-system.sh\n[2026-09-05 23:11:38] Completed: /usr/share/omarchy/install/config/theme-system.sh\n[2026-09-05 23:11:38] Starting: /usr/share/omarchy/install/config/browser-policy.sh\n[2026-09-05 23:11:38] Completed: /usr/share/omarchy/install/config/browser-policy.sh\n[2026-09-05 23:11:38] Starting: /usr/share/omarchy/install/config/increase-lockout-limit.sh\n[2026-09-05 23:11:38] Completed: /usr/share/omarchy/install/config/increase-lockout-limit.sh\n[2026-09-05 23:11:38] Starting: /usr/share/omarchy/install/config/lockscreen-pam.sh\n[CREDENTIAL LINE REDACTED]\n[2026-09-05 23:11:39] Completed: /usr/share/omarchy/install/config/lockscreen-pam.sh\n[2026-09-05 23:11:39] Starting: /usr/share/omarchy/install/config/fix-powerprofilesctl-shebang.sh\n[2026-09-05 23:11:39] Completed: /usr/share/omarchy/install/config/fix-powerprofilesctl-shebang.sh\n[2026-09-05 23:11:39] Starting: /usr/share/omarchy/install/config/ssh-command-path.sh\n[2026-09-05 23:11:39] Completed: /usr/share/omarchy/install/config/ssh-command-path.sh\n[2026-09-05 23:11:39] Starting: /usr/share/omarchy/install/config/ssh-keepalive.sh\n[2026-09-05 23:11:39] Completed: /usr/share/omarchy/install/config/ssh-keepalive.sh\n[2026-09-05 23:11:39] Starting: /usr/share/omarchy/install/config/docker.sh\n[2026-09-05 23:11:39] Completed: /usr/share/omarchy/install/config/docker.sh\n[2026-09-05 23:11:39] Starting: /usr/share/omarchy/install/config/snapper.sh\nConfiguring Omarchy Snapper snapshot retention\n[2026-09-05 23:11:39] Completed: /usr/share/omarchy/install/config/snapper.sh\n[2026-09-05 23:11:39] Starting: /usr/share/omarchy/install/config/locate.sh\nConfiguring locate to skip Btrfs snapshots and index Btrfs subvolumes\n[2026-09-05 23:11:39] Completed: /usr/share/omarchy/install/config/locate.sh\n[2026-09-05 23:11:39] Starting: /usr/share/omarchy/install/config/enable-services.sh\nCreated symlink '/etc/systemd/system/printer.target.wants/cups.service' \u2192 '/usr/lib/systemd/system/cups.service'.\nCreated symlink '/etc/systemd/system/multi-user.target.wants/cups.service' \u2192 '/usr/lib/systemd/system/cups.service'.\nCreated symlink '/etc/systemd/system/sockets.target.wants/cups.socket' \u2192 '/usr/lib/systemd/system/cups.socket'.\nCreated symlink '/etc/systemd/system/multi-user.target.wants/cups.path' \u2192 '/usr/lib/systemd/system/cups.path'.\nCreated symlink '/etc/systemd/system/dbus-org.freedesktop.Avahi.service' \u2192 '/usr/lib/systemd/system/avahi-daemon.service'.\nCreated symlink '/etc/systemd/system/multi-user.target.wants/avahi-daemon.service' \u2192 '/usr/lib/systemd/system/avahi-daemon.service'.\nCreated symlink '/etc/systemd/system/sockets.target.wants/avahi-daemon.socket' \u2192 '/usr/lib/systemd/system/avahi-daemon.socket'.\nCreated symlink '/etc/systemd/system/basic.target.wants/linux-modules-cleanup.service' \u2192 '/usr/lib/systemd/system/linux-modules-cleanup.service'.\nCreated symlink '/etc/systemd/system/sockets.target.wants/docker.socket' \u2192 '/usr/lib/systemd/system/docker.socket'.\nCreated symlink '/etc/systemd/system/dbus-org.freedesktop.resolve1.service' \u2192 '/usr/lib/systemd/system/systemd-resolved.service'.\nCreated symlink '/etc/systemd/system/sysinit.target.wants/systemd-resolved.service' \u2192 '/usr/lib/systemd/system/systemd-resolved.service'.\nCreated symlink '/etc/systemd/system/sockets.target.wants/systemd-resolved-varlink.socket' \u2192 '/usr/lib/systemd/system/systemd-resolved-varlink.socket'.\nCreated symlink '/etc/systemd/system/sockets.target.wants/systemd-resolved-monitor.socket' \u2192 '/usr/lib/systemd/system/systemd-resolved-monitor.socket'.\nCreated symlink '/etc/systemd/system/multi-user.target.wants/NetworkManager.service' \u2192 '/usr/lib/systemd/system/NetworkManager.service'.\nCreated symlink '/etc/systemd/system/dbus-org.freedesktop.nm-dispatcher.service' \u2192 '/usr/lib/systemd/system/NetworkManager-dispatcher.service'.\nCreated symlink '/etc/systemd/system/network-online.target.wants/NetworkManager-wait-online.service' \u2192 '/usr/lib/systemd/system/NetworkManager-wait-online.service'.\nCreated symlink '/etc/systemd/system/NetworkManager-wait-online.service' \u2192 '/dev/null'.\nCreated symlink '/etc/systemd/system/graphical.target.wants/power-profiles-daemon.service' \u2192 '/usr/lib/systemd/system/power-profiles-daemon.service'.\nCreated symlink '/etc/systemd/system/display-manager.service' \u2192 '/usr/lib/systemd/system/sddm.service'.\nCreated symlink '/etc/systemd/system/dbus-org.freedesktop.oom1.service' \u2192 '/usr/lib/systemd/system/systemd-oomd.service'.\nCreated symlink '/etc/systemd/system/multi-user.target.wants/systemd-oomd.service' \u2192 '/usr/lib/systemd/system/systemd-oomd.service'.\nCreated symlink '/etc/systemd/system/sockets.target.wants/systemd-oomd.socket' \u2192 '/usr/lib/systemd/system/systemd-oomd.socket'.\n[2026-09-05 23:11:39] Completed: /usr/share/omarchy/install/config/enable-services.sh\n[2026-09-05 23:11:39] Starting: /usr/share/omarchy/install/config/firewall.sh\nDefault incoming policy changed to 'deny'\n(be sure to update your rules accordingly)\nDefault outgoing policy changed to 'allow'\n(be sure to update your rules accordingly)\nRules updated\nRules updated (v6)\nRules updated\nRules updated (v6)\nRules updated\nRules updated\n--- /etc/ufw/after.rules\t2026-09-05 23:11:39.985195061 +0000\n+++ /tmp/tmp.0oxp8uEUvN\t2026-09-05 23:11:40.921646301 +0000\n@@ -28,3 +28,28 @@\n \n # don't delete the 'COMMIT' line or these rules won't be processed\n COMMIT\n+# BEGIN UFW AND DOCKER\n+*filter\n+:ufw-user-forward - [0:0]\n+:ufw-docker-logging-deny - [0:0]\n+:DOCKER-USER - [0:0]\n+-A DOCKER-USER -j ufw-user-forward\n+\n+-A DOCKER-USER -m conntrack --ctstate RELATED,ESTABLISHED -j RETURN\n+-A DOCKER-USER -m conntrack --ctstate INVALID -j DROP\n+-A DOCKER-USER -i docker0 -o docker0 -j ACCEPT\n+\n+-A DOCKER-USER -j RETURN -s 10.0.0.0/8\n+-A DOCKER-USER -j RETURN -s 172.16.0.0/12\n+-A DOCKER-USER -j RETURN -s 192.168.0.0/16\n+-A DOCKER-USER -j ufw-docker-logging-deny -m conntrack --ctstate NEW -d 10.0.0.0/8\n+-A DOCKER-USER -j ufw-docker-logging-deny -m conntrack --ctstate NEW -d 172.16.0.0/12\n+-A DOCKER-USER -j ufw-docker-logging-deny -m conntrack --ctstate NEW -d 192.168.0.0/16\n+\n+-A DOCKER-USER -j RETURN\n+\n+-A ufw-docker-logging-deny -m limit --limit 3/min --limit-burst 10 -j LOG --log-prefix \"[UFW DOCKER BLOCK] \"\n+-A ufw-docker-logging-deny -j DROP\n+\n+COMMIT\n+# END UFW AND DOCKER\n\nBacking up /etc/ufw/after.rules to /etc/ufw/after.rules-ufw-docker~2026-09-05-231140~\n# BEGIN UFW AND DOCKER\n*filter\n:ufw6-user-forward - [0:0]\n:ufw6-docker-logging-deny - [0:0]\n:DOCKER-USER - [0:0]\n-A DOCKER-USER -j ufw6-user-forward\n\n-A DOCKER-USER -m conntrack --ctstate RELATED,ESTABLISHED -j RETURN\n-A DOCKER-USER -m conntrack --ctstate INVALID -j DROP\n-A DOCKER-USER -i docker0 -o docker0 -j ACCEPT\n\n-A DOCKER-USER -j RETURN -s fd00::/8\n-A DOCKER-USER -j ufw6-docker-logging-deny -m conntrack --ctstate NEW -d fd00::/8\n\n-A DOCKER-USER -j RETURN\n\n-A ufw6-docker-logging-deny -m limit --limit 3/min --limit-burst 10 -j LOG --log-prefix \"[UFW DOCKER BLOCK] \"\n-A ufw6-docker-logging-deny -j DROP\n\nCOMMIT\n# END UFW AND DOCKER\n--- /etc/ufw/after6.rules\t2026-09-05 23:11:39.985424321 +0000\n+++ /tmp/tmp.gg858zWPZG\t2026-09-05 23:11:40.932276694 +0000\n@@ -25,3 +25,24 @@\n \n # don't delete the 'COMMIT' line or these rules won't be processed\n COMMIT\n+# BEGIN UFW AND DOCKER\n+*filter\n+:ufw6-user-forward - [0:0]\n+:ufw6-docker-logging-deny - [0:0]\n+:DOCKER-USER - [0:0]\n+-A DOCKER-USER -j ufw6-user-forward\n+\n+-A DOCKER-USER -m conntrack --ctstate RELATED,ESTABLISHED -j RETURN\n+-A DOCKER-USER -m conntrack --ctstate INVALID -j DROP\n+-A DOCKER-USER -i docker0 -o docker0 -j ACCEPT\n+\n+-A DOCKER-USER -j RETURN -s fd00::/8\n+-A DOCKER-USER -j ufw6-docker-logging-deny -m conntrack --ctstate NEW -d fd00::/8\n+\n+-A DOCKER-USER -j RETURN\n+\n+-A ufw6-docker-logging-deny -m limit --limit 3/min --limit-burst 10 -j LOG --log-prefix \"[UFW DOCKER BLOCK] \"\n+-A ufw6-docker-logging-deny -j DROP\n+\n+COMMIT\n+# END UFW AND DOCKER\n\nBacking up /etc/ufw/after6.rules to /etc/ufw/after6.rules-ufw-docker~2026-09-05-231140~\n\nPlease restart UFW service manually by using the following command:\n    sudo systemctl restart ufw\nCreated symlink '/etc/systemd/system/multi-user.target.wants/ufw.service' \u2192 '/usr/lib/systemd/system/ufw.service'.\n[2026-09-05 23:11:40] Completed: /usr/share/omarchy/install/config/firewall.sh\n[2026-09-05 23:11:40] Starting: /usr/share/omarchy/install/hardware/asus-rog.sh\n[2026-09-05 23:11:40] Completed: /usr/share/omarchy/install/hardware/asus-rog.sh\n[2026-09-05 23:11:40] Starting: /usr/share/omarchy/install/hardware/framework16.sh\n[2026-09-05 23:11:40] Completed: /usr/share/omarchy/install/hardware/framework16.sh\n[2026-09-05 23:11:40] Starting: /usr/share/omarchy/install/hardware/dell-xps-touchpad-haptics.sh\n[2026-09-05 23:11:40] Completed: /usr/share/omarchy/install/hardware/dell-xps-touchpad-haptics.sh\n[2026-09-05 23:11:40] Starting: /usr/share/omarchy/install/hardware/surface.sh\n[2026-09-05 23:11:40] Completed: /usr/share/omarchy/install/hardware/surface.sh\n[2026-09-05 23:11:40] Starting: /usr/share/omarchy/install/hardware/network.sh\n[2026-09-05 23:11:41] Completed: /usr/share/omarchy/install/hardware/network.sh\n[2026-09-05 23:11:41] Starting: /usr/share/omarchy/install/hardware/set-wireless-regdom.sh\n[2026-09-05 23:11:41] Completed: /usr/share/omarchy/install/hardware/set-wireless-regdom.sh\n[2026-09-05 23:11:41] Starting: /usr/share/omarchy/install/hardware/fix-fkeys.sh\n[2026-09-05 23:11:41] Completed: /usr/share/omarchy/install/hardware/fix-fkeys.sh\n[2026-09-05 23:11:41] Starting: /usr/share/omarchy/install/hardware/fix-synaptic-touchpad.sh\n[2026-09-05 23:11:41] Completed: /usr/share/omarchy/install/hardware/fix-synaptic-touchpad.sh\n[2026-09-05 23:11:41] Starting: /usr/share/omarchy/install/hardware/bluetooth.sh\nCreated symlink '/etc/systemd/system/dbus-org.bluez.service' \u2192 '/usr/lib/systemd/system/bluetooth.service'.\nCreated symlink '/etc/systemd/system/bluetooth.target.wants/bluetooth.service' \u2192 '/usr/lib/systemd/system/bluetooth.service'.\n[2026-09-05 23:11:41] Completed: /usr/share/omarchy/install/hardware/bluetooth.sh\n[2026-09-05 23:11:41] Starting: /usr/share/omarchy/install/hardware/nvidia.sh\n[2026-09-05 23:11:41] Completed: /usr/share/omarchy/install/hardware/nvidia.sh\n[2026-09-05 23:11:41] Starting: /usr/share/omarchy/install/hardware/vulkan.sh\n[2026-09-05 23:11:41] Completed: /usr/share/omarchy/install/hardware/vulkan.sh\n[2026-09-05 23:11:41] Starting: /usr/share/omarchy/install/hardware/intel/video-acceleration.sh\n[2026-09-05 23:11:41] Completed: /usr/share/omarchy/install/hardware/intel/video-acceleration.sh\n[2026-09-05 23:11:41] Starting: /usr/share/omarchy/install/hardware/intel/lpmd.sh\n[2026-09-05 23:11:41] Completed: /usr/share/omarchy/install/hardware/intel/lpmd.sh\n[2026-09-05 23:11:41] Starting: /usr/share/omarchy/install/hardware/intel/thermald.sh\n[2026-09-05 23:11:41] Completed: /usr/share/omarchy/install/hardware/intel/thermald.sh\n[2026-09-05 23:11:41] Starting: /usr/share/omarchy/install/hardware/intel/ptl-kernel.sh\n[2026-09-05 23:11:41] Completed: /usr/share/omarchy/install/hardware/intel/ptl-kernel.sh\n[2026-09-05 23:11:41] Starting: /usr/share/omarchy/install/hardware/intel/ipu7-camera.sh\n[2026-09-05 23:11:41] Completed: /usr/share/omarchy/install/hardware/intel/ipu7-camera.sh\n[2026-09-05 23:11:41] Starting: /usr/share/omarchy/install/hardware/intel/fred.sh\n[2026-09-05 23:11:41] Completed: /usr/share/omarchy/install/hardware/intel/fred.sh\n[2026-09-05 23:11:41] Starting: /usr/share/omarchy/install/hardware/intel/fix-wifi7-eht.sh\n[2026-09-05 23:11:41] Completed: /usr/share/omarchy/install/hardware/intel/fix-wifi7-eht.sh\n[2026-09-05 23:11:41] Starting: /usr/share/omarchy/install/hardware/intel/sof-firmware.sh\n[2026-09-05 23:11:41] Completed: /usr/share/omarchy/install/hardware/intel/sof-firmware.sh\n[2026-09-05 23:11:41] Starting: /usr/share/omarchy/install/hardware/asus/fix-asus-ptl-display-backlight.sh\n[2026-09-05 23:11:41] Completed: /usr/share/omarchy/install/hardware/asus/fix-asus-ptl-display-backlight.sh\n[2026-09-05 23:11:41] Starting: /usr/share/omarchy/install/hardware/asus/fix-asus-ptl-b9406-display.sh\n[2026-09-05 23:11:41] Completed: /usr/share/omarchy/install/hardware/asus/fix-asus-ptl-b9406-display.sh\n[2026-09-05 23:11:41] Starting: /usr/share/omarchy/install/hardware/asus/fix-asus-ptl-b9406-touchpad.sh\n[2026-09-05 23:11:41] Completed: /usr/share/omarchy/install/hardware/asus/fix-asus-ptl-b9406-touchpad.sh\n[2026-09-05 23:11:41] Starting: /usr/share/omarchy/install/hardware/asus/fix-z13-touchpad.sh\n[2026-09-05 23:11:41] Completed: /usr/share/omarchy/install/hardware/asus/fix-z13-touchpad.sh\n[2026-09-05 23:11:41] Starting: /usr/share/omarchy/install/hardware/framework/qmk-hid.sh\n[2026-09-05 23:11:41] Completed: /usr/share/omarchy/install/hardware/framework/qmk-hid.sh\n[2026-09-05 23:11:41] Starting: /usr/share/omarchy/install/hardware/apple/fix-spi-keyboard.sh\n[2026-09-05 23:11:41] Completed: /usr/share/omarchy/install/hardware/apple/fix-spi-keyboard.sh\n[2026-09-05 23:11:41] Starting: /usr/share/omarchy/install/hardware/apple/fix-suspend-nvme.sh\n[2026-09-05 23:11:41] Completed: /usr/share/omarchy/install/hardware/apple/fix-suspend-nvme.sh\n[2026-09-05 23:11:41] Starting: /usr/share/omarchy/install/hardware/apple/fix-t2.sh\n[2026-09-05 23:11:41] Completed: /usr/share/omarchy/install/hardware/apple/fix-t2.sh\n[2026-09-05 23:11:41] Starting: /usr/share/omarchy/install/hardware/apple/fix-brcmfmac-supplicant.sh\n[2026-09-05 23:11:41] Completed: /usr/share/omarchy/install/hardware/apple/fix-brcmfmac-supplicant.sh\n[2026-09-05 23:11:41] Starting: /usr/share/omarchy/install/hardware/lenovo/fix-yoga-pro7-bass-speakers.sh\n[2026-09-05 23:11:41] Completed: /usr/share/omarchy/install/hardware/lenovo/fix-yoga-pro7-bass-speakers.sh\n[2026-09-05 23:11:41] Starting: /usr/share/omarchy/install/hardware/fix-bcm43xx.sh\n[2026-09-05 23:11:41] Completed: /usr/share/omarchy/install/hardware/fix-bcm43xx.sh\n[2026-09-05 23:11:41] Starting: /usr/share/omarchy/install/hardware/fix-surface-keyboard.sh\n[2026-09-05 23:11:41] Completed: /usr/share/omarchy/install/hardware/fix-surface-keyboard.sh\n[2026-09-05 23:11:41] Starting: /usr/share/omarchy/install/hardware/fix-yt6801-ethernet-adapter.sh\n[2026-09-05 23:11:41] Completed: /usr/share/omarchy/install/hardware/fix-yt6801-ethernet-adapter.sh\n[2026-09-05 23:11:41] Starting: /usr/share/omarchy/install/hardware/fix-tuxedo-backlight.sh\n[2026-09-05 23:11:41] Completed: /usr/share/omarchy/install/hardware/fix-tuxedo-backlight.sh\n[2026-09-05 23:11:41] Starting: /usr/share/omarchy/install/hardware/speaker-tuning.sh\n[2026-09-05 23:11:41] Completed: /usr/share/omarchy/install/hardware/speaker-tuning.sh\n[2026-09-05 23:11:41] Starting: /usr/share/omarchy/install/hardware/pacman.sh\n[2026-09-05 23:11:41] Completed: /usr/share/omarchy/install/hardware/pacman.sh\n[2026-09-05 23:11:41] Starting: /usr/share/omarchy/install/login/sddm.sh\n[2026-09-05 23:11:41] Completed: /usr/share/omarchy/install/login/sddm.sh\n[2026-09-05 23:11:41] Starting: /usr/share/omarchy/install/post-install/pacman.sh\n[2026-09-05 23:11:41] Completed: /usr/share/omarchy/install/post-install/pacman.sh\n[2026-09-05 23:11:41] Starting: /usr/share/omarchy/install/post-install/udev.sh\n[2026-09-05 23:11:41] Completed: /usr/share/omarchy/install/post-install/udev.sh\n[2026-09-05 23:11:41] Starting: /usr/share/omarchy/install/post-install/localdb.sh\n[2026-09-05 23:11:42] Completed: /usr/share/omarchy/install/post-install/localdb.sh\n=== Omarchy Setup Completed: 2026-09-05 23:11:42 ===\nOmarchy setup: 0m 5s\n\n    \u203a Staging provisioning\n\n    \u203a stashing Node tarball for offline first-boot setup\n\n    \u203a Finalizing boot and user setup\n\n    \u203a Finalizing Limine boot [boot branch]\n\n    \u203a Finalizing user [user branch]\n[2026-09-05 23:11:43] Starting: /usr/share/omarchy/install/user/theme.sh\nUpdating Limine fallback EFI...\nUpdating /boot/EFI/limine/limine_x64.efi...\nCreating a backup /boot/EFI/limine/limine_x64.bak...\nLimine EFI update completed successfully.\nBuilding UKI for linux (7.1.9-arch1-2)\n[2026-09-05 23:11:43] Completed: /usr/share/omarchy/install/user/theme.sh\n[2026-09-05 23:11:43] Starting: /usr/share/omarchy/install/user/chromium.sh\n[2026-09-05 23:11:43] Completed: /usr/share/omarchy/install/user/chromium.sh\n[2026-09-05 23:11:43] Starting: /usr/share/omarchy/install/user/git.sh\n[2026-09-05 23:11:43] Completed: /usr/share/omarchy/install/user/git.sh\n[2026-09-05 23:11:43] Starting: /usr/share/omarchy/install/user/xcompose.sh\n[2026-09-05 23:11:43] Completed: /usr/share/omarchy/install/user/xcompose.sh\n[2026-09-05 23:11:43] Starting: /usr/share/omarchy/install/user/mise-work.sh\n==> Using drop-in configuration file: 'omarchy_hooks.conf'\n==> Using drop-in configuration file: 'omarchy_resume.conf'\n==> Using drop-in configuration file: 'thunderbolt_module.conf'\n==> Using drop-in configuration file: 'zz-omarchy-resume.conf'\n==> Using drop-in configuration file: 'zz-omarchy-unencrypted-root.conf'\n==> Starting build: '7.1.9-arch1-2'\nmise trusted ~/Work\n  -> Running build hook: [base]\n  -> Running build hook: [udev]\n  -> Running build hook: [plymouth]\nmise ~/.config/mise/config.toml tools: node@26.8.1\n[2026-09-05 23:11:46] Completed: /usr/share/omarchy/install/user/mise-work.sh\n[2026-09-05 23:11:46] Starting: /usr/share/omarchy/install/user/hardware/asus/fix-audio-mixer.sh\n[2026-09-05 23:11:46] Completed: /usr/share/omarchy/install/user/hardware/asus/fix-audio-mixer.sh\n[2026-09-05 23:11:46] Starting: /usr/share/omarchy/install/user/hardware/asus/fix-mic.sh\n[2026-09-05 23:11:46] Completed: /usr/share/omarchy/install/user/hardware/asus/fix-mic.sh\n[2026-09-05 23:11:46] Starting: /usr/share/omarchy/install/user/hardware/framework/fix-f13-amd-audio-input.sh\n[2026-09-05 23:11:46] Completed: /usr/share/omarchy/install/user/hardware/framework/fix-f13-amd-audio-input.sh\n[2026-09-05 23:11:46] Starting: /usr/share/omarchy/install/user/hardware/dell/xps13-text-scaling.sh\n[2026-09-05 23:11:46] Completed: /usr/share/omarchy/install/user/hardware/dell/xps13-text-scaling.sh\n[2026-09-05 23:11:46] Starting: /usr/share/omarchy/install/user/hardware/fix-nouveau-cursor.sh\nlspci: Unable to load libkmod resources: error -2\n[2026-09-05 23:11:46] Completed: /usr/share/omarchy/install/user/hardware/fix-nouveau-cursor.sh\n[2026-09-05 23:11:46] Starting: /usr/share/omarchy/install/user/default-keyring.sh\n[2026-09-05 23:11:46] Completed: /usr/share/omarchy/install/user/default-keyring.sh\n[2026-09-05 23:11:46] Starting: /usr/share/omarchy/install/user/mise.sh\n[2026-09-05 23:11:46] Completed: /usr/share/omarchy/install/user/mise.sh\n  -> Running build hook: [keyboard]\n==> WARNING: Possibly missing firmware for module: 'xhci_pci_renesas'\nUser finalization complete.",
+      "bytes": 22899,
+      "truncated": false
+    },
+    "@log/omarchy-install-timing.json": {
+      "text": "{\n  \"started_at\": 1788649867.8032508,\n  \"target\": \"/mnt\",\n  \"total_phases\": 9,\n  \"current_index\": 8,\n  \"current_phase\": \"Installation complete\",\n  \"phases\": [\n    {\n      \"name\": \"Preparing live environment\",\n      \"status\": \"ok\",\n      \"elapsed\": 0.11791566399999809\n    },\n    {\n      \"name\": \"Preparing install target\",\n      \"status\": \"ok\",\n      \"elapsed\": 0.049763965000000354\n    },\n    {\n      \"name\": \"Installing Arch + Omarchy\",\n      \"status\": \"ok\",\n      \"elapsed\": 28.646428996000004,\n      \"substeps\": [\n        {\n          \"name\": \"partition, format, and encrypt\",\n          \"elapsed\": 0.2975257950000021\n        },\n        {\n          \"name\": \"mount and validate target\",\n          \"elapsed\": 0.06188637099999994\n        },\n        {\n          \"name\": \"unpack root image\",\n          \"elapsed\": 22.790019384000004\n        },\n        {\n          \"name\": \"per-machine package delta\",\n          \"elapsed\": 1.3027210449999984\n        },\n        {\n          \"name\": \"configure Limine\",\n          \"elapsed\": 0.09101267799999846\n        },\n        {\n          \"name\": \"create user\",\n          \"elapsed\": 2.541864292999996\n        },\n        {\n          \"name\": \"write target metadata\",\n          \"elapsed\": 0.2546380120000009\n        }\n      ]\n    },\n    {\n      \"name\": \"Configuring hibernation\",\n      \"status\": \"ok\",\n      \"elapsed\": 0.6636474459999988\n    },\n    {\n      \"name\": \"Configuring system\",\n      \"status\": \"ok\",\n      \"elapsed\": 5.149492746\n    },\n    {\n      \"name\": \"Staging provisioning\",\n      \"status\": \"ok\",\n      \"elapsed\": 0.255442881999997\n    },\n    {\n      \"name\": \"Finalizing boot and user setup\",\n      \"status\": \"ok\",\n      \"elapsed\": 7.930437968999996,\n      \"substeps\": [\n        {\n          \"name\": \"Finalizing Limine boot\",\n          \"branch\": \"boot\",\n          \"status\": \"ok\",\n          \"elapsed\": 7.928845629999998\n        },\n        {\n          \"name\": \"Finalizing user\",\n          \"branch\": \"user\",\n          \"status\": \"ok\",\n          \"elapsed\": 4.153158103000003\n        },\n        {\n          \"name\": \"Configuring login\",\n          \"branch\": \"user\",\n          \"status\": \"ok\",\n          \"elapsed\": 0.05964087600000312\n        },\n        {\n          \"name\": \"Configuring SSH access\",\n          \"branch\": \"user\",\n          \"status\": \"ok\",\n          \"elapsed\": 0.22139117200000413\n        },\n        {\n          \"name\": \"Configuring Tailscale\",\n          \"branch\": \"user\",\n          \"status\": \"ok\",\n          \"elapsed\": 1.5219999980331522e-06\n        },\n        {\n          \"name\": \"Configuring DNS resolver\",\n          \"branch\": \"user\",\n          \"status\": \"ok\",\n          \"elapsed\": 0.00033550900000278716\n        }\n      ]\n    },\n    {\n      \"name\": \"Validating boot setup\",\n      \"status\": \"ok\",\n      \"elapsed\": 0.004150823999999886\n    },\n    {\n      \"name\": \"Creating factory snapshot\",\n      \"status\": \"ok\",\n      \"elapsed\": 0.5299647519999979\n    }\n  ],\n  \"phase_started_at\": 1788649911.1210823,\n  \"finished_at\": 1788649911.6512983,\n  \"duration_seconds\": 43.34990108,\n  \"installed_packages\": 941,\n  \"expected_packages\": 942\n}",
+      "bytes": 3077,
+      "truncated": false
+    },
+    "@log/archinstall/install.log": {
+      "text": "[2026-09-05 23:11:07] - DEBUG - Unmounting all existing partitions: /dev/vda\n[2026-09-05 23:11:07] - INFO - Wiping partitions and metadata: /dev/vda\n[2026-09-05 23:11:07] - INFO - Creating partitions: /dev/vda\n[2026-09-05 23:11:07] - DEBUG - \tType: primary\n[2026-09-05 23:11:07] - DEBUG - \tFilesystem: fat32\n[2026-09-05 23:11:07] - DEBUG - \tGeometry: 2048 start sector, 4194304 length\n[2026-09-05 23:11:07] - DEBUG - \tType: primary\n[2026-09-05 23:11:07] - DEBUG - \tFilesystem: btrfs\n[2026-09-05 23:11:07] - DEBUG - \tGeometry: 4196352 start sector, 79687680 length\n[2026-09-05 23:11:07] - DEBUG - Wiping signatures from: /dev/vda1\n[2026-09-05 23:11:08] - DEBUG - Wiping signatures from: /dev/vda2\n[2026-09-05 23:11:08] - DEBUG - Formatting filesystem: mkfs.fat -F 32 /dev/vda1\n[2026-09-05 23:11:08] - DEBUG - partition information found: {\"name\":\"vda1\",\"path\":\"/dev/vda1\",\"pkname\":\"vda\",\"log_sec\":512,\"size\":\"2048 MiB\",\"pttype\":\"gpt\",\"ptuuid\":\"2d214dcc-c02f-4d7c-aca3-6526900db593\",\"rota\":true,\"tran\":\"virtio\",\"partn\":1,\"partuuid\":\"5994d62b-0de9-4fb6-9ea7-83b8c8c9312c\",\"parttype\":\"c12a7328-f81f-11d2-ba4b-00a0c93ec93b\",\"uuid\":\"18C0-A337\",\"fstype\":\"vfat\",\"fsver\":\"FAT32\",\"fsavail\":null,\"fsuse_percentage\":null,\"type\":\"part\",\"mountpoint\":null,\"mountpoints\":[],\"fsroots\":[],\"children\":[]}\n[2026-09-05 23:11:08] - DEBUG - Formatting filesystem: mkfs.btrfs -f /dev/vda2\n[2026-09-05 23:11:08] - DEBUG - partition information found: {\"name\":\"vda2\",\"path\":\"/dev/vda2\",\"pkname\":\"vda\",\"log_sec\":512,\"size\":\"38910 MiB\",\"pttype\":\"gpt\",\"ptuuid\":\"2d214dcc-c02f-4d7c-aca3-6526900db593\",\"rota\":true,\"tran\":\"virtio\",\"partn\":2,\"partuuid\":\"b1dbd285-a189-43f7-9867-991231e345f0\",\"parttype\":\"4f68bce3-e8cd-4db1-96e7-fbcaf984b709\",\"uuid\":\"81d39bc4-054f-4d5c-bc77-a3ae420c5513\",\"fstype\":\"btrfs\",\"fsver\":null,\"fsavail\":null,\"fsuse_percentage\":null,\"type\":\"part\",\"mountpoint\":null,\"mountpoints\":[],\"fsroots\":[],\"children\":[]}\n[2026-09-05 23:11:08] - INFO - Creating subvolumes: /dev/vda2\n[2026-09-05 23:11:08] - DEBUG - Mounting /dev/vda2: mount -o compress=zstd /dev/vda2 /mnt/arch_btrfs\n[2026-09-05 23:11:08] - DEBUG - Creating subvolume: @\n[2026-09-05 23:11:08] - DEBUG - Creating subvolume: @home\n[2026-09-05 23:11:08] - DEBUG - Creating subvolume: @log\n[2026-09-05 23:11:08] - DEBUG - Creating subvolume: @pkg\n[2026-09-05 23:11:08] - DEBUG - Partition /dev/vda2 is currently mounted at: ['/mnt/arch_btrfs']\n[2026-09-05 23:11:08] - DEBUG - Unmounting mountpoint: /mnt/arch_btrfs\n[2026-09-05 23:11:08] - DEBUG - Mounting ordered layout\n[2026-09-05 23:11:08] - DEBUG - No lvm config defined to be imported\n[2026-09-05 23:11:08] - DEBUG - No lvm config defined to be mounted\n[2026-09-05 23:11:08] - DEBUG - Mounting partition layout\n[2026-09-05 23:11:08] - DEBUG - Mounting /dev/vda2: mount -o compress=zstd,subvol=@ /dev/vda2 /mnt\n[2026-09-05 23:11:08] - DEBUG - Mounting /dev/vda2: mount -o compress=zstd,subvol=@home /dev/vda2 /mnt/home\n[2026-09-05 23:11:08] - DEBUG - Mounting /dev/vda2: mount -o compress=zstd,subvol=@pkg /dev/vda2 /mnt/var/cache/pacman/pkg\n[2026-09-05 23:11:08] - DEBUG - Mounting /dev/vda2: mount -o compress=zstd,subvol=@log /dev/vda2 /mnt/var/log\n[2026-09-05 23:11:08] - DEBUG - Mounting /dev/vda1: mount -o fmask=0077,dmask=0077 /dev/vda1 /mnt/boot\n[2026-09-05 23:11:08] - INFO - Skipping waiting for automatic time sync (this can cause issues if time is out of sync during installation)\n[2026-09-05 23:11:08] - INFO - Skipped reflector...\n[2026-09-05 23:11:31] - DEBUG - Setting mirrors on live system\n[2026-09-05 23:11:31] - DEBUG - Custom servers:\n## Custom Servers\nServer = https://mirror.omarchy.org/$repo/os/$arch\nServer = https://mirror.rackspace.com/archlinux/$repo/os/$arch\nServer = https://geo.mirror.pkgbuild.com/$repo/os/$arch\n[2026-09-05 23:11:31] - INFO - Wrote to /mnt/etc/vconsole.conf using  and default8x16\n[2026-09-05 23:11:32] - INFO - Setting keyboard language to \n[2026-09-05 23:11:32] - INFO - Keyboard language was not changed from default (no language specified)\n[2026-09-05 23:11:32] - DEBUG - Setting mirrors on target\n[2026-09-05 23:11:32] - DEBUG - Custom servers:\n## Custom Servers\nServer = https://mirror.omarchy.org/$repo/os/$arch\nServer = https://mirror.rackspace.com/archlinux/$repo/os/$arch\nServer = https://geo.mirror.pkgbuild.com/$repo/os/$arch\n[2026-09-05 23:11:32] - INFO - Enabling service systemd-zram-setup@zram0.service\n[2026-09-05 23:11:33] - DEBUG - Identifying root partition by PARTUUID: b1dbd285-a189-43f7-9867-991231e345f0\n[2026-09-05 23:11:33] - DEBUG - kernel parameters: root=PARTUUID=b1dbd285-a189-43f7-9867-991231e345f0 zswap.enabled=0 rootflags=subvol=@ rw rootfstype=btrfs\n[2026-09-05 23:11:33] - INFO - Creating user omarchy\n[CREDENTIAL LINE REDACTED]\n[2026-09-05 23:11:35] - INFO - Enabling sudo permissions for omarchy\n[2026-09-05 23:11:35] - DEBUG - Installing audio server: pipewire\n[2026-09-05 23:11:36] - INFO - Activating systemd-timesyncd for time synchronization using Arch Linux and ntp.org NTP servers\n[2026-09-05 23:11:36] - INFO - Enabling service systemd-timesyncd\n[CREDENTIAL LINE REDACTED]\n[2026-09-05 23:11:36] - INFO - Updating /mnt/etc/fstab\n[2026-09-05 23:11:36] - INFO - Syncing the system...\n[2026-09-05 23:11:37] - INFO - Installation completed without any errors.\nLog files temporarily available at /var/log/archinstall.\nYou may reboot when ready.\n",
+      "bytes": 5396,
+      "truncated": false
+    },
+    "efi/limine.conf": {
+      "text": "### Read more at config document: https://github.com/limine-bootloader/limine/blob/trunk/CONFIG.md\n#timeout: 3\ndefault_entry: 2\ninterface_branding: Omarchy Bootloader\ninterface_branding_color: 9ece6a\ninterface_help_color: 9ece6a\ninterface_help_color_bright: 9ece6a\nhash_mismatch_panic: no\n\nterm_background: 1a1b26\nbackdrop: 1a1b26\n\n# Terminal colors (Tokyo Night palette)\nterm_palette: 15161e;f7768e;9ece6a;e0af68;7aa2f7;bb9af7;7dcfff;a9b1d6\nterm_palette_bright: 414868;f7768e;9ece6a;e0af68;7aa2f7;bb9af7;7dcfff;c0caf5\n\n# Text colors\nterm_foreground: c0caf5\nterm_foreground_bright: c0caf5\nterm_background_bright: 24283b\n/+Omarchy\n### This OS entry is auto-generated by limine-entry-tool\ncomment: Omarchy\ncomment: machine-id=ace1bcdf1f4e411f891bee84b9f39a6a order-priority=50 \n  //linux\n  ### This kernel entry is auto-generated by limine-entry-tool\n  comment: Kernel version: 7.1.9-arch1-2\n  comment: kernel-id=linux \n  protocol: efi\n  path: boot():/EFI/Linux/omarchy_linux.efi#2ea241f72070d74454dbf9e957b2761d255f75ac95722bed965eeac64d4559a2729e98e8b9e9ba2c2ba2fad9712902dad413bbee2d1057a17b4525f27c040deb\n  cmdline: root=PARTUUID=b1dbd285-a189-43f7-9867-991231e345f0 zswap.enabled=0 rootflags=subvol=@ rw rootfstype=btrfs  resume=/dev/vda2 resume_offset=1322761 initramfs_async=0 quiet splash loglevel=0 systemd.show_status=false rd.udev.log_level=0 vt.global_cursor_default=0\n",
+      "bytes": 1380,
+      "truncated": false
+    }
+  },
+  "commands": {
+    "mount": {
+      "argv": [
+        "findmnt",
+        "--json",
+        "/run/omarchy-failed-install/btrfs"
+      ],
+      "exit_status": 0,
+      "output": "{\n   \"filesystems\": [\n      {\n         \"target\": \"/run/omarchy-failed-install/btrfs\",\n         \"source\": \"/dev/vdb2\",\n         \"fstype\": \"btrfs\",\n         \"options\": \"ro,nosuid,nodev,relatime,rescue=nologreplay,discard=async,space_cache=v2,subvolid=5,subvol=/\"\n      }\n   ]\n}",
+      "truncated": false
+    },
+    "subvolumes": {
+      "argv": [
+        "btrfs",
+        "subvolume",
+        "list",
+        "/run/omarchy-failed-install/btrfs"
+      ],
+      "exit_status": 0,
+      "output": "ID 256 gen 79 top level 5 path @\nID 257 gen 55 top level 256 path @/var/lib/portables\nID 258 gen 55 top level 256 path @/var/lib/machines\nID 259 gen 68 top level 5 path @home\nID 260 gen 61 top level 5 path @pkg\nID 261 gen 76 top level 5 path @log\nID 262 gen 64 top level 256 path @/swap\nID 263 gen 65 top level 256 path @/.snapshots\nID 264 gen 66 top level 5 path @factory",
+      "truncated": false
+    },
+    "enabled_units": {
+      "argv": [
+        "systemctl",
+        "--root",
+        "/run/omarchy-failed-install/btrfs/@",
+        "list-unit-files",
+        "--state=enabled,failed,masked",
+        "--no-pager"
+      ],
+      "exit_status": 0,
+      "output": "UNIT FILE                            STATE   PRESET\ncups.path                            enabled disabled\navahi-daemon.service                 enabled disabled\nbluetooth.service                    enabled disabled\ncups.service                         enabled disabled\ngetty@.service                       enabled enabled\nlimine-snapper-sync.service          enabled disabled\nlinux-modules-cleanup.service        enabled disabled\nNetworkManager-dispatcher.service    enabled disabled\nNetworkManager-wait-online.service   masked  disabled\nNetworkManager.service               enabled disabled\npower-profiles-daemon.service        enabled disabled\nsddm.service                         enabled disabled\nsshd.service                         enabled disabled\nsystemd-networkd-wait-online.service masked  enabled\nsystemd-oomd.service                 enabled disabled\nsystemd-resolved.service             enabled enabled\nsystemd-timesyncd.service            enabled enabled\nufw.service                          enabled disabled\navahi-daemon.socket                  enabled disabled\ncups.socket                          enabled disabled\ndocker.socket                        enabled disabled\nsystemd-oomd.socket                  enabled disabled\nsystemd-resolved-monitor.socket      enabled disabled\nsystemd-resolved-varlink.socket      enabled disabled\nsystemd-userdbd.socket               enabled enabled\nremote-fs.target                     enabled enabled\nsnapper-cleanup.timer                enabled disabled\n\n27 unit files listed.",
+      "truncated": false
+    },
+    "sshd_effective": {
+      "argv": [
+        "chroot",
+        "/run/omarchy-failed-install/btrfs/@",
+        "/usr/bin/sshd",
+        "-T",
+        "-C",
+        "user=omarchy,host=localhost,addr=127.0.0.1"
+      ],
+      "exit_status": 1,
+      "output": "Couldn't open /dev/null: No such file or directory",
+      "truncated": false
+    },
+    "@/var/log/journal/boots": {
+      "argv": [
+        "journalctl",
+        "--directory",
+        "/run/omarchy-failed-install/btrfs/@/var/log/journal",
+        "--list-boots",
+        "--no-pager"
+      ],
+      "exit_status": 1,
+      "output": "No journal files were found.\nNo boot found.",
+      "truncated": false
+    },
+    "@/var/log/journal/warnings": {
+      "argv": [
+        "journalctl",
+        "--directory",
+        "/run/omarchy-failed-install/btrfs/@/var/log/journal",
+        "-p",
+        "warning",
+        "-n",
+        "500",
+        "--no-pager"
+      ],
+      "exit_status": 0,
+      "output": "No journal files were found.\n-- No entries --",
+      "truncated": false
+    },
+    "@/var/log/journal/boot_services": {
+      "argv": [
+        "journalctl",
+        "--directory",
+        "/run/omarchy-failed-install/btrfs/@/var/log/journal",
+        "-n",
+        "500",
+        "--no-pager",
+        "-u",
+        "sshd",
+        "-u",
+        "sshdgenkeys",
+        "-u",
+        "NetworkManager",
+        "-u",
+        "systemd-networkd",
+        "-u",
+        "systemd-logind",
+        "-u",
+        "ufw"
+      ],
+      "exit_status": 0,
+      "output": "No journal files were found.\n-- No entries --",
+      "truncated": false
+    },
+    "@log/journal/boots": {
+      "argv": [
+        "journalctl",
+        "--directory",
+        "/run/omarchy-failed-install/btrfs/@log/journal",
+        "--list-boots",
+        "--no-pager"
+      ],
+      "exit_status": 0,
+      "output": "IDX BOOT ID                          FIRST ENTRY                 LAST ENTRY\n  0 0bcdad999aef410a8e249d5f146277ac Sat 2026-09-05 23:12:07 UTC Sat 2026-09-05 23:13:38 UTC",
+      "truncated": false
+    },
+    "@log/journal/warnings": {
+      "argv": [
+        "journalctl",
+        "--directory",
+        "/run/omarchy-failed-install/btrfs/@log/journal",
+        "-p",
+        "warning",
+        "-n",
+        "500",
+        "--no-pager"
+      ],
+      "exit_status": 0,
+      "output": "Sep 05 23:12:07 omarchy-benchmark kernel: Speculative Return Stack Overflow: IBPB-extending microcode not applied!\nSep 05 23:12:07 omarchy-benchmark kernel: Speculative Return Stack Overflow: WARNING: See https://kernel.org/doc/html/latest/admin-guide/hw-vuln/srso.html for mitigation options.\nSep 05 23:12:07 omarchy-benchmark kernel: virt/tdx: TDX not supported by the host platform\nSep 05 23:12:07 omarchy-benchmark kernel: amd_pstate: The CPPC feature is supported but currently disabled by the BIOS.\n                                          Please enable it if your BIOS has the CPPC option.\nSep 05 23:12:07 omarchy-benchmark kernel: amd_pstate: the _CPC object is not present in SBIOS or ACPI disabled\nSep 05 23:12:07 omarchy-benchmark kernel: sd 6:0:0:0: Power-on or device reset occurred\nSep 05 23:13:38 omarchy-benchmark systemd[1]: plymouth-start.service: start-post operation timed out. Terminating.\nSep 05 23:13:38 omarchy-benchmark systemd[1]: plymouth-start.service: Failed with result 'timeout'.\nSep 05 23:13:38 omarchy-benchmark systemd[1]: Failed to start Show Plymouth Boot Screen.",
+      "truncated": false
+    },
+    "@log/journal/boot_services": {
+      "argv": [
+        "journalctl",
+        "--directory",
+        "/run/omarchy-failed-install/btrfs/@log/journal",
+        "-n",
+        "500",
+        "--no-pager",
+        "-u",
+        "sshd",
+        "-u",
+        "sshdgenkeys",
+        "-u",
+        "NetworkManager",
+        "-u",
+        "systemd-networkd",
+        "-u",
+        "systemd-logind",
+        "-u",
+        "ufw"
+      ],
+      "exit_status": 0,
+      "output": "Sep 05 23:12:07 omarchy-benchmark systemd[1]: Finished CLI Netfilter Manager.",
+      "truncated": false
+    }
+  },
+  "command_failures": [],
+  "network_profiles": {},
+  "ssh_keys": {
+    "@home/omarchy/.ssh/authorized_keys": {
+      "mode": "0o600",
+      "uid": 1000,
+      "gid": 1000,
+      "bytes": 110,
+      "fingerprints": [
+        "SHA256:crvnKEeu7hQxhnD6tJ+F7f80RBDY/7/JmDG5MJ9Uobo"
+      ],
+      "fingerprint_exit_status": 0
+    },
+    "@home/omarchy/.ssh": {
+      "mode": "0o700",
+      "uid": 1000,
+      "gid": 1000
+    },
+    "@home/omarchy": {
+      "mode": "0o700",
+      "uid": 1000,
+      "gid": 1000
+    }
+  },
+  "mount_attempt": {
+    "argv": [
+      "mount",
+      "-t",
+      "btrfs",
+      "-o",
+      "ro,rescue=nologreplay,subvolid=5,nosuid,nodev",
+      "/dev/vdb2",
+      "/run/omarchy-failed-install/btrfs"
+    ],
+    "read_only": true,
+    "log_replay": false
+  },
+  "efi_files": [
+    "limine.conf",
+    "limine.conf.old",
+    "loader/random-seed",
+    "loader/boot-secret-mixin",
+    "EFI/limine/limine_x64.efi",
+    "EFI/limine/limine_x64.bak",
+    "EFI/BOOT/BOOTX64.EFI",
+    "EFI/Linux/omarchy_linux.efi"
+  ]
+}

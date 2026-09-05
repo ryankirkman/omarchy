@@ -1,6 +1,6 @@
 # Fresh ISO VM benchmark
 
-`iso-vm.py` runs the official ISO's existing unattended installation flow, then verifies that SSH reached the installed Btrfs root rather than the live ISO. It saves the installer's actual phase timings, the exact installed package/version inventory, explicit-package inventory, boot evidence, `pacman -Qk` output and exit status, screenshots, serial output, and all QEMU arguments. Feed independent completed runs to `compare-installs.py`.
+`iso-vm.py` runs the official ISO's existing unattended installation flow, then verifies that SSH reached the installed Btrfs root rather than the live ISO. It saves the installer's actual phase timings, the exact installed package/version inventory, explicit-package inventory, boot evidence, `pacman -Qk` output and exit status, screenshots, serial output, and all QEMU arguments. `repeat-installs.py` seals accepted samples for comparison. To diagnose raw standalone outputs or older unsealed calibrations, use `compare-installs.py --allow-unsealed`; the default requires a seal. An existing seal is always checked, including every recorded file and required comparison input. Historical source hashes remain unchanged and need not equal the newer verifier's hashes.
 
 Use an empty run directory under `/tmp` or another unsynced filesystem. A sync service can recursively copy a disk while QEMU writes it; that consumes storage and invalidates measurements. Each sample requires its own fresh disk and firmware variables. Never reuse an installed base as a fresh-install sample.
 

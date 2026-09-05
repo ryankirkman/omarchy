@@ -1,0 +1,56 @@
+{
+  "schema_version": 1,
+  "status": "failed",
+  "measurement_valid": false,
+  "failure": "Runner failed with exit 1; evidence/disk retained at /home/runner/work/_temp/omarchy-install-speed/fresh-installs-image-no-package-prefetch-fast-reboot-early-verify/03-candidate-pair02",
+  "runner_exit_status": 1,
+  "source_run_directory": "/home/runner/work/_temp/omarchy-install-speed/fresh-installs-image-no-package-prefetch-fast-reboot-early-verify/03-candidate-pair02",
+  "captured_at": 1788650448.1116567,
+  "private_keys_and_virtual_disks_excluded": true,
+  "files": {
+    "manifest.json": {
+      "sha256": "0a8ff8d2625d95acc78dd1478b6f0c983945fae73922c880aa33a5d7f5b66e1a",
+      "bytes": 5505
+    },
+    "serial.log": {
+      "sha256": "df87c36bac78ac7019d284ea2f88fa17a5d7318d413f8e5b7d051a37b17f9207",
+      "bytes": 1970
+    },
+    "qemu.log": {
+      "sha256": "1043baecbe6bd01f7df04c8a880c92e29dd6406bec24b414c5c8107a8db79bb3",
+      "bytes": 78
+    },
+    "progress.json": {
+      "sha256": "e6a17e8da4b70ca4766eaf756177ddf1266046ff791feb7340c17e624837badc",
+      "bytes": 250
+    },
+    "latest-screen.png": {
+      "sha256": "05713dbacb00cfa92e8cad1581147b0f1349f6ee14c97d122440aff36011bd53",
+      "bytes": 3057
+    },
+    "last-failed-ssh-probe.json": {
+      "sha256": "7474ca466f8d0eba0dd8f2dd9a99c6cb54e7df93137c83df254fd89f1f822ce7",
+      "bytes": 174
+    },
+    "timeout-diagnostics.json": {
+      "sha256": "01bc3b66910836cedbc6dd456369556a60193736958035e14639072c890e6d54",
+      "bytes": 10759
+    },
+    "timeout-before-keys.png": {
+      "sha256": "05713dbacb00cfa92e8cad1581147b0f1349f6ee14c97d122440aff36011bd53",
+      "bytes": 3057
+    },
+    "timeout-after-escape.png": {
+      "sha256": "390ba68ca0aee8eaf0e1422b421880974924934d495c4403af69974fcd6acba2",
+      "bytes": 3077
+    },
+    "timeout-after-tty2.png": {
+      "sha256": "41517666c19f735ab863a987f640b6edfbb1f26b315f2517ad844ab234f7e52a",
+      "bytes": 3771
+    }
+  },
+  "capture_errors": {},
+  "runner_sha256": "bf01ecf0e4838ac84fef9ff4bd60c7da0b7f460f5b6fe38fd25da4d8ae7114b1",
+  "comparator_sha256": "7fb8a6d38dc516a0bf6ff79810888bd4c10018e9ba124a45785e89ea2eec6af4",
+  "repeat_driver_sha256": "3266c103f149cf4e5c3fdfca3a0ed3bf1d2e5c6531c575bb913142ecfde7e548"
+}

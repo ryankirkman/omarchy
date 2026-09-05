@@ -45,17 +45,19 @@ The primary full-install clock is host monotonic time from QEMU start to the fir
 
 The [supervised VM runner](../test/benchmarks/iso-vm.md) uses the official unattended installation inputs and collects evidence after verifying that the installed Btrfs root has booted. Keep mutable VM disks under `/tmp`, outside synced checkouts: copying an actively growing disk can exhaust storage and invalidate a run. The runner records interventions and rejects unexpected pauses as valid measurements.
 
-The comparison tool consumes run directories containing `manifest.json`, `install-timing.json`, `validation.json`, `package-manifest.txt`, and `package-explicit.txt`. It rejects unbooted, incomplete, interrupted, reused, different-hardware and different-package samples, or failed package-file verification. Package versions, explicit/dependency installation reasons and per-package file counts must match. The file-count check catches damaged package databases that otherwise report a misleading successful `pacman -Qk` with zero files. Encryption, filesystem, unattended configuration and I/O settings must match; repetitions of a revision must use identical ISO and overlay digests. Guest installer time and complete boot-to-SSH time are separate measurements, because a candidate must not appear faster by moving verification into boot.
+The comparison tool consumes sealed run directories produced by `repeat-installs.py`. Before each read it verifies every file recorded in `seal.json` and requires coverage of the timing, package, identity and requested standalone-boot inputs. Historical seals keep their original runner/comparator hashes; those hashes need not match a newer verifier. It rejects unbooted, incomplete, interrupted, reused, different-hardware and different-package samples, or failed package-file verification. Package versions, explicit/dependency installation reasons and per-package file counts must match. The file-count check catches damaged package databases that otherwise report a misleading successful `pacman -Qk` with zero files. Encryption, filesystem, unattended configuration and I/O settings must match; repetitions of a revision must use identical ISO and overlay digests. Guest installer time and complete boot-to-SSH time are separate measurements, because a candidate must not appear faster by moving verification into boot.
 
 ```bash
 python3 test/benchmarks/compare-installs.py \
-  --baseline /tmp/baseline-1 /tmp/baseline-2 /tmp/baseline-3 \
-  --candidate /tmp/candidate-1 /tmp/candidate-2 /tmp/candidate-3 \
+  --baseline /tmp/evidence/runs/01-control-pair01 /tmp/evidence/runs/04-control-pair02 /tmp/evidence/runs/05-control-pair03 \
+  --candidate /tmp/evidence/runs/02-candidate-pair01 /tmp/evidence/runs/03-candidate-pair02 /tmp/evidence/runs/06-candidate-pair03 \
   --output /tmp/install-comparison.json
 bash test/shell.d/install-comparison-test.sh
 ```
 
-The available development environment is an Ubuntu container with no KVM device and no mount privileges. A disposable QEMU VM using software emulation exercises the real installer locally. Its results remain labeled as software-emulation measurements. The [native experiment](../test/benchmarks/install-speed/native-ci/README.md) also runs on standard public GitHub runners after an actual KVM creation check. No independently measured twofold complete-install result is recorded in this document yet.
+Use `--allow-unsealed` explicitly when diagnosing raw `iso-vm.py` outputs, older unsealed calibrations or synthetic contract fixtures. It permits a missing seal; an existing invalid seal still fails. This option supplies no missing historical validation or provenance and does not make an unpaired calibration a repeated-install result.
+
+The available development environment is an Ubuntu container with no KVM device and no mount privileges. A disposable QEMU VM using software emulation exercises the real installer locally. Its results remain labeled as software-emulation measurements. The [native experiment](../test/benchmarks/install-speed/native-ci/README.md) also runs on standard public GitHub runners after an actual KVM creation check. One complete native pair has now exceeded 2×, but an intermittent installed-boot failure prevented the required three-pair result.
 
 ## First successful calibration install
 
@@ -94,4 +96,19 @@ The first native candidate failed, leaving no completed comparison or speedup re
 
 The failed candidate's installer profile records 14.076 seconds waiting in target preparation and 28.320 seconds unpacking the root image. The next selected native trial measures the [early verification candidate](../test/benchmarks/install-speed/early-verifier/README.md), then adds [direct target writes](../test/benchmarks/install-speed/image/direct-restore.md). The direct-write change passed [four real block-device cases](../test/benchmarks/install-speed/direct-restore/results/local-tcg-2026-09-05/acceptance.json), covering 512-byte and 4 KiB sectors with zero offload enabled and disabled, complete restored contents, untouched trailing bytes and real read-only failure propagation. These are correctness results, not install-speed measurements.
 
-Each candidate receives three fresh alternating control/candidate pairs with firmware boot, verified cold source pages and the same early-activation control fixture. Full image verification remains inside the complete host clock. Each variant's comparison stays separate; separate blocks do not isolate the incremental time saved by direct writes. The trial explicitly selects `--install-timeout 600` and `--standalone-reboot-timeout 180`; driver defaults remain 1,800 and 600 seconds respectively. A failed deadline invalidates the sample and triggers bounded diagnostics, without retrying that sample or changing its timing. No paired speedup result is claimed yet.
+Each candidate receives three fresh alternating control/candidate pairs with firmware boot, verified cold source pages and the same early-activation control fixture. Full image verification remains inside the complete host clock. Each variant's comparison stays separate; separate blocks do not isolate the incremental time saved by direct writes. The trial explicitly selects `--install-timeout 600` and `--standalone-reboot-timeout 180`; driver defaults remain 1,800 and 600 seconds respectively. A failed deadline invalidates the sample and triggers bounded diagnostics, without retrying that sample or changing its timing. The resulting first pair and failed repetition are recorded below.
+
+## First complete native pair above 2×
+
+[Run 33996768275](https://github.com/ryankirkman/omarchy/actions/runs/33996768275) produced one fully validated pair with the early-verification candidate. The [original evidence and independent hash checks](../test/benchmarks/install-speed/results/kvm-attempts/33996768275/) are retained unchanged.
+
+| Measurement | Control | Early-verification candidate |
+| --- | ---: | ---: |
+| Complete host readiness interval | 201.291–205.676 s | 87.507–91.894 s |
+| Guest installer | 144.481 s | 42.306 s |
+| Package versions / explicit reasons / complete file-count rows | 941 / 158 / 941 | 941 / 158 / 941 |
+| Independent reboot without installation media | Passed | Passed |
+
+The observed ratio is 2.23818×; the conservative ratio, including actual polling uncertainty, is **2.19046×**. Both samples used matched hardware, firmware and media topology, verified cold source pages, fresh targets and NVRAM, and distinct machine, filesystem, SSH and package-signing identities. All 60 original sealed file hashes were independently rechecked. The shared image build and verification took 576.054 seconds outside per-install timing.
+
+The next fresh candidate timed out before reaching installed SSH. Its recovered timing file records all nine installer phases as successful, and a tty2 login prompt was visible after timeout diagnostics. The read-only rescue recovered a Plymouth start-post timeout during installed boot; its retained journal contains no NetworkManager or SSH service-start entries. Missing entries and host keys in a no-replay recovery cannot by themselves prove which job blocked startup. The next diagnostic step captures live waiting jobs and process state after marking a sample invalid. The failed sample remains excluded, the three-pair acceptance flag remains false, and the direct-write variant has not yet been measured in a complete native comparison.

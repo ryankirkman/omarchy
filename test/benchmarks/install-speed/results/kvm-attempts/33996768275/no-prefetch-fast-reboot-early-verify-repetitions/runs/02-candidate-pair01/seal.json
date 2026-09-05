@@ -1,0 +1,133 @@
+{
+  "schema_version": 1,
+  "sealed_at": 1788649816.6929836,
+  "source_run_directory": "/home/runner/work/_temp/omarchy-install-speed/fresh-installs-image-no-package-prefetch-fast-reboot-early-verify/02-candidate-pair01",
+  "qemu_exit_status": 0,
+  "runner_exit_status": 0,
+  "private_keys_and_virtual_disks_excluded": true,
+  "files": {
+    "manifest.json": {
+      "sha256": "e1e2b032bf60455829b0ed674b5392f368cb15ad532831d9a1aeb6c8f488a0aa",
+      "bytes": 5709
+    },
+    "install-timing.json": {
+      "sha256": "28b62bdb6b9a7eb403e336445c888f678ba44fcb271d9f8c77a5c31d9b7342e0",
+      "bytes": 3065
+    },
+    "validation.json": {
+      "sha256": "4c9790ed71ef8a08187d509f0ea4e74efc4620af5d0c4855d47bcdb3912a164e",
+      "bytes": 221
+    },
+    "identity.json": {
+      "sha256": "68f85f2f38f7aaa83af6ebe23053cf3123848f6dafcde69ea7ab4dfcc8300604",
+      "bytes": 459
+    },
+    "package-manifest.txt": {
+      "sha256": "f69fe12f4d2b530f56f28b6f350380eaae2e0ea679d88abedd0d032f0b0df89d",
+      "bytes": 18343
+    },
+    "package-explicit.txt": {
+      "sha256": "37d06fc7de2487901f81513bf70f3e592d7245cd656d6c34089ccc1f258055f9",
+      "bytes": 1705
+    },
+    "package-files.txt": {
+      "sha256": "5b501e2ef951a921a004c72ce90497acc7047f27a0f1c1fd12acbb9f26c8ec38",
+      "bytes": 41163
+    },
+    "package-files.stderr": {
+      "sha256": "5b6482796f084d9f1a7c88a251d30d1f9d46a2bad8adb9401253e706a28c0018",
+      "bytes": 300
+    },
+    "installed-root.json": {
+      "sha256": "cebc725cbd245afc4139ebbe70d7a3010beb56dc36ead369327bb8504f5a9c59",
+      "bytes": 132
+    },
+    "installed-boot.txt": {
+      "sha256": "32672d15a9236eb762c69d63040e579c49f29f290c12b0c6f80f62f437eddf6b",
+      "bytes": 776
+    },
+    "machine-id.txt": {
+      "sha256": "46599ccb43e72f9602c4f362aba417b148719aa465b25bcb13b28bb0d368a4fb",
+      "bytes": 33
+    },
+    "ssh-host-fingerprints.txt": {
+      "sha256": "d6e4cecce7ab55c279accca712b0c47541ba01cf1d3df40e7b153e144507f44f",
+      "bytes": 355
+    },
+    "pacman-master-keys.txt": {
+      "sha256": "54330fedec1d645a5356cfdd442f0cebce6e48c73a1a40e969f1fc19544117e5",
+      "bytes": 293
+    },
+    "btrfs-uuid.txt": {
+      "sha256": "a318eee6c7d0766a2e5eb8576ad8c757a0efb130e0a7755cab0b38f460314f44",
+      "bytes": 37
+    },
+    "btrfs-subvolumes.txt": {
+      "sha256": "94bdd9ffb22a18c4046185dd81c6257745a7ce3ceee04e125480d383cb275d42",
+      "bytes": 2296
+    },
+    "uki-files.txt": {
+      "sha256": "2a5f50a368711cb8cb4da49440f7116b62ff87f4798a23263f65f04aff0c2e42",
+      "bytes": 266
+    },
+    "serial.log": {
+      "sha256": "0dec80375567864819a85ad23f0c6268c7d650c1b5e90d2894df2548f21b7c62",
+      "bytes": 31800
+    },
+    "qemu.log": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    "installed-screen.png": {
+      "sha256": "c002095c2a60d70eb395f04c6e96657036879559417f0cb36e9437b9e68c5c06",
+      "bytes": 8676
+    },
+    "systemd-analyze-blame.txt": {
+      "sha256": "dd113a2fdffdfcbb99c55bc86176c7628475362f0dfcdb90ed62eb128c21954c",
+      "bytes": 3353
+    },
+    "systemd-analyze-critical-chain.txt": {
+      "sha256": "02da5c83b44ae6a2a41074163d95da792d0da23ef9b2f5bfd911012d6df24964",
+      "bytes": 1345
+    },
+    "standalone-reboot.json": {
+      "sha256": "ec6a629dd8868d644973dfac33177ffef2535271731d3c1d97c930fdcd80e605",
+      "bytes": 10952
+    },
+    "standalone-root.json": {
+      "sha256": "cebc725cbd245afc4139ebbe70d7a3010beb56dc36ead369327bb8504f5a9c59",
+      "bytes": 132
+    },
+    "standalone-identity.json": {
+      "sha256": "68f85f2f38f7aaa83af6ebe23053cf3123848f6dafcde69ea7ab4dfcc8300604",
+      "bytes": 459
+    },
+    "standalone-machine-id.txt": {
+      "sha256": "46599ccb43e72f9602c4f362aba417b148719aa465b25bcb13b28bb0d368a4fb",
+      "bytes": 33
+    },
+    "standalone-ssh-host-fingerprints.txt": {
+      "sha256": "d6e4cecce7ab55c279accca712b0c47541ba01cf1d3df40e7b153e144507f44f",
+      "bytes": 355
+    },
+    "standalone-pacman-master-keys.txt": {
+      "sha256": "54330fedec1d645a5356cfdd442f0cebce6e48c73a1a40e969f1fc19544117e5",
+      "bytes": 293
+    },
+    "standalone-btrfs-uuid.txt": {
+      "sha256": "a318eee6c7d0766a2e5eb8576ad8c757a0efb130e0a7755cab0b38f460314f44",
+      "bytes": 37
+    },
+    "standalone-btrfs-subvolumes.txt": {
+      "sha256": "a3a57562f25ee1ea548e7d4b871dcb2461751ebe4e4f414fe7116b567c58f8bd",
+      "bytes": 2296
+    },
+    "standalone-uki-files.txt": {
+      "sha256": "2a5f50a368711cb8cb4da49440f7116b62ff87f4798a23263f65f04aff0c2e42",
+      "bytes": 266
+    }
+  },
+  "runner_sha256": "bf01ecf0e4838ac84fef9ff4bd60c7da0b7f460f5b6fe38fd25da4d8ae7114b1",
+  "comparator_sha256": "7fb8a6d38dc516a0bf6ff79810888bd4c10018e9ba124a45785e89ea2eec6af4",
+  "repeat_driver_sha256": "3266c103f149cf4e5c3fdfca3a0ed3bf1d2e5c6531c575bb913142ecfde7e548"
+}

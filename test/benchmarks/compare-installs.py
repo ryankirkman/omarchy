@@ -14,6 +14,10 @@ import uuid
 
 MEDIA_CACHE_PRECONDITIONING = "sha256-read-iso-then-extra-media-in-array-order-then-kernel-then-initrd-before-vm-start"
 COLD_SOURCE_PRECONDITIONING = "sha256-read-then-fsync-fadvise-dontneed-mincore-verified-cold-before-vm-start"
+COMPARISON_INPUTS = {
+  "manifest.json", "install-timing.json", "validation.json", "identity.json",
+  "package-manifest.txt", "package-explicit.txt", "package-files.txt",
+}
 
 
 def sha256(value, description):
@@ -24,6 +28,51 @@ def sha256(value, description):
 
 def finite_number(value):
   return isinstance(value, (int, float)) and not isinstance(value, bool) and math.isfinite(value)
+
+
+def verify_seal(directory, *, allow_unsealed=False):
+  directory = Path(directory)
+  path = directory / "seal.json"
+  if path.is_symlink():
+    raise ValueError(f"{directory}: evidence seal must be a regular file")
+  if not path.exists():
+    if allow_unsealed:
+      return None
+    raise ValueError(f"{directory}: evidence seal required; use --allow-unsealed only for raw calibration or diagnostic fixtures")
+  if not path.is_file():
+    raise ValueError(f"{directory}: evidence seal must be a regular file")
+  seal = json.loads(path.read_text())
+  if (not isinstance(seal, dict) or type(seal.get("schema_version")) is not int
+      or seal["schema_version"] != 1 or not isinstance(seal.get("files"), dict)
+      or any(type(seal.get(key)) is not int or seal[key] != 0
+             for key in ("qemu_exit_status", "runner_exit_status"))):
+    raise ValueError(f"{directory}: invalid successful evidence seal")
+  # Historical provenance describes the code that produced the evidence. It
+  # must not be replaced with, or required to match, this verifier's source.
+  for key in ("runner_sha256", "comparator_sha256", "repeat_driver_sha256"):
+    if key in seal:
+      sha256(seal[key], f"{directory}: original {key}")
+  missing = COMPARISON_INPUTS - seal["files"].keys()
+  if missing:
+    raise ValueError(f"{directory}: evidence seal omits comparison inputs: {', '.join(sorted(missing))}")
+  for name, record in seal["files"].items():
+    if not isinstance(name, str) or Path(name).name != name:
+      raise ValueError(f"{directory}: unsafe sealed filename")
+    source = directory / name
+    if (source.is_symlink() or not source.is_file() or not isinstance(record, dict)
+        or type(record.get("bytes")) is not int or record["bytes"] < 0):
+      raise ValueError(f"{directory}: unsafe, missing or malformed sealed file: {name}")
+    expected = sha256(record.get("sha256"), f"{directory}: sealed {name}")
+    with source.open("rb") as stream:
+      actual = hashlib.file_digest(stream, "sha256").hexdigest()
+    if source.stat().st_size != record["bytes"] or actual != expected:
+      raise ValueError(f"{directory}: sealed evidence changed: {name}")
+  manifest = json.loads((directory / "manifest.json").read_text())
+  if manifest.get("verify_standalone_reboot") is True:
+    missing = {"installed-root.json", "standalone-reboot.json"} - seal["files"].keys()
+    if missing:
+      raise ValueError(f"{directory}: evidence seal omits standalone inputs: {', '.join(sorted(missing))}")
+  return seal
 
 
 def package_file_counts(directory, package_names):
@@ -266,8 +315,9 @@ def standalone_evidence(manifest, extra_media, directory):
   return {"standalone_reboot": proof}
 
 
-def read_run(directory):
+def read_run(directory, *, allow_unsealed=False):
   directory = Path(directory)
+  verify_seal(directory, allow_unsealed=allow_unsealed)
   manifest = json.loads((directory / "manifest.json").read_text())
   timing = json.loads((directory / "install-timing.json").read_text())
   validation = json.loads((directory / "validation.json").read_text())
@@ -437,9 +487,12 @@ def main():
   parser.add_argument("--baseline", nargs="+", type=Path, required=True)
   parser.add_argument("--candidate", nargs="+", type=Path, required=True)
   parser.add_argument("--output", type=Path, required=True)
+  parser.add_argument("--allow-unsealed", action="store_true",
+                      help="Allow raw calibration or diagnostic fixtures without seals; present seals are always verified")
   args = parser.parse_args()
   try:
-    result = compare([read_run(path) for path in args.baseline], [read_run(path) for path in args.candidate])
+    result = compare([read_run(path, allow_unsealed=args.allow_unsealed) for path in args.baseline],
+                     [read_run(path, allow_unsealed=args.allow_unsealed) for path in args.candidate])
   except (OSError, ValueError, KeyError, TypeError) as error:
     parser.error(str(error))
   args.output.parent.mkdir(parents=True, exist_ok=True)

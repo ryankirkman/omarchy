@@ -109,10 +109,10 @@ with tempfile.TemporaryDirectory() as directory:
 
   def rejects_artifacts(changes, description):
     write_artifacts(changes)
-    rejects(lambda: module.read_run(root), description)
+    rejects(lambda: module.read_run(root, allow_unsealed=True), description)
 
   write_artifacts()
-  run = module.read_run(root)
+  run = module.read_run(root, allow_unsealed=True)
   assert run["elapsed"] == 12
   assert run["elapsed_clock"] == "guest-wall-clock"
   assert run["guest_wall_clock_delta_seconds"] == 12
@@ -127,7 +127,7 @@ with tempfile.TemporaryDirectory() as directory:
                 "kernel: zero total files, 0 missing files\nshell: 31 total files, 0 missing files\n"):
     rejects_artifacts({"package-files.txt": value}, "invalid package file inventory accepted")
   write_artifacts({"package-files.txt": "kernel: 0 total files, 0 missing files\nshell: 31 total files, 0 missing files\n"})
-  assert module.read_run(root)["package_file_counts"]["kernel"] == 0  # Metapackages may own no files.
+  assert module.read_run(root, allow_unsealed=True)["package_file_counts"]["kernel"] == 0  # Metapackages may own no files.
   for key, value in (("booted_installed_root", False), ("package_files_exit_status", 1),
                      ("package_files_exit_status", False)):
     rejects_artifacts({"validation.json": {**validation, key: value}}, "invalid installation accepted")
@@ -164,7 +164,7 @@ with tempfile.TemporaryDirectory() as directory:
                       "invalid authoritative monotonic duration silently fell back to wall clock")
   for finished_at in (99, 500):
     write_artifacts({"install-timing.json": {**timing, "finished_at": finished_at, "duration_seconds": 12.5}})
-    monotonic_run = module.read_run(root)
+    monotonic_run = module.read_run(root, allow_unsealed=True)
     assert monotonic_run["elapsed"] == 12.5
     assert monotonic_run["elapsed_clock"] == "guest-monotonic"
     assert monotonic_run["guest_wall_clock_delta_seconds"] == finished_at - timing["started_at"]
@@ -182,7 +182,7 @@ with tempfile.TemporaryDirectory() as directory:
               "direct_initrd_sha256": None, "direct_kernel_command_line": None,
               "reboot_strategy": "guest-firmware-reboot"}
   write_artifacts({"manifest.json": firmware})
-  assert not module.read_run(root)["boot_fixture"]["direct_kernel_boot"]
+  assert not module.read_run(root, allow_unsealed=True)["boot_fixture"]["direct_kernel_boot"]
   rejects_artifacts({"manifest.json": {**firmware, "direct_kernel_sha256": "1" * 64}},
                     "firmware boot accepted inconsistent direct kernel metadata")
   for missing in (None, {}, []):
@@ -204,7 +204,7 @@ with tempfile.TemporaryDirectory() as directory:
   # Case variations cannot hide duplicate hexadecimal public identifiers.
   write_artifacts({"identity.json": {**identity, "btrfs_uuid": identity["btrfs_uuid"].upper(),
                                      "pacman_master_key_fingerprint": identity["pacman_master_key_fingerprint"].lower()}})
-  assert module.read_run(root)["identity"] == run["identity"]
+  assert module.read_run(root, allow_unsealed=True)["identity"] == run["identity"]
   for key, value in (("readonly", False), ("readonly", 1), ("sha256", "unknown"), ("format", ""),
                      ("path", "relative.iso"), ("cache", ""), ("interface", ""), ("device", ""), ("drive_id", 1)):
     media = copy.deepcopy(manifest["extra_media"])
@@ -218,10 +218,10 @@ with tempfile.TemporaryDirectory() as directory:
   media[1]["drive_id"] = media[0]["drive_id"]
   rejects_artifacts({"manifest.json": {**manifest, "extra_media": media}}, "duplicate supplementary drive ID accepted")
   write_artifacts({"manifest.json": {**manifest, "extra_media": []}})
-  assert module.read_run(root)["fixture"]["extra_media_topology"] == []
+  assert module.read_run(root, allow_unsealed=True)["fixture"]["extra_media_topology"] == []
   cold = cold_manifest()
   write_artifacts({"manifest.json": cold})
-  cold_run = module.read_run(root)
+  cold_run = module.read_run(root, allow_unsealed=True)
   assert cold_run["source_cache"] == "cold"
   assert len(cold_run["source_cache_evidence"]) == 5
   for key in ("source_cache", "source_cache_evidence", "source_cache_verified_at_monotonic_s", "vm_started_at_monotonic_s"):
@@ -281,7 +281,7 @@ with tempfile.TemporaryDirectory() as directory:
   standalone_artifacts = {"manifest.json": standalone_manifest, "standalone-reboot.json": proof,
                           "installed-root.json": {"filesystems": roots}}
   write_artifacts(standalone_artifacts)
-  standalone_run = module.read_run(root)
+  standalone_run = module.read_run(root, allow_unsealed=True)
   assert standalone_run["boot_to_ssh_seconds"] == 96
   assert standalone_run["boot_fixture"]["verify_standalone_reboot"]
   assert standalone_run["standalone_reboot"]["passed"]

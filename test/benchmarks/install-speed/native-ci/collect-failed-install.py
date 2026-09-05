@@ -198,6 +198,13 @@ def collect():
         label = str(journal.relative_to(top))
         result['commands'][label + '/boots'] = command(['journalctl', '--directory', str(journal), '--list-boots', '--no-pager'])
         result['commands'][label + '/warnings'] = command(['journalctl', '--directory', str(journal), '-p', 'warning', '-n', '500', '--no-pager'])
+        # Service-only filters can hide the boot job that prevents networking
+        # and SSH from starting. Retain bounded latest-boot context as well;
+        # the same credential redaction and byte cap apply to every command.
+        result['commands'][label + '/latest_boot'] = command(['journalctl', '--directory', str(journal),
+          '-b', '0', '-n', '2000', '--no-pager'])
+        result['commands'][label + '/latest_boot_kernel'] = command(['journalctl', '--directory', str(journal),
+          '-b', '0', '-k', '-n', '1000', '--no-pager'])
         result['commands'][label + '/boot_services'] = command(['journalctl', '--directory', str(journal), '-n', '500', '--no-pager',
           '-u', 'sshd', '-u', 'sshdgenkeys', '-u', 'NetworkManager', '-u', 'systemd-networkd', '-u', 'systemd-logind', '-u', 'ufw'])
     for row in partitions:

@@ -1,0 +1,12 @@
+{
+  "measurement_valid": false,
+  "source_run_directory": "/home/runner/work/_temp/omarchy-install-speed/fresh-installs-image-no-package-prefetch-fast-reboot-early-verify/03-candidate-pair02",
+  "provenance": {
+    "series": "/home/runner/work/_temp/omarchy-install-evidence/no-prefetch-fast-reboot-early-verify-repetitions/series.json",
+    "series_sha256": "139be53c2a44dac8caf04b196443a045f1dc302612372622a0e483e0ed91099d",
+    "failure_record": "/home/runner/work/_temp/omarchy-install-evidence/no-prefetch-fast-reboot-early-verify-repetitions/failed-runs/03-candidate-pair02/failure-record.json",
+    "failure_record_sha256": "783f63c5795f787417d0ae622859da850d9f4c54e924a75b848690a80cdb7c62",
+    "manifest_sha256": "0a8ff8d2625d95acc78dd1478b6f0c983945fae73922c880aa33a5d7f5b66e1a"
+  },
+  "read_only_rescue": true
+}
