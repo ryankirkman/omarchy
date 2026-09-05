@@ -1,0 +1,18 @@
+[
+  "/tmp/omarchy-bench/toolchain/usr/bin/xorriso",
+  "-indev",
+  "/tmp/omarchy-bench/fast-image.iso",
+  "-outdev",
+  "/tmp/omarchy-bench/fast-image-fixed.iso",
+  "-map",
+  "/tmp/omarchy-bench/subvolume-fixed-bundles-v2/installer-overlay.tar",
+  "/installer-overlay.tar",
+  "-map",
+  "/tmp/omarchy-bench/subvolume-fixed-bundles-v2/installer-overlay.tar.sha256",
+  "/installer-overlay.tar.sha256",
+  "-map",
+  "/tmp/omarchy-bench/subvolume-fixed-bundles-v2/installer-overlay.manifest.json",
+  "/installer-overlay.manifest.json",
+  "-commit",
+  "-end"
+]

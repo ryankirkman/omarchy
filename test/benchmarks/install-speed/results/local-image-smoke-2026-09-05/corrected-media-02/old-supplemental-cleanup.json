@@ -1,0 +1,12 @@
+{
+  "schema_version": 1,
+  "removed_path": "/tmp/omarchy-bench/fast-image.iso",
+  "original_iso_sha256": "add515a8db48541779613d4071d7b140a9df64c07d79070f4b4472d13fe36892",
+  "reason": "Verified replacement preserves every member except recorded installer-overlay correction; sealed root image SHA unchanged",
+  "replacement": "/tmp/omarchy-bench/fast-image-fixed.iso",
+  "replacement_sha256": "19de1071bc7825078324c21243b4371f5bb6f4d9f47608b16c11288d22919e97",
+  "free_before_bytes": 1777561600,
+  "time": 1788641765.2107859,
+  "free_after_bytes": 5475540992,
+  "status": "completed"
+}

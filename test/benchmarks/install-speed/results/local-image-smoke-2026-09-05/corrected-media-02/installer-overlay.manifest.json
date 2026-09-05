@@ -1,0 +1,72 @@
+{
+  "upstream_commit": "dbffaa6c65344d644627a023c28661e08382b8fa",
+  "files": [
+    {
+      "path": "etc/systemd/system/omarchy-root-image-verify.service",
+      "sha256": "08e91617c32e20c4921752fd87eacd8455e1795213f5452eec16593e249f471a"
+    },
+    {
+      "path": "usr/local/bin/omarchy-iso-cleanup-disk",
+      "sha256": "48d634e0bdb91d2e3d3dff7864e56769ff89a777ce9fe9d3a680825e3fe9a943"
+    },
+    {
+      "path": "usr/local/bin/omarchy-iso-install",
+      "sha256": "81cc26433caf533197b9f1594a41af94d13a622e0859b8dd7f14ac0f92129fa5"
+    },
+    {
+      "path": "usr/local/bin/omarchy-release-install-target",
+      "sha256": "b8503f3aabd572441a43a8412251767d51a410a6604ad2b31b31bdb8909af97b"
+    },
+    {
+      "path": "usr/local/bin/omarchy-wait-root-image-verify",
+      "sha256": "98ed98d0b0f12f68e819070c9ebc00cfd5464af1fb22a680e449e610f0e2d71a"
+    },
+    {
+      "path": "usr/share/omarchy-iso/LICENSE",
+      "sha256": "e2b1e3778a6ada6d6eee5f48c028f885e9797313f4c5705929bdc5b99db569d3"
+    },
+    {
+      "path": "usr/share/omarchy-iso/orchestrator/__init__.py",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "usr/share/omarchy-iso/orchestrator/archinstall_adapter.py",
+      "sha256": "ecd94f9bb1ec7b2f423d39e2afc9d0c36bcd573f4dcdbdac4878d1231ad7e41f"
+    },
+    {
+      "path": "usr/share/omarchy-iso/orchestrator/command.py",
+      "sha256": "b7b233b98b0dcf77297222b80e22067710ae4de6ce666495bc6e9ff0653893f5"
+    },
+    {
+      "path": "usr/share/omarchy-iso/orchestrator/context.py",
+      "sha256": "10fa0871c95dc951794cc2c5bae0b4228137dea3c4ed9a25ff43e0e3f8edb832"
+    },
+    {
+      "path": "usr/share/omarchy-iso/orchestrator/keyboard.py",
+      "sha256": "1e1895fb7b3ee51bff3596f634152c3d0166d77b8e0f71a01b226673664e10b5"
+    },
+    {
+      "path": "usr/share/omarchy-iso/orchestrator/luks_lifecycle.py",
+      "sha256": "eb910946dd26bc64f26fe766de982f2086fbe772acc85ccb11604e677f3ab4bd"
+    },
+    {
+      "path": "usr/share/omarchy-iso/orchestrator/main.py",
+      "sha256": "a874284fe78db3bc5669c6f6a116b1bf818754d36e49668c8fad52f9a11cd067"
+    },
+    {
+      "path": "usr/share/omarchy-iso/orchestrator/phases.py",
+      "sha256": "5c7eefd4f7efecf42baf75bec8b7b3b83806e57f02df389d29b754f0e5b2c5e2"
+    },
+    {
+      "path": "usr/share/omarchy-iso/orchestrator/phases_impl.py",
+      "sha256": "8c802ec9ad8b94478ad16d4ca434fa6197741b4d1b3195b0a78d0c876b8682bf",
+      "upstream_sha256": "4088b7e930d2da7729f69c4506483d8e9c661a0488de913255c868f1154de977",
+      "change": "Preserve image contents and metadata in every separate Btrfs child mount"
+    },
+    {
+      "path": "usr/share/omarchy-iso/orchestrator/ui.py",
+      "sha256": "598c3e89bca5673032cd48fb13a579125ee43fb8e02fdb27686d48527fcc7791"
+    }
+  ],
+  "sha256": "b5cf4014cd99d06a949fb7340e35fa506ec3c39fd7880c4d9d81f6fdd90ff775"
+}

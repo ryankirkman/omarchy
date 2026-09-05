@@ -1,0 +1,22 @@
+{
+  "schema_version": 1,
+  "status": "verified supplemental media only; installed validation is a separate fresh run",
+  "speedup_claim": false,
+  "files": {
+    "fast-image-fixed-sections.txt": "169ea291c54c6f152f4b677b95c8b5c9bbffe9713c4bdbeb98f4f0867d314d49",
+    "fast-image-sections.txt": "b6137f16b16767fedd7e9cf2aee73d44e308fbcf103b8e964d7ab932bd9de4d6",
+    "image-media-verification.json": "36c2d1e532bf76d78d379e5de3c4bc31a911b0548b24bc9fbc7fe1af86db4dab",
+    "installer-overlay.manifest.json": "b2fa5c6418f6bb0074048db010cdf267b25c53090c2a4abe36f2eae3f75d53f9",
+    "installer-overlay.tar.sha256": "aafa456360e4cda744d0fc5e0e96e447abc9d83409c49c76a6e5b8d0d80508ff",
+    "old-supplemental-cleanup.json": "a6f2f9b9d945ba43c8b1c42c087512a5774fe117d72b9fa67e96457a5bc224a0",
+    "original-image-media-verification.json": "5fcf7625a0e4d477ba3821e08d1cb87fa57ace6b2cf4729add23a799637e43db",
+    "original-overlay/installer-overlay.manifest.json": "3c9c21c9c0a3eb9950ae00b6fc6d36181ffdc94756c3b8ef1dc1e413271d5140",
+    "original-overlay/installer-overlay.tar.sha256": "ac9baec975b3d1528b9edc3f6fda2c1a18f436766dba0cc20e880d9ebb7c43e4",
+    "original-sealed-source-byte-range.json": "908567e7601b8bd8195c24e559769bfb6df5792b05b5fca5e20ff52b14ae1fd3",
+    "repack-command.json": "9f527dd7f8ec2ec9ab70500572c2a402840d42ba366ba34c09d3ba3a1176bc12",
+    "repack-supplemental-02.py": "e382b5a78de23647e1403c15600a992d9885cb6b497f2ea5178a18b1f4f06b4e",
+    "repack.log": "ca26e554ea5dfc942ee7dc86019db53f1a1e6f44a82cb41624d0ee880fe12f25",
+    "sealed-source-byte-range.json": "18c8dbe200d3617fcf1632a816039703dc05b69ff2ff90b300dec793638c63f3",
+    "supplemental-revision.json": "010e41221ac7db8336e18a43bb4114920b9b072d3c6046c00aaeaad107b68e2c"
+  }
+}

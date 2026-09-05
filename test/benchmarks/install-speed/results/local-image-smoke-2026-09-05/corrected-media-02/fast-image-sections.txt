@@ -1,0 +1,11 @@
+Report layout: xt , Startlba ,   Blocks , Sectsize , ISO image path
+File data lba:  0 ,       33 ,  1797678 , 3681644544 , '/arch/x86_64/omarchy-root.btrfs.qcow2'
+File data lba:  0 ,  1797711 ,        1 ,      681 , '/arch/x86_64/omarchy-root.btrfs.qcow2.json'
+File data lba:  0 ,  1797712 ,        1 ,       91 , '/arch/x86_64/omarchy-root.btrfs.qcow2.sha256'
+File data lba:  0 ,  1797713 ,        1 ,      667 , '/fixture-provenance.json'
+File data lba:  0 ,  1797809 ,        2 ,     2695 , '/installer-overlay.manifest.json'
+File data lba:  0 ,  1797714 ,       95 ,   194560 , '/installer-overlay.tar'
+File data lba:  0 ,  1797811 ,        1 ,       88 , '/installer-overlay.tar.sha256'
+File data lba:  0 ,  1805497 ,        3 ,     5570 , '/qemu-img-live.manifest.json'
+File data lba:  0 ,  1797812 ,     7685 , 15738880 , '/qemu-img-live.tar'
+File data lba:  0 ,  1805500 ,        1 ,       84 , '/qemu-img-live.tar.sha256'
