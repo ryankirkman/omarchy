@@ -80,6 +80,24 @@ with tempfile.TemporaryDirectory() as directory:
     "package-explicit.txt": "shell\n",
   }
 
+  def cold_manifest():
+    result = copy.deepcopy(manifest)
+    result.update(
+      iso="/tmp/official.iso", source_cache="cold",
+      media_cache_preconditioning="sha256-read-then-fsync-fadvise-dontneed-mincore-verified-cold-before-vm-start",
+      qemu_argv=["qemu-system-x86_64", "-kernel", "/tmp/kernel", "-initrd", "/tmp/initrd"],
+      source_cache_verified_at_monotonic_s=110, vm_started_at_monotonic_s=111,
+    )
+    sources = [(result["iso"], result["iso_sha256"])]
+    sources.extend((medium["path"], medium["sha256"]) for medium in result["extra_media"])
+    sources.extend([("/tmp/kernel", result["direct_kernel_sha256"]), ("/tmp/initrd", result["direct_initrd_sha256"])])
+    result["source_cache_evidence"] = [
+      {"path": path, "sha256": digest, "file_bytes": 4097, "page_size": 4096, "page_count": 2,
+       "resident_pages": 0, "sampled_at_monotonic_s": 100 + index}
+      for index, (path, digest) in enumerate(sources)
+    ]
+    return result
+
   def write_artifacts(changes=None):
     for name, value in {**artifacts, **(changes or {})}.items():
       path = root / name
@@ -100,6 +118,7 @@ with tempfile.TemporaryDirectory() as directory:
   assert run["explicit_packages"] == ["shell"]
   assert run["identity"]["machine_id"] == identity["machine_id"]
   assert run["ssh_poll_uncertainty_seconds"] == 2  # Never substitute the nominal 30 seconds.
+  assert run["source_cache"] == "conditioned"
   for key, value in (("booted_installed_root", False), ("package_files_exit_status", 1),
                      ("package_files_exit_status", False)):
     rejects_artifacts({"validation.json": {**validation, key: value}}, "invalid installation accepted")
@@ -191,6 +210,39 @@ with tempfile.TemporaryDirectory() as directory:
   rejects_artifacts({"manifest.json": {**manifest, "extra_media": media}}, "duplicate supplementary drive ID accepted")
   write_artifacts({"manifest.json": {**manifest, "extra_media": []}})
   assert module.read_run(root)["fixture"]["extra_media_topology"] == []
+  cold = cold_manifest()
+  write_artifacts({"manifest.json": cold})
+  cold_run = module.read_run(root)
+  assert cold_run["source_cache"] == "cold"
+  assert len(cold_run["source_cache_evidence"]) == 5
+  for key in ("source_cache", "source_cache_evidence", "source_cache_verified_at_monotonic_s", "vm_started_at_monotonic_s"):
+    incomplete = cold_manifest()
+    del incomplete[key]
+    rejects_artifacts({"manifest.json": incomplete}, f"cold run without {key} accepted")
+  for key, value in (("source_cache", "conditioned"), ("source_cache_evidence", []),
+                     ("source_cache_verified_at_monotonic_s", 112), ("vm_started_at_monotonic_s", 0),
+                     ("vm_started_at_monotonic_s", float("nan")),
+                     ("qemu_argv", ["qemu", "-kernel", "/tmp/kernel", "-kernel", "/tmp/kernel", "-initrd", "/tmp/initrd"])):
+    rejects_artifacts({"manifest.json": {**cold, key: value}}, f"invalid cold source {key} accepted")
+  for key, value in (("path", "/tmp/different.iso"), ("sha256", "8" * 64), ("file_bytes", 0),
+                     ("page_size", 4095), ("page_count", 1), ("resident_pages", 1), ("resident_pages", False),
+                     ("sampled_at_monotonic_s", float("inf")), ("sampled_at_monotonic_s", 111)):
+    altered = cold_manifest()
+    altered["source_cache_evidence"][0][key] = value
+    rejects_artifacts({"manifest.json": altered}, f"invalid cold page evidence {key} accepted")
+  for key in cold["source_cache_evidence"][0]:
+    incomplete = cold_manifest()
+    del incomplete["source_cache_evidence"][0][key]
+    rejects_artifacts({"manifest.json": incomplete}, f"missing cold page evidence {key} accepted")
+  altered = cold_manifest()
+  altered["source_cache_evidence"].reverse()
+  rejects_artifacts({"manifest.json": altered}, "wrong cold source ordering accepted")
+  altered = cold_manifest()
+  altered["source_cache_evidence"][1]["sampled_at_monotonic_s"] = 99
+  rejects_artifacts({"manifest.json": altered}, "out-of-order cold residency samples accepted")
+  rejects_artifacts({"manifest.json": {**manifest, "source_cache": "cold"}}, "cold mode silently used warm policy")
+  rejects_artifacts({"manifest.json": {**manifest, "source_cache_evidence": cold["source_cache_evidence"]}},
+                    "conditioned mode unexpectedly included conflicting cold proof")
 
 
 def sample(name, seconds):
@@ -220,6 +272,13 @@ assert comparison["explicit_package_count"] == 1
 assert comparison["distinct_installation_identities_verified"]
 assert comparison["runs"][3]["test_overlay_sha256"] == "d" * 64
 assert comparison["runs"][0]["test_overlay_sha256"] is None
+assert "does not establish cold-source performance" in comparison["source_cache_scope"]
+altered_baseline, altered_candidate = copy.deepcopy(baseline), copy.deepcopy(candidate)
+for result in altered_baseline + altered_candidate:
+  result["source_cache"] = "cold"
+  result["fixture"]["media_cache_preconditioning"] = module.COLD_SOURCE_PRECONDITIONING
+assert "zero resident host pages" in module.compare(altered_baseline, altered_candidate)["source_cache_scope"]
+rejects(lambda: module.compare(baseline, altered_candidate), "warm and cold policies mixed in one comparison")
 assert not module.compare(baseline[:1], candidate[:1])["twofold_target_verified_for_this_fixture"]
 assert not module.compare(baseline[:2], candidate)["twofold_target_verified_for_this_fixture"]
 rejects(lambda: module.compare([], candidate), "empty baseline accepted")

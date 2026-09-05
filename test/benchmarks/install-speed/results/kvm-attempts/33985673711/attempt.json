@@ -1,0 +1,14 @@
+{
+  "schema_version": 1,
+  "status": "invalid-no-installed-system-validation",
+  "workflow_run_id": 33985673711,
+  "workflow_job_id": 101358605511,
+  "commit": "3a11ab79b84d4f982ca0e54602b83f18e323ab1a",
+  "artifact_id": 9975565184,
+  "artifact_zip_sha256": "bf3738c191c1a9ec5fa1b1fb8ea2a2e3f94c83db13e52a5dd0d94931ebf8669d",
+  "installer_qemu_exit_status": 0,
+  "installed_boot_restart_host_wall_s": 163.30453677100002,
+  "installer_timing_collected": false,
+  "installed_system_validation_collected": false,
+  "failure": "Installed disk reached Limine and initial initramfs output but no successful SSH response within 1800-second whole-run timeout. Root cause not established."
+}

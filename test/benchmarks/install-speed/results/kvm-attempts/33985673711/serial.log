@@ -1,0 +1,5 @@
+[2J[01;01H[=3h[2J[01;01H[2J[01;01H[=3h[2J[01;01H[2J[01;01H[=3h[2J[01;01HBdsDxe: loading Boot0001 "Limine" from HD(1,GPT,6A4DA875-4411-433C-8BA4-CA904FEC6614,0x800,0x400000)/\EFI\limine\limine_x64.efi
+BdsDxe: starting Boot0001 "Limine" from HD(1,GPT,6A4DA875-4411-433C-8BA4-CA904FEC6614,0x800,0x400000)/\EFI\limine\limine_x64.efi
+[01;01H[01;01H%Ga ERROR: Failed to open encryption mapping: The device PARTUUID=c110a4f7-5ee0-4bfc-95dc-c3c76345a0e0 is not a LUKS volume and the crypto= parameter was not specified.
+Unable to resume from device '/dev/vda2' (254:2) offset 1519883, continuing boot process.
+[18t7[32766;32766H[6n8

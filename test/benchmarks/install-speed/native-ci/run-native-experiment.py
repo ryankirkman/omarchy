@@ -31,6 +31,8 @@ EVIDENCE_FILES = {
   'btrfs-subvolumes.txt', 'ssh-host-fingerprints.txt', 'pacman-master-keys.txt',
   'uki-files.txt', 'systemd-analyze-blame.txt', 'systemd-analyze-critical-chain.txt',
   'serial.log', 'live-serial.log', 'qemu.log', 'progress.json', 'latest-screen.png',
+  'last-failed-ssh-probe.json', 'timeout-diagnostics.json',
+  'timeout-before-keys.png', 'timeout-after-escape.png', 'timeout-after-tty2.png',
 }
 
 
@@ -127,6 +129,11 @@ def execute(args):
   bench = repo / 'test/benchmarks'
   image = bench / 'install-speed/image'
   overlay = bench / 'install-speed/boot-overlay'
+  if args.source_cache == 'cold':
+    with (evidence / 'cold-cache-preflight.log').open('w') as log:
+      command(['bash', repo / 'test/shell.d/iso-vm-source-cache-test.sh'],
+        env=dict(os.environ, OMARCHY_REQUIRE_COLD_EVICTION='1'), cwd=repo,
+        stdout=log, stderr=subprocess.STDOUT, timeout=120)
   harness, fast = work / 'iso-harness', work / 'iso-fast'
   git_checkout(harness, HARNESS_PIN)
   git_checkout(fast, FAST_PIN)
@@ -136,8 +143,9 @@ def execute(args):
     'repository_commit': subprocess.check_output(['git', '-C', str(repo), 'rev-parse', 'HEAD'], text=True).strip(),
     'github_run_id': os.getenv('GITHUB_RUN_ID'), 'github_run_attempt': os.getenv('GITHUB_RUN_ATTEMPT'),
     'accelerator': 'kvm', 'cpus': 4, 'memory_mib': 8192, 'pairs_per_variant': 3,
-    'variants': ['upstream-image', 'image-no-package-prefetch'], 'comparisons': {},
-    'cache_policy': 'Each iso-vm run SHA256-reads official ISO, then supplemental media before timing',
+    'variants': args.variants, 'comparisons': {},
+    'source_cache': args.source_cache,
+    'cache_policy': ('Integrity pre-reads condition source media before timing' if args.source_cache == 'conditioned' else 'Require verified source-page eviction after integrity reads and before timing; see per-run evidence'),
     'build_time_in_install_time': False,
   }
   save_json(evidence / 'experiment.json', provenance)
@@ -178,18 +186,37 @@ def execute(args):
       argv += ['--extra-qemu-args-json', json.dumps(extra)]
     if builder:
       argv += ['--mode', 'builder', '--ssh-key', key]
+    else:
+      argv += ['--source-cache', args.source_cache, '--installed-boot-timeout', '300']
     return list(map(str, argv))
 
   def install(name, selected_initrd, extra=None):
     run = work / name
     try:
       command(vm_args(name, selected_initrd, extra), timeout=2100)
+      manifest = json.loads((run / 'manifest.json').read_text())
+      validation = json.loads((run / 'validation.json').read_text())
+      if manifest['status'] != 'installed-and-booted' or manifest.get('qemu_exit_status') != 0 or validation.get('package_files_exit_status') != 0:
+        raise RuntimeError(f'Installation not validated: {name}')
+    except Exception:
+      # The failed supervisor and QEMU must be stopped before the same target
+      # is attached read-only to a separate live VM. Rescue never makes a
+      # failed install eligible for comparison and cannot replace its error.
+      if (run / 'target.qcow2').is_file():
+        rescue_evidence = evidence / (name + '-rescue')
+        rescue_evidence.mkdir(parents=True, exist_ok=True)
+        try:
+          with (rescue_evidence / 'rescue-driver.log').open('w') as log:
+            command([sys.executable, bench / 'install-speed/native-ci/rescue-failed-install.py',
+              '--repo', repo, '--work', work / (name + '-rescue'), '--evidence', rescue_evidence,
+              '--failed-run', run, '--iso', iso, '--harness', harness, '--kernel', kernel,
+              '--initrd', initrd], stdout=log, stderr=subprocess.STDOUT, timeout=360)
+        except Exception as error:
+          save_json(rescue_evidence / 'rescue-failure.json',
+            {'error_type': type(error).__name__, 'error': str(error), 'measurement_valid': False})
+      raise
     finally:
       collect_small(run, evidence / name)
-    manifest = json.loads((run / 'manifest.json').read_text())
-    validation = json.loads((run / 'validation.json').read_text())
-    if manifest['status'] != 'installed-and-booted' or manifest.get('qemu_exit_status') != 0 or validation.get('package_files_exit_status') != 0:
-      raise RuntimeError(f'Installation not validated: {name}')
     # The VM supervisor has exited, so this disk and disposable credentials
     # are no longer needed. All comparison inputs were copied above.
     for leaf in ('target.qcow2', 'cidata.img', 'id_ed25519', 'id_ed25519.pub', 'OVMF_VARS_4M.fd'):
@@ -241,7 +268,7 @@ def execute(args):
     shutil.copyfile(bundles / leaf, media / leaf)
   command([sys.executable, image / 'bundle-qemu-img.py', '/usr/bin/qemu-img', media / 'qemu-img-live.tar'])
   supplemental = work / 'fast-image.iso'
-  command(['xorriso', '-as', 'mkisofs', '-r', '-J', '-V', 'OMARCHY_FAST_IMAGE', '-o', supplemental, media])
+  command(['xorriso', '-as', 'mkisofs', '-iso-level', '3', '-r', '-J', '-V', 'OMARCHY_FAST_IMAGE', '-o', supplemental, media])
   command([sys.executable, image / 'verify-image-media.py', supplemental,
       destination.with_suffix('.qcow2.json'), evidence / 'image-media-verification.json'])
   shutil.copyfile(destination.with_suffix('.qcow2.json'), evidence / 'root-image.json')
@@ -249,7 +276,6 @@ def execute(args):
   candidate_payload = work / 'candidate-payload'
   (candidate_payload / 'usr/local/lib/omarchy-benchmark').mkdir(parents=True)
   shutil.copyfile(image / 'activate-installer-overlay.sh', candidate_payload / 'usr/local/lib/omarchy-benchmark/activate-installer-overlay.sh')
-  candidate_initrd = make_initrd('candidate', candidate_payload, image / 'candidate-preflight.sh')
   same_media = ['-drive', f'file={supplemental},if=none,id=fastimage,format=raw,readonly=on,cache=writeback,media=cdrom',
          '-device', 'ide-cd,drive=fastimage']
   control_launch = work / 'control-launch.json'
@@ -281,13 +307,17 @@ def execute(args):
     save_json(evidence / 'experiment.json', provenance)
     return result.returncode
 
-  measure_variant('upstream-image', candidate_initrd, 'repetitions')
-  # Keep the first completed comparison even if it misses 2x. The existing
-  # upstream switch changes package warming only; SHA256 image verification,
-  # package inventory, per-machine setup and installed boot remain required.
-  no_prefetch_initrd = make_initrd('candidate', candidate_payload, image / 'candidate-preflight.sh',
-    label='candidate-no-prefetch', disable_prefetch=True)
-  measure_variant('image-no-package-prefetch', no_prefetch_initrd, 'no-prefetch-repetitions')
+  for variant in args.variants:
+    if variant == 'upstream-image':
+      candidate_initrd = make_initrd('candidate', candidate_payload, image / 'candidate-preflight.sh')
+      measure_variant(variant, candidate_initrd, 'repetitions')
+    else:
+      # Preserve any first comparison, including a valid result below 2x.
+      # This existing upstream switch changes package warming only; image
+      # verification, package inventory and installed boot stay required.
+      no_prefetch_initrd = make_initrd('candidate', candidate_payload, image / 'candidate-preflight.sh',
+        label='candidate-no-prefetch', disable_prefetch=True)
+      measure_variant(variant, no_prefetch_initrd, 'no-prefetch-repetitions')
   provenance['status'] = 'comparisons-complete'
   save_json(evidence / 'experiment.json', provenance)
   # Each variant's actual result remains separate. Never present a failed
@@ -295,12 +325,30 @@ def execute(args):
   return 0 if any(row['full_clock_twofold_verified'] for row in provenance['comparisons'].values()) else 2
 
 
-def main():
-  parser = argparse.ArgumentParser(description=__doc__)
+class ArgumentParser(argparse.ArgumentParser):
+  def error(self, message):
+    # Exit 2 is reserved for complete, valid comparisons below the speed goal.
+    self.print_usage(sys.stderr)
+    self.exit(1, f'{self.prog}: error: {message}\n')
+
+
+def parse_arguments(argv=None):
+  parser = ArgumentParser(description=__doc__)
   parser.add_argument('--repo', required=True, type=Path)
   parser.add_argument('--work', required=True, type=Path)
   parser.add_argument('--evidence', required=True, type=Path)
-  args = parser.parse_args()
+  parser.add_argument('--source-cache', choices=('conditioned', 'cold'), default='conditioned',
+    help='Source media cache policy; cold requires verified eviction in the VM runner')
+  parser.add_argument('--variants', nargs='+', choices=('upstream-image', 'image-no-package-prefetch'),
+    default=['upstream-image', 'image-no-package-prefetch'], help='Variants to measure, in order; three fresh pairs each')
+  args = parser.parse_args(argv)
+  if len(set(args.variants)) != len(args.variants):
+    parser.error('variants must be distinct')
+  return args
+
+
+def main():
+  args = parse_arguments()
   args.evidence.mkdir(parents=True, exist_ok=True)
   failure = None
   try:

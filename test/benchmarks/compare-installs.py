@@ -13,6 +13,7 @@ import uuid
 
 
 MEDIA_CACHE_PRECONDITIONING = "sha256-read-iso-then-extra-media-in-array-order-then-kernel-then-initrd-before-vm-start"
+COLD_SOURCE_PRECONDITIONING = "sha256-read-then-fsync-fadvise-dontneed-mincore-verified-cold-before-vm-start"
 
 
 def sha256(value, description):
@@ -60,7 +61,7 @@ def identity_evidence(directory):
 
 
 def media_evidence(manifest, directory):
-  if manifest["media_cache_preconditioning"] != MEDIA_CACHE_PRECONDITIONING:
+  if manifest["media_cache_preconditioning"] not in {MEDIA_CACHE_PRECONDITIONING, COLD_SOURCE_PRECONDITIONING}:
     raise ValueError(f"{directory}: unsupported or missing media cache preconditioning policy")
   media = manifest["extra_media"]
   if not isinstance(media, list):
@@ -87,6 +88,55 @@ def media_evidence(manifest, directory):
       identifiers.add(identifier)
     recorded.append({"path": path, "sha256": sha256(medium["sha256"], f"{directory}: supplementary media"), **topology})
   return recorded
+
+
+def source_cache_evidence(manifest, extra_media, directory):
+  if manifest["media_cache_preconditioning"] == MEDIA_CACHE_PRECONDITIONING:
+    if manifest.get("source_cache", "conditioned") != "conditioned" or "source_cache_evidence" in manifest:
+      raise ValueError(f"{directory}: inconsistent conditioned source-cache evidence")
+    return {"source_cache": "conditioned"}
+  if manifest.get("source_cache") != "cold":
+    raise ValueError(f"{directory}: cold source-cache policy requires an explicit cold mode")
+  expected = [(manifest["iso"], manifest["iso_sha256"])]
+  expected.extend((medium["path"], medium["sha256"]) for medium in extra_media)
+  if manifest["direct_kernel_boot"] is True:
+    argv = manifest["qemu_argv"]
+    if not isinstance(argv, list) or not all(isinstance(item, str) for item in argv):
+      raise ValueError(f"{directory}: cold source evidence requires recorded QEMU arguments")
+    for option, key in (("-kernel", "direct_kernel_sha256"), ("-initrd", "direct_initrd_sha256")):
+      if argv.count(option) != 1 or argv.index(option) == len(argv) - 1:
+        raise ValueError(f"{directory}: missing or ambiguous direct-boot source {option}")
+      expected.append((argv[argv.index(option) + 1], manifest[key]))
+  records = manifest["source_cache_evidence"]
+  if not isinstance(records, list) or len(records) != len(expected):
+    raise ValueError(f"{directory}: cold evidence does not cover every source file")
+  verified = manifest["source_cache_verified_at_monotonic_s"]
+  started = manifest["vm_started_at_monotonic_s"]
+  if not all(finite_number(value) and value > 0 for value in (verified, started)) or verified > started:
+    raise ValueError(f"{directory}: source cache was not verified before the VM clock started")
+  previous_sample = 0
+  evidence = []
+  for record, (path, digest) in zip(records, expected):
+    if not isinstance(record, dict) or record.get("path") != path:
+      raise ValueError(f"{directory}: cold evidence source path or order differs from launched media")
+    if not isinstance(path, str) or not Path(path).is_absolute():
+      raise ValueError(f"{directory}: cold evidence requires absolute source paths")
+    if sha256(record["sha256"], f"{directory}: cold source") != sha256(digest, f"{directory}: launched source"):
+      raise ValueError(f"{directory}: cold evidence source digest differs from launched media")
+    size, page_size, pages = (record[key] for key in ("file_bytes", "page_size", "page_count"))
+    if (not all(type(value) is int and value > 0 for value in (size, page_size, pages))
+        or page_size & (page_size - 1) or pages != (size + page_size - 1) // page_size):
+      raise ValueError(f"{directory}: cold evidence has invalid source page accounting")
+    if type(record.get("resident_pages")) is not int or record["resident_pages"] != 0:
+      raise ValueError(f"{directory}: source pages remain resident; cold preconditioning is not established")
+    sampled = record["sampled_at_monotonic_s"]
+    if not finite_number(sampled) or not 0 < sampled <= verified or sampled < previous_sample:
+      raise ValueError(f"{directory}: cold source samples were not recorded in order before VM start")
+    previous_sample = sampled
+    evidence.append({key: record[key] for key in ("path", "sha256", "file_bytes", "page_size", "page_count",
+                                                 "resident_pages", "sampled_at_monotonic_s")})
+  return {"source_cache": "cold", "source_cache_evidence": evidence,
+          "source_cache_verified_at_monotonic_s": verified, "vm_started_at_monotonic_s": started}
 
 
 def boot_evidence(manifest, directory):
@@ -207,6 +257,7 @@ def read_run(directory):
     "iso_sha256": sha256(manifest["iso_sha256"], f"{directory}: ISO"),
     "test_overlay_sha256": overlay,
     "extra_media": extra_media,
+    **source_cache_evidence(manifest, extra_media, directory),
   }
 
 
@@ -248,10 +299,15 @@ def compare(baseline, candidate):
   boot_conservative = min(boot_lower["baseline"]) / max(boot_upper["candidate"]) if boot_comparable else None
   repeated = len(baseline) >= 3 and len(candidate) >= 3
   return {
-    "schema_version": 6, "kind": "validated_full_install_comparison",
+    "schema_version": 7, "kind": "validated_full_install_comparison",
     "fixture": baseline[0]["fixture"],
     "scope": "Host VM start through live boot, installation, reboot and first successful SSH to the independently verified installed root. Package files are checked afterward.",
     "clock": "Host monotonic clock across any QEMU restart, with actual SSH probe uncertainty. Guest installer duration is a separate component metric, preferring its recorded monotonic duration over the stock wall-clock fallback.",
+    "source_cache_scope": (
+      "Every launched source file had zero resident host pages immediately before VM start; storage/controller caches were not reset."
+      if baseline[0]["source_cache"] == "cold" else
+      "Source files were pre-read in the recorded order; cache recency can favor different treatment inputs. This result does not establish cold-source performance."
+    ),
     "package_count": len(baseline[0]["packages"]),
     "package_manifest_sha256": hashlib.sha256(("\n".join(baseline[0]["packages"]) + "\n").encode()).hexdigest(),
     "explicit_package_count": len(baseline[0]["explicit_packages"]),

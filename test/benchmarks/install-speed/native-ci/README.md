@@ -12,6 +12,24 @@ The job begins only with at least 28 GiB free. Peak storage is expected below ap
 
 The upload directory contains a fixed whitelist of timing, manifests, public identity evidence, validation output, logs and screenshots, plus small image-build provenance. Private SSH keys, cidata images/configuration, target/build disks, NVRAM and ISO files stay in temporary work storage. Evidence uploads run even after failure and expire after seven days. Supervisor timeouts and interrupts terminate only their own process groups and preserve small failure evidence.
 
+Native installs allow 300 seconds for SSH after the installer hands off to the installed disk. A failed calibration triggers one bounded rescue attempt before the ephemeral runner disappears. The original supervisor and QEMU must have stopped first. A fresh live ISO boot uses the existing builder overlay to disable autoinstall and authorize a new disposable public SSH key. The failed target is attached with QEMU `readonly=on` and serial `OMARCHY_RESCUE`; the guest independently checks the disk and all partitions are read-only before mounting Btrfs with `ro,nologreplay,subvolid=5` and the EFI partition read-only. It never unlocks encryption or changes the failed installation.
+
+The rescue retains bounded JSON diagnostics for boot configuration, enabled services, network configuration from an explicit non-secret field allowlist, SSH configuration and file permissions, public SSH fingerprints, redacted installation logs and persisted journal warnings/service entries. No private key contents, password database or raw NetworkManager profile is exported. Timeout screenshots and the last failed SSH probe are retained too. The rescue subprocess has a six-minute wall limit including preparing its initramfs; its KVM supervisor is capped at 270 seconds. Failure rescue is always excluded from timing comparisons and preserves the original installation failure even if rescue itself fails.
+
+## Selecting confirmation trials
+
+The driver defaults to `--source-cache conditioned --variants upstream-image image-no-package-prefetch`, retaining the initial experiment's behavior. A later confirmation can run only the best candidate with three new pairs:
+
+```bash
+python3 test/benchmarks/install-speed/native-ci/run-native-experiment.py \
+  --repo "$GITHUB_WORKSPACE" --work "$BENCH_WORK" --evidence "$BENCH_EVIDENCE" \
+  --source-cache cold --variants image-no-package-prefetch
+```
+
+Before downloads or VM installation work, cold mode runs `OMARCHY_REQUIRE_COLD_EVICTION=1 bash test/shell.d/iso-vm-source-cache-test.sh`. This requires a real positive warmed-file eviction result on the actual runner; unsupported or ineffective hosts fail immediately, retaining `cold-cache-preflight.log`. Cold mode is requested for calibration and timed installation VMs; the untimed image builder retains its default. The VM runner verifies all source hashes first, then uses Linux `fsync`, `posix_fadvise(DONTNEED)` and `mincore` to require zero resident pages for the official ISO, supplemental read-only media, kernel and initramfs before starting the host clock. It does not require root or global `drop_caches`. Unsupported files or incomplete eviction fail the run. Preserve the runner's actual eviction evidence; requesting this flag is not proof that eviction succeeded. This checks cold source pages on the hosted runner, not physical USB behavior or every cache layer.
+
+Each variant keeps a separate comparison, all requested variants run even when an earlier valid comparison misses 2×, and invalid CLI configuration returns exit 1. Use a fresh work directory for every invocation. The workflow's defaults stay unchanged until a later reviewed experiment explicitly selects confirmation flags.
+
 ## Trigger and capability gates
 
 Only pushes to `perf/install-speed-kvm` that touch the workflow or benchmark paths trigger the job, and the job requires the public `ryankirkman/omarchy` repository. The default branch is untouched. No workflow dispatch endpoint or new secret is required. A GitHub App push can trigger a workflow; this differs from a workflow's own `GITHUB_TOKEN`, which suppresses most recursive triggers. The linked app still needs the separate Workflows write permission to publish `.github/workflows` files.

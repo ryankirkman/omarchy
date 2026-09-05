@@ -1,6 +1,8 @@
 #!/usr/bin/env python3
 """Check native benchmark process cleanup and evidence boundaries."""
 import importlib.util
+import contextlib
+import io
 import os
 from pathlib import Path
 import subprocess
@@ -9,11 +11,23 @@ import tempfile
 import time
 import unittest
 from types import SimpleNamespace
+from unittest.mock import patch
 
 DIRECTORY = Path(__file__).resolve().parent
 spec = importlib.util.spec_from_file_location('native_experiment', DIRECTORY / 'run-native-experiment.py')
 module = importlib.util.module_from_spec(spec)
 spec.loader.exec_module(module)
+
+
+def load_sibling(name):
+  source = importlib.util.spec_from_file_location(name.replace('-', '_'), DIRECTORY / (name + '.py'))
+  loaded = importlib.util.module_from_spec(source)
+  source.loader.exec_module(loaded)
+  return loaded
+
+
+rescue = load_sibling('rescue-failed-install')
+collector = load_sibling('collect-failed-install')
 
 
 class NativeContract(unittest.TestCase):
@@ -59,10 +73,61 @@ class NativeContract(unittest.TestCase):
         module.execute(SimpleNamespace(repo=DIRECTORY, work=root, evidence=root / 'evidence'))
       self.assertEqual(list(root.iterdir()), [])
 
+  def test_cache_and_variant_selection(self):
+    base = ['--repo', '/repo', '--work', '/new-work', '--evidence', '/evidence']
+    default = module.parse_arguments(base)
+    self.assertEqual(default.source_cache, 'conditioned')
+    self.assertEqual(default.variants, ['upstream-image', 'image-no-package-prefetch'])
+    selected = module.parse_arguments(base + ['--source-cache', 'cold', '--variants', 'image-no-package-prefetch'])
+    self.assertEqual(selected.source_cache, 'cold')
+    self.assertEqual(selected.variants, ['image-no-package-prefetch'])
+    for invalid in (['--source-cache', 'warm'], ['--variants', 'upstream-image', 'upstream-image']):
+      with contextlib.redirect_stderr(io.StringIO()):
+        with self.assertRaises(SystemExit) as result:
+          module.parse_arguments(base + invalid)
+      self.assertEqual(result.exception.code, 1)
+
   def test_pinned_sources(self):
     self.assertEqual(module.HARNESS_PIN, '2673c613d9a71e23920e43fbb951238145e0f1e8')
     self.assertEqual(module.FAST_PIN, 'dbffaa6c65344d644627a023c28661e08382b8fa')
     self.assertEqual(module.ISO_SHA256, '2ef8e624aa1bec7e277e28056b8535a6c9373ba48d7ede3f1a01cb6d2373cfb8')
+
+  def test_rescue_refuses_an_active_supervisor(self):
+    with tempfile.TemporaryDirectory() as temporary:
+      run = Path(temporary)
+      (run / 'supervisor.pid').write_text(str(os.getpid()))
+      with self.assertRaisesRegex(RuntimeError, 'still alive'):
+        rescue.assert_stopped(run)
+
+  def test_rescue_requires_a_readonly_dedicated_target(self):
+    args = rescue.readonly_target_args(Path('/tmp/failed/target.qcow2'))
+    self.assertIn('readonly=on', args[1])
+    self.assertIn('serial=OMARCHY_RESCUE', args[3])
+    with self.assertRaises(ValueError):
+      rescue.readonly_target_args(Path('/tmp/target,readonly=off'))
+    with patch.object(collector.os, 'geteuid', return_value=0), \
+        patch.object(collector.Path, 'is_file', return_value=True), \
+        patch.object(collector.Path, 'is_block_device', return_value=True), \
+        patch.object(collector, 'required', side_effect=['kvm', '0']) as invoked:
+      with self.assertRaisesRegex(RuntimeError, 'must be read-only'):
+        collector.collect()
+      self.assertEqual(invoked.call_count, 2, 'Writable media reached a mount or inspection command')
+
+  def test_rescue_network_and_log_redaction(self):
+    with tempfile.TemporaryDirectory() as temporary:
+      root = Path(temporary)
+      profile = root / 'profile.nmconnection'
+      profile.write_text('[connection]\nid=fixture\ntype=wifi\n[wifi-security]\npsk=DO-NOT-EXPORT\n[ipv4]\nmethod=auto\n')
+      filtered = collector.network_profile(profile, root)
+      self.assertEqual(filtered, {'connection': {'id': 'fixture', 'type': 'wifi'}, 'ipv4': {'method': 'auto'}})
+      text = collector.redact('PasswordAuthentication no\npassword=DO-NOT-EXPORT\n-----BEGIN OPENSSH PRIVATE KEY-----\nSENSITIVE\n-----END OPENSSH PRIVATE KEY-----\nboot completed')
+      self.assertIn('PasswordAuthentication no', text)
+      self.assertIn('boot completed', text)
+      self.assertNotIn('DO-NOT-EXPORT', text)
+      self.assertNotIn('SENSITIVE', text)
+      private = root / 'ssh_host_ed25519_key'
+      private.write_text('DO-NOT-EXPORT')
+      self.assertNotIn('DO-NOT-EXPORT', str(collector.public_key_metadata(private, root)))
 
 
 if __name__ == '__main__':

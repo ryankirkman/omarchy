@@ -6,13 +6,17 @@ and SSH control even when separate tool invocations have separate network namesp
 """
 
 import argparse
+from contextlib import ExitStack
+import ctypes
 import hashlib
 import json
+import mmap
 import os
 from pathlib import Path
 import shlex
 import shutil
 import socket
+import stat
 import subprocess
 import sys
 import time
@@ -43,6 +47,51 @@ def executable(name, prefix):
   if not result:
     raise RuntimeError(f"Required executable unavailable: {name}")
   return result
+
+
+def evict_and_measure_sources(sources):
+  """Evict only these files and measure page residency without reading data."""
+  if (sys.platform != "linux" or not callable(getattr(os, "posix_fadvise", None))
+      or not hasattr(os, "POSIX_FADV_DONTNEED")):
+    raise RuntimeError("Cold source cache requires Linux posix_fadvise and mincore")
+  libc = ctypes.CDLL(None, use_errno=True)
+  if not hasattr(libc, "mincore"):
+    raise RuntimeError("Cold source cache requires Linux mincore")
+  libc.mincore.argtypes = (ctypes.c_void_p, ctypes.c_size_t, ctypes.POINTER(ctypes.c_ubyte))
+  libc.mincore.restype = ctypes.c_int
+  page_size = os.sysconf("SC_PAGE_SIZE")
+  evidence = []
+  with ExitStack() as stack:
+    opened = []
+    for source in sources:
+      file = stack.enter_context(Path(source["path"]).open("rb"))
+      info = os.fstat(file.fileno())
+      if not stat.S_ISREG(info.st_mode) or info.st_size <= 0:
+        raise RuntimeError(f"Cold source cache requires a nonempty regular file: {source['path']}")
+      opened.append((source, file, info.st_size))
+    # Flush all sources before evicting any, and evict all before measuring any.
+    # No host-wide drop_caches or writes to the source contents are needed.
+    for _, file, _ in opened:
+      os.fsync(file.fileno())
+    for _, file, _ in opened:
+      os.posix_fadvise(file.fileno(), 0, 0, os.POSIX_FADV_DONTNEED)
+    for source, file, file_bytes in opened:
+      page_count = (file_bytes + page_size - 1) // page_size
+      residency = (ctypes.c_ubyte * page_count)()
+      # ACCESS_COPY supplies a private writable address for ctypes while the
+      # descriptor stays read-only. Taking its address does not fault data in.
+      with mmap.mmap(file.fileno(), 0, access=mmap.ACCESS_COPY) as mapping:
+        first_byte = ctypes.c_char.from_buffer(mapping)
+        address = ctypes.addressof(first_byte)
+        del first_byte
+        if libc.mincore(address, file_bytes, residency) != 0:
+          error = ctypes.get_errno()
+          raise OSError(error, os.strerror(error), source["path"])
+      evidence.append({**source, "file_bytes": file_bytes, "page_size": page_size,
+                       "page_count": page_count,
+                       "resident_pages": sum(page & 1 for page in residency),
+                       "sampled_at_monotonic_s": time.monotonic()})
+  return evidence
 
 
 def build_cidata(args, env):
@@ -162,6 +211,52 @@ class Supervisor:
       return str(self.directory / name)
     except ImportError:
       return str(ppm)
+
+  def record_failed_probe(self, result, started, finished):
+    self.last_failed_probe_start = started
+    self.last_failed_probe_end = finished
+    write_json(self.directory / "last-failed-ssh-probe.json", {
+      "started_host_wall_s": started, "finished_host_wall_s": finished,
+      "returncode": result.returncode, "stderr": result.stderr[-16384:],
+    })
+
+  def timeout_reason(self, elapsed):
+    if self.collected:
+      return None
+    boot_started = self.manifest.get("installed_boot_restart_host_wall_s")
+    boot_timeout = self.args.installed_boot_timeout
+    if boot_timeout is not None and boot_started is not None and elapsed - boot_started >= boot_timeout:
+      return f"Installed system did not become SSH-ready within {boot_timeout}s after disk boot"
+    if elapsed >= self.args.timeout:
+      return f"Install timed out after {self.args.timeout}s"
+    return None
+
+  def fail_timeout(self, reason):
+    # These keys change the guest's console. Mark the measurement invalid
+    # before sending any input; a subsequently responding guest cannot rescue it.
+    self.manifest.update(status="timeout", validation_passed=False, failure=reason,
+                         measurement_failed_host_wall_s=time.monotonic() - self.started)
+    write_json(self.directory / "manifest.json", self.manifest)
+    self.qmp_socket.settimeout(2)
+    diagnostics = {"reason": reason, "after_measurement_failure": True, "steps": []}
+    def capture(label, action):
+      step = {"label": label, "host_wall_s": time.monotonic() - self.started}
+      try:
+        step["result"] = action()
+      except Exception as error:
+        step["error"] = str(error)
+      diagnostics["steps"].append(step)
+      write_json(self.directory / "timeout-diagnostics.json", diagnostics)
+    capture("before-keys", lambda: self.screenshot("timeout-before-keys.png"))
+    for label, keys in (("escape", ("esc",)), ("tty2", ("ctrl", "alt", "f2"))):
+      capture("send-" + label, lambda keys=keys: self.qmp("send-key", {
+        "keys": [{"type": "qcode", "data": key} for key in keys], "hold-time": 100,
+      }))
+      time.sleep(1)
+      capture("after-" + label, lambda label=label: self.screenshot("timeout-after-" + label + ".png"))
+    capture("cpus", lambda: self.qmp("query-cpus-fast"))
+    capture("registers", lambda: self.qmp("human-monitor-command", {"command-line": "info registers"}))
+    raise RuntimeError(reason + "; failed measurement and diagnostic evidence retained")
 
   def collect_identity(self):
     evidence = {}
@@ -298,6 +393,25 @@ class Supervisor:
       })
     return result
 
+  def prepare_source_cache(self):
+    if self.args.source_cache != "cold":
+      return
+    sources = [{"path": self.manifest["iso"], "sha256": self.manifest["iso_sha256"]}]
+    sources.extend({"path": item["path"], "sha256": item["sha256"]} for item in self.manifest["extra_media"])
+    if self.args.kernel:
+      sources.extend([
+        {"path": str(self.args.kernel.resolve()), "sha256": self.manifest["direct_kernel_sha256"]},
+        {"path": str(self.args.initrd.resolve()), "sha256": self.manifest["direct_initrd_sha256"]},
+      ])
+    self.manifest["media_cache_preconditioning"] = "sha256-read-then-fsync-fadvise-dontneed-mincore-verified-cold-before-vm-start"
+    records = evict_and_measure_sources(sources)
+    self.manifest["source_cache_evidence"] = records
+    warm = [item for item in records if item["resident_pages"] != 0]
+    if warm:
+      raise RuntimeError("Source cache remains resident after eviction: " + ", ".join(
+        f"{item['path']} ({item['resident_pages']}/{item['page_count']} pages)" for item in warm))
+    self.manifest["source_cache_verified_at_monotonic_s"] = time.monotonic()
+
   def start(self):
     args = self.args
     if self.directory.exists() and any(self.directory.iterdir()):
@@ -362,12 +476,14 @@ class Supervisor:
       "cpu_count": args.cpus, "memory_mib": args.memory, "fresh_target": True, "fresh_nvram": True,
       "disk_format": "qcow2", "disk_virtual_bytes": 40 * 1024 ** 3, "disk_cache": "writeback",
       "iso_cache": "writeback", "readiness_poll_interval_s": args.poll_interval,
+      "installed_boot_timeout_s": args.installed_boot_timeout,
       "started_at": time.time(), "hostname": "omarchy-benchmark", "measurement_interrupted": False,
       "network": "QEMU user networking; ISO installs packages from its own bundled mirror",
       "encryption": False, "filesystem": "btrfs compress=zstd", "interventions": [],
       "cidata_configuration_sha256": hashlib.sha256((self.directory / "cidata/user_configuration.json").read_bytes()).hexdigest(),
       "test_overlay_sha256": args.test_overlay_sha256,
       "extra_media": self.extra_media(extra),
+      "source_cache": args.source_cache,
       "media_cache_preconditioning": "sha256-read-iso-then-extra-media-in-array-order-then-kernel-then-initrd-before-vm-start",
       "direct_kernel_boot": bool(args.kernel),
       "direct_kernel_sha256": hashlib.sha256(args.kernel.read_bytes()).hexdigest() if args.kernel else None,
@@ -375,8 +491,10 @@ class Supervisor:
       "direct_kernel_command_line": args.append if args.kernel else None,
       "reboot_strategy": "qemu-no-reboot-then-disk" if args.kernel and args.mode == "install" else "guest-firmware-reboot",
     }
+    self.prepare_source_cache()
     write_json(self.directory / "manifest.json", self.manifest)
     self.started = time.monotonic()
+    self.manifest["vm_started_at_monotonic_s"] = self.started
     with (self.directory / "qemu.log").open("w") as log:
       self.vm = subprocess.Popen(argv, env=self.env, stdout=log, stderr=subprocess.STDOUT)
       (self.directory / "qemu.pid").write_text(str(self.vm.pid) + "\n")
@@ -452,8 +570,7 @@ class Supervisor:
             ready = self.ssh("true", timeout=8)
             probe_finished = time.monotonic() - self.started
             if ready.returncode != 0:
-              self.last_failed_probe_start = probe_started
-              self.last_failed_probe_end = probe_finished
+              self.record_failed_probe(ready, probe_started, probe_finished)
             if ready.returncode == 0:
               if args.mode == "builder":
                 self.manifest["first_builder_ssh_wall_s"] = time.monotonic() - self.started
@@ -470,10 +587,9 @@ class Supervisor:
                 self.collect()
                 if not args.keep_running:
                   self.ssh("systemctl poweroff", sudo=True)
-          if elapsed > args.timeout and not self.collected:
-            self.manifest["status"] = "timeout"
-            write_json(self.directory / "manifest.json", self.manifest)
-            raise RuntimeError(f"Install timed out after {args.timeout}s; evidence retained")
+          reason = self.timeout_reason(time.monotonic() - self.started)
+          if reason:
+            self.fail_timeout(reason)
         time.sleep(1)
       if not self.collected:
         self.manifest["status"] = "qemu-exited-before-validation"
@@ -498,7 +614,11 @@ def main():
   run.add_argument("--ssh-port", type=int, default=24022)
   run.add_argument("--qmp-port", type=int, default=24444)
   run.add_argument("--poll-interval", type=int, default=30)
+  run.add_argument("--source-cache", choices=("conditioned", "cold"), default="conditioned",
+                   help="Pre-read sources (default), or evict and verify zero cached pages before timing")
   run.add_argument("--timeout", type=int, default=7200)
+  run.add_argument("--installed-boot-timeout", type=int,
+                   help="Optional SSH readiness deadline after the direct installer restarts from disk")
   run.add_argument("--runtime-package", default="omarchy")
   run.add_argument("--settings-package", default="omarchy-settings")
   run.add_argument("--keep-running", action="store_true")
@@ -524,6 +644,8 @@ def main():
     args.guest_user = "root" if args.mode == "builder" else "omarchy"
   if bool(args.kernel) != bool(args.initrd):
     parser.error("--kernel and --initrd are required together")
+  if args.installed_boot_timeout is not None and args.installed_boot_timeout <= 0:
+    parser.error("--installed-boot-timeout must be positive")
   supervisor = Supervisor(args)
   try:
     supervisor.start()

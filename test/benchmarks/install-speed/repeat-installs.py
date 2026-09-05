@@ -18,7 +18,6 @@ import time
 HERE = Path(__file__).resolve().parent
 RUNNER = HERE.parent / "iso-vm.py"
 COMPARATOR = HERE.parent / "compare-installs.py"
-CACHE_POLICY = "sha256-read-iso-then-extra-media-in-array-order-then-kernel-then-initrd-before-vm-start"
 EVIDENCE_FILES = (
   "manifest.json", "install-timing.json", "validation.json", "identity.json",
   "package-manifest.txt", "package-explicit.txt", "package-files.txt", "package-files.stderr",
