@@ -56,7 +56,7 @@ python3 test/benchmarks/install-speed/image/compress-root-image.py \
   /tmp/omarchy-bench/image-media/arch/x86_64/omarchy-root.btrfs.qcow2
 ```
 
-`qemu-img resize` checks QEMU's image write lock before shrinking the raw backing file; it must fail if the build VM still owns the image. Compression uses upstream's 1 MiB zstd qcow2 clusters. The tool verifies the qcow2 and writes a SHA-256 companion and provenance JSON. Do not delete the raw file until this succeeds.
+`qemu-img resize` checks QEMU's image write lock before shrinking the raw backing file; it must fail if the build VM still owns the image. Compression uses upstream's 1 MiB zstd qcow2 clusters. The tool checks qcow2 structure, compares its entire logical content against the validated raw filesystem and writes a SHA-256 companion and provenance JSON. Do not delete the raw file until this succeeds.
 
 ## Read-only candidate media and activation
 

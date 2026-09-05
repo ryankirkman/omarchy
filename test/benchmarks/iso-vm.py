@@ -66,6 +66,10 @@ def build_cidata(args, env):
   return key
 
 
+class QMPDisconnected(ConnectionError):
+  """The QMP transport closed before a command response arrived."""
+
+
 class Supervisor:
   def __init__(self, args):
     self.args = args
@@ -103,12 +107,39 @@ class Supervisor:
     while True:
       line = self.qmp_stream.readline()
       if not line:
-        raise RuntimeError("QMP disconnected")
+        raise QMPDisconnected("QMP disconnected")
       response = json.loads(line)
       if response.get("id") == identifier:
         if "error" in response:
           raise RuntimeError(str(response["error"]))
         return response.get("return")
+
+  def qemu_stopped_after_disconnect(self, error, timeout=5):
+    if self.vm.poll() is not None:
+      return True
+    if not isinstance(error, (QMPDisconnected, BrokenPipeError, ConnectionResetError, ConnectionAbortedError)):
+      return False
+    return self.wait_for_expected_qemu_exit(timeout)
+
+  def wait_for_expected_qemu_exit(self, timeout=5):
+    expected_exit = self.collected or (
+      self.args.kernel and self.args.mode == "install" and not self.restarted_for_installed_boot
+    )
+    if not expected_exit:
+      return False
+    # QEMU can close QMP slightly before its process exits on -no-reboot or
+    # final poweroff. Wait for actual exit, not a fixed delay or a retry that
+    # could hide a persistently broken monitor. The host clock keeps running.
+    try:
+      return self.vm.wait(timeout=timeout) == 0
+    except subprocess.TimeoutExpired:
+      return False
+
+  def qemu_stopped_during_install_shutdown(self, status, timeout=5):
+    if (status != "shutdown" or not self.args.kernel or self.args.mode != "install"
+        or self.restarted_for_installed_boot):
+      return False
+    return self.wait_for_expected_qemu_exit(timeout)
 
   def ssh(self, command, *, sudo=False, timeout=120):
     if sudo and self.args.guest_user != "root":
@@ -400,10 +431,12 @@ class Supervisor:
           try:
             self.screenshot()
             vm_status = self.qmp("query-status")
-          except (OSError, RuntimeError):
-            if self.vm.poll() is not None:
+          except (OSError, RuntimeError) as error:
+            if self.qemu_stopped_after_disconnect(error):
               continue
             raise
+          if self.qemu_stopped_during_install_shutdown(vm_status.get("status")):
+            continue
           if not self.collected and vm_status.get("status") != "running":
             self.manifest["measurement_interrupted"] = True
             self.manifest.setdefault("unexpected_vm_states", []).append({"host_wall_s": elapsed, **vm_status})

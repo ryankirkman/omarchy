@@ -1,0 +1,5 @@
+{
+  "status": "failed",
+  "error_type": "CalledProcessError",
+  "error": "Command '['/usr/bin/python3', '/home/runner/work/omarchy/omarchy/test/benchmarks/iso-vm.py', 'run', '--iso', '/home/runner/work/_temp/omarchy-install-speed/omarchy-4.0.2.iso', '--iso-source', '/home/runner/work/_temp/omarchy-install-speed/iso-harness', '--run-dir', '/home/runner/work/_temp/omarchy-install-speed/calibration', '--cpus', '4', '--memory', '8192', '--accelerator', 'kvm', '--poll-interval', '2', '--timeout', '1800', '--kernel', '/home/runner/work/_temp/omarchy-install-speed/vmlinuz-linux-t2', '--initrd', '/home/runner/work/_temp/omarchy-install-speed/initramfs-control.img', '--append', 'archisobasedir=arch archisosearchuuid=2026-08-31-03-24-58-00 quiet splash xe.enable_panel_replay=0 initramfs_async=0 copytoram=n', '--test-overlay-sha256', '192b782af42c164e78453f2b3b122b5ac1849dbbc5e382b76780827c0dcc38c2']' returned non-zero exit status 1."
+}

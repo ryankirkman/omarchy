@@ -33,11 +33,12 @@ def qemu(*command):
 qemu("resize", "--shrink", "-f", "raw", args.raw, size)
 qemu("convert", "-c", "-f", "raw", "-O", "qcow2", "-o", "cluster_size=1048576,lazy_refcounts=on,compression_type=zstd", "-m", workers, args.raw, args.destination)
 qemu("check", "-f", "qcow2", args.destination)
+qemu("compare", "-f", "raw", "-F", "qcow2", args.raw, args.destination)
 digest = hashlib.sha256()
 with args.destination.open("rb") as source:
     while chunk := source.read(8 * 1024**2):
         digest.update(chunk)
 args.destination.with_suffix(args.destination.suffix + ".sha256").write_text(f"{digest.hexdigest()}  {args.destination.name}\n")
-manifest = {"schema_version": 1, "upstream_commit": "dbffaa6c65344d644627a023c28661e08382b8fa", "virtual_bytes": size, "file_bytes": args.destination.stat().st_size, "sha256": digest.hexdigest(), "compression": "Btrfs " + (args.build_output / "btrfs-compression.txt").read_text().strip() + "; qcow2 zstd 1MiB clusters", "qemu_version": subprocess.check_output([args.qemu_img, "--version"], text=True).splitlines()[0], "image_package_delta": json.loads((args.build_output / "image-package-delta.json").read_text())}
+manifest = {"schema_version": 1, "upstream_commit": "dbffaa6c65344d644627a023c28661e08382b8fa", "virtual_bytes": size, "file_bytes": args.destination.stat().st_size, "sha256": digest.hexdigest(), "compression": "Btrfs " + (args.build_output / "btrfs-compression.txt").read_text().strip() + "; qcow2 zstd 1MiB clusters", "qemu_version": subprocess.check_output([args.qemu_img, "--version"], text=True).splitlines()[0], "verification": ["guest Btrfs data checksums", "qemu-img check", "qemu-img compare raw versus qcow2", "SHA-256"], "image_package_delta": json.loads((args.build_output / "image-package-delta.json").read_text())}
 args.destination.with_suffix(args.destination.suffix + ".json").write_text(json.dumps(manifest, indent=2) + "\n")
 print(json.dumps(manifest, indent=2))
