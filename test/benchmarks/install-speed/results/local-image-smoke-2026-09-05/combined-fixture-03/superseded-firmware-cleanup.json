@@ -1,0 +1,20 @@
+{
+  "schema_version": 1,
+  "action": "reclaim superseded derived firmware ISO after full replacement verification",
+  "removed_path": "/tmp/omarchy-bench/omarchy-candidate-firmware-smoke.iso",
+  "original_sha256": "d57c4a348843ae246fe54b3ab9da0cb863b2bcdb400ed1f66af796abb7592b6a",
+  "original_file_bytes": 6227886080,
+  "original_allocated_bytes": 6227890176,
+  "replacement_path": "/tmp/omarchy-bench/omarchy-candidate-early-verify-03.iso",
+  "replacement_sha256": "795cabc672bba0ca2922ff2b2cda5cb103882ebb147293c8caafbe4ec842545f",
+  "replacement_file_bytes": 6227951616,
+  "verified_file_count": 91,
+  "efi_boot_images_byte_identical": true,
+  "original_official_iso_preserved": true,
+  "fixed_supplemental_iso_preserved": true,
+  "sealed_root_image_unchanged": true,
+  "free_before_bytes": 3769192448,
+  "at": 1788643673.875971,
+  "free_after_bytes": 9997082624,
+  "status": "completed"
+}

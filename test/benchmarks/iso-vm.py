@@ -250,6 +250,8 @@ class Supervisor:
         step["error"] = str(error)
       diagnostics["steps"].append(step)
       write_json(self.directory / "timeout-diagnostics.json", diagnostics)
+    capture("usernet", lambda: self.qmp("human-monitor-command", {"command-line": "info usernet"}))
+    capture("network", lambda: self.qmp("human-monitor-command", {"command-line": "info network"}))
     capture("before-keys", lambda: self.screenshot("timeout-before-keys.png"))
     for label, keys in (("escape", ("esc",)), ("tty2", ("ctrl", "alt", "f2"))):
       capture("send-" + label, lambda keys=keys: self.qmp("send-key", {

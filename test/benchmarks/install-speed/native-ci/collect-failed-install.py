@@ -27,14 +27,60 @@ def command(argv, timeout=20):
     result = subprocess.run(argv, text=True, stdout=subprocess.PIPE,
       stderr=subprocess.STDOUT, timeout=timeout, check=False)
     return {'argv': argv, 'exit_status': result.returncode,
-      'output': redact(result.stdout[-LIMIT:]), 'truncated': len(result.stdout) > LIMIT}
-  except subprocess.TimeoutExpired:
-    return {'argv': argv, 'error': 'command timed out'}
+      'output': redact(result.stdout)[-LIMIT:], 'truncated': len(result.stdout) > LIMIT}
+  except subprocess.TimeoutExpired as error:
+    output = error.stdout or b''
+    if isinstance(output, bytes):
+      output = output.decode(errors='replace')
+    return {'argv': argv, 'error': 'command timed out', 'output': redact(output)[-LIMIT:],
+      'truncated': len(output) > LIMIT}
+  except OSError as error:
+    return {'argv': argv, 'error': redact(str(error))}
+
+
+class CommandFailure(RuntimeError):
+  def __init__(self, record):
+    self.record = record
+    super().__init__('Required diagnostic command failed: ' + json.dumps(record))
+
+
+def failed_command(argv, error, stdout='', stderr='', exit_status=None):
+  record = {'argv': argv, 'error': error, 'exit_status': exit_status}
+  for name, value in (('stdout', stdout or ''), ('stderr', stderr or '')):
+    if isinstance(value, bytes):
+      value = value.decode(errors='replace')
+    record[name] = redact(value)[-LIMIT:]
+    record[name + '_truncated'] = len(value) > LIMIT
+  return CommandFailure(record)
 
 
 def required(argv):
-  result = subprocess.run(argv, text=True, capture_output=True, timeout=20, check=True)
+  try:
+    result = subprocess.run(argv, text=True, capture_output=True, timeout=20, check=False)
+  except subprocess.TimeoutExpired as error:
+    raise failed_command(argv, 'command timed out', error.stdout, error.stderr) from None
+  except OSError as error:
+    raise failed_command(argv, redact(str(error))) from None
+  if result.returncode:
+    raise failed_command(argv, 'nonzero exit', result.stdout, result.stderr, result.returncode)
   return result.stdout.strip()
+
+
+def mount_failure_diagnostics(result, partitions):
+  # These commands inspect only. blkid --probe bypasses its persistent cache;
+  # no alternate mount, log replay, repair or writable device is attempted.
+  result['commands']['failure_mounts'] = command(['findmnt', '--json', '--output', 'TARGET,SOURCE,FSTYPE,OPTIONS'])
+  result['commands']['failure_block_devices'] = command(['lsblk', '--json', '--paths', '--output',
+    'NAME,TYPE,FSTYPE,RO,MOUNTPOINTS', str(DEVICE)])
+  for row in partitions[:8]:
+    result['commands']['failure_blkid/' + Path(row['name']).name] = command([
+      'blkid', '--probe', '--output', 'export', row['name']])
+  kernel = command(['dmesg', '--color=never'])
+  lines = [line for line in kernel.get('output', '').splitlines() if re.search(r'(?i)btrfs|mount', line)]
+  kernel['output'] = '\n'.join(lines[-200:])
+  kernel['truncated'] = kernel.get('truncated', False) or len(lines) > 200
+  kernel['filter'] = 'Last 200 Btrfs or mount lines from the bounded rescue kernel log tail'
+  result['commands']['failure_kernel_mount_tail'] = kernel
 
 
 def safe_file(path, root):
@@ -94,7 +140,8 @@ def collect():
     raise RuntimeError('Every rescue partition must be read-only')
   result = {'schema_version': 1, 'measurement_valid': False,
     'purpose': 'Read-only failure forensics after the installation timer failed',
-    'block_devices': layout, 'files': {}, 'commands': {}, 'network_profiles': {}, 'ssh_keys': {}}
+    'status': 'partial', 'block_read_only': True, 'block_devices': layout,
+    'files': {}, 'commands': {}, 'command_failures': [], 'network_profiles': {}, 'ssh_keys': {}}
   MOUNT.mkdir()
   mounted = []
   try:
@@ -104,7 +151,12 @@ def collect():
       return result
     top = MOUNT / 'btrfs'
     top.mkdir()
-    required(['mount', '-t', 'btrfs', '-o', 'ro,nologreplay,subvolid=5,nosuid,nodev', roots[0], str(top)])
+    # The standalone nologreplay alias was removed in Linux 6.16. The documented
+    # rescue=nologreplay spelling retains the same no-replay, read-only scope:
+    # https://btrfs.readthedocs.io/en/latest/Feature-by-version.html
+    mount_argv = ['mount', '-t', 'btrfs', '-o', 'ro,rescue=nologreplay,subvolid=5,nosuid,nodev', roots[0], str(top)]
+    result['mount_attempt'] = {'argv': mount_argv, 'read_only': True, 'log_replay': False}
+    required(mount_argv)
     mounted.append(top)
     root = top / '@'
     if not root.is_dir():
@@ -113,7 +165,8 @@ def collect():
     result['commands']['mount'] = command(['findmnt', '--json', str(top)])
     result['commands']['subvolumes'] = command(['btrfs', 'subvolume', 'list', str(top)])
     for name in ('etc/fstab', 'etc/kernel/cmdline', 'etc/limine.conf', 'boot/limine.conf',
-        'etc/ssh/sshd_config', 'etc/systemd/system/default.target'):
+        'etc/ssh/sshd_config', 'etc/systemd/system/default.target', 'etc/ufw/ufw.conf',
+        'etc/ufw/user.rules', 'etc/ufw/user6.rules', 'etc/ufw/before.rules', 'etc/default/ufw'):
       result['files'][name] = read_file(root / name, top)
     for path in sorted((root / 'etc/ssh/sshd_config.d').glob('*.conf'))[:50]:
       result['files'][str(path.relative_to(root))] = read_file(path, top)
@@ -146,7 +199,7 @@ def collect():
         result['commands'][label + '/boots'] = command(['journalctl', '--directory', str(journal), '--list-boots', '--no-pager'])
         result['commands'][label + '/warnings'] = command(['journalctl', '--directory', str(journal), '-p', 'warning', '-n', '500', '--no-pager'])
         result['commands'][label + '/boot_services'] = command(['journalctl', '--directory', str(journal), '-n', '500', '--no-pager',
-          '-u', 'sshd', '-u', 'sshdgenkeys', '-u', 'NetworkManager', '-u', 'systemd-networkd', '-u', 'systemd-logind'])
+          '-u', 'sshd', '-u', 'sshdgenkeys', '-u', 'NetworkManager', '-u', 'systemd-networkd', '-u', 'systemd-logind', '-u', 'ufw'])
     for row in partitions:
       if row['fstype'] != 'vfat':
         continue
@@ -160,9 +213,22 @@ def collect():
       break
     result['status'] = 'collected'
     return result
+  except Exception as error:
+    result['status'] = 'partial'
+    if isinstance(error, CommandFailure):
+      result['command_failures'].append(error.record)
+      result['error'] = 'Required diagnostic command failed; see command_failures'
+    else:
+      result['error'] = redact(f'{type(error).__name__}: {error}')[-LIMIT:]
+    mount_failure_diagnostics(result, partitions)
+    return result
   finally:
     for target in reversed(mounted):
-      required(['umount', str(target)])
+      try:
+        required(['umount', str(target)])
+      except CommandFailure as error:
+        result['status'] = 'partial'
+        result['command_failures'].append(error.record)
 
 
 if __name__ == '__main__':

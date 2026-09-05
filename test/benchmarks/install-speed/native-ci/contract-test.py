@@ -3,6 +3,7 @@
 import importlib.util
 import contextlib
 import io
+import json
 import os
 import stat
 from pathlib import Path
@@ -116,6 +117,19 @@ class NativeContract(unittest.TestCase):
     with self.assertRaisesRegex(ValueError, 'verified derived ISO'):
       module.boot_arguments('firmware', source, kernel, initrd)
 
+  def test_install_timeout_is_shared_and_leaves_builder_unchanged(self):
+    base = ['--repo', '/repo', '--work', '/new-work', '--evidence', '/evidence']
+    self.assertEqual(module.parse_arguments(base).install_timeout, 1800)
+    selected = module.parse_arguments(base + ['--install-timeout', '600'])
+    self.assertEqual(selected.install_timeout, 600)
+    self.assertEqual(module.timeout_arguments(selected.install_timeout), ['--timeout', '600'])
+    self.assertEqual(module.timeout_arguments(selected.install_timeout, builder=True), ['--timeout', '5400'])
+    for invalid in ('0', '-1', '600.5', 'invalid'):
+      with contextlib.redirect_stderr(io.StringIO()):
+        with self.assertRaises(SystemExit) as result:
+          module.parse_arguments(base + ['--install-timeout', invalid])
+      self.assertEqual(result.exception.code, 1)
+
   def test_firmware_disk_headroom_fails_before_preparation(self):
     with patch.object(module.shutil, 'disk_usage', return_value=SimpleNamespace(free=43 * 1024**3)):
       with self.assertRaisesRegex(RuntimeError, '44 GiB'):
@@ -225,6 +239,50 @@ class NativeContract(unittest.TestCase):
       private = root / 'ssh_host_ed25519_key'
       private.write_text('DO-NOT-EXPORT')
       self.assertNotIn('DO-NOT-EXPORT', str(collector.public_key_metadata(private, root)))
+
+  def test_rescue_mount_failure_preserves_partial_readonly_diagnostics(self):
+    layout = {'blockdevices': [{'name': '/dev/vdb', 'type': 'disk', 'ro': True, 'children': [
+      {'name': '/dev/vdb1', 'type': 'part', 'fstype': 'vfat', 'ro': True},
+      {'name': '/dev/vdb2', 'type': 'part', 'fstype': 'btrfs', 'ro': True},
+    ]}]}
+    invoked = []
+    real_run = subprocess.run
+    def run(argv, **kwargs):
+      invoked.append(argv)
+      if argv[0] == 'mount':
+        # Capture actual subprocess stderr/exit 32 without mounting anything.
+        script = "import sys; sys.stderr.write('x'*300+'\\n-----BEGIN OPENSSH PRIVATE KEY-----\\n'+'KEY-DATA-'*40+'\\n-----END OPENSSH PRIVATE KEY-----\\nsynthetic mount failure\\npassword=DO-NOT-EXPORT\\n'); sys.exit(32)"
+        return real_run([sys.executable, '-c', script], **kwargs)
+      output = {'systemd-detect-virt': 'kvm\n', 'blockdev': '1\n', 'lsblk': json.dumps(layout),
+        'findmnt': '{"filesystems": []}', 'blkid': 'TYPE=btrfs\n',
+        'dmesg': 'BTRFS error: synthetic mount failure\nBTRFS token=DO-NOT-EXPORT\n'}[argv[0]]
+      return subprocess.CompletedProcess(argv, 0, stdout=output, stderr='')
+    with tempfile.TemporaryDirectory() as temporary, \
+        patch.object(collector, 'MOUNT', Path(temporary) / 'rescue'), \
+        patch.object(collector, 'LIMIT', 128), \
+        patch.object(collector.os, 'geteuid', return_value=0), \
+        patch.object(collector.Path, 'is_file', return_value=True), \
+        patch.object(collector.Path, 'is_block_device', return_value=True), \
+        patch.object(collector.subprocess, 'run', side_effect=run):
+      result = collector.collect()
+    self.assertEqual(result['status'], 'partial')
+    self.assertFalse(result['measurement_valid'])
+    self.assertTrue(result['block_read_only'])
+    self.assertEqual(result['block_devices'], layout)
+    failure = result['command_failures'][0]
+    self.assertEqual(failure['exit_status'], 32)
+    self.assertIn('synthetic mount failure', failure['stderr'])
+    self.assertTrue(failure['stderr_truncated'])
+    self.assertLessEqual(len(failure['stderr']), 128)
+    self.assertNotIn('DO-NOT-EXPORT', json.dumps(result))
+    self.assertNotIn('KEY-DATA', json.dumps(result))
+    self.assertIn('failure_mounts', result['commands'])
+    self.assertIn('failure_block_devices', result['commands'])
+    self.assertIn('failure_blkid/vdb2', result['commands'])
+    self.assertIn('BTRFS error', result['commands']['failure_kernel_mount_tail']['output'])
+    mounts = [argv for argv in invoked if argv[0] == 'mount']
+    self.assertEqual(len(mounts), 1, 'A failed mount must never trigger recovery/remount attempts')
+    self.assertEqual(mounts[0][4], 'ro,rescue=nologreplay,subvolid=5,nosuid,nodev')
 
 
 if __name__ == '__main__':

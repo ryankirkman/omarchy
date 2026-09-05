@@ -55,7 +55,7 @@ jobs:
           # Do not run this cleanup on a user workstation or self-hosted runner.
           if ! python3 - <<'PYSPACE'
           import os, shutil
-          raise SystemExit(0 if shutil.disk_usage(os.environ['RUNNER_TEMP']).free >= 46 * 1024**3 else 1)
+          raise SystemExit(0 if shutil.disk_usage(os.environ['RUNNER_TEMP']).free >= 52 * 1024**3 else 1)
           PYSPACE
           then
             sudo rm -rf -- /usr/share/dotnet /usr/local/lib/android /opt/ghc /opt/hostedtoolcache/CodeQL
@@ -65,7 +65,7 @@ jobs:
           df -h > "$BENCH_EVIDENCE/runner-after.txt"
           python3 - <<'PY'
           import os, shutil
-          assert shutil.disk_usage(os.environ['RUNNER_TEMP']).free >= 44 * 1024**3, 'Need 44 GiB free for firmware fixtures; do not start a partial benchmark'
+          assert shutil.disk_usage(os.environ['RUNNER_TEMP']).free >= 50 * 1024**3, 'Need 50 GiB free for matched early firmware fixtures; do not start a partial benchmark'
           PY
           dpkg-query -W > "$BENCH_EVIDENCE/host-packages.txt"
           printf '%s\n' "$ImageOS" "$ImageVersion" > "$BENCH_EVIDENCE/runner-image.txt"
@@ -76,8 +76,8 @@ jobs:
           set -euo pipefail
           python3 test/benchmarks/install-speed/native-ci/run-native-experiment.py \
             --repo "$GITHUB_WORKSPACE" --work "$BENCH_WORK" --evidence "$BENCH_EVIDENCE" \
-            --boot-method firmware --source-cache cold \
-            --variants upstream-image image-no-package-prefetch image-no-package-prefetch-fast-reboot
+            --boot-method firmware --source-cache cold --install-timeout 600 \
+            --variants image-no-package-prefetch-fast-reboot image-no-package-prefetch-fast-reboot-early-verify
 
       - name: Retain small validation and timing evidence
         if: always()

@@ -60,7 +60,8 @@ with tempfile.TemporaryDirectory(prefix='omarchy-timeout-') as temporary:
     else:
       raise AssertionError('timeout diagnostics accepted failed guest')
   result = json.loads((supervisor.directory / 'timeout-diagnostics.json').read_text())
-  assert result['after_measurement_failure'] and len(result['steps']) == 7
+  assert result['after_measurement_failure'] and len(result['steps']) == 9
+  assert [step['label'] for step in result['steps'][:2]] == ['usernet', 'network']
   assert any(step.get('error') == 'diagnostic monitor lost' for step in result['steps'])
   assert result['steps'][-1]['label'] == 'registers', 'one failed diagnostic must not erase later evidence'
   assert calls[0] == ('socket-timeout', 2)

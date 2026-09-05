@@ -1,0 +1,17 @@
+{
+  "schema_version": 1,
+  "workflow_run_id": 33991603136,
+  "workflow_job_id": 101374708779,
+  "repository": "ryankirkman/omarchy",
+  "commit": "d931066f6e9e79983acf49bdf3dcc9cd219e721e",
+  "artifact_id": 9977251335,
+  "artifact_zip_sha256": "67e550b4bb9945ab3784b8857d76527a0527c69ac9239a74ca2f714cfdc1545f",
+  "artifact_original_file_count": 33,
+  "status": "calibration-installed-ssh-timeout",
+  "measurement_valid": false,
+  "image_built": false,
+  "candidate_measured": false,
+  "boot_method": "firmware",
+  "source_cache": "cold",
+  "observed_failure": "The calibration exceeded 1800 seconds without installed SSH readiness. Last probe timed out during SSH banner exchange. The post-failure tty2 screenshot shows the installed Omarchy login prompt. Read-only rescue failed mounting the Btrfs root with exit 32 before collecting journals; mount stderr was not retained."
+}

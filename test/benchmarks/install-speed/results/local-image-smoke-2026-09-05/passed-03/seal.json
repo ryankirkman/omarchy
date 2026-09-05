@@ -1,0 +1,154 @@
+{
+  "schema_version": 1,
+  "sealed_at": 1788644682.30877,
+  "source_run_directory": "/tmp/omarchy-bench/candidate-firmware-smoke-03-early-verify",
+  "qemu_exit_status": 0,
+  "runner_exit_status": 0,
+  "private_keys_and_virtual_disks_excluded": true,
+  "files": {
+    "manifest.json": {
+      "sha256": "a2f65d6aae822ae9b661769ada8feb69a8eb84c9a0f9aeb1947f62c031084aaf",
+      "bytes": 4743
+    },
+    "install-timing.json": {
+      "sha256": "54939d66d5c1d33c19e5c241f86264019af439fc4f42dc5fed63b968049aa3ba",
+      "bytes": 3062
+    },
+    "validation.json": {
+      "sha256": "57dae1c4cb5e8ecd298973012eb11e4f9e7f12e9c26441c800f051be43111afc",
+      "bytes": 221
+    },
+    "identity.json": {
+      "sha256": "4703d16bc05248872aef3ffc1e2c64dc514dd69bbae598b445fbf8999213b6d3",
+      "bytes": 459
+    },
+    "package-manifest.txt": {
+      "sha256": "f69fe12f4d2b530f56f28b6f350380eaae2e0ea679d88abedd0d032f0b0df89d",
+      "bytes": 18343
+    },
+    "package-explicit.txt": {
+      "sha256": "37d06fc7de2487901f81513bf70f3e592d7245cd656d6c34089ccc1f258055f9",
+      "bytes": 1705
+    },
+    "package-files.txt": {
+      "sha256": "5b501e2ef951a921a004c72ce90497acc7047f27a0f1c1fd12acbb9f26c8ec38",
+      "bytes": 41163
+    },
+    "package-files.stderr": {
+      "sha256": "5b6482796f084d9f1a7c88a251d30d1f9d46a2bad8adb9401253e706a28c0018",
+      "bytes": 300
+    },
+    "installed-root.json": {
+      "sha256": "cebc725cbd245afc4139ebbe70d7a3010beb56dc36ead369327bb8504f5a9c59",
+      "bytes": 132
+    },
+    "installed-boot.txt": {
+      "sha256": "5448e899b2519e9202edc89eada5acbb5fa15c502eaf790b0cdeb8b5db7a65ae",
+      "bytes": 776
+    },
+    "machine-id.txt": {
+      "sha256": "6e2f598207ea2f532416d5749b056b6013528cbd599f7a1e9fa8005864462104",
+      "bytes": 33
+    },
+    "ssh-host-fingerprints.txt": {
+      "sha256": "ff62b9b6f13b51c132463694f10e2070d311b192698561a1bb7d3edfa6281c48",
+      "bytes": 355
+    },
+    "pacman-master-keys.txt": {
+      "sha256": "7447adaf2f479a2d34784d2cfcd2d7137fc0c00f5545b150992530b3c76c5bdd",
+      "bytes": 293
+    },
+    "btrfs-uuid.txt": {
+      "sha256": "698d2594b1d506223d229192793eefab3b847c0e5d1aed92c7c0cc68c04b9fb4",
+      "bytes": 37
+    },
+    "btrfs-subvolumes.txt": {
+      "sha256": "2369816df8bcd9a71172fbef2e924f40b6ab1c95ea60e945173fde3e90eebb9a",
+      "bytes": 2305
+    },
+    "uki-files.txt": {
+      "sha256": "2a5f50a368711cb8cb4da49440f7116b62ff87f4798a23263f65f04aff0c2e42",
+      "bytes": 266
+    },
+    "serial.log": {
+      "sha256": "16e83e3180ccb321a4f024038485d0f8459ea29e4c239f769c5a475fbf24bfa7",
+      "bytes": 34199
+    },
+    "qemu.log": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    "installed-screen.png": {
+      "sha256": "11b7469862ff5357c7454d33ec3639a0007d16cacdce2af01d35479b720f61fa",
+      "bytes": 5283
+    },
+    "systemd-analyze-blame.txt": {
+      "sha256": "1befbc4ff48fe77288cd9eddb2794d2008b9bb0e35ad6ed7a457ed589d14675a",
+      "bytes": 3414
+    },
+    "systemd-analyze-critical-chain.txt": {
+      "sha256": "2315a64319dbdb34ae74eef385dc6ebb7a1985fc7b684aa2e1c55cdeb6a3a1b4",
+      "bytes": 1167
+    },
+    "standalone-reboot.json": {
+      "sha256": "10003da653c8ea4cc76f6ec552abcde2245ad44556173384cbf3a1a3cec1e2c2",
+      "bytes": 10533
+    },
+    "standalone-root.json": {
+      "sha256": "cebc725cbd245afc4139ebbe70d7a3010beb56dc36ead369327bb8504f5a9c59",
+      "bytes": 132
+    },
+    "standalone-identity.json": {
+      "sha256": "4703d16bc05248872aef3ffc1e2c64dc514dd69bbae598b445fbf8999213b6d3",
+      "bytes": 459
+    },
+    "standalone-machine-id.txt": {
+      "sha256": "6e2f598207ea2f532416d5749b056b6013528cbd599f7a1e9fa8005864462104",
+      "bytes": 33
+    },
+    "standalone-ssh-host-fingerprints.txt": {
+      "sha256": "ff62b9b6f13b51c132463694f10e2070d311b192698561a1bb7d3edfa6281c48",
+      "bytes": 355
+    },
+    "standalone-pacman-master-keys.txt": {
+      "sha256": "7447adaf2f479a2d34784d2cfcd2d7137fc0c00f5545b150992530b3c76c5bdd",
+      "bytes": 293
+    },
+    "standalone-btrfs-uuid.txt": {
+      "sha256": "698d2594b1d506223d229192793eefab3b847c0e5d1aed92c7c0cc68c04b9fb4",
+      "bytes": 37
+    },
+    "standalone-btrfs-subvolumes.txt": {
+      "sha256": "62c2ee2c0a7853e60c220caa41bf5f12d23c343c837154db4f67ae52512e1e5b",
+      "bytes": 2305
+    },
+    "standalone-uki-files.txt": {
+      "sha256": "2a5f50a368711cb8cb4da49440f7116b62ff87f4798a23263f65f04aff0c2e42",
+      "bytes": 266
+    },
+    "install.log": {
+      "sha256": "1bd5b84321fe913b18ba7240710bba4df0822c32c75171c7836b73c50d773dd9",
+      "bytes": 22920
+    },
+    "journal-boot.log": {
+      "sha256": "0ab1ab2a10cfe7101bfd17b35b50b0c1cb5ae2a2d7ff0b75f4b24c09450f368a",
+      "bytes": 147804
+    },
+    "early-preflight-markers.json": {
+      "sha256": "d6b9a015778d0e612f2fdf78ee72bfaf55aa4401b5aa5032971502cb8e42edea",
+      "bytes": 561
+    }
+  },
+  "kind": "unpaired-functional-candidate-smoke",
+  "variant": "image-no-package-prefetch-fast-reboot-early-verify",
+  "speedup_claim": false,
+  "source_root_image_sha256": "6ef64246e8b7d01e8f129046bae0d8e41228f7f195fd4c1ffb8fe00e4d00ca3e",
+  "first_boot_profiles_preserved": true,
+  "supplemental_iso_sha256": "19de1071bc7825078324c21243b4371f5bb6f4d9f47608b16c11288d22919e97",
+  "firmware_iso_sha256": "795cabc672bba0ca2922ff2b2cda5cb103882ebb147293c8caafbe4ec842545f",
+  "package_manifest_matches_stock_baseline": true,
+  "package_file_counts_match_stock_baseline": true,
+  "explicit_package_reasons_match_stock_baseline": true,
+  "paired_speed_comparison_performed": false,
+  "early_preflight_marker_pair_verified": true
+}

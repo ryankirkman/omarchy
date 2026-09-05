@@ -110,6 +110,10 @@ def boot_arguments(boot_method, iso, kernel, initrd, *, builder=False, firmware_
   return ['--iso', iso, '--kernel', kernel, '--initrd', initrd, '--append', CMDLINE]
 
 
+def timeout_arguments(install_timeout, *, builder=False):
+  return ['--timeout', '5400' if builder else str(install_timeout)]
+
+
 def git_checkout(destination, revision):
   command(['git', 'init', destination])
   command(['git', '-C', destination, 'remote', 'add', 'origin', 'https://github.com/omacom-io/omarchy-iso.git'])
@@ -180,6 +184,7 @@ def execute(args):
     'accelerator': 'kvm', 'cpus': 4, 'memory_mib': 8192, 'pairs_per_variant': 3,
     'variants': args.variants, 'comparisons': {},
     'boot_method': args.boot_method, 'firmware_fixtures': {},
+    'install_timeout_seconds': args.install_timeout,
     'source_cache': args.source_cache,
     'cache_policy': ('Integrity pre-reads condition source media before timing' if args.source_cache == 'conditioned' else 'Require verified source-page eviction after integrity reads and before timing; see per-run evidence'),
     'build_time_in_install_time': False,
@@ -251,8 +256,9 @@ def execute(args):
     selected_iso = firmware_iso(selected_initrd, initrd_digest) if args.boot_method == 'firmware' and not builder else None
     argv = [sys.executable, bench / 'iso-vm.py', 'run', '--iso-source', harness,
         '--run-dir', work / name, '--cpus', '4', '--memory', '8192', '--accelerator', 'kvm',
-        '--poll-interval', '2', '--timeout', '5400' if builder else '1800',
+        '--poll-interval', '2',
         '--test-overlay-sha256', initrd_digest]
+    argv += timeout_arguments(args.install_timeout, builder=builder)
     argv += boot_arguments(args.boot_method, iso, kernel, selected_initrd,
       builder=builder, firmware_iso=selected_iso)
     if extra:
@@ -266,7 +272,8 @@ def execute(args):
   def install(name, selected_initrd, extra=None):
     run = work / name
     try:
-      command(vm_args(name, selected_initrd, extra), timeout=2700 if args.boot_method == 'firmware' else 2100)
+      command(vm_args(name, selected_initrd, extra),
+        timeout=args.install_timeout + (900 if args.boot_method == 'firmware' else 300))
       manifest = json.loads((run / 'manifest.json').read_text())
       validation = json.loads((run / 'validation.json').read_text())
       if manifest['status'] != 'installed-and-booted' or manifest.get('qemu_exit_status') != 0 or validation.get('package_files_exit_status') != 0:
@@ -462,6 +469,8 @@ def parse_arguments(argv=None):
   parser.add_argument('--repo', required=True, type=Path)
   parser.add_argument('--work', required=True, type=Path)
   parser.add_argument('--evidence', required=True, type=Path)
+  parser.add_argument('--install-timeout', type=int, default=1800, metavar='SECONDS',
+    help='Positive readiness timeout shared by all installation VMs; builder timeout remains 5400 seconds')
   parser.add_argument('--boot-method', choices=('direct', 'firmware'), default='direct',
     help='Direct kernel boot (default), or verified ISO repacking with firmware boot and standalone reboot validation')
   parser.add_argument('--source-cache', choices=('conditioned', 'cold'), default='conditioned',
@@ -469,6 +478,8 @@ def parse_arguments(argv=None):
   parser.add_argument('--variants', nargs='+', choices=('upstream-image', 'image-no-package-prefetch', 'image-no-package-prefetch-fast-reboot', EARLY_VERIFY_VARIANT),
     default=['upstream-image', 'image-no-package-prefetch'], help='Variants to measure, in order; three fresh pairs each')
   args = parser.parse_args(argv)
+  if args.install_timeout <= 0:
+    parser.error('--install-timeout must be a positive integer')
   if len(set(args.variants)) != len(args.variants):
     parser.error('variants must be distinct')
   if EARLY_VERIFY_VARIANT in args.variants and (args.source_cache != 'cold' or args.boot_method != 'firmware'):
