@@ -30,6 +30,40 @@ def load_sibling(name):
 
 rescue = load_sibling('rescue-failed-install')
 collector = load_sibling('collect-failed-install')
+repeat_spec = importlib.util.spec_from_file_location('native_repeat_contract', DIRECTORY.parent / 'repeat-installs.py')
+repeat = importlib.util.module_from_spec(repeat_spec)
+repeat_spec.loader.exec_module(repeat)
+
+
+def failed_repeat_fixture(root, revision='candidate'):
+  repo = DIRECTORY.parents[3]
+  work, evidence = root / 'work', root / 'evidence'
+  run_root, series_evidence = work / 'fresh-installs-fixture', evidence / 'repetitions'
+  order = repeat.schedule(3, 'control')
+  selected = order[0 if revision == 'control' else 1]
+  run = run_root / selected['name']
+  run.mkdir(parents=True)
+  (run / 'target.qcow2').write_bytes(b'Disposable test fixture; never passed to QEMU')
+  for name in ('supervisor.pid', 'qemu.pid'):
+    (run / name).write_text('2147483647\n')
+  module.save_json(run / 'manifest.json', {'status': 'timeout', 'mode': 'install', 'fresh_target': True,
+    'qemu_argv': ['qemu-system-x86_64', '-drive',
+      f'file={run / "target.qcow2"},format=qcow2,if=none,id=target,cache=writeback']})
+  bench = repo / 'test/benchmarks'
+  provenance = {'runner_sha256': module.digest(bench / 'iso-vm.py'),
+    'comparator_sha256': module.digest(bench / 'compare-installs.py'),
+    'repeat_driver_sha256': module.digest(bench / 'install-speed/repeat-installs.py')}
+  failed_evidence = series_evidence / 'failed-runs' / run.name
+  repeat.retain_failed_run(run, failed_evidence, 'fixture installation timeout', 1, provenance)
+  series = {'status': 'failed', 'failure': 'fixture installation timeout',
+    'failed_run_evidence': str(failed_evidence),
+    'runs': [] if revision == 'control' else [order[0]],
+    'plan': {'run_root': str(run_root), 'evidence_root': str(series_evidence),
+      'order': order, 'source_provenance': provenance}}
+  module.save_json(series_evidence / 'series.json', series)
+  context = {'repo': repo, 'work': work, 'evidence': evidence, 'iso': work / 'official.iso',
+    'harness': work / 'iso-harness', 'kernel': work / 'kernel', 'initrd': work / 'initrd'}
+  return run, run_root, series_evidence, context
 
 
 class NativeContract(unittest.TestCase):
@@ -209,6 +243,78 @@ class NativeContract(unittest.TestCase):
       (run / 'supervisor.pid').write_text(str(os.getpid()))
       with self.assertRaisesRegex(RuntimeError, 'still alive'):
         rescue.assert_stopped(run)
+
+  def test_failed_repeat_rescues_only_its_retained_control_or_candidate(self):
+    for revision in ('control', 'candidate'):
+      with tempfile.TemporaryDirectory() as temporary:
+        run, run_root, evidence, context = failed_repeat_fixture(Path(temporary), revision)
+        original = (evidence / 'series.json').read_bytes()
+        target = (run / 'target.qcow2').read_bytes()
+        process = SimpleNamespace(returncode=1, poll=lambda: 1)
+        with patch.object(module, 'command', return_value=0) as invoked:
+          self.assertTrue(module.rescue_failed_repeat(process, run_root, evidence, 'fixture-rescue', **context))
+        invoked.assert_called_once()
+        argv = invoked.call_args.args[0]
+        self.assertEqual(argv[1], context['repo'] / 'test/benchmarks/install-speed/native-ci/rescue-failed-install.py')
+        self.assertEqual(argv[argv.index('--failed-run') + 1], run)
+        self.assertEqual(invoked.call_args.kwargs['timeout'], 360)
+        self.assertIn('readonly=on', rescue.readonly_target_args(run / 'target.qcow2')[1])
+        self.assertEqual((evidence / 'series.json').read_bytes(), original)
+        self.assertEqual((run / 'target.qcow2').read_bytes(), target)
+        request = json.loads((context['evidence'] / 'fixture-rescue/rescue-request.json').read_text())
+        self.assertFalse(request['measurement_valid'])
+        self.assertEqual(request['source_run_directory'], str(run))
+        self.assertIn('failure_record_sha256', request['provenance'])
+
+  def test_failed_repeat_missing_or_unsafe_provenance_never_launches_rescue(self):
+    for corruption in ('missing-record', 'outside-run', 'changed-manifest', 'accepted-sample', 'symlink-target'):
+      with self.subTest(corruption=corruption), tempfile.TemporaryDirectory() as temporary:
+        root = Path(temporary)
+        run, run_root, evidence, context = failed_repeat_fixture(root)
+        series_path = evidence / 'series.json'
+        series = json.loads(series_path.read_text())
+        record_path = Path(series['failed_run_evidence']) / 'failure-record.json'
+        record = json.loads(record_path.read_text())
+        if corruption == 'missing-record':
+          record_path.unlink()
+        elif corruption == 'outside-run':
+          record['source_run_directory'] = str(root / 'unrelated-run')
+          module.save_json(record_path, record)
+        elif corruption == 'changed-manifest':
+          (run / 'manifest.json').write_text('{}')
+        elif corruption == 'accepted-sample':
+          series['runs'].append({'name': run.name})
+          module.save_json(series_path, series)
+        else:
+          outside = root / 'unrelated-disk'
+          (run / 'target.qcow2').rename(outside)
+          (run / 'target.qcow2').symlink_to(outside)
+        process = SimpleNamespace(returncode=1, poll=lambda: 1)
+        with patch.object(module, 'command') as invoked:
+          self.assertFalse(module.rescue_failed_repeat(process, run_root, evidence, 'fixture-rescue', **context))
+          invoked.assert_not_called()
+        self.assertEqual(json.loads(series_path.read_text())['status'], 'failed')
+
+  def test_failed_repeat_waits_for_process_exit_and_never_retries_rescue(self):
+    with tempfile.TemporaryDirectory() as temporary:
+      run, run_root, evidence, context = failed_repeat_fixture(Path(temporary))
+      original = (evidence / 'series.json').read_bytes()
+      active = SimpleNamespace(returncode=None, poll=lambda: None)
+      with patch.object(module, 'command') as invoked:
+        self.assertFalse(module.rescue_failed_repeat(active, run_root, evidence, 'active-repeat-rescue', **context))
+        invoked.assert_not_called()
+      stopped = SimpleNamespace(returncode=1, poll=lambda: 1)
+      (run / 'qemu.pid').write_text(str(os.getpid()))
+      with patch.object(module, 'command') as invoked:
+        self.assertFalse(module.rescue_failed_repeat(stopped, run_root, evidence, 'active-qemu-rescue', **context))
+        invoked.assert_not_called()
+      (run / 'qemu.pid').write_text('2147483647\n')
+      with patch.object(module, 'command', side_effect=subprocess.TimeoutExpired(['rescue'], 360)) as invoked:
+        self.assertFalse(module.rescue_failed_repeat(stopped, run_root, evidence, 'fixture-rescue', **context))
+        self.assertFalse(module.rescue_failed_repeat(stopped, run_root, evidence, 'fixture-rescue', **context))
+        invoked.assert_called_once()
+      self.assertEqual((evidence / 'series.json').read_bytes(), original)
+      self.assertTrue((run / 'target.qcow2').is_file())
 
   def test_rescue_requires_a_readonly_dedicated_target(self):
     args = rescue.readonly_target_args(Path('/tmp/failed/target.qcow2'))

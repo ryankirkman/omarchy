@@ -134,6 +134,146 @@ def collect_small(run, evidence):
       shutil.copyfile(source, evidence / name)
 
 
+def read_regular_json(path):
+  if path.resolve() != path or path.is_symlink() or not path.is_file() or path.stat().st_size > 20 * 1024**2:
+    raise ValueError(f'Missing, unsafe or oversized failure provenance: {path}')
+  return json.loads(path.read_text())
+
+
+def retained_failed_run(repo, run_root, evidence_root):
+  """Resolve only this failed series' planned, unaccepted, retained target."""
+  series_path = evidence_root / 'series.json'
+  series = read_regular_json(series_path)
+  plan = series['plan']
+  if (series.get('status') != 'failed' or plan.get('run_root') != str(run_root)
+      or plan.get('evidence_root') != str(evidence_root)):
+    raise ValueError('Rescue requires this exact failed repeated-install series')
+  failed = Path(series['failed_run_evidence'])
+  if (not failed.is_absolute() or failed.resolve() != failed
+      or failed.parent != evidence_root / 'failed-runs'):
+    raise ValueError('Failed-run evidence is outside this series')
+  name = failed.name
+  planned = [row for row in plan['order'] if row.get('name') == name]
+  if (len(planned) != 1 or planned[0].get('revision') not in {'control', 'candidate'}
+      or any(row.get('name') == name for row in series['runs'])):
+    raise ValueError('Rescue target is not a unique unaccepted sample in this plan')
+  run = run_root / name
+  if run.resolve() != run or not run.is_dir():
+    raise ValueError('Retained source run is missing or uses a symlink')
+  record_path = failed / 'failure-record.json'
+  record = read_regular_json(record_path)
+  if (record.get('schema_version') != 1 or record.get('status') != 'failed'
+      or record.get('measurement_valid') is not False
+      or record.get('source_run_directory') != str(run)
+      or record.get('failure') != series.get('failure')):
+    raise ValueError('Failure record does not identify this invalid source run')
+  bench = repo / 'test/benchmarks'
+  for key, source in (('runner_sha256', bench / 'iso-vm.py'),
+      ('comparator_sha256', bench / 'compare-installs.py'),
+      ('repeat_driver_sha256', bench / 'install-speed/repeat-installs.py')):
+    if record.get(key) != digest(source) or record.get(key) != plan['source_provenance'].get(key):
+      raise ValueError('Failed-run benchmark source provenance differs from this driver')
+  # Verify the captured small-file hashes before trusting the recorded target.
+  # There is deliberately no search for alternative disks if evidence is absent.
+  files = record['files']
+  if 'manifest.json' not in files or 'manifest.json' in record.get('capture_errors', {}):
+    raise ValueError('Failed-run manifest was not preserved successfully')
+  for leaf, entry in files.items():
+    path = failed / leaf
+    if (leaf not in EVIDENCE_FILES | {'installed-screen.png'} or path.resolve() != path
+        or not path.is_file() or type(entry.get('bytes')) is not int
+        or not 0 <= entry['bytes'] <= 20 * 1024**2
+        or path.stat().st_size != entry['bytes'] or digest(path) != entry.get('sha256')):
+      raise ValueError(f'Failed-run evidence is unsafe or changed: {leaf}')
+  manifest_path = run / 'manifest.json'
+  manifest = read_regular_json(manifest_path)
+  if digest(manifest_path) != files['manifest.json']['sha256']:
+    raise ValueError('Retained run manifest changed after failure capture')
+  if manifest.get('mode') != 'install' or manifest.get('fresh_target') is not True:
+    raise ValueError('Retained run is not a fresh installation target')
+  target = run / 'target.qcow2'
+  if target.resolve() != target or not target.is_file():
+    raise ValueError('Retained installation target is missing or uses a symlink')
+  argv = manifest['qemu_argv']
+  if not isinstance(argv, list) or not all(isinstance(value, str) for value in argv):
+    raise ValueError('Missing recorded QEMU launch arguments')
+  targets = []
+  for index, value in enumerate(argv[:-1]):
+    if value == '-drive':
+      options = dict(piece.split('=', 1) for piece in argv[index + 1].split(',') if '=' in piece)
+      if options.get('id') == 'target':
+        targets.append(options)
+  if len(targets) != 1 or targets[0].get('file') != str(target) or targets[0].get('format') != 'qcow2':
+    raise ValueError('Recorded QEMU target does not match the retained source disk')
+  return run, {'series': str(series_path), 'series_sha256': digest(series_path),
+    'failure_record': str(record_path), 'failure_record_sha256': digest(record_path),
+    'manifest_sha256': files['manifest.json']['sha256']}
+
+
+def record_rescue_failure(directory, error):
+  # Rescue diagnostics must never replace the original installation failure,
+  # even if the evidence filesystem is full or unavailable.
+  try:
+    directory.mkdir(parents=True, exist_ok=True)
+    save_json(directory / 'rescue-failure.json',
+      {'error_type': type(error).__name__, 'error': str(error), 'measurement_valid': False})
+  except OSError as capture_error:
+    print(json.dumps({'event': 'rescue-error-capture-failed', 'error': str(capture_error)}), flush=True)
+
+
+def rescue_failed_install(run, rescue_name, *, repo, work, evidence, iso, harness, kernel, initrd, provenance=None):
+  if Path(rescue_name).name != rescue_name or rescue_name in {'', '.', '..'}:
+    return False
+  destination = evidence / rescue_name
+  try:
+    if run.resolve() != run or not run.is_relative_to(work) or not (run / 'target.qcow2').is_file():
+      raise ValueError('Rescue requires an exact retained target inside this experiment')
+    if (run / 'target.qcow2').resolve() != run / 'target.qcow2':
+      raise ValueError('Refusing a symlinked rescue target')
+    for name in ('supervisor.pid', 'qemu.pid'):
+      path = run / name
+      if path.resolve() != path or not path.is_file():
+        raise ValueError(f'Missing stopped-process provenance: {name}')
+      pid = int(path.read_text())
+      if pid <= 0:
+        raise ValueError(f'Invalid stopped-process provenance: {name}')
+      try:
+        os.kill(pid, 0)
+      except ProcessLookupError:
+        continue
+      raise RuntimeError(f'Refusing rescue while {name} is still alive')
+    destination.mkdir(parents=True, exist_ok=True)
+    request = destination / 'rescue-request.json'
+    with request.open('x') as output:
+      json.dump({'measurement_valid': False, 'source_run_directory': str(run),
+        'provenance': provenance, 'read_only_rescue': True}, output, indent=2)
+      output.write('\n')
+    # This existing script checks supervisor/QEMU PIDs before constructing the
+    # fresh live VM, and attaches only this target with QEMU readonly=on.
+    with (destination / 'rescue-driver.log').open('w') as log:
+      command([sys.executable, repo / 'test/benchmarks/install-speed/native-ci/rescue-failed-install.py',
+        '--repo', repo, '--work', work / rescue_name, '--evidence', destination,
+        '--failed-run', run, '--iso', iso, '--harness', harness, '--kernel', kernel,
+        '--initrd', initrd], stdout=log, stderr=subprocess.STDOUT, timeout=360)
+    return True
+  except Exception as error:
+    record_rescue_failure(destination, error)
+    return False
+
+
+def rescue_failed_repeat(process, run_root, series_evidence, rescue_name, **context):
+  if Path(rescue_name).name != rescue_name or rescue_name in {'', '.', '..'}:
+    return False
+  try:
+    if process.poll() is None or process.returncode in (0, 2):
+      raise ValueError('Read-only rescue requires a stopped, failed repeat driver')
+    run, provenance = retained_failed_run(context['repo'], run_root, series_evidence)
+  except Exception as error:
+    record_rescue_failure(context['evidence'] / rescue_name, error)
+    return False
+  return rescue_failed_install(run, rescue_name, provenance=provenance, **context)
+
+
 def mailbox(run, request, timeout=180):
   identifier = uuid.uuid4().hex
   target = run / 'requests' / (identifier + '.json')
@@ -269,6 +409,9 @@ def execute(args):
       argv += ['--source-cache', args.source_cache, '--installed-boot-timeout', '300']
     return list(map(str, argv))
 
+  rescue_context = {'repo': repo, 'work': work, 'evidence': evidence,
+    'iso': iso, 'harness': harness, 'kernel': kernel, 'initrd': initrd}
+
   def install(name, selected_initrd, extra=None):
     run = work / name
     try:
@@ -287,17 +430,7 @@ def execute(args):
       # is attached read-only to a separate live VM. Rescue never makes a
       # failed install eligible for comparison and cannot replace its error.
       if (run / 'target.qcow2').is_file():
-        rescue_evidence = evidence / (name + '-rescue')
-        rescue_evidence.mkdir(parents=True, exist_ok=True)
-        try:
-          with (rescue_evidence / 'rescue-driver.log').open('w') as log:
-            command([sys.executable, bench / 'install-speed/native-ci/rescue-failed-install.py',
-              '--repo', repo, '--work', work / (name + '-rescue'), '--evidence', rescue_evidence,
-              '--failed-run', run, '--iso', iso, '--harness', harness, '--kernel', kernel,
-              '--initrd', initrd], stdout=log, stderr=subprocess.STDOUT, timeout=360)
-        except Exception as error:
-          save_json(rescue_evidence / 'rescue-failure.json',
-            {'error_type': type(error).__name__, 'error': str(error), 'measurement_valid': False})
+        rescue_failed_install(run, name + '-rescue', **rescue_context)
       raise
     finally:
       collect_small(run, evidence / name)
@@ -374,9 +507,11 @@ def execute(args):
     save_json(candidate_launch, vm_args('candidate-template', selected_initrd, same_media))
     # repeat-installs owns fresh-run allocation, complete validation, evidence
     # sealing, alternating order, shutdown and target disk reclamation.
+    series_run_root = work / f'fresh-installs-{label}'
+    series_evidence = evidence / output_name
     repeat_argv = list(map(str, [sys.executable, bench / 'install-speed/repeat-installs.py',
       '--control-launch', selected_control_launch, '--candidate-launch', candidate_launch,
-      '--run-root', work / f'fresh-installs-{label}', '--evidence-root', evidence / output_name, '--pairs', '3']))
+      '--run-root', series_run_root, '--evidence-root', series_evidence, '--pairs', '3']))
     result = subprocess.Popen(repeat_argv, start_new_session=True)
     try:
       result.wait()
@@ -386,6 +521,7 @@ def execute(args):
       stop_process_group(result, grace=55)
       raise
     if result.returncode not in (0, 2):
+      rescue_failed_repeat(result, series_run_root, series_evidence, label + '-failed-run-rescue', **rescue_context)
       raise RuntimeError(f'Repeated install series failed: {label}: {result.returncode}')
     provenance['comparisons'][label] = {
       'status': 'complete', 'exit_status': result.returncode,
