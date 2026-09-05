@@ -41,4 +41,8 @@ Booting via a supplied kernel instead of the ISO's GRUB loader changes the fixtu
 
 ## Verification status
 
-`python test/benchmarks/install-speed/boot-overlay/contract-test.py` checks the archive and fail-closed entry-point contracts. Building against the real official initramfs succeeded; the no-op control appendix is approximately 5 KiB. The copy hook preserves existing live directory permissions, including `/root`. These are host checks; successful live guest preflight, candidate activation, and a subsequent installed-system boot remain separate integration gates. Do not interpret construction success as a successful installation or speed result.
+`python test/benchmarks/install-speed/boot-overlay/contract-test.py` checks the archive, fail-closed entry point, actual payload copying, and package-prefetch flag propagation. Building against the real official initramfs succeeded; the no-op control appendix is approximately 5 KiB.
+
+The actual builder live boot passed in QEMU TCG with four CPUs and 8 GiB RAM. The hook preserved the original automated entry point byte-for-byte against the read-only squashfs copy and preserved `/root` mode `0750`. All eight payload files matched their expected SHA256 digests and permissions. The builder preflight completed, SSH became active, and autoinstall remained disabled. [The raw commands, results, fixture, and artifact digests are recorded here](results/builder-smoke.json).
+
+Candidate activation and a subsequent installed-system boot remain separate integration gates. This successful builder smoke test establishes that the unattended injection works; it is not an installation speed result.

@@ -52,3 +52,25 @@ For accurate readiness uncertainty, the runner records the start of the last fai
 `--mode builder` deliberately does not produce a valid install benchmark. It waits for root SSH by default, records `builder-ssh-ready`, and serves the mailbox indefinitely. `--ssh-key` can copy an existing disposable benchmark private key into that run; `--guest-user` overrides the login name. Use a builder overlay that disables the system installer, and attach its dedicated blank build disk with explicit device identity.
 
 All supplemental read-only `-drive` files supplied in extra QEMU arguments are hashed and recorded with their drive ID, format, cache setting and attached device interface. Install mode rejects writable extra drives. Use the same supplemental media and topology in control and candidate, even when control does not consume the prebuilt root image. The official ISO and supplementary media are fully read for SHA256 verification before the VM starts, providing the same explicit cache-preconditioning procedure in both groups. These measurements are therefore not cold-host-cache claims. Initrd/kernel hashes additionally cover embedded overlay scripts and portable binaries.
+
+## Repeated matched installs
+
+`install-speed/repeat-installs.py` orchestrates at least three fresh installs of each revision. Supply two JSON files containing complete `iso-vm.py run` argv arrays. The driver replaces each template's `--run-dir`, removes `--keep-running`, and uses install mode. With three pairs and the default first revision, run order is control/candidate, candidate/control, control/candidate. Both templates must attach the same read-only supplementary media with matching hardware, cache settings and boot strategy. Prepare and validate the image before launching the series.
+
+```bash
+python3 test/benchmarks/install-speed/repeat-installs.py \
+  --control-launch /tmp/omarchy-bench/control-launch.json \
+  --candidate-launch /tmp/omarchy-bench/candidate-launch.json \
+  --run-root /tmp/omarchy-bench/matched-series \
+  --vm-state-root /tmp/omarchy-bench \
+  --evidence-root test/benchmarks/install-speed/results/matched-series \
+  --pairs 3
+```
+
+Use `--plan-only` to inspect the order and normalized templates without starting a VM. Keep every other VM under the same `--vm-state-root` and shut it down first: the driver refuses manifests that still report a live builder/install, and an advisory lock prevents two repeat drivers sharing that state root. It runs one VM at a time. These guards do not replace coordination with unrelated VM launchers elsewhere on the host.
+
+After each clean runner/QEMU exit, the real comparator validates installed boot, complete phases, package files, package versions/reasons, identities, and measurement provenance. An explicit whitelist of small evidence files is copied into `evidence-root/runs/<sample>`; `seal.json` records every file's SHA256 and source-code hashes, and copies are verified before the driver unlinks only that sample's `target.qcow2`. No recursive disk cleanup occurs. Failed runs retain their disk for investigation. SSH private keys, CIDATA credentials, ISO images, firmware variables and disk images are excluded from sealed evidence.
+
+`series.json` records the sample order and progress; `comparison.json` contains the latest full comparison. Exit **0** means all samples completed and the conservative full host-clock 2× target passed. Exit **2** means a valid complete comparison below that target; preserve its artifacts and investigate the remaining bottleneck. Other failures return **1**, and interruption returns **130**. CI should always upload the small evidence directory, including when the target is unmet.
+
+`--resume` verifies sealed samples and continues the original plan without rerunning completed installs. Source hashes, templates and ordering must remain identical. Unsealed existing runs are retained rather than overwritten. Interrupt handling requests guest poweroff and then terminates the dedicated child process group if necessary; allow 45 seconds after SIGTERM before forcibly stopping the driver. No interrupted target is reclaimed. Contract verification used synthetic fixtures for alternating order, six-run acceptance, target-unmet exit, resume, tamper rejection, failed-disk retention and existing-VM exclusion; those invented fixture durations are not performance results.

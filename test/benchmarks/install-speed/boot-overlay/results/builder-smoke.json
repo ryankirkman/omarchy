@@ -1,0 +1,109 @@
+{
+  "schema_version": 1,
+  "status": "live-overlay-smoke-passed",
+  "scope": "Builder live boot only; not an installation speed measurement or candidate installed-boot validation",
+  "official_iso_sha256": "2ef8e624aa1bec7e277e28056b8535a6c9373ba48d7ede3f1a01cb6d2373cfb8",
+  "kernel_sha256": "6dd21ab00a39f04a9ede184a8f7ee4a3613f409a0b615f8abb1edfd009930838",
+  "fixture": {
+    "qemu_version": "QEMU emulator version 8.2.2 (Debian 1:8.2.2+ds-0ubuntu1.18)",
+    "accelerator": "tcg",
+    "cpu_count": 4,
+    "memory_mib": 8192,
+    "fresh_target": true,
+    "fresh_nvram": true
+  },
+  "initramfs_build_manifest": {
+    "schema_version": 1,
+    "mode": "builder",
+    "original_initramfs_sha256": "6e3e15b983da69df4e18df2f1489fa854980b395b28546355d0f6dc13914694e",
+    "original_config_sha256": "1e00045b8b2979c16cbc7a943a708b136a1989c7407889a96b8450632ea9deba",
+    "hook_sha256": "cba3c7709fe79e1bd7cfde845867c72f64ce8377eaeb275076be4e9faf2243d7",
+    "payload": [
+      {
+        "path": "root/.automated_script.sh",
+        "mode": "0o755",
+        "sha256": "c0db7f3ab972e798a8c0d1ebaab4656a5c879f80348a602556e810d4ce021c2e"
+      },
+      {
+        "path": "usr/local/lib/omarchy-benchmark/builder-key.pub",
+        "mode": "0o644",
+        "sha256": "17dcc0c6590602b7506d11856e277fc1e97e810eb43da9e2f754b75242b4c744"
+      },
+      {
+        "path": "usr/local/lib/omarchy-benchmark/image-builder/archinstall.packages",
+        "mode": "0o644",
+        "sha256": "43c26414b239b02d989e4298503ab6b2c492f1fe3a983f70db896da48c7aa169"
+      },
+      {
+        "path": "usr/local/lib/omarchy-benchmark/image-builder/build-root-from-iso.sh",
+        "mode": "0o755",
+        "sha256": "890031a9389a3b0cee031d0e7829062802bd20f48fb8c4d7cda0e8b6801f082e"
+      },
+      {
+        "path": "usr/local/lib/omarchy-benchmark/image-builder/image.packages",
+        "mode": "0o644",
+        "sha256": "778ac736913250f9b1324d3d52a6b2443fd107c09ac002886ec1572d5ae86526"
+      },
+      {
+        "path": "usr/local/lib/omarchy-benchmark/image-builder/select-image-packages.py",
+        "mode": "0o644",
+        "sha256": "d4e17f9c1e91c387c23de1de9e9c5f255e967329d16c50befafca6257f80b057"
+      },
+      {
+        "path": "usr/local/lib/omarchy-benchmark/image-builder/validate-image-manifest.py",
+        "mode": "0o644",
+        "sha256": "6bdea655fb71cfd7bf88b715a4b9abc2b92abf2eea911654ebd46141c2837bfa"
+      },
+      {
+        "path": "usr/local/lib/omarchy-benchmark/preflight.sh",
+        "mode": "0o755",
+        "sha256": "3dca5f259428975c81d74c37936a1beeb267642f7a2db0dd1f47be4957c2c42c"
+      }
+    ],
+    "appended_archive_bytes": 18432,
+    "appended_archive_sha256": "52f4ce4d6b92eac0d8440fba918c85266be7fca6fbc2ea404dc7d67a6f01b4cd",
+    "output_initramfs_sha256": "3c423ae664355c393b7dd90ec82cecd99eda8600ee6eed20b51530014bd868e2"
+  },
+  "checks": {
+    "mode": "builder",
+    "root_filesystem": "overlay",
+    "live_and_original_root_directory_mode": "0750",
+    "original_entrypoint_matches_readonly_squashfs": true,
+    "original_entrypoint_sha256": "cd25a9813c4c5eab343ede6dc7cd595e7a9087fafdbc4237885830313ffe8c46",
+    "payload_files_sha256_and_modes_verified": 8,
+    "sshd_active": true,
+    "autoinstall_running": false
+  },
+  "commands_and_responses": [
+    {
+      "request": {
+        "action": "ssh",
+        "command": "set -e\nprintf 'preflight mode: '; cat /run/omarchy-benchmark/preflight-complete\nprintf 'root filesystem: '; findmnt -no FSTYPE /\nprintf 'live root permissions: '; stat -c '%a' /root\nprintf 'original root permissions: '; stat -c '%a' /run/archiso/airootfs/root\n[[ $(stat -c '%a' /root) == $(stat -c '%a' /run/archiso/airootfs/root) ]]\ncmp /root/.automated_script.benchmark-original.sh /run/archiso/airootfs/root/.automated_script.sh\nprintf 'original entrypoint checksum: '; sha256sum /root/.automated_script.benchmark-original.sh\nprintf 'payload manifest: '; cat /usr/local/lib/omarchy-benchmark/manifest.json\nprintf 'preflight log: '; cat /var/log/omarchy-benchmark-preflight.log\nprintf 'SSH status: '; systemctl is-active sshd\nprintf 'kernel command line: '; cat /proc/cmdline\nprintf 'installer processes: '; pgrep -af '^(python|python3) -m orchestrator.main' || true\n",
+        "timeout": 60
+      },
+      "response": {
+        "ok": true,
+        "result": {
+          "returncode": 0,
+          "stdout": "preflight mode: builder\nroot filesystem: overlay\nlive root permissions: 750\noriginal root permissions: 750\noriginal entrypoint checksum: cd25a9813c4c5eab343ede6dc7cd595e7a9087fafdbc4237885830313ffe8c46  /root/.automated_script.benchmark-original.sh\npayload manifest: {\n  \"schema_version\": 1,\n  \"mode\": \"builder\",\n  \"original_initramfs_sha256\": \"6e3e15b983da69df4e18df2f1489fa854980b395b28546355d0f6dc13914694e\",\n  \"original_config_sha256\": \"1e00045b8b2979c16cbc7a943a708b136a1989c7407889a96b8450632ea9deba\",\n  \"hook_sha256\": \"cba3c7709fe79e1bd7cfde845867c72f64ce8377eaeb275076be4e9faf2243d7\",\n  \"payload\": [\n    {\n      \"path\": \"root/.automated_script.sh\",\n      \"mode\": \"0o755\",\n      \"sha256\": \"c0db7f3ab972e798a8c0d1ebaab4656a5c879f80348a602556e810d4ce021c2e\"\n    },\n    {\n      \"path\": \"usr/local/lib/omarchy-benchmark/builder-key.pub\",\n      \"mode\": \"0o644\",\n      \"sha256\": \"17dcc0c6590602b7506d11856e277fc1e97e810eb43da9e2f754b75242b4c744\"\n    },\n    {\n      \"path\": \"usr/local/lib/omarchy-benchmark/image-builder/archinstall.packages\",\n      \"mode\": \"0o644\",\n      \"sha256\": \"43c26414b239b02d989e4298503ab6b2c492f1fe3a983f70db896da48c7aa169\"\n    },\n    {\n      \"path\": \"usr/local/lib/omarchy-benchmark/image-builder/build-root-from-iso.sh\",\n      \"mode\": \"0o755\",\n      \"sha256\": \"890031a9389a3b0cee031d0e7829062802bd20f48fb8c4d7cda0e8b6801f082e\"\n    },\n    {\n      \"path\": \"usr/local/lib/omarchy-benchmark/image-builder/image.packages\",\n      \"mode\": \"0o644\",\n      \"sha256\": \"778ac736913250f9b1324d3d52a6b2443fd107c09ac002886ec1572d5ae86526\"\n    },\n    {\n      \"path\": \"usr/local/lib/omarchy-benchmark/image-builder/select-image-packages.py\",\n      \"mode\": \"0o644\",\n      \"sha256\": \"d4e17f9c1e91c387c23de1de9e9c5f255e967329d16c50befafca6257f80b057\"\n    },\n    {\n      \"path\": \"usr/local/lib/omarchy-benchmark/image-builder/validate-image-manifest.py\",\n      \"mode\": \"0o644\",\n      \"sha256\": \"6bdea655fb71cfd7bf88b715a4b9abc2b92abf2eea911654ebd46141c2837bfa\"\n    },\n    {\n      \"path\": \"usr/local/lib/omarchy-benchmark/preflight.sh\",\n      \"mode\": \"0o755\",\n      \"sha256\": \"3dca5f259428975c81d74c37936a1beeb267642f7a2db0dd1f47be4957c2c42c\"\n    }\n  ]\n}\npreflight log: ssh-keygen: generating new host keys: MLDSA44-ED25519 \nDisposable builder SSH enabled; no installer was started.\nSSH status: active\nkernel command line: archisobasedir=arch archisosearchuuid=2026-08-31-03-24-58-00 quiet splash xe.enable_panel_replay=0 initramfs_async=0 copytoram=n initrd=initrd\ninstaller processes: ",
+          "stderr": ""
+        }
+      }
+    },
+    {
+      "request": {
+        "action": "ssh",
+        "command": "set -e\n[[ $(cat /run/omarchy-benchmark/preflight-complete) == builder ]]\nif pgrep -af '^(python|python3) -m orchestrator.main'; then exit 1; fi\npython - <<'PYTHON'\nimport hashlib, json, stat\nfrom pathlib import Path\nmanifest=json.loads(Path('/usr/local/lib/omarchy-benchmark/manifest.json').read_text())\nfor member in manifest['payload']:\n path=Path('/')/member['path']\n assert hashlib.sha256(path.read_bytes()).hexdigest()==member['sha256'], path\n assert oct(stat.S_IMODE(path.stat().st_mode))==member['mode'], path\nprint(json.dumps({'payload_files_verified':len(manifest['payload']), 'mode':manifest['mode'], 'original_initramfs_sha256':manifest['original_initramfs_sha256'], 'hook_sha256':manifest['hook_sha256']}))\nPYTHON\n",
+        "timeout": 60
+      },
+      "response": {
+        "ok": true,
+        "result": {
+          "returncode": 0,
+          "stdout": "{\"payload_files_verified\": 8, \"mode\": \"builder\", \"original_initramfs_sha256\": \"6e3e15b983da69df4e18df2f1489fa854980b395b28546355d0f6dc13914694e\", \"hook_sha256\": \"cba3c7709fe79e1bd7cfde845867c72f64ce8377eaeb275076be4e9faf2243d7\"}\n",
+          "stderr": ""
+        }
+      }
+    }
+  ]
+}

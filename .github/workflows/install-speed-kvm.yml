@@ -1,0 +1,77 @@
+name: Omarchy install speed (KVM experiment)
+
+on:
+  push:
+    branches: [perf/install-speed-kvm]
+    paths:
+      - .github/workflows/install-speed-kvm.yml
+      - test/benchmarks/**
+
+permissions:
+  contents: read
+
+concurrency:
+  group: omarchy-install-speed-kvm
+  cancel-in-progress: false
+
+jobs:
+  measure:
+    if: github.repository == 'ryankirkman/omarchy' && github.event.repository.private == false
+    runs-on: ubuntu-24.04
+    timeout-minutes: 120
+    env:
+      BENCH_WORK: ${{ runner.temp }}/omarchy-install-speed
+      BENCH_EVIDENCE: ${{ runner.temp }}/omarchy-install-evidence
+    steps:
+      - name: Check out the exact experiment commit
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+        with:
+          persist-credentials: false
+          fetch-depth: 1
+
+      - name: Check real KVM access and prepare disposable runner
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p "$BENCH_EVIDENCE"
+          { uname -a; lscpu; free -h; df -h; } > "$BENCH_EVIDENCE/runner-before.txt"
+          [[ -c /dev/kvm ]]
+          sudo chown "$(id -u):$(id -g)" /dev/kvm
+          python3 - <<'PY'
+          import fcntl, os
+          fd = os.open('/dev/kvm', os.O_RDWR | os.O_CLOEXEC)
+          assert fcntl.ioctl(fd, 0xae00, 0) == 12, 'Unsupported KVM API'
+          vm = fcntl.ioctl(fd, 0xae01, 0)
+          os.close(vm)
+          os.close(fd)
+          print('KVM_CREATE_VM succeeded; TCG fallback is forbidden')
+          PY
+          # These are unused SDKs in GitHub's fresh disposable runner.
+          # Do not run this cleanup on a user workstation or self-hosted runner.
+          sudo rm -rf -- /usr/share/dotnet /usr/local/lib/android /opt/ghc /opt/hostedtoolcache/CodeQL
+          sudo apt-get update
+          sudo apt-get install -y --no-install-recommends qemu-system-x86 qemu-utils ovmf seabios dosfstools mtools jq openssh-client openssl xorriso zstd python3-pil
+          df -h > "$BENCH_EVIDENCE/runner-after.txt"
+          python3 - <<'PY'
+          import os, shutil
+          assert shutil.disk_usage(os.environ['RUNNER_TEMP']).free >= 28 * 1024**3, 'Need 28 GiB free; do not start a partial benchmark'
+          PY
+          dpkg-query -W > "$BENCH_EVIDENCE/host-packages.txt"
+          printf '%s\n' "$ImageOS" "$ImageVersion" > "$BENCH_EVIDENCE/runner-image.txt"
+
+      - name: Build once, then measure three alternating fresh install pairs
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 test/benchmarks/install-speed/native-ci/run-native-experiment.py \
+            --repo "$GITHUB_WORKSPACE" --work "$BENCH_WORK" --evidence "$BENCH_EVIDENCE"
+
+      - name: Retain small validation and timing evidence
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
+        with:
+          name: omarchy-kvm-install-${{ github.run_id }}-${{ github.run_attempt }}
+          path: ${{ env.BENCH_EVIDENCE }}/
+          if-no-files-found: error
+          retention-days: 7
+          compression-level: 6
