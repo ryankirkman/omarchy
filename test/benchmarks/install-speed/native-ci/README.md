@@ -38,6 +38,8 @@ Before downloads or VM installation work, cold mode runs `OMARCHY_REQUIRE_COLD_E
 
 Each variant keeps a separate comparison, all requested variants run even when an earlier valid comparison misses 2×, and invalid CLI configuration returns exit 1. Use a fresh work directory for every invocation. The workflow explicitly selects `--boot-method firmware --source-cache cold` for both candidate variants. The driver CLI retains direct/conditioned defaults for reproducing the earlier attempts.
 
+`--variants image-no-package-prefetch-fast-reboot` explicitly selects a separate experiment using PR145's pinned dashboard after the normal image overlay, with both release-helper `sync` calls guarded against failure. This can reduce the live shutdown part of the complete host clock after the target has been safely released. The default two variants retain their existing payloads and dashboard. Preparation runs the release/fallback contracts and retains `fast-reboot.manifest.json`; results go to `no-prefetch-fast-reboot-repetitions`. See [the variant's protocol, upstream credit and failure gates](../fast-reboot/README.md). Selecting the option does not change workflow configuration or trigger Actions.
+
 ## Trigger and capability gates
 
 Only pushes to `perf/install-speed-kvm` that touch the workflow or benchmark paths trigger the job, and the job requires the public `ryankirkman/omarchy` repository. The default branch is untouched. No workflow dispatch endpoint or new secret is required. A GitHub App push can trigger a workflow; this differs from a workflow's own `GITHUB_TOKEN`, which suppresses most recursive triggers. The linked app still needs the separate Workflows write permission to publish `.github/workflows` files.

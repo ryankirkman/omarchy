@@ -448,6 +448,8 @@ class Supervisor:
       ("package-manifest.txt", "LC_ALL=C pacman -Q | LC_ALL=C sort", False),
       ("package-explicit.txt", "LC_ALL=C pacman -Qqe | LC_ALL=C sort", False),
       ("installed-boot.txt", "findmnt /boot; ls -l /boot; cat /proc/cmdline; uname -a", True),
+      ("systemd-analyze-blame.txt", "systemd-analyze --no-pager blame", False),
+      ("systemd-analyze-critical-chain.txt", "systemd-analyze --no-pager time; systemd-analyze --no-pager critical-chain", False),
       ("install.log", "cat /var/log/omarchy-install.log", True),
       ("journal-boot.log", "journalctl -b --no-pager", True),
     ):

@@ -369,13 +369,30 @@ def execute(args):
     if variant == 'upstream-image':
       candidate_initrd = make_initrd('candidate', candidate_payload, image / 'candidate-preflight.sh')
       measure_variant(variant, candidate_initrd, 'repetitions')
-    else:
+    elif variant == 'image-no-package-prefetch':
       # Preserve any first comparison, including a valid result below 2x.
       # This existing upstream switch changes package warming only; image
       # verification, package inventory and installed boot stay required.
       no_prefetch_initrd = make_initrd('candidate', candidate_payload, image / 'candidate-preflight.sh',
         label='candidate-no-prefetch', disable_prefetch=True)
       measure_variant(variant, no_prefetch_initrd, 'no-prefetch-repetitions')
+    elif variant == 'image-no-package-prefetch-fast-reboot':
+      # Separate opt-in experiment: retain PR145's release-gated dashboard,
+      # which the original image overlay deliberately does not replace.
+      fast_reboot = bench / 'install-speed/fast-reboot'
+      fast_reboot_payload = work / 'candidate-fast-reboot-payload'
+      with (evidence / 'fast-reboot-contract.log').open('w') as log:
+        command([sys.executable, fast_reboot / 'contract-test.py', '--iso-source', fast],
+          stdout=log, stderr=subprocess.STDOUT, timeout=120)
+      command([sys.executable, fast_reboot / 'prepare-payload.py', '--iso-source', fast,
+        '--base-payload', candidate_payload, '--output', fast_reboot_payload])
+      source_manifest = fast_reboot_payload.with_name(fast_reboot_payload.name + '.manifest.json')
+      shutil.copyfile(source_manifest, evidence / 'fast-reboot.manifest.json')
+      provenance['fast_reboot_variant'] = json.loads(source_manifest.read_text())
+      save_json(evidence / 'experiment.json', provenance)
+      fast_reboot_initrd = make_initrd('candidate', fast_reboot_payload, fast_reboot / 'candidate-preflight.sh',
+        label='candidate-no-prefetch-fast-reboot', disable_prefetch=True)
+      measure_variant(variant, fast_reboot_initrd, 'no-prefetch-fast-reboot-repetitions')
   provenance['status'] = 'comparisons-complete'
   save_json(evidence / 'experiment.json', provenance)
   # Each variant's actual result remains separate. Never present a failed
@@ -399,7 +416,7 @@ def parse_arguments(argv=None):
     help='Direct kernel boot (default), or verified ISO repacking with firmware boot and standalone reboot validation')
   parser.add_argument('--source-cache', choices=('conditioned', 'cold'), default='conditioned',
     help='Source media cache policy; cold requires verified eviction in the VM runner')
-  parser.add_argument('--variants', nargs='+', choices=('upstream-image', 'image-no-package-prefetch'),
+  parser.add_argument('--variants', nargs='+', choices=('upstream-image', 'image-no-package-prefetch', 'image-no-package-prefetch-fast-reboot'),
     default=['upstream-image', 'image-no-package-prefetch'], help='Variants to measure, in order; three fresh pairs each')
   args = parser.parse_args(argv)
   if len(set(args.variants)) != len(args.variants):

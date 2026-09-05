@@ -96,6 +96,8 @@ class NativeContract(unittest.TestCase):
     selected = module.parse_arguments(base + ['--source-cache', 'cold', '--variants', 'image-no-package-prefetch'])
     self.assertEqual(selected.source_cache, 'cold')
     self.assertEqual(selected.variants, ['image-no-package-prefetch'])
+    self.assertEqual(module.parse_arguments(base + ['--variants', 'image-no-package-prefetch-fast-reboot']).variants,
+      ['image-no-package-prefetch-fast-reboot'])
     self.assertEqual(module.parse_arguments(base + ['--boot-method', 'firmware']).boot_method, 'firmware')
     for invalid in (['--source-cache', 'warm'], ['--boot-method', 'automatic'], ['--variants', 'upstream-image', 'upstream-image']):
       with contextlib.redirect_stderr(io.StringIO()):
