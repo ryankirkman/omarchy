@@ -13,12 +13,16 @@ if omarchy-pkg-missing "$@"; then
   fi
 fi
 
-for pkg in "$@"; do
-  # Secondary check to handle states where pacman doesn't actually register an error
-  if ! pacman -Q "$pkg" &>/dev/null; then
-    echo -e "\033[31mError: Package '$pkg' did not install\033[0m" >&2
-    exit 1
-  fi
-done
+# Check the whole transaction even when pacman reports success. The usual path
+# opens the database once; only a failed postflight needs per-package queries to
+# preserve the diagnostic naming the first package that did not install.
+if (( $# > 0 )) && ! pacman -Q "$@" &>/dev/null; then
+  for pkg in "$@"; do
+    if ! pacman -Q "$pkg" &>/dev/null; then
+      echo -e "\033[31mError: Package '$pkg' did not install\033[0m" >&2
+      exit 1
+    fi
+  done
+fi
 
 exit 0
