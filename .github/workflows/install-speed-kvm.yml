@@ -19,10 +19,15 @@ jobs:
     if: github.repository == 'ryankirkman/omarchy' && github.event.repository.private == false
     runs-on: ubuntu-24.04
     timeout-minutes: 120
-    env:
-      BENCH_WORK: ${{ runner.temp }}/omarchy-install-speed
-      BENCH_EVIDENCE: ${{ runner.temp }}/omarchy-install-evidence
     steps:
+      - name: Initialize paths after the runner is allocated
+        shell: bash
+        run: |
+          set -euo pipefail
+          printf 'BENCH_WORK=%s/omarchy-install-speed\n' "$RUNNER_TEMP" >> "$GITHUB_ENV"
+          printf 'BENCH_EVIDENCE=%s/omarchy-install-evidence\n' "$RUNNER_TEMP" >> "$GITHUB_ENV"
+          mkdir -p "$RUNNER_TEMP/omarchy-install-evidence"
+
       - name: Check out the exact experiment commit
         uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
         with:
