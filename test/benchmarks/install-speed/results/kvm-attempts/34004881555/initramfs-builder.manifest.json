@@ -1,0 +1,58 @@
+{
+  "schema_version": 1,
+  "mode": "builder",
+  "disable_package_prefetch": false,
+  "original_initramfs_sha256": "6e3e15b983da69df4e18df2f1489fa854980b395b28546355d0f6dc13914694e",
+  "original_config_sha256": "1e00045b8b2979c16cbc7a943a708b136a1989c7407889a96b8450632ea9deba",
+  "hook_sha256": "cba3c7709fe79e1bd7cfde845867c72f64ce8377eaeb275076be4e9faf2243d7",
+  "payload": [
+    {
+      "path": "root/.automated_script.sh",
+      "mode": "0o755",
+      "sha256": "c0db7f3ab972e798a8c0d1ebaab4656a5c879f80348a602556e810d4ce021c2e"
+    },
+    {
+      "path": "usr/local/lib/omarchy-benchmark/builder-key.pub",
+      "mode": "0o644",
+      "sha256": "9c8a6842950fa46207e88b492e338d9424ceb8799ba831f18937994fca38c7e7"
+    },
+    {
+      "path": "usr/local/lib/omarchy-benchmark/image-builder/LICENSE.omarchy-iso",
+      "mode": "0o644",
+      "sha256": "e2b1e3778a6ada6d6eee5f48c028f885e9797313f4c5705929bdc5b99db569d3"
+    },
+    {
+      "path": "usr/local/lib/omarchy-benchmark/image-builder/archinstall.packages",
+      "mode": "0o644",
+      "sha256": "43c26414b239b02d989e4298503ab6b2c492f1fe3a983f70db896da48c7aa169"
+    },
+    {
+      "path": "usr/local/lib/omarchy-benchmark/image-builder/build-root-from-iso.sh",
+      "mode": "0o755",
+      "sha256": "77cda6be223efa0e61a12a29d02b11763ef5397f05a8ebd2203662d704ebf3d3"
+    },
+    {
+      "path": "usr/local/lib/omarchy-benchmark/image-builder/image.packages",
+      "mode": "0o644",
+      "sha256": "778ac736913250f9b1324d3d52a6b2443fd107c09ac002886ec1572d5ae86526"
+    },
+    {
+      "path": "usr/local/lib/omarchy-benchmark/image-builder/select-image-packages.py",
+      "mode": "0o644",
+      "sha256": "d4e17f9c1e91c387c23de1de9e9c5f255e967329d16c50befafca6257f80b057"
+    },
+    {
+      "path": "usr/local/lib/omarchy-benchmark/image-builder/validate-image-manifest.py",
+      "mode": "0o644",
+      "sha256": "6bdea655fb71cfd7bf88b715a4b9abc2b92abf2eea911654ebd46141c2837bfa"
+    },
+    {
+      "path": "usr/local/lib/omarchy-benchmark/preflight.sh",
+      "mode": "0o755",
+      "sha256": "3dca5f259428975c81d74c37936a1beeb267642f7a2db0dd1f47be4957c2c42c"
+    }
+  ],
+  "appended_archive_bytes": 20992,
+  "appended_archive_sha256": "bae0fd847d3be854f0947a4dd9eefb5c91aefb74a5b477d0bd608635c705d82a",
+  "output_initramfs_sha256": "a078be8829004a1728aa9fc674a8b2f049f7e683ff6e3bfc1b71f125ffdc61e4"
+}

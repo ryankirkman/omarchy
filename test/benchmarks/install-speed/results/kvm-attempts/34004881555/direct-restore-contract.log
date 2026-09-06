@@ -1,0 +1,13 @@
+test_changed_fast_reboot_base_is_rejected_before_output (__main__.DirectRestorePayloadContract.test_changed_fast_reboot_base_is_rejected_before_output) ... ok
+test_corrupt_payload_aborts_before_ordinary_activation (__main__.DirectRestorePayloadContract.test_corrupt_payload_aborts_before_ordinary_activation) ... ok
+test_corruption_during_install_fails_final_verification (__main__.DirectRestorePayloadContract.test_corruption_during_install_fails_final_verification) ... ok
+test_direct_activation_survives_ordinary_overlay_overwrite (__main__.DirectRestorePayloadContract.test_direct_activation_survives_ordinary_overlay_overwrite) ... ok
+test_existing_output_and_manifest_are_not_overwritten (__main__.DirectRestorePayloadContract.test_existing_output_and_manifest_are_not_overwritten) ... ok
+test_failed_ordinary_activation_is_not_masked (__main__.DirectRestorePayloadContract.test_failed_ordinary_activation_is_not_masked) ... ok
+test_live_source_drift_aborts_before_direct_install (__main__.DirectRestorePayloadContract.test_live_source_drift_aborts_before_direct_install) ... ok
+test_pinned_sources_base_preservation_and_complete_manifest (__main__.DirectRestorePayloadContract.test_pinned_sources_base_preservation_and_complete_manifest) ... ok
+
+----------------------------------------------------------------------
+Ran 8 tests in 0.282s
+
+OK

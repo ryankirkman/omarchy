@@ -13,9 +13,9 @@ import os
 from pathlib import Path
 import pty
 import selectors
+import shlex
 import shutil
 import signal
-import stat
 import subprocess
 import sys
 import tempfile
@@ -29,6 +29,12 @@ HERE = Path(__file__).resolve().parent
 FINALIZING = "Finalizing boot and user setup"
 LOGO = "FIXTURE LOGO\nSECOND ROW\n"
 CSI = b"\x1b["
+PATCHED_SHA256 = "33a77a5ed86df5d6d14b39a027237b888c65b4dbaa7855c10e4a78865f89111d"
+SERIAL_BLOCK = br'''  if [[ -c /dev/ttyS0 ]]; then
+    printf 'OMARCHY_BENCHMARK_ANIMATION %s %s %s %s\n' \
+      "$1" "$animation_boot_id" "$animation_uptime" "$2" >/dev/ttyS0 || true
+  fi
+'''
 
 # Every executable reachable through PATH is either a listed real read-only
 # utility or this fixture. In particular, no host release/reboot command can
@@ -177,6 +183,21 @@ def require(condition, message):
     raise AssertionError(message)
 
 
+def isolate_serial_output(patched, directory):
+  # Only this executed test copy changes. Never inspect or open host serial
+  # devices: an unrelated host may have a real character device at ttyS0.
+  sink = directory / "unconnected-fixture-serial"
+  require(not sink.exists() and not sink.is_symlink(), "Fresh owned serial sink required")
+  require(patched.count(SERIAL_BLOCK) == 1, "Pinned serial marker block changed")
+  quoted_sink = shlex.quote(str(sink)).encode()
+  isolated = patched.replace(SERIAL_BLOCK, SERIAL_BLOCK.replace(b"/dev/ttyS0", quoted_sink))
+  require(b"/dev/ttyS0" not in isolated and isolated.count(quoted_sink) == 2,
+          "Executed dashboard still references host serial or lacks owned sink")
+  require(isolated.replace(quoted_sink, b"/dev/ttyS0") == patched,
+          "Serial isolation changed unrelated dashboard behavior")
+  return isolated
+
+
 def tag(event):
   return f"<contract:{event}>".encode()
 
@@ -206,6 +227,10 @@ def stop_processes(process, root):
 
 
 def exercise(directory, dashboard, name, **changes):
+  executed = dashboard.read_bytes()
+  owned_sink = shlex.quote(str(directory / "unconnected-fixture-serial")).encode()
+  require(b"/dev/ttyS0" not in executed and executed.count(owned_sink) == 2,
+          "Every executed full dashboard must use its owned serial fixture")
   root = directory / name
   binary = root / "bin"
   binary.mkdir(parents=True)
@@ -392,15 +417,14 @@ def main():
   parser = argparse.ArgumentParser(description=__doc__)
   parser.add_argument("--iso-source", type=Path, required=True)
   args = parser.parse_args()
-  serial = Path("/dev/ttyS0")
-  require(not serial.exists() or not stat.S_ISCHR(serial.stat().st_mode),
-          "Run this host contract where /dev/ttyS0 is absent; real benchmark markers must not write a host serial port")
   require(shutil.which("jq") is not None and shutil.which("timeout") is not None,
           "Real jq and GNU timeout are required")
   source = subprocess.run(["git", "-C", str(args.iso_source), "show", f"{PIN}:{SOURCE_PATH}"],
                           check=True, capture_output=True).stdout
   require(hashlib.sha256(source).hexdigest() == SOURCE_SHA256, "Pinned source SHA256 mismatch")
   patched = patch_source(source)
+  require(hashlib.sha256(patched).hexdigest() == PATCHED_SHA256,
+          "Runtime dashboard changed; host isolation must only affect the executed test copy")
   try:
     patch_source(source + b"\n")
   except ValueError:
@@ -415,7 +439,17 @@ def main():
   temporary = Path(tempfile.mkdtemp(prefix="omarchy-animation-contract-"))
   try:
     dashboard = temporary / "dashboard.sh"
-    dashboard.write_bytes(patched)
+    isolated = isolate_serial_output(patched, temporary)
+    for drift in (patched.replace(SERIAL_BLOCK, b""), patched + SERIAL_BLOCK):
+      try:
+        isolate_serial_output(drift, temporary)
+      except AssertionError:
+        pass
+      else:
+        raise AssertionError("Missing or duplicate serial marker anchor was accepted")
+    dashboard.write_bytes(isolated)
+    require(dashboard.read_bytes() == isolated, "Executed fixture source differs from isolated source")
+    print("PASS owned serial fixture isolation; no host serial access", flush=True)
     exercise(temporary, dashboard, "overlap-and-redraw")
     exercise(temporary, dashboard, "failure-during-effect", child_rc=37)
     exercise(temporary, dashboard, "phase-unobserved-fallback", phase="Configuring system", overlap=False)
