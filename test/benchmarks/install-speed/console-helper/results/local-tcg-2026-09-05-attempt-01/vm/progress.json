@@ -1,0 +1,12 @@
+{
+  "event": "progress",
+  "host_wall_s": 242.71235523899668,
+  "target_allocated_bytes": 200704,
+  "host_free_bytes": 8356937728,
+  "collected": false,
+  "vm_status": {
+    "status": "running",
+    "singlestep": false,
+    "running": true
+  }
+}

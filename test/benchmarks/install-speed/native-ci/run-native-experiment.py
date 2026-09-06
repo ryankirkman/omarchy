@@ -38,6 +38,8 @@ EVIDENCE_FILES = {
   'standalone-last-failed-ssh-probe.json', 'standalone-timeout-diagnostics.json',
   'standalone-timeout-before-keys.png', 'standalone-timeout-after-escape.png',
   'standalone-timeout-after-tty2.png',
+  'timeout-console.log', 'timeout-console.json',
+  'standalone-timeout-console.log', 'standalone-timeout-console.json',
   'standalone-reboot.json',
   'standalone-root.json', 'standalone-identity.json', 'standalone-machine-id.txt',
   'standalone-ssh-host-fingerprints.txt', 'standalone-pacman-master-keys.txt',
@@ -146,6 +148,44 @@ def boot_arguments(boot_method, iso, kernel, initrd, *, builder=False, firmware_
 
 def timeout_arguments(install_timeout, *, builder=False):
   return ['--timeout', '5400' if builder else str(install_timeout)]
+
+
+def diagnostic_provenance(count):
+  return {'measurement_valid': False, 'purpose': 'Installed boot diagnosis only',
+    'pairs_per_variant': 0, 'variants': [],
+    'diagnostic_calibrations': {'requested_count': count, 'status': 'preparing', 'completed_names': []}}
+
+
+def calibration_stage(install, control_initrd, diagnostic_count, provenance, evidence):
+  if diagnostic_count is None:
+    return install('calibration', control_initrd)
+  record = provenance['diagnostic_calibrations']
+  record['status'] = 'running'
+  provenance['status'] = 'diagnosing-installed-boot'
+  for index in range(1, diagnostic_count + 1):
+    name = f'diagnostic-calibration-{index:02d}'
+    record['current_name'] = name
+    save_json(evidence / 'experiment.json', provenance)
+    try:
+      # This is the same fresh install, validation, cleanup and bounded rescue
+      # path as ordinary calibration. A failed attempt is never retried.
+      install(name, control_initrd)
+    except BaseException:
+      record.update(status='failed', failed_name=name)
+      provenance['status'] = 'diagnostic-failed'
+      try:
+        save_json(evidence / 'experiment.json', provenance)
+      except OSError as capture_error:
+        print(json.dumps({'event': 'diagnostic-progress-capture-failed', 'error': str(capture_error)}), flush=True)
+      raise
+    record['completed_names'].append(name)
+    save_json(evidence / 'experiment.json', provenance)
+  record.pop('current_name', None)
+  record['status'] = 'complete'
+  provenance['status'] = 'diagnostic-complete'
+  save_json(evidence / 'experiment.json', provenance)
+  # None is an explicit stop before image preparation or any comparisons.
+  return None
 
 
 def git_checkout(destination, revision):
@@ -364,6 +404,8 @@ def execute(args):
     'cache_policy': ('Integrity pre-reads condition source media before timing' if args.source_cache == 'conditioned' else 'Require verified source-page eviction after integrity reads and before timing; see per-run evidence'),
     'build_time_in_install_time': False,
   }
+  if args.diagnostic_calibrations is not None:
+    provenance.update(diagnostic_provenance(args.diagnostic_calibrations))
   save_json(evidence / 'experiment.json', provenance)
   iso = work / 'omarchy-4.0.2.iso'
   command(['curl', '--fail', '--location', '--retry', '3', '--output', iso, ISO_URL])
@@ -477,7 +519,9 @@ def execute(args):
 
   # Calibration supplies exact packages and installation reasons for the image.
   # It does not enter the paired comparison because media topology differs.
-  calibration = install('calibration', control_initrd)
+  calibration = calibration_stage(install, control_initrd, args.diagnostic_calibrations, provenance, evidence)
+  if calibration is None:
+    return 0
   bundles, payload = work / 'bundles', work / 'builder-payload'
   command([sys.executable, image / 'prepare-bundles.py', fast, bundles])
   build_scripts = payload / 'usr/local/lib/omarchy-benchmark/image-builder'
@@ -656,6 +700,8 @@ def parse_arguments(argv=None):
     help='Positive readiness timeout shared by all installation VMs; builder timeout remains 5400 seconds')
   parser.add_argument('--standalone-reboot-timeout', type=int, default=600, metavar='SECONDS',
     help='Positive standalone reboot timeout shared by firmware calibration and measured installations')
+  parser.add_argument('--diagnostic-calibrations', type=int, metavar='N',
+    help='Run 1..6 fresh stock calibration installs for boot diagnosis, then stop before image preparation/comparisons')
   parser.add_argument('--boot-method', choices=('direct', 'firmware'), default='direct',
     help='Direct kernel boot (default), or verified ISO repacking with firmware boot and standalone reboot validation')
   parser.add_argument('--source-cache', choices=('conditioned', 'cold'), default='conditioned',
@@ -667,6 +713,11 @@ def parse_arguments(argv=None):
     parser.error('--install-timeout must be a positive integer')
   if args.standalone_reboot_timeout <= 0:
     parser.error('--standalone-reboot-timeout must be a positive integer')
+  if args.diagnostic_calibrations is not None:
+    if not 1 <= args.diagnostic_calibrations <= 6:
+      parser.error('--diagnostic-calibrations must be an integer from 1 to 6')
+    if args.source_cache != 'cold' or args.boot_method != 'firmware':
+      parser.error('--diagnostic-calibrations requires --source-cache cold --boot-method firmware')
   if len(set(args.variants)) != len(args.variants):
     parser.error('variants must be distinct')
   for variant in (EARLY_VERIFY_VARIANT, DIRECT_RESTORE_VARIANT):

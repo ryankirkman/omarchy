@@ -1,0 +1,38 @@
+{
+    "children": [
+        {
+            "name": "file",
+            "info": {
+                "children": [
+                ],
+                "virtual-size": 197632,
+                "filename": "/tmp/omarchy-bench/console-helper-smoke-01/vm/target.qcow2",
+                "format": "file",
+                "actual-size": 200704,
+                "format-specific": {
+                    "type": "file",
+                    "data": {
+                    }
+                },
+                "dirty-flag": false
+            }
+        }
+    ],
+    "virtual-size": 42949672960,
+    "filename": "/tmp/omarchy-bench/console-helper-smoke-01/vm/target.qcow2",
+    "cluster-size": 65536,
+    "format": "qcow2",
+    "actual-size": 200704,
+    "format-specific": {
+        "type": "qcow2",
+        "data": {
+            "compat": "1.1",
+            "compression-type": "zlib",
+            "lazy-refcounts": false,
+            "refcount-bits": 16,
+            "corrupt": false,
+            "extended-l2": false
+        }
+    },
+    "dirty-flag": false
+}

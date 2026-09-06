@@ -173,9 +173,10 @@ with tempfile.TemporaryDirectory(prefix='omarchy-standalone-test-') as temporary
   assert probe['stderr'] == 'Connection timed out during banner exchange'
   assert probe['finished_host_wall_s'] >= probe['started_host_wall_s']
   diagnostics = json.loads((directory / 'standalone-timeout-diagnostics.json').read_text())
-  assert diagnostics['after_measurement_failure'] and len(diagnostics['steps']) == 9
+  assert diagnostics['after_measurement_failure'] and len(diagnostics['steps']) == 10
   assert [step['label'] for step in diagnostics['steps'][:2]] == ['usernet', 'network']
-  assert diagnostics['steps'][-1]['label'] == 'registers'
+  assert diagnostics['steps'][-2]['label'] == 'registers'
+  assert diagnostics['steps'][-1]['label'] == 'live-console'
   assert any(step.get('error') == 'diagnostic socket closed' for step in diagnostics['steps'])
   assert diagnostic_calls[0] == ('socket-timeout', 2)
   for stage in ('before-keys', 'after-escape', 'after-tty2'):

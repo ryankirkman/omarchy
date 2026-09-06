@@ -1,0 +1,125 @@
+{
+  "schema_version": 1,
+  "files": [
+    {
+      "path": "assessment.json",
+      "bytes": 1605,
+      "sha256": "caa6df96379f115cf3dc4253d6a81cd9bc074656f3a23283a5e5daf5c16957cc"
+    },
+    {
+      "path": "initramfs-console-test-v2.img.manifest.json",
+      "bytes": 954,
+      "sha256": "61dce6eb03a4baaf8a37e2d3d7a09fc1d44633ff26f9884be3c9113fafd95f7d"
+    },
+    {
+      "path": "launch.json",
+      "bytes": 1549,
+      "sha256": "1525c1d1cd22657bc4a279af7eae52a9e25e8f0bb66304d46f2dd69c8c1bb360"
+    },
+    {
+      "path": "launch.py",
+      "bytes": 440,
+      "sha256": "5f69754ce9a24f9a66efba320fe1fa1c8aac97e32cd9be33f4c60f188e571d27"
+    },
+    {
+      "path": "source/iso-vm.py",
+      "bytes": 46843,
+      "sha256": "7bb131f587d66a57dd690a25346abf50ab3d17ebf8fab3617785fb55996dcf22"
+    },
+    {
+      "path": "source/live-preflight.sh",
+      "bytes": 1128,
+      "sha256": "68e8f1e22f9b1f5c5d3b842e8c89e96e43c9c1f089f6f72f9f62ff1c2fee12ce"
+    },
+    {
+      "path": "source/postfailure-console.py",
+      "bytes": 11669,
+      "sha256": "9a4c7355e9c6459b43e98dda43b1ed55dd97e118e34d16e7ba338d4931fcc8cb"
+    },
+    {
+      "path": "supervisor-completion.json",
+      "bytes": 56,
+      "sha256": "667ac13052ff940d22accd831302705b5aad62079ebf3b7fd2ac53f492e7a7cd"
+    },
+    {
+      "path": "supervisor.log",
+      "bytes": 6128,
+      "sha256": "9fe0c1e11abfaebcabd1eafe0e673e8f6a6f7200b1fbe4863bb44022e5270194"
+    },
+    {
+      "path": "target-info.json",
+      "bytes": 1044,
+      "sha256": "fb17f8782a85135cd130e0d97b632296deb91b7102497e3e5e2350d1db3cd08d"
+    },
+    {
+      "path": "target-map.json",
+      "bytes": 119,
+      "sha256": "873bdf5b3af744fe0320013c53786b5bbc65d0cb2f910c6e283e05646f9a7381"
+    },
+    {
+      "path": "vm/last-failed-ssh-probe.json",
+      "bytes": 191,
+      "sha256": "0296532647349eb24af744122972959ef8f76f41d5e8bade21170dfe449cd0a2"
+    },
+    {
+      "path": "vm/latest-screen.png",
+      "bytes": 7202,
+      "sha256": "744406e0b1a5811f2f5e4cafa05988b6912275754b249f77886c5af038bfe871"
+    },
+    {
+      "path": "vm/manifest.json",
+      "bytes": 3801,
+      "sha256": "27fd239199a3e352c0f60aca62ed0323cee60bce3a67c3276fce3eb83ebb42f5"
+    },
+    {
+      "path": "vm/progress.json",
+      "bytes": 246,
+      "sha256": "8c79be40efeb15f1d92981f781709c516a638b9d9d8219de542706e854e622f9"
+    },
+    {
+      "path": "vm/qemu.log",
+      "bytes": 76,
+      "sha256": "6052710bfb5e11af3e6e62aac7b3c020fe2a354dc4cb9caefbb29d38362d8ea3"
+    },
+    {
+      "path": "vm/qemu.pid",
+      "bytes": 3,
+      "sha256": "932ab0a0e4191d32c0af7b3f565b7b180dbe9869378abc5816f9add54b806e7f"
+    },
+    {
+      "path": "vm/serial.log",
+      "bytes": 653,
+      "sha256": "c5bb1e7b71480bec70d37475a732d560cafea976b0549d079dbd3d50c3c719a7"
+    },
+    {
+      "path": "vm/supervisor.pid",
+      "bytes": 2,
+      "sha256": "10159baf262b43a92d95db59dae1f72c645127301661e0a3ce4e38b295a97c58"
+    },
+    {
+      "path": "vm/timeout-after-escape.png",
+      "bytes": 7186,
+      "sha256": "1c59982782ab10c54f54af3fa80e2903d657c2423febadeab84be5982342cf39"
+    },
+    {
+      "path": "vm/timeout-after-tty2.png",
+      "bytes": 3077,
+      "sha256": "390ba68ca0aee8eaf0e1422b421880974924934d495c4403af69974fcd6acba2"
+    },
+    {
+      "path": "vm/timeout-before-keys.png",
+      "bytes": 7202,
+      "sha256": "744406e0b1a5811f2f5e4cafa05988b6912275754b249f77886c5af038bfe871"
+    },
+    {
+      "path": "vm/timeout-console.json",
+      "bytes": 544,
+      "sha256": "158b0eeb4b8fa33aea9bf694f1db041320e5a5d62fa50cfc1da6504c4cb51e8d"
+    },
+    {
+      "path": "vm/timeout-diagnostics.json",
+      "bytes": 35193,
+      "sha256": "1c151eb94de8d4a36b5b521dedc056f9670f3cf6aaff7c90e5b1dfc55ec6d8a0"
+    }
+  ]
+}

@@ -103,10 +103,11 @@ class NativeContract(unittest.TestCase):
           'standalone-btrfs-subvolumes.txt', 'standalone-uki-files.txt',
           'standalone-last-failed-ssh-probe.json', 'standalone-timeout-diagnostics.json',
           'standalone-timeout-before-keys.png', 'standalone-timeout-after-escape.png',
-          'standalone-timeout-after-tty2.png', 'id_ed25519'):
+          'standalone-timeout-after-tty2.png', 'timeout-console.log', 'timeout-console.json',
+          'standalone-timeout-console.log', 'standalone-timeout-console.json', 'id_ed25519'):
         (run / name).write_text('fixture')
       module.collect_small(run, output)
-      self.assertEqual(len(list(output.iterdir())), 14)
+      self.assertEqual(len(list(output.iterdir())), 18)
       self.assertFalse((output / 'id_ed25519').exists())
 
   def test_rejects_oversized_evidence(self):
@@ -190,6 +191,105 @@ class NativeContract(unittest.TestCase):
         with self.assertRaises(SystemExit) as result:
           module.parse_arguments(base + ['--standalone-reboot-timeout', invalid])
       self.assertEqual(result.exception.code, 1)
+
+  def test_diagnostic_calibration_cli_requires_bounded_count_cold_firmware(self):
+    base = ['--repo', '/repo', '--work', '/new-work', '--evidence', '/evidence']
+    self.assertIsNone(module.parse_arguments(base).diagnostic_calibrations)
+    for count in ('1', '6'):
+      parsed = module.parse_arguments(base + ['--diagnostic-calibrations', count,
+        '--boot-method', 'firmware', '--source-cache', 'cold'])
+      self.assertEqual(parsed.diagnostic_calibrations, int(count))
+    invalid = [['--diagnostic-calibrations', value, '--boot-method', 'firmware', '--source-cache', 'cold']
+      for value in ('0', '-1', '7', '1.5', 'invalid')]
+    invalid += [['--diagnostic-calibrations', '2'] + flags
+      for flags in ([], ['--boot-method', 'firmware'], ['--source-cache', 'cold'])]
+    for flags in invalid:
+      with contextlib.redirect_stderr(io.StringIO()):
+        with self.assertRaises(SystemExit) as result:
+          module.parse_arguments(base + flags)
+      self.assertEqual(result.exception.code, 1)
+
+  def test_diagnostic_calibrations_use_distinct_stock_runs_and_stop_before_build(self):
+    with tempfile.TemporaryDirectory() as temporary:
+      root = Path(temporary)
+      control = root / 'control.img'
+      provenance = {'comparisons': {}, **module.diagnostic_provenance(3)}
+      calls = []
+      def install(name, selected):
+        self.assertEqual(selected, control)
+        run = root / name
+        run.mkdir()  # Reusing a name fails this contract.
+        calls.append(name)
+        return run
+      self.assertIsNone(module.calibration_stage(install, control, 3, provenance, root))
+      expected = ['diagnostic-calibration-01', 'diagnostic-calibration-02', 'diagnostic-calibration-03']
+      self.assertEqual(calls, expected)
+      saved = json.loads((root / 'experiment.json').read_text())
+      self.assertFalse(saved['measurement_valid'])
+      self.assertEqual(saved['status'], 'diagnostic-complete')
+      self.assertEqual(saved['diagnostic_calibrations']['requested_count'], 3)
+      self.assertEqual(saved['diagnostic_calibrations']['completed_names'], expected)
+      self.assertEqual(saved['comparisons'], {})
+      self.assertEqual(saved['variants'], [])
+      self.assertEqual(saved['pairs_per_variant'], 0)
+      self.assertEqual(module.calibration_stage(install, control, None, {}, root), root / 'calibration')
+      self.assertEqual(calls[-1], 'calibration')
+
+  def test_diagnostic_first_failure_propagates_without_retry_or_later_run(self):
+    with tempfile.TemporaryDirectory() as temporary:
+      root = Path(temporary)
+      provenance = {'comparisons': {}, **module.diagnostic_provenance(4)}
+      failure = RuntimeError('retained failed installation')
+      calls = []
+      def install(name, selected):
+        calls.append(name)
+        if len(calls) == 2:
+          raise failure
+        return root / name
+      with self.assertRaises(RuntimeError) as caught:
+        module.calibration_stage(install, root / 'control.img', 4, provenance, root)
+      self.assertIs(caught.exception, failure)
+      self.assertEqual(calls, ['diagnostic-calibration-01', 'diagnostic-calibration-02'])
+      saved = json.loads((root / 'experiment.json').read_text())
+      self.assertEqual(saved['status'], 'diagnostic-failed')
+      self.assertEqual(saved['diagnostic_calibrations']['completed_names'], calls[:1])
+      self.assertEqual(saved['diagnostic_calibrations']['failed_name'], calls[1])
+      self.assertFalse(saved['measurement_valid'])
+      self.assertEqual(saved['comparisons'], {})
+
+  def test_diagnostic_execute_returns_before_image_preparation(self):
+    # Exercise the real execute boundary with only host/KVM preparation
+    # replaced. Diagnostic sequencing and failure handling are checked above.
+    with tempfile.TemporaryDirectory() as temporary:
+      root = Path(temporary)
+      args = module.parse_arguments(['--repo', str(DIRECTORY.parents[3]), '--work', str(root / 'work'),
+        '--evidence', str(root / 'evidence'), '--boot-method', 'firmware', '--source-cache', 'cold',
+        '--diagnostic-calibrations', '2'])
+      def prepare(argv, **kwargs):
+        if Path(str(argv[1])).name == 'make-initramfs.py':
+          output = Path(argv[argv.index('--output') + 1])
+          output.write_bytes(b'diagnostic control fixture')
+          module.save_json(output.with_suffix(output.suffix + '.manifest.json'), {})
+        return 0
+      original_open, original_close = os.open, os.close
+      def open_kvm(path, *args, **kwargs):
+        return 1000000 if path == '/dev/kvm' else original_open(path, *args, **kwargs)
+      def close_kvm(fd):
+        if fd not in (1000000, 1000001):
+          original_close(fd)
+      with patch.object(module.os, 'open', side_effect=open_kvm), patch.object(module.os, 'close', side_effect=close_kvm), \
+          patch.object(module.fcntl, 'ioctl', side_effect=[12, 1000001]), \
+          patch.object(module, 'disk_budget', return_value={}), patch.object(module, 'git_checkout'), \
+          patch.object(module.subprocess, 'check_output', return_value='fixture-commit\n'), \
+          patch.object(module, 'digest', side_effect=lambda path: module.ISO_SHA256 if path.suffix == '.iso' else module.INITRD_SHA256), \
+          patch.object(module, 'command', side_effect=prepare) as commands, \
+          patch.object(module, 'calibration_stage', return_value=None) as stage:
+        self.assertEqual(module.execute(args), 0)
+      stage.assert_called_once()
+      self.assertEqual(stage.call_args.args[2], 2)
+      self.assertFalse(stage.call_args.args[3]['measurement_valid'])
+      invoked = [str(call.args[0]) for call in commands.call_args_list]
+      self.assertFalse(any('prepare-bundles.py' in argv or 'repeat-installs.py' in argv or 'qemu-img' in argv for argv in invoked))
 
   def test_firmware_disk_headroom_fails_before_preparation(self):
     with patch.object(module.shutil, 'disk_usage', return_value=SimpleNamespace(free=43 * 1024**3)):

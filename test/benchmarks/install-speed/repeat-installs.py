@@ -36,6 +36,7 @@ FAILED_EVIDENCE_FILES = (*EVIDENCE_FILES,
   "timeout-before-keys.png", "timeout-after-escape.png", "timeout-after-tty2.png",
   "standalone-last-failed-ssh-probe.json", "standalone-timeout-diagnostics.json",
   "standalone-timeout-before-keys.png", "standalone-timeout-after-escape.png", "standalone-timeout-after-tty2.png",
+  "timeout-console.log", "timeout-console.json", "standalone-timeout-console.log", "standalone-timeout-console.json",
 )
 
 

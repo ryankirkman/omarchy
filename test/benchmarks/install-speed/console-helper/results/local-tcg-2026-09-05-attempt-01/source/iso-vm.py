@@ -291,8 +291,7 @@ class Supervisor:
     spec = importlib.util.spec_from_file_location("omarchy_postfailure_console", path)
     module = importlib.util.module_from_spec(spec)
     spec.loader.exec_module(module)
-    return module.capture(self.directory, self.manifest.get("hostname"), self.qmp,
-      qemu_process=self.vm, prefix=prefix)
+    return module.capture(self.directory, self.manifest.get("hostname"), self.qmp, prefix=prefix)
 
   def collect_identity(self, prefix=""):
     evidence = {}

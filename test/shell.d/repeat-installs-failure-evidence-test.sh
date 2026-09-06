@@ -26,7 +26,8 @@ with tempfile.TemporaryDirectory(prefix='omarchy-failed-sample-') as temporary:
   launches = []
   warning = 'warning: cups: /var/log/cups/ (No such file or directory)\n'
   standalone_files = ('standalone-last-failed-ssh-probe.json', 'standalone-timeout-diagnostics.json',
-    'standalone-timeout-before-keys.png', 'standalone-timeout-after-escape.png', 'standalone-timeout-after-tty2.png')
+    'standalone-timeout-before-keys.png', 'standalone-timeout-after-escape.png', 'standalone-timeout-after-tty2.png',
+    'timeout-console.log', 'timeout-console.json', 'standalone-timeout-console.log', 'standalone-timeout-console.json')
   def execute(argv, run, log, timeout):
     # This regression runs the actual series/comparison/copy logic with two
     # captured-data fixtures; no VM or synthetic performance claim is involved.
