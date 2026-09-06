@@ -39,6 +39,8 @@ The [Btrfs UUID experiment](../test/benchmarks/install-speed/uuid/README.md) mea
 
 The [checksum comparison](../test/benchmarks/install-speed/checksum-findings.md) rejected replacing the ISO's SHA-256 checker with OpenSSL. Both actual Arch binaries already use OpenSSL; complete-image measurements showed essentially no gain. The shipping checksum/failure behavior is unchanged. A separate [chunk-verification prototype](../test/benchmarks/install-speed/hash/README.md) changes the manifest format and remains experimental; its modest host-only result does not justify default integration.
 
+The next native candidate [overlaps required file indexing](../test/benchmarks/install-speed/localdb-overlap/README.md) with boot preparation and [runs the complete logo animation](../test/benchmarks/install-speed/animation-overlap/README.md) during the existing finalization child. The index must join before validation and the factory snapshot, and completion/removal messaging still waits for successful target release. Local shell, payload, real indexing-engine and real-console checks passed. The combined candidate has no native speed result yet; its selected recipe and separate provenance are in the [native experiment protocol](../test/benchmarks/install-speed/native-ci/README.md#overlapping-required-finalization-work).
+
 ## Complete-install measurement
 
 Download the official 4.0.2 ISO and its checksum from [the release](https://github.com/omacom/omarchy/releases/tag/v4.0.2). The image used here is 6,227,752,960 bytes, SHA-256 `2ef8e624aa1bec7e277e28056b8535a6c9373ba48d7ede3f1a01cb6d2373cfb8`. Record exact Omarchy and ISO revisions and ISO digests for each treatment. Fresh disk and firmware state, vCPU count, memory, acceleration, package inputs and I/O cache policy must match between treatments. Alternate run order; retain unsuccessful runs as failures rather than timings.
@@ -59,7 +61,7 @@ bash test/shell.d/install-comparison-test.sh
 
 Use `--allow-unsealed` explicitly when diagnosing raw `iso-vm.py` outputs, older unsealed calibrations or synthetic contract fixtures. It permits a missing seal; an existing invalid seal still fails. This option supplies no missing historical validation or provenance and does not make an unpaired calibration a repeated-install result.
 
-The available development environment is an Ubuntu container with no KVM device and no mount privileges. A disposable QEMU VM using software emulation exercises the real installer locally. Its results remain labeled as software-emulation measurements. The [native experiment](../test/benchmarks/install-speed/native-ci/README.md) also runs on standard public GitHub runners after an actual KVM creation check. One complete native pair has now exceeded 2×, but an intermittent installed-boot failure prevented the required three-pair result.
+The available development environment is an Ubuntu container with no KVM device and no mount privileges. A disposable QEMU VM using software emulation exercises the real installer locally. Its results remain labeled as software-emulation measurements. The [native experiment](../test/benchmarks/install-speed/native-ci/README.md) also runs on standard public GitHub runners after an actual KVM creation check. One earlier native pair exceeded 2× before a later boot failed. A subsequent complete three-pair direct-write trial passed all correctness gates but missed 2×; these attempts remain separate.
 
 ## First successful calibration install
 

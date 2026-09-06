@@ -301,7 +301,7 @@ class NativeContract(unittest.TestCase):
 
   def test_early_verify_requires_cold_firmware_and_preserves_defaults(self):
     base = ['--repo', '/repo', '--work', '/new-work', '--evidence', '/evidence']
-    for variant in (module.EARLY_VERIFY_VARIANT, module.DIRECT_RESTORE_VARIANT):
+    for variant in module.EARLY_VARIANTS:
       selected = base + ['--variants', variant]
       for options in ([], ['--source-cache', 'cold'], ['--boot-method', 'firmware']):
         with contextlib.redirect_stderr(io.StringIO()):
@@ -318,6 +318,74 @@ class NativeContract(unittest.TestCase):
           'image-no-package-prefetch-fast-reboot', module.EARLY_VERIFY_VARIANT])
       self.assertEqual(module.disk_budget(Path('/tmp'), 'firmware',
         [module.EARLY_VERIFY_VARIANT, module.DIRECT_RESTORE_VARIANT])['minimum_free_bytes'], 50 * 1024**3)
+      self.assertEqual(module.disk_budget(Path('/tmp'), 'firmware',
+        [module.DIRECT_RESTORE_VARIANT, module.FINALIZATION_OVERLAP_VARIANT])['minimum_free_bytes'], 50 * 1024**3)
+
+  def test_overlap_layers_before_activation_and_retains_separate_provenance(self):
+    with tempfile.TemporaryDirectory() as temporary:
+      root = Path(temporary)
+      bench, work, evidence, fast = (root / name for name in ('bench', 'work', 'evidence', 'fast'))
+      work.mkdir()
+      evidence.mkdir()
+      base = work / 'direct-payload'
+      base.mkdir()
+      (base / 'original').write_text('immutable base')
+      calls = []
+      def command(argv, **kwargs):
+        calls.append(list(map(str, argv)))
+        if Path(argv[1]).name == 'prepare-payload.py':
+          output = Path(argv[argv.index('--output') + 1])
+          source = Path(argv[argv.index('--base-payload') + 1])
+          module.shutil.copytree(source, output)
+          output.with_name(output.name + '.manifest.json').write_text(json.dumps({'component': Path(argv[1]).parent.name}))
+      with patch.object(module, 'command', side_effect=command):
+        payload, preflight, manifest = module.prepare_finalization_overlap(bench, work, evidence, fast, base)
+      producers = [argv for argv in calls if Path(argv[1]).name == 'prepare-payload.py']
+      self.assertEqual([Path(argv[1]).parent.name for argv in producers], ['localdb-overlap', 'animation-overlap'])
+      self.assertEqual(producers[1][producers[1].index('--base-payload') + 1],
+        producers[0][producers[0].index('--output') + 1])
+      self.assertEqual(producers[1][producers[1].index('--base-preflight') + 1],
+        str(bench / 'install-speed/localdb-overlap/preflight.sh'))
+      self.assertEqual((base / 'original').read_text(), 'immutable base')
+      self.assertEqual((payload / 'original').read_text(), 'immutable base')
+      self.assertEqual(preflight, bench / 'install-speed/animation-overlap/preflight.sh')
+      self.assertEqual(manifest, payload.with_name(payload.name + '.manifest.json'))
+      self.assertTrue((evidence / 'localdb-overlap.manifest.json').is_file())
+      self.assertTrue((evidence / 'animation-overlap.manifest.json').is_file())
+      configuration = module.early_variant_configuration(module.FINALIZATION_OVERLAP_VARIANT)
+      self.assertEqual(configuration['provenance_key'], 'finalization_overlap_variant')
+      self.assertNotEqual(configuration['output_name'], module.early_variant_configuration(module.DIRECT_RESTORE_VARIANT)['output_name'])
+      control, candidate = root / 'control.img', root / 'candidate.img'
+      control.write_bytes(b'control'); candidate.write_bytes(b'overlap')
+      preflight.parent.mkdir(parents=True)
+      preflight.write_text('verified component preflight')
+      record = module.early_preflight_provenance(module.FINALIZATION_OVERLAP_VARIANT,
+        control, candidate, preflight, 'cold', 'firmware')
+      self.assertEqual(record['pairs'], 3)
+      self.assertEqual(record['base_variant'], module.DIRECT_RESTORE_VARIANT)
+      self.assertEqual(record['payload_manifest'], 'animation-overlap.manifest.json')
+      self.assertEqual(record['component_manifests'], ['direct-restore.manifest.json',
+        'localdb-overlap.manifest.json', 'animation-overlap.manifest.json'])
+      self.assertFalse(record['supplemental_image_changed'])
+      self.assertEqual(record['target_cache'], 'none')
+
+  def test_overlap_component_failure_stops_before_following_preparation(self):
+    with tempfile.TemporaryDirectory() as temporary:
+      root = Path(temporary)
+      evidence = root / 'evidence'
+      evidence.mkdir()
+      calls = []
+      def command(argv, **kwargs):
+        calls.append(list(map(str, argv)))
+        raise subprocess.CalledProcessError(7, argv)
+      with patch.object(module, 'command', side_effect=command):
+        with self.assertRaises(subprocess.CalledProcessError):
+          module.prepare_finalization_overlap(root / 'bench', root / 'work', evidence,
+            root / 'source', root / 'base')
+      self.assertEqual(len(calls), 1)
+      self.assertEqual(Path(calls[0][1]).parent.name, 'localdb-overlap')
+      self.assertFalse((root / 'work').exists())
+      self.assertFalse((evidence / 'animation-overlap.manifest.json').exists())
 
   def test_early_verify_builds_matched_control_and_fast_reboot_candidate(self):
     # Exercise native fixture selection against the real overlay builder on a
@@ -388,9 +456,38 @@ class NativeContract(unittest.TestCase):
       self.assertNotIn(prefix + phase_path, candidate_files)
       self.assertEqual(direct_files[prefix + 'usr/local/lib/omarchy-benchmark/preflight.sh'][1],
         direct_preflight.read_bytes())
+      overlap_payload = root / 'overlap-payload'
+      module.shutil.copytree(direct_payload, overlap_payload)
+      additions = {
+        'usr/local/lib/omarchy-benchmark/localdb-overlap/phases_impl.py': 'pinned joined indexing phases',
+        'usr/local/lib/omarchy-benchmark/animation-overlap/omarchy-install-dashboard': 'pinned foreground animation',
+        'usr/local/lib/omarchy-benchmark/animation-overlap/base-preflight.sh': 'pinned indexing preflight',
+      }
+      for name, body in additions.items():
+        path = overlap_payload / name
+        path.parent.mkdir(parents=True, exist_ok=True)
+        path.write_text(body)
+      overlap_preflight = DIRECTORY.parent / 'animation-overlap/preflight.sh'
+      shared_control, overlap_candidate = module.early_preflight_pair(make_initrd,
+        overlap_payload, overlap_preflight, variant=module.FINALIZATION_OVERLAP_VARIANT, control=control)
+      self.assertEqual(shared_control, control)
+      self.assertEqual(len(outputs), 4)
+      self.assertEqual(overlap_candidate.name,
+        'candidate-no-prefetch-fast-reboot-early-verify-direct-restore-overlap.img')
+      overlap_files, overlap_manifest = outputs[overlap_candidate]
+      self.assertTrue(overlap_manifest['early_preflight'])
+      self.assertTrue(overlap_manifest['disable_package_prefetch'])
+      self.assertEqual(overlap_files[prefix + phase_path], direct_files[prefix + phase_path])
+      for name, body in additions.items():
+        self.assertEqual(overlap_files[prefix + name][1], body.encode())
+        self.assertNotIn(prefix + name, direct_files)
+        self.assertNotIn(prefix + name, candidate_files)
+      self.assertEqual(overlap_files[prefix + 'usr/local/lib/omarchy-benchmark/preflight.sh'][1],
+        overlap_preflight.read_bytes())
       records = []
       for variant, selected, script in ((module.EARLY_VERIFY_VARIANT, candidate, preflight),
-          (module.DIRECT_RESTORE_VARIANT, direct_candidate, direct_preflight)):
+          (module.DIRECT_RESTORE_VARIANT, direct_candidate, direct_preflight),
+          (module.FINALIZATION_OVERLAP_VARIANT, overlap_candidate, overlap_preflight)):
         record = module.early_preflight_provenance(variant, control, selected, script, 'cold', 'firmware')
         self.assertEqual(record['candidate_initramfs_sha256'], module.digest(selected))
         self.assertEqual(record['control_initramfs_sha256'], module.digest(control))

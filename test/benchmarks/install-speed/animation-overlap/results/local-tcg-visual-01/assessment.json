@@ -1,0 +1,123 @@
+{
+  "schema_version": 1,
+  "status": "passed",
+  "scope": "actual live-console functional and visual proof only; scripted child, no installation or speed claim",
+  "original_dashboard_sha256": "4871faded220498542e1d01a0cbae3f98c21ea5b4eea6bab94fa9e62b415ad89",
+  "candidate_dashboard_sha256": "33a77a5ed86df5d6d14b39a027237b888c65b4dbaa7855c10e4a78865f89111d",
+  "environment": {
+    "qemu": "QEMU emulator version 8.2.2 (Debian 1:8.2.2+ds-0ubuntu1.18)",
+    "accelerator": "tcg",
+    "cpus": 4,
+    "memory_mib": 8192,
+    "same_live_guest_for_all_scenarios": true,
+    "tty": "tty1",
+    "columns": 160,
+    "rows": 50,
+    "qmp_frame_pixels": [
+      1280,
+      800
+    ],
+    "boot_type": "direct kernel builder overlay; firmware install acceptance is outside this test"
+  },
+  "scenarios": {
+    "reference-success": {
+      "dashboard_exit_status": 0,
+      "boot_id": "30bbfe11-3633-49e3-950b-b0468e1c94fc",
+      "actual_ttfx": "ttfx 0.3.2",
+      "frames": 24,
+      "release_stub_called": true
+    },
+    "candidate-success": {
+      "dashboard_exit_status": 0,
+      "boot_id": "30bbfe11-3633-49e3-950b-b0468e1c94fc",
+      "actual_ttfx": "ttfx 0.3.2",
+      "frames": 20,
+      "release_stub_called": true,
+      "effect_mode": "finalizing",
+      "effect_begin_uptime_s": 195.41,
+      "effect_end_uptime_s": 199.86,
+      "effect_duration_s": 4.45,
+      "effect_exit_status": 0,
+      "eight_second_cap_hit": false,
+      "effect_fully_within_scripted_child_window": true
+    },
+    "candidate-failure": {
+      "dashboard_exit_status": 17,
+      "boot_id": "30bbfe11-3633-49e3-950b-b0468e1c94fc",
+      "actual_ttfx": "ttfx 0.3.2",
+      "frames": 15,
+      "release_stub_called": false,
+      "effect_mode": "finalizing",
+      "effect_begin_uptime_s": 223.9,
+      "effect_end_uptime_s": 228.36,
+      "effect_duration_s": 4.46,
+      "effect_exit_status": 0,
+      "eight_second_cap_hit": false,
+      "child_failed_during_effect": true
+    },
+    "candidate-fallback": {
+      "dashboard_exit_status": 0,
+      "boot_id": "30bbfe11-3633-49e3-950b-b0468e1c94fc",
+      "actual_ttfx": "ttfx 0.3.2",
+      "frames": 24,
+      "release_stub_called": true,
+      "effect_mode": "complete",
+      "effect_begin_uptime_s": 263.4,
+      "effect_end_uptime_s": 267.79,
+      "effect_duration_s": 4.39,
+      "effect_exit_status": 0,
+      "eight_second_cap_hit": false,
+      "effect_after_successful_child_wait": true
+    }
+  },
+  "visual_review": {
+    "reviewed_by": [
+      "fixture agent",
+      "parent agent"
+    ],
+    "observations": [
+      "Neutral finalization frame retains install-media warning while real full effect runs.",
+      "Same-size terminal returns to clean ordinary progress after the early effect.",
+      "Successful completion retains canonical final static screen.",
+      "Child status 17 produces the failure screen without an Installed or media-removal promise.",
+      "No new clipping, layout overlap or stale early finalization frame in reviewed transitions."
+    ],
+    "representative_frames": [
+      "reference-success/frames/frame-0008.png",
+      "reference-success/frames/frame-0022.png",
+      "candidate-success/frames/frame-0008.png",
+      "candidate-success/frames/frame-0012.png",
+      "candidate-success/frames/frame-0018.png",
+      "candidate-failure/frames/frame-0013.png"
+    ]
+  },
+  "limitations": [
+    "The installer child only writes scripted fixture state under /tmp.",
+    "The target release command is a harmless recorded stub, and automatic reboot is disabled in the visual fixture.",
+    "Actual real ttfx 0.3.2 runs the complete unchanged effect arguments; all candidate effects returned 0 rather than timeout 124.",
+    "The live ISO lacks ffmpeg; capture_available=false refers to guest framebuffer movie capture, while retained QMP PNG frames and host-encoded 1-fps movies are available.",
+    "QMP frames are sampled approximately once per second; recordings prove visible transitions, not 260-fps animation smoothness.",
+    "An initial sampled frame can show the preceding scenario until the next dashboard clears the console.",
+    "Reference dashboard is byte-identical and does not emit the candidate-only uptime markers.",
+    "Host and guest wall clocks are not subtracted; marked effect intervals use one guest boot and monotonic uptime.",
+    "No package, real target release, installed reboot or end-to-end performance conclusion is drawn from this visual fixture."
+  ],
+  "provenance_notes": [
+    "All launch frozen source hashes were verified before copying evidence.",
+    "exercise-visual.py was frozen separately after VM launch and is covered by this evidence seal; it only drives the existing mailbox and records QMP frames.",
+    "The separate genuine localdb temporary index check and verified staging cleanup are retained under localdb-overlap/evidence."
+  ],
+  "completion": {
+    "normal_guest_poweroff": true,
+    "qemu_exit_status": 0,
+    "supervisor_returncode": 0,
+    "blank_target_remains_entirely_zero": true,
+    "target_reclaimed": false
+  },
+  "contract_results": {
+    "shell_behavior_cases": 10,
+    "payload_cases": 4,
+    "status": "passed",
+    "record": "completed focused contract results reported by guest_matrix; native composition independently rechecked by parent"
+  }
+}

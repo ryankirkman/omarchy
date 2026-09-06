@@ -26,6 +26,8 @@ HARNESS_PIN = '2673c613d9a71e23920e43fbb951238145e0f1e8'
 CMDLINE = 'archisobasedir=arch archisosearchuuid=2026-08-31-03-24-58-00 quiet splash xe.enable_panel_replay=0 initramfs_async=0 copytoram=n'
 EARLY_VERIFY_VARIANT = 'image-no-package-prefetch-fast-reboot-early-verify'
 DIRECT_RESTORE_VARIANT = EARLY_VERIFY_VARIANT + '-direct-restore'
+FINALIZATION_OVERLAP_VARIANT = DIRECT_RESTORE_VARIANT + '-overlap'
+EARLY_VARIANTS = (EARLY_VERIFY_VARIANT, DIRECT_RESTORE_VARIANT, FINALIZATION_OVERLAP_VARIANT)
 EVIDENCE_FILES = {
   'manifest.json', 'validation.json', 'install-timing.json', 'package-manifest.txt',
   'package-explicit.txt', 'package-files.txt', 'package-files.stderr', 'identity.json',
@@ -89,7 +91,7 @@ def save_json(path, value):
 
 def disk_budget(work, boot_method, variants=()):
   required = (44 if boot_method == 'firmware' else 28) * 1024**3
-  if any(variant in variants for variant in (EARLY_VERIFY_VARIANT, DIRECT_RESTORE_VARIANT)):
+  if any(variant in variants for variant in EARLY_VARIANTS):
     # The early experiment needs its own matched control ISO. When several
     # variants are requested, their immutable fixtures remain available too.
     required += 6 * max(0, len(variants) - 1) * 1024**3
@@ -100,12 +102,16 @@ def disk_budget(work, boot_method, variants=()):
 
 
 def early_variant_configuration(variant):
-  if variant not in (EARLY_VERIFY_VARIANT, DIRECT_RESTORE_VARIANT):
+  if variant not in EARLY_VARIANTS:
     raise ValueError('Not an early-preflight variant')
-  suffix = '-direct-restore' if variant == DIRECT_RESTORE_VARIANT else ''
+  suffix = {EARLY_VERIFY_VARIANT: '', DIRECT_RESTORE_VARIANT: '-direct-restore',
+    FINALIZATION_OVERLAP_VARIANT: '-direct-restore-overlap'}[variant]
+  provenance_key = {EARLY_VERIFY_VARIANT: 'early_preflight_variant',
+    DIRECT_RESTORE_VARIANT: 'direct_restore_variant',
+    FINALIZATION_OVERLAP_VARIANT: 'finalization_overlap_variant'}[variant]
   return {'candidate_label': 'candidate-no-prefetch-fast-reboot-early-verify' + suffix,
     'output_name': 'no-prefetch-fast-reboot-early-verify' + suffix + '-repetitions',
-    'provenance_key': 'direct_restore_variant' if suffix else 'early_preflight_variant'}
+    'provenance_key': provenance_key}
 
 
 def early_preflight_pair(make_initrd, payload, preflight, *, variant=EARLY_VERIFY_VARIANT, control=None):
@@ -130,11 +136,37 @@ def early_preflight_provenance(variant, control, candidate, preflight, source_ca
     'source_cache': source_cache, 'boot_method': boot_method,
     'pairs': 3, 'comparison': configuration['output_name'] + '/comparison.json',
   }
-  if variant == DIRECT_RESTORE_VARIANT:
+  if variant in (DIRECT_RESTORE_VARIANT, FINALIZATION_OVERLAP_VARIANT):
     record.update({'base_variant': EARLY_VERIFY_VARIANT,
       'payload_manifest': 'direct-restore.manifest.json',
       'supplemental_image_changed': False, 'target_cache': 'none'})
+  if variant == FINALIZATION_OVERLAP_VARIANT:
+    record.update({'base_variant': DIRECT_RESTORE_VARIANT,
+      'payload_manifest': 'animation-overlap.manifest.json',
+      'component_manifests': ['direct-restore.manifest.json', 'localdb-overlap.manifest.json',
+        'animation-overlap.manifest.json'],
+      'required_work': 'File index joins existing finalization; complete animation precedes release-gated completion'})
   return record
+
+
+def prepare_finalization_overlap(bench, work, evidence, fast, payload):
+  """Layer index scheduling and animation onto an immutable direct-write payload."""
+  preflight = bench / 'install-speed/image/direct-restore-preflight.sh'
+  for component in ('localdb-overlap', 'animation-overlap'):
+    scripts = bench / 'install-speed' / component
+    output = work / ('candidate-' + component + '-payload')
+    with (evidence / (component + '-contract.log')).open('w') as log:
+      command([sys.executable, scripts / 'contract-test.py', '--iso-source', fast],
+        stdout=log, stderr=subprocess.STDOUT, timeout=120)
+    argv = [sys.executable, scripts / 'prepare-payload.py', '--iso-source', fast,
+      '--base-payload', payload, '--output', output]
+    if component == 'animation-overlap':
+      argv += ['--base-preflight', preflight]
+    command(argv)
+    manifest = output.with_name(output.name + '.manifest.json')
+    shutil.copyfile(manifest, evidence / (component + '.manifest.json'))
+    payload, preflight = output, scripts / 'preflight.sh'
+  return payload, preflight, manifest
 
 
 def boot_arguments(boot_method, iso, kernel, initrd, *, builder=False, firmware_iso=None, standalone_reboot_timeout=600):
@@ -612,6 +644,7 @@ def execute(args):
 
   fast_reboot = bench / 'install-speed/fast-reboot'
   fast_reboot_payload = None
+  direct_restore_payload = None
   early_control_initrd = None
 
   def prepare_fast_reboot_payload():
@@ -632,6 +665,20 @@ def execute(args):
       fast_reboot_payload = output
     return fast_reboot_payload
 
+  def prepare_direct_restore_payload():
+    nonlocal direct_restore_payload
+    if direct_restore_payload is None:
+      output = work / 'candidate-direct-restore-payload'
+      with (evidence / 'direct-restore-contract.log').open('w') as log:
+        command([sys.executable, image / 'direct-restore-payload-test.py', '--iso-source', fast],
+          stdout=log, stderr=subprocess.STDOUT, timeout=120)
+      command([sys.executable, image / 'direct-restore-payload.py', '--iso-source', fast,
+        '--base-payload', prepare_fast_reboot_payload(), '--output', output])
+      source_manifest = output.with_name(output.name + '.manifest.json')
+      shutil.copyfile(source_manifest, evidence / 'direct-restore.manifest.json')
+      direct_restore_payload = output
+    return direct_restore_payload
+
   for variant in args.variants:
     if variant == 'upstream-image':
       candidate_initrd = make_initrd('candidate', candidate_payload, image / 'candidate-preflight.sh')
@@ -643,32 +690,28 @@ def execute(args):
       no_prefetch_initrd = make_initrd('candidate', candidate_payload, image / 'candidate-preflight.sh',
         label='candidate-no-prefetch', disable_prefetch=True)
       measure_variant(variant, no_prefetch_initrd, 'no-prefetch-repetitions')
-    elif variant in ('image-no-package-prefetch-fast-reboot', EARLY_VERIFY_VARIANT, DIRECT_RESTORE_VARIANT):
+    elif variant in ('image-no-package-prefetch-fast-reboot', *EARLY_VARIANTS):
       # Separate opt-in experiment: retain PR145's release-gated dashboard,
       # which the original image overlay deliberately does not replace.
       payload = prepare_fast_reboot_payload()
       preflight = fast_reboot / 'candidate-preflight.sh'
-      if variant == DIRECT_RESTORE_VARIANT:
-        direct_payload = work / 'candidate-direct-restore-payload'
-        with (evidence / 'direct-restore-contract.log').open('w') as log:
-          command([sys.executable, image / 'direct-restore-payload-test.py', '--iso-source', fast],
-            stdout=log, stderr=subprocess.STDOUT, timeout=120)
-        command([sys.executable, image / 'direct-restore-payload.py', '--iso-source', fast,
-          '--base-payload', payload, '--output', direct_payload])
+      if variant in (DIRECT_RESTORE_VARIANT, FINALIZATION_OVERLAP_VARIANT):
+        direct_payload = prepare_direct_restore_payload()
         source_manifest = direct_payload.with_name(direct_payload.name + '.manifest.json')
-        shutil.copyfile(source_manifest, evidence / 'direct-restore.manifest.json')
         payload = direct_payload
         preflight = image / 'direct-restore-preflight.sh'
         # The supplemental ISO retains its ordinary overlay. This small,
         # verified initramfs payload installs the direct patch only after
         # ordinary activation, without building another root-image ISO.
-      if variant in (EARLY_VERIFY_VARIANT, DIRECT_RESTORE_VARIANT):
+      if variant == FINALIZATION_OVERLAP_VARIANT:
+        payload, preflight, source_manifest = prepare_finalization_overlap(bench, work, evidence, fast, payload)
+      if variant in EARLY_VARIANTS:
         configuration = early_variant_configuration(variant)
         early_control_initrd, early_candidate = early_preflight_pair(make_initrd, payload, preflight,
           variant=variant, control=early_control_initrd)
         provenance[configuration['provenance_key']] = early_preflight_provenance(variant,
           early_control_initrd, early_candidate, preflight, args.source_cache, args.boot_method)
-        if variant == DIRECT_RESTORE_VARIANT:
+        if variant in (DIRECT_RESTORE_VARIANT, FINALIZATION_OVERLAP_VARIANT):
           provenance[configuration['provenance_key']]['payload_manifest_sha256'] = digest(source_manifest)
         save_json(evidence / 'experiment.json', provenance)
         measure_variant(variant, early_candidate, configuration['output_name'],
@@ -706,7 +749,7 @@ def parse_arguments(argv=None):
     help='Direct kernel boot (default), or verified ISO repacking with firmware boot and standalone reboot validation')
   parser.add_argument('--source-cache', choices=('conditioned', 'cold'), default='conditioned',
     help='Source media cache policy; cold requires verified eviction in the VM runner')
-  parser.add_argument('--variants', nargs='+', choices=('upstream-image', 'image-no-package-prefetch', 'image-no-package-prefetch-fast-reboot', EARLY_VERIFY_VARIANT, DIRECT_RESTORE_VARIANT),
+  parser.add_argument('--variants', nargs='+', choices=('upstream-image', 'image-no-package-prefetch', 'image-no-package-prefetch-fast-reboot', *EARLY_VARIANTS),
     default=['upstream-image', 'image-no-package-prefetch'], help='Variants to measure, in order; three fresh pairs each')
   args = parser.parse_args(argv)
   if args.install_timeout <= 0:
@@ -720,7 +763,7 @@ def parse_arguments(argv=None):
       parser.error('--diagnostic-calibrations requires --source-cache cold --boot-method firmware')
   if len(set(args.variants)) != len(args.variants):
     parser.error('variants must be distinct')
-  for variant in (EARLY_VERIFY_VARIANT, DIRECT_RESTORE_VARIANT):
+  for variant in EARLY_VARIANTS:
     if variant in args.variants and (args.source_cache != 'cold' or args.boot_method != 'firmware'):
       parser.error(f'{variant} requires --source-cache cold --boot-method firmware')
   return args

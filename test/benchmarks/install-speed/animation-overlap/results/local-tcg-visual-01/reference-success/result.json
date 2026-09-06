@@ -1,0 +1,15 @@
+{
+  "schema_version": 1,
+  "purpose": "scripted actual-console visual test; no installation or speed measurement",
+  "scenario": "reference-success",
+  "dashboard_sha256": "4871faded220498542e1d01a0cbae3f98c21ea5b4eea6bab94fa9e62b415ad89",
+  "boot_id": "30bbfe11-3633-49e3-950b-b0468e1c94fc",
+  "real_ttfx": "ttfx 0.3.2",
+  "fake_command": "omarchy-release-install-target",
+  "automatic_reboot_disabled": true,
+  "started_monotonic_s": 156.690479799,
+  "dashboard_exit_status": 0,
+  "finished_monotonic_s": 181.938553861,
+  "expected_exit_status": 0,
+  "capture_available": false
+}

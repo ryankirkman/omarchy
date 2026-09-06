@@ -1,0 +1,14 @@
+{
+  "schema_version": 1,
+  "verified_input_sha256": {
+    "/tmp/localdb-guest-check/bundle.tar.gz": "490b328feb2ed52b66a2bf53878d46748a444ccc2401a3bd4e44e366ec338442",
+    "/tmp/localdb-guest-engines/usr/bin/updatedb": "04c4523df38b126bd1fe020d43f7b1ae932ba27567bf48eac24ba5422bff9936",
+    "/tmp/localdb-guest-engines/usr/bin/plocate": "d3c76e8c42b8627f9e4187d39ce6b41593717e063a2eec1df3754b629c3c7409"
+  },
+  "removed_paths": [
+    "/tmp/localdb-guest-check",
+    "/tmp/localdb-guest-engines"
+  ],
+  "removed_paths_absent": true,
+  "no_fixture_index_directories_remain": true
+}

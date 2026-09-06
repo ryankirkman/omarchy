@@ -70,7 +70,7 @@ jobs:
           dpkg-query -W > "$BENCH_EVIDENCE/host-packages.txt"
           printf '%s\n' "$ImageOS" "$ImageVersion" > "$BENCH_EVIDENCE/runner-image.txt"
 
-      - name: Measure three fresh direct-write installation pairs
+      - name: Measure three fresh finalization-overlap installation pairs
         shell: bash
         run: |
           set -euo pipefail
@@ -78,7 +78,7 @@ jobs:
             --repo "$GITHUB_WORKSPACE" --work "$BENCH_WORK" --evidence "$BENCH_EVIDENCE" \
             --boot-method firmware --source-cache cold --install-timeout 600 \
             --standalone-reboot-timeout 180 \
-            --variants image-no-package-prefetch-fast-reboot-early-verify-direct-restore
+            --variants image-no-package-prefetch-fast-reboot-early-verify-direct-restore-overlap
 
       - name: Retain small validation and timing evidence
         if: always()

@@ -1,0 +1,4 @@
+/usr/bin/ttfx
+/usr/bin/gum
+crw-rw---- 1 root video 29, 0 Sep  6 01:31 /dev/fb0
+50 160

@@ -1,0 +1,12 @@
+{
+  "started_at": 1788658471.146513,
+  "target": "/tmp/omarchy-animation-visual/candidate-fallback/unused-target",
+  "total_phases": 9,
+  "current_index": 6,
+  "current_phase": "Installation complete",
+  "phases": [],
+  "phase_started_at": 1788658472.1564617,
+  "finished_at": 1788658484.161641,
+  "duration_seconds": 13.015291188999981,
+  "installed_packages": 941
+}

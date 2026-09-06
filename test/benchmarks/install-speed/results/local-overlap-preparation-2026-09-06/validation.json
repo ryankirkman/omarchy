@@ -1,0 +1,25 @@
+{
+  "status": "passed",
+  "measurement_valid": false,
+  "purpose": "Actual pinned combined payload production and immutable input verification",
+  "variant": "image-no-package-prefetch-fast-reboot-early-verify-direct-restore-overlap",
+  "files": {
+    "early-verify-fast-reboot-payload": {
+      "manifest_sha256": "ebd0d1fbbb7af680fd15eb453fd56f2930371156f6c926bc0cef8cee8e587f3d",
+      "inventory_count": 4
+    },
+    "direct-payload": {
+      "manifest_sha256": "37b03228ddbc63e47decff26f768c410bf06a534c1e447a61568b9f9e451b9ed",
+      "inventory_count": 10
+    },
+    "candidate-localdb-overlap-payload": {
+      "manifest_sha256": "22f1ff097d12c649ecb60a01d477f7c0c70b8722b9e444a9a06b9e91df2b263e",
+      "inventory_count": 14
+    },
+    "candidate-animation-overlap-payload": {
+      "manifest_sha256": "0c7563d93d0ea95c2104bf7fbec2b50acb64dce304a32f1f55b54a6123729959",
+      "inventory_count": 18
+    }
+  },
+  "final_preflight_sha256": "510a502d0f4388a43b137e2e22e1b65eaa10a271b299c8c31131365bbbd94b5a"
+}

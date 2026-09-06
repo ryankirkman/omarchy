@@ -1,0 +1,15 @@
+[
+  {
+    "event": "child-started",
+    "monotonic_s": 192.265840217
+  },
+  {
+    "event": "finalization-window",
+    "monotonic_s": 193.281998111
+  },
+  {
+    "event": "child-exited",
+    "monotonic_s": 205.326887358,
+    "exit_status": 0
+  }
+]
