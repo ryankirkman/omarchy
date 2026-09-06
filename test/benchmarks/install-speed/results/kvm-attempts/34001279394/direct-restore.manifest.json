@@ -1,0 +1,85 @@
+{
+  "schema_version": 1,
+  "variant": "image-no-package-prefetch-fast-reboot-early-verify-direct-restore",
+  "base_variant": "image-no-package-prefetch-fast-reboot-early-verify",
+  "upstream_commit": "dbffaa6c65344d644627a023c28661e08382b8fa",
+  "upstream_source_path": "configs/airootfs/usr/share/omarchy-iso/orchestrator/phases_impl.py",
+  "upstream_source_sha256": "4088b7e930d2da7729f69c4506483d8e9c661a0488de913255c868f1154de977",
+  "ordinary_phases_sha256": "8c802ec9ad8b94478ad16d4ca434fa6197741b4d1b3195b0a78d0c876b8682bf",
+  "direct_phases_sha256": "8787646c45b164b4fde2abb894c87ece46e9c8f180ff96fede9ed23b2723a458",
+  "target_cache": "none",
+  "base_payload_manifest_sha256": "ebd0d1fbbb7af680fd15eb453fd56f2930371156f6c926bc0cef8cee8e587f3d",
+  "preflight_sha256": "1d3e8c3b82507eaf4b3977e93d1adf6af54eacdf65449d3c94ac33d6dae9aee3",
+  "supplemental_image_changed": false,
+  "activation_order": [
+    "ordinary image overlay",
+    "guarded fast reboot",
+    "verify ordinary phases",
+    "install verified direct phases"
+  ],
+  "changes": [
+    "Add only -t none to the existing qemu-img convert command after the image-mount correction"
+  ],
+  "files": [
+    {
+      "path": "usr/local/lib/omarchy-benchmark/activate-installer-overlay.sh",
+      "sha256": "388814f2aa33ee0202eb48a83a3df4eaf10c22d907cf6bba57b8c209e389126a",
+      "mode": "0o644",
+      "bytes": 2313
+    },
+    {
+      "path": "usr/local/lib/omarchy-benchmark/direct-restore/LICENSE",
+      "sha256": "e2b1e3778a6ada6d6eee5f48c028f885e9797313f4c5705929bdc5b99db569d3",
+      "mode": "0o644",
+      "bytes": 1070
+    },
+    {
+      "path": "usr/local/lib/omarchy-benchmark/direct-restore/fast-reboot-preflight.sh",
+      "sha256": "5a43425e190b15d4852313b5ef07cebae0c9e41dc76f3851311028409d2a9230",
+      "mode": "0o755",
+      "bytes": 902
+    },
+    {
+      "path": "usr/local/lib/omarchy-benchmark/direct-restore/payload.sha256",
+      "sha256": "f4df24b9a8ea5122b92cf815368d3c0c71cad6536266aaec218ec957e11c8501",
+      "mode": "0o644",
+      "bytes": 246
+    },
+    {
+      "path": "usr/local/lib/omarchy-benchmark/direct-restore/phases_impl.py",
+      "sha256": "8787646c45b164b4fde2abb894c87ece46e9c8f180ff96fede9ed23b2723a458",
+      "mode": "0o644",
+      "bytes": 119539
+    },
+    {
+      "path": "usr/local/lib/omarchy-benchmark/fast-reboot/LICENSE",
+      "sha256": "e2b1e3778a6ada6d6eee5f48c028f885e9797313f4c5705929bdc5b99db569d3",
+      "mode": "0o644",
+      "bytes": 1070
+    },
+    {
+      "path": "usr/local/lib/omarchy-benchmark/fast-reboot/image-candidate-preflight.sh",
+      "sha256": "ba833c405435621e4718edb4911e3d8ddd27c84bace0729cd97fe26456ae5010",
+      "mode": "0o755",
+      "bytes": 511
+    },
+    {
+      "path": "usr/local/lib/omarchy-benchmark/fast-reboot/omarchy-install-dashboard",
+      "sha256": "4871faded220498542e1d01a0cbae3f98c21ea5b4eea6bab94fa9e62b415ad89",
+      "mode": "0o755",
+      "bytes": 37767
+    },
+    {
+      "path": "usr/local/lib/omarchy-benchmark/fast-reboot/omarchy-release-install-target",
+      "sha256": "de6a8aafc0f587e868bd8db2d3fdee25da90f468a4919e3f89ba9aeb357818b6",
+      "mode": "0o755",
+      "bytes": 5273
+    },
+    {
+      "path": "usr/local/lib/omarchy-benchmark/fast-reboot/payload.sha256",
+      "sha256": "69ff549a4e6b4d0900c1670ca48ee6ea1663341e1aa70e5c3d607cdf5d5467f9",
+      "mode": "0o644",
+      "bytes": 358
+    }
+  ]
+}

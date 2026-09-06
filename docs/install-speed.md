@@ -2,6 +2,8 @@
 
 The optimization target is a complete successful installation into a fresh VM disk, with the same package names and versions, a successful installed-system boot, and no missing package files. Component benchmarks are useful for finding waste, but do not satisfy that target. The initial source baseline is `e8e92c5092c9bbbf3d7fc5240f8551fd1eeaced9` on the fork's `quattro` branch.
 
+The first complete three-pair native trial passed every installation and reboot gate but missed the full-clock target: **1.89833× conservatively**, or 1.96853× using median observed readiness times. Its installer phases alone were 3.26002× faster at the median. The earlier 2.19046× observation remains a single validated pair with a different candidate. These results are kept separate; optimization continues toward a repeated full-clock result above 2×.
+
 ## Scope and ownership
 
 This repository supplies the target's configuration and setup commands. Current ISO orchestration belongs to [omacom/omarchy-iso](https://github.com/omacom/omarchy-iso). The package extraction and filesystem deployment changes needed for large complete-install gains therefore span both repositories. [The upstream research record](install-speed-upstream.md) distinguishes other authors' measured results from the experiments performed here.
@@ -112,3 +114,21 @@ Each candidate receives three fresh alternating control/candidate pairs with fir
 The observed ratio is 2.23818×; the conservative ratio, including actual polling uncertainty, is **2.19046×**. Both samples used matched hardware, firmware and media topology, verified cold source pages, fresh targets and NVRAM, and distinct machine, filesystem, SSH and package-signing identities. All 60 original sealed file hashes were independently rechecked. The shared image build and verification took 576.054 seconds outside per-install timing.
 
 The next fresh candidate timed out before reaching installed SSH. Its recovered timing file records all nine installer phases as successful, and a tty2 login prompt was visible after timeout diagnostics. The read-only rescue recovered a Plymouth start-post timeout during installed boot; its retained journal contains no NetworkManager or SSH service-start entries. Missing entries and host keys in a no-replay recovery cannot by themselves prove which job blocked startup. The next diagnostic step captures live waiting jobs and process state after marking a sample invalid. The failed sample remains excluded, the three-pair acceptance flag remains false, and the direct-write variant has not yet been measured in a complete native comparison.
+
+[Diagnostic run 34000377432](https://github.com/ryankirkman/omarchy/actions/runs/34000377432) then completed four fresh stock installations and all four ordinary second boots with installation media removed. Their host readiness intervals were 192.284–196.726, 181.700–186.197, 182.084–186.571 and 183.596–188.041 seconds. All 941 package versions, 158 explicit reasons and 941 complete file-count rows matched; machine, SSH, pacman and Btrfs identities were distinct. Cold source pages and clean QEMU exits passed in every attempt. The [142 original artifact files](../test/benchmarks/install-speed/results/kvm-attempts/34000377432/) are preserved byte for byte and were independently rehashed.
+
+That diagnostic run exited before image building or comparisons. It supplies four successful stock observations, no new speedup measurement and no established explanation for the earlier intermittent failure. [The subsequent direct-write trial](https://github.com/ryankirkman/omarchy/actions/runs/34001279394) uses three new alternating control/candidate pairs, retaining the live console and read-only rescue diagnostics if a failure recurs.
+
+## First complete three-pair native comparison
+
+[Run 34001279394](https://github.com/ryankirkman/omarchy/actions/runs/34001279394) completed all six fresh installations and all six independent media-free reboots. The [266 original artifact files](../test/benchmarks/install-speed/results/kvm-attempts/34001279394/) retain the complete comparison and all original sample seals. All 180 sample-seal hashes and the comparison verdict were independently rechecked.
+
+| Full-clock readiness interval | Control | Direct-write candidate |
+| --- | ---: | ---: |
+| Pair 1 | 205.577–209.994 s | 94.051–98.606 s |
+| Pair 2 | 189.680–194.108 s | 94.436–98.875 s |
+| Pair 3 | 187.697–192.121 s | 89.458–94.005 s |
+
+The median observed speedup is 1.968526×. The conservative bound is 187.697 / 98.875 = **1.898331×**, so the full-clock twofold flag is false. This is a valid performance miss, not an installation or boot failure. All 941 package versions, explicit/dependency reasons, complete file-count rows, fresh identities, cold-source-page checks and clean exits passed. The shared image build took 782.082 seconds outside installation timing.
+
+Candidate installer phases took 40.087–41.530 seconds. Root-image unpacking took 16.520–16.654 seconds, configuring the system took 7.228–7.608 seconds, and parallel boot/user finalization took 9.701–10.977 seconds. These identify the remaining work; comparison with another run cannot isolate the incremental effect of direct I/O. This trial would need its slowest candidate readiness bound at or below 93.849 seconds to pass the unchanged conservative target, a gap of about 5.03 seconds. No sample was retried, dropped or substituted.

@@ -1,0 +1,3373 @@
+Create subvolume '/run/omarchy-root-build.cMBCPx/mnt/omarchy-root'
+==> Creating install root at /run/omarchy-root-build.cMBCPx/mnt/omarchy-root
+==> Installing packages to /run/omarchy-root-build.cMBCPx/mnt/omarchy-root
+:: Synchronizing package databases...
+ offline downloading...
+resolving dependencies...
+looking for conflicting packages...
+
+Packages (941) abseil-cpp-20260817.0-1  acl-2.4.0-1  adwaita-cursors-50.0-1  adwaita-fonts-50.0-1  adwaita-icon-theme-50.0-1  adwaita-icon-theme-legacy-46.2-3  alsa-card-profiles-1:1.6.8-1  alsa-lib-1.2.16.1-1  alsa-topology-conf-1.2.5.1-4  alsa-ucm-conf-1.2.16.1-1  aom-3.14.1-1  appstream-1.1.6-1  aquamarine-0.14.0-2  archlinux-keyring-20260727-1  argon2-20190702-6  at-spi2-core-2.60.6-1  attica-6.29.0-1  attr-2.6.0-1  audit-4.2.1-1  autoconf-2.73-1  automake-1.18.1-1  ayatana-ido-0.10.4-1  bash-5.3.15-1  binutils-2.47-4  bison-3.8.2-8  blas-3.12.1-2  bluez-libs-5.87-2  boost-libs-1.92.0-1  breeze-icons-6.29.0-1  brotli-1.2.0-1  bubblewrap-0.11.2-1  bzip2-1.0.8-6  c-ares-1.34.8-1  ca-certificates-20240618-1  ca-certificates-mozilla-3.127-1  ca-certificates-utils-20240618-1  cairo-1.18.4-1  cblas-3.12.1-2  cdparanoia-10.2-10  cfitsio-1:4.7.0-1  cifs-utils-7.5-1  clucene-2.3.3.4-17  compiler-rt-22.1.8-1  containerd-2.3.4-1  convertlit-1.8-13  coreutils-9.11-2  cpio-2.15-3  cpptrace-1.0.4-2  cracklib-2.10.3-1  cryptsetup-2.8.7-1  curl-8.21.0-1  dav1d-1.5.4-1  db5.3-5.3.28-7  dbus-1.16.2-1  dbus-broker-37-3  dbus-broker-units-37-3  dbus-units-37-3  dconf-0.49.0-1  debugedit-5.3-2  default-cursors-3-1  deno-2.9.5-1  desktop-file-utils-0.28-1  device-mapper-2.03.42-1  diffutils-3.12-2  djvulibre-3.5.30.1-1  dotnet-host-10.0.11.sdk111-1  double-conversion-3.4.0-1  duktape-2.7.0-7  e2fsprogs-1.47.4-1  ebook-tools-0.2.2-9  efivar-39-2  electron43-43.4.1-1  elfutils-0.196-1  enchant-2.8.15-2  exempi-2.6.6-3  exiv2-0.28.8-2  expat-2.8.3-1  fcft-3.3.3-1  ffmpeg-2:9.0.1-1  fftw-3.3.11-1  file-5.48-1  filesystem-2025.10.12-1  findutils-4.11.0-1  flac-1.5.0-1  flex-2.6.4-6  fmt-12.2.0-1  freeglut-3.8.0-1  freetype2-2.14.3-1  frei0r-plugins-3.5.0-1  fribidi-1.0.16-2  fuse-common-3.18.2-1  fuse3-3.18.2-1  gavl-2.0.1-2  gawk-5.4.1-1  gc-8.2.12-1  gcc-16.2.1+r23+gd564253eb6c8-1  gcc-libs-16.2.1+r23+gd564253eb6c8-1  gcr-3.41.2-2  gcr-4-4.4.0.1-1  gdb-17.2-1  gdb-common-17.2-1  gdbm-1.26-2  gdk-pixbuf2-2.44.7-1  gettext-1.0-2  gexiv2-0.16.2-2  gexiv2-common-0.16.2-2  ghostscript-10.07.1-1  giflib-6.1.3-2  gjs-2:1.88.1-1  glib-networking-1:2.80.1-1  glib2-2.88.3-1  glibc-2.44+r24+g16be1518495f-1  glslang-1:1.4.357.0-1  glu-9.0.3-3  glycin-2.1.5-2  glycin-gtk4-2.1.5-2  gmp-6.3.0-3  gnome-autoar-0.4.5-1  gnome-desktop-1:44.5-1  gnome-desktop-4-1:44.5-1  gnome-desktop-common-1:44.5-1  gnulib-l10n-20241231-1  gnupg-2.4.9-3  gnutls-3.8.13-2  gobject-introspection-runtime-1.86.0-2  gperftools-2.18.1-1  gpgme-2.1.2-1  gpgmepp-2.1.0-1  gpm-1.20.7.r38.ge82d1a6-6  graphene-1.10.8-2  graphite-1:1.3.15-1  grep-3.12-2  groff-1.24.1-1  gsettings-desktop-schemas-50.1-1  gsettings-system-schemas-50.1-1  gsfonts-20200910-6  gsm-1.0.24-1  gspell-1.14.4-1  gssdp-1.6.6-1  gst-plugin-gtk-1.28.6-2  gst-plugins-bad-libs-1.28.6-2  gst-plugins-base-1.28.6-2  gst-plugins-base-libs-1.28.6-2  gstreamer-1.28.6-2  gtest-1.17.0-2  gtk-update-icon-cache-1:4.22.4-1  gtk3-1:3.24.52-1  gtk4-1:4.22.4-1  gtk4-layer-shell-1.3.0-1  gtksourceview4-4.8.4-2  guile-3.0.11-1  gupnp-1:1.6.10-1  gupnp-dlna-0.12.0-5  gupnp-igd-1.6.0-2  gvfs-1.60.2-1  gzip-1.14-2  harfbuzz-14.3.1-1  harfbuzz-icu-14.3.1-1  hicolor-icon-theme-0.18-1  hidapi-0.15.0-1  highway-1.4.0-1  hunspell-1.7.3-1  hwdata-0.410-1  hwloc-2.14.0-1  hyphen-2.8.9-1  hyprcursor-0.1.13-7  hyprgraphics-0.5.1-4  hyprlang-0.6.8-5  hyprtoolkit-0.5.4-4  hyprutils-0.14.1-1  hyprwayland-scanner-0.4.6-1  hyprwire-0.3.1-3  i2c-tools-4.4-4  iana-etc-20260617-1  icu-78.3-1  ijs-0.35-7  imath-3.2.3-1  iniparser-4.2.6-2  iproute2-7.2.0-1  iptables-1:1.8.13-1  iputils-20250605-1  iso-codes-4.20.1-1  iw-6.17-1  jansson-2.15.1-1  jasper-4.2.9-1  jbig2dec-0.20-2  jbigkit-2.1-8  jemalloc-1:5.3.1-3  js140-140.14.0-1  json-c-0.19-1  json-glib-1.10.8-1  kaccounts-integration-26.08.0-1  karchive-6.29.0-1  kbd-2.10.0-1  kbookmarks-6.29.0-1  kcmutils-6.29.0-1  kcodecs-6.29.0-1  kcolorscheme-6.29.0-1  kcompletion-6.29.0-1  kconfig-6.29.0-1  kconfigwidgets-6.29.0-1  kcoreaddons-6.29.0-1  kcrash-6.29.0-1  kdbusaddons-6.29.0-1  kddockwidgets-2.4.1-1  keyutils-1.6.3-4  kfilemetadata-6.29.0-1  kglobalaccel-6.29.0-1  kguiaddons-6.29.0-1  ki18n-6.29.0-1  kiconthemes-6.29.0-1  kio-6.29.0-2  kirigami-6.29.0-1  kitemmodels-6.29.0-1  kitemviews-6.29.0-1  kjobwidgets-6.29.0-1  kmod-34.2-1  knewstuff-6.29.0-1  knotifications-6.29.0-1  knotifyconfig-6.29.0-1  kpackage-6.29.0-1  krb5-1.22.2-1  kservice-6.29.0-1  ktextwidgets-6.29.0-1  kwallet-6.29.0-1  kwidgetsaddons-6.29.0-1  kwindowsystem-6.29.0-1  kxmlgui-6.29.0-1  l-smash-2.14.5-4  lame-4.0-1  lapack-3.12.1-2  lcms2-2.19.1-1  ldb-2:4.24.6-1  leancrypto-1.8.0-1  leptonica-1.87.0-1  libabw-0.1.4-1  libaccounts-glib-1.27-3  libaccounts-qt-1.17-2  libadwaita-1:1.9.3-1  libarchive-3.8.9-1  libasan-16.2.1+r23+gd564253eb6c8-1  libass-0.17.5-1  libassuan-3.0.0-1  libasyncns-1:0.8+r3+g68cd5af-3  libatasmart-0.19-8  libatomic-16.2.1+r23+gd564253eb6c8-1  libatomic_ops-7.8.2-2  libavc1394-0.5.4-7  libavif-1.4.2-1  libayatana-appindicator-0.6.0-1  libayatana-indicator-0.9.5-1  libb2-0.98.1-3  libblake3-1.8.7-1  libblockdev-3.5.0-2  libblockdev-crypto-3.5.0-2  libblockdev-fs-3.5.0-2  libblockdev-loop-3.5.0-2  libblockdev-mdraid-3.5.0-2  libblockdev-nvme-3.5.0-2  libblockdev-part-3.5.0-2  libblockdev-smart-3.5.0-2  libblockdev-swap-3.5.0-2  libbluray-1.4.1-1  libbpf-1.7.0-1  libbs2b-3.1.0-10  libbsd-0.12.2-2  libbytesize-2.12-3  libcanberra-1:0.30+r2+gc0620e4-6  libcap-2.78-1  libcap-ng-0.9.3-1  libcdio-2.3.0-1  libcdio-paranoia-10.2+2.0.2-2  libcdr-0.1.9-1  libcgif-0.5.3-1  libcloudproviders-0.4.0-1  libcmis-0.6.3-2  libcolord-1.4.8-1  libcue-2.3.0-2  libcups-2:2.4.19-1  libcupsfilters-2.1.1-4  libdaemon-0.14-6  libdatachannel-0.24.5-2  libdatrie-0.2.14-1  libdbusmenu-glib-18.10.20180917-2  libdbusmenu-gtk3-18.10.20180917-2  libdc1394-2.2.7-2  libde265-1.1.1-1  libdecor-0.2.5-1  libdeflate-1.26-1  libdisplay-info-0.3.0-1  libdovi-3.4.0-1  libdrm-2.4.134-1  libdvdnav-7.0.0-1  libdvdread-7.1.1-1  libdwarf-1:2.3.2-1  libe-book-0.1.4-1  libebur128-1.2.6-2  libedit-20260512_3.1-1  libei-1.6.0-1  libelf-0.196-1  libepoxy-1.5.10-3  libepubgen-0.1.1-6  libetonyek-0.1.13-2  libevdev-1.13.7-1  libevent-2.1.13-2  libexif-0.6.26-1  libexttextcat-3.4.8-1  libfdk-aac-2.0.3-2  libffi-3.8.0-1  libfontenc-1.1.9-1  libfreeaptx-0.2.2-1  libfreehand-0.1.3-1  libfyaml-0.9.6-3  libgcc-16.2.1+r23+gd564253eb6c8-1  libgcrypt-1.12.2-1  libgfortran-16.2.1+r23+gd564253eb6c8-1  libgirepository-1.86.0-2  libgit2-1:1.9.7-1  libglvnd-1.7.0-3  libgomp-16.2.1+r23+gd564253eb6c8-1  libgpg-error-1.61-1  libgsf-1.14.58-1  libgudev-238-3  libgxps-0.3.2-5  libhandy-1.8.3-2  libheif-1.23.1-4  libhwasan-16.2.1+r23+gd564253eb6c8-1  libice-1.1.2-1  libidn-1.44-1  libidn2-2.3.8-1  libiec61883-1.2.0-9  libimagequant-4.4.1-2  libimobiledevice-1.4.0-2  libimobiledevice-glue-1.3.2-1  libinih-62-2  libinput-1.31.3-1  libiptcdata-1.0.5-5  libisl-0.28-1  libixion-0.20.0-8  libjpeg-turbo-3.2.0-2  libjuice-1.7.3-1  libjxl-0.12.0-1  libksba-1.8.0-1  liblangtag-0.6.8-1  liblc3-1.1.3-2  libldac-2.0.2.6-1  libldap-2.6.13-1  liblqr-0.4.3-1  liblsan-16.2.1+r23+gd564253eb6c8-1  libluv-1.52.1-1  libmakepkg-dropins-20-2  libmanette-0.2.13-2  libmd-1.2.0-1  libmm-glib-1.24.2-1  libmng-2.0.3-4  libmnl-1.0.5-2  libmodplug-0.8.9.0-7  libmpc-1.4.1-1  libmspub-0.1.5-1  libmtp-1.1.23-1  libmwaw-0.3.23-1  libmysofa-1.3.5-1  libnautilus-extension-50.2.2-1  libndp-1.9-1  libnetfilter_conntrack-1.1.1-1  libnewt-0.52.25-2  libnfnetlink-1.0.2-2  libnfs-6.0.2-5  libnftnl-1.3.1-1  libnghttp2-1.70.0-1  libnghttp3-1.18.0-1  libngtcp2-1.25.0-1  libnice-0.1.23-1  libnl-3.12.0-1  libnm-1.58.1-1  libnotify-0.8.8-1  libnsbmp-0.1.7-2  libnsgif-1.0.0-2  libnsl-2.0.1-2  libnumbertext-1.0.11-3  libnvme-1.16.2-2  libobjc-16.2.1+r23+gd564253eb6c8-1  libodfgen-0.1.8-5  libogg-1.3.6-1  libopenmpt-0.8.8-1  liborcus-0.21.0-7  libosinfo-1.12.0-3  libp11-kit-0.26.5-1  libpagemaker-0.0.4-5  libpaper-2.2.8-1  libpathrs-0.2.5-2  libpcap-1.10.6-1  libpciaccess-0.19-1  libpgm-5.3.128-4  libpipeline-1.5.8-1  libpipewire-1:1.6.8-1  libplacebo-7.360.1-6  libplist-2.7.0-3  libpng-1.6.58-2  libportal-0.10.0-1  libportal-gtk4-0.10.0-1  libppd-2.1.1-2  libproxy-0.5.12-1  libpsl-0.21.5-2  libpwquality-1.4.5-7  libquadmath-16.2.1+r23+gd564253eb6c8-1  libqxp-0.0.3-1  libraqm-0.11.0-1  libraw1394-2.1.2-4  librevenge-0.0.6-1  librsvg-2:2.62.3-1  libsamplerate-0.2.2-3  libsasl-2.1.28-5  libseccomp-2.6.0-1  libsixel-1.10.5-1  libsm-1.2.6-1  libsndfile-1.2.2-4  libsodium-1.0.22-1  libsoup3-3.6.6-2  libsoxr-0.1.3-5  libspectre-0.2.12-2  libsrtp-1:2.8.0-1  libssh-0.12.2-1  libssh2-1.11.1-7  libstaroffice-0.0.8-1  libstdc++-16.2.1+r23+gd564253eb6c8-1  libstemmer-3.1.1-1  libsynctex-2026.0-2  libsysprof-capture-50.0-6  libtasn1-4.21.0-1  libtatsu-1.0.5-1  libteam-1.32-3  libthai-0.1.30-1  libtheora-1.2.0-1  libtiff-4.7.2-1  libtirpc-1.3.7-1  libtommath-1.3.0-2  libtool-2.6.2-5  libtsan-16.2.1+r23+gd564253eb6c8-1  libubsan-16.2.1+r23+gd564253eb6c8-1  libunibreak-7.0-1  libunistring-1.4.2-1  libunwind-1.8.2-1  liburing-2.15-1  libusb-1.0.30-1  libusbmuxd-2.1.1-2  libutempter-1.2.3-1  libutf8proc-2.11.3-1  libuv-1.52.1-1  libva-2.24.1-1  libvdpau-1.5-4  libverto-0.3.2-6  libvisio-0.1.11-1  libvorbis-1.3.7-4  libvpl-2.17.0-1  libvpx-1.16.0-3  libvterm-0.3.3-2  libwacom-2.19.1-1  libwbclient-2:4.24.6-1  libwebp-1.6.0-2  libwireplumber-0.5.15-1  libwpd-0.10.3-6  libwps-0.4.14-4  libx11-1.8.13-1  libxau-1.0.12-1  libxcb-1.17.0-1  libxcomposite-0.4.7-1  libxcrypt-4.5.2-1  libxcursor-1.2.3-1  libxcvt-0.1.3-1  libxdamage-1.1.7-1  libxdmcp-1.1.5-2  libxext-1.3.7-1  libxfixes-6.0.2-1  libxfont2-2.0.9-1  libxft-2.3.9-1  libxi-1.8.3-1  libxinerama-1.1.6-1  libxkbcommon-1.13.2-1  libxkbcommon-x11-1.13.2-1  libxkbfile-1.2.0-1  libxml2-2.15.3-1  libxmlb-0.3.29-1  libxmu-1.3.1-1  libxpresent-1.0.2-1  libxrandr-1.5.5-1  libxrender-0.9.12-1  libxshmfence-1.3.3-1  libxslt-1.1.45-2  libxss-1.2.5-1  libxt-1.3.1-1  libxtst-1.2.5-1  libxv-1.0.13-1  libxxf86vm-1.1.7-1  libyuv-r2921+644251f25-1  libzip-1.11.4-1  libzmf-0.0.2-20  licenses-20240728-1  lilv-0.28.0-1  limine-mkinitcpio-hook-1.37.1-1  limine-snapper-sync-1.31.0-1  linux-api-headers-7.2-1  linux-firmware-amdgpu-20260810-2  linux-firmware-atheros-20260810-2  linux-firmware-broadcom-20260810-2  linux-firmware-cirrus-20260810-2  linux-firmware-intel-20260810-2  linux-firmware-mediatek-20260810-2  linux-firmware-nvidia-20260810-2  linux-firmware-other-20260810-2  linux-firmware-radeon-20260810-2  linux-firmware-realtek-20260810-2  linux-firmware-whence-20260810-2  llhttp-9.3.1-1  llvm-libs-22.1.8-2  lm_sensors-1:3.6.2-1  lmdb-0.9.35-1  localsearch-3.11.1-2  lpsolve-5.5.2.14-1  lua-5.5.1-1  lua-luarocks-3.13.0-5  lua51-lpeg-1.1.0-5  lua54-5.4.8-6  luajit-2.1.1787165859+1ee778a-1  lv2-1.18.10-2  lz4-1:1.10.0-2  lzo-2.10-5  m4-1.4.21-2  make-4.4.1-3  mbedtls3-3.6.7-1  md4c-0.5.3-1  mdadm-4.6-2  media-player-info-26-1  mesa-1:26.2.1-1  minizip-1:1.3.2-3  mkinitcpio-busybox-1.36.1-1  mlt-7.40.0-3  mobile-broadband-provider-info-20251101-1  mpdecimal-4.0.1-3  mpfr-4.2.2-1  mpg123-1.33.7-1  msgpack-c-7.0.1-1  mtdev-1.1.7-1  mujs-1.3.9-1  muparser-2.3.5-2  ncurses-6.6-2  neon-0.37.1-1  nettle-4.0-1  nftables-1:1.1.6-3  npth-1.8-1  nspr-4.40-1  nss-3.127-1  ocl-icd-2.3.5-1  onetbb-2023.1.0-1  oniguruma-6.9.10-1  openal-1.25.2-2  opencore-amr-0.1.6-2  opencv-5.0.0-9  openexr-3.4.15-1  openh264-2.6.0-2  openjpeg2-2.5.4-1  openjph-0.31.0-1  openssl-3.6.3-1  opentimelineio-0.18.1-3  opus-1.6.1-1  orc-0.4.42-1  osinfo-db-20260812-1  p11-kit-0.26.5-1  pacman-7.1.0.r9.g54d9411-2  pacman-mirrorlist-20260610-1  pam-1.7.2-2  pambase-20260616-1  pango-1:1.58.2-1  parted-3.7-1  patch-2.8-1  pciutils-3.15.0-1  pcre-8.45-5  pcre2-10.47-1  pcsclite-2.5.1-1  perl-5.42.2-2  perl-error-0.17030-3  perl-mailtools-2.22-3  perl-timedate-2.35-1  pinentry-1.3.3-1  pipewire-audio-1:1.6.8-1  pixman-0.46.4-1  pkgconf-3.0.5-1  polkit-127-3  poppler-26.08.0-1  poppler-data-0.4.12-2  poppler-glib-26.08.0-1  poppler-qt6-26.08.0-1  popt-1.19-2  portaudio-1:19.7.0-4  procps-ng-4.0.7-1  protobuf-35.1-2  psmisc-23.7-2  pugixml-1.16-1  purpose-6.29.0-1  python-3.14.7-1  python-aaf2-1.7.1-4  python-cairo-1.29.1-1  python-certifi-2026.07.22-1  python-charset-normalizer-3.4.7-1  python-colorama-0.4.6-6  python-dbus-1.4.0-2  python-docopt-0.6.2-15  python-fastjsonschema-2.21.2-2  python-idna-3.19-1  python-lark-parser-1.3.1-2  python-packaging-26.3-1  python-pycups-2.0.4-4  python-pyxdg-0.28-7  python-requests-2.34.2-1  python-shtab-1.11.0-1  python-termcolor-3.3.0-1  python-typing_extensions-4.16.0-1  python-urllib3-2.7.0-1  python-yaml-6.0.3-2  qca-qt6-2.3.10-8  qemu-user-static-11.1.0-1  qoi-r350.4461cc3-1  qpdf-12.4.0-1  qqc2-desktop-style-6.29.0-2  qrcodegencpp-cmake-1.8.0-4  qt6-5compat-6.11.2-1  qt6-base-6.11.2-2  qt6-declarative-6.11.2-1  qt6-multimedia-6.11.2-1  qt6-multimedia-ffmpeg-6.11.2-1  qt6-networkauth-6.11.2-1  qt6-positioning-6.11.2-1  qt6-shadertools-6.11.2-1  qt6-speech-6.11.2-1  qt6-svg-6.11.2-1  qt6-translations-6.11.2-1  qt6-wayland-6.11.2-1  qt6-webchannel-6.11.2-1  qt6-webengine-6.11.2-1  raptor-2.0.16-9  rasqal-1:0.9.33-9  rav1e-0.8.1-3  re2-2:2025.11.05-6  readline-8.3.003-1  redland-1:1.0.17-10  rnnoise-1:0.2-1  rsync-3.5.0-1  rubberband-4.0.0-2  rubygems-3.6.9-1  runc-1.5.1-1  sbc-2.2-1  sdbus-cpp-2.3.1-1  sdl2-compat-2.32.70-1  sdl2_ttf-2.24.0-2  sdl3-3.4.14-1  seatd-0.9.3-1  sed-4.10-2  serd-0.32.10-1  shaderc-2026.3-1  shadow-4.20.0.arch1-1  shared-mime-info-2.5.1-2  signon-kwallet-extension-26.08.0-1  signon-plugin-oauth2-0.25-4  signon-ui-0.17+20231016-4  signond-8.61-4  simde-0.8.2-1  slang-2.3.3-4  smbclient-2:4.24.6-1  snappy-1.2.2-3  sndio-1.10.0-1  solid-6.29.0-1  sonnet-6.29.0-1  sord-0.16.22-1  sound-theme-freedesktop-0.8-6  source-highlight-3.1.9-19  spandsp-0.0.6-7  spdlog-1.17.0-2  speex-1.2.1-2  speexdsp-1.2.1-2  spirv-tools-1:1.4.357.0-1  sqlite-3.53.4-1  sratom-0.6.22-1  srt-1.5.6-1  svt-av1-4.2.0-1  syndication-6.29.0-1  systemd-261.2-1  systemd-libs-261.2-1  systemd-sysvcompat-261.2-1  taglib-2.3.1-1  talloc-2.5.0-1  tar-1.35-5  tdb-1.4.15-1  tesseract-data-osd-2:4.1.0-5  tevent-1:0.17.2-1  texinfo-7.3-1  tinysparql-3.11.1-1  tomlplusplus-3.4.0-2  totem-pl-parser-3.26.7-1  tpm2-tss-4.2.0-2  tree-sitter-0.26.9-1  tree-sitter-c-0.24.1-2  tree-sitter-lua-0.5.0-3  tree-sitter-markdown-0.5.3-2  tree-sitter-query-0.8.0-2  tree-sitter-vim-0.8.1-3  tree-sitter-vimdoc-4.1.0-2  tslib-1.24-1  ttf-liberation-2.1.5-2  tzdata-2026c-1  uchardet-0.0.8-4  udisks2-2.11.2-1  unibilium-2.1.2-1  upower-1.91.3-1  uthash-2.3.0-3  util-linux-2.42.2-1  util-linux-libs-2.42.2-1  v4l-utils-1.32.0-2  vapoursynth-77-2  verdict-1.4.5-2  vid.stab-1.1.1-3  vmaf-3.2.0-1  volume_key-0.3.12-12  vulkan-icd-loader-1.4.357.0-1  wayland-1.26.0-1  wayland-protocols-1.49-1  webkit2gtk-4.1-2.52.6-1  webrtc-audio-processing-1-1.3-5  which-2.25-1  woff2-1.0.2-6  wpa_supplicant-2:2.12-1  x264-3:0.165.r3222.b35605a-2  x265-4.3-1  xcb-imdkit-1.0.9-1  xcb-proto-1.17.0-4  xcb-util-0.4.1-2  xcb-util-cursor-0.1.6-1  xcb-util-errors-1.0.1-2  xcb-util-image-0.4.1-3  xcb-util-keysyms-0.4.1-5  xcb-util-renderutil-0.3.10-2  xcb-util-wm-0.4.2-2  xdg-dbus-proxy-0.1.8-1  xdg-desktop-portal-1.22.1-2  xdg-user-dirs-0.20-1  xdg-user-dirs-gtk-0.16-1  xdg-utils-1.2.1-2  xf86-input-libinput-1.5.0-1  xkeyboard-config-2.48-1  xmlsec-1.3.12-1  xorg-fonts-encodings-1.1.0-2  xorg-server-21.1.24-1  xorg-server-common-21.1.24-1  xorg-setxkbmap-1.3.5-1  xorg-xauth-1.1.5-1  xorg-xkbcomp-1.5.0-1  xorg-xprop-1.2.8-1  xorg-xwayland-24.1.13-1  xorgproto-2025.1-1  xvidcore-1.3.7-4  xxhash-0.8.3-1  xz-5.8.3-1  yoga-3.2.1-1  yt-dlp-ejs-0.8.0-1  yyjson-0.12.0-1  zeromq-4.3.5-3  zimg-3.0.6-2  zint-2.16.0-2  zip-3.0-14  zix-0.8.2-1  zlib-1:1.3.2-3  zlib-ng-2.3.3-1  zstd-1.5.7-3  zxing-cpp-3.1.1-1  aether-4.29.6-1  alsa-utils-1.2.16-1  asdcontrol-1:0.6.0-2  avahi-1:0.9rc5-1  base-3-3  base-devel-1-2  bash-completion-2.18.0-1  bat-0.26.1-2  bluez-5.87-2  bluez-tools-0.2.0-6  bluez-utils-5.87-2  bolt-0.9.11-3  brightnessctl-0.5.1-3  btop-1.4.7-1  btrfs-progs-7.1-1  chromium-151.0.7922.173-1  clang-22.1.8-1  cliamp-1.63.2-1  cups-2:2.4.19-1  cups-filters-2.0.1-2  cups-pk-helper-0.2.7-2  ddcutil-2.2.7-1  docker-1:29.7.2-1  docker-buildx-0.36.1-1  docker-compose-5.5.0-1  dosfstools-4.2-5  dotnet-runtime-10.0.11.sdk111-1  dua-cli-2.42.1-1  efibootmgr-18-4  evince-1:48.4-1  exfatprogs-1.4.3-1  expac-10-13  eza-0.23.5-2  fakeroot-1:1.37.2-3  fastfetch-2.67.1-1  fcitx5-5.1.21-1  fcitx5-gtk-5.1.7-1  fcitx5-qt-5.1.14-2  fd-10.4.2-2  ffmpegthumbnailer-2.3.0-2  fontconfig-2:2.18.3-2  foot-1.27.0-2  fzf-0.74.3-1  git-2.55.0-1  gnome-disk-utility-46.1-3  gnome-keyring-1:50.0-1  gnome-themes-extra-1:3.28-1  gpu-screen-recorder-6.0.1-1  grim-1.5.0-2  gst-plugin-pipewire-1:1.6.8-1  gum-2.0.0-1  gvfs-mtp-1.60.2-1  gvfs-nfs-1.60.2-1  gvfs-smb-1.60.2-1  herdr-0.8.2-1  hyprland-0.56.2-1  hyprland-guiutils-0.2.2-2  hyprland-preview-share-picker-0.2.1-1  hyprpicker-0.4.7-3  hyprsunset-0.4.0-3  imagemagick-7.1.2.30-1  imv-5.0.1-2  inetutils-2.8-1  inotify-tools-4.25.9.0-1  inxi-3.3.41.1-1  jq-1.8.2-1  kdenlive-26.08.0-1  kernel-modules-hook-0.1.7-3  lazydocker-0.25.2-1  lazygit-0.64.1-1  less-1:704-1  libpulse-17.0+r98+gb096704c0-1  libreoffice-fresh-26.2.5-3  libsecret-0.21.7-1  libvips-8.18.5-1  libyaml-0.2.5-3  limine-12.6.0-1  linux-7.1.9.arch1-2  linux-firmware-20260810-2  llvm-22.1.8-2  localsend-1.18.2-1  lua51-5.1.5-13  luarocks-3.13.0-5  man-db-2.13.1-2  mariadb-libs-12.3.2-4  mise-bin-2026.8.14-1  mkinitcpio-41.1-1  moonlight-qt-6.1.0-7  mpv-1:0.41.0-4  mpv-mpris-1.2-2  nautilus-50.2.2-1  nautilus-python-4.1.0-3  neovim-0.12.5-1  networkmanager-1.58.1-1  noto-fonts-1:2026.08.01-1  noto-fonts-cjk-20240730-1  noto-fonts-emoji-1:2.051-1  nss-mdns-0.15.1-2  obs-studio-32.2.2-1  obsidian-1.13.7-2  omacalc-0.2.2-1  omacut-0.4.0-1  omarchy-4.0.2-1  omarchy-keyring-20251027-1  omarchy-nvim-2026.8.13-1  omarchy-settings-4.0.2-1  omawrite-0.5.0-1  openssh-10.5p1-1  pacman-contrib-1.13.1-1  pamixer-1.6-4  pinta-3.1.2-2  pipewire-1:1.6.8-1  pipewire-alsa-1:1.6.8-1  pipewire-jack-1:1.6.8-1  pipewire-pulse-1:1.6.8-1  plocate-1.1.24-2  plymouth-26.134.222-2  postgresql-libs-18.6-1  power-profiles-daemon-0.30-1  python-gobject-3.56.3-1  python-poetry-core-2.4.1-1  qemu-user-static-binfmt-11.1.0-1  qrencode-4.1.1-4  qt6-imageformats-6.11.2-1  quickshell-0.3.1-1  ripgrep-15.2.0-1  ruby-3.4.10-1  sddm-0.21.0-7  slurp-1.5.0-2  snapper-0.13.1-3  socat-1.8.1.3-1  starship-1.26.0-1  sudo-1.9.17.p2-6  sushi-50.0-1  system-config-printer-1.5.18-6  tensaku-0.28.0-1  tesseract-5.5.3-1  tesseract-data-eng-2:4.1.0-5  tldr-3.4.4-1  tmux-3.7_c-1  tobi-try-1.8.1-3  tree-sitter-cli-0.26.9-1  ttf-ia-writer-20181225-1  ttf-jetbrains-mono-nerd-basic-3.5.0-1  ttfx-0.3.2-1  tzupdate-3.1.0-1  udiskie-2.7.0-2  ufw-0.36.2-7  ufw-docker-251123-1  unzip-6.0-23  usage-5.1.0-1  uwsm-0.26.7-1  whois-5.6.6-1  wireless-regdb-2026.05.30-1  wireplumber-0.5.15-1  wl-clipboard-1:2.3.0-1  woff2-font-awesome-7.3.1-1  wtype-0.4-2  xdg-desktop-portal-gtk-1.15.3-1  xdg-desktop-portal-hyprland-1.4.1-1  xdg-terminal-exec-0.14.3-1  xournalpp-1.3.7-1  yaru-icon-theme-26.04.5.1ubuntu-1  yay-13.0.1-1  yt-dlp-2026.08.19-1  zbar-0.23.93-7  zoxide-0.10.0-1  zram-generator-1.2.1-1
+
+Total Installed Size:  8081.43 MiB
+
+:: Proceed with installation? [Y/n] 
+checking keyring...
+checking package integrity...
+loading package files...
+checking for file conflicts...
+checking available disk space...
+:: Processing package changes...
+installing linux-api-headers...
+installing tzdata...
+Optional dependencies for tzdata
+    bash: for tzselect [pending]
+    glibc: for zdump, zic [pending]
+installing iana-etc...
+installing filesystem...
+installing glibc...
+Optional dependencies for glibc
+    gd: for memusagestat
+    perl: for mtrace [pending]
+installing libgcc...
+installing libstdc++...
+installing ncurses...
+Optional dependencies for ncurses
+    bash: for ncursesw6-config [pending]
+installing readline...
+installing bash...
+Optional dependencies for bash
+    bash-completion: for tab completion [pending]
+installing zlib...
+installing sqlite...
+installing util-linux-libs...
+Optional dependencies for util-linux-libs
+    python: python bindings to libmount [pending]
+installing e2fsprogs...
+Optional dependencies for e2fsprogs
+    lvm2: for e2scrub
+    util-linux: for e2scrub [pending]
+    smtp-forwarder: for e2scrub_fail script
+installing keyutils...
+installing gdbm...
+installing brotli...
+installing xz...
+installing lz4...
+installing zstd...
+installing openssl...
+Optional dependencies for openssl
+    ca-certificates [pending]
+    perl [pending]
+installing libsasl...
+installing libldap...
+installing libevent...
+Optional dependencies for libevent
+    python: event_rpcgen.py [pending]
+installing libverto...
+installing lmdb...
+installing krb5...
+installing libcap-ng...
+installing audit...
+Optional dependencies for audit
+    audispd-plugins: for audit event dispatcher plugins
+    audispd-plugins-zos: for z/OS audit event dispatcher plugin
+installing expat...
+installing libgpg-error...
+installing libgcrypt...
+installing systemd-libs...
+installing dbus...
+installing libffi...
+installing libsysprof-capture...
+installing bzip2...
+installing pcre2...
+Optional dependencies for pcre2
+    sh: for pcre2-config [installed]
+installing glib2...
+Optional dependencies for glib2
+    dconf: GSettings storage backend [pending]
+    glib2-devel: development tools
+    gvfs: most gio functionality [pending]
+installing libasan...
+installing libatomic...
+installing libgfortran...
+installing libgomp...
+installing libhwasan...
+installing liblsan...
+installing libobjc...
+installing libquadmath...
+installing libtsan...
+installing libubsan...
+installing gcc-libs...
+installing dconf...
+/tmp/alpm_YdMxvP/.INSTALL: line 6: vercmp: command not found
+/tmp/alpm_YdMxvP/.INSTALL: line 6: ((: < 0 : arithmetic syntax error: operand expected (error token is "< 0 ")
+installing gsettings-system-schemas...
+installing adwaita-fonts...
+installing gsettings-desktop-schemas...
+installing xcb-proto...
+installing xorgproto...
+installing libxdmcp...
+installing libxau...
+installing libxcb...
+installing libx11...
+installing libxext...
+installing libxfixes...
+installing libxi...
+installing libxtst...
+installing xorg-xprop...
+installing at-spi2-core...
+installing libxcrypt...
+installing libtirpc...
+installing libnsl...
+installing pambase...
+installing pam...
+installing libcap...
+installing bubblewrap...
+installing libpng...
+installing freetype2...
+Optional dependencies for freetype2
+    harfbuzz: Improved autohinting [pending]
+installing fontconfig...
+/tmp/alpm_zuhryZ/.INSTALL: line 2: vercmp: command not found
+/tmp/alpm_zuhryZ/.INSTALL: line 2: ((: < 0 : arithmetic syntax error: operand expected (error token is "< 0 ")
+Rebuilding fontconfig cache...
+installing libxrender...
+installing lzo...
+installing pixman...
+installing cairo...
+installing enchant...
+Optional dependencies for enchant
+    aspell: for aspell based spell checking support
+    hspell: for hspell based spell checking support
+    hunspell: for hunspell based spell checking support [pending]
+    libvoikko: for libvoikko based spell checking support
+    nuspell: for nuspell based spell checking support
+installing libjpeg-turbo...
+installing jbigkit...
+installing libdeflate...
+installing libwebp...
+Optional dependencies for libwebp
+    libwebp-utils: WebP conversion and inspection tools
+installing libtiff...
+Optional dependencies for libtiff
+    freeglut: for using tiffgt [pending]
+installing lcms2...
+installing giflib...
+installing libunwind...
+installing gperftools...
+installing gtest...
+Optional dependencies for gtest
+    python: gmock generator [pending]
+installing highway...
+installing libjxl...
+Optional dependencies for libjxl
+    java-runtime: for JNI bindings
+installing dav1d...
+Optional dependencies for dav1d
+    dav1d-doc: HTML documentation
+installing graphite...
+Optional dependencies for graphite
+    graphite-docs: Documentation
+installing harfbuzz...
+Optional dependencies for harfbuzz
+    harfbuzz-utils: utilities
+installing icu...
+installing libxml2...
+Optional dependencies for libxml2
+    python: Python bindings [pending]
+installing fribidi...
+installing libdatrie...
+installing libthai...
+installing libxft...
+installing pango...
+installing librsvg...
+installing libseccomp...
+installing glycin...
+Optional dependencies for glycin
+    libheif: Load .avif, .heic and .heif [pending]
+installing shared-mime-info...
+installing gdk-pixbuf2...
+Optional dependencies for gdk-pixbuf2
+    libheif: Load .avif, .heic and .heif [pending]
+    libopenraw: Load .arw, .cr2, .crw, .dng, .erf, .mrw, .nef, .orf, .pef and .raf
+    libwmf: Load .apm and .wmf
+installing acl...
+installing attr...
+installing gmp...
+installing coreutils...
+installing findutils...
+installing libtasn1...
+installing libp11-kit...
+installing p11-kit...
+installing ca-certificates-utils...
+installing ca-certificates-mozilla...
+installing ca-certificates...
+installing libunistring...
+installing libidn2...
+installing libnghttp2...
+installing libnghttp3...
+installing nettle...
+installing leancrypto...
+installing gnutls...
+Optional dependencies for gnutls
+    tpm2-tss: support for TPM2 wrapped keys [pending]
+installing libngtcp2...
+installing libpsl...
+installing libssh2...
+installing curl...
+installing json-c...
+installing libelf...
+installing gstreamer...
+Optional dependencies for gstreamer
+    python: gst-plugins-doc-cache-generator [pending]
+installing graphene...
+installing iso-codes...
+installing libpciaccess...
+installing libdrm...
+Optional dependencies for libdrm
+    cairo: needed for modetest tool [installed]
+installing libxshmfence...
+installing libxxf86vm...
+installing libedit...
+installing llvm-libs...
+installing lm_sensors...
+Optional dependencies for lm_sensors
+    rrdtool: for logging with sensord
+    perl: for sensor detection and configuration convert [pending]
+installing spirv-tools...
+installing default-cursors...
+Optional dependencies for default-cursors
+    adwaita-cursors: default cursor theme [pending]
+installing wayland...
+installing mesa...
+Optional dependencies for mesa
+    opengl-man-pages: for the OpenGL API man pages
+installing libglvnd...
+installing libgudev...
+installing libxv...
+installing orc...
+installing gst-plugins-base-libs...
+installing duktape...
+installing libproxy...
+installing glib-networking...
+installing libsoup3...
+Optional dependencies for libsoup3
+    samba: Windows Domain SSO
+installing gssdp...
+Optional dependencies for gssdp
+    gtk4: gssdp-device-sniffer [pending]
+installing gupnp...
+Optional dependencies for gupnp
+    python: gupnp-binding-tool [pending]
+installing gupnp-igd...
+installing libnice...
+Optional dependencies for libnice
+    gstreamer: "nice" GStreamer plugin [installed]
+installing libusb...
+installing libva...
+Optional dependencies for libva
+    intel-media-driver: backend for Intel GPUs (>= Broadwell)
+    libva-intel-driver: backend for Intel GPUs (<= Haswell)
+    libva-mesa-driver: backend for AMD and NVIDIA GPUs [installed]
+installing xkeyboard-config...
+installing libxkbcommon...
+Optional dependencies for libxkbcommon
+    libxkbcommon-x11: xkbcli interactive-x11 [pending]
+    wayland: xkbcli interactive-wayland [installed]
+installing libxkbcommon-x11...
+installing vulkan-icd-loader...
+Optional dependencies for vulkan-icd-loader
+    vulkan-driver: packaged vulkan driver
+installing vmaf...
+installing gst-plugins-bad-libs...
+installing hicolor-icon-theme...
+installing adwaita-icon-theme-legacy...
+installing adwaita-cursors...
+installing adwaita-icon-theme...
+installing desktop-file-utils...
+installing libcloudproviders...
+installing libcolord...
+installing libdaemon...
+installing avahi...
+Optional dependencies for avahi
+    gtk3: avahi-discover, avahi-discover-standalone, bshell, bssh, bvnc [pending]
+    libevent: libevent bindings [installed]
+    nss-mdns: NSS support for mDNS [pending]
+    python-dbus: avahi-bookmarks, avahi-discover [pending]
+    python-gobject: avahi-bookmarks, avahi-discover [pending]
+    python-twisted: avahi-bookmarks
+installing libcups...
+installing libepoxy...
+installing libxcomposite...
+installing libxcursor...
+installing libxdamage...
+installing libxinerama...
+installing libxrandr...
+installing json-glib...
+installing libstemmer...
+installing tinysparql...
+installing gtk-update-icon-cache...
+installing gtk3...
+Optional dependencies for gtk3
+    evince: Default print preview command [pending]
+installing harfbuzz-icu...
+installing db5.3...
+installing perl...
+installing hyphen...
+installing aom...
+installing libyuv...
+installing rav1e...
+installing svt-av1...
+installing libavif...
+installing hidapi...
+Optional dependencies for hidapi
+    libusb: for hidapi-libusb [installed]
+installing libevdev...
+installing libmanette...
+installing tpm2-tss...
+installing libsecret...
+Optional dependencies for libsecret
+    org.freedesktop.secrets: secret storage backend [pending]
+installing libxslt...
+Optional dependencies for libxslt
+    python: Python bindings [pending]
+installing openjpeg2...
+installing noto-fonts...
+Optional dependencies for noto-fonts
+    noto-fonts-cjk: CJK characters [pending]
+    noto-fonts-emoji: Emoji characters [pending]
+    noto-fonts-extra: additional variants (condensed, semi-bold, extra-light)
+installing woff2...
+installing xdg-dbus-proxy...
+installing ttf-liberation...
+installing webkit2gtk-4.1...
+Optional dependencies for webkit2gtk-4.1
+    geoclue: Geolocation support
+    gst-libav: nonfree media decoding
+    gst-plugins-bad: media decoding
+    gst-plugins-good: media decoding
+installing aether...
+installing hwdata...
+installing kmod...
+installing pciutils...
+Optional dependencies for pciutils
+    which: for update-pciids [pending]
+    grep: for update-pciids [pending]
+    curl: for update-pciids [installed]
+installing psmisc...
+installing alsa-topology-conf...
+installing alsa-ucm-conf...
+installing alsa-lib...
+installing fftw...
+Optional dependencies for fftw
+    fftw-openmpi: for OpenMPI integration
+installing libsamplerate...
+installing alsa-utils...
+installing asdcontrol...
+installing file...
+installing mpfr...
+installing gawk...
+installing grep...
+installing procps-ng...
+installing sed...
+installing tar...
+installing gnulib-l10n...
+installing gettext...
+Optional dependencies for gettext
+    git: for autopoint infrastructure updates [pending]
+    appstream: for appstream support [pending]
+installing shadow...
+installing util-linux...
+Optional dependencies for util-linux
+    words: default dictionary for look
+installing gzip...
+Optional dependencies for gzip
+    less: zless support [pending]
+    util-linux: zmore support [installed]
+    diffutils: zdiff/zcmp support [pending]
+installing licenses...
+installing libksba...
+installing libassuan...
+installing pinentry...
+Optional dependencies for pinentry
+    gcr: GNOME backend [pending]
+    gtk3: GTK backend [installed]
+    kguiaddons: Qt6 backend [pending]
+    kwindowsystem: Qt6 backend [pending]
+installing npth...
+installing gnupg...
+Optional dependencies for gnupg
+    pcsclite: for using scdaemon not with the gnupg internal card driver [pending]
+installing gpgme...
+installing libarchive...
+installing pacman-mirrorlist...
+installing device-mapper...
+installing popt...
+installing cryptsetup...
+installing dbus-broker...
+installing dbus-broker-units...
+installing dbus-units...
+installing kbd...
+installing systemd...
+Initializing machine ID from random generator.
+Creating group 'sys' with GID 3.
+Creating group 'mem' with GID 8.
+Creating group 'ftp' with GID 11.
+Creating group 'mail' with GID 12.
+Creating group 'log' with GID 19.
+Creating group 'smmsp' with GID 25.
+Creating group 'proc' with GID 26.
+Creating group 'games' with GID 50.
+Creating group 'lock' with GID 54.
+Creating group 'network' with GID 90.
+Creating group 'floppy' with GID 94.
+Creating group 'scanner' with GID 96.
+Creating group 'power' with GID 98.
+Creating group 'nobody' with GID 65534.
+Creating group 'adm' with GID 999.
+Creating group 'wheel' with GID 998.
+Creating group 'empower' with GID 997.
+Creating group 'utmp' with GID 996.
+Creating group 'audio' with GID 995.
+Creating group 'clock' with GID 994.
+Creating group 'disk' with GID 993.
+Creating group 'input' with GID 992.
+Creating group 'kmem' with GID 991.
+Creating group 'kvm' with GID 990.
+Creating group 'lp' with GID 989.
+Creating group 'optical' with GID 988.
+Creating group 'render' with GID 987.
+Creating group 'sgx' with GID 986.
+Creating group 'storage' with GID 985.
+Creating group 'tty' with GID 5.
+Creating group 'uucp' with GID 984.
+Creating group 'video' with GID 983.
+Creating group 'users' with GID 982.
+Creating group 'systemd-journal' with GID 981.
+Creating group 'rfkill' with GID 980.
+Creating group 'bin' with GID 1.
+Creating user 'bin' (n/a) with UID 1 and GID 1.
+Creating group 'daemon' with GID 2.
+Creating user 'daemon' (n/a) with UID 2 and GID 2.
+Creating user 'mail' (n/a) with UID 8 and GID 12.
+Creating user 'ftp' (n/a) with UID 14 and GID 11.
+Creating group 'http' with GID 33.
+Creating user 'http' (n/a) with UID 33 and GID 33.
+Creating group 'avahi' with GID 979.
+Creating user 'avahi' (Avahi mDNS/DNS-SD daemon) with UID 979 and GID 979.
+Creating user 'nobody' (Kernel Overflow User) with UID 65534 and GID 65534.
+Creating group 'dbus' with GID 81.
+Creating user 'dbus' (System Message Bus) with UID 81 and GID 81.
+Creating group 'systemd-coredump' with GID 978.
+Creating user 'systemd-coredump' (systemd Core Dumper) with UID 978 and GID 978.
+Creating group 'systemd-imds' with GID 977.
+Creating user 'systemd-imds' (systemd Instance Metadata) with UID 977 and GID 977.
+Creating group 'systemd-network' with GID 976.
+Creating user 'systemd-network' (systemd Network Management) with UID 976 and GID 976.
+Creating group 'systemd-oom' with GID 975.
+Creating user 'systemd-oom' (systemd Userspace OOM Killer) with UID 975 and GID 975.
+Creating group 'systemd-journal-remote' with GID 974.
+Creating user 'systemd-journal-remote' (systemd Journal Remote) with UID 974 and GID 974.
+Creating group 'systemd-resolve' with GID 973.
+Creating user 'systemd-resolve' (systemd Resolver) with UID 973 and GID 973.
+Creating group 'systemd-timesync' with GID 972.
+Creating user 'systemd-timesync' (systemd Time Synchronization) with UID 972 and GID 972.
+Creating group 'tss' with GID 971.
+Creating user 'tss' (tss user for tpm2) with UID 971 and GID 971.
+Creating group 'uuidd' with GID 970.
+Creating user 'uuidd' (UUID generator helper daemon) with UID 970 and GID 970.
+Created symlink '/etc/systemd/system/autovt@.service' → '/usr/lib/systemd/system/getty@.service'.
+Created symlink '/etc/systemd/system/getty.target.wants/getty@tty1.service' → '/usr/lib/systemd/system/getty@.service'.
+Created symlink '/etc/systemd/system/multi-user.target.wants/remote-fs.target' → '/usr/lib/systemd/system/remote-fs.target'.
+Created symlink '/etc/systemd/system/sockets.target.wants/systemd-userdbd.socket' → '/usr/lib/systemd/system/systemd-userdbd.socket'.
+Optional dependencies for systemd
+    apparmor: additional security features
+    curl: systemd-journal-upload, machinectl pull-tar and pull-raw [installed]
+    gnutls: systemd-journal-gatewayd and systemd-journal-remote [installed]
+    iptables: firewall features [pending]
+    libarchive: convert DDIs to tarballs [installed]
+    libbpf: support BPF programs [pending]
+    libfido2: unlocking LUKS2 volumes with FIDO2 token
+    libmicrohttpd: systemd-journal-gatewayd and systemd-journal-remote
+    libp11-kit: support PKCS#11 [installed]
+    libpwquality: check password quality [pending]
+    polkit: allow administration as unprivileged user [pending]
+    qemu-base: systemd-vmspawn
+    qrencode: show QR codes [pending]
+    quota-tools: kernel-level quota management
+    systemd-sysvcompat: symlink package to provide sysvinit binaries [pending]
+    systemd-ukify: combine kernel and initrd into a signed Unified Kernel Image
+    tpm2-tss: unlocking LUKS2 volumes with TPM2 [installed]
+installing jansson...
+installing binutils...
+Optional dependencies for binutils
+    debuginfod: for debuginfod server/client functionality
+    perl: for gprofng-display-html [installed]
+installing libmakepkg-dropins...
+installing pacman...
+Optional dependencies for pacman
+    base-devel: required to use makepkg [pending]
+    perl-locale-gettext: translation support in makepkg-template
+installing archlinux-keyring...
+installing systemd-sysvcompat...
+installing iputils...
+installing libmnl...
+installing libnfnetlink...
+installing libnetfilter_conntrack...
+installing libnftnl...
+installing libnl...
+installing libpcap...
+installing nftables...
+Optional dependencies for nftables
+    python: Python bindings [pending]
+    python-jsonschema: Python bindings
+installing iptables...
+installing libbpf...
+installing iproute2...
+Optional dependencies for iproute2
+    db: userspace arp daemon
+    linux-atm: ATM support
+    python: for routel [pending]
+installing base...
+Optional dependencies for base
+    linux: bare metal support [pending]
+installing m4...
+installing diffutils...
+installing autoconf...
+installing automake...
+installing bison...
+installing xxhash...
+installing cpio...
+installing elfutils...
+installing boost-libs...
+Optional dependencies for boost-libs
+    openmpi: for mpi support
+installing mpdecimal...
+installing python...
+Optional dependencies for python
+    python-setuptools: for building Python packages using tooling that is usually bundled with Python
+    python-pip: for installing Python packages using tooling that is usually bundled with Python
+    python-pipx: for installing Python software not packaged on Arch Linux
+    sqlite: for a default database integration [installed]
+    xz: for lzma [installed]
+    tk: for tkinter
+installing gc...
+installing guile...
+installing gdb-common...
+installing source-highlight...
+Optional dependencies for source-highlight
+    lesspipe: src-hilite-lesspipe.sh
+installing gdb...
+installing debugedit...
+installing fakeroot...
+installing flex...
+installing libisl...
+installing libmpc...
+installing gcc...
+Optional dependencies for gcc
+    lib32-gcc-libs: for generating code for 32-bit ABI
+installing groff...
+Optional dependencies for groff
+    netpbm: for use together with man -H command interaction in browsers
+    psutils: for use together with man -H command interaction in browsers
+    libxaw: for gxditview
+    perl-file-homedir: for use with glilypond
+installing libtool...
+installing make...
+installing patch...
+Optional dependencies for patch
+    ed: for patch -e functionality
+installing pkgconf...
+installing sudo...
+installing texinfo...
+Optional dependencies for texinfo
+    perl-archive-zip: EPUB file output via texi2any
+installing which...
+installing base-devel...
+installing bash-completion...
+installing llhttp...
+installing libgit2...
+installing oniguruma...
+installing bat...
+installing bluez...
+installing bluez-tools...
+installing bluez-utils...
+Optional dependencies for bluez-utils
+    ell: for btpclient
+    perl: for parse_companies.pl [installed]
+installing polkit...
+installing bolt...
+installing brightnessctl...
+installing btop...
+Optional dependencies for btop
+    rocm-smi-lib: AMD GPU support
+installing btrfs-progs...
+Optional dependencies for btrfs-progs
+    python: libbtrfsutil python bindings [installed]
+    e2fsprogs: btrfs-convert [installed]
+installing libasyncns...
+installing libogg...
+installing flac...
+installing mpg123...
+Optional dependencies for mpg123
+    sdl2-compat: for sdl audio support [pending]
+    jack: for jack audio support [pending]
+    libpulse: for pulse audio support [pending]
+    perl: for conplay [installed]
+installing lame...
+installing libvorbis...
+installing opus...
+installing libsndfile...
+Optional dependencies for libsndfile
+    alsa-lib: for sndfile-play [installed]
+installing libpulse...
+Optional dependencies for libpulse
+    pulse-native-provider: PulseAudio backend [pending]
+installing libxss...
+installing nspr...
+installing nss...
+installing xdg-utils...
+Optional dependencies for xdg-utils
+    kde-cli-tools: for KDE Plasma5 support in xdg-open
+    exo: for Xfce support in xdg-open
+    pcmanfm: for LXDE support in xdg-open
+    perl-file-mimeinfo: for generic support in xdg-open
+    perl-net-dbus: Perl extension to dbus used in xdg-screensaver
+    perl-x11-protocol: Perl X11 protocol used in xdg-screensaver
+    xorg-xset: for X11 support in xdg-screensaver
+    xorg-xprop: for X11 support in xdg-screensaver [installed]
+installing openh264...
+installing minizip...
+installing chromium...
+Optional dependencies for chromium
+    pipewire: WebRTC desktop sharing under Wayland [pending]
+    kdialog: support for native dialogs in Plasma
+    gtk4: for --gtk-version=4 (GTK4 IME might work better on Wayland) [pending]
+    qt6-base: Qt support [pending]
+    org.freedesktop.secrets: password storage backend on GNOME, KDE and Xfce [pending]
+    upower: Battery Status API support [pending]
+installing compiler-rt...
+installing clang...
+Optional dependencies for clang
+    openmp: OpenMP support in clang with -fopenmp
+    python: for scan-view and git-clang-format [installed]
+    llvm: referenced by some clang headers [pending]
+installing gsm...
+installing libpipewire...
+installing pipewire...
+Created symlink '/etc/systemd/user/sockets.target.wants/pipewire.socket' → '/usr/lib/systemd/user/pipewire.socket'.
+Optional dependencies for pipewire
+    gst-plugin-pipewire: GStreamer plugin [pending]
+    pipewire-alsa: ALSA configuration [pending]
+    pipewire-audio: Audio support [pending]
+    pipewire-docs: Documentation
+    pipewire-ffado: FireWire support
+    pipewire-jack-client: PipeWire as JACK client
+    pipewire-jack: JACK replacement [pending]
+    pipewire-libcamera: Libcamera support
+    pipewire-onnx: ONNX filter support
+    pipewire-pulse: PulseAudio replacement [pending]
+    pipewire-roc: ROC streaming
+    pipewire-session-manager: Session manager [pending]
+    pipewire-v4l2: V4L2 interceptor
+    pipewire-x11-bell: X11 bell
+    pipewire-zeroconf: Zeroconf support
+    realtime-privileges: realtime privileges with rt module
+    rtkit: realtime privileges with rtkit module
+installing alsa-card-profiles...
+installing bluez-libs...
+installing libebur128...
+installing libfdk-aac...
+installing libfreeaptx...
+installing liblc3...
+Optional dependencies for liblc3
+    python: Python bindings [installed]
+installing libldac...
+installing libmysofa...
+installing serd...
+Optional dependencies for serd
+    serd-docs: for developer documentation
+installing zix...
+Optional dependencies for zix
+    zix-docs: for developer documentation
+installing sord...
+Optional dependencies for sord
+    sord-docs: for developer documentation
+installing lv2...
+Optional dependencies for lv2
+    lv2-docs: for developer documentation
+    lv2-example-plugins: for example plugins
+    python-lxml: for lv2specgen.py
+    python-markdown: for lv2specgen.py
+    python-pygments: for lv2specgen.py
+    python-rdflib: for lv2specgen.py
+    sord: for lv2_validate [installed]
+installing sratom...
+Optional dependencies for sratom
+    sratom-docs: for developer documentation
+installing lilv...
+Optional dependencies for lilv
+    lilv-docs: for documentation
+    lilv-tools: for CLI tools
+    python-lilv: for Python bindings
+installing sbc...
+installing spandsp...
+installing abseil-cpp...
+installing webrtc-audio-processing-1...
+installing pipewire-audio...
+installing libwireplumber...
+installing lua...
+installing wireplumber...
+Created symlink '/etc/systemd/user/pipewire-session-manager.service' → '/usr/lib/systemd/user/wireplumber.service'.
+Created symlink '/etc/systemd/user/pipewire.service.wants/wireplumber.service' → '/usr/lib/systemd/user/wireplumber.service'.
+Optional dependencies for wireplumber
+    wireplumber-docs: Documentation
+installing pipewire-jack...
+Optional dependencies for pipewire-jack
+    jack-example-tools: for official JACK example-clients and tools
+installing libunibreak...
+installing libass...
+installing libraw1394...
+installing libavc1394...
+installing libbluray...
+Optional dependencies for libbluray
+    java-runtime: BD-J library
+installing libbs2b...
+installing libdvdread...
+Optional dependencies for libdvdread
+    libdvdcss: Decoding encrypted DVDs
+installing libdvdnav...
+installing libiec61883...
+installing libmodplug...
+installing portaudio...
+installing libopenmpt...
+installing glslang...
+installing shaderc...
+installing libdovi...
+installing libplacebo...
+installing libsoxr...
+installing libssh...
+installing libtheora...
+installing libvdpau...
+Optional dependencies for libvdpau
+    libvdpau-va-gl: driver using VAAPI
+    nvidia-utils: driver for NVIDIA
+installing libvpx...
+installing ocl-icd...
+Optional dependencies for ocl-icd
+    opencl-driver: packaged opencl driver
+installing libvpl...
+Optional dependencies for libvpl
+    intel-media-sdk: runtime implementation for legacy Intel GPUs
+    vpl-gpu-rt: runtime implementation for Tiger Lake and newer GPUs
+installing opencore-amr...
+installing rubberband...
+installing sdl3...
+Optional dependencies for sdl3
+    alsa-lib: ALSA audio driver [installed]
+    libpulse: PulseAudio audio driver [installed]
+    jack: JACK audio driver [installed]
+    pipewire: PipeWire audio driver [installed]
+    vulkan-driver: vulkan renderer
+    sndio: sndio audio driver [pending]
+    libdecor: Wayland client decorations [pending]
+installing sdl2-compat...
+installing snappy...
+installing libmd...
+installing libbsd...
+installing sndio...
+installing speexdsp...
+installing speex...
+installing srt...
+installing v4l-utils...
+Optional dependencies for v4l-utils
+    qt6-base: for qv4l2 and qvidcap [pending]
+    qt6-5compat: for qv4l2 [pending]
+    alsa-lib: for qv4l2 [installed]
+installing zimg...
+installing vapoursynth...
+installing vid.stab...
+installing l-smash...
+installing x264...
+installing x265...
+installing xvidcore...
+installing libsodium...
+installing libpgm...
+installing zeromq...
+Optional dependencies for zeromq
+    cppzmq: C++ binding for libzmq
+installing ffmpeg...
+Optional dependencies for ffmpeg
+    avisynthplus: AviSynthPlus support
+    frei0r-plugins: Frei0r video effects support [pending]
+    intel-media-sdk: Intel QuickSync support (legacy)
+    ladspa: LADSPA filters
+    nvidia-utils: Nvidia NVDEC/NVENC support
+    onevpl-intel-gpu: Intel QuickSync support
+installing python-certifi...
+installing python-charset-normalizer...
+installing python-idna...
+installing python-urllib3...
+Optional dependencies for python-urllib3
+    python-brotli: Brotli support
+    python-brotlicffi: Brotli support
+    python-h2: HTTP/2 support
+    python-pysocks: SOCKS support
+installing python-requests...
+Optional dependencies for python-requests
+    python-chardet: alternative character encoding library
+    python-pysocks: SOCKS proxy support
+installing deno...
+installing yt-dlp-ejs...
+installing yt-dlp...
+Optional dependencies for yt-dlp
+    ffmpeg: for video post-processing [installed]
+    rtmpdump: for rtmp streams support
+    atomicparsley: for embedding thumbnails into m4a files
+    aria2: for using aria2 as external downloader
+    python-curl_cffi: support for impersonating browser requests
+    python-mutagen: for embedding thumbnail in certain formats
+    python-pycryptodome: for decrypting AES-128 HLS streams and various other data
+    python-pycryptodomex: for decrypting AES-128 HLS streams and various other data
+    python-websockets: for downloading over websocket
+    python-brotli: brotli content encoding support
+    python-brotlicffi: brotli content encoding support
+    python-xattr: for writing xattr metadata
+    python-pyxattr: for writing xattr metadata (alternative option)
+    python-secretstorage: For -cookies-from-browser to access the GNOME keyring while decrypting cookies of Chromium-based browsers
+installing cliamp...
+Optional dependencies for cliamp
+    pipewire-alsa: audio output on PipeWire systems [pending]
+    pulseaudio-alsa: audio output on PulseAudio systems
+installing libexif...
+installing qpdf...
+installing gpgmepp...
+installing poppler...
+Optional dependencies for poppler
+    poppler-data: highly recommended encoding data to display PDF documents with certain encodings and characters [pending]
+installing libcupsfilters...
+installing libppd...
+installing cups-filters...
+Optional dependencies for cups-filters
+    ghostscript: for non-PDF printers (preferred) [pending]
+    poppler: for non-PDF printers [installed]
+    mupdf-tools: for non-PDF printers
+installing libpaper...
+installing cups...
+>> If you use an HTTPS connection to CUPS, the first time you access
+>> the interface it may take a very long time before the site comes up.
+>> This is because the first request triggers the generation of the CUPS
+>> SSL certificates which can be a very time-consuming job.
+Optional dependencies for cups
+    cups-browsed: to browse the network for remote CUPS queues and IPP network printers
+    libusb: for usb printer backend [installed]
+    ipp-usb: allows to send HTTP requests via a USB connection on devices without Ethernet or WiFi connections
+    xdg-utils: xdg .desktop file support [installed]
+    colord: for ICC color profile support
+    logrotate: for logfile rotation support
+installing cups-pk-helper...
+installing i2c-tools...
+Optional dependencies for i2c-tools
+    read-edid: for decode-edid script
+    python: for smbus module [installed]
+installing ddcutil...
+installing libpathrs...
+installing runc...
+Optional dependencies for runc
+    criu: checkpoint support
+installing containerd...
+installing docker...
+Optional dependencies for docker
+    btrfs-progs: btrfs backend support [installed]
+    pigz: parallel gzip compressor support
+    docker-buildx: extended build capabilities [pending]
+installing docker-buildx...
+installing docker-compose...
+installing dosfstools...
+installing dotnet-host...
+Optional dependencies for dotnet-host
+    bash-completion: Bash completion support [installed]
+installing dotnet-runtime...
+Optional dependencies for dotnet-runtime
+    lttng-ust2.12: CoreCLR tracing
+installing dua-cli...
+installing efivar...
+installing efibootmgr...
+installing djvulibre...
+installing exempi...
+installing gnome-desktop-common...
+installing gnome-desktop...
+installing gsfonts...
+installing gspell...
+installing fuse-common...
+installing fuse3...
+installing openssh...
+Optional dependencies for openssh
+    libfido2: FIDO/U2F support
+    sh: for ssh-copy-id and findssl.sh [installed]
+    x11-ssh-askpass: input passphrase in X
+    xorg-xauth: X11 forwarding [pending]
+installing gcr-4...
+Optional dependencies for gcr-4
+    gtk4: gcr-viewer-gtk4 [pending]
+installing libcdio...
+installing libcdio-paranoia...
+installing libblockdev...
+Optional dependencies for libblockdev
+    libblockdev-btrfs: for BTRFS support
+    libblockdev-crypto: for crypto support [pending]
+    libblockdev-dm: for device-mapper support
+    libblockdev-fs: for filesystem support [pending]
+    libblockdev-loop: for loop device support [pending]
+    libblockdev-lvm: for LVM support
+    libblockdev-mdraid: for MDRAID support [pending]
+    libblockdev-mpath: for multipath support
+    libblockdev-nvdimm: for NVDIMM support
+    libblockdev-nvme: for NVME support [pending]
+    libblockdev-part: for partitioning support [pending]
+    libblockdev-smart: for S.M.A.R.T. support [pending]
+    libblockdev-swap: for swap support [pending]
+    python-libblockdev: for Python support
+installing volume_key...
+Optional dependencies for volume_key
+    python-volume_key: for Python bindings
+installing libblockdev-crypto...
+installing libbytesize...
+Optional dependencies for libbytesize
+    python: for Python bindings and for the bscalc command [installed]
+installing parted...
+installing libblockdev-fs...
+Optional dependencies for libblockdev-fs
+    btrfs-progs: for BTRFS filesystem support [installed]
+    dosfstools: for VFAT filesystem support [installed]
+    exfatprogs: for exFAT filesystem support [pending]
+    f2fs-tools: for F2FS filesystem support
+    nilfs-utils: for nilfs filesystem support
+    ntfsprogs: for NTFS filesystem support
+    udftools: for UDF filesystem support
+    xfsprogs: for XFS filesystem support
+installing mdadm...
+Optional dependencies for mdadm
+    bash: mdcheck [installed]
+installing libblockdev-mdraid...
+installing libblockdev-loop...
+installing liburing...
+installing libnvme...
+installing libblockdev-nvme...
+installing libblockdev-part...
+installing libatasmart...
+installing libblockdev-smart...
+Optional dependencies for libblockdev-smart
+    smartmontools: for experimental smartmontools-based plugin
+installing libblockdev-swap...
+installing udisks2...
+Optional dependencies for udisks2
+    udisks2-btrfs: for BTRFS module
+    udisks2-lvm2: for LVM2 module
+    udisks2-docs: API documentation
+    btrfs-progs: for BTRFS support in libblockdev-fs [installed]
+    dosfstools: for FAT support in libblockdev-fs [installed]
+    exfatprogs: for exFAT support in libblockdev-fs [pending]
+    e2fsprogs: for Ext2/3/4 support in libblockdev-fs [installed]
+    f2fs-tools: for F2FS support in libblockdev-fs
+    less: for default pager of the udisksctl dump command [pending]
+    nilfs-utils: for NILFS support in libblockdev-fs
+    udftools: for UDF support in libblockdev-fs
+    xfsprogs: for XFS support in libblockdev-fs
+installing gvfs...
+Optional dependencies for gvfs
+    gvfs-afc: AFC support (Apple mobile devices)
+    gvfs-dnssd: DNS-SD and WebDAV support (macOS file sharing)
+    gvfs-goa: Gnome Online Accounts support (e.g. OwnCloud)
+    gvfs-gphoto2: gphoto2 support (PTP camera, MTP media player)
+    gvfs-mtp: MTP support (Android, media player) [pending]
+    gvfs-nfs: NFS support [pending]
+    gvfs-onedrive: Microsoft OneDrive support
+    gvfs-smb: SMB/CIFS support (Windows file sharing) [pending]
+    gvfs-wsdd: Web Services Dynamic Discovery support (Windows discovery)
+installing libgxps...
+installing libhandy...
+installing libice...
+installing libsm...
+installing libxt...
+installing jbig2dec...
+installing ijs...
+installing libidn...
+installing poppler-data...
+installing ghostscript...
+Optional dependencies for ghostscript
+    gtk3: needed for gsx [installed]
+installing libspectre...
+installing libsynctex...
+installing poppler-glib...
+installing evince...
+Optional dependencies for evince
+    texlive-bin: DVI support
+installing exfatprogs...
+installing expac...
+installing eza...
+installing yyjson...
+installing fastfetch...
+Optional dependencies for fastfetch
+    chafa: Image output as ascii art
+    dbus: Bluetooth, Player & Media detection [installed]
+    dconf: Needed for values that are only stored in DConf + Fallback for GSettings [installed]
+    ddcutil: Brightness detection of external displays [installed]
+    glib2: Output for values that are only stored in GSettings [installed]
+    hwdata: GPU output [installed]
+    imagemagick: Image output using sixel or kitty graphics protocol [pending]
+    libdrm: Displays detection [installed]
+    libelf: st term font detection and fast path of systemd version detection [installed]
+    libglvnd: OpenGL module [installed]
+    libpulse: Sound detection [installed]
+    libva: Primary backend of hardware-accelerated video codec detection [installed]
+    libvdpau: Fallback backend of hardware-accelerated video codec detection [installed]
+    libxrandr: Multi monitor support [installed]
+    lua: Lua scripting in format section of JSON config [installed]
+    ocl-icd: OpenCL module [installed]
+    quickjs-ng: JavaScript scripting in format section of JSON config
+    python: Needed for zsh and fish completions [installed]
+    sqlite: Needed for Sqlite integration and Soar packages count [installed]
+    vulkan-icd-loader: Vulkan module & fallback for GPU output [installed]
+    zlib: Faster image output when using kitty graphics protocol [installed]
+installing xcb-util...
+installing xcb-util-keysyms...
+installing xcb-imdkit...
+installing xcb-util-wm...
+installing libxkbfile...
+installing yoga...
+installing fcitx5...
+installing fcitx5-gtk...
+installing double-conversion...
+installing libb2...
+installing libwacom...
+Optional dependencies for libwacom
+    python-libevdev: for libwacom-show-stylus
+    python-pyudev: for libwacom-show-stylus
+installing lua54...
+installing mtdev...
+installing libinput...
+Optional dependencies for libinput
+    libinput-tools: debug utilities
+installing md4c...
+installing tslib...
+installing xcb-util-renderutil...
+installing xcb-util-image...
+installing xcb-util-cursor...
+installing qt6-translations...
+installing qt6-base...
+Optional dependencies for qt6-base
+    freetds: MS SQL driver
+    gdk-pixbuf2: GTK platform plugin [installed]
+    gtk3: GTK platform plugin [installed]
+    libfbclient: Firebird/iBase driver
+    mariadb-libs: MariaDB driver [pending]
+    pango: GTK platform plugin [installed]
+    perl: for syncqt [installed]
+    postgresql-libs: PostgreSQL driver [pending]
+    unixodbc: ODBC driver
+installing fcitx5-qt...
+installing jemalloc...
+Optional dependencies for jemalloc
+    perl: for jeprof [installed]
+installing fd...
+installing ffmpegthumbnailer...
+Optional dependencies for ffmpegthumbnailer
+    gvfs: support for gio uris [installed]
+installing libutf8proc...
+installing fcft...
+installing foot...
+Optional dependencies for foot
+    foot-terminfo: extra non-standard features over terminfo included in ncurses
+    libnotify: desktop notifications [pending]
+    xdg-utils: URI launching [installed]
+installing fzf...
+Optional dependencies for fzf
+    fish: fish keybindings
+    tmux: fzf-tmux script for launching fzf in a tmux pane [pending]
+    vim: plugin
+    zsh: zsh keybindings
+installing perl-error...
+installing perl-timedate...
+installing perl-mailtools...
+installing zlib-ng...
+installing git...
+Optional dependencies for git
+    git-zsh-completion: upstream zsh completion
+    tk: gitk and git gui
+    openssh: ssh transport and crypto [installed]
+    man: show help with `git command --help` [pending]
+    perl-libwww: git svn
+    perl-term-readkey: git svn and interactive.singlekey setting
+    perl-io-socket-ssl: git send-email TLS support
+    perl-authen-sasl: git send-email TLS support
+    perl-cgi: gitweb (web interface) support
+    python: git svn & git p4 [installed]
+    subversion: git svn
+    org.freedesktop.secrets: keyring credential helper [pending]
+    libsecret: libsecret credential helper [installed]
+    less: the default pager for git [pending]
+installing tdb...
+Optional dependencies for tdb
+    python: for python bindings [installed]
+installing sound-theme-freedesktop...
+installing libcanberra...
+Optional dependencies for libcanberra
+    gtk3: canberra-gtk-play [installed]
+installing libnotify...
+installing cracklib...
+installing libpwquality...
+Optional dependencies for libpwquality
+    python: Python bindings [installed]
+installing gnome-disk-utility...
+installing gcr...
+installing gnome-keyring...
+Created symlink '/etc/systemd/user/sockets.target.wants/gnome-keyring-daemon.socket' → '/usr/lib/systemd/user/gnome-keyring-daemon.socket'.
+installing gnome-themes-extra...
+installing gpu-screen-recorder...
+Optional dependencies for gpu-screen-recorder
+    nvidia-utils: Required to record your screen on NVIDIA
+    libxnvctrl: Required when using the -oc option to overclock the NVIDIA GPU to workaround NVIDIA p2 state bug
+    mesa: Required to record your screen on AMD/Intel [installed]
+    libva-mesa-driver: Required to record your screen on AMD [installed]
+    libva-intel-driver: Required to record your screen on Intel G45 and HD Graphics family
+    intel-media-driver: Required to record your screen on Intel Broadwell or later iGPUs or Intel Arc
+    linux-firmware-intel: Required to record your screen on Intel Skylake or later iGPUs [pending]
+installing grim...
+installing gst-plugin-pipewire...
+installing gum...
+installing libmtp...
+installing gvfs-mtp...
+installing libnfs...
+installing gvfs-nfs...
+installing libwbclient...
+Optional dependencies for libwbclient
+    python-dnspython: samba_dnsupdate and samba_upgradedns in AD setup
+    python-markdown: for samba-tool domain schemeupgrade
+    glusterfs: for vfs_glusterfs support
+installing talloc...
+Optional dependencies for talloc
+    python: for python bindings [installed]
+installing cifs-utils...
+Optional dependencies for cifs-utils
+    python: for smb2-quota and smbinfo script [installed]
+installing tevent...
+Optional dependencies for tevent
+    python: for python bindings [installed]
+installing ldb...
+Optional dependencies for ldb
+    python: for python bindings [installed]
+installing smbclient...
+Optional dependencies for smbclient
+    python-dnspython: samba_dnsupdate and samba_upgradedns in AD setup
+    python-markdown: for samba-tool domain schemeupgrade
+    glusterfs: for vfs_glusterfs support
+installing gvfs-smb...
+installing herdr...
+installing hyprutils...
+installing pugixml...
+installing hyprwayland-scanner...
+installing libdisplay-info...
+installing seatd...
+installing wayland-protocols...
+installing aquamarine...
+installing hyprlang...
+installing libzip...
+installing tomlplusplus...
+installing hyprcursor...
+installing hyprgraphics...
+installing iniparser...
+installing hyprtoolkit...
+installing hyprland-guiutils...
+installing hyprwire...
+installing muparser...
+installing re2...
+installing xcb-util-errors...
+installing xorg-fonts-encodings...
+installing libfontenc...
+installing libxfont2...
+installing xorg-xkbcomp...
+installing xorg-setxkbmap...
+installing xorg-server-common...
+installing libxcvt...
+installing libei...
+installing libdecor...
+Optional dependencies for libdecor
+    gtk3: gtk3 support [installed]
+installing xorg-xwayland...
+installing hyprland...
+Optional dependencies for hyprland
+    cmake: to build and install plugins using hyprpm
+    cpio: to build and install plugins using hyprpm [installed]
+    glaze: to build and install plugins using hyprpm
+    hyprland-protocols: to build and install plugins using hyprpm
+    hyprshutdown: clean logout and shutdown helper
+    meson: to build and install plugins using hyprpm
+    uwsm: an advanced way to start desktop compositors as systemd units [pending]
+    xdg-desktop-portal-hyprland: xdg-desktop-portal backend for hyprland [pending]
+installing xdg-desktop-portal...
+Optional dependencies for xdg-desktop-portal
+    gamemode: GameMode portal
+    geoclue: Location portal
+    rtkit: Realtime portal
+    xdg-desktop-portal-impl: Portal backends [pending]
+installing xdg-desktop-portal-gtk...
+Optional dependencies for xdg-desktop-portal-gtk
+    evince: Print preview [installed]
+installing gtk4...
+Optional dependencies for gtk4
+    evince: Default print preview command [installed]
+installing gtk4-layer-shell...
+installing libinih...
+installing sdbus-cpp...
+installing xdg-desktop-portal-hyprland...
+Optional dependencies for xdg-desktop-portal-hyprland
+    grim: required for the screenshot portal to function [installed]
+    slurp: support for interactive mode for the screenshot portal [pending]
+installing hyprland-preview-share-picker...
+Optional dependencies for hyprland-preview-share-picker
+    slurp: default tool for selecting share regions [pending]
+installing hyprpicker...
+Optional dependencies for hyprpicker
+    wl-clipboard: Allows --autocopy to automatically copy the output to the clipboard [pending]
+installing hyprsunset...
+installing liblqr...
+installing libraqm...
+installing imagemagick...
+Optional dependencies for imagemagick
+    ghostscript: PS/PDF support [installed]
+    jbigkit: JBIG support [installed]
+    libheif: HEIF support [pending]
+    libjpeg-turbo: JPEG support [installed]
+    libjxl: JPEG XL support [installed]
+    libraw: DNG support
+    librsvg: SVG support [installed]
+    libtiff: TIFF support [installed]
+    libultrahdr: UHDR support
+    libwebp: WEBP support [installed]
+    libwmf: WMF support
+    libzip: OpenRaster support [installed]
+    ocl-icd: OpenCL support [installed]
+    openexr: OpenEXR support [pending]
+    openjpeg2: JPEG2000 support [installed]
+    djvulibre: DJVU support [installed]
+    pango: Text rendering [installed]
+installing glu...
+installing libde265...
+Optional dependencies for libde265
+    sdl2-compat: for the decoder tool [installed]
+installing libheif...
+Optional dependencies for libheif
+    libjpeg-turbo: for heif-dec and heif-enc [installed]
+    libpng: for heif-dec and heif-enc [installed]
+    libtiff: for heif-dec and heif-enc [installed]
+    dav1d: dav1d encoder [installed]
+    ffmpeg: hardware decode [installed]
+    openjpeg2: JPEG2000 decoder [installed]
+    rav1e: rav1e encoder [installed]
+    svt-av1: svt-av1 encoder [installed]
+installing libnsbmp...
+installing libnsgif...
+installing qoi...
+installing imv...
+installing inetutils...
+installing inotify-tools...
+installing inxi...
+Optional dependencies for inxi
+    bind: dig: -i wlan IP
+    binutils: strings: -I sysvinit version [installed]
+    bluez-tools: bt-adapter: -E bluetooth data (if no hciconfig) [installed]
+    curl: -i (if no dig); -w,-W; -U [installed]
+    dmidecode: -M if no sys machine data; -m
+    doas: -Dx hddtemp-user; -o file-user (alt for sudo)
+    file: -o unmounted file system (if no lsblk) [installed]
+    freeipmi: ipmi-sensors: -s IPMI sensors (servers)
+    hddtemp: -Dx show hdd temp, if no drivetemp module
+    iproute2: ip: -i ip LAN [installed]
+    kmod: modinfo: Ax; -Nx module version [installed]
+    ipmitool: -s IPMI sensors (servers)
+    lvm2: lvs: -L LVM data
+    lm_sensors: sensors: -s sensors output [installed]
+    mdadm: -Ra advanced mdraid data [installed]
+    mesa-utils: glxinfo: -G (X) glx info
+    net-tools: ifconfig: -i ip LAN (deprecated)
+    perl-cpanel-json-xs: Cpanel::JSON::XS: --output json (faster than JSON::PP)
+    perl-json-xs: JSON::XS: --output json (legacy)
+    perl-io-socket-ssl: IO::Socket::SSL: -U; -w,-W; -i (if dig not installed)
+    smartmontools: smartctl: -Da advanced data
+    systemd-sysvcompat: -I runlevel [installed]
+    sudo: -Dx hddtemp-user; -o file-user [installed]
+    tree: --debugger 20,21 /sys tree
+    upower: -sx attached device battery info [pending]
+    usbutils: lsusb: -A usb audio; -J (optional); -N usb networking
+    vulkan-tools: vulkaninfo: -G vulkan info
+    wget: -i (if no dig); -w,-W; -U
+    wmctrl: -S active window manager (fallback)
+    xorg-xdpyinfo: xdpyinfo: -G (X) Screen resolution, dpi; -Ga Screen size
+    xorg-xdriinfo: xdriinfo: -G (X) DRI driver (if missing, fallback to Xorg log)
+    xorg-xprop: xprop: -S (X) desktop data [installed]
+    xorg-xrandr: xrandr: -G (X) monitors(s) resolution; -Ga monitor data
+installing jq...
+installing gavl...
+installing blas...
+installing cblas...
+installing cdparanoia...
+installing gst-plugins-base...
+installing lapack...
+installing libdc1394...
+installing imath...
+Optional dependencies for imath
+    boost-libs: python bindings [installed]
+    python: python bindings [installed]
+installing openjph...
+installing openexr...
+Optional dependencies for openexr
+    python: for python bindings [installed]
+installing verdict...
+installing protobuf...
+installing hwloc...
+Optional dependencies for hwloc
+    cairo: PDF, Postscript, and PNG export support [installed]
+    libxml2: full XML import/export support [installed]
+installing onetbb...
+Optional dependencies for onetbb
+    python: for Python module [installed]
+installing opencv...
+Optional dependencies for opencv
+    opencv-samples: samples
+    vtk: for the viz module
+    glew: for the viz module
+    qt6-base: for the HighGUI module [installed]
+    hdf5: for the HDF5 module
+    opencl-icd-loader: For coding with OpenCL [installed]
+    java-runtime: Java interface
+installing frei0r-plugins...
+installing karchive...
+installing qt6-declarative...
+Optional dependencies for qt6-declarative
+    qt6-svg: for QtQuickVectorImage and svgtoqml [pending]
+installing kconfig...
+installing kcoreaddons...
+Optional dependencies for kcoreaddons
+    pyside6: Python bindings
+    qt6-declarative: QML bindings [installed]
+installing kwidgetsaddons...
+Optional dependencies for kwidgetsaddons
+    pyside6: Python bindings
+installing kbookmarks...
+installing kcodecs...
+installing kguiaddons...
+Optional dependencies for kguiaddons
+    pyside6: Python bindings
+    qt6-declarative: QML bindings [installed]
+installing ki18n...
+Optional dependencies for ki18n
+    python: to compile .ts files [installed]
+    qt6-declarative: ktranscript plugin and QML bindings [installed]
+installing kcolorscheme...
+installing kcompletion...
+installing kconfigwidgets...
+installing kcrash...
+Optional dependencies for kcrash
+    drkonqi: KDE crash handler application
+installing kdbusaddons...
+installing fmt...
+installing spdlog...
+installing kddockwidgets...
+installing libtommath...
+installing convertlit...
+installing ebook-tools...
+installing exiv2...
+installing poppler-qt6...
+installing taglib...
+installing kfilemetadata...
+Optional dependencies for kfilemetadata
+    catdoc: Extract text from Office 98 files
+    kdegraphics-mobipocket: MOBI extractor
+    libappimage: AppImage extractor
+installing breeze-icons...
+installing qt6-svg...
+installing kiconthemes...
+Optional dependencies for kiconthemes
+    qt6-declarative: QML bindings [installed]
+installing kitemviews...
+installing knotifications...
+Optional dependencies for knotifications
+    pyside6: Python bindings
+    qt6-declarative: QML bindings [installed]
+installing kjobwidgets...
+Optional dependencies for kjobwidgets
+    pyside6: Python bindings
+installing kservice...
+installing kwindowsystem...
+Optional dependencies for kwindowsystem
+    qt6-declarative: QML bindings [installed]
+installing qt6-shadertools...
+installing qt6-5compat...
+Optional dependencies for qt6-5compat
+    qt6-declarative: for QtGraphicalEffects [installed]
+installing qca-qt6...
+Optional dependencies for qca-qt6
+    botan: botan plugin
+    libgcrypt: gcrypt plugin [installed]
+    libsasl: SASL plugin [installed]
+    openssl: SSL plugin [installed]
+    pkcs11-helper: PKCS-11 plugin
+installing kwallet...
+Optional dependencies for kwallet
+    kwalletmanager: Configuration GUI
+installing libplist...
+Optional dependencies for libplist
+    python: Python bindings [installed]
+installing libimobiledevice-glue...
+installing libtatsu...
+installing libusbmuxd...
+installing libimobiledevice...
+Optional dependencies for libimobiledevice
+    python: Python bindings [installed]
+installing media-player-info...
+installing upower...
+Optional dependencies for upower
+    usbmuxd: Read charge status of iOS devices
+installing solid...
+Optional dependencies for solid
+    qt6-declarative: QML bindings [installed]
+installing kio...
+Optional dependencies for kio
+    audiocd-kio: for accessing audio CDs
+    kded: proxy management and cookie storage
+    kdoctools: for the help kioslave
+    kio-extras: extra protocols support (sftp, fish and more)
+    kio-fuse: to mount remote filesystems via FUSE
+    switcheroo-control: hybrid GPU support
+installing attica...
+installing kirigami...
+installing kglobalaccel...
+installing kxmlgui...
+Optional dependencies for kxmlgui
+    pyside6: Python bindings
+installing kcmutils...
+installing kpackage...
+installing syndication...
+installing knewstuff...
+installing knotifyconfig...
+installing qt6-multimedia-ffmpeg...
+installing qt6-multimedia...
+Optional dependencies for qt6-multimedia
+    qt6-declarative: QML bindings [installed]
+    qt6-quick3d: for QtQuick3DAudio
+installing qt6-speech...
+Optional dependencies for qt6-speech
+    flite: flite TTS backend
+    speech-dispatcher: speech-dispatcher TTS backend
+    qt6-declarative: QML bindings [installed]
+installing sonnet...
+Optional dependencies for sonnet
+    aspell: spell checking via aspell
+    hspell: spell checking for Hebrew
+    hunspell: spell checking via hunspell [pending]
+    libvoikko: Finnish support via Voikko
+    qt6-declarative: QML bindings [installed]
+installing ktextwidgets...
+installing mlt...
+Optional dependencies for mlt
+    ffmpeg: ffmpeg plugin [installed]
+    fftw: plus plugin [installed]
+    fontconfig: gdk plugin [installed]
+    frei0r-plugins: for additional effects [installed]
+    gdk-pixbuf2: gdk plugin [installed]
+    glib2: gdk plugin [installed]
+    jack: JACK sound output plugin [installed]
+    ladspa: LADSPA plugins
+    libepoxy: opengl plugin [installed]
+    libexif: auto rotate plugin [installed]
+    libglvnd: opengl plugin [installed]
+    libsamplerate: libavresample plugin [installed]
+    libvorbis: vorbis plugin [installed]
+    libx11: SDL1 plugin [installed]
+    libxml2: XML plugin [installed]
+    movit: opengl plugin
+    opencv: openCV plugin [installed]
+    qt6-5compat: Qt6 plugin [installed]
+    qt6-base: Qt6 plugin [installed]
+    qt6-svg: Qt6 plugin [installed]
+    pango: gdk plugin [installed]
+    python: python bindings [installed]
+    rnnoise: rnnoise plugin [pending]
+    rtaudio: rtaudio plugin
+    rubberband: audio pitch plugin [installed]
+    sdl2: SDL2 plugin [installed]
+    sdl_image: SDL1 plugin
+    sdl12-compat: SDL1 plugin
+    sox: SOX (Audio Swiss Army Knife) plugin
+    vid.stab: video stabilize plugin [installed]
+    zlib: glaxnimate plugin [installed]
+installing python-aaf2...
+installing opentimelineio...
+installing libaccounts-glib...
+installing libaccounts-qt...
+installing signond...
+installing signon-kwallet-extension...
+installing signon-plugin-oauth2...
+installing qt6-positioning...
+Optional dependencies for qt6-positioning
+    geoclue: geoclue2 plugin
+    qt6-declarative: QML bindings [installed]
+    qt6-serialport: NMEA plugin
+installing qt6-webchannel...
+installing qt6-webengine...
+Optional dependencies for qt6-webengine
+    pipewire: WebRTC desktop sharing under Wayland [installed]
+installing signon-ui...
+installing kaccounts-integration...
+Optional dependencies for kaccounts-integration
+    qt6-declarative: QML plugin [installed]
+installing kitemmodels...
+Optional dependencies for kitemmodels
+    qt6-declarative: QML bindings [installed]
+installing purpose...
+Optional dependencies for purpose
+    bluedevil: sharing via Bluetooth
+    kdeclarative: Nextcloud and YouTube plugins
+    kdeconnect: sharing to smartphone via KDE Connect
+    prison: QR code plugin
+    telegram-desktop: sharing via Telegram
+installing qqc2-desktop-style...
+installing qt6-networkauth...
+installing kdenlive...
+Optional dependencies for kdenlive
+    bigsh0t: VR360 effects
+    dvgrab: for firewire capture
+    kimageformats: support for dds, xcf, exr, psd, and more image formats
+    noise-suppression-for-voice: noise suppression effect
+    opencv: for motion tracking [installed]
+    plasma-desktop: theme configuration
+    python-openai-whisper: speech to text (Whisper engine)
+    python-srt_equalizer: speech to text (Whisper engine)
+    python-vosk: speech to text (VOSK engine)
+    qt6-imageformats: support for tiff, webp, and more image formats [pending]
+    recordmydesktop: for screen capture
+installing rsync...
+Optional dependencies for rsync
+    python: for rrsync [installed]
+installing kernel-modules-hook...
+installing lazydocker...
+installing lazygit...
+installing less...
+installing hunspell...
+Optional dependencies for hunspell
+    perl: for ispellaff2myspell [installed]
+installing librevenge...
+installing libwpd...
+installing libwps...
+installing neon...
+installing raptor...
+installing rasqal...
+installing redland...
+installing lpsolve...
+installing libvisio...
+installing liblangtag...
+Optional dependencies for liblangtag
+    gobject-introspection-runtime: use with liblangtag-gobject [pending]
+installing libetonyek...
+installing libodfgen...
+installing libcdr...
+installing libmspub...
+installing clucene...
+installing libpagemaker...
+installing libabw...
+installing libmwaw...
+installing libe-book...
+installing libexttextcat...
+installing libixion...
+installing liborcus...
+Optional dependencies for liborcus
+    python-requests: in tool bugzilla [installed]
+installing libcmis...
+installing libzmf...
+installing libatomic_ops...
+installing xmlsec...
+installing libnumbertext...
+installing libfreehand...
+installing libstaroffice...
+installing libepubgen...
+installing libqxp...
+installing zint...
+installing zxing-cpp...
+Optional dependencies for zxing-cpp
+    qt6-multimedia: for ZXingQtCamReader [installed]
+installing argon2...
+installing libreoffice-fresh...
+Optional dependencies for libreoffice-fresh
+    libreoffice-fresh-i18n: Localizations
+    java-runtime: adds java support
+    java-environment>=17: required by extension-wiki-publisher and extension-nlpsolver
+    pstoedit: translates PostScript and PDF graphics into other vector formats
+    libmythes: for use in thesaurus
+    beanshell: interactive java -- good for prototyping/macros
+    libwpg: library for importing and converting WordPerfect Graphics format
+    sane: for scanner access
+    unixodbc: adds ODBC database support
+    gst-plugins-base-libs: for multimedia content, e.g. in Impress [installed]
+    libpaper: takes care of papersize [installed]
+    postgresql-libs: for postgresql-connector [pending]
+    mariadb-libs: for mysql-connector [pending]
+    coin-or-mp: required by the Calc solver
+    gtk3: for GTK3 integration [installed]
+    gtk4: for GTK4 integration (experimental) [installed]
+    kio: for KF6 KDE desktop integration [installed]
+    qt6-multimedia: for Qt6 desktop integration [installed]
+    rhino: for JavaScript support
+installing cfitsio...
+installing libimagequant...
+installing libcgif...
+installing libvips...
+Optional dependencies for libvips
+    libheif: for heif module [installed]
+    imagemagick: for magick module [installed]
+    openslide: for openslide module
+    poppler-glib: for poppler module [installed]
+    python: for vipsprofile [installed]
+    libjxl: for jxl module [installed]
+installing libyaml...
+installing limine...
+installing mkinitcpio-busybox...
+installing mkinitcpio...
+Optional dependencies for mkinitcpio
+    xz: Use lzma or xz compression for the initramfs image [installed]
+    bzip2: Use bzip2 compression for the initramfs image [installed]
+    lzop: Use lzo compression for the initramfs image
+    lz4: Use lz4 compression for the initramfs image [installed]
+    mkinitcpio-nfs-utils: Support for root filesystem on NFS
+    systemd-ukify: alternative UKI generator
+installing linux...
+Optional dependencies for linux
+    linux-headers: headers and scripts for building modules
+    linux-firmware: firmware images needed for some devices [pending]
+    scx-scheds: to use sched-ext schedulers
+    wireless-regdb: to set the correct wireless channels of your country [pending]
+installing linux-firmware-whence...
+installing linux-firmware-amdgpu...
+installing linux-firmware-atheros...
+installing linux-firmware-broadcom...
+installing linux-firmware-cirrus...
+installing linux-firmware-intel...
+installing linux-firmware-mediatek...
+installing linux-firmware-nvidia...
+installing linux-firmware-other...
+installing linux-firmware-radeon...
+installing linux-firmware-realtek...
+installing linux-firmware...
+Optional dependencies for linux-firmware
+    linux-firmware-liquidio: Firmware for Cavium LiquidIO server adapters
+    linux-firmware-marvell: Firmware for Marvell devices
+    linux-firmware-mellanox: Firmware for Mellanox Spectrum switches
+    linux-firmware-nfp: Firmware for Netronome Flow Processors
+    linux-firmware-qcom: Firmware for Qualcomm SoCs
+    linux-firmware-qlogic: Firmware for QLogic devices
+installing llvm...
+installing ayatana-ido...
+installing libayatana-indicator...
+installing libdbusmenu-glib...
+installing libdbusmenu-gtk3...
+installing libayatana-appindicator...
+installing localsend...
+installing lua51...
+installing lua-luarocks...
+installing unzip...
+installing zip...
+installing luarocks...
+Optional dependencies for luarocks
+    cvs: for fetching sources from CVS repositories
+    git: for fetching sources from git repositories [installed]
+    mercurial: for fetching sources from mercurial repositories
+    cmake: for building rocks that use the cmake build system
+    lua-sec: HTTPS support
+installing libpipeline...
+installing man-db...
+Optional dependencies for man-db
+    gzip [installed]
+installing mariadb-libs...
+Optional dependencies for mariadb-libs
+    krb5: for gssapi authentication [installed]
+installing mise-bin...
+Optional dependencies for mise-bin
+    bash-completion: bash completion support [installed]
+installing sdl2_ttf...
+installing moonlight-qt...
+Optional dependencies for moonlight-qt
+    libva-intel-driver: hardware acceleration for Intel GPUs GMA 4500 (2008) up to Coffee Lake (2017)
+    intel-media-driver: hardware acceleration for Intel GPUs starting from Broadwell (2014) and newer (e.g. Intel Arc)
+installing libsixel...
+installing libxpresent...
+installing luajit...
+installing mujs...
+installing openal...
+Optional dependencies for openal
+    qt6-base: alsoft-config GUI Configurator [installed]
+    fluidsynth: MIDI rendering
+    libmysofa: makemhr tool [installed]
+installing uchardet...
+installing mpv...
+Optional dependencies for mpv
+    yt-dlp: for video-sharing websites playback [installed]
+installing mpv-mpris...
+installing gexiv2-common...
+installing gexiv2...
+installing glycin-gtk4...
+installing gnome-autoar...
+installing gnome-desktop-4...
+installing libblake3...
+installing libfyaml...
+installing libxmlb...
+installing appstream...
+installing libadwaita...
+installing libportal...
+Optional dependencies for libportal
+    libportal-docs: API documentation
+    libportal-gtk3: GTK 3 backend
+    libportal-gtk4: GTK 4 backend [pending]
+    libportal-qt5: Qt 5 backend
+    libportal-qt6: Qt 6 backend
+    xdg-desktop-portal: Portal service [installed]
+installing libportal-gtk4...
+installing gupnp-dlna...
+installing libcue...
+installing libgsf...
+installing libiptcdata...
+Optional dependencies for libiptcdata
+    python: Python bindings [installed]
+installing osinfo-db...
+installing libosinfo...
+installing totem-pl-parser...
+installing localsearch...
+installing xdg-user-dirs...
+Created symlink '/etc/systemd/user/graphical-session-pre.target.wants/xdg-user-dirs.service' → '/usr/lib/systemd/user/xdg-user-dirs.service'.
+installing xdg-user-dirs-gtk...
+installing libnautilus-extension...
+installing nautilus...
+installing libgirepository...
+installing gobject-introspection-runtime...
+installing python-gobject...
+Optional dependencies for python-gobject
+    python-cairo: Cairo bindings [pending]
+installing nautilus-python...
+installing libmm-glib...
+installing libndp...
+installing gpm...
+installing pcre...
+installing slang...
+installing libnewt...
+Optional dependencies for libnewt
+    python: libnewt support with the _snack module [installed]
+    tcl: whiptcl support
+installing libnm...
+installing libteam...
+installing mobile-broadband-provider-info...
+installing pcsclite...
+Optional dependencies for pcsclite
+    python: API call trace logging with the pcsc-spy [installed]
+    ccid: USB Chip/Smart Card Interface Devices driver
+installing wpa_supplicant...
+installing networkmanager...
+Optional dependencies for networkmanager
+    bluez: Bluetooth support [installed]
+    dhcpcd: alternative DHCP client
+    dnsmasq: connection sharing
+    firewalld: firewall support
+    iptables: connection sharing [installed]
+    iwd: wpa_supplicant alternative
+    libnvme: NBFT support [installed]
+    modemmanager: cellular network support
+    nftables: connection sharing [installed]
+    openresolv: alternative resolv.conf manager
+    pacrunner: PAC proxy support
+    polkit: let non-root users control networking [installed]
+    ppp: dialup connection support
+installing noto-fonts-cjk...
+installing noto-fonts-emoji...
+installing nss-mdns...
+installing libuv...
+installing libluv...
+installing tree-sitter...
+installing unibilium...
+installing libvterm...
+installing lua51-lpeg...
+installing msgpack-c...
+installing tree-sitter-c...
+Optional dependencies for tree-sitter-c
+    tree-sitter: core library [installed]
+installing tree-sitter-lua...
+Optional dependencies for tree-sitter-lua
+    tree-sitter: core library [installed]
+installing tree-sitter-markdown...
+Optional dependencies for tree-sitter-markdown
+    tree-sitter: core library [installed]
+installing tree-sitter-query...
+Optional dependencies for tree-sitter-query
+    tree-sitter: core library [installed]
+installing tree-sitter-vim...
+Optional dependencies for tree-sitter-vim
+    tree-sitter: core library [installed]
+installing tree-sitter-vimdoc...
+Optional dependencies for tree-sitter-vimdoc
+    tree-sitter: core library [installed]
+installing neovim...
+Optional dependencies for neovim
+    python-pynvim: for Python plugin support (see :help python)
+    xclip: for clipboard support on X11 (or xsel) (see :help clipboard)
+    xsel: for clipboard support on X11 (or xclip) (see :help clipboard)
+    wl-clipboard: for clipboard support on wayland (see :help clipboard) [pending]
+installing mbedtls3...
+installing rnnoise...
+installing libjuice...
+installing libsrtp...
+installing libdatachannel...
+installing uthash...
+installing simde...
+installing qrcodegencpp-cmake...
+installing obs-studio...
+Optional dependencies for obs-studio
+    libfdk-aac: FDK AAC codec support [installed]
+    libva-intel-driver: hardware encoding for older Intel GPUs
+    intel-media-driver: hardware encoding for recent Intel GPUs
+    libva-mesa-driver: hardware encoding [installed]
+    sndio: Sndio input client [installed]
+    v4l2loopback-dkms: virtual camera support
+    xdg-desktop-portal-impl: Wayland window/screen capture [installed]
+    obs-studio-plugin-browser: CEF-based browser plugin
+installing c-ares...
+installing electron43...
+Optional dependencies for electron43
+    kde-cli-tools: file deletion support (kioclient)
+    pipewire: WebRTC desktop sharing under Wayland [installed]
+    gtk4: for --gtk-version=4 (GTK4 IME might work better on Wayland) [installed]
+    trash-cli: file deletion support (trash-put)
+    xdg-utils: open URLs with desktop’s default (xdg-email, xdg-open) [installed]
+installing obsidian...
+You can add custom permanent flags for Obsidian in .config/obsidian/user-flags.conf
+installing omacalc...
+installing omacut...
+installing omarchy-keyring...
+ >>> Run `pacman-key --init` to set up your pacman keyring.
+ >>> Then run `pacman-key --populate omarchy` to install the Omarchy keyring.
+installing plymouth...
+Optional dependencies for plymouth
+    gtk3: x11 renderer [installed]
+installing omarchy-settings...
+Applying Omarchy etc-overrides...
+Creating group 'cups-browsed' with GID 969.
+Creating user 'cups-browsed' (CUPS printer discovery) with UID 969 and GID 969.
+install: invalid group 'cups'
+Optional dependencies for omarchy-settings
+    omarchy: Full Omarchy desktop [pending]
+    inxi: System information for omarchy-debug [installed]
+    fastfetch: System information for omarchy-upload-log [installed]
+    limine: Bootloader the shipped /etc/mkinitcpio.conf.d/ and /etc/limine-entry-tool.d/ drop-ins are for [installed]
+    limine-mkinitcpio-hook: Picks up the shipped /etc/mkinitcpio.conf.d/omarchy_hooks.conf [pending]
+    limine-snapper-sync: Boot-entry sync for snapper snapshots [pending]
+    zram-generator: Reads the shipped /etc/systemd/zram-generator.conf to create the compressed swap device [pending]
+    snapper: Used with the shipped /etc/snapper/config-templates/omarchy template [pending]
+installing limine-mkinitcpio-hook...
+Optional dependencies for limine-mkinitcpio-hook
+    kernel-modules-hook: Safely keeps kernel on upgrade failure [installed]
+    sbctl: Signs UEFI boot files for Secure Boot when enabled
+    journalctl-desktop-notification: Sends desktop notifications when errors occur
+installing snapper...
+Optional dependencies for snapper
+    pam: pam_snapper [installed]
+installing limine-snapper-sync...
+Optional dependencies for limine-snapper-sync
+    limine-dracut-support: Automates kernel installation/removal and Limine boot entry management.
+    limine-mkinitcpio-hook: Automates kernel installation/removal and Limine boot entry management. [installed]
+    inotify-tools: Monitors when snapshots are created or deleted. [installed]
+    rsync: Alternative method for restoring snapshots. [installed]
+    b3sum: Fast Blake3 hash function to prevent duplication.
+    xxhash: Fast hashing utility for deduplication with shorter hashes. [installed]
+installing libdwarf...
+installing cpptrace...
+installing qt6-wayland...
+installing quickshell...
+installing python-pyxdg...
+installing python-dbus...
+Optional dependencies for python-dbus
+    python-gobject: D-Bus services via PyGI [installed]
+installing uwsm...
+Optional dependencies for uwsm
+    bemenu: optional picker for uuctl support
+    dmenu: optional picker for uuctl support
+    fuzzel: optional picker for uuctl support
+    libnewt: for "uwsm start select" [installed]
+    libnotify: for feeback from "uswm app" commands or fmon service [installed]
+    rofi-wayland: optional picker for uuctl support
+    wmenu: optional picker for uuctl support
+    wofi: optional picker for uuctl support
+installing xf86-input-libinput...
+installing xorg-server...
+>>> xorg-server has now the ability to run without root rights with
+    the help of systemd-logind. xserver will fail to run if not launched
+    from the same virtual terminal as was used to log in.
+    Without root rights, log files will be in ~/.local/share/xorg/ directory.
+
+    Old behavior can be restored through Xorg.wrap config file.
+    See Xorg.wrap man page (man xorg.wrap).
+installing libxmu...
+installing xorg-xauth...
+installing sddm...
+Optional dependencies for sddm
+    qt5-declarative: for using Qt5 themes
+installing pacman-contrib...
+Optional dependencies for pacman-contrib
+    diffutils: for pacdiff [installed]
+    fakeroot: for checkupdates [installed]
+    findutils: for pacdiff --find [installed]
+    mlocate: for pacdiff --locate [pending]
+    plocate: faster mlocate alternative [pending]
+    perl: for pacsearch [installed]
+    sudo: privilege elevation for several scripts [installed]
+    vim: default diff program for pacdiff
+    neovim: default diff program for pacdiff if EDITOR=nvim [installed]
+installing ttf-jetbrains-mono-nerd-basic...
+installing omarchy...
+installing omarchy-nvim...
+installing omawrite...
+installing pamixer...
+installing pinta...
+installing pipewire-alsa...
+installing pipewire-pulse...
+Created symlink '/etc/systemd/user/sockets.target.wants/pipewire-pulse.socket' → '/usr/lib/systemd/user/pipewire-pulse.socket'.
+installing plocate...
+installing postgresql-libs...
+installing power-profiles-daemon...
+Optional dependencies for power-profiles-daemon
+    python-gobject: for powerprofilesctl [installed]
+installing python-fastjsonschema...
+installing python-typing_extensions...
+installing python-lark-parser...
+Optional dependencies for python-lark-parser
+    python-atomicwrites: for atomic_cache
+    python-regex: for regex support
+installing python-packaging...
+installing python-poetry-core...
+installing qemu-user-static...
+Optional dependencies for qemu-user-static
+    qemu-user-static-binfmt: for binary format rules [pending]
+installing qemu-user-static-binfmt...
+installing qrencode...
+installing freeglut...
+installing jasper...
+Optional dependencies for jasper
+    jasper-doc: documentation
+installing libmng...
+installing qt6-imageformats...
+installing ripgrep...
+installing rubygems...
+installing ruby...
+Optional dependencies for ruby
+    tk: for Ruby/TK
+    ruby-docs: Documentation for Ruby
+    ruby-default-gems: Default gems which are part of Ruby StdLib
+    ruby-bundled-gems: Bundled gems which are part of Ruby StdLib
+    ruby-stdlib: Full Ruby StdLib including default gems, bundled gems and tools
+installing slurp...
+installing socat...
+installing starship...
+Optional dependencies for starship
+    ttf-font-nerd: Nerd Font Symbols preset [installed]
+installing js140...
+installing gjs...
+installing gst-plugin-gtk...
+installing gtksourceview4...
+installing sushi...
+Optional dependencies for sushi
+    libreoffice: OpenDocument formats [installed]
+    webkit2gtk-4.1: Render HTML files [installed]
+installing python-pycups...
+installing python-cairo...
+installing system-config-printer...
+Optional dependencies for system-config-printer
+    libsecret: password management [installed]
+    python-pysmbc: SMB browser support
+    cups-pk-helper: PolicyKit helper to configure cups with fine-grained privileges [installed]
+installing tensaku...
+Optional dependencies for tensaku
+    hyprland: window snapping and pin placement [installed]
+    sway: window snapping and pin placement
+installing leptonica...
+installing tesseract-data-eng...
+installing tesseract-data-osd...
+installing tesseract...
+Optional dependencies for tesseract
+    icu: for text2image [installed]
+    pango: for text2image [installed]
+    tesseract-data-afr: OCR data (afr)
+    tesseract-data-amh: OCR data (amh)
+    tesseract-data-ara: OCR data (ara)
+    tesseract-data-asm: OCR data (asm)
+    tesseract-data-aze: OCR data (aze)
+    tesseract-data-aze_cyrl: OCR data (aze_cyrl)
+    tesseract-data-bel: OCR data (bel)
+    tesseract-data-ben: OCR data (ben)
+    tesseract-data-bod: OCR data (bod)
+    tesseract-data-bos: OCR data (bos)
+    tesseract-data-bre: OCR data (bre)
+    tesseract-data-bul: OCR data (bul)
+    tesseract-data-cat: OCR data (cat)
+    tesseract-data-ceb: OCR data (ceb)
+    tesseract-data-ces: OCR data (ces)
+    tesseract-data-chi_sim: OCR data (chi_sim)
+    tesseract-data-chi_tra: OCR data (chi_tra)
+    tesseract-data-chr: OCR data (chr)
+    tesseract-data-cos: OCR data (cos)
+    tesseract-data-cym: OCR data (cym)
+    tesseract-data-dan: OCR data (dan)
+    tesseract-data-dan_frak: OCR data (dan_frak)
+    tesseract-data-deu: OCR data (deu)
+    tesseract-data-deu_frak: OCR data (deu_frak)
+    tesseract-data-div: OCR data (div)
+    tesseract-data-dzo: OCR data (dzo)
+    tesseract-data-ell: OCR data (ell)
+    tesseract-data-eng: OCR data (eng) [installed]
+    tesseract-data-enm: OCR data (enm)
+    tesseract-data-epo: OCR data (epo)
+    tesseract-data-equ: OCR data (equ)
+    tesseract-data-est: OCR data (est)
+    tesseract-data-eus: OCR data (eus)
+    tesseract-data-fao: OCR data (fao)
+    tesseract-data-fas: OCR data (fas)
+    tesseract-data-fil: OCR data (fil)
+    tesseract-data-fin: OCR data (fin)
+    tesseract-data-fra: OCR data (fra)
+    tesseract-data-frk: OCR data (frk)
+    tesseract-data-frm: OCR data (frm)
+    tesseract-data-fry: OCR data (fry)
+    tesseract-data-gla: OCR data (gla)
+    tesseract-data-gle: OCR data (gle)
+    tesseract-data-glg: OCR data (glg)
+    tesseract-data-grc: OCR data (grc)
+    tesseract-data-guj: OCR data (guj)
+    tesseract-data-hat: OCR data (hat)
+    tesseract-data-heb: OCR data (heb)
+    tesseract-data-hin: OCR data (hin)
+    tesseract-data-hrv: OCR data (hrv)
+    tesseract-data-hun: OCR data (hun)
+    tesseract-data-hye: OCR data (hye)
+    tesseract-data-iku: OCR data (iku)
+    tesseract-data-ind: OCR data (ind)
+    tesseract-data-isl: OCR data (isl)
+    tesseract-data-ita: OCR data (ita)
+    tesseract-data-ita_old: OCR data (ita_old)
+    tesseract-data-jav: OCR data (jav)
+    tesseract-data-jpn: OCR data (jpn)
+    tesseract-data-jpn_vert: OCR data (jpn_vert)
+    tesseract-data-kan: OCR data (kan)
+    tesseract-data-kat: OCR data (kat)
+    tesseract-data-kat_old: OCR data (kat_old)
+    tesseract-data-kaz: OCR data (kaz)
+    tesseract-data-khm: OCR data (khm)
+    tesseract-data-kir: OCR data (kir)
+    tesseract-data-kmr: OCR data (kmr)
+    tesseract-data-kor: OCR data (kor)
+    tesseract-data-kor_vert: OCR data (kor_vert)
+    tesseract-data-lao: OCR data (lao)
+    tesseract-data-lat: OCR data (lat)
+    tesseract-data-lav: OCR data (lav)
+    tesseract-data-lit: OCR data (lit)
+    tesseract-data-ltz: OCR data (ltz)
+    tesseract-data-mal: OCR data (mal)
+    tesseract-data-mar: OCR data (mar)
+    tesseract-data-mkd: OCR data (mkd)
+    tesseract-data-mlt: OCR data (mlt)
+    tesseract-data-mon: OCR data (mon)
+    tesseract-data-mri: OCR data (mri)
+    tesseract-data-msa: OCR data (msa)
+    tesseract-data-mya: OCR data (mya)
+    tesseract-data-nep: OCR data (nep)
+    tesseract-data-nld: OCR data (nld)
+    tesseract-data-nor: OCR data (nor)
+    tesseract-data-oci: OCR data (oci)
+    tesseract-data-ori: OCR data (ori)
+    tesseract-data-pan: OCR data (pan)
+    tesseract-data-pol: OCR data (pol)
+    tesseract-data-por: OCR data (por)
+    tesseract-data-pus: OCR data (pus)
+    tesseract-data-que: OCR data (que)
+    tesseract-data-ron: OCR data (ron)
+    tesseract-data-rus: OCR data (rus)
+    tesseract-data-san: OCR data (san)
+    tesseract-data-sin: OCR data (sin)
+    tesseract-data-slk: OCR data (slk)
+    tesseract-data-slk_frak: OCR data (slk_frak)
+    tesseract-data-slv: OCR data (slv)
+    tesseract-data-snd: OCR data (snd)
+    tesseract-data-spa: OCR data (spa)
+    tesseract-data-spa_old: OCR data (spa_old)
+    tesseract-data-sqi: OCR data (sqi)
+    tesseract-data-srp: OCR data (srp)
+    tesseract-data-srp_latn: OCR data (srp_latn)
+    tesseract-data-sun: OCR data (sun)
+    tesseract-data-swa: OCR data (swa)
+    tesseract-data-swe: OCR data (swe)
+    tesseract-data-syr: OCR data (syr)
+    tesseract-data-tam: OCR data (tam)
+    tesseract-data-tat: OCR data (tat)
+    tesseract-data-tel: OCR data (tel)
+    tesseract-data-tgk: OCR data (tgk)
+    tesseract-data-tgl: OCR data (tgl)
+    tesseract-data-tha: OCR data (tha)
+    tesseract-data-tir: OCR data (tir)
+    tesseract-data-ton: OCR data (ton)
+    tesseract-data-tur: OCR data (tur)
+    tesseract-data-uig: OCR data (uig)
+    tesseract-data-ukr: OCR data (ukr)
+    tesseract-data-urd: OCR data (urd)
+    tesseract-data-uzb: OCR data (uzb)
+    tesseract-data-uzb_cyrl: OCR data (uzb_cyrl)
+    tesseract-data-vie: OCR data (vie)
+    tesseract-data-yid: OCR data (yid)
+    tesseract-data-yor: OCR data (yor)
+installing python-shtab...
+installing python-colorama...
+installing python-termcolor...
+installing tldr...
+installing libutempter...
+installing tmux...
+installing tobi-try...
+installing tree-sitter-cli...
+Optional dependencies for tree-sitter-cli
+    nodejs: for the generate subcommand
+installing ttf-ia-writer...
+installing ttfx...
+installing tzupdate...
+installing python-yaml...
+installing python-docopt...
+installing udiskie...
+Optional dependencies for udiskie
+    libappindicator-gtk3: --appindicator support
+installing ufw...
+installing ufw-docker...
+Run `ufw-docker install` to update ufw rules and automatically back up existing rules.
+To restore backed up ufw rules, run `ufw-docker uninstall`.
+installing usage...
+installing whois...
+installing iw...
+installing wireless-regdb...
+installing wl-clipboard...
+Optional dependencies for wl-clipboard
+    xdg-utils: for content type inference in wl-copy [installed]
+    mailcap: for type inference in wl-paste
+installing woff2-font-awesome...
+
+:: Starting from version 7.0.0, the Font Awesome upstream no longer includes '.ttf' webfonts
+   and instead provides them in '.woff2' format, which is now the standard for webfont delivery.
+
+   The 'ttf-font-awesome' package has therefore been replaced by the 'woff2-font-awesome' one.
+
+   If your project(s) or configuration(s) still depend on '.ttf' files, please update
+   them to use the '.woff2' format instead.
+
+   See https://fontawesome.com/changelog for more details.
+
+installing wtype...
+installing xdg-terminal-exec...
+installing xournalpp...
+Optional dependencies for xournalpp
+    texlive-latexextra: LaTeX package
+installing yaru-icon-theme...
+installing yay...
+Optional dependencies for yay
+    sudo: privilege elevation [installed]
+    doas: privilege elevation
+installing zbar...
+Optional dependencies for zbar
+    gtk3: for zbar-gtk [installed]
+    qt5-x11extras: for zbar-qt
+    python: for zbar python bindings [installed]
+installing zoxide...
+Optional dependencies for zoxide
+    fzf: for interactive selection [installed]
+installing zram-generator...
+:: Running post-transaction hooks...
+( 1/32) Generating the configured locale...
+Generating locales...
+Generation complete.
+( 2/32) Restoring Linux kernel modules...
+++ uname -r
++ KVER=7.1.8-arch1-Watanare-T2-3-t2
++ test -e /usr/lib/modules/backup/7.1.8-arch1-Watanare-T2-3-t2
++ rm -rf /usr/lib/modules/backup
+( 3/32) Configuring dynamic linker run-time bindings...
+( 4/32) Creating iconv module configuration cache...
+( 5/32) Creating system user accounts...
+Creating group 'docker' with GID 968.
+Creating group 'i2c' with GID 967.
+Creating group 'locate' with GID 21.
+Creating group 'polkitd' with GID 102.
+Creating group 'seat' with GID 966.
+Creating group 'alpm' with GID 965.
+Creating user 'alpm' (Arch Linux Package Management) with UID 965 and GID 965.
+Creating group 'cups' with GID 209.
+Creating user 'cups' (cups helper user) with UID 209 and GID 209.
+Creating group 'git' with GID 964.
+Creating user 'git' (git daemon user) with UID 964 and GID 964.
+Creating group '_talkd' with GID 963.
+Creating user '_talkd' (User for legacy talkd server) with UID 963 and GID 963.
+Creating group 'pcscd' with GID 962.
+Creating user 'pcscd' (PC/SC Smart Card Daemon) with UID 962 and GID 962.
+Creating user 'polkitd' (User for polkitd) with UID 102 and GID 102.
+Creating group 'sddm' with GID 961.
+Creating user 'sddm' (SDDM Greeter Account) with UID 961 and GID 961.
+( 6/32) Creating temporary files...
+( 7/32) Registering binary formats...
+  Skipped: Running in chroot.
+( 8/32) Updating journal message catalog...
+( 9/32) Updating udev hardware database...
+(10/32) Applying kernel sysctl settings...
+  Skipped: Running in chroot.
+(11/32) Reloading system manager configuration...
+  Skipped: Running in chroot.
+(12/32) Reloading user manager configuration...
+  Skipped: Running in chroot.
+(13/32) Updating the MIME type database...
+(14/32) Reloading device manager configuration...
+  Skipped: Running in chroot.
+(15/32) Arming ConditionNeedsUpdate...
+(16/32) Updating fontconfig configuration...
+(17/32) Rebuilding certificate stores...
+(18/32) Updating module dependencies...
+(19/32) Reloading Hyprland after Omarchy settings update...
+(20/32) Updating the appstream cache...
+✔ Metadata cache was updated successfully.
+(21/32) Reloading system bus configuration...
+  Skipped: Running in chroot.
+(22/32) Checking for old perl modules...
+perl: warning: Setting locale failed.
+perl: warning: Please check that your locale settings:
+	LANGUAGE = (unset),
+	LC_ALL = (unset),
+	LC_CTYPE = (unset),
+	LC_NUMERIC = (unset),
+	LC_COLLATE = (unset),
+	LC_TIME = (unset),
+	LC_MESSAGES = (unset),
+	LC_MONETARY = (unset),
+	LC_ADDRESS = (unset),
+	LC_IDENTIFICATION = (unset),
+	LC_MEASUREMENT = (unset),
+	LC_PAPER = (unset),
+	LC_TELEPHONE = (unset),
+	LC_NAME = (unset),
+	LANG = "en_US.UTF-8"
+    are supported and installed on your system.
+perl: warning: Falling back to the standard locale ("C").
+(23/32) Updating fontconfig cache...
+(24/32) Updating GIO module cache...
+(25/32) Compiling GSettings XML schema files...
+(26/32) Probing GTK3 input method modules...
+(27/32) Updating icon theme caches...
+(28/32) Updating GTK4 module cache...
+(29/32) Reloading GVFS config...
+(30/32) Generating luarocks manifest for Lua 5.1...
+Making manifest for /usr/lib/luarocks/rocks-5.1/
+(31/32) Updating the info directory file...
+(32/32) Updating the desktop file MIME type cache...
+abseil-cpp: install reason has been set to 'installed as dependency'
+acl: install reason has been set to 'installed as dependency'
+adwaita-cursors: install reason has been set to 'installed as dependency'
+adwaita-fonts: install reason has been set to 'installed as dependency'
+adwaita-icon-theme: install reason has been set to 'installed as dependency'
+adwaita-icon-theme-legacy: install reason has been set to 'installed as dependency'
+aether: install reason has been set to 'installed as dependency'
+alsa-card-profiles: install reason has been set to 'installed as dependency'
+alsa-lib: install reason has been set to 'installed as dependency'
+alsa-topology-conf: install reason has been set to 'installed as dependency'
+alsa-ucm-conf: install reason has been set to 'installed as dependency'
+alsa-utils: install reason has been set to 'installed as dependency'
+aom: install reason has been set to 'installed as dependency'
+appstream: install reason has been set to 'installed as dependency'
+aquamarine: install reason has been set to 'installed as dependency'
+archlinux-keyring: install reason has been set to 'installed as dependency'
+argon2: install reason has been set to 'installed as dependency'
+asdcontrol: install reason has been set to 'installed as dependency'
+at-spi2-core: install reason has been set to 'installed as dependency'
+attica: install reason has been set to 'installed as dependency'
+attr: install reason has been set to 'installed as dependency'
+audit: install reason has been set to 'installed as dependency'
+autoconf: install reason has been set to 'installed as dependency'
+automake: install reason has been set to 'installed as dependency'
+avahi: install reason has been set to 'installed as dependency'
+ayatana-ido: install reason has been set to 'installed as dependency'
+base: install reason has been set to 'installed as dependency'
+base-devel: install reason has been set to 'installed as dependency'
+bash: install reason has been set to 'installed as dependency'
+bash-completion: install reason has been set to 'installed as dependency'
+bat: install reason has been set to 'installed as dependency'
+binutils: install reason has been set to 'installed as dependency'
+bison: install reason has been set to 'installed as dependency'
+blas: install reason has been set to 'installed as dependency'
+bluez: install reason has been set to 'installed as dependency'
+bluez-libs: install reason has been set to 'installed as dependency'
+bluez-tools: install reason has been set to 'installed as dependency'
+bluez-utils: install reason has been set to 'installed as dependency'
+bolt: install reason has been set to 'installed as dependency'
+boost-libs: install reason has been set to 'installed as dependency'
+breeze-icons: install reason has been set to 'installed as dependency'
+brightnessctl: install reason has been set to 'installed as dependency'
+brotli: install reason has been set to 'installed as dependency'
+btop: install reason has been set to 'installed as dependency'
+btrfs-progs: install reason has been set to 'installed as dependency'
+bubblewrap: install reason has been set to 'installed as dependency'
+bzip2: install reason has been set to 'installed as dependency'
+c-ares: install reason has been set to 'installed as dependency'
+ca-certificates: install reason has been set to 'installed as dependency'
+ca-certificates-mozilla: install reason has been set to 'installed as dependency'
+ca-certificates-utils: install reason has been set to 'installed as dependency'
+cairo: install reason has been set to 'installed as dependency'
+cblas: install reason has been set to 'installed as dependency'
+cdparanoia: install reason has been set to 'installed as dependency'
+cfitsio: install reason has been set to 'installed as dependency'
+chromium: install reason has been set to 'installed as dependency'
+cifs-utils: install reason has been set to 'installed as dependency'
+clang: install reason has been set to 'installed as dependency'
+cliamp: install reason has been set to 'installed as dependency'
+clucene: install reason has been set to 'installed as dependency'
+compiler-rt: install reason has been set to 'installed as dependency'
+containerd: install reason has been set to 'installed as dependency'
+convertlit: install reason has been set to 'installed as dependency'
+coreutils: install reason has been set to 'installed as dependency'
+cpio: install reason has been set to 'installed as dependency'
+cpptrace: install reason has been set to 'installed as dependency'
+cracklib: install reason has been set to 'installed as dependency'
+cryptsetup: install reason has been set to 'installed as dependency'
+cups: install reason has been set to 'installed as dependency'
+cups-filters: install reason has been set to 'installed as dependency'
+cups-pk-helper: install reason has been set to 'installed as dependency'
+curl: install reason has been set to 'installed as dependency'
+dav1d: install reason has been set to 'installed as dependency'
+db5.3: install reason has been set to 'installed as dependency'
+dbus: install reason has been set to 'installed as dependency'
+dbus-broker: install reason has been set to 'installed as dependency'
+dbus-broker-units: install reason has been set to 'installed as dependency'
+dbus-units: install reason has been set to 'installed as dependency'
+dconf: install reason has been set to 'installed as dependency'
+ddcutil: install reason has been set to 'installed as dependency'
+debugedit: install reason has been set to 'installed as dependency'
+default-cursors: install reason has been set to 'installed as dependency'
+deno: install reason has been set to 'installed as dependency'
+desktop-file-utils: install reason has been set to 'installed as dependency'
+device-mapper: install reason has been set to 'installed as dependency'
+diffutils: install reason has been set to 'installed as dependency'
+djvulibre: install reason has been set to 'installed as dependency'
+docker: install reason has been set to 'installed as dependency'
+docker-buildx: install reason has been set to 'installed as dependency'
+docker-compose: install reason has been set to 'installed as dependency'
+dosfstools: install reason has been set to 'installed as dependency'
+dotnet-host: install reason has been set to 'installed as dependency'
+dotnet-runtime: install reason has been set to 'installed as dependency'
+double-conversion: install reason has been set to 'installed as dependency'
+dua-cli: install reason has been set to 'installed as dependency'
+duktape: install reason has been set to 'installed as dependency'
+e2fsprogs: install reason has been set to 'installed as dependency'
+ebook-tools: install reason has been set to 'installed as dependency'
+efibootmgr: install reason has been set to 'installed as dependency'
+efivar: install reason has been set to 'installed as dependency'
+electron43: install reason has been set to 'installed as dependency'
+elfutils: install reason has been set to 'installed as dependency'
+enchant: install reason has been set to 'installed as dependency'
+evince: install reason has been set to 'installed as dependency'
+exempi: install reason has been set to 'installed as dependency'
+exfatprogs: install reason has been set to 'installed as dependency'
+exiv2: install reason has been set to 'installed as dependency'
+expac: install reason has been set to 'installed as dependency'
+expat: install reason has been set to 'installed as dependency'
+eza: install reason has been set to 'installed as dependency'
+fakeroot: install reason has been set to 'installed as dependency'
+fastfetch: install reason has been set to 'installed as dependency'
+fcft: install reason has been set to 'installed as dependency'
+fcitx5: install reason has been set to 'installed as dependency'
+fcitx5-gtk: install reason has been set to 'installed as dependency'
+fcitx5-qt: install reason has been set to 'installed as dependency'
+fd: install reason has been set to 'installed as dependency'
+ffmpeg: install reason has been set to 'installed as dependency'
+ffmpegthumbnailer: install reason has been set to 'installed as dependency'
+fftw: install reason has been set to 'installed as dependency'
+file: install reason has been set to 'installed as dependency'
+filesystem: install reason has been set to 'installed as dependency'
+findutils: install reason has been set to 'installed as dependency'
+flac: install reason has been set to 'installed as dependency'
+flex: install reason has been set to 'installed as dependency'
+fmt: install reason has been set to 'installed as dependency'
+fontconfig: install reason has been set to 'installed as dependency'
+foot: install reason has been set to 'installed as dependency'
+freeglut: install reason has been set to 'installed as dependency'
+freetype2: install reason has been set to 'installed as dependency'
+frei0r-plugins: install reason has been set to 'installed as dependency'
+fribidi: install reason has been set to 'installed as dependency'
+fuse-common: install reason has been set to 'installed as dependency'
+fuse3: install reason has been set to 'installed as dependency'
+fzf: install reason has been set to 'installed as dependency'
+gavl: install reason has been set to 'installed as dependency'
+gawk: install reason has been set to 'installed as dependency'
+gc: install reason has been set to 'installed as dependency'
+gcc: install reason has been set to 'installed as dependency'
+gcc-libs: install reason has been set to 'installed as dependency'
+gcr: install reason has been set to 'installed as dependency'
+gcr-4: install reason has been set to 'installed as dependency'
+gdb: install reason has been set to 'installed as dependency'
+gdb-common: install reason has been set to 'installed as dependency'
+gdbm: install reason has been set to 'installed as dependency'
+gdk-pixbuf2: install reason has been set to 'installed as dependency'
+gettext: install reason has been set to 'installed as dependency'
+gexiv2: install reason has been set to 'installed as dependency'
+gexiv2-common: install reason has been set to 'installed as dependency'
+ghostscript: install reason has been set to 'installed as dependency'
+giflib: install reason has been set to 'installed as dependency'
+git: install reason has been set to 'installed as dependency'
+gjs: install reason has been set to 'installed as dependency'
+glib-networking: install reason has been set to 'installed as dependency'
+glib2: install reason has been set to 'installed as dependency'
+glibc: install reason has been set to 'installed as dependency'
+glslang: install reason has been set to 'installed as dependency'
+glu: install reason has been set to 'installed as dependency'
+glycin: install reason has been set to 'installed as dependency'
+glycin-gtk4: install reason has been set to 'installed as dependency'
+gmp: install reason has been set to 'installed as dependency'
+gnome-autoar: install reason has been set to 'installed as dependency'
+gnome-desktop: install reason has been set to 'installed as dependency'
+gnome-desktop-4: install reason has been set to 'installed as dependency'
+gnome-desktop-common: install reason has been set to 'installed as dependency'
+gnome-disk-utility: install reason has been set to 'installed as dependency'
+gnome-keyring: install reason has been set to 'installed as dependency'
+gnome-themes-extra: install reason has been set to 'installed as dependency'
+gnulib-l10n: install reason has been set to 'installed as dependency'
+gnupg: install reason has been set to 'installed as dependency'
+gnutls: install reason has been set to 'installed as dependency'
+gobject-introspection-runtime: install reason has been set to 'installed as dependency'
+gperftools: install reason has been set to 'installed as dependency'
+gpgme: install reason has been set to 'installed as dependency'
+gpgmepp: install reason has been set to 'installed as dependency'
+gpm: install reason has been set to 'installed as dependency'
+gpu-screen-recorder: install reason has been set to 'installed as dependency'
+graphene: install reason has been set to 'installed as dependency'
+graphite: install reason has been set to 'installed as dependency'
+grep: install reason has been set to 'installed as dependency'
+grim: install reason has been set to 'installed as dependency'
+groff: install reason has been set to 'installed as dependency'
+gsettings-desktop-schemas: install reason has been set to 'installed as dependency'
+gsettings-system-schemas: install reason has been set to 'installed as dependency'
+gsfonts: install reason has been set to 'installed as dependency'
+gsm: install reason has been set to 'installed as dependency'
+gspell: install reason has been set to 'installed as dependency'
+gssdp: install reason has been set to 'installed as dependency'
+gst-plugin-gtk: install reason has been set to 'installed as dependency'
+gst-plugin-pipewire: install reason has been set to 'installed as dependency'
+gst-plugins-bad-libs: install reason has been set to 'installed as dependency'
+gst-plugins-base: install reason has been set to 'installed as dependency'
+gst-plugins-base-libs: install reason has been set to 'installed as dependency'
+gstreamer: install reason has been set to 'installed as dependency'
+gtest: install reason has been set to 'installed as dependency'
+gtk-update-icon-cache: install reason has been set to 'installed as dependency'
+gtk3: install reason has been set to 'installed as dependency'
+gtk4: install reason has been set to 'installed as dependency'
+gtk4-layer-shell: install reason has been set to 'installed as dependency'
+gtksourceview4: install reason has been set to 'installed as dependency'
+guile: install reason has been set to 'installed as dependency'
+gum: install reason has been set to 'installed as dependency'
+gupnp: install reason has been set to 'installed as dependency'
+gupnp-dlna: install reason has been set to 'installed as dependency'
+gupnp-igd: install reason has been set to 'installed as dependency'
+gvfs: install reason has been set to 'installed as dependency'
+gvfs-mtp: install reason has been set to 'installed as dependency'
+gvfs-nfs: install reason has been set to 'installed as dependency'
+gvfs-smb: install reason has been set to 'installed as dependency'
+gzip: install reason has been set to 'installed as dependency'
+harfbuzz: install reason has been set to 'installed as dependency'
+harfbuzz-icu: install reason has been set to 'installed as dependency'
+herdr: install reason has been set to 'installed as dependency'
+hicolor-icon-theme: install reason has been set to 'installed as dependency'
+hidapi: install reason has been set to 'installed as dependency'
+highway: install reason has been set to 'installed as dependency'
+hunspell: install reason has been set to 'installed as dependency'
+hwdata: install reason has been set to 'installed as dependency'
+hwloc: install reason has been set to 'installed as dependency'
+hyphen: install reason has been set to 'installed as dependency'
+hyprcursor: install reason has been set to 'installed as dependency'
+hyprgraphics: install reason has been set to 'installed as dependency'
+hyprland: install reason has been set to 'installed as dependency'
+hyprland-guiutils: install reason has been set to 'installed as dependency'
+hyprland-preview-share-picker: install reason has been set to 'installed as dependency'
+hyprlang: install reason has been set to 'installed as dependency'
+hyprpicker: install reason has been set to 'installed as dependency'
+hyprsunset: install reason has been set to 'installed as dependency'
+hyprtoolkit: install reason has been set to 'installed as dependency'
+hyprutils: install reason has been set to 'installed as dependency'
+hyprwayland-scanner: install reason has been set to 'installed as dependency'
+hyprwire: install reason has been set to 'installed as dependency'
+i2c-tools: install reason has been set to 'installed as dependency'
+iana-etc: install reason has been set to 'installed as dependency'
+icu: install reason has been set to 'installed as dependency'
+ijs: install reason has been set to 'installed as dependency'
+imagemagick: install reason has been set to 'installed as dependency'
+imath: install reason has been set to 'installed as dependency'
+imv: install reason has been set to 'installed as dependency'
+inetutils: install reason has been set to 'installed as dependency'
+iniparser: install reason has been set to 'installed as dependency'
+inotify-tools: install reason has been set to 'installed as dependency'
+inxi: install reason has been set to 'installed as dependency'
+iproute2: install reason has been set to 'installed as dependency'
+iptables: install reason has been set to 'installed as dependency'
+iputils: install reason has been set to 'installed as dependency'
+iso-codes: install reason has been set to 'installed as dependency'
+iw: install reason has been set to 'installed as dependency'
+jansson: install reason has been set to 'installed as dependency'
+jasper: install reason has been set to 'installed as dependency'
+jbig2dec: install reason has been set to 'installed as dependency'
+jbigkit: install reason has been set to 'installed as dependency'
+jemalloc: install reason has been set to 'installed as dependency'
+jq: install reason has been set to 'installed as dependency'
+js140: install reason has been set to 'installed as dependency'
+json-c: install reason has been set to 'installed as dependency'
+json-glib: install reason has been set to 'installed as dependency'
+kaccounts-integration: install reason has been set to 'installed as dependency'
+karchive: install reason has been set to 'installed as dependency'
+kbd: install reason has been set to 'installed as dependency'
+kbookmarks: install reason has been set to 'installed as dependency'
+kcmutils: install reason has been set to 'installed as dependency'
+kcodecs: install reason has been set to 'installed as dependency'
+kcolorscheme: install reason has been set to 'installed as dependency'
+kcompletion: install reason has been set to 'installed as dependency'
+kconfig: install reason has been set to 'installed as dependency'
+kconfigwidgets: install reason has been set to 'installed as dependency'
+kcoreaddons: install reason has been set to 'installed as dependency'
+kcrash: install reason has been set to 'installed as dependency'
+kdbusaddons: install reason has been set to 'installed as dependency'
+kddockwidgets: install reason has been set to 'installed as dependency'
+kdenlive: install reason has been set to 'installed as dependency'
+kernel-modules-hook: install reason has been set to 'installed as dependency'
+keyutils: install reason has been set to 'installed as dependency'
+kfilemetadata: install reason has been set to 'installed as dependency'
+kglobalaccel: install reason has been set to 'installed as dependency'
+kguiaddons: install reason has been set to 'installed as dependency'
+ki18n: install reason has been set to 'installed as dependency'
+kiconthemes: install reason has been set to 'installed as dependency'
+kio: install reason has been set to 'installed as dependency'
+kirigami: install reason has been set to 'installed as dependency'
+kitemmodels: install reason has been set to 'installed as dependency'
+kitemviews: install reason has been set to 'installed as dependency'
+kjobwidgets: install reason has been set to 'installed as dependency'
+kmod: install reason has been set to 'installed as dependency'
+knewstuff: install reason has been set to 'installed as dependency'
+knotifications: install reason has been set to 'installed as dependency'
+knotifyconfig: install reason has been set to 'installed as dependency'
+kpackage: install reason has been set to 'installed as dependency'
+krb5: install reason has been set to 'installed as dependency'
+kservice: install reason has been set to 'installed as dependency'
+ktextwidgets: install reason has been set to 'installed as dependency'
+kwallet: install reason has been set to 'installed as dependency'
+kwidgetsaddons: install reason has been set to 'installed as dependency'
+kwindowsystem: install reason has been set to 'installed as dependency'
+kxmlgui: install reason has been set to 'installed as dependency'
+l-smash: install reason has been set to 'installed as dependency'
+lame: install reason has been set to 'installed as dependency'
+lapack: install reason has been set to 'installed as dependency'
+lazydocker: install reason has been set to 'installed as dependency'
+lazygit: install reason has been set to 'installed as dependency'
+lcms2: install reason has been set to 'installed as dependency'
+ldb: install reason has been set to 'installed as dependency'
+leancrypto: install reason has been set to 'installed as dependency'
+leptonica: install reason has been set to 'installed as dependency'
+less: install reason has been set to 'installed as dependency'
+libabw: install reason has been set to 'installed as dependency'
+libaccounts-glib: install reason has been set to 'installed as dependency'
+libaccounts-qt: install reason has been set to 'installed as dependency'
+libadwaita: install reason has been set to 'installed as dependency'
+libarchive: install reason has been set to 'installed as dependency'
+libasan: install reason has been set to 'installed as dependency'
+libass: install reason has been set to 'installed as dependency'
+libassuan: install reason has been set to 'installed as dependency'
+libasyncns: install reason has been set to 'installed as dependency'
+libatasmart: install reason has been set to 'installed as dependency'
+libatomic: install reason has been set to 'installed as dependency'
+libatomic_ops: install reason has been set to 'installed as dependency'
+libavc1394: install reason has been set to 'installed as dependency'
+libavif: install reason has been set to 'installed as dependency'
+libayatana-appindicator: install reason has been set to 'installed as dependency'
+libayatana-indicator: install reason has been set to 'installed as dependency'
+libb2: install reason has been set to 'installed as dependency'
+libblake3: install reason has been set to 'installed as dependency'
+libblockdev: install reason has been set to 'installed as dependency'
+libblockdev-crypto: install reason has been set to 'installed as dependency'
+libblockdev-fs: install reason has been set to 'installed as dependency'
+libblockdev-loop: install reason has been set to 'installed as dependency'
+libblockdev-mdraid: install reason has been set to 'installed as dependency'
+libblockdev-nvme: install reason has been set to 'installed as dependency'
+libblockdev-part: install reason has been set to 'installed as dependency'
+libblockdev-smart: install reason has been set to 'installed as dependency'
+libblockdev-swap: install reason has been set to 'installed as dependency'
+libbluray: install reason has been set to 'installed as dependency'
+libbpf: install reason has been set to 'installed as dependency'
+libbs2b: install reason has been set to 'installed as dependency'
+libbsd: install reason has been set to 'installed as dependency'
+libbytesize: install reason has been set to 'installed as dependency'
+libcanberra: install reason has been set to 'installed as dependency'
+libcap: install reason has been set to 'installed as dependency'
+libcap-ng: install reason has been set to 'installed as dependency'
+libcdio: install reason has been set to 'installed as dependency'
+libcdio-paranoia: install reason has been set to 'installed as dependency'
+libcdr: install reason has been set to 'installed as dependency'
+libcgif: install reason has been set to 'installed as dependency'
+libcloudproviders: install reason has been set to 'installed as dependency'
+libcmis: install reason has been set to 'installed as dependency'
+libcolord: install reason has been set to 'installed as dependency'
+libcue: install reason has been set to 'installed as dependency'
+libcups: install reason has been set to 'installed as dependency'
+libcupsfilters: install reason has been set to 'installed as dependency'
+libdaemon: install reason has been set to 'installed as dependency'
+libdatachannel: install reason has been set to 'installed as dependency'
+libdatrie: install reason has been set to 'installed as dependency'
+libdbusmenu-glib: install reason has been set to 'installed as dependency'
+libdbusmenu-gtk3: install reason has been set to 'installed as dependency'
+libdc1394: install reason has been set to 'installed as dependency'
+libde265: install reason has been set to 'installed as dependency'
+libdecor: install reason has been set to 'installed as dependency'
+libdeflate: install reason has been set to 'installed as dependency'
+libdisplay-info: install reason has been set to 'installed as dependency'
+libdovi: install reason has been set to 'installed as dependency'
+libdrm: install reason has been set to 'installed as dependency'
+libdvdnav: install reason has been set to 'installed as dependency'
+libdvdread: install reason has been set to 'installed as dependency'
+libdwarf: install reason has been set to 'installed as dependency'
+libe-book: install reason has been set to 'installed as dependency'
+libebur128: install reason has been set to 'installed as dependency'
+libedit: install reason has been set to 'installed as dependency'
+libei: install reason has been set to 'installed as dependency'
+libelf: install reason has been set to 'installed as dependency'
+libepoxy: install reason has been set to 'installed as dependency'
+libepubgen: install reason has been set to 'installed as dependency'
+libetonyek: install reason has been set to 'installed as dependency'
+libevdev: install reason has been set to 'installed as dependency'
+libevent: install reason has been set to 'installed as dependency'
+libexif: install reason has been set to 'installed as dependency'
+libexttextcat: install reason has been set to 'installed as dependency'
+libfdk-aac: install reason has been set to 'installed as dependency'
+libffi: install reason has been set to 'installed as dependency'
+libfontenc: install reason has been set to 'installed as dependency'
+libfreeaptx: install reason has been set to 'installed as dependency'
+libfreehand: install reason has been set to 'installed as dependency'
+libfyaml: install reason has been set to 'installed as dependency'
+libgcc: install reason has been set to 'installed as dependency'
+libgcrypt: install reason has been set to 'installed as dependency'
+libgfortran: install reason has been set to 'installed as dependency'
+libgirepository: install reason has been set to 'installed as dependency'
+libgit2: install reason has been set to 'installed as dependency'
+libglvnd: install reason has been set to 'installed as dependency'
+libgomp: install reason has been set to 'installed as dependency'
+libgpg-error: install reason has been set to 'installed as dependency'
+libgsf: install reason has been set to 'installed as dependency'
+libgudev: install reason has been set to 'installed as dependency'
+libgxps: install reason has been set to 'installed as dependency'
+libhandy: install reason has been set to 'installed as dependency'
+libheif: install reason has been set to 'installed as dependency'
+libhwasan: install reason has been set to 'installed as dependency'
+libice: install reason has been set to 'installed as dependency'
+libidn: install reason has been set to 'installed as dependency'
+libidn2: install reason has been set to 'installed as dependency'
+libiec61883: install reason has been set to 'installed as dependency'
+libimagequant: install reason has been set to 'installed as dependency'
+libimobiledevice: install reason has been set to 'installed as dependency'
+libimobiledevice-glue: install reason has been set to 'installed as dependency'
+libinih: install reason has been set to 'installed as dependency'
+libinput: install reason has been set to 'installed as dependency'
+libiptcdata: install reason has been set to 'installed as dependency'
+libisl: install reason has been set to 'installed as dependency'
+libixion: install reason has been set to 'installed as dependency'
+libjpeg-turbo: install reason has been set to 'installed as dependency'
+libjuice: install reason has been set to 'installed as dependency'
+libjxl: install reason has been set to 'installed as dependency'
+libksba: install reason has been set to 'installed as dependency'
+liblangtag: install reason has been set to 'installed as dependency'
+liblc3: install reason has been set to 'installed as dependency'
+libldac: install reason has been set to 'installed as dependency'
+libldap: install reason has been set to 'installed as dependency'
+liblqr: install reason has been set to 'installed as dependency'
+liblsan: install reason has been set to 'installed as dependency'
+libluv: install reason has been set to 'installed as dependency'
+libmakepkg-dropins: install reason has been set to 'installed as dependency'
+libmanette: install reason has been set to 'installed as dependency'
+libmd: install reason has been set to 'installed as dependency'
+libmm-glib: install reason has been set to 'installed as dependency'
+libmng: install reason has been set to 'installed as dependency'
+libmnl: install reason has been set to 'installed as dependency'
+libmodplug: install reason has been set to 'installed as dependency'
+libmpc: install reason has been set to 'installed as dependency'
+libmspub: install reason has been set to 'installed as dependency'
+libmtp: install reason has been set to 'installed as dependency'
+libmwaw: install reason has been set to 'installed as dependency'
+libmysofa: install reason has been set to 'installed as dependency'
+libnautilus-extension: install reason has been set to 'installed as dependency'
+libndp: install reason has been set to 'installed as dependency'
+libnetfilter_conntrack: install reason has been set to 'installed as dependency'
+libnewt: install reason has been set to 'installed as dependency'
+libnfnetlink: install reason has been set to 'installed as dependency'
+libnfs: install reason has been set to 'installed as dependency'
+libnftnl: install reason has been set to 'installed as dependency'
+libnghttp2: install reason has been set to 'installed as dependency'
+libnghttp3: install reason has been set to 'installed as dependency'
+libngtcp2: install reason has been set to 'installed as dependency'
+libnice: install reason has been set to 'installed as dependency'
+libnl: install reason has been set to 'installed as dependency'
+libnm: install reason has been set to 'installed as dependency'
+libnotify: install reason has been set to 'installed as dependency'
+libnsbmp: install reason has been set to 'installed as dependency'
+libnsgif: install reason has been set to 'installed as dependency'
+libnsl: install reason has been set to 'installed as dependency'
+libnumbertext: install reason has been set to 'installed as dependency'
+libnvme: install reason has been set to 'installed as dependency'
+libobjc: install reason has been set to 'installed as dependency'
+libodfgen: install reason has been set to 'installed as dependency'
+libogg: install reason has been set to 'installed as dependency'
+libopenmpt: install reason has been set to 'installed as dependency'
+liborcus: install reason has been set to 'installed as dependency'
+libosinfo: install reason has been set to 'installed as dependency'
+libp11-kit: install reason has been set to 'installed as dependency'
+libpagemaker: install reason has been set to 'installed as dependency'
+libpaper: install reason has been set to 'installed as dependency'
+libpathrs: install reason has been set to 'installed as dependency'
+libpcap: install reason has been set to 'installed as dependency'
+libpciaccess: install reason has been set to 'installed as dependency'
+libpgm: install reason has been set to 'installed as dependency'
+libpipeline: install reason has been set to 'installed as dependency'
+libpipewire: install reason has been set to 'installed as dependency'
+libplacebo: install reason has been set to 'installed as dependency'
+libplist: install reason has been set to 'installed as dependency'
+libpng: install reason has been set to 'installed as dependency'
+libportal: install reason has been set to 'installed as dependency'
+libportal-gtk4: install reason has been set to 'installed as dependency'
+libppd: install reason has been set to 'installed as dependency'
+libproxy: install reason has been set to 'installed as dependency'
+libpsl: install reason has been set to 'installed as dependency'
+libpulse: install reason has been set to 'installed as dependency'
+libpwquality: install reason has been set to 'installed as dependency'
+libquadmath: install reason has been set to 'installed as dependency'
+libqxp: install reason has been set to 'installed as dependency'
+libraqm: install reason has been set to 'installed as dependency'
+libraw1394: install reason has been set to 'installed as dependency'
+libreoffice-fresh: install reason has been set to 'installed as dependency'
+librevenge: install reason has been set to 'installed as dependency'
+librsvg: install reason has been set to 'installed as dependency'
+libsamplerate: install reason has been set to 'installed as dependency'
+libsasl: install reason has been set to 'installed as dependency'
+libseccomp: install reason has been set to 'installed as dependency'
+libsecret: install reason has been set to 'installed as dependency'
+libsixel: install reason has been set to 'installed as dependency'
+libsm: install reason has been set to 'installed as dependency'
+libsndfile: install reason has been set to 'installed as dependency'
+libsodium: install reason has been set to 'installed as dependency'
+libsoup3: install reason has been set to 'installed as dependency'
+libsoxr: install reason has been set to 'installed as dependency'
+libspectre: install reason has been set to 'installed as dependency'
+libsrtp: install reason has been set to 'installed as dependency'
+libssh: install reason has been set to 'installed as dependency'
+libssh2: install reason has been set to 'installed as dependency'
+libstaroffice: install reason has been set to 'installed as dependency'
+libstdc++: install reason has been set to 'installed as dependency'
+libstemmer: install reason has been set to 'installed as dependency'
+libsynctex: install reason has been set to 'installed as dependency'
+libsysprof-capture: install reason has been set to 'installed as dependency'
+libtasn1: install reason has been set to 'installed as dependency'
+libtatsu: install reason has been set to 'installed as dependency'
+libteam: install reason has been set to 'installed as dependency'
+libthai: install reason has been set to 'installed as dependency'
+libtheora: install reason has been set to 'installed as dependency'
+libtiff: install reason has been set to 'installed as dependency'
+libtirpc: install reason has been set to 'installed as dependency'
+libtommath: install reason has been set to 'installed as dependency'
+libtool: install reason has been set to 'installed as dependency'
+libtsan: install reason has been set to 'installed as dependency'
+libubsan: install reason has been set to 'installed as dependency'
+libunibreak: install reason has been set to 'installed as dependency'
+libunistring: install reason has been set to 'installed as dependency'
+libunwind: install reason has been set to 'installed as dependency'
+liburing: install reason has been set to 'installed as dependency'
+libusb: install reason has been set to 'installed as dependency'
+libusbmuxd: install reason has been set to 'installed as dependency'
+libutempter: install reason has been set to 'installed as dependency'
+libutf8proc: install reason has been set to 'installed as dependency'
+libuv: install reason has been set to 'installed as dependency'
+libva: install reason has been set to 'installed as dependency'
+libvdpau: install reason has been set to 'installed as dependency'
+libverto: install reason has been set to 'installed as dependency'
+libvips: install reason has been set to 'installed as dependency'
+libvisio: install reason has been set to 'installed as dependency'
+libvorbis: install reason has been set to 'installed as dependency'
+libvpl: install reason has been set to 'installed as dependency'
+libvpx: install reason has been set to 'installed as dependency'
+libvterm: install reason has been set to 'installed as dependency'
+libwacom: install reason has been set to 'installed as dependency'
+libwbclient: install reason has been set to 'installed as dependency'
+libwebp: install reason has been set to 'installed as dependency'
+libwireplumber: install reason has been set to 'installed as dependency'
+libwpd: install reason has been set to 'installed as dependency'
+libwps: install reason has been set to 'installed as dependency'
+libx11: install reason has been set to 'installed as dependency'
+libxau: install reason has been set to 'installed as dependency'
+libxcb: install reason has been set to 'installed as dependency'
+libxcomposite: install reason has been set to 'installed as dependency'
+libxcrypt: install reason has been set to 'installed as dependency'
+libxcursor: install reason has been set to 'installed as dependency'
+libxcvt: install reason has been set to 'installed as dependency'
+libxdamage: install reason has been set to 'installed as dependency'
+libxdmcp: install reason has been set to 'installed as dependency'
+libxext: install reason has been set to 'installed as dependency'
+libxfixes: install reason has been set to 'installed as dependency'
+libxfont2: install reason has been set to 'installed as dependency'
+libxft: install reason has been set to 'installed as dependency'
+libxi: install reason has been set to 'installed as dependency'
+libxinerama: install reason has been set to 'installed as dependency'
+libxkbcommon: install reason has been set to 'installed as dependency'
+libxkbcommon-x11: install reason has been set to 'installed as dependency'
+libxkbfile: install reason has been set to 'installed as dependency'
+libxml2: install reason has been set to 'installed as dependency'
+libxmlb: install reason has been set to 'installed as dependency'
+libxmu: install reason has been set to 'installed as dependency'
+libxpresent: install reason has been set to 'installed as dependency'
+libxrandr: install reason has been set to 'installed as dependency'
+libxrender: install reason has been set to 'installed as dependency'
+libxshmfence: install reason has been set to 'installed as dependency'
+libxslt: install reason has been set to 'installed as dependency'
+libxss: install reason has been set to 'installed as dependency'
+libxt: install reason has been set to 'installed as dependency'
+libxtst: install reason has been set to 'installed as dependency'
+libxv: install reason has been set to 'installed as dependency'
+libxxf86vm: install reason has been set to 'installed as dependency'
+libyaml: install reason has been set to 'installed as dependency'
+libyuv: install reason has been set to 'installed as dependency'
+libzip: install reason has been set to 'installed as dependency'
+libzmf: install reason has been set to 'installed as dependency'
+licenses: install reason has been set to 'installed as dependency'
+lilv: install reason has been set to 'installed as dependency'
+limine: install reason has been set to 'installed as dependency'
+limine-mkinitcpio-hook: install reason has been set to 'installed as dependency'
+limine-snapper-sync: install reason has been set to 'installed as dependency'
+linux: install reason has been set to 'installed as dependency'
+linux-api-headers: install reason has been set to 'installed as dependency'
+linux-firmware: install reason has been set to 'installed as dependency'
+linux-firmware-amdgpu: install reason has been set to 'installed as dependency'
+linux-firmware-atheros: install reason has been set to 'installed as dependency'
+linux-firmware-broadcom: install reason has been set to 'installed as dependency'
+linux-firmware-cirrus: install reason has been set to 'installed as dependency'
+linux-firmware-intel: install reason has been set to 'installed as dependency'
+linux-firmware-mediatek: install reason has been set to 'installed as dependency'
+linux-firmware-nvidia: install reason has been set to 'installed as dependency'
+linux-firmware-other: install reason has been set to 'installed as dependency'
+linux-firmware-radeon: install reason has been set to 'installed as dependency'
+linux-firmware-realtek: install reason has been set to 'installed as dependency'
+linux-firmware-whence: install reason has been set to 'installed as dependency'
+llhttp: install reason has been set to 'installed as dependency'
+llvm: install reason has been set to 'installed as dependency'
+llvm-libs: install reason has been set to 'installed as dependency'
+lm_sensors: install reason has been set to 'installed as dependency'
+lmdb: install reason has been set to 'installed as dependency'
+localsearch: install reason has been set to 'installed as dependency'
+localsend: install reason has been set to 'installed as dependency'
+lpsolve: install reason has been set to 'installed as dependency'
+lua: install reason has been set to 'installed as dependency'
+lua-luarocks: install reason has been set to 'installed as dependency'
+lua51: install reason has been set to 'installed as dependency'
+lua51-lpeg: install reason has been set to 'installed as dependency'
+lua54: install reason has been set to 'installed as dependency'
+luajit: install reason has been set to 'installed as dependency'
+luarocks: install reason has been set to 'installed as dependency'
+lv2: install reason has been set to 'installed as dependency'
+lz4: install reason has been set to 'installed as dependency'
+lzo: install reason has been set to 'installed as dependency'
+m4: install reason has been set to 'installed as dependency'
+make: install reason has been set to 'installed as dependency'
+man-db: install reason has been set to 'installed as dependency'
+mariadb-libs: install reason has been set to 'installed as dependency'
+mbedtls3: install reason has been set to 'installed as dependency'
+md4c: install reason has been set to 'installed as dependency'
+mdadm: install reason has been set to 'installed as dependency'
+media-player-info: install reason has been set to 'installed as dependency'
+mesa: install reason has been set to 'installed as dependency'
+minizip: install reason has been set to 'installed as dependency'
+mise-bin: install reason has been set to 'installed as dependency'
+mkinitcpio: install reason has been set to 'installed as dependency'
+mkinitcpio-busybox: install reason has been set to 'installed as dependency'
+mlt: install reason has been set to 'installed as dependency'
+mobile-broadband-provider-info: install reason has been set to 'installed as dependency'
+moonlight-qt: install reason has been set to 'installed as dependency'
+mpdecimal: install reason has been set to 'installed as dependency'
+mpfr: install reason has been set to 'installed as dependency'
+mpg123: install reason has been set to 'installed as dependency'
+mpv: install reason has been set to 'installed as dependency'
+mpv-mpris: install reason has been set to 'installed as dependency'
+msgpack-c: install reason has been set to 'installed as dependency'
+mtdev: install reason has been set to 'installed as dependency'
+mujs: install reason has been set to 'installed as dependency'
+muparser: install reason has been set to 'installed as dependency'
+nautilus: install reason has been set to 'installed as dependency'
+nautilus-python: install reason has been set to 'installed as dependency'
+ncurses: install reason has been set to 'installed as dependency'
+neon: install reason has been set to 'installed as dependency'
+neovim: install reason has been set to 'installed as dependency'
+nettle: install reason has been set to 'installed as dependency'
+networkmanager: install reason has been set to 'installed as dependency'
+nftables: install reason has been set to 'installed as dependency'
+noto-fonts: install reason has been set to 'installed as dependency'
+noto-fonts-cjk: install reason has been set to 'installed as dependency'
+noto-fonts-emoji: install reason has been set to 'installed as dependency'
+npth: install reason has been set to 'installed as dependency'
+nspr: install reason has been set to 'installed as dependency'
+nss: install reason has been set to 'installed as dependency'
+nss-mdns: install reason has been set to 'installed as dependency'
+obs-studio: install reason has been set to 'installed as dependency'
+obsidian: install reason has been set to 'installed as dependency'
+ocl-icd: install reason has been set to 'installed as dependency'
+omacalc: install reason has been set to 'installed as dependency'
+omacut: install reason has been set to 'installed as dependency'
+omarchy: install reason has been set to 'installed as dependency'
+omarchy-keyring: install reason has been set to 'installed as dependency'
+omarchy-nvim: install reason has been set to 'installed as dependency'
+omarchy-settings: install reason has been set to 'installed as dependency'
+omawrite: install reason has been set to 'installed as dependency'
+onetbb: install reason has been set to 'installed as dependency'
+oniguruma: install reason has been set to 'installed as dependency'
+openal: install reason has been set to 'installed as dependency'
+opencore-amr: install reason has been set to 'installed as dependency'
+opencv: install reason has been set to 'installed as dependency'
+openexr: install reason has been set to 'installed as dependency'
+openh264: install reason has been set to 'installed as dependency'
+openjpeg2: install reason has been set to 'installed as dependency'
+openjph: install reason has been set to 'installed as dependency'
+openssh: install reason has been set to 'installed as dependency'
+openssl: install reason has been set to 'installed as dependency'
+opentimelineio: install reason has been set to 'installed as dependency'
+opus: install reason has been set to 'installed as dependency'
+orc: install reason has been set to 'installed as dependency'
+osinfo-db: install reason has been set to 'installed as dependency'
+p11-kit: install reason has been set to 'installed as dependency'
+pacman: install reason has been set to 'installed as dependency'
+pacman-contrib: install reason has been set to 'installed as dependency'
+pacman-mirrorlist: install reason has been set to 'installed as dependency'
+pam: install reason has been set to 'installed as dependency'
+pambase: install reason has been set to 'installed as dependency'
+pamixer: install reason has been set to 'installed as dependency'
+pango: install reason has been set to 'installed as dependency'
+parted: install reason has been set to 'installed as dependency'
+patch: install reason has been set to 'installed as dependency'
+pciutils: install reason has been set to 'installed as dependency'
+pcre: install reason has been set to 'installed as dependency'
+pcre2: install reason has been set to 'installed as dependency'
+pcsclite: install reason has been set to 'installed as dependency'
+perl: install reason has been set to 'installed as dependency'
+perl-error: install reason has been set to 'installed as dependency'
+perl-mailtools: install reason has been set to 'installed as dependency'
+perl-timedate: install reason has been set to 'installed as dependency'
+pinentry: install reason has been set to 'installed as dependency'
+pinta: install reason has been set to 'installed as dependency'
+pipewire: install reason has been set to 'installed as dependency'
+pipewire-alsa: install reason has been set to 'installed as dependency'
+pipewire-audio: install reason has been set to 'installed as dependency'
+pipewire-jack: install reason has been set to 'installed as dependency'
+pipewire-pulse: install reason has been set to 'installed as dependency'
+pixman: install reason has been set to 'installed as dependency'
+pkgconf: install reason has been set to 'installed as dependency'
+plocate: install reason has been set to 'installed as dependency'
+plymouth: install reason has been set to 'installed as dependency'
+polkit: install reason has been set to 'installed as dependency'
+poppler: install reason has been set to 'installed as dependency'
+poppler-data: install reason has been set to 'installed as dependency'
+poppler-glib: install reason has been set to 'installed as dependency'
+poppler-qt6: install reason has been set to 'installed as dependency'
+popt: install reason has been set to 'installed as dependency'
+portaudio: install reason has been set to 'installed as dependency'
+postgresql-libs: install reason has been set to 'installed as dependency'
+power-profiles-daemon: install reason has been set to 'installed as dependency'
+procps-ng: install reason has been set to 'installed as dependency'
+protobuf: install reason has been set to 'installed as dependency'
+psmisc: install reason has been set to 'installed as dependency'
+pugixml: install reason has been set to 'installed as dependency'
+purpose: install reason has been set to 'installed as dependency'
+python: install reason has been set to 'installed as dependency'
+python-aaf2: install reason has been set to 'installed as dependency'
+python-cairo: install reason has been set to 'installed as dependency'
+python-certifi: install reason has been set to 'installed as dependency'
+python-charset-normalizer: install reason has been set to 'installed as dependency'
+python-colorama: install reason has been set to 'installed as dependency'
+python-dbus: install reason has been set to 'installed as dependency'
+python-docopt: install reason has been set to 'installed as dependency'
+python-fastjsonschema: install reason has been set to 'installed as dependency'
+python-gobject: install reason has been set to 'installed as dependency'
+python-idna: install reason has been set to 'installed as dependency'
+python-lark-parser: install reason has been set to 'installed as dependency'
+python-packaging: install reason has been set to 'installed as dependency'
+python-poetry-core: install reason has been set to 'installed as dependency'
+python-pycups: install reason has been set to 'installed as dependency'
+python-pyxdg: install reason has been set to 'installed as dependency'
+python-requests: install reason has been set to 'installed as dependency'
+python-shtab: install reason has been set to 'installed as dependency'
+python-termcolor: install reason has been set to 'installed as dependency'
+python-typing_extensions: install reason has been set to 'installed as dependency'
+python-urllib3: install reason has been set to 'installed as dependency'
+python-yaml: install reason has been set to 'installed as dependency'
+qca-qt6: install reason has been set to 'installed as dependency'
+qemu-user-static: install reason has been set to 'installed as dependency'
+qemu-user-static-binfmt: install reason has been set to 'installed as dependency'
+qoi: install reason has been set to 'installed as dependency'
+qpdf: install reason has been set to 'installed as dependency'
+qqc2-desktop-style: install reason has been set to 'installed as dependency'
+qrcodegencpp-cmake: install reason has been set to 'installed as dependency'
+qrencode: install reason has been set to 'installed as dependency'
+qt6-5compat: install reason has been set to 'installed as dependency'
+qt6-base: install reason has been set to 'installed as dependency'
+qt6-declarative: install reason has been set to 'installed as dependency'
+qt6-imageformats: install reason has been set to 'installed as dependency'
+qt6-multimedia: install reason has been set to 'installed as dependency'
+qt6-multimedia-ffmpeg: install reason has been set to 'installed as dependency'
+qt6-networkauth: install reason has been set to 'installed as dependency'
+qt6-positioning: install reason has been set to 'installed as dependency'
+qt6-shadertools: install reason has been set to 'installed as dependency'
+qt6-speech: install reason has been set to 'installed as dependency'
+qt6-svg: install reason has been set to 'installed as dependency'
+qt6-translations: install reason has been set to 'installed as dependency'
+qt6-wayland: install reason has been set to 'installed as dependency'
+qt6-webchannel: install reason has been set to 'installed as dependency'
+qt6-webengine: install reason has been set to 'installed as dependency'
+quickshell: install reason has been set to 'installed as dependency'
+raptor: install reason has been set to 'installed as dependency'
+rasqal: install reason has been set to 'installed as dependency'
+rav1e: install reason has been set to 'installed as dependency'
+re2: install reason has been set to 'installed as dependency'
+readline: install reason has been set to 'installed as dependency'
+redland: install reason has been set to 'installed as dependency'
+ripgrep: install reason has been set to 'installed as dependency'
+rnnoise: install reason has been set to 'installed as dependency'
+rsync: install reason has been set to 'installed as dependency'
+rubberband: install reason has been set to 'installed as dependency'
+ruby: install reason has been set to 'installed as dependency'
+rubygems: install reason has been set to 'installed as dependency'
+runc: install reason has been set to 'installed as dependency'
+sbc: install reason has been set to 'installed as dependency'
+sdbus-cpp: install reason has been set to 'installed as dependency'
+sddm: install reason has been set to 'installed as dependency'
+sdl2-compat: install reason has been set to 'installed as dependency'
+sdl2_ttf: install reason has been set to 'installed as dependency'
+sdl3: install reason has been set to 'installed as dependency'
+seatd: install reason has been set to 'installed as dependency'
+sed: install reason has been set to 'installed as dependency'
+serd: install reason has been set to 'installed as dependency'
+shaderc: install reason has been set to 'installed as dependency'
+shadow: install reason has been set to 'installed as dependency'
+shared-mime-info: install reason has been set to 'installed as dependency'
+signon-kwallet-extension: install reason has been set to 'installed as dependency'
+signon-plugin-oauth2: install reason has been set to 'installed as dependency'
+signon-ui: install reason has been set to 'installed as dependency'
+signond: install reason has been set to 'installed as dependency'
+simde: install reason has been set to 'installed as dependency'
+slang: install reason has been set to 'installed as dependency'
+slurp: install reason has been set to 'installed as dependency'
+smbclient: install reason has been set to 'installed as dependency'
+snapper: install reason has been set to 'installed as dependency'
+snappy: install reason has been set to 'installed as dependency'
+sndio: install reason has been set to 'installed as dependency'
+socat: install reason has been set to 'installed as dependency'
+solid: install reason has been set to 'installed as dependency'
+sonnet: install reason has been set to 'installed as dependency'
+sord: install reason has been set to 'installed as dependency'
+sound-theme-freedesktop: install reason has been set to 'installed as dependency'
+source-highlight: install reason has been set to 'installed as dependency'
+spandsp: install reason has been set to 'installed as dependency'
+spdlog: install reason has been set to 'installed as dependency'
+speex: install reason has been set to 'installed as dependency'
+speexdsp: install reason has been set to 'installed as dependency'
+spirv-tools: install reason has been set to 'installed as dependency'
+sqlite: install reason has been set to 'installed as dependency'
+sratom: install reason has been set to 'installed as dependency'
+srt: install reason has been set to 'installed as dependency'
+starship: install reason has been set to 'installed as dependency'
+sudo: install reason has been set to 'installed as dependency'
+sushi: install reason has been set to 'installed as dependency'
+svt-av1: install reason has been set to 'installed as dependency'
+syndication: install reason has been set to 'installed as dependency'
+system-config-printer: install reason has been set to 'installed as dependency'
+systemd: install reason has been set to 'installed as dependency'
+systemd-libs: install reason has been set to 'installed as dependency'
+systemd-sysvcompat: install reason has been set to 'installed as dependency'
+taglib: install reason has been set to 'installed as dependency'
+talloc: install reason has been set to 'installed as dependency'
+tar: install reason has been set to 'installed as dependency'
+tdb: install reason has been set to 'installed as dependency'
+tensaku: install reason has been set to 'installed as dependency'
+tesseract: install reason has been set to 'installed as dependency'
+tesseract-data-eng: install reason has been set to 'installed as dependency'
+tesseract-data-osd: install reason has been set to 'installed as dependency'
+tevent: install reason has been set to 'installed as dependency'
+texinfo: install reason has been set to 'installed as dependency'
+tinysparql: install reason has been set to 'installed as dependency'
+tldr: install reason has been set to 'installed as dependency'
+tmux: install reason has been set to 'installed as dependency'
+tobi-try: install reason has been set to 'installed as dependency'
+tomlplusplus: install reason has been set to 'installed as dependency'
+totem-pl-parser: install reason has been set to 'installed as dependency'
+tpm2-tss: install reason has been set to 'installed as dependency'
+tree-sitter: install reason has been set to 'installed as dependency'
+tree-sitter-c: install reason has been set to 'installed as dependency'
+tree-sitter-cli: install reason has been set to 'installed as dependency'
+tree-sitter-lua: install reason has been set to 'installed as dependency'
+tree-sitter-markdown: install reason has been set to 'installed as dependency'
+tree-sitter-query: install reason has been set to 'installed as dependency'
+tree-sitter-vim: install reason has been set to 'installed as dependency'
+tree-sitter-vimdoc: install reason has been set to 'installed as dependency'
+tslib: install reason has been set to 'installed as dependency'
+ttf-ia-writer: install reason has been set to 'installed as dependency'
+ttf-jetbrains-mono-nerd-basic: install reason has been set to 'installed as dependency'
+ttf-liberation: install reason has been set to 'installed as dependency'
+ttfx: install reason has been set to 'installed as dependency'
+tzdata: install reason has been set to 'installed as dependency'
+tzupdate: install reason has been set to 'installed as dependency'
+uchardet: install reason has been set to 'installed as dependency'
+udiskie: install reason has been set to 'installed as dependency'
+udisks2: install reason has been set to 'installed as dependency'
+ufw: install reason has been set to 'installed as dependency'
+ufw-docker: install reason has been set to 'installed as dependency'
+unibilium: install reason has been set to 'installed as dependency'
+unzip: install reason has been set to 'installed as dependency'
+upower: install reason has been set to 'installed as dependency'
+usage: install reason has been set to 'installed as dependency'
+uthash: install reason has been set to 'installed as dependency'
+util-linux: install reason has been set to 'installed as dependency'
+util-linux-libs: install reason has been set to 'installed as dependency'
+uwsm: install reason has been set to 'installed as dependency'
+v4l-utils: install reason has been set to 'installed as dependency'
+vapoursynth: install reason has been set to 'installed as dependency'
+verdict: install reason has been set to 'installed as dependency'
+vid.stab: install reason has been set to 'installed as dependency'
+vmaf: install reason has been set to 'installed as dependency'
+volume_key: install reason has been set to 'installed as dependency'
+vulkan-icd-loader: install reason has been set to 'installed as dependency'
+wayland: install reason has been set to 'installed as dependency'
+wayland-protocols: install reason has been set to 'installed as dependency'
+webkit2gtk-4.1: install reason has been set to 'installed as dependency'
+webrtc-audio-processing-1: install reason has been set to 'installed as dependency'
+which: install reason has been set to 'installed as dependency'
+whois: install reason has been set to 'installed as dependency'
+wireless-regdb: install reason has been set to 'installed as dependency'
+wireplumber: install reason has been set to 'installed as dependency'
+wl-clipboard: install reason has been set to 'installed as dependency'
+woff2: install reason has been set to 'installed as dependency'
+woff2-font-awesome: install reason has been set to 'installed as dependency'
+wpa_supplicant: install reason has been set to 'installed as dependency'
+wtype: install reason has been set to 'installed as dependency'
+x264: install reason has been set to 'installed as dependency'
+x265: install reason has been set to 'installed as dependency'
+xcb-imdkit: install reason has been set to 'installed as dependency'
+xcb-proto: install reason has been set to 'installed as dependency'
+xcb-util: install reason has been set to 'installed as dependency'
+xcb-util-cursor: install reason has been set to 'installed as dependency'
+xcb-util-errors: install reason has been set to 'installed as dependency'
+xcb-util-image: install reason has been set to 'installed as dependency'
+xcb-util-keysyms: install reason has been set to 'installed as dependency'
+xcb-util-renderutil: install reason has been set to 'installed as dependency'
+xcb-util-wm: install reason has been set to 'installed as dependency'
+xdg-dbus-proxy: install reason has been set to 'installed as dependency'
+xdg-desktop-portal: install reason has been set to 'installed as dependency'
+xdg-desktop-portal-gtk: install reason has been set to 'installed as dependency'
+xdg-desktop-portal-hyprland: install reason has been set to 'installed as dependency'
+xdg-terminal-exec: install reason has been set to 'installed as dependency'
+xdg-user-dirs: install reason has been set to 'installed as dependency'
+xdg-user-dirs-gtk: install reason has been set to 'installed as dependency'
+xdg-utils: install reason has been set to 'installed as dependency'
+xf86-input-libinput: install reason has been set to 'installed as dependency'
+xkeyboard-config: install reason has been set to 'installed as dependency'
+xmlsec: install reason has been set to 'installed as dependency'
+xorg-fonts-encodings: install reason has been set to 'installed as dependency'
+xorg-server: install reason has been set to 'installed as dependency'
+xorg-server-common: install reason has been set to 'installed as dependency'
+xorg-setxkbmap: install reason has been set to 'installed as dependency'
+xorg-xauth: install reason has been set to 'installed as dependency'
+xorg-xkbcomp: install reason has been set to 'installed as dependency'
+xorg-xprop: install reason has been set to 'installed as dependency'
+xorg-xwayland: install reason has been set to 'installed as dependency'
+xorgproto: install reason has been set to 'installed as dependency'
+xournalpp: install reason has been set to 'installed as dependency'
+xvidcore: install reason has been set to 'installed as dependency'
+xxhash: install reason has been set to 'installed as dependency'
+xz: install reason has been set to 'installed as dependency'
+yaru-icon-theme: install reason has been set to 'installed as dependency'
+yay: install reason has been set to 'installed as dependency'
+yoga: install reason has been set to 'installed as dependency'
+yt-dlp: install reason has been set to 'installed as dependency'
+yt-dlp-ejs: install reason has been set to 'installed as dependency'
+yyjson: install reason has been set to 'installed as dependency'
+zbar: install reason has been set to 'installed as dependency'
+zeromq: install reason has been set to 'installed as dependency'
+zimg: install reason has been set to 'installed as dependency'
+zint: install reason has been set to 'installed as dependency'
+zip: install reason has been set to 'installed as dependency'
+zix: install reason has been set to 'installed as dependency'
+zlib: install reason has been set to 'installed as dependency'
+zlib-ng: install reason has been set to 'installed as dependency'
+zoxide: install reason has been set to 'installed as dependency'
+zram-generator: install reason has been set to 'installed as dependency'
+zstd: install reason has been set to 'installed as dependency'
+zxing-cpp: install reason has been set to 'installed as dependency'
+aether: install reason has been set to 'explicitly installed'
+alsa-utils: install reason has been set to 'explicitly installed'
+asdcontrol: install reason has been set to 'explicitly installed'
+base: install reason has been set to 'explicitly installed'
+base-devel: install reason has been set to 'explicitly installed'
+bash-completion: install reason has been set to 'explicitly installed'
+bat: install reason has been set to 'explicitly installed'
+bluez: install reason has been set to 'explicitly installed'
+bluez-tools: install reason has been set to 'explicitly installed'
+bluez-utils: install reason has been set to 'explicitly installed'
+bolt: install reason has been set to 'explicitly installed'
+brightnessctl: install reason has been set to 'explicitly installed'
+btop: install reason has been set to 'explicitly installed'
+btrfs-progs: install reason has been set to 'explicitly installed'
+chromium: install reason has been set to 'explicitly installed'
+clang: install reason has been set to 'explicitly installed'
+cliamp: install reason has been set to 'explicitly installed'
+cups: install reason has been set to 'explicitly installed'
+cups-filters: install reason has been set to 'explicitly installed'
+cups-pk-helper: install reason has been set to 'explicitly installed'
+ddcutil: install reason has been set to 'explicitly installed'
+docker: install reason has been set to 'explicitly installed'
+docker-buildx: install reason has been set to 'explicitly installed'
+docker-compose: install reason has been set to 'explicitly installed'
+dosfstools: install reason has been set to 'explicitly installed'
+dotnet-runtime: install reason has been set to 'explicitly installed'
+dua-cli: install reason has been set to 'explicitly installed'
+efibootmgr: install reason has been set to 'explicitly installed'
+evince: install reason has been set to 'explicitly installed'
+exfatprogs: install reason has been set to 'explicitly installed'
+expac: install reason has been set to 'explicitly installed'
+eza: install reason has been set to 'explicitly installed'
+fastfetch: install reason has been set to 'explicitly installed'
+fcitx5: install reason has been set to 'explicitly installed'
+fcitx5-gtk: install reason has been set to 'explicitly installed'
+fcitx5-qt: install reason has been set to 'explicitly installed'
+fd: install reason has been set to 'explicitly installed'
+ffmpegthumbnailer: install reason has been set to 'explicitly installed'
+foot: install reason has been set to 'explicitly installed'
+fzf: install reason has been set to 'explicitly installed'
+git: install reason has been set to 'explicitly installed'
+gnome-disk-utility: install reason has been set to 'explicitly installed'
+gnome-keyring: install reason has been set to 'explicitly installed'
+gnome-themes-extra: install reason has been set to 'explicitly installed'
+gpu-screen-recorder: install reason has been set to 'explicitly installed'
+grim: install reason has been set to 'explicitly installed'
+gst-plugin-pipewire: install reason has been set to 'explicitly installed'
+gvfs-mtp: install reason has been set to 'explicitly installed'
+gvfs-nfs: install reason has been set to 'explicitly installed'
+gvfs-smb: install reason has been set to 'explicitly installed'
+herdr: install reason has been set to 'explicitly installed'
+hyprland: install reason has been set to 'explicitly installed'
+hyprland-guiutils: install reason has been set to 'explicitly installed'
+hyprland-preview-share-picker: install reason has been set to 'explicitly installed'
+hyprpicker: install reason has been set to 'explicitly installed'
+hyprsunset: install reason has been set to 'explicitly installed'
+imagemagick: install reason has been set to 'explicitly installed'
+imv: install reason has been set to 'explicitly installed'
+inetutils: install reason has been set to 'explicitly installed'
+inotify-tools: install reason has been set to 'explicitly installed'
+inxi: install reason has been set to 'explicitly installed'
+jq: install reason has been set to 'explicitly installed'
+kdenlive: install reason has been set to 'explicitly installed'
+kernel-modules-hook: install reason has been set to 'explicitly installed'
+lazydocker: install reason has been set to 'explicitly installed'
+lazygit: install reason has been set to 'explicitly installed'
+less: install reason has been set to 'explicitly installed'
+libpulse: install reason has been set to 'explicitly installed'
+libreoffice-fresh: install reason has been set to 'explicitly installed'
+libvips: install reason has been set to 'explicitly installed'
+libyaml: install reason has been set to 'explicitly installed'
+limine: install reason has been set to 'explicitly installed'
+linux: install reason has been set to 'explicitly installed'
+linux-firmware: install reason has been set to 'explicitly installed'
+llvm: install reason has been set to 'explicitly installed'
+localsend: install reason has been set to 'explicitly installed'
+lua51: install reason has been set to 'explicitly installed'
+luarocks: install reason has been set to 'explicitly installed'
+man-db: install reason has been set to 'explicitly installed'
+mariadb-libs: install reason has been set to 'explicitly installed'
+mise-bin: install reason has been set to 'explicitly installed'
+mkinitcpio: install reason has been set to 'explicitly installed'
+moonlight-qt: install reason has been set to 'explicitly installed'
+mpv: install reason has been set to 'explicitly installed'
+mpv-mpris: install reason has been set to 'explicitly installed'
+nautilus: install reason has been set to 'explicitly installed'
+nautilus-python: install reason has been set to 'explicitly installed'
+networkmanager: install reason has been set to 'explicitly installed'
+noto-fonts: install reason has been set to 'explicitly installed'
+noto-fonts-cjk: install reason has been set to 'explicitly installed'
+noto-fonts-emoji: install reason has been set to 'explicitly installed'
+nss-mdns: install reason has been set to 'explicitly installed'
+obs-studio: install reason has been set to 'explicitly installed'
+obsidian: install reason has been set to 'explicitly installed'
+omacalc: install reason has been set to 'explicitly installed'
+omacut: install reason has been set to 'explicitly installed'
+omarchy: install reason has been set to 'explicitly installed'
+omarchy-keyring: install reason has been set to 'explicitly installed'
+omarchy-nvim: install reason has been set to 'explicitly installed'
+omarchy-settings: install reason has been set to 'explicitly installed'
+omawrite: install reason has been set to 'explicitly installed'
+pacman-contrib: install reason has been set to 'explicitly installed'
+pamixer: install reason has been set to 'explicitly installed'
+pinta: install reason has been set to 'explicitly installed'
+pipewire: install reason has been set to 'explicitly installed'
+pipewire-alsa: install reason has been set to 'explicitly installed'
+pipewire-jack: install reason has been set to 'explicitly installed'
+pipewire-pulse: install reason has been set to 'explicitly installed'
+plocate: install reason has been set to 'explicitly installed'
+postgresql-libs: install reason has been set to 'explicitly installed'
+power-profiles-daemon: install reason has been set to 'explicitly installed'
+python-gobject: install reason has been set to 'explicitly installed'
+python-poetry-core: install reason has been set to 'explicitly installed'
+qemu-user-static-binfmt: install reason has been set to 'explicitly installed'
+qrencode: install reason has been set to 'explicitly installed'
+qt6-imageformats: install reason has been set to 'explicitly installed'
+quickshell: install reason has been set to 'explicitly installed'
+ripgrep: install reason has been set to 'explicitly installed'
+ruby: install reason has been set to 'explicitly installed'
+sddm: install reason has been set to 'explicitly installed'
+slurp: install reason has been set to 'explicitly installed'
+socat: install reason has been set to 'explicitly installed'
+starship: install reason has been set to 'explicitly installed'
+sudo: install reason has been set to 'explicitly installed'
+sushi: install reason has been set to 'explicitly installed'
+system-config-printer: install reason has been set to 'explicitly installed'
+tensaku: install reason has been set to 'explicitly installed'
+tesseract: install reason has been set to 'explicitly installed'
+tesseract-data-eng: install reason has been set to 'explicitly installed'
+tldr: install reason has been set to 'explicitly installed'
+tmux: install reason has been set to 'explicitly installed'
+tobi-try: install reason has been set to 'explicitly installed'
+tree-sitter-cli: install reason has been set to 'explicitly installed'
+ttf-ia-writer: install reason has been set to 'explicitly installed'
+ttf-jetbrains-mono-nerd-basic: install reason has been set to 'explicitly installed'
+ttfx: install reason has been set to 'explicitly installed'
+tzupdate: install reason has been set to 'explicitly installed'
+udiskie: install reason has been set to 'explicitly installed'
+ufw: install reason has been set to 'explicitly installed'
+ufw-docker: install reason has been set to 'explicitly installed'
+usage: install reason has been set to 'explicitly installed'
+uwsm: install reason has been set to 'explicitly installed'
+whois: install reason has been set to 'explicitly installed'
+wireless-regdb: install reason has been set to 'explicitly installed'
+wireplumber: install reason has been set to 'explicitly installed'
+wl-clipboard: install reason has been set to 'explicitly installed'
+woff2-font-awesome: install reason has been set to 'explicitly installed'
+wtype: install reason has been set to 'explicitly installed'
+xdg-desktop-portal-gtk: install reason has been set to 'explicitly installed'
+xdg-desktop-portal-hyprland: install reason has been set to 'explicitly installed'
+xdg-terminal-exec: install reason has been set to 'explicitly installed'
+xournalpp: install reason has been set to 'explicitly installed'
+yaru-icon-theme: install reason has been set to 'explicitly installed'
+yay: install reason has been set to 'explicitly installed'
+yt-dlp: install reason has been set to 'explicitly installed'
+zbar: install reason has been set to 'explicitly installed'
+zoxide: install reason has been set to 'explicitly installed'
+zram-generator: install reason has been set to 'explicitly installed'
+Resize device id 1 (/dev/vdb) from 24.00GiB to 5.75GiB
+Build complete: 6174015488 virtual bytes. Copy small output files, shut down this VM, then compress the raw disk on the host.

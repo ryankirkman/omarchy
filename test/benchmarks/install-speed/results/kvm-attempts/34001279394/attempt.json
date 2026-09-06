@@ -1,0 +1,278 @@
+{
+  "schema_version": 1,
+  "workflow_run_id": 34001279394,
+  "workflow_job_id": 101400476314,
+  "repository": "ryankirkman/omarchy",
+  "commit": "21fa88e2cc72ed2c89bb95e01ceba5c0d5699969",
+  "artifact_id": 9980077888,
+  "artifact_zip_sha256": "98ad18e0b98fa87f0491afd9f04446759028231ba2e8cf483c1dded94c4cdc16",
+  "artifact_original_file_count": 266,
+  "artifact_original_bytes": 1769308,
+  "status": "three-valid-pairs-target-not-met",
+  "completed_valid_pairs": 3,
+  "required_valid_pairs": 3,
+  "twofold_target_verified": false,
+  "image_build_host_seconds": 782.0817501899999,
+  "image_build_outside_install_timing": true,
+  "workflow_started_at": "2026-09-06T00:26:22Z",
+  "workflow_completed_at": "2026-09-06T01:08:21Z",
+  "experiment_step": {
+    "name": "Measure three fresh direct-write installation pairs",
+    "status": "completed",
+    "conclusion": "failure",
+    "number": 5,
+    "started_at": "2026-09-06T00:26:39Z",
+    "completed_at": "2026-09-06T01:08:18Z"
+  },
+  "failed_samples": 0,
+  "live_failure_console_invoked": false,
+  "independent_validation": {
+    "schema_version": 1,
+    "run_id": 34001279394,
+    "current_strict_comparator_reproduced_result": true,
+    "all_six_samples_valid": true,
+    "original_seal_hashes_rechecked": 180,
+    "calibration_strict_raw_gates_passed": true,
+    "comparison": {
+      "host_boot_to_installed_ssh": {
+        "comparable": true,
+        "incomparable_reason": null,
+        "readiness_upper_bound_seconds": {
+          "baseline": [
+            209.994476073,
+            194.10752659800028,
+            192.12100989700002
+          ],
+          "candidate": [
+            98.60550042999989,
+            98.87484139199978,
+            94.00461015700012
+          ]
+        },
+        "readiness_lower_bound_seconds": {
+          "baseline": [
+            205.57679453700007,
+            189.67990257700012,
+            187.69716199699997
+          ],
+          "candidate": [
+            94.05111753899996,
+            94.43645299399986,
+            89.4576971800002
+          ]
+        },
+        "median_observed_seconds": {
+          "baseline": 194.10752659800028,
+          "candidate": 98.60550042999989
+        },
+        "median_observed_speedup": 1.9685263575716787,
+        "conservative_speedup_lower_bound": 1.8983308529705214,
+        "bound": "Fastest baseline readiness lower bound divided by slowest candidate readiness upper bound; includes actual polling uncertainty."
+      },
+      "guest_installer": {
+        "seconds": {
+          "baseline": [
+            145.91303539276123,
+            132.3921320438385,
+            131.90576934814453
+          ],
+          "candidate": [
+            41.529960508,
+            40.610869570000006,
+            40.086595229000004
+          ]
+        },
+        "median_seconds": {
+          "baseline": 132.3921320438385,
+          "candidate": 40.610869570000006
+        },
+        "median_speedup": 3.260017168941366,
+        "fastest_baseline_over_slowest_candidate": 3.176159277173771,
+        "twofold_verified_for_this_fixture": true,
+        "clock_sources": {
+          "baseline": [
+            "guest-wall-clock",
+            "guest-wall-clock",
+            "guest-wall-clock"
+          ],
+          "candidate": [
+            "guest-monotonic",
+            "guest-monotonic",
+            "guest-monotonic"
+          ]
+        },
+        "scope": "Guest installer phases only; excludes work performed during live boot or after phase completion."
+      },
+      "at_least_three_fresh_samples_per_revision": true,
+      "twofold_target_verified_for_this_fixture": false,
+      "distinct_installation_identities_verified": true
+    },
+    "samples": [
+      {
+        "name": "01-control-pair01",
+        "revision": "control",
+        "host_interval": [
+          205.57679453700007,
+          209.994476073
+        ],
+        "guest_installer_seconds": 145.91303539276123,
+        "phases": {
+          "Preparing live environment": 0.2698969841003418,
+          "Preparing install target": 1.1205673217773438e-05,
+          "Installing Arch + Omarchy": 128.4484202861786,
+          "Configuring hibernation": 0.2801065444946289,
+          "Configuring system": 3.1252191066741943,
+          "Staging provisioning": 0.2153770923614502,
+          "Finalizing Limine boot": 9.364382266998291,
+          "Finalizing user": 3.850724935531616,
+          "Configuring login": 0.0637960433959961,
+          "Configuring SSH access": 0.24499273300170898,
+          "Configuring Tailscale": 9.5367431640625e-07,
+          "Configuring DNS resolver": 0.000339508056640625,
+          "Validating boot setup": 0.010587930679321289,
+          "Creating factory snapshot": 0.0346524715423584
+        },
+        "packages": 941,
+        "explicit": 158,
+        "qk_rows": 941,
+        "standalone_passed": true,
+        "sealed_files_verified": 30
+      },
+      {
+        "name": "02-candidate-pair01",
+        "revision": "candidate",
+        "host_interval": [
+          94.05111753899996,
+          98.60550042999989
+        ],
+        "guest_installer_seconds": 41.529960508,
+        "phases": {
+          "Preparing live environment": 0.1157127899999999,
+          "Preparing install target": 0.06766336799999806,
+          "Installing Arch + Omarchy": 22.02348294,
+          "Configuring hibernation": 0.41644972400000313,
+          "Configuring system": 7.307746774999998,
+          "Staging provisioning": 0.5372307290000009,
+          "Finalizing boot and user setup": 10.976924128,
+          "Validating boot setup": 0.0070309930000007625,
+          "Creating factory snapshot": 0.07462405799999772
+        },
+        "packages": 941,
+        "explicit": 158,
+        "qk_rows": 941,
+        "standalone_passed": true,
+        "sealed_files_verified": 30
+      },
+      {
+        "name": "03-candidate-pair02",
+        "revision": "candidate",
+        "host_interval": [
+          94.43645299399986,
+          98.87484139199978
+        ],
+        "guest_installer_seconds": 40.610869570000006,
+        "phases": {
+          "Preparing live environment": 0.12368619300000105,
+          "Preparing install target": 0.0680994720000001,
+          "Installing Arch + Omarchy": 21.978178771,
+          "Configuring hibernation": 0.4005743499999994,
+          "Configuring system": 7.2284272220000005,
+          "Staging provisioning": 0.31108367600000264,
+          "Finalizing boot and user setup": 10.375813977,
+          "Validating boot setup": 0.006979846999996653,
+          "Creating factory snapshot": 0.1146408809999997
+        },
+        "packages": 941,
+        "explicit": 158,
+        "qk_rows": 941,
+        "standalone_passed": true,
+        "sealed_files_verified": 30
+      },
+      {
+        "name": "04-control-pair02",
+        "revision": "control",
+        "host_interval": [
+          189.67990257700012,
+          194.10752659800028
+        ],
+        "guest_installer_seconds": 132.3921320438385,
+        "phases": {
+          "Preparing live environment": 0.21052217483520508,
+          "Preparing install target": 3.6716461181640625e-05,
+          "Installing Arch + Omarchy": 115.10927200317383,
+          "Configuring hibernation": 0.29059886932373047,
+          "Configuring system": 3.0719056129455566,
+          "Staging provisioning": 0.22771525382995605,
+          "Finalizing Limine boot": 9.302258014678955,
+          "Finalizing user": 3.802294969558716,
+          "Configuring login": 0.06243181228637695,
+          "Configuring SSH access": 0.25310730934143066,
+          "Configuring Tailscale": 1.9073486328125e-06,
+          "Configuring DNS resolver": 0.0003495216369628906,
+          "Validating boot setup": 0.011144876480102539,
+          "Creating factory snapshot": 0.046381235122680664
+        },
+        "packages": 941,
+        "explicit": 158,
+        "qk_rows": 941,
+        "standalone_passed": true,
+        "sealed_files_verified": 30
+      },
+      {
+        "name": "05-control-pair03",
+        "revision": "control",
+        "host_interval": [
+          187.69716199699997,
+          192.12100989700002
+        ],
+        "guest_installer_seconds": 131.90576934814453,
+        "phases": {
+          "Preparing live environment": 0.21375155448913574,
+          "Preparing install target": 1.1682510375976562e-05,
+          "Installing Arch + Omarchy": 114.19077563285828,
+          "Configuring hibernation": 0.29474496841430664,
+          "Configuring system": 3.09659743309021,
+          "Staging provisioning": 0.21729803085327148,
+          "Finalizing Limine boot": 9.439388036727905,
+          "Finalizing user": 4.05672550201416,
+          "Configuring login": 0.06440401077270508,
+          "Configuring SSH access": 0.25963592529296875,
+          "Configuring Tailscale": 1.430511474609375e-06,
+          "Configuring DNS resolver": 0.00024247169494628906,
+          "Validating boot setup": 0.011641502380371094,
+          "Creating factory snapshot": 0.055951833724975586
+        },
+        "packages": 941,
+        "explicit": 158,
+        "qk_rows": 941,
+        "standalone_passed": true,
+        "sealed_files_verified": 30
+      },
+      {
+        "name": "06-candidate-pair03",
+        "revision": "candidate",
+        "host_interval": [
+          89.4576971800002,
+          94.00461015700012
+        ],
+        "guest_installer_seconds": 40.086595229000004,
+        "phases": {
+          "Preparing live environment": 0.1182270129999985,
+          "Preparing install target": 0.06555292399999857,
+          "Installing Arch + Omarchy": 21.788421082000003,
+          "Configuring hibernation": 0.4461289500000021,
+          "Configuring system": 7.608161081999995,
+          "Staging provisioning": 0.24883378999999906,
+          "Finalizing boot and user setup": 9.700629314000004,
+          "Validating boot setup": 0.007023150000001976,
+          "Creating factory snapshot": 0.10068990399999933
+        },
+        "packages": 941,
+        "explicit": 158,
+        "qk_rows": 941,
+        "standalone_passed": true,
+        "sealed_files_verified": 30
+      }
+    ]
+  }
+}

@@ -1,8 +1,6 @@
 # Optional direct I/O for image restoration
 
-This is an **unmeasured candidate**, separate from install-speed results. It
-changes only the destination cache option of the image restore to `-t none`.
-It does not select a native experiment or change any existing default bundle.
+This experimental candidate changes only the destination cache option of the image restore to `-t none`. Its [first complete native comparison](../results/kvm-attempts/34001279394/) passed all three installation pairs but missed the full-clock 2× target: 1.898331× conservatively and 1.968526× at the observed median. The bundle option does not change any existing default bundle.
 
 The implementation builds on [gosuwachu's Omarchy ISO PR145](https://github.com/omacom/omarchy-iso/pull/145),
 pinned to commit `dbffaa6c65344d644627a023c28661e08382b8fa`, with the existing
@@ -80,4 +78,4 @@ its metadata must remain identical.
 
 Those contracts do not establish block-device correctness or speed. The [separate real block-device fixture](../direct-restore/results/local-tcg-2026-09-05/acceptance.json) has now passed all four combinations of 512-byte and 4 KiB logical sectors with zero offload enabled or disabled. Each case restored nonzero data, allocated zeros and sparse ranges onto a nonzero-prefilled device, verified the complete restored contents, and checked that the trailing 32 MiB remained unchanged. An actual read-only-device failure propagated without an application retry or fallback. After clean guest shutdown, independent host readback verified all four complete 96 MiB targets.
 
-These are functional results from QEMU 8.2.2 under software emulation, not native install-speed or physical-drive measurements. Full-install package/Qk, unique identity and standalone reboot validation remain required before accepting any installation timing. The direct-write variant has not yet completed a native comparison.
+These block-device cases are functional results from QEMU 8.2.2 under software emulation, not native install-speed or physical-drive measurements. The later native trial passed full-install package/Qk, unique identity and standalone reboot validation in all six samples. Its candidate readiness bounds were 89.458–98.875 seconds across three fresh installs, versus 187.697–209.994 seconds for controls. The complete comparison remains below the strict full-clock 2× target; its guest-installer median ratio of 3.260017× is a separate metric.

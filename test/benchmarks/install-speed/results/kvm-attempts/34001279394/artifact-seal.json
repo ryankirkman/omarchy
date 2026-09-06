@@ -1,0 +1,1072 @@
+{
+  "schema_version": 1,
+  "scope": "Original GitHub artifact files only; original per-sample seals are unchanged",
+  "artifact_zip_sha256": "98ad18e0b98fa87f0491afd9f04446759028231ba2e8cf483c1dded94c4cdc16",
+  "original_file_count": 266,
+  "files": {
+    "builder/last-failed-ssh-probe.json": {
+      "bytes": 187,
+      "sha256": "cd97b6f00d653a1df8d655e4bf39fc88b600a41e20b98ba8685896a4310a1b2c"
+    },
+    "builder/latest-screen.png": {
+      "bytes": 7102,
+      "sha256": "5dd0abb4edc61d8788eea2febfd203135c6bf916df4a7834a7074217ca959b3e"
+    },
+    "builder/manifest.json": {
+      "bytes": 43005,
+      "sha256": "d084ed03639f71354a14954dbd0e8e03e74d86469ca14259d617cef0f09465bc"
+    },
+    "builder/progress.json": {
+      "bytes": 241,
+      "sha256": "cdff83fd51e94b2f229c446a6db79e3d7f75085ade39be88b082a684329d8d36"
+    },
+    "builder/qemu.log": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "builder/serial.log": {
+      "bytes": 87,
+      "sha256": "e1156c9971b32fa096fa70290161cf4bad3f49f066ddd30746fd3e6f75a16fa6"
+    },
+    "builder-supervisor.log": {
+      "bytes": 81361,
+      "sha256": "63c9fd9d4e6a5d07bf0bf9c867dcff1fb0fba995a326fa88da24b39a3ab3402a"
+    },
+    "calibration/btrfs-subvolumes.txt": {
+      "bytes": 2295,
+      "sha256": "38c1dfbb0189b3a1999faf99dbc008466700c381bfb915114a3e064d677f0a2c"
+    },
+    "calibration/btrfs-uuid.txt": {
+      "bytes": 37,
+      "sha256": "16219180e8d8fd499a08fa5d2a808bda4af263c19588e56d4f798aad5b2fe7ff"
+    },
+    "calibration/identity.json": {
+      "bytes": 459,
+      "sha256": "23c136f5eb427e1d1abcbf6c78d336903a854ce0aa4fd139237c6c2b98ca1eb4"
+    },
+    "calibration/install-timing.json": {
+      "bytes": 1863,
+      "sha256": "939a2974ea800dfc022a9c8f2ac6abc7e289980ffdeedec50a91db9a7d46c1db"
+    },
+    "calibration/installed-boot.txt": {
+      "bytes": 776,
+      "sha256": "0d798652701ab38b57511660ea7121c2e3b33ffaf31d4278c6bfe09b792d9643"
+    },
+    "calibration/installed-root.json": {
+      "bytes": 132,
+      "sha256": "cebc725cbd245afc4139ebbe70d7a3010beb56dc36ead369327bb8504f5a9c59"
+    },
+    "calibration/last-failed-ssh-probe.json": {
+      "bytes": 171,
+      "sha256": "3a6e7f4823e9a84aa9a7d2d0345e30876f7d52f8c84fb74918d8f8eb066f43c0"
+    },
+    "calibration/latest-screen.png": {
+      "bytes": 3057,
+      "sha256": "05713dbacb00cfa92e8cad1581147b0f1349f6ee14c97d122440aff36011bd53"
+    },
+    "calibration/machine-id.txt": {
+      "bytes": 33,
+      "sha256": "44f0a939ce1aa940940d6d09ff34e299d1d6bc949651a5b6d38a6b2c5eac6ba4"
+    },
+    "calibration/manifest.json": {
+      "bytes": 4252,
+      "sha256": "82f1d24dbdd7a324d1da02ff137014ea93baa0f263da679426cd48899d2926f4"
+    },
+    "calibration/package-explicit.txt": {
+      "bytes": 1705,
+      "sha256": "37d06fc7de2487901f81513bf70f3e592d7245cd656d6c34089ccc1f258055f9"
+    },
+    "calibration/package-files.stderr": {
+      "bytes": 300,
+      "sha256": "5b6482796f084d9f1a7c88a251d30d1f9d46a2bad8adb9401253e706a28c0018"
+    },
+    "calibration/package-files.txt": {
+      "bytes": 41163,
+      "sha256": "5b501e2ef951a921a004c72ce90497acc7047f27a0f1c1fd12acbb9f26c8ec38"
+    },
+    "calibration/package-manifest.txt": {
+      "bytes": 18343,
+      "sha256": "f69fe12f4d2b530f56f28b6f350380eaae2e0ea679d88abedd0d032f0b0df89d"
+    },
+    "calibration/pacman-master-keys.txt": {
+      "bytes": 293,
+      "sha256": "694dd6e95a9f75506a382b4ae219c074f51c33f7c92d55e97b262d385ac32a74"
+    },
+    "calibration/progress.json": {
+      "bytes": 250,
+      "sha256": "3c5c7b56c779924f698f0ae66f49d0c579e20cad32e9bbe91ede64f4ee18b608"
+    },
+    "calibration/qemu.log": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "calibration/serial.log": {
+      "bytes": 32127,
+      "sha256": "cf46bb47f1ecc3507f9ec22a1894ba69938e919eff89fb1e9dc3bbe36b9e2513"
+    },
+    "calibration/ssh-host-fingerprints.txt": {
+      "bytes": 355,
+      "sha256": "3321c97d2c3f90a1ec63e92f9dc034462d9ab565172a54c2102c8fb002690ffb"
+    },
+    "calibration/standalone-btrfs-subvolumes.txt": {
+      "bytes": 2295,
+      "sha256": "5f2456f6df1c5ec070f7670e1c83980ffc25f8a3ecdc251f52b8226623492625"
+    },
+    "calibration/standalone-btrfs-uuid.txt": {
+      "bytes": 37,
+      "sha256": "16219180e8d8fd499a08fa5d2a808bda4af263c19588e56d4f798aad5b2fe7ff"
+    },
+    "calibration/standalone-identity.json": {
+      "bytes": 459,
+      "sha256": "23c136f5eb427e1d1abcbf6c78d336903a854ce0aa4fd139237c6c2b98ca1eb4"
+    },
+    "calibration/standalone-last-failed-ssh-probe.json": {
+      "bytes": 192,
+      "sha256": "bcfad35073b7aaf7cad8f3b7ee2c33b804dc4afed599a1fdda21a3afc2d13229"
+    },
+    "calibration/standalone-machine-id.txt": {
+      "bytes": 33,
+      "sha256": "44f0a939ce1aa940940d6d09ff34e299d1d6bc949651a5b6d38a6b2c5eac6ba4"
+    },
+    "calibration/standalone-pacman-master-keys.txt": {
+      "bytes": 293,
+      "sha256": "694dd6e95a9f75506a382b4ae219c074f51c33f7c92d55e97b262d385ac32a74"
+    },
+    "calibration/standalone-reboot.json": {
+      "bytes": 9905,
+      "sha256": "3661f9731f8c3ee9217ff18f5415897d1113492aab977384fb2486f23691a184"
+    },
+    "calibration/standalone-root.json": {
+      "bytes": 132,
+      "sha256": "cebc725cbd245afc4139ebbe70d7a3010beb56dc36ead369327bb8504f5a9c59"
+    },
+    "calibration/standalone-ssh-host-fingerprints.txt": {
+      "bytes": 355,
+      "sha256": "3321c97d2c3f90a1ec63e92f9dc034462d9ab565172a54c2102c8fb002690ffb"
+    },
+    "calibration/standalone-uki-files.txt": {
+      "bytes": 266,
+      "sha256": "d37b17ae00ba1fe47a767a2c7e160e0bd4b9a5d003317d811a2621fc826f36f1"
+    },
+    "calibration/systemd-analyze-blame.txt": {
+      "bytes": 3353,
+      "sha256": "f2ca4b448645b6da668bbadabaabf756b5d1c93f7a18313b6b4f6079410ae7db"
+    },
+    "calibration/systemd-analyze-critical-chain.txt": {
+      "bytes": 1347,
+      "sha256": "61b131b25913d7b8b1483ef097c6e6b69f16b838046cd94720920ec45be3667e"
+    },
+    "calibration/uki-files.txt": {
+      "bytes": 266,
+      "sha256": "d37b17ae00ba1fe47a767a2c7e160e0bd4b9a5d003317d811a2621fc826f36f1"
+    },
+    "calibration/validation.json": {
+      "bytes": 220,
+      "sha256": "1edc23ea064e414ce3a0ccecf2a4c434f81b29479fcd022897a1aedb25df686f"
+    },
+    "cold-cache-preflight.log": {
+      "bytes": 92,
+      "sha256": "b36a8eafbab19ad75146957dd07408caf770697413b9a1c424e878fefbbc78d1"
+    },
+    "direct-restore-contract.log": {
+      "bytes": 1350,
+      "sha256": "51900f3efe57e81bbc18581d72e2b61296b41045a29a7bc1466c343f75a11dee"
+    },
+    "direct-restore.manifest.json": {
+      "bytes": 3382,
+      "sha256": "37b03228ddbc63e47decff26f768c410bf06a534c1e447a61568b9f9e451b9ed"
+    },
+    "disk-budget.json": {
+      "bytes": 107,
+      "sha256": "24fc0e2dfdd609f4412a842114cd84f2ef531cc9f7dac287ff948341550c2c5f"
+    },
+    "experiment.json": {
+      "bytes": 4819,
+      "sha256": "07eb59710228d130dd6a46ba375dcdb378acec9e1cb389dac1074aee2dae980d"
+    },
+    "fast-reboot-contract.log": {
+      "bytes": 488,
+      "sha256": "be1f0c4ea4efbb612f133a41571ddcc1dc1260eadd29c1e088cb0ccbfeca02c6"
+    },
+    "fast-reboot.manifest.json": {
+      "bytes": 1453,
+      "sha256": "ebd0d1fbbb7af680fd15eb453fd56f2930371156f6c926bc0cef8cee8e587f3d"
+    },
+    "firmware-initramfs-candidate-no-prefetch-fast-reboot-early-verify-direct-restore.iso.manifest.json": {
+      "bytes": 22777,
+      "sha256": "04a9f1b787d6dcd48af01e613945f844562f0d18b606b8864c4c26fcc7de1cf2"
+    },
+    "firmware-initramfs-candidate-no-prefetch-fast-reboot-early-verify-direct-restore.iso.repack.log": {
+      "bytes": 4116,
+      "sha256": "35d0df7295851fefbd8e0e02ff54a3baac0966ee7306949e7089a285f92d4f94"
+    },
+    "firmware-initramfs-control-early-preflight.iso.manifest.json": {
+      "bytes": 20596,
+      "sha256": "d9843c093eecb38de3d0b61b24caeb6fed4847599705b9bf0791ebe1f2e0e266"
+    },
+    "firmware-initramfs-control-early-preflight.iso.repack.log": {
+      "bytes": 4406,
+      "sha256": "46d576d911053b93a204ffbe3cae7bcd14cdd06edeca0472a7b0d99dc2e3a318"
+    },
+    "firmware-initramfs-control.iso.manifest.json": {
+      "bytes": 19911,
+      "sha256": "14c7923492463fc0e4f199ea70bab4a819f0d7da31821275bcb459e02717cf4c"
+    },
+    "firmware-initramfs-control.iso.repack.log": {
+      "bytes": 3836,
+      "sha256": "23ed87e896218ae8120db5b9a132d0436b00d9c514af5e9db608e51c908b9893"
+    },
+    "host-packages.txt": {
+      "bytes": 40667,
+      "sha256": "eaf9c200086096dbd5130fa897027313f00e8f39b5190eecc78888fa2ef3dbaa"
+    },
+    "image-build/baseline-package-explicit.txt": {
+      "bytes": 1705,
+      "sha256": "37d06fc7de2487901f81513bf70f3e592d7245cd656d6c34089ccc1f258055f9"
+    },
+    "image-build/baseline-package-manifest.txt": {
+      "bytes": 18343,
+      "sha256": "f69fe12f4d2b530f56f28b6f350380eaae2e0ea679d88abedd0d032f0b0df89d"
+    },
+    "image-build/btrfs-check.txt": {
+      "bytes": 665,
+      "sha256": "3a68a73701d7836e2c46f12e59efd467dfce5662e71486233b650497d50f1b39"
+    },
+    "image-build/btrfs-compression.txt": {
+      "bytes": 23,
+      "sha256": "901966a36e71b5e581ecc7d5f13fdbfb2be8b8d3ae5c667a1ba580ec1586feb5"
+    },
+    "image-build/build-progress.json": {
+      "bytes": 115,
+      "sha256": "09f3f15c45e326c47fb68a89b82f3c7464d48d820ea8fb68213bdc54c99cb5bd"
+    },
+    "image-build/build-run.json": {
+      "bytes": 249,
+      "sha256": "a49dae12bd8ecb0eff17735edd50bd9d57a71c7ecc7dd7c67978e0b556408111"
+    },
+    "image-build/build-status.txt": {
+      "bytes": 15,
+      "sha256": "836159d6ec827f0f4a66280068b751297f179c69ea5e110a01f731bb7d259961"
+    },
+    "image-build/guest-build.log": {
+      "bytes": 178474,
+      "sha256": "67552a548f745c1be4a72f6cd3407084178938034d839dee073a5c530c5d108b"
+    },
+    "image-build/image-explicit-packages-actual.txt": {
+      "bytes": 1705,
+      "sha256": "37d06fc7de2487901f81513bf70f3e592d7245cd656d6c34089ccc1f258055f9"
+    },
+    "image-build/image-explicit-packages.txt": {
+      "bytes": 1705,
+      "sha256": "37d06fc7de2487901f81513bf70f3e592d7245cd656d6c34089ccc1f258055f9"
+    },
+    "image-build/image-package-delta.json": {
+      "bytes": 128,
+      "sha256": "84ef90eb2ea1fecc31eadb05c540481426d5e855cede90d4b8ab4f25c3a2f765"
+    },
+    "image-build/image-package-files.txt": {
+      "bytes": 41163,
+      "sha256": "5b501e2ef951a921a004c72ce90497acc7047f27a0f1c1fd12acbb9f26c8ec38"
+    },
+    "image-build/image-package-manifest.txt": {
+      "bytes": 18343,
+      "sha256": "f69fe12f4d2b530f56f28b6f350380eaae2e0ea679d88abedd0d032f0b0df89d"
+    },
+    "image-build/image-targets.txt": {
+      "bytes": 1781,
+      "sha256": "7f56a0aa3ec28bc757bce3371a6c25620580d1f369b892302c820bc4b3f88a43"
+    },
+    "image-build/raw-image-size.txt": {
+      "bytes": 11,
+      "sha256": "c1a7050492742257fa299cf1926afe6351324d6ad14cc6dcd29d732e889715c8"
+    },
+    "image-media-verification.json": {
+      "bytes": 1113,
+      "sha256": "0dfeb595f9bec5c9a9b5feae733025d615d81badc1de99286f86f65c9a1f280f"
+    },
+    "initramfs-builder.manifest.json": {
+      "bytes": 2362,
+      "sha256": "40422af1792450f6109fa31175bdeda5a61db1bad0734e80e4cc5b103fa40808"
+    },
+    "initramfs-candidate-no-prefetch-fast-reboot-early-verify-direct-restore.manifest.json": {
+      "bytes": 3580,
+      "sha256": "dd84120fe5324b4ecad240a4ee9ae4a2ed791157841d01083c57742636919722"
+    },
+    "initramfs-control-early-preflight.manifest.json": {
+      "bytes": 1575,
+      "sha256": "b16d19c715984ecf7ebde254deae3f5803b494fe6c7670c2f85a33f191fa8c46"
+    },
+    "initramfs-control.manifest.json": {
+      "bytes": 954,
+      "sha256": "cf2de9676c98c8fd067b9151c923e177cd1405fec70922ed954da7f5fdeb097e"
+    },
+    "no-prefetch-fast-reboot-early-verify-direct-restore-repetitions/comparison.json": {
+      "bytes": 256931,
+      "sha256": "a0bd6e40b6686a9b7e2a2a95f4417c4ec80cec460e18c379e9dce69195a9e731"
+    },
+    "no-prefetch-fast-reboot-early-verify-direct-restore-repetitions/runs/01-control-pair01/btrfs-subvolumes.txt": {
+      "bytes": 2295,
+      "sha256": "307f0db6355814ab11a64aebfcf3a337d1086295c1ec61fc2a573cf23afb2c4d"
+    },
+    "no-prefetch-fast-reboot-early-verify-direct-restore-repetitions/runs/01-control-pair01/btrfs-uuid.txt": {
+      "bytes": 37,
+      "sha256": "77c309af0ddfa2e9697e82522a57575ec3a247a08b94222fcc35f1fbc6aca52e"
+    },
+    "no-prefetch-fast-reboot-early-verify-direct-restore-repetitions/runs/01-control-pair01/identity.json": {
+      "bytes": 459,
+      "sha256": "2c7d79474b1aae3b846a506f360940e7e2acc0bbce622f9f1472ee0d33facf7f"
+    },
+    "no-prefetch-fast-reboot-early-verify-direct-restore-repetitions/runs/01-control-pair01/install-timing.json": {
+      "bytes": 1856,
+      "sha256": "da0fe4f950cf8e80a49da52d2c306d5f410653f48f400216fe6c7c6098823993"
+    },
+    "no-prefetch-fast-reboot-early-verify-direct-restore-repetitions/runs/01-control-pair01/installed-boot.txt": {
+      "bytes": 776,
+      "sha256": "f6a6dda2a95191c00de3f2a68b0cd5651cc705edc838849f2f56ecb44dbc7fce"
+    },
+    "no-prefetch-fast-reboot-early-verify-direct-restore-repetitions/runs/01-control-pair01/installed-root.json": {
+      "bytes": 132,
+      "sha256": "cebc725cbd245afc4139ebbe70d7a3010beb56dc36ead369327bb8504f5a9c59"
+    },
+    "no-prefetch-fast-reboot-early-verify-direct-restore-repetitions/runs/01-control-pair01/installed-screen.png": {
+      "bytes": 8676,
+      "sha256": "c002095c2a60d70eb395f04c6e96657036879559417f0cb36e9437b9e68c5c06"
+    },
+    "no-prefetch-fast-reboot-early-verify-direct-restore-repetitions/runs/01-control-pair01/machine-id.txt": {
+      "bytes": 33,
+      "sha256": "c8ec50f21588b60cb5a0316cdfdfe03e85ce07aca51ff269bfcdfd6227facb6d"
+    },
+    "no-prefetch-fast-reboot-early-verify-direct-restore-repetitions/runs/01-control-pair01/manifest.json": {
+      "bytes": 5695,
+      "sha256": "efd59ffa68c56528cbda9b839c58a21f5222caaaed8f8196049380b0e6f3c320"
+    },
+    "no-prefetch-fast-reboot-early-verify-direct-restore-repetitions/runs/01-control-pair01/package-explicit.txt": {
+      "bytes": 1705,
+      "sha256": "37d06fc7de2487901f81513bf70f3e592d7245cd656d6c34089ccc1f258055f9"
+    },
+    "no-prefetch-fast-reboot-early-verify-direct-restore-repetitions/runs/01-control-pair01/package-files.stderr": {
+      "bytes": 300,
+      "sha256": "5b6482796f084d9f1a7c88a251d30d1f9d46a2bad8adb9401253e706a28c0018"
+    },
+    "no-prefetch-fast-reboot-early-verify-direct-restore-repetitions/runs/01-control-pair01/package-files.txt": {
+      "bytes": 41163,
+      "sha256": "5b501e2ef951a921a004c72ce90497acc7047f27a0f1c1fd12acbb9f26c8ec38"
+    },
+    "no-prefetch-fast-reboot-early-verify-direct-restore-repetitions/runs/01-control-pair01/package-manifest.txt": {
+      "bytes": 18343,
+      "sha256": "f69fe12f4d2b530f56f28b6f350380eaae2e0ea679d88abedd0d032f0b0df89d"
+    },
+    "no-prefetch-fast-reboot-early-verify-direct-restore-repetitions/runs/01-control-pair01/pacman-master-keys.txt": {
+      "bytes": 293,
+      "sha256": "634774e1ab2382e43814975bf22a468f9fa96852e27c4a3421dd2a80b50a7b4f"
+    },
+    "no-prefetch-fast-reboot-early-verify-direct-restore-repetitions/runs/01-control-pair01/qemu.log": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "no-prefetch-fast-reboot-early-verify-direct-restore-repetitions/runs/01-control-pair01/seal.json": {
+      "bytes": 4856,
+      "sha256": "1d5e93e4cf50acb084a22fd513e05d91851af002ae34fe58c42938411f739eed"
+    },
+    "no-prefetch-fast-reboot-early-verify-direct-restore-repetitions/runs/01-control-pair01/serial.log": {
+      "bytes": 32067,
+      "sha256": "d4d417948b5c00cb4c57580941fb3530911dc31f604a97bc66f4a43615cd0664"
+    },
+    "no-prefetch-fast-reboot-early-verify-direct-restore-repetitions/runs/01-control-pair01/ssh-host-fingerprints.txt": {
+      "bytes": 355,
+      "sha256": "471ac577f9c3989a1fa332ee3cc34e103bfaa5e63fc14d3d249468f28bb2bbc9"
+    },
+    "no-prefetch-fast-reboot-early-verify-direct-restore-repetitions/runs/01-control-pair01/standalone-btrfs-subvolumes.txt": {
+      "bytes": 2295,
+      "sha256": "da716e9046e0ed0beb8a4508e38412ed74770ee53f991717d8f3dc0d81d3ca8f"
+    },
+    "no-prefetch-fast-reboot-early-verify-direct-restore-repetitions/runs/01-control-pair01/standalone-btrfs-uuid.txt": {
+      "bytes": 37,
+      "sha256": "77c309af0ddfa2e9697e82522a57575ec3a247a08b94222fcc35f1fbc6aca52e"
+    },
+    "no-prefetch-fast-reboot-early-verify-direct-restore-repetitions/runs/01-control-pair01/standalone-identity.json": {
+      "bytes": 459,
+      "sha256": "2c7d79474b1aae3b846a506f360940e7e2acc0bbce622f9f1472ee0d33facf7f"
+    },
+    "no-prefetch-fast-reboot-early-verify-direct-restore-repetitions/runs/01-control-pair01/standalone-machine-id.txt": {
+      "bytes": 33,
+      "sha256": "c8ec50f21588b60cb5a0316cdfdfe03e85ce07aca51ff269bfcdfd6227facb6d"
+    },
+    "no-prefetch-fast-reboot-early-verify-direct-restore-repetitions/runs/01-control-pair01/standalone-pacman-master-keys.txt": {
+      "bytes": 293,
+      "sha256": "634774e1ab2382e43814975bf22a468f9fa96852e27c4a3421dd2a80b50a7b4f"
+    },
+    "no-prefetch-fast-reboot-early-verify-direct-restore-repetitions/runs/01-control-pair01/standalone-reboot.json": {
+      "bytes": 11056,
+      "sha256": "a7cf21e17b587baf4f6ad3719d6996f0310e45ca96e78c5aa01e2b846e3a41d6"
+    },
+    "no-prefetch-fast-reboot-early-verify-direct-restore-repetitions/runs/01-control-pair01/standalone-root.json": {
+      "bytes": 132,
+      "sha256": "cebc725cbd245afc4139ebbe70d7a3010beb56dc36ead369327bb8504f5a9c59"
+    },
+    "no-prefetch-fast-reboot-early-verify-direct-restore-repetitions/runs/01-control-pair01/standalone-ssh-host-fingerprints.txt": {
+      "bytes": 355,
+      "sha256": "471ac577f9c3989a1fa332ee3cc34e103bfaa5e63fc14d3d249468f28bb2bbc9"
+    },
+    "no-prefetch-fast-reboot-early-verify-direct-restore-repetitions/runs/01-control-pair01/standalone-uki-files.txt": {
+      "bytes": 266,
+      "sha256": "d37b17ae00ba1fe47a767a2c7e160e0bd4b9a5d003317d811a2621fc826f36f1"
+    },
+    "no-prefetch-fast-reboot-early-verify-direct-restore-repetitions/runs/01-control-pair01/systemd-analyze-blame.txt": {
+      "bytes": 3353,
+      "sha256": "dafdff3babc2e9fc7792f80ff1f54cea9a47d718e5b82a09d324cc501c6baaa5"
+    },
+    "no-prefetch-fast-reboot-early-verify-direct-restore-repetitions/runs/01-control-pair01/systemd-analyze-critical-chain.txt": {
+      "bytes": 1350,
+      "sha256": "3146f13eb8b6cc4065e401c4a2a8d9a1cb032c0ea0b1fc658501f182cb953657"
+    },
+    "no-prefetch-fast-reboot-early-verify-direct-restore-repetitions/runs/01-control-pair01/uki-files.txt": {
+      "bytes": 266,
+      "sha256": "d37b17ae00ba1fe47a767a2c7e160e0bd4b9a5d003317d811a2621fc826f36f1"
+    },
+    "no-prefetch-fast-reboot-early-verify-direct-restore-repetitions/runs/01-control-pair01/validation.json": {
+      "bytes": 221,
+      "sha256": "7b461cbab6dfd2a7f1f1553e950ea4cfcf65b1af1fbad0eb58e5204838cf5645"
+    },
+    "no-prefetch-fast-reboot-early-verify-direct-restore-repetitions/runs/02-candidate-pair01/btrfs-subvolumes.txt": {
+      "bytes": 2296,
+      "sha256": "e5da1b22a43352f30b2e38eaf2972c6428c02bfd5e2380c89aa8f71c10d2a999"
+    },
+    "no-prefetch-fast-reboot-early-verify-direct-restore-repetitions/runs/02-candidate-pair01/btrfs-uuid.txt": {
+      "bytes": 37,
+      "sha256": "dc5a02475357c4cc134f9247449e211acd533ea1e5840718e23381af454e63f9"
+    },
+    "no-prefetch-fast-reboot-early-verify-direct-restore-repetitions/runs/02-candidate-pair01/identity.json": {
+      "bytes": 459,
+      "sha256": "8e1ffc9d054ec17948b11ebd2e7872f80386096fc97a3c8cc5c55f7aa2fa8f09"
+    },
+    "no-prefetch-fast-reboot-early-verify-direct-restore-repetitions/runs/02-candidate-pair01/install-timing.json": {
+      "bytes": 3074,
+      "sha256": "7d0a8539d88d28e4246c2006be39eaa094ad59d079e47b783a8bd0607e196430"
+    },
+    "no-prefetch-fast-reboot-early-verify-direct-restore-repetitions/runs/02-candidate-pair01/installed-boot.txt": {
+      "bytes": 776,
+      "sha256": "fe4c5836daae777b1633e8630c9d2b2937e23daea7217c89d060b6b12cd6a147"
+    },
+    "no-prefetch-fast-reboot-early-verify-direct-restore-repetitions/runs/02-candidate-pair01/installed-root.json": {
+      "bytes": 132,
+      "sha256": "cebc725cbd245afc4139ebbe70d7a3010beb56dc36ead369327bb8504f5a9c59"
+    },
+    "no-prefetch-fast-reboot-early-verify-direct-restore-repetitions/runs/02-candidate-pair01/installed-screen.png": {
+      "bytes": 8676,
+      "sha256": "c002095c2a60d70eb395f04c6e96657036879559417f0cb36e9437b9e68c5c06"
+    },
+    "no-prefetch-fast-reboot-early-verify-direct-restore-repetitions/runs/02-candidate-pair01/machine-id.txt": {
+      "bytes": 33,
+      "sha256": "432623e7d06bdca6fe7fd828f0ce79d97da4b5a6de2b85a895f28049d01b76b1"
+    },
+    "no-prefetch-fast-reboot-early-verify-direct-restore-repetitions/runs/02-candidate-pair01/manifest.json": {
+      "bytes": 5819,
+      "sha256": "bd336b8cbd3fe6928119e1a9bc921be7a25c22e6bff146fb0a9b9e79f2a96f1a"
+    },
+    "no-prefetch-fast-reboot-early-verify-direct-restore-repetitions/runs/02-candidate-pair01/package-explicit.txt": {
+      "bytes": 1705,
+      "sha256": "37d06fc7de2487901f81513bf70f3e592d7245cd656d6c34089ccc1f258055f9"
+    },
+    "no-prefetch-fast-reboot-early-verify-direct-restore-repetitions/runs/02-candidate-pair01/package-files.stderr": {
+      "bytes": 300,
+      "sha256": "5b6482796f084d9f1a7c88a251d30d1f9d46a2bad8adb9401253e706a28c0018"
+    },
+    "no-prefetch-fast-reboot-early-verify-direct-restore-repetitions/runs/02-candidate-pair01/package-files.txt": {
+      "bytes": 41163,
+      "sha256": "5b501e2ef951a921a004c72ce90497acc7047f27a0f1c1fd12acbb9f26c8ec38"
+    },
+    "no-prefetch-fast-reboot-early-verify-direct-restore-repetitions/runs/02-candidate-pair01/package-manifest.txt": {
+      "bytes": 18343,
+      "sha256": "f69fe12f4d2b530f56f28b6f350380eaae2e0ea679d88abedd0d032f0b0df89d"
+    },
+    "no-prefetch-fast-reboot-early-verify-direct-restore-repetitions/runs/02-candidate-pair01/pacman-master-keys.txt": {
+      "bytes": 293,
+      "sha256": "dce55c7ef07a07f706d1384fa07718d4517d7c152a032352b8784f31764554c2"
+    },
+    "no-prefetch-fast-reboot-early-verify-direct-restore-repetitions/runs/02-candidate-pair01/qemu.log": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "no-prefetch-fast-reboot-early-verify-direct-restore-repetitions/runs/02-candidate-pair01/seal.json": {
+      "bytes": 4858,
+      "sha256": "732cf748c679525bc94e1b28a3bcebbffe6e34678c1f432dc2729e3b9c038cd0"
+    },
+    "no-prefetch-fast-reboot-early-verify-direct-restore-repetitions/runs/02-candidate-pair01/serial.log": {
+      "bytes": 31851,
+      "sha256": "714330ddf8042e2c81ccda3e83d4390394b281e41e83a5f736d1f37631983883"
+    },
+    "no-prefetch-fast-reboot-early-verify-direct-restore-repetitions/runs/02-candidate-pair01/ssh-host-fingerprints.txt": {
+      "bytes": 355,
+      "sha256": "42b8f28f3b82cff18ab4a83e43ba2bc6287de92f67efb34bd23207d6a6deac95"
+    },
+    "no-prefetch-fast-reboot-early-verify-direct-restore-repetitions/runs/02-candidate-pair01/standalone-btrfs-subvolumes.txt": {
+      "bytes": 2296,
+      "sha256": "cf9271f54e3496ed022f6d3c597f301a2d8090ecfe378a37905e7900dada4bc9"
+    },
+    "no-prefetch-fast-reboot-early-verify-direct-restore-repetitions/runs/02-candidate-pair01/standalone-btrfs-uuid.txt": {
+      "bytes": 37,
+      "sha256": "dc5a02475357c4cc134f9247449e211acd533ea1e5840718e23381af454e63f9"
+    },
+    "no-prefetch-fast-reboot-early-verify-direct-restore-repetitions/runs/02-candidate-pair01/standalone-identity.json": {
+      "bytes": 459,
+      "sha256": "8e1ffc9d054ec17948b11ebd2e7872f80386096fc97a3c8cc5c55f7aa2fa8f09"
+    },
+    "no-prefetch-fast-reboot-early-verify-direct-restore-repetitions/runs/02-candidate-pair01/standalone-machine-id.txt": {
+      "bytes": 33,
+      "sha256": "432623e7d06bdca6fe7fd828f0ce79d97da4b5a6de2b85a895f28049d01b76b1"
+    },
+    "no-prefetch-fast-reboot-early-verify-direct-restore-repetitions/runs/02-candidate-pair01/standalone-pacman-master-keys.txt": {
+      "bytes": 293,
+      "sha256": "dce55c7ef07a07f706d1384fa07718d4517d7c152a032352b8784f31764554c2"
+    },
+    "no-prefetch-fast-reboot-early-verify-direct-restore-repetitions/runs/02-candidate-pair01/standalone-reboot.json": {
+      "bytes": 11078,
+      "sha256": "568d99215f035cfca3fe4ba6859a7083f009e4c979f7070a2696bf230ff43287"
+    },
+    "no-prefetch-fast-reboot-early-verify-direct-restore-repetitions/runs/02-candidate-pair01/standalone-root.json": {
+      "bytes": 132,
+      "sha256": "cebc725cbd245afc4139ebbe70d7a3010beb56dc36ead369327bb8504f5a9c59"
+    },
+    "no-prefetch-fast-reboot-early-verify-direct-restore-repetitions/runs/02-candidate-pair01/standalone-ssh-host-fingerprints.txt": {
+      "bytes": 355,
+      "sha256": "42b8f28f3b82cff18ab4a83e43ba2bc6287de92f67efb34bd23207d6a6deac95"
+    },
+    "no-prefetch-fast-reboot-early-verify-direct-restore-repetitions/runs/02-candidate-pair01/standalone-uki-files.txt": {
+      "bytes": 266,
+      "sha256": "2a5f50a368711cb8cb4da49440f7116b62ff87f4798a23263f65f04aff0c2e42"
+    },
+    "no-prefetch-fast-reboot-early-verify-direct-restore-repetitions/runs/02-candidate-pair01/systemd-analyze-blame.txt": {
+      "bytes": 3353,
+      "sha256": "76cb598b8ad69d57986ef23fab66be474baeaa85c73703e856a070723586f71c"
+    },
+    "no-prefetch-fast-reboot-early-verify-direct-restore-repetitions/runs/02-candidate-pair01/systemd-analyze-critical-chain.txt": {
+      "bytes": 1348,
+      "sha256": "73002d60e397f34944eb03a0cf81c243453704f5f7965dd5caaca885682c5a86"
+    },
+    "no-prefetch-fast-reboot-early-verify-direct-restore-repetitions/runs/02-candidate-pair01/uki-files.txt": {
+      "bytes": 266,
+      "sha256": "2a5f50a368711cb8cb4da49440f7116b62ff87f4798a23263f65f04aff0c2e42"
+    },
+    "no-prefetch-fast-reboot-early-verify-direct-restore-repetitions/runs/02-candidate-pair01/validation.json": {
+      "bytes": 221,
+      "sha256": "3a481639f54e2275d62209fd0c44bb636d2848d9f98b90bcc0f949e872723f4c"
+    },
+    "no-prefetch-fast-reboot-early-verify-direct-restore-repetitions/runs/03-candidate-pair02/btrfs-subvolumes.txt": {
+      "bytes": 2296,
+      "sha256": "9fd5cbb1a484c8b6abc8116faa9003fc2798c435b011548ef3076088dfd53a1f"
+    },
+    "no-prefetch-fast-reboot-early-verify-direct-restore-repetitions/runs/03-candidate-pair02/btrfs-uuid.txt": {
+      "bytes": 37,
+      "sha256": "0037b831110447208fb8780a31bc235a63ff20f5c83c9700b52765b4b87b2cd5"
+    },
+    "no-prefetch-fast-reboot-early-verify-direct-restore-repetitions/runs/03-candidate-pair02/identity.json": {
+      "bytes": 459,
+      "sha256": "270e47500236dbecbd8e1ac26a77be002863532eae09c70c925e99ee551a462c"
+    },
+    "no-prefetch-fast-reboot-early-verify-direct-restore-repetitions/runs/03-candidate-pair02/install-timing.json": {
+      "bytes": 3077,
+      "sha256": "c52900f9371f1414cbed77a6f6567cb3fe6313d0aeb0545ba47c327769f74956"
+    },
+    "no-prefetch-fast-reboot-early-verify-direct-restore-repetitions/runs/03-candidate-pair02/installed-boot.txt": {
+      "bytes": 776,
+      "sha256": "64dcb9a35913b38f8134ed2aec7cb74b89ef8d10a7d64bde8113abc058bc4253"
+    },
+    "no-prefetch-fast-reboot-early-verify-direct-restore-repetitions/runs/03-candidate-pair02/installed-root.json": {
+      "bytes": 132,
+      "sha256": "cebc725cbd245afc4139ebbe70d7a3010beb56dc36ead369327bb8504f5a9c59"
+    },
+    "no-prefetch-fast-reboot-early-verify-direct-restore-repetitions/runs/03-candidate-pair02/installed-screen.png": {
+      "bytes": 8676,
+      "sha256": "c002095c2a60d70eb395f04c6e96657036879559417f0cb36e9437b9e68c5c06"
+    },
+    "no-prefetch-fast-reboot-early-verify-direct-restore-repetitions/runs/03-candidate-pair02/machine-id.txt": {
+      "bytes": 33,
+      "sha256": "a902dcd8680c77211b512781b5d44cdb72e64116d38695e65f01afc63f044932"
+    },
+    "no-prefetch-fast-reboot-early-verify-direct-restore-repetitions/runs/03-candidate-pair02/manifest.json": {
+      "bytes": 5821,
+      "sha256": "9e26ef1798bb6cec2ce5138b94f7bfedb4a6c3f8dbf67664340ba0cd8d4a210d"
+    },
+    "no-prefetch-fast-reboot-early-verify-direct-restore-repetitions/runs/03-candidate-pair02/package-explicit.txt": {
+      "bytes": 1705,
+      "sha256": "37d06fc7de2487901f81513bf70f3e592d7245cd656d6c34089ccc1f258055f9"
+    },
+    "no-prefetch-fast-reboot-early-verify-direct-restore-repetitions/runs/03-candidate-pair02/package-files.stderr": {
+      "bytes": 300,
+      "sha256": "5b6482796f084d9f1a7c88a251d30d1f9d46a2bad8adb9401253e706a28c0018"
+    },
+    "no-prefetch-fast-reboot-early-verify-direct-restore-repetitions/runs/03-candidate-pair02/package-files.txt": {
+      "bytes": 41163,
+      "sha256": "5b501e2ef951a921a004c72ce90497acc7047f27a0f1c1fd12acbb9f26c8ec38"
+    },
+    "no-prefetch-fast-reboot-early-verify-direct-restore-repetitions/runs/03-candidate-pair02/package-manifest.txt": {
+      "bytes": 18343,
+      "sha256": "f69fe12f4d2b530f56f28b6f350380eaae2e0ea679d88abedd0d032f0b0df89d"
+    },
+    "no-prefetch-fast-reboot-early-verify-direct-restore-repetitions/runs/03-candidate-pair02/pacman-master-keys.txt": {
+      "bytes": 293,
+      "sha256": "aa8153bd9f474f1e72e82f5a0b25b0566775259804fa1ca674c5704a20cbc535"
+    },
+    "no-prefetch-fast-reboot-early-verify-direct-restore-repetitions/runs/03-candidate-pair02/qemu.log": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "no-prefetch-fast-reboot-early-verify-direct-restore-repetitions/runs/03-candidate-pair02/seal.json": {
+      "bytes": 4857,
+      "sha256": "76545e4d0e13640ad55e1a270c38d330b171c8f46d515360fdbbff8722f04276"
+    },
+    "no-prefetch-fast-reboot-early-verify-direct-restore-repetitions/runs/03-candidate-pair02/serial.log": {
+      "bytes": 32312,
+      "sha256": "482e6d8168de42352f6b2b7bbcd5452c532443900e1372a1c675b0974cbab94c"
+    },
+    "no-prefetch-fast-reboot-early-verify-direct-restore-repetitions/runs/03-candidate-pair02/ssh-host-fingerprints.txt": {
+      "bytes": 355,
+      "sha256": "16c8ce3cd5e77128506098db2492d71ee7345756193f21a2d0325fe1f420b7dd"
+    },
+    "no-prefetch-fast-reboot-early-verify-direct-restore-repetitions/runs/03-candidate-pair02/standalone-btrfs-subvolumes.txt": {
+      "bytes": 2296,
+      "sha256": "36a0fed6e395ff6ad6b6ae1102c1f123bd1e31121ea68fd15c3b91713ae51f71"
+    },
+    "no-prefetch-fast-reboot-early-verify-direct-restore-repetitions/runs/03-candidate-pair02/standalone-btrfs-uuid.txt": {
+      "bytes": 37,
+      "sha256": "0037b831110447208fb8780a31bc235a63ff20f5c83c9700b52765b4b87b2cd5"
+    },
+    "no-prefetch-fast-reboot-early-verify-direct-restore-repetitions/runs/03-candidate-pair02/standalone-identity.json": {
+      "bytes": 459,
+      "sha256": "270e47500236dbecbd8e1ac26a77be002863532eae09c70c925e99ee551a462c"
+    },
+    "no-prefetch-fast-reboot-early-verify-direct-restore-repetitions/runs/03-candidate-pair02/standalone-machine-id.txt": {
+      "bytes": 33,
+      "sha256": "a902dcd8680c77211b512781b5d44cdb72e64116d38695e65f01afc63f044932"
+    },
+    "no-prefetch-fast-reboot-early-verify-direct-restore-repetitions/runs/03-candidate-pair02/standalone-pacman-master-keys.txt": {
+      "bytes": 293,
+      "sha256": "aa8153bd9f474f1e72e82f5a0b25b0566775259804fa1ca674c5704a20cbc535"
+    },
+    "no-prefetch-fast-reboot-early-verify-direct-restore-repetitions/runs/03-candidate-pair02/standalone-reboot.json": {
+      "bytes": 11126,
+      "sha256": "3b0d6f4aa289bf8733b2b7a93a9f9e9fa9a522f789c839c71e3a96587f4ba39a"
+    },
+    "no-prefetch-fast-reboot-early-verify-direct-restore-repetitions/runs/03-candidate-pair02/standalone-root.json": {
+      "bytes": 132,
+      "sha256": "cebc725cbd245afc4139ebbe70d7a3010beb56dc36ead369327bb8504f5a9c59"
+    },
+    "no-prefetch-fast-reboot-early-verify-direct-restore-repetitions/runs/03-candidate-pair02/standalone-ssh-host-fingerprints.txt": {
+      "bytes": 355,
+      "sha256": "16c8ce3cd5e77128506098db2492d71ee7345756193f21a2d0325fe1f420b7dd"
+    },
+    "no-prefetch-fast-reboot-early-verify-direct-restore-repetitions/runs/03-candidate-pair02/standalone-uki-files.txt": {
+      "bytes": 266,
+      "sha256": "2a5f50a368711cb8cb4da49440f7116b62ff87f4798a23263f65f04aff0c2e42"
+    },
+    "no-prefetch-fast-reboot-early-verify-direct-restore-repetitions/runs/03-candidate-pair02/systemd-analyze-blame.txt": {
+      "bytes": 3353,
+      "sha256": "e37f0e312e19324e9c22c0c29c85a27f4b2fda28dd065bf307ef8c198ed77e21"
+    },
+    "no-prefetch-fast-reboot-early-verify-direct-restore-repetitions/runs/03-candidate-pair02/systemd-analyze-critical-chain.txt": {
+      "bytes": 1346,
+      "sha256": "d9de7082352d94c7634924c5f2e7489b5e60a8cce909f8fd0389f4710d8cba5c"
+    },
+    "no-prefetch-fast-reboot-early-verify-direct-restore-repetitions/runs/03-candidate-pair02/uki-files.txt": {
+      "bytes": 266,
+      "sha256": "2a5f50a368711cb8cb4da49440f7116b62ff87f4798a23263f65f04aff0c2e42"
+    },
+    "no-prefetch-fast-reboot-early-verify-direct-restore-repetitions/runs/03-candidate-pair02/validation.json": {
+      "bytes": 221,
+      "sha256": "ddb2ad2cb379fbd2ef6c5ad8e26646f7ad44d5f3291466726117842c844da761"
+    },
+    "no-prefetch-fast-reboot-early-verify-direct-restore-repetitions/runs/04-control-pair02/btrfs-subvolumes.txt": {
+      "bytes": 2295,
+      "sha256": "bc17e6ee219ce19b7d9f2067df7514931607bc84633506c3b5b29ad9512aab43"
+    },
+    "no-prefetch-fast-reboot-early-verify-direct-restore-repetitions/runs/04-control-pair02/btrfs-uuid.txt": {
+      "bytes": 37,
+      "sha256": "29120dca8717721f7476069d04f44dcf555423d0ab73d4356df7cc23acb31931"
+    },
+    "no-prefetch-fast-reboot-early-verify-direct-restore-repetitions/runs/04-control-pair02/identity.json": {
+      "bytes": 459,
+      "sha256": "097d6d3424dd86c8805bdf1913ad5af40ae144c89d25f5b12f83faa9ea5719a2"
+    },
+    "no-prefetch-fast-reboot-early-verify-direct-restore-repetitions/runs/04-control-pair02/install-timing.json": {
+      "bytes": 1865,
+      "sha256": "1e08301dcc2a33d3e022064a725fd63caacca6f6548e349c628702d12b865180"
+    },
+    "no-prefetch-fast-reboot-early-verify-direct-restore-repetitions/runs/04-control-pair02/installed-boot.txt": {
+      "bytes": 776,
+      "sha256": "db121028185951cd1ddfbc40bb6c140403ef26744b1232ff00bed172eeec89f5"
+    },
+    "no-prefetch-fast-reboot-early-verify-direct-restore-repetitions/runs/04-control-pair02/installed-root.json": {
+      "bytes": 132,
+      "sha256": "cebc725cbd245afc4139ebbe70d7a3010beb56dc36ead369327bb8504f5a9c59"
+    },
+    "no-prefetch-fast-reboot-early-verify-direct-restore-repetitions/runs/04-control-pair02/installed-screen.png": {
+      "bytes": 8676,
+      "sha256": "c002095c2a60d70eb395f04c6e96657036879559417f0cb36e9437b9e68c5c06"
+    },
+    "no-prefetch-fast-reboot-early-verify-direct-restore-repetitions/runs/04-control-pair02/machine-id.txt": {
+      "bytes": 33,
+      "sha256": "4b9e2a9517e486b5b910461567f0502fe1ce2563b76dec0def14587650edbbb4"
+    },
+    "no-prefetch-fast-reboot-early-verify-direct-restore-repetitions/runs/04-control-pair02/manifest.json": {
+      "bytes": 5700,
+      "sha256": "595e31803eb7d0ac5859a19f40a330fb4e173ded8cea8dc7b5f21883d3ed82f0"
+    },
+    "no-prefetch-fast-reboot-early-verify-direct-restore-repetitions/runs/04-control-pair02/package-explicit.txt": {
+      "bytes": 1705,
+      "sha256": "37d06fc7de2487901f81513bf70f3e592d7245cd656d6c34089ccc1f258055f9"
+    },
+    "no-prefetch-fast-reboot-early-verify-direct-restore-repetitions/runs/04-control-pair02/package-files.stderr": {
+      "bytes": 300,
+      "sha256": "5b6482796f084d9f1a7c88a251d30d1f9d46a2bad8adb9401253e706a28c0018"
+    },
+    "no-prefetch-fast-reboot-early-verify-direct-restore-repetitions/runs/04-control-pair02/package-files.txt": {
+      "bytes": 41163,
+      "sha256": "5b501e2ef951a921a004c72ce90497acc7047f27a0f1c1fd12acbb9f26c8ec38"
+    },
+    "no-prefetch-fast-reboot-early-verify-direct-restore-repetitions/runs/04-control-pair02/package-manifest.txt": {
+      "bytes": 18343,
+      "sha256": "f69fe12f4d2b530f56f28b6f350380eaae2e0ea679d88abedd0d032f0b0df89d"
+    },
+    "no-prefetch-fast-reboot-early-verify-direct-restore-repetitions/runs/04-control-pair02/pacman-master-keys.txt": {
+      "bytes": 293,
+      "sha256": "c1d633d13a745ef6f9c6a86b2d9d6c3dd18a0bb8292c89a0b608ce4acefd91b0"
+    },
+    "no-prefetch-fast-reboot-early-verify-direct-restore-repetitions/runs/04-control-pair02/qemu.log": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "no-prefetch-fast-reboot-early-verify-direct-restore-repetitions/runs/04-control-pair02/seal.json": {
+      "bytes": 4855,
+      "sha256": "c1b839e19f17414c42977dd7a1d18b36c43cef921216822cc9256fecd0542e27"
+    },
+    "no-prefetch-fast-reboot-early-verify-direct-restore-repetitions/runs/04-control-pair02/serial.log": {
+      "bytes": 32182,
+      "sha256": "66a52cab0c66556552672ac9ec9e495f85972d8744c6e0c26a8ea52d52f2bc56"
+    },
+    "no-prefetch-fast-reboot-early-verify-direct-restore-repetitions/runs/04-control-pair02/ssh-host-fingerprints.txt": {
+      "bytes": 355,
+      "sha256": "777721f4b6d23956860fdfc45d52fa50bd722cd2b503998ce4e50f535061fa10"
+    },
+    "no-prefetch-fast-reboot-early-verify-direct-restore-repetitions/runs/04-control-pair02/standalone-btrfs-subvolumes.txt": {
+      "bytes": 2295,
+      "sha256": "cd2120a0a271fda888d6093d583437cf9363202f54b1a50752ba1dcec56dceb4"
+    },
+    "no-prefetch-fast-reboot-early-verify-direct-restore-repetitions/runs/04-control-pair02/standalone-btrfs-uuid.txt": {
+      "bytes": 37,
+      "sha256": "29120dca8717721f7476069d04f44dcf555423d0ab73d4356df7cc23acb31931"
+    },
+    "no-prefetch-fast-reboot-early-verify-direct-restore-repetitions/runs/04-control-pair02/standalone-identity.json": {
+      "bytes": 459,
+      "sha256": "097d6d3424dd86c8805bdf1913ad5af40ae144c89d25f5b12f83faa9ea5719a2"
+    },
+    "no-prefetch-fast-reboot-early-verify-direct-restore-repetitions/runs/04-control-pair02/standalone-machine-id.txt": {
+      "bytes": 33,
+      "sha256": "4b9e2a9517e486b5b910461567f0502fe1ce2563b76dec0def14587650edbbb4"
+    },
+    "no-prefetch-fast-reboot-early-verify-direct-restore-repetitions/runs/04-control-pair02/standalone-pacman-master-keys.txt": {
+      "bytes": 293,
+      "sha256": "c1d633d13a745ef6f9c6a86b2d9d6c3dd18a0bb8292c89a0b608ce4acefd91b0"
+    },
+    "no-prefetch-fast-reboot-early-verify-direct-restore-repetitions/runs/04-control-pair02/standalone-reboot.json": {
+      "bytes": 11062,
+      "sha256": "8db5b096f7d83d5e8c2036bb74d6a7f39cab5138d6fd6cfbc576746b9b3f4c56"
+    },
+    "no-prefetch-fast-reboot-early-verify-direct-restore-repetitions/runs/04-control-pair02/standalone-root.json": {
+      "bytes": 132,
+      "sha256": "cebc725cbd245afc4139ebbe70d7a3010beb56dc36ead369327bb8504f5a9c59"
+    },
+    "no-prefetch-fast-reboot-early-verify-direct-restore-repetitions/runs/04-control-pair02/standalone-ssh-host-fingerprints.txt": {
+      "bytes": 355,
+      "sha256": "777721f4b6d23956860fdfc45d52fa50bd722cd2b503998ce4e50f535061fa10"
+    },
+    "no-prefetch-fast-reboot-early-verify-direct-restore-repetitions/runs/04-control-pair02/standalone-uki-files.txt": {
+      "bytes": 266,
+      "sha256": "d37b17ae00ba1fe47a767a2c7e160e0bd4b9a5d003317d811a2621fc826f36f1"
+    },
+    "no-prefetch-fast-reboot-early-verify-direct-restore-repetitions/runs/04-control-pair02/systemd-analyze-blame.txt": {
+      "bytes": 3353,
+      "sha256": "7c6d1075446cfaf140120b37ab5527d434ea573c2a51bbc9fd30b50dc34f1b44"
+    },
+    "no-prefetch-fast-reboot-early-verify-direct-restore-repetitions/runs/04-control-pair02/systemd-analyze-critical-chain.txt": {
+      "bytes": 1347,
+      "sha256": "4cdf8fec78356753a4c6be87af95bfae2d005b8447b7504ebdc796a542e66fce"
+    },
+    "no-prefetch-fast-reboot-early-verify-direct-restore-repetitions/runs/04-control-pair02/uki-files.txt": {
+      "bytes": 266,
+      "sha256": "d37b17ae00ba1fe47a767a2c7e160e0bd4b9a5d003317d811a2621fc826f36f1"
+    },
+    "no-prefetch-fast-reboot-early-verify-direct-restore-repetitions/runs/04-control-pair02/validation.json": {
+      "bytes": 221,
+      "sha256": "4000211669dad5464ca2f0478b20895179e78b4793911674dcbf5cd23b102c2a"
+    },
+    "no-prefetch-fast-reboot-early-verify-direct-restore-repetitions/runs/05-control-pair03/btrfs-subvolumes.txt": {
+      "bytes": 2295,
+      "sha256": "dbf17051a19952ee4061132b0ec3d5e5b728614734991fe17cc2bf0e59fb9d3a"
+    },
+    "no-prefetch-fast-reboot-early-verify-direct-restore-repetitions/runs/05-control-pair03/btrfs-uuid.txt": {
+      "bytes": 37,
+      "sha256": "d3f4c92c806502a53afb1c12220c04d95a74fc6a986310b4004b2a7d4ca5dd92"
+    },
+    "no-prefetch-fast-reboot-early-verify-direct-restore-repetitions/runs/05-control-pair03/identity.json": {
+      "bytes": 459,
+      "sha256": "0dfd836d0ddaf7e69c1c6d4a3ebb43650ee88c8eb6a72c10a6e16a69ccf38fd5"
+    },
+    "no-prefetch-fast-reboot-early-verify-direct-restore-repetitions/runs/05-control-pair03/install-timing.json": {
+      "bytes": 1865,
+      "sha256": "e8e1e2881db3ad2f2c5fd9087de5854f27c6a5ed3157b2ec57b7818fb7f1a981"
+    },
+    "no-prefetch-fast-reboot-early-verify-direct-restore-repetitions/runs/05-control-pair03/installed-boot.txt": {
+      "bytes": 776,
+      "sha256": "3bdb309c7fe9e18475db51714ecd30ef997e43b9069776080141877e8c8d2446"
+    },
+    "no-prefetch-fast-reboot-early-verify-direct-restore-repetitions/runs/05-control-pair03/installed-root.json": {
+      "bytes": 132,
+      "sha256": "cebc725cbd245afc4139ebbe70d7a3010beb56dc36ead369327bb8504f5a9c59"
+    },
+    "no-prefetch-fast-reboot-early-verify-direct-restore-repetitions/runs/05-control-pair03/installed-screen.png": {
+      "bytes": 8676,
+      "sha256": "c002095c2a60d70eb395f04c6e96657036879559417f0cb36e9437b9e68c5c06"
+    },
+    "no-prefetch-fast-reboot-early-verify-direct-restore-repetitions/runs/05-control-pair03/machine-id.txt": {
+      "bytes": 33,
+      "sha256": "054be831bd77ebc6b0b5ad10e6433860febbd80d581f6708cebf823e16b9ae87"
+    },
+    "no-prefetch-fast-reboot-early-verify-direct-restore-repetitions/runs/05-control-pair03/manifest.json": {
+      "bytes": 5700,
+      "sha256": "3ff5294761abc50875ee12a4c7c348478688a80315e0c3f43d32edc511fde897"
+    },
+    "no-prefetch-fast-reboot-early-verify-direct-restore-repetitions/runs/05-control-pair03/package-explicit.txt": {
+      "bytes": 1705,
+      "sha256": "37d06fc7de2487901f81513bf70f3e592d7245cd656d6c34089ccc1f258055f9"
+    },
+    "no-prefetch-fast-reboot-early-verify-direct-restore-repetitions/runs/05-control-pair03/package-files.stderr": {
+      "bytes": 300,
+      "sha256": "5b6482796f084d9f1a7c88a251d30d1f9d46a2bad8adb9401253e706a28c0018"
+    },
+    "no-prefetch-fast-reboot-early-verify-direct-restore-repetitions/runs/05-control-pair03/package-files.txt": {
+      "bytes": 41163,
+      "sha256": "5b501e2ef951a921a004c72ce90497acc7047f27a0f1c1fd12acbb9f26c8ec38"
+    },
+    "no-prefetch-fast-reboot-early-verify-direct-restore-repetitions/runs/05-control-pair03/package-manifest.txt": {
+      "bytes": 18343,
+      "sha256": "f69fe12f4d2b530f56f28b6f350380eaae2e0ea679d88abedd0d032f0b0df89d"
+    },
+    "no-prefetch-fast-reboot-early-verify-direct-restore-repetitions/runs/05-control-pair03/pacman-master-keys.txt": {
+      "bytes": 293,
+      "sha256": "7cb2de441d5fadcde60e2850a6abcf26e8586ca93d4bce69c5a7deada4df624e"
+    },
+    "no-prefetch-fast-reboot-early-verify-direct-restore-repetitions/runs/05-control-pair03/qemu.log": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "no-prefetch-fast-reboot-early-verify-direct-restore-repetitions/runs/05-control-pair03/seal.json": {
+      "bytes": 4855,
+      "sha256": "3b5e05c362d1a81fc7ad97f5afd70d69b79cfa506a21cacf819f8e3bbdb3f774"
+    },
+    "no-prefetch-fast-reboot-early-verify-direct-restore-repetitions/runs/05-control-pair03/serial.log": {
+      "bytes": 32367,
+      "sha256": "29c6ed52ca19eb21d95e3ad8938b11ddebeeb477cc5625145ddd388d4aa0ac14"
+    },
+    "no-prefetch-fast-reboot-early-verify-direct-restore-repetitions/runs/05-control-pair03/ssh-host-fingerprints.txt": {
+      "bytes": 355,
+      "sha256": "c4d64bd379e1def346d7e1e2170e2af6fbdc8cd9e183cc0078a73829d6d5f957"
+    },
+    "no-prefetch-fast-reboot-early-verify-direct-restore-repetitions/runs/05-control-pair03/standalone-btrfs-subvolumes.txt": {
+      "bytes": 2295,
+      "sha256": "7114914e26b2ec083e3f397a064793d358e083f12e533c6f4c4dfaf1e97e6e59"
+    },
+    "no-prefetch-fast-reboot-early-verify-direct-restore-repetitions/runs/05-control-pair03/standalone-btrfs-uuid.txt": {
+      "bytes": 37,
+      "sha256": "d3f4c92c806502a53afb1c12220c04d95a74fc6a986310b4004b2a7d4ca5dd92"
+    },
+    "no-prefetch-fast-reboot-early-verify-direct-restore-repetitions/runs/05-control-pair03/standalone-identity.json": {
+      "bytes": 459,
+      "sha256": "0dfd836d0ddaf7e69c1c6d4a3ebb43650ee88c8eb6a72c10a6e16a69ccf38fd5"
+    },
+    "no-prefetch-fast-reboot-early-verify-direct-restore-repetitions/runs/05-control-pair03/standalone-machine-id.txt": {
+      "bytes": 33,
+      "sha256": "054be831bd77ebc6b0b5ad10e6433860febbd80d581f6708cebf823e16b9ae87"
+    },
+    "no-prefetch-fast-reboot-early-verify-direct-restore-repetitions/runs/05-control-pair03/standalone-pacman-master-keys.txt": {
+      "bytes": 293,
+      "sha256": "7cb2de441d5fadcde60e2850a6abcf26e8586ca93d4bce69c5a7deada4df624e"
+    },
+    "no-prefetch-fast-reboot-early-verify-direct-restore-repetitions/runs/05-control-pair03/standalone-reboot.json": {
+      "bytes": 11062,
+      "sha256": "212219242217135c8b6c731b99bcb2550f9c8e07d9c20d81c74f39065ea5e64e"
+    },
+    "no-prefetch-fast-reboot-early-verify-direct-restore-repetitions/runs/05-control-pair03/standalone-root.json": {
+      "bytes": 132,
+      "sha256": "cebc725cbd245afc4139ebbe70d7a3010beb56dc36ead369327bb8504f5a9c59"
+    },
+    "no-prefetch-fast-reboot-early-verify-direct-restore-repetitions/runs/05-control-pair03/standalone-ssh-host-fingerprints.txt": {
+      "bytes": 355,
+      "sha256": "c4d64bd379e1def346d7e1e2170e2af6fbdc8cd9e183cc0078a73829d6d5f957"
+    },
+    "no-prefetch-fast-reboot-early-verify-direct-restore-repetitions/runs/05-control-pair03/standalone-uki-files.txt": {
+      "bytes": 266,
+      "sha256": "d37b17ae00ba1fe47a767a2c7e160e0bd4b9a5d003317d811a2621fc826f36f1"
+    },
+    "no-prefetch-fast-reboot-early-verify-direct-restore-repetitions/runs/05-control-pair03/systemd-analyze-blame.txt": {
+      "bytes": 3353,
+      "sha256": "f052b9a0be58d005923aba326b09bbe676f79f67f806e1c25098bcbb86781a91"
+    },
+    "no-prefetch-fast-reboot-early-verify-direct-restore-repetitions/runs/05-control-pair03/systemd-analyze-critical-chain.txt": {
+      "bytes": 1348,
+      "sha256": "67938dc604247b0f3ab5b0efefe4976668179731faf49c2f110875a972f26134"
+    },
+    "no-prefetch-fast-reboot-early-verify-direct-restore-repetitions/runs/05-control-pair03/uki-files.txt": {
+      "bytes": 266,
+      "sha256": "d37b17ae00ba1fe47a767a2c7e160e0bd4b9a5d003317d811a2621fc826f36f1"
+    },
+    "no-prefetch-fast-reboot-early-verify-direct-restore-repetitions/runs/05-control-pair03/validation.json": {
+      "bytes": 221,
+      "sha256": "e2d6826c8ce0ee24332de24d665b3866a66df17b7d44755cffbb6bb9ec263b9d"
+    },
+    "no-prefetch-fast-reboot-early-verify-direct-restore-repetitions/runs/06-candidate-pair03/btrfs-subvolumes.txt": {
+      "bytes": 2296,
+      "sha256": "261533dddfe50d3c2d2121cdaa46a9cc2ae248ae3176abc89c36211c10287532"
+    },
+    "no-prefetch-fast-reboot-early-verify-direct-restore-repetitions/runs/06-candidate-pair03/btrfs-uuid.txt": {
+      "bytes": 37,
+      "sha256": "2242b1da367d13eda8fed72d84d655e10e7f2603d2cfe0a7774aae2adb94ca37"
+    },
+    "no-prefetch-fast-reboot-early-verify-direct-restore-repetitions/runs/06-candidate-pair03/identity.json": {
+      "bytes": 459,
+      "sha256": "8b626b89745351acf442eed571c3100ff378834676bea22220ff5f9c797d6b92"
+    },
+    "no-prefetch-fast-reboot-early-verify-direct-restore-repetitions/runs/06-candidate-pair03/install-timing.json": {
+      "bytes": 3067,
+      "sha256": "86a283e4bb0a41bf2f994f013c3763970a2375ce1f49c0c901830d79d8e6e7fe"
+    },
+    "no-prefetch-fast-reboot-early-verify-direct-restore-repetitions/runs/06-candidate-pair03/installed-boot.txt": {
+      "bytes": 776,
+      "sha256": "8a2369f8ed4e98e43d61b9b93df79d9965677c782064fe1545b11499fc4568e4"
+    },
+    "no-prefetch-fast-reboot-early-verify-direct-restore-repetitions/runs/06-candidate-pair03/installed-root.json": {
+      "bytes": 132,
+      "sha256": "cebc725cbd245afc4139ebbe70d7a3010beb56dc36ead369327bb8504f5a9c59"
+    },
+    "no-prefetch-fast-reboot-early-verify-direct-restore-repetitions/runs/06-candidate-pair03/installed-screen.png": {
+      "bytes": 8676,
+      "sha256": "c002095c2a60d70eb395f04c6e96657036879559417f0cb36e9437b9e68c5c06"
+    },
+    "no-prefetch-fast-reboot-early-verify-direct-restore-repetitions/runs/06-candidate-pair03/machine-id.txt": {
+      "bytes": 33,
+      "sha256": "d3ae8acd581f3dbc053254c481cf081f762b101db8ab7187dea8280e259df399"
+    },
+    "no-prefetch-fast-reboot-early-verify-direct-restore-repetitions/runs/06-candidate-pair03/manifest.json": {
+      "bytes": 5816,
+      "sha256": "0ed5e8bc523443b2a94c1536854df03d7359d856a62954960bd31b69f0d64d03"
+    },
+    "no-prefetch-fast-reboot-early-verify-direct-restore-repetitions/runs/06-candidate-pair03/package-explicit.txt": {
+      "bytes": 1705,
+      "sha256": "37d06fc7de2487901f81513bf70f3e592d7245cd656d6c34089ccc1f258055f9"
+    },
+    "no-prefetch-fast-reboot-early-verify-direct-restore-repetitions/runs/06-candidate-pair03/package-files.stderr": {
+      "bytes": 300,
+      "sha256": "5b6482796f084d9f1a7c88a251d30d1f9d46a2bad8adb9401253e706a28c0018"
+    },
+    "no-prefetch-fast-reboot-early-verify-direct-restore-repetitions/runs/06-candidate-pair03/package-files.txt": {
+      "bytes": 41163,
+      "sha256": "5b501e2ef951a921a004c72ce90497acc7047f27a0f1c1fd12acbb9f26c8ec38"
+    },
+    "no-prefetch-fast-reboot-early-verify-direct-restore-repetitions/runs/06-candidate-pair03/package-manifest.txt": {
+      "bytes": 18343,
+      "sha256": "f69fe12f4d2b530f56f28b6f350380eaae2e0ea679d88abedd0d032f0b0df89d"
+    },
+    "no-prefetch-fast-reboot-early-verify-direct-restore-repetitions/runs/06-candidate-pair03/pacman-master-keys.txt": {
+      "bytes": 293,
+      "sha256": "584a34d853cde904eca7f133977600e215ad8558dc0675431bdfa984db3c911f"
+    },
+    "no-prefetch-fast-reboot-early-verify-direct-restore-repetitions/runs/06-candidate-pair03/qemu.log": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "no-prefetch-fast-reboot-early-verify-direct-restore-repetitions/runs/06-candidate-pair03/seal.json": {
+      "bytes": 4857,
+      "sha256": "cc9dcea10e0d5fcbd989a86ed676d3393824c23afd416c3c171cb1ec5222225c"
+    },
+    "no-prefetch-fast-reboot-early-verify-direct-restore-repetitions/runs/06-candidate-pair03/serial.log": {
+      "bytes": 31777,
+      "sha256": "12b4fdfdf768ccaba90699338f6399d7f54cd72d442fde274c5606762f0a67bf"
+    },
+    "no-prefetch-fast-reboot-early-verify-direct-restore-repetitions/runs/06-candidate-pair03/ssh-host-fingerprints.txt": {
+      "bytes": 355,
+      "sha256": "58f360397759b4224bc3d88e0f38f0f28826e9ae70d162fd998f9cc7695b2a38"
+    },
+    "no-prefetch-fast-reboot-early-verify-direct-restore-repetitions/runs/06-candidate-pair03/standalone-btrfs-subvolumes.txt": {
+      "bytes": 2296,
+      "sha256": "85bba9f6f765814a76edc9e97dbb3eecddd0936670c78b1768f76961f124bb95"
+    },
+    "no-prefetch-fast-reboot-early-verify-direct-restore-repetitions/runs/06-candidate-pair03/standalone-btrfs-uuid.txt": {
+      "bytes": 37,
+      "sha256": "2242b1da367d13eda8fed72d84d655e10e7f2603d2cfe0a7774aae2adb94ca37"
+    },
+    "no-prefetch-fast-reboot-early-verify-direct-restore-repetitions/runs/06-candidate-pair03/standalone-identity.json": {
+      "bytes": 459,
+      "sha256": "8b626b89745351acf442eed571c3100ff378834676bea22220ff5f9c797d6b92"
+    },
+    "no-prefetch-fast-reboot-early-verify-direct-restore-repetitions/runs/06-candidate-pair03/standalone-machine-id.txt": {
+      "bytes": 33,
+      "sha256": "d3ae8acd581f3dbc053254c481cf081f762b101db8ab7187dea8280e259df399"
+    },
+    "no-prefetch-fast-reboot-early-verify-direct-restore-repetitions/runs/06-candidate-pair03/standalone-pacman-master-keys.txt": {
+      "bytes": 293,
+      "sha256": "584a34d853cde904eca7f133977600e215ad8558dc0675431bdfa984db3c911f"
+    },
+    "no-prefetch-fast-reboot-early-verify-direct-restore-repetitions/runs/06-candidate-pair03/standalone-reboot.json": {
+      "bytes": 11077,
+      "sha256": "34f03decf434d348745690bf38364e4e7bd44a27e147f9e038d9df9ed3aa0442"
+    },
+    "no-prefetch-fast-reboot-early-verify-direct-restore-repetitions/runs/06-candidate-pair03/standalone-root.json": {
+      "bytes": 132,
+      "sha256": "cebc725cbd245afc4139ebbe70d7a3010beb56dc36ead369327bb8504f5a9c59"
+    },
+    "no-prefetch-fast-reboot-early-verify-direct-restore-repetitions/runs/06-candidate-pair03/standalone-ssh-host-fingerprints.txt": {
+      "bytes": 355,
+      "sha256": "58f360397759b4224bc3d88e0f38f0f28826e9ae70d162fd998f9cc7695b2a38"
+    },
+    "no-prefetch-fast-reboot-early-verify-direct-restore-repetitions/runs/06-candidate-pair03/standalone-uki-files.txt": {
+      "bytes": 266,
+      "sha256": "2a5f50a368711cb8cb4da49440f7116b62ff87f4798a23263f65f04aff0c2e42"
+    },
+    "no-prefetch-fast-reboot-early-verify-direct-restore-repetitions/runs/06-candidate-pair03/systemd-analyze-blame.txt": {
+      "bytes": 3353,
+      "sha256": "8faa370d604b96595f1a99f38b057cc1f47de89aa49581ba366f3b097657fea3"
+    },
+    "no-prefetch-fast-reboot-early-verify-direct-restore-repetitions/runs/06-candidate-pair03/systemd-analyze-critical-chain.txt": {
+      "bytes": 1349,
+      "sha256": "e441c7b4a584bb646113404231c3eb8999d30b612f210a5c7e7db866dad0d7dc"
+    },
+    "no-prefetch-fast-reboot-early-verify-direct-restore-repetitions/runs/06-candidate-pair03/uki-files.txt": {
+      "bytes": 266,
+      "sha256": "2a5f50a368711cb8cb4da49440f7116b62ff87f4798a23263f65f04aff0c2e42"
+    },
+    "no-prefetch-fast-reboot-early-verify-direct-restore-repetitions/runs/06-candidate-pair03/validation.json": {
+      "bytes": 221,
+      "sha256": "029ca0f28a248c4adbaf30256f3049059eb6451eca149489feecb9c8521bcde6"
+    },
+    "no-prefetch-fast-reboot-early-verify-direct-restore-repetitions/series.json": {
+      "bytes": 7269,
+      "sha256": "ccf31a3a17266a26aa875f78973770e54767d5a0821a03df46ca478641ef4ab9"
+    },
+    "root-image.json": {
+      "bytes": 681,
+      "sha256": "271e89cbd75e2a96ac3f8f2c36b172a96d491eb3e14188f3c6f1157cfb46ed45"
+    },
+    "runner-after.txt": {
+      "bytes": 436,
+      "sha256": "62254060c99798a27b545aa5e0d8d004a31458e46bdb45f420cefc6199b69fb2"
+    },
+    "runner-before.txt": {
+      "bytes": 3945,
+      "sha256": "7581931d92233c605e72cdb04f3b5d22361a36aaa6d12d3f42e764b8532ac1dc"
+    },
+    "runner-image.txt": {
+      "bytes": 24,
+      "sha256": "7ef3cf88f0b9abbc463eb815da6a918272cd777a5c87584ead39f0054d74b186"
+    }
+  }
+}
