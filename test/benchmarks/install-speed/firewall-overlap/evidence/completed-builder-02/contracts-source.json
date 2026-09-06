@@ -1,0 +1,13 @@
+{
+  "firewall-overlap/patch.py": "30dcdb0a8ff5178b9e5623d166ff2171dadb9aaff7b22006e00aefcd886b3a71",
+  "firewall-overlap/guest-contract.py": "3ff19ea55e9b652fbdeb8431b17da3408ed7813a99aff618a0aefaee743864ca",
+  "logging-bind/guard.py": "639365971a6080341de18705a5ca504322bb4574ed72e86605fccac0180eb466",
+  "logging-bind/guest-contract.py": "34006a8c800bfedb21f83bbb9f1f0c8d67b7aca9d85daddc323bbd24ff50743a",
+  "original-logging.sh": "61a13abcc44fd5241e9882f1bcfed833e10e0ed19ad42c34a08efe1973b70d27",
+  "optimized-logging.sh": "1d8151adb150bc1dfe930b30e7039978591add500a132b9951152d7a8a23d715",
+  "runtime/usr/bin/omarchy-apply-system": "403b83536e69812667464bd188d0a4f90466e867f5192a30710b90d26bdd93ca",
+  "runtime/usr/share/omarchy/install/config/all.sh": "dbd47b68f8c7b9ef5a6a74919cc022789244a21b5e4da460249d688b15c751dd",
+  "runtime/usr/share/omarchy/install/config/firewall.sh": "c15b76478355ae633b990520b7f8db829e2c3ab4a850922bb2c75072a99d4fcd",
+  "runtime/usr/share/omarchy/install/helpers/logging.sh": "61a13abcc44fd5241e9882f1bcfed833e10e0ed19ad42c34a08efe1973b70d27",
+  "phases_impl.py": "f5235ae1ed7e6a783978d2f51e49fc3e0d44c687f218967a599a104101e0070c"
+}

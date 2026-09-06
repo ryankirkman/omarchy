@@ -1,0 +1,127 @@
+{
+  "plan": {
+    "schema_version": 1,
+    "pairs": 3,
+    "first": "control",
+    "run_root": "/home/runner/work/_temp/omarchy-install-speed/fresh-installs-image-no-package-prefetch-fast-reboot",
+    "evidence_root": "/home/runner/work/_temp/omarchy-install-evidence/no-prefetch-fast-reboot-repetitions",
+    "templates": {
+      "control": [
+        "/usr/bin/python3",
+        "/home/runner/work/omarchy/omarchy/test/benchmarks/iso-vm.py",
+        "run",
+        "--iso-source",
+        "/home/runner/work/_temp/omarchy-install-speed/iso-harness",
+        "--cpus",
+        "4",
+        "--memory",
+        "8192",
+        "--accelerator",
+        "kvm",
+        "--poll-interval",
+        "2",
+        "--test-overlay-sha256",
+        "192b782af42c164e78453f2b3b122b5ac1849dbbc5e382b76780827c0dcc38c2",
+        "--timeout",
+        "600",
+        "--iso",
+        "/home/runner/work/_temp/omarchy-install-speed/firmware-initramfs-control.iso",
+        "--verify-standalone-reboot",
+        "--extra-qemu-args-json",
+        "[\"-drive\", \"file=/home/runner/work/_temp/omarchy-install-speed/fast-image.iso,if=none,id=fastimage,format=raw,readonly=on,cache=writeback,media=cdrom\", \"-device\", \"ide-cd,drive=fastimage,bus=ide.1,id=fastimage-cd\"]",
+        "--source-cache",
+        "cold",
+        "--installed-boot-timeout",
+        "300",
+        "--mode",
+        "install"
+      ],
+      "candidate": [
+        "/usr/bin/python3",
+        "/home/runner/work/omarchy/omarchy/test/benchmarks/iso-vm.py",
+        "run",
+        "--iso-source",
+        "/home/runner/work/_temp/omarchy-install-speed/iso-harness",
+        "--cpus",
+        "4",
+        "--memory",
+        "8192",
+        "--accelerator",
+        "kvm",
+        "--poll-interval",
+        "2",
+        "--test-overlay-sha256",
+        "91dba0089c1d2e42d83389622d37c09cad511686db044163a5ef5c0369c1fa50",
+        "--timeout",
+        "600",
+        "--iso",
+        "/home/runner/work/_temp/omarchy-install-speed/firmware-initramfs-candidate-no-prefetch-fast-reboot.iso",
+        "--verify-standalone-reboot",
+        "--extra-qemu-args-json",
+        "[\"-drive\", \"file=/home/runner/work/_temp/omarchy-install-speed/fast-image.iso,if=none,id=fastimage,format=raw,readonly=on,cache=writeback,media=cdrom\", \"-device\", \"ide-cd,drive=fastimage,bus=ide.1,id=fastimage-cd\"]",
+        "--source-cache",
+        "cold",
+        "--installed-boot-timeout",
+        "300",
+        "--mode",
+        "install"
+      ]
+    },
+    "order": [
+      {
+        "name": "01-control-pair01",
+        "revision": "control",
+        "pair": 1
+      },
+      {
+        "name": "02-candidate-pair01",
+        "revision": "candidate",
+        "pair": 1
+      },
+      {
+        "name": "03-candidate-pair02",
+        "revision": "candidate",
+        "pair": 2
+      },
+      {
+        "name": "04-control-pair02",
+        "revision": "control",
+        "pair": 2
+      },
+      {
+        "name": "05-control-pair03",
+        "revision": "control",
+        "pair": 3
+      },
+      {
+        "name": "06-candidate-pair03",
+        "revision": "candidate",
+        "pair": 3
+      }
+    ],
+    "source_provenance": {
+      "runner_sha256": "dc36ec7b12de11b4b03649b6bde303e13abfc5ec86bcdd9a0402b463bc7e882f",
+      "comparator_sha256": "7fb8a6d38dc516a0bf6ff79810888bd4c10018e9ba124a45785e89ea2eec6af4",
+      "repeat_driver_sha256": "bfc86b70adfb4410ffb35143541439c8bbebcde191d884375332375587125557"
+    }
+  },
+  "started_at": 1788646264.133371,
+  "status": "failed",
+  "runs": [
+    {
+      "name": "01-control-pair01",
+      "revision": "control",
+      "pair": 1,
+      "evidence": "/home/runner/work/_temp/omarchy-install-evidence/no-prefetch-fast-reboot-repetitions/runs/01-control-pair01",
+      "runner_exit_status": 0,
+      "reclamation": {
+        "target": "/home/runner/work/_temp/omarchy-install-speed/fresh-installs-image-no-package-prefetch-fast-reboot/01-control-pair01/target.qcow2",
+        "reclaimed_allocated_bytes": 6283010048,
+        "at": 1788646556.38192
+      }
+    }
+  ],
+  "failure": "Runner failed with exit 1; evidence/disk retained at /home/runner/work/_temp/omarchy-install-speed/fresh-installs-image-no-package-prefetch-fast-reboot/02-candidate-pair01",
+  "failed_at": 1788647321.674713,
+  "failed_run_evidence": "/home/runner/work/_temp/omarchy-install-evidence/no-prefetch-fast-reboot-repetitions/failed-runs/02-candidate-pair01"
+}

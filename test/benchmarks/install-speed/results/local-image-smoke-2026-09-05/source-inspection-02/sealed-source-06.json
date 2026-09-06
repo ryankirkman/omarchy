@@ -1,0 +1,16 @@
+{
+  "request": {
+    "action": "ssh",
+    "sudo": true,
+    "command": "set -euo pipefail; udevadm settle; [[ -z $(lsblk -dnro SERIAL | awk '$1 == \"OMARCHY_SEALED_SOURCE\" {print $1}') ]]; printf 'SOURCE_DETACHED\\n'",
+    "timeout": 60
+  },
+  "response": {
+    "ok": true,
+    "result": {
+      "returncode": 0,
+      "stdout": "SOURCE_DETACHED\n",
+      "stderr": ""
+    }
+  }
+}

@@ -1,0 +1,259 @@
+{
+  "schema_version": 1,
+  "status": "verified",
+  "time": 1788641741.867987,
+  "original_iso_sha256": "add515a8db48541779613d4071d7b140a9df64c07d79070f4b4472d13fe36892",
+  "new_iso_sha256": "19de1071bc7825078324c21243b4371f5bb6f4d9f47608b16c11288d22919e97",
+  "new_iso_bytes": 3698065408,
+  "changes": [
+    "installer-overlay.tar",
+    "installer-overlay.tar.sha256",
+    "installer-overlay.manifest.json"
+  ],
+  "original_files": {
+    "/arch/x86_64/omarchy-root.btrfs.qcow2": {
+      "sha256": "6ef64246e8b7d01e8f129046bae0d8e41228f7f195fd4c1ffb8fe00e4d00ca3e",
+      "bytes": 3681644544,
+      "sections": [
+        [
+          0,
+          33,
+          1797678,
+          3681644544
+        ]
+      ]
+    },
+    "/arch/x86_64/omarchy-root.btrfs.qcow2.json": {
+      "sha256": "29192d16d9451898cd5b5ea8c082ff072a2561423a6ab58f216516b409f42b03",
+      "bytes": 681,
+      "sections": [
+        [
+          0,
+          1797711,
+          1,
+          681
+        ]
+      ]
+    },
+    "/arch/x86_64/omarchy-root.btrfs.qcow2.sha256": {
+      "sha256": "a0ef6ebcbed59331d7cf833a36ffe64e7dcefe758cb836f6c8070cc869da7aaa",
+      "bytes": 91,
+      "sections": [
+        [
+          0,
+          1797712,
+          1,
+          91
+        ]
+      ]
+    },
+    "/fixture-provenance.json": {
+      "sha256": "4538364a035b1f64f0a80574bdef0daa59debf9d17350bee2a1d9e07a69b26c3",
+      "bytes": 667,
+      "sections": [
+        [
+          0,
+          1797713,
+          1,
+          667
+        ]
+      ]
+    },
+    "/installer-overlay.manifest.json": {
+      "sha256": "3c9c21c9c0a3eb9950ae00b6fc6d36181ffdc94756c3b8ef1dc1e413271d5140",
+      "bytes": 2695,
+      "sections": [
+        [
+          0,
+          1797809,
+          2,
+          2695
+        ]
+      ]
+    },
+    "/installer-overlay.tar": {
+      "sha256": "2263cfdefcaa71d233123f3d06f22f7c34e45f460c86763478ce6655b7676b46",
+      "bytes": 194560,
+      "sections": [
+        [
+          0,
+          1797714,
+          95,
+          194560
+        ]
+      ]
+    },
+    "/installer-overlay.tar.sha256": {
+      "sha256": "ac9baec975b3d1528b9edc3f6fda2c1a18f436766dba0cc20e880d9ebb7c43e4",
+      "bytes": 88,
+      "sections": [
+        [
+          0,
+          1797811,
+          1,
+          88
+        ]
+      ]
+    },
+    "/qemu-img-live.manifest.json": {
+      "sha256": "b026662dfa5af504469bd763353a2eda02a665788042cec5072795332500ee4a",
+      "bytes": 5570,
+      "sections": [
+        [
+          0,
+          1805497,
+          3,
+          5570
+        ]
+      ]
+    },
+    "/qemu-img-live.tar": {
+      "sha256": "52534a252d99fc157bf1febd1380c09633e1a39b30c94cbef60e5b9fcd6a949b",
+      "bytes": 15738880,
+      "sections": [
+        [
+          0,
+          1797812,
+          7685,
+          15738880
+        ]
+      ]
+    },
+    "/qemu-img-live.tar.sha256": {
+      "sha256": "9d93e71d2cc94791d9bb21424b4182516e321cb10143dbc4d3c02cee8f9ab2e3",
+      "bytes": 84,
+      "sections": [
+        [
+          0,
+          1805500,
+          1,
+          84
+        ]
+      ]
+    }
+  },
+  "new_files": {
+    "/arch/x86_64/omarchy-root.btrfs.qcow2": {
+      "sha256": "6ef64246e8b7d01e8f129046bae0d8e41228f7f195fd4c1ffb8fe00e4d00ca3e",
+      "bytes": 3681644544,
+      "sections": [
+        [
+          0,
+          57,
+          1797678,
+          3681644544
+        ]
+      ]
+    },
+    "/arch/x86_64/omarchy-root.btrfs.qcow2.json": {
+      "sha256": "29192d16d9451898cd5b5ea8c082ff072a2561423a6ab58f216516b409f42b03",
+      "bytes": 681,
+      "sections": [
+        [
+          0,
+          1797735,
+          1,
+          681
+        ]
+      ]
+    },
+    "/arch/x86_64/omarchy-root.btrfs.qcow2.sha256": {
+      "sha256": "a0ef6ebcbed59331d7cf833a36ffe64e7dcefe758cb836f6c8070cc869da7aaa",
+      "bytes": 91,
+      "sections": [
+        [
+          0,
+          1797736,
+          1,
+          91
+        ]
+      ]
+    },
+    "/fixture-provenance.json": {
+      "sha256": "4538364a035b1f64f0a80574bdef0daa59debf9d17350bee2a1d9e07a69b26c3",
+      "bytes": 667,
+      "sections": [
+        [
+          0,
+          1797737,
+          1,
+          667
+        ]
+      ]
+    },
+    "/installer-overlay.manifest.json": {
+      "sha256": "b2fa5c6418f6bb0074048db010cdf267b25c53090c2a4abe36f2eae3f75d53f9",
+      "bytes": 2880,
+      "sections": [
+        [
+          0,
+          1805522,
+          2,
+          2880
+        ]
+      ]
+    },
+    "/installer-overlay.tar": {
+      "sha256": "b5cf4014cd99d06a949fb7340e35fa506ec3c39fd7880c4d9d81f6fdd90ff775",
+      "bytes": 194560,
+      "sections": [
+        [
+          0,
+          1805427,
+          95,
+          194560
+        ]
+      ]
+    },
+    "/installer-overlay.tar.sha256": {
+      "sha256": "aafa456360e4cda744d0fc5e0e96e447abc9d83409c49c76a6e5b8d0d80508ff",
+      "bytes": 88,
+      "sections": [
+        [
+          0,
+          1805524,
+          1,
+          88
+        ]
+      ]
+    },
+    "/qemu-img-live.manifest.json": {
+      "sha256": "b026662dfa5af504469bd763353a2eda02a665788042cec5072795332500ee4a",
+      "bytes": 5570,
+      "sections": [
+        [
+          0,
+          1805423,
+          3,
+          5570
+        ]
+      ]
+    },
+    "/qemu-img-live.tar": {
+      "sha256": "52534a252d99fc157bf1febd1380c09633e1a39b30c94cbef60e5b9fcd6a949b",
+      "bytes": 15738880,
+      "sections": [
+        [
+          0,
+          1797738,
+          7685,
+          15738880
+        ]
+      ]
+    },
+    "/qemu-img-live.tar.sha256": {
+      "sha256": "9d93e71d2cc94791d9bb21424b4182516e321cb10143dbc4d3c02cee8f9ab2e3",
+      "bytes": 84,
+      "sections": [
+        [
+          0,
+          1805426,
+          1,
+          84
+        ]
+      ]
+    }
+  },
+  "source_root_image_unchanged": true,
+  "patch_commit": "9512167"
+}

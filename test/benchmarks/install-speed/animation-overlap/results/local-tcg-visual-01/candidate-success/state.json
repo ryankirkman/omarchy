@@ -1,0 +1,12 @@
+{
+  "started_at": 1788658418.0199513,
+  "target": "/tmp/omarchy-animation-visual/candidate-success/unused-target",
+  "total_phases": 9,
+  "current_index": 6,
+  "current_phase": "Installation complete",
+  "phases": [],
+  "phase_started_at": 1788658419.0321817,
+  "finished_at": 1788658431.039165,
+  "duration_seconds": 13.019586212999997,
+  "installed_packages": 941
+}

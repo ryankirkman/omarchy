@@ -1,0 +1,9 @@
+{"event": "started", "run_dir": "/home/runner/work/_temp/omarchy-install-speed/calibration-rescue/vm", "pid": 5120}
+{"event": "progress", "host_wall_s": 1.0042179310000847, "target_allocated_bytes": 200704, "host_free_bytes": 72632143872, "collected": false, "vm_status": {"status": "running", "singlestep": false, "running": true}}
+{"event": "progress", "host_wall_s": 5.0683770489999915, "target_allocated_bytes": 200704, "host_free_bytes": 72632127488, "collected": false, "vm_status": {"status": "running", "singlestep": false, "running": true}}
+{"event": "progress", "host_wall_s": 9.105700840000054, "target_allocated_bytes": 200704, "host_free_bytes": 72632127488, "collected": false, "vm_status": {"status": "running", "singlestep": false, "running": true}}
+{"event": "progress", "host_wall_s": 13.145952048000026, "target_allocated_bytes": 200704, "host_free_bytes": 72632131584, "collected": false, "vm_status": {"status": "running", "singlestep": false, "running": true}}
+{"event": "progress", "host_wall_s": 15.363585869999952, "target_allocated_bytes": 200704, "host_free_bytes": 72632127488, "collected": false, "vm_status": {"status": "running", "singlestep": false, "running": true}}
+{"event": "progress", "host_wall_s": 17.53537699100002, "target_allocated_bytes": 200704, "host_free_bytes": 72632127488, "collected": false, "vm_status": {"status": "running", "singlestep": false, "running": true}}
+{"event": "progress", "host_wall_s": 19.707442020999906, "target_allocated_bytes": 200704, "host_free_bytes": 72632127488, "collected": false, "vm_status": {"status": "running", "singlestep": false, "running": true}}
+{"event": "builder-ssh-ready", "run_dir": "/home/runner/work/_temp/omarchy-install-speed/calibration-rescue/vm"}

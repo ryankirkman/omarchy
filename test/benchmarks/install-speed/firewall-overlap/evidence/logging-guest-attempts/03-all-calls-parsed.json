@@ -1,0 +1,210 @@
+{
+  "schema_version": 1,
+  "scope": "Actual private file bind and arch-chroot on an owned minimal /tmp fixture; no installed disk, package changes or installation-speed claim",
+  "source_sha256": {
+    "guard.py": "639365971a6080341de18705a5ca504322bb4574ed72e86605fccac0180eb466",
+    "original-helper": "61a13abcc44fd5241e9882f1bcfed833e10e0ed19ad42c34a08efe1973b70d27",
+    "optimized-helper": "1d8151adb150bc1dfe930b30e7039978591add500a132b9951152d7a8a23d715"
+  },
+  "cases": [
+    {
+      "case": "root-success",
+      "passed": true,
+      "exit_status": 0,
+      "uid": 0,
+      "parent_observed_original_while_child_mounted": true,
+      "original_file_and_metadata_unchanged": true,
+      "parent_mount_absent": true,
+      "seconds_for_functional_check_only": 5.979717459999961,
+      "stdout": "=== Omarchy Setup Started: 2026-09-06 00:00:00 ===\n[2026-09-06 03:28:24] Starting: /opt/logging-bind-contract/leaf.sh\nLEAF_OUTPUT\n[2026-09-06 03:28:24] Completed: /opt/logging-bind-contract/leaf.sh\n[2026-09-06 03:28:24] Starting: /opt/logging-bind-contract/leaf.sh\nLEAF_OUTPUT\n[2026-09-06 03:28:25] Completed: /opt/logging-bind-contract/leaf.sh\n=== Omarchy Setup Completed: 2026-09-06 03:28:25 ===\nOmarchy setup: 208m 25s\nGUARD_GUEST_UID=0\n",
+      "stderr": "==> WARNING: /tmp/omarchy-logging-bind-guest-0u2xigjm/target is not a mountpoint. This may have undesirable side effects.\n"
+    },
+    {
+      "case": "user-success",
+      "passed": true,
+      "exit_status": 0,
+      "uid": 65534,
+      "parent_observed_original_while_child_mounted": false,
+      "original_file_and_metadata_unchanged": true,
+      "parent_mount_absent": true,
+      "seconds_for_functional_check_only": 4.704445620000001,
+      "stdout": "=== Omarchy Setup Started: 2026-09-06 00:00:00 ===\n[2026-09-06 03:28:30] Starting: /opt/logging-bind-contract/leaf.sh\nLEAF_OUTPUT\n[2026-09-06 03:28:30] Completed: /opt/logging-bind-contract/leaf.sh\n[2026-09-06 03:28:30] Starting: /opt/logging-bind-contract/leaf.sh\nLEAF_OUTPUT\n[2026-09-06 03:28:30] Completed: /opt/logging-bind-contract/leaf.sh\n=== Omarchy Setup Completed: 2026-09-06 03:28:30 ===\nOmarchy setup: 208m 30s\nGUARD_GUEST_UID=65534\n",
+      "stderr": "==> WARNING: /tmp/omarchy-logging-bind-guest-0u2xigjm/target is not a mountpoint. This may have undesirable side effects.\n"
+    },
+    {
+      "case": "root-failure",
+      "passed": true,
+      "exit_status": 37,
+      "uid": 0,
+      "parent_observed_original_while_child_mounted": false,
+      "original_file_and_metadata_unchanged": true,
+      "parent_mount_absent": true,
+      "seconds_for_functional_check_only": 4.56241460199999,
+      "stdout": "=== Omarchy Setup Started: 2026-09-06 00:00:00 ===\n[2026-09-06 03:28:34] Starting: /opt/logging-bind-contract/leaf.sh\nLEAF_OUTPUT\n[2026-09-06 03:28:34] Completed: /opt/logging-bind-contract/leaf.sh\n[2026-09-06 03:28:34] Starting: /opt/logging-bind-contract/leaf.sh\nLEAF_OUTPUT\n[2026-09-06 03:28:34] Completed: /opt/logging-bind-contract/leaf.sh\n=== Omarchy Setup Completed: 2026-09-06 03:28:34 ===\nOmarchy setup: 208m 34s\nGUARD_GUEST_UID=0\n",
+      "stderr": "==> WARNING: /tmp/omarchy-logging-bind-guest-0u2xigjm/target is not a mountpoint. This may have undesirable side effects.\n"
+    }
+  ],
+  "copied_guest_binary_sha256": {
+    "/usr/bin/bash": "575e03ac834b739349a4484de481abcd06a6f7193cefc795260a32a1943f20a5",
+    "/usr/bin/date": "8c40f636dad194d945ba65c6ce18a412e8dffc595a9a80f9874515f79411e6ac",
+    "/lib64/ld-linux-x86-64.so.2": "d011113b7054c641c8ca064f58bcc23804fd2654a3dff2444dad06ddeda61bfb",
+    "/usr/lib/libc.so.6": "e221b10fee9ee4776d8f0f1701253bc06817f7a4dbe6c5292487277d0bf8ffff",
+    "/usr/lib/libncursesw.so.6": "7498a0b0f75deb5417e109d1853679f1a6b201e52e03b247c914fec0a36e3a5b",
+    "/usr/lib/libreadline.so.8": "e860c46c8ec8a37d9ade7cc5eb75e6973a3bb12c8cdc50f849887f88095da200",
+    "/usr/lib64/ld-linux-x86-64.so.2": "d011113b7054c641c8ca064f58bcc23804fd2654a3dff2444dad06ddeda61bfb"
+  },
+  "fixture": "/tmp/omarchy-logging-bind-guest-0u2xigjm",
+  "source_helper_unchanged": true,
+  "component_timing": {
+    "scope": "TCG guest only; real Bash/date and all four private chroot/guard lifecycles, 63 trivial leaves; no native or full-install inference",
+    "samples": [
+      {
+        "pair": 1,
+        "label": "baseline",
+        "seconds": 14.82635354499996,
+        "invocations": [
+          {
+            "leaves": 49,
+            "seconds": 8.95169721000002
+          },
+          {
+            "leaves": 1,
+            "seconds": 1.283802006999963
+          },
+          {
+            "leaves": 12,
+            "seconds": 3.174010546999966
+          },
+          {
+            "leaves": 1,
+            "seconds": 1.3892171129999724
+          }
+        ]
+      },
+      {
+        "pair": 1,
+        "label": "candidate",
+        "seconds": 15.879115259999935,
+        "invocations": [
+          {
+            "leaves": 49,
+            "seconds": 6.134116651999989
+          },
+          {
+            "leaves": 1,
+            "seconds": 2.9066204250000283
+          },
+          {
+            "leaves": 12,
+            "seconds": 3.717167277000044
+          },
+          {
+            "leaves": 1,
+            "seconds": 3.1167304210000566
+          }
+        ]
+      },
+      {
+        "pair": 2,
+        "label": "candidate",
+        "seconds": 16.50353309600007,
+        "invocations": [
+          {
+            "leaves": 49,
+            "seconds": 7.027348237000069
+          },
+          {
+            "leaves": 1,
+            "seconds": 2.992870782000068
+          },
+          {
+            "leaves": 12,
+            "seconds": 3.6117539199999555
+          },
+          {
+            "leaves": 1,
+            "seconds": 2.8621731220000584
+          }
+        ]
+      },
+      {
+        "pair": 2,
+        "label": "baseline",
+        "seconds": 14.19518623700003,
+        "invocations": [
+          {
+            "leaves": 49,
+            "seconds": 8.973050508000028
+          },
+          {
+            "leaves": 1,
+            "seconds": 1.1506553450000183
+          },
+          {
+            "leaves": 12,
+            "seconds": 2.8499731130000328
+          },
+          {
+            "leaves": 1,
+            "seconds": 1.191849298999955
+          }
+        ]
+      },
+      {
+        "pair": 3,
+        "label": "baseline",
+        "seconds": 14.641953022999928,
+        "invocations": [
+          {
+            "leaves": 49,
+            "seconds": 8.693640155000026
+          },
+          {
+            "leaves": 1,
+            "seconds": 1.170243400000004
+          },
+          {
+            "leaves": 12,
+            "seconds": 3.02840744599996
+          },
+          {
+            "leaves": 1,
+            "seconds": 1.7256354539999847
+          }
+        ]
+      },
+      {
+        "pair": 3,
+        "label": "candidate",
+        "seconds": 15.706942999000034,
+        "invocations": [
+          {
+            "leaves": 49,
+            "seconds": 6.277277507000008
+          },
+          {
+            "leaves": 1,
+            "seconds": 2.8546088189999637
+          },
+          {
+            "leaves": 12,
+            "seconds": 3.543821851999951
+          },
+          {
+            "leaves": 1,
+            "seconds": 3.021401888000014
+          }
+        ]
+      }
+    ],
+    "median_seconds": {
+      "baseline": 14.641953022999928,
+      "candidate": 15.879115259999935
+    },
+    "median_saved_seconds": -1.2371622370000068,
+    "median_speedup": 0.9220887173659817,
+    "all_logged_leaves_verified": true
+  },
+  "fixture_removed": true,
+  "status": "passed"
+}

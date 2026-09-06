@@ -1,0 +1,9 @@
+{
+   "filesystems": [
+      {
+         "source": "/dev/vda2[/@]",
+         "fstype": "btrfs",
+         "target": "/"
+      }
+   ]
+}

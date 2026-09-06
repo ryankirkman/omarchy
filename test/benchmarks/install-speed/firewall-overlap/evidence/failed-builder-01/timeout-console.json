@@ -1,0 +1,102 @@
+{
+  "schema_version": 1,
+  "measurement_valid": false,
+  "status": "failed",
+  "after_measurement_failure": true,
+  "original_failure": "Install timed out after 600s",
+  "budget_seconds": 90,
+  "output_limit_bytes": 262144,
+  "authenticated_root": false,
+  "commands_started": false,
+  "interventions": [
+    {
+      "kind": "qmp-chardev-change",
+      "id": "serial0",
+      "backend": {
+        "type": "socket",
+        "data": {
+          "addr": {
+            "type": "inet",
+            "data": {
+              "host": "127.0.0.1",
+              "port": "0",
+              "ipv4": true
+            }
+          },
+          "server": true,
+          "wait": false,
+          "telnet": false
+        }
+      },
+      "at_monotonic_s": 117120.00025212
+    },
+    {
+      "kind": "refresh-login-prompt",
+      "at_monotonic_s": 117120.004217919,
+      "input": "\r"
+    }
+  ],
+  "helper_sha256": "52400893cb2bfdf957b5408c5fbb97ec428f42290a5f74a1b5ee7c84ef3cc884",
+  "observed_chardevs_before_guard": [
+    {
+      "frontend-open": true,
+      "filename": "vc",
+      "label": "parallel0"
+    },
+    {
+      "frontend-open": true,
+      "filename": "tcp:127.0.0.1:24444,server=on <-> 127.0.0.1:35702",
+      "label": "compat_monitor0"
+    },
+    {
+      "frontend-open": true,
+      "filename": "file",
+      "label": "serial0"
+    }
+  ],
+  "owned_qemu": {
+    "pid": 27,
+    "live": true,
+    "actual_argv_matches_manifest": true,
+    "serial_argument": "file:/tmp/omarchy-bench/setup-overlap-functional-01/vm/serial.log",
+    "argv_sha256": "7aebb1eaa730c05781154726eb85357dada16467df04f3018bb5e85b3586ac48"
+  },
+  "backend": {
+    "type": "socket",
+    "data": {
+      "addr": {
+        "type": "inet",
+        "data": {
+          "host": "127.0.0.1",
+          "port": "0",
+          "ipv4": true
+        }
+      },
+      "server": true,
+      "wait": false,
+      "telnet": false
+    }
+  },
+  "original_serial": {
+    "bytes_before_switch": 87,
+    "bytes": 87,
+    "sha256": "e1156c9971b32fa096fa70290161cf4bad3f49f066ddd30746fd3e6f75a16fa6",
+    "bytes_received_before_backend_detached": 0,
+    "preservation": "Original file is closed by chardev-change and never opened for writing by diagnostics",
+    "unchanged_during_console_capture": true
+  },
+  "observed_backend": {
+    "frontend-open": true,
+    "filename": "disconnected:tcp:127.0.0.1:37503,server=on",
+    "label": "serial0"
+  },
+  "connection": {
+    "host": "127.0.0.1",
+    "port": 37503
+  },
+  "error_type": "TimeoutError",
+  "error": "Expected console boundary did not arrive before its deadline",
+  "received_bytes": 0,
+  "output_truncated": false,
+  "elapsed_seconds": 20.011240207997616
+}

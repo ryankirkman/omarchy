@@ -1,0 +1,23 @@
+{
+  "schema_version": 1,
+  "mode": "builder",
+  "disable_package_prefetch": false,
+  "original_initramfs_sha256": "6e3e15b983da69df4e18df2f1489fa854980b395b28546355d0f6dc13914694e",
+  "original_config_sha256": "1e00045b8b2979c16cbc7a943a708b136a1989c7407889a96b8450632ea9deba",
+  "hook_sha256": "cba3c7709fe79e1bd7cfde845867c72f64ce8377eaeb275076be4e9faf2243d7",
+  "payload": [
+    {
+      "path": "root/.automated_script.sh",
+      "mode": "0o755",
+      "sha256": "c0db7f3ab972e798a8c0d1ebaab4656a5c879f80348a602556e810d4ce021c2e"
+    },
+    {
+      "path": "usr/local/lib/omarchy-benchmark/preflight.sh",
+      "mode": "0o755",
+      "sha256": "68e8f1e22f9b1f5c5d3b842e8c89e96e43c9c1f089f6f72f9f62ff1c2fee12ce"
+    }
+  ],
+  "appended_archive_bytes": 6144,
+  "appended_archive_sha256": "07c76e502906bbe08b7415deafa6c5d6056e7c83a96b901e6397504f0d140892",
+  "output_initramfs_sha256": "a290a5b175a99c66c3aa2bbe34f95a1f804701b3ed0726758355f13e75c594af"
+}

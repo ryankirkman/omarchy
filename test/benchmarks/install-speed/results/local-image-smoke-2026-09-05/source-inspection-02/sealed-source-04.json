@@ -1,0 +1,16 @@
+{
+  "request": {
+    "action": "ssh",
+    "sudo": true,
+    "command": "set -euo pipefail\nfor attempt in {1..100}; do\n mapfile -t devices < <(lsblk -dnro PATH,SERIAL | awk '$2 == \"OMARCHY_SEALED_SOURCE\" {print $1}')\n (( ${#devices[@]} == 1 )) && break\n sleep .2\ndone\n(( ${#devices[@]} == 1 ))\ndevice=${devices[0]}\n[[ -z $(lsblk -nro MOUNTPOINTS \"$device\" | tr -d '[:space:]') ]]\nmounted_uuids=$(findmnt -rn -o UUID)\nwhile IFS= read -r uuid; do [[ $uuid != 51a18a79-7bde-4aeb-8895-181970407957 ]] || exit 1; done <<< \"$mounted_uuids\"\nfor path in /run/omarchy-sealed-inspect.*; do [[ ! -e $path ]]; done\nprintf 'SOURCE_UNMOUNTED\n'\n",
+    "timeout": 60
+  },
+  "response": {
+    "ok": true,
+    "result": {
+      "returncode": 0,
+      "stdout": "SOURCE_UNMOUNTED\n",
+      "stderr": ""
+    }
+  }
+}

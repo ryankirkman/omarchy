@@ -1,0 +1,5 @@
+{
+  "error_type": "CalledProcessError",
+  "error": "Command '['/usr/bin/python3', PosixPath('/home/runner/work/omarchy/omarchy/test/benchmarks/install-speed/native-ci/rescue-failed-install.py'), '--repo', PosixPath('/home/runner/work/omarchy/omarchy'), '--work', PosixPath('/home/runner/work/_temp/omarchy-install-speed/calibration-rescue'), '--evidence', PosixPath('/home/runner/work/_temp/omarchy-install-evidence/calibration-rescue'), '--failed-run', PosixPath('/home/runner/work/_temp/omarchy-install-speed/calibration'), '--iso', PosixPath('/home/runner/work/_temp/omarchy-install-speed/omarchy-4.0.2.iso'), '--harness', PosixPath('/home/runner/work/_temp/omarchy-install-speed/iso-harness'), '--kernel', PosixPath('/home/runner/work/_temp/omarchy-install-speed/vmlinuz-linux-t2'), '--initrd', PosixPath('/home/runner/work/_temp/omarchy-install-speed/initramfs-linux-t2.img')]' returned non-zero exit status 1.",
+  "measurement_valid": false
+}

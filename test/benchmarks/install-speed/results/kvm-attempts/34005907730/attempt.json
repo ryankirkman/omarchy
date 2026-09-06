@@ -1,0 +1,500 @@
+{
+  "schema_version": 1,
+  "workflow_run_id": 34005907730,
+  "workflow_job_id": 101412908446,
+  "repository": "ryankirkman/omarchy",
+  "commit": "dac5b17d12d0fac41052e1695620e3b3784a5063",
+  "artifact_id": 9981399064,
+  "artifact_zip_sha256": "58d687a240a5317bec1f362d73cac71dfd22fa6307e085d9be6547710a10e8dc",
+  "artifact_original_file_count": 270,
+  "artifact_original_bytes": 1762937,
+  "status": "three-valid-overlap-pairs-target-not-met",
+  "completed_valid_pairs": 3,
+  "required_valid_pairs": 3,
+  "twofold_target_verified": false,
+  "candidate_upper_bound_shortfall_seconds": 0.01624233349991755,
+  "image_build_host_seconds": 619.0643083970001,
+  "image_build_outside_install_timing": true,
+  "workflow_started_at": "2026-09-06T02:13:08Z",
+  "workflow_completed_at": "2026-09-06T02:49:14Z",
+  "experiment_step": {
+    "name": "Measure three fresh finalization-overlap installation pairs",
+    "status": "completed",
+    "conclusion": "failure",
+    "number": 5,
+    "started_at": "2026-09-06T02:13:35Z",
+    "completed_at": "2026-09-06T02:49:11Z"
+  },
+  "failed_samples": 0,
+  "live_failure_console_invoked": false,
+  "independent_validation": {
+    "schema_version": 1,
+    "run_id": 34005907730,
+    "current_strict_comparator_reproduced_result": true,
+    "all_six_samples_valid": true,
+    "original_seal_hashes_rechecked": 180,
+    "calibration_strict_raw_gates_passed": true,
+    "comparison": {
+      "host_boot_to_installed_ssh": {
+        "comparable": true,
+        "incomparable_reason": null,
+        "readiness_upper_bound_seconds": {
+          "baseline": [
+            166.32464097800016,
+            155.5843486629999,
+            155.3408441670001
+          ],
+          "candidate": [
+            75.46454625899992,
+            74.84693491000007,
+            74.89719673699983
+          ]
+        },
+        "readiness_lower_bound_seconds": {
+          "baseline": [
+            161.86203631900003,
+            151.20535373899997,
+            150.896607851
+          ],
+          "candidate": [
+            71.05274385100006,
+            70.45256717400002,
+            70.54338706199997
+          ]
+        },
+        "median_observed_seconds": {
+          "baseline": 155.5843486629999,
+          "candidate": 74.89719673699983
+        },
+        "median_observed_speedup": 2.0773053657713194,
+        "conservative_speedup_lower_bound": 1.9995695373707232,
+        "bound": "Fastest baseline readiness lower bound divided by slowest candidate readiness upper bound; includes actual polling uncertainty."
+      },
+      "guest_installer": {
+        "seconds": {
+          "baseline": [
+            115.58881783485413,
+            104.68122696876526,
+            103.36934399604797
+          ],
+          "candidate": [
+            30.718009858000002,
+            31.203407676,
+            31.198520422999998
+          ]
+        },
+        "median_seconds": {
+          "baseline": 104.68122696876526,
+          "candidate": 31.198520422999998
+        },
+        "median_speedup": 3.3553266484904443,
+        "fastest_baseline_over_slowest_candidate": 3.3127581791508676,
+        "twofold_verified_for_this_fixture": true,
+        "clock_sources": {
+          "baseline": [
+            "guest-wall-clock",
+            "guest-wall-clock",
+            "guest-wall-clock"
+          ],
+          "candidate": [
+            "guest-monotonic",
+            "guest-monotonic",
+            "guest-monotonic"
+          ]
+        },
+        "scope": "Guest installer phases only; excludes work performed during live boot or after phase completion."
+      },
+      "at_least_three_fresh_samples_per_revision": true,
+      "twofold_target_verified_for_this_fixture": false,
+      "distinct_installation_identities_verified": true
+    },
+    "samples": [
+      {
+        "name": "01-control-pair01",
+        "revision": "control",
+        "host_interval": [
+          161.86203631900003,
+          166.32464097800016
+        ],
+        "guest_installer_seconds": 115.58881783485413,
+        "phases": {
+          "Preparing live environment": 0.19623041152954102,
+          "Preparing install target": 8.344650268554688e-06,
+          "Installing Arch + Omarchy": 101.57984662055969,
+          "Configuring hibernation": 0.2253265380859375,
+          "Configuring system": 2.7085859775543213,
+          "Staging provisioning": 0.21949982643127441,
+          "Finalizing Limine boot": 7.087918519973755,
+          "Finalizing user": 3.2059340476989746,
+          "Configuring login": 0.04608750343322754,
+          "Configuring SSH access": 0.21500277519226074,
+          "Configuring Tailscale": 1.430511474609375e-06,
+          "Configuring DNS resolver": 0.00031948089599609375,
+          "Validating boot setup": 0.009468555450439453,
+          "Creating factory snapshot": 0.0898740291595459
+        },
+        "finalization_detail": [],
+        "serial_markers": [
+          "\u001b[0m\u001b[30m\u001b[40m\u001b[2J\u001b[01;01H\u001b[0m\u001b[37m\u001b[40m\u001b[H\u001b[J\u001b[1;1HOMARCHY_BENCHMARK_EARLY_PREFLIGHT started 01ee5d39-4b77-434e-84ba-e54de8047e87 6.40",
+          "OMARCHY_BENCHMARK_EARLY_PREFLIGHT finished 01ee5d39-4b77-434e-84ba-e54de8047e87 6.41"
+        ],
+        "packages": 941,
+        "explicit": 158,
+        "qk_rows": 941,
+        "standalone_passed": true,
+        "sealed_files_verified": 30
+      },
+      {
+        "name": "02-candidate-pair01",
+        "revision": "candidate",
+        "host_interval": [
+          71.05274385100006,
+          75.46454625899992
+        ],
+        "guest_installer_seconds": 30.718009858000002,
+        "phases": {
+          "Preparing live environment": 0.10269145999999907,
+          "Preparing install target": 0.045459238999999485,
+          "Installing Arch + Omarchy": 18.556290675,
+          "Configuring hibernation": 0.2815609660000007,
+          "Configuring system": 2.2307788210000012,
+          "Staging provisioning": 0.2961718639999944,
+          "Finalizing boot and user setup": 9.083003339999998,
+          "Validating boot setup": 0.004443599999994774,
+          "Creating factory snapshot": 0.11493517800000319
+        },
+        "finalization_detail": [
+          {
+            "name": "Finalizing boot and user setup",
+            "status": "ok",
+            "elapsed": 9.083003339999998,
+            "substeps": [
+              {
+                "name": "Finalizing Limine boot",
+                "branch": "boot",
+                "status": "ok",
+                "elapsed": 9.082018122000001
+              },
+              {
+                "name": "Finalizing user",
+                "branch": "user",
+                "status": "ok",
+                "elapsed": 5.125249235999995
+              },
+              {
+                "name": "Configuring login",
+                "branch": "user",
+                "status": "ok",
+                "elapsed": 0.05895056899999673
+              },
+              {
+                "name": "Configuring SSH access",
+                "branch": "user",
+                "status": "ok",
+                "elapsed": 0.23870424700000115
+              },
+              {
+                "name": "Configuring Tailscale",
+                "branch": "user",
+                "status": "ok",
+                "elapsed": 1.3590000023100401e-06
+              },
+              {
+                "name": "Configuring DNS resolver",
+                "branch": "user",
+                "status": "ok",
+                "elapsed": 0.0008409330000063164
+              },
+              {
+                "name": "Indexing installed files",
+                "branch": "user",
+                "status": "ok",
+                "elapsed": 2.4255921529999966
+              }
+            ]
+          }
+        ],
+        "serial_markers": [
+          "\u001b[0m\u001b[30m\u001b[40m\u001b[2J\u001b[01;01H\u001b[0m\u001b[37m\u001b[40m\u001b[H\u001b[J\u001b[1;1HOMARCHY_BENCHMARK_EARLY_PREFLIGHT started 63d758a2-e7a2-4cb4-80a3-7bb81bf202b7 6.39",
+          "OMARCHY_BENCHMARK_EARLY_PREFLIGHT finished 63d758a2-e7a2-4cb4-80a3-7bb81bf202b7 7.00",
+          "OMARCHY_BENCHMARK_ANIMATION begin 63d758a2-e7a2-4cb4-80a3-7bb81bf202b7 40.39 finalizing",
+          "OMARCHY_BENCHMARK_ANIMATION end 63d758a2-e7a2-4cb4-80a3-7bb81bf202b7 44.64 0"
+        ],
+        "packages": 941,
+        "explicit": 158,
+        "qk_rows": 941,
+        "standalone_passed": true,
+        "sealed_files_verified": 30
+      },
+      {
+        "name": "03-candidate-pair02",
+        "revision": "candidate",
+        "host_interval": [
+          70.45256717400002,
+          74.84693491000007
+        ],
+        "guest_installer_seconds": 31.203407676,
+        "phases": {
+          "Preparing live environment": 0.09704704299999989,
+          "Preparing install target": 0.046596338999997045,
+          "Installing Arch + Omarchy": 18.41000888,
+          "Configuring hibernation": 0.3813192829999963,
+          "Configuring system": 2.431699504000001,
+          "Staging provisioning": 0.3261120290000008,
+          "Finalizing boot and user setup": 9.411838303000003,
+          "Validating boot setup": 0.004387960000002522,
+          "Creating factory snapshot": 0.09148649099999773
+        },
+        "finalization_detail": [
+          {
+            "name": "Finalizing boot and user setup",
+            "status": "ok",
+            "elapsed": 9.411838303000003,
+            "substeps": [
+              {
+                "name": "Finalizing Limine boot",
+                "branch": "boot",
+                "status": "ok",
+                "elapsed": 9.410629626999999
+              },
+              {
+                "name": "Finalizing user",
+                "branch": "user",
+                "status": "ok",
+                "elapsed": 5.163764960000002
+              },
+              {
+                "name": "Configuring login",
+                "branch": "user",
+                "status": "ok",
+                "elapsed": 0.05860198900000313
+              },
+              {
+                "name": "Configuring SSH access",
+                "branch": "user",
+                "status": "ok",
+                "elapsed": 0.2624562979999965
+              },
+              {
+                "name": "Configuring Tailscale",
+                "branch": "user",
+                "status": "ok",
+                "elapsed": 2.125000001740318e-06
+              },
+              {
+                "name": "Configuring DNS resolver",
+                "branch": "user",
+                "status": "ok",
+                "elapsed": 0.00026411999999709224
+              },
+              {
+                "name": "Indexing installed files",
+                "branch": "user",
+                "status": "ok",
+                "elapsed": 3.3404051659999965
+              }
+            ]
+          }
+        ],
+        "serial_markers": [
+          "\u001b[0m\u001b[30m\u001b[40m\u001b[2J\u001b[01;01H\u001b[0m\u001b[37m\u001b[40m\u001b[H\u001b[J\u001b[1;1HOMARCHY_BENCHMARK_EARLY_PREFLIGHT started 7c260e8c-c1e4-48d3-a3e1-725188c88453 6.39",
+          "OMARCHY_BENCHMARK_EARLY_PREFLIGHT finished 7c260e8c-c1e4-48d3-a3e1-725188c88453 7.01",
+          "OMARCHY_BENCHMARK_ANIMATION begin 7c260e8c-c1e4-48d3-a3e1-725188c88453 40.39 finalizing",
+          "OMARCHY_BENCHMARK_ANIMATION end 7c260e8c-c1e4-48d3-a3e1-725188c88453 44.67 0"
+        ],
+        "packages": 941,
+        "explicit": 158,
+        "qk_rows": 941,
+        "standalone_passed": true,
+        "sealed_files_verified": 30
+      },
+      {
+        "name": "04-control-pair02",
+        "revision": "control",
+        "host_interval": [
+          151.20535373899997,
+          155.5843486629999
+        ],
+        "guest_installer_seconds": 104.68122696876526,
+        "phases": {
+          "Preparing live environment": 0.15747570991516113,
+          "Preparing install target": 8.821487426757812e-06,
+          "Installing Arch + Omarchy": 91.05046582221985,
+          "Configuring hibernation": 0.22713398933410645,
+          "Configuring system": 2.601343870162964,
+          "Staging provisioning": 0.17952561378479004,
+          "Finalizing Limine boot": 6.950620174407959,
+          "Finalizing user": 3.236025810241699,
+          "Configuring login": 0.04295206069946289,
+          "Configuring SSH access": 0.19353127479553223,
+          "Configuring Tailscale": 1.9073486328125e-06,
+          "Configuring DNS resolver": 0.0002732276916503906,
+          "Validating boot setup": 0.008564949035644531,
+          "Creating factory snapshot": 0.02922964096069336
+        },
+        "finalization_detail": [],
+        "serial_markers": [
+          "\u001b[0m\u001b[30m\u001b[40m\u001b[2J\u001b[01;01H\u001b[0m\u001b[37m\u001b[40m\u001b[H\u001b[J\u001b[1;1HOMARCHY_BENCHMARK_EARLY_PREFLIGHT started d7e672f6-1a90-4c8d-95e0-9af04dfde415 6.43",
+          "OMARCHY_BENCHMARK_EARLY_PREFLIGHT finished d7e672f6-1a90-4c8d-95e0-9af04dfde415 6.44"
+        ],
+        "packages": 941,
+        "explicit": 158,
+        "qk_rows": 941,
+        "standalone_passed": true,
+        "sealed_files_verified": 30
+      },
+      {
+        "name": "05-control-pair03",
+        "revision": "control",
+        "host_interval": [
+          150.896607851,
+          155.3408441670001
+        ],
+        "guest_installer_seconds": 103.36934399604797,
+        "phases": {
+          "Preparing live environment": 0.18690705299377441,
+          "Preparing install target": 9.298324584960938e-06,
+          "Installing Arch + Omarchy": 89.82011938095093,
+          "Configuring hibernation": 0.2301340103149414,
+          "Configuring system": 2.692017078399658,
+          "Staging provisioning": 0.18941450119018555,
+          "Finalizing Limine boot": 6.882769823074341,
+          "Finalizing user": 3.0227344036102295,
+          "Configuring login": 0.04603123664855957,
+          "Configuring SSH access": 0.20823097229003906,
+          "Configuring Tailscale": 1.6689300537109375e-06,
+          "Configuring DNS resolver": 0.0001761913299560547,
+          "Validating boot setup": 0.009167671203613281,
+          "Creating factory snapshot": 0.07730436325073242
+        },
+        "finalization_detail": [],
+        "serial_markers": [
+          "\u001b[0m\u001b[30m\u001b[40m\u001b[2J\u001b[01;01H\u001b[0m\u001b[37m\u001b[40m\u001b[H\u001b[J\u001b[1;1HOMARCHY_BENCHMARK_EARLY_PREFLIGHT started 17da1733-bf02-4448-bba7-a45412a9dfe2 6.41",
+          "OMARCHY_BENCHMARK_EARLY_PREFLIGHT finished 17da1733-bf02-4448-bba7-a45412a9dfe2 6.42"
+        ],
+        "packages": 941,
+        "explicit": 158,
+        "qk_rows": 941,
+        "standalone_passed": true,
+        "sealed_files_verified": 30
+      },
+      {
+        "name": "06-candidate-pair03",
+        "revision": "candidate",
+        "host_interval": [
+          70.54338706199997,
+          74.89719673699983
+        ],
+        "guest_installer_seconds": 31.198520422999998,
+        "phases": {
+          "Preparing live environment": 0.11188255700000127,
+          "Preparing install target": 0.05598025200000123,
+          "Installing Arch + Omarchy": 18.369320172000002,
+          "Configuring hibernation": 0.2862988770000001,
+          "Configuring system": 2.5587874349999993,
+          "Staging provisioning": 0.4867826409999978,
+          "Finalizing boot and user setup": 9.220779481000001,
+          "Validating boot setup": 0.004659392000000651,
+          "Creating factory snapshot": 0.1012411349999951
+        },
+        "finalization_detail": [
+          {
+            "name": "Finalizing boot and user setup",
+            "status": "ok",
+            "elapsed": 9.220779481000001,
+            "substeps": [
+              {
+                "name": "Finalizing Limine boot",
+                "branch": "boot",
+                "status": "ok",
+                "elapsed": 9.219610689
+              },
+              {
+                "name": "Finalizing user",
+                "branch": "user",
+                "status": "ok",
+                "elapsed": 4.998802190999996
+              },
+              {
+                "name": "Configuring login",
+                "branch": "user",
+                "status": "ok",
+                "elapsed": 0.06373910700000351
+              },
+              {
+                "name": "Configuring SSH access",
+                "branch": "user",
+                "status": "ok",
+                "elapsed": 0.25386280499999714
+              },
+              {
+                "name": "Configuring Tailscale",
+                "branch": "user",
+                "status": "ok",
+                "elapsed": 1.2029999965079696e-06
+              },
+              {
+                "name": "Configuring DNS resolver",
+                "branch": "user",
+                "status": "ok",
+                "elapsed": 0.00035676899999970146
+              },
+              {
+                "name": "Indexing installed files",
+                "branch": "user",
+                "status": "ok",
+                "elapsed": 3.425153346000002
+              }
+            ]
+          }
+        ],
+        "serial_markers": [
+          "\u001b[0m\u001b[30m\u001b[40m\u001b[2J\u001b[01;01H\u001b[0m\u001b[37m\u001b[40m\u001b[H\u001b[J\u001b[1;1HOMARCHY_BENCHMARK_EARLY_PREFLIGHT started 17e27300-7596-4020-a60b-f74722e2016e 6.37",
+          "OMARCHY_BENCHMARK_EARLY_PREFLIGHT finished 17e27300-7596-4020-a60b-f74722e2016e 6.97",
+          "OMARCHY_BENCHMARK_ANIMATION begin 17e27300-7596-4020-a60b-f74722e2016e 40.07 finalizing",
+          "OMARCHY_BENCHMARK_ANIMATION end 17e27300-7596-4020-a60b-f74722e2016e 44.21 0"
+        ],
+        "packages": 941,
+        "explicit": 158,
+        "qk_rows": 941,
+        "standalone_passed": true,
+        "sealed_files_verified": 30
+      }
+    ]
+  },
+  "finalization_profiles": [
+    {
+      "name": "02-candidate-pair01",
+      "boot_branch_seconds": 9.082018122000001,
+      "ordered_user_substeps_sum_seconds": 7.849338496999998,
+      "index_seconds": 2.4255921529999966,
+      "boot_minus_user_substep_sum_seconds": 1.232679625000003,
+      "animation_markers": [
+        "OMARCHY_BENCHMARK_ANIMATION begin 63d758a2-e7a2-4cb4-80a3-7bb81bf202b7 40.39 finalizing",
+        "OMARCHY_BENCHMARK_ANIMATION end 63d758a2-e7a2-4cb4-80a3-7bb81bf202b7 44.64 0"
+      ]
+    },
+    {
+      "name": "03-candidate-pair02",
+      "boot_branch_seconds": 9.410629626999999,
+      "ordered_user_substeps_sum_seconds": 8.825494657999997,
+      "index_seconds": 3.3404051659999965,
+      "boot_minus_user_substep_sum_seconds": 0.5851349690000021,
+      "animation_markers": [
+        "OMARCHY_BENCHMARK_ANIMATION begin 7c260e8c-c1e4-48d3-a3e1-725188c88453 40.39 finalizing",
+        "OMARCHY_BENCHMARK_ANIMATION end 7c260e8c-c1e4-48d3-a3e1-725188c88453 44.67 0"
+      ]
+    },
+    {
+      "name": "06-candidate-pair03",
+      "boot_branch_seconds": 9.219610689,
+      "ordered_user_substeps_sum_seconds": 8.741915420999995,
+      "index_seconds": 3.425153346000002,
+      "boot_minus_user_substep_sum_seconds": 0.47769526800000506,
+      "animation_markers": [
+        "OMARCHY_BENCHMARK_ANIMATION begin 17e27300-7596-4020-a60b-f74722e2016e 40.07 finalizing",
+        "OMARCHY_BENCHMARK_ANIMATION end 17e27300-7596-4020-a60b-f74722e2016e 44.21 0"
+      ]
+    }
+  ]
+}

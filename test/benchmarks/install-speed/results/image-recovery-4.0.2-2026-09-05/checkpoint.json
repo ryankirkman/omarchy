@@ -1,0 +1,9 @@
+{
+  "upstream_commit": "dbffaa6c65344d644627a023c28661e08382b8fa",
+  "official_iso_sha256": "2ef8e624aa1bec7e277e28056b8535a6c9373ba48d7ede3f1a01cb6d2373cfb8",
+  "root_image_sha256": "6ef64246e8b7d01e8f129046bae0d8e41228f7f195fd4c1ffb8fe00e4d00ca3e",
+  "supplementary_iso_sha256": "add515a8db48541779613d4071d7b140a9df64c07d79070f4b4472d13fe36892",
+  "native_archive_catalog_file_sha256": "17a40c36965a6f7633e1e54160a0f27599759a530e16a5cb0a55d59f4203f25c",
+  "git_cleanup_fix": "bd08eb3",
+  "no_install_speed_result": true
+}

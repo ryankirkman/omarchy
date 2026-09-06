@@ -1,0 +1,122 @@
+{
+  "path": "/usr/bin/arch-chroot",
+  "sha256": "56c50ac2f6d58325d4f5eaa0a0e359ca3019bffe08b7b37468de3bddae09e8d5",
+  "lines": [
+    {
+      "line": 63,
+      "text": "  chroot_add_mount sys \"$1/sys\" -t sysfs -o nosuid,noexec,nodev,ro &&"
+    },
+    {
+      "line": 64,
+      "text": "  ignore_error chroot_maybe_add_mount \"[[ -d '$1/sys/firmware/efi/efivars' ]]\" \\"
+    },
+    {
+      "line": 65,
+      "text": "      efivarfs \"$1/sys/firmware/efi/efivars\" -t efivarfs -o nosuid,noexec,nodev &&"
+    },
+    {
+      "line": 66,
+      "text": "  chroot_add_mount udev \"$1/dev\" -t devtmpfs -o mode=0755,nosuid &&"
+    },
+    {
+      "line": 67,
+      "text": "  chroot_add_mount devpts \"$1/dev/pts\" -t devpts -o mode=0620,gid=5,nosuid,noexec &&"
+    },
+    {
+      "line": 68,
+      "text": "  chroot_add_mount shm \"$1/dev/shm\" -t tmpfs -o mode=1777,nosuid,nodev &&"
+    },
+    {
+      "line": 69,
+      "text": "  chroot_add_mount /run \"$1/run\" --bind --make-private &&"
+    },
+    {
+      "line": 70,
+      "text": "  chroot_add_mount tmp \"$1/tmp\" -t tmpfs -o mode=1777,strictatime,nodev,nosuid"
+    },
+    {
+      "line": 71,
+      "text": "}"
+    },
+    {
+      "line": 72,
+      "text": ""
+    },
+    {
+      "line": 73,
+      "text": "chroot_add_mount_lazy() {"
+    },
+    {
+      "line": 74,
+      "text": "  mount \"$@\" && CHROOT_ACTIVE_LAZY=(\"$2\" \"${CHROOT_ACTIVE_LAZY[@]}\")"
+    },
+    {
+      "line": 97,
+      "text": "  chroot_bind_device /dev/tty \"$1/dev/tty\" &&"
+    },
+    {
+      "line": 98,
+      "text": "  chroot_bind_device /dev/urandom \"$1/dev/urandom\" &&"
+    },
+    {
+      "line": 99,
+      "text": "  chroot_bind_device /dev/zero \"$1/dev/zero\" &&"
+    },
+    {
+      "line": 100,
+      "text": "  chroot_add_mount run \"$1/run\" -t tmpfs -o nosuid,nodev,mode=0755 &&"
+    },
+    {
+      "line": 101,
+      "text": "  chroot_add_mount tmp \"$1/tmp\" -t tmpfs -o mode=1777,strictatime,nodev,nosuid"
+    },
+    {
+      "line": 102,
+      "text": "}"
+    },
+    {
+      "line": 103,
+      "text": ""
+    },
+    {
+      "line": 104,
+      "text": "pid_unshare=\"unshare --fork --pid\""
+    },
+    {
+      "line": 105,
+      "text": "mount_unshare=\"$pid_unshare --mount --map-auto --map-root-user --setuid 0 --setgid 0\""
+    },
+    {
+      "line": 197,
+      "text": "                       -p ProtectControlGroupsEx=private"
+    },
+    {
+      "line": 198,
+      "text": "                       -p BindLogSockets=no"
+    },
+    {
+      "line": 199,
+      "text": "                       -p BindReadOnlyPaths=/run/udev # https://github.com/archlinux/arch-install-scripts/pull/52"
+    },
+    {
+      "line": 200,
+      "text": "                       -p TemporaryFileSystem=/tmp"
+    },
+    {
+      "line": 201,
+      "text": "                       -p IgnoreSIGPIPE=no)"
+    },
+    {
+      "line": 202,
+      "text": ""
+    },
+    {
+      "line": 203,
+      "text": "  if ! [[ -t 0 && -t 1 ]]; then"
+    },
+    {
+      "line": 204,
+      "text": "    sd_args+=(--quiet)"
+    }
+  ]
+}

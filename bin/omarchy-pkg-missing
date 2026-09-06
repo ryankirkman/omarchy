@@ -3,10 +3,10 @@
 # omarchy:summary=Returns true if any of the named packages are missing from the system (or false if they're all there).
 # omarchy:args=<packages...>
 
-for pkg in "$@"; do
-  if ! pacman -Q "$pkg" &>/dev/null; then
-    exit 0
-  fi
-done
-
-exit 1
+# Pacman fails a multi-target query if any package is missing. Avoid reopening
+# the database for every target, while keeping no targets equal to none missing.
+if (( $# > 0 )) && ! pacman -Q "$@" &>/dev/null; then
+  exit 0
+else
+  exit 1
+fi

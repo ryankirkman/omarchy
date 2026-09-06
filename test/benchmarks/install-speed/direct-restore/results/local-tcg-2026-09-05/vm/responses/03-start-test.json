@@ -1,0 +1,8 @@
+{
+  "ok": true,
+  "result": {
+    "returncode": 0,
+    "stdout": "",
+    "stderr": "Running as unit: omarchy-direct-restore-test.service; invocation ID: 73fe797374334acfb314267647a7d734\n"
+  }
+}

@@ -1,0 +1,5 @@
+{
+  "action": "ssh",
+  "command": "systemd-run --unit=omarchy-direct-restore-test --property=Type=exec /bin/bash -c 'cd /tmp/omarchy-direct-restore; PATH=/tmp/omarchy-direct-restore/qemu:$PATH python3 guest-test.py --work-dir /tmp/omarchy-direct-restore --phases /tmp/omarchy-direct-restore/phases_impl.py --fixture-manifest /tmp/omarchy-direct-restore/fixture-manifest.json > /tmp/omarchy-direct-restore/test.log 2>&1'",
+  "timeout": 120
+}

@@ -1,0 +1,12 @@
+{
+  "path": "/tmp/omarchy-bench/root-build.raw",
+  "virtual_bytes": 6174015488,
+  "allocated_bytes": 4271026176,
+  "reclaimed_after": [
+    "guest full Btrfs data checksums",
+    "qemu-img check",
+    "qemu-img compare raw versus qcow2"
+  ],
+  "validated_qcow2_sha256": "6ef64246e8b7d01e8f129046bae0d8e41228f7f195fd4c1ffb8fe00e4d00ca3e",
+  "epoch": 1788639542.574468
+}

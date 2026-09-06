@@ -1,0 +1,66 @@
+==> WARNING: /run/image-recovery/mnt/omarchy-root is not a mountpoint. This may have undesirable side effects.
+{"event": "hook-started", "name": "10-glibc-locale-gen.hook", "exec": "/usr/bin/locale-gen", "needs_targets": false, "target_count": 1}
+{"event": "hook-finished", "name": "10-glibc-locale-gen.hook", "returncode": 0, "elapsed_s": 0.26835223800003405, "stdout": "Generating locales...\nGeneration complete.\n", "stderr": ""}
+{"event": "hook-started", "name": "10-linux-modules-post.hook", "exec": "/bin/sh -xc 'KVER=\"${KVER:-$(uname -r)}\"; if test -e \"/usr/lib/modules/backup/${KVER}\"; then rsync -AHXal --ignore-existing \"/usr/lib/modules/backup/${KVER}\" /usr/lib/modules/; fi; rm -rf /usr/lib/modules/backup'", "needs_targets": false, "target_count": 1}
+{"event": "hook-finished", "name": "10-linux-modules-post.hook", "returncode": 0, "elapsed_s": 0.14222976299993206, "stdout": "", "stderr": "++ uname -r\n+ KVER=7.1.8-arch1-Watanare-T2-3-t2\n+ test -e /usr/lib/modules/backup/7.1.8-arch1-Watanare-T2-3-t2\n+ rm -rf /usr/lib/modules/backup\n"}
+{"event": "hook-started", "name": "11-glibc-ldconfig.hook", "exec": "/usr/bin/ldconfig -r .", "needs_targets": false, "target_count": 6}
+{"event": "hook-finished", "name": "11-glibc-ldconfig.hook", "returncode": 0, "elapsed_s": 0.7176390059998994, "stdout": "", "stderr": ""}
+{"event": "hook-started", "name": "12-glibc-iconvconfig.hook", "exec": "/usr/bin/iconvconfig", "needs_targets": false, "target_count": 4}
+{"event": "hook-finished", "name": "12-glibc-iconvconfig.hook", "returncode": 0, "elapsed_s": 0.07234211100012544, "stdout": "", "stderr": ""}
+{"event": "hook-started", "name": "20-systemd-sysusers.hook", "exec": "/usr/share/libalpm/scripts/systemd-hook sysusers", "needs_targets": false, "target_count": 26}
+{"event": "hook-finished", "name": "20-systemd-sysusers.hook", "returncode": 0, "elapsed_s": 0.8344334640000852, "stdout": "", "stderr": "Creating group 'docker' with GID 968.\nCreating group 'i2c' with GID 967.\nCreating group 'locate' with GID 21.\nCreating group 'polkitd' with GID 102.\nCreating group 'seat' with GID 966.\nCreating group 'alpm' with GID 965.\nCreating user 'alpm' (Arch Linux Package Management) with UID 965 and GID 965.\nCreating group 'cups' with GID 209.\nCreating user 'cups' (cups helper user) with UID 209 and GID 209.\nCreating group 'git' with GID 964.\nCreating user 'git' (git daemon user) with UID 964 and GID 964.\nCreating group '_talkd' with GID 963.\nCreating user '_talkd' (User for legacy talkd server) with UID 963 and GID 963.\nCreating group 'pcscd' with GID 962.\nCreating user 'pcscd' (PC/SC Smart Card Daemon) with UID 962 and GID 962.\nCreating user 'polkitd' (User for polkitd) with UID 102 and GID 102.\nCreating group 'sddm' with GID 961.\nCreating user 'sddm' (SDDM Greeter Account) with UID 961 and GID 961.\n"}
+{"event": "hook-started", "name": "21-systemd-tmpfiles.hook", "exec": "/usr/share/libalpm/scripts/systemd-hook tmpfiles", "needs_targets": false, "target_count": 46}
+{"event": "hook-finished", "name": "21-systemd-tmpfiles.hook", "returncode": 0, "elapsed_s": 1.183710653000162, "stdout": "", "stderr": ""}
+{"event": "hook-started", "name": "25-systemd-binfmt.hook", "exec": "/usr/share/libalpm/scripts/systemd-hook binfmt", "needs_targets": false, "target_count": 31}
+{"event": "hook-finished", "name": "25-systemd-binfmt.hook", "returncode": 0, "elapsed_s": 0.11894679599981828, "stdout": "", "stderr": "  Skipped: Running in chroot.\n"}
+{"event": "hook-started", "name": "25-systemd-catalog.hook", "exec": "/usr/share/libalpm/scripts/systemd-hook catalog", "needs_targets": false, "target_count": 20}
+{"event": "hook-finished", "name": "25-systemd-catalog.hook", "returncode": 0, "elapsed_s": 0.28172685499998806, "stdout": "", "stderr": ""}
+{"event": "hook-started", "name": "25-systemd-hwdb.hook", "exec": "/usr/share/libalpm/scripts/systemd-hook hwdb", "needs_targets": false, "target_count": 46}
+{"event": "hook-finished", "name": "25-systemd-hwdb.hook", "returncode": 0, "elapsed_s": 9.38890143399999, "stdout": "", "stderr": ""}
+{"event": "hook-started", "name": "25-systemd-sysctl.hook", "exec": "/usr/share/libalpm/scripts/systemd-hook sysctl", "needs_targets": false, "target_count": 4}
+{"event": "hook-finished", "name": "25-systemd-sysctl.hook", "returncode": 0, "elapsed_s": 0.11062139099999513, "stdout": "", "stderr": "  Skipped: Running in chroot.\n"}
+{"event": "hook-started", "name": "30-systemd-daemon-reload-system.hook", "exec": "/usr/share/libalpm/scripts/systemd-hook daemon-reload-system", "needs_targets": false, "target_count": 625}
+{"event": "hook-finished", "name": "30-systemd-daemon-reload-system.hook", "returncode": 0, "elapsed_s": 0.11796254499995484, "stdout": "", "stderr": "  Skipped: Running in chroot.\n"}
+{"event": "hook-started", "name": "30-systemd-daemon-reload-user.hook", "exec": "/usr/share/libalpm/scripts/systemd-hook daemon-reload-user", "needs_targets": false, "target_count": 140}
+{"event": "hook-finished", "name": "30-systemd-daemon-reload-user.hook", "returncode": 0, "elapsed_s": 0.11338166699988506, "stdout": "", "stderr": "  Skipped: Running in chroot.\n"}
+{"event": "hook-started", "name": "30-update-mime-database.hook", "exec": "/usr/bin/env PKGSYSTEM_ENABLE_FSYNC=0 /usr/bin/update-mime-database /usr/share/mime", "needs_targets": false, "target_count": 10}
+{"event": "hook-finished", "name": "30-update-mime-database.hook", "returncode": 0, "elapsed_s": 5.259320616999958, "stdout": "", "stderr": ""}
+{"event": "hook-started", "name": "35-systemd-udev-reload.hook", "exec": "/usr/share/libalpm/scripts/systemd-hook udev-reload", "needs_targets": false, "target_count": 81}
+{"event": "hook-finished", "name": "35-systemd-udev-reload.hook", "returncode": 0, "elapsed_s": 0.13161639300005845, "stdout": "", "stderr": "  Skipped: Running in chroot.\n"}
+{"event": "hook-started", "name": "35-systemd-update.hook", "exec": "/usr/share/libalpm/scripts/systemd-hook update", "needs_targets": false, "target_count": 1}
+{"event": "hook-finished", "name": "35-systemd-update.hook", "returncode": 0, "elapsed_s": 0.12077889299985145, "stdout": "", "stderr": ""}
+{"event": "hook-started", "name": "40-fontconfig-config.hook", "exec": "/usr/share/libalpm/scripts/40-fontconfig-config /etc/fonts/conf.d", "needs_targets": true, "target_count": 39}
+{"event": "hook-finished", "name": "40-fontconfig-config.hook", "returncode": 0, "elapsed_s": 1.5474012380000204, "stdout": "", "stderr": ""}
+{"event": "hook-started", "name": "40-update-ca-trust.hook", "exec": "/usr/bin/update-ca-trust", "needs_targets": false, "target_count": 5}
+{"event": "hook-finished", "name": "40-update-ca-trust.hook", "returncode": 0, "elapsed_s": 17.286575297000127, "stdout": "", "stderr": ""}
+{"event": "hook-started", "name": "60-depmod.hook", "exec": "/usr/share/libalpm/scripts/depmod", "needs_targets": true, "target_count": 1}
+{"event": "hook-finished", "name": "60-depmod.hook", "returncode": 0, "elapsed_s": 21.235006000000112, "stdout": "", "stderr": ""}
+{"event": "hook-started", "name": "90-omarchy-hyprland-reload-resume.hook", "exec": "/usr/bin/omarchy-hyprland-reload-guard resume", "needs_targets": false, "target_count": 1}
+{"event": "hook-finished", "name": "90-omarchy-hyprland-reload-resume.hook", "returncode": 0, "elapsed_s": 0.08383313500007716, "stdout": "", "stderr": ""}
+{"event": "hook-started", "name": "90-update-appstream-cache.hook", "exec": "/usr/bin/appstreamcli refresh-cache --force", "needs_targets": false, "target_count": 1}
+{"event": "hook-finished", "name": "90-update-appstream-cache.hook", "returncode": 0, "elapsed_s": 1.5843986579998273, "stdout": "\u2714 Metadata cache was updated successfully.\n", "stderr": ""}
+{"event": "hook-started", "name": "dbus-reload.hook", "exec": "/usr/share/libalpm/scripts/systemd-hook reload dbus", "needs_targets": false, "target_count": 61}
+{"event": "hook-finished", "name": "dbus-reload.hook", "returncode": 0, "elapsed_s": 0.12674403200003326, "stdout": "", "stderr": "  Skipped: Running in chroot.\n"}
+{"event": "hook-started", "name": "detect-old-perl-modules.hook", "exec": "/usr/share/libalpm/scripts/detect-old-perl-modules.sh", "needs_targets": false, "target_count": 120}
+{"event": "hook-finished", "name": "detect-old-perl-modules.hook", "returncode": 0, "elapsed_s": 0.28643833900014215, "stdout": "", "stderr": ""}
+{"event": "hook-started", "name": "fontconfig.hook", "exec": "/usr/bin/fc-cache -s", "needs_targets": false, "target_count": 883}
+{"event": "hook-finished", "name": "fontconfig.hook", "returncode": 0, "elapsed_s": 10.244941825000069, "stdout": "", "stderr": ""}
+{"event": "hook-started", "name": "gio-querymodules.hook", "exec": "/usr/bin/gio-querymodules /usr/lib/gio/modules", "needs_targets": false, "target_count": 6}
+{"event": "hook-finished", "name": "gio-querymodules.hook", "returncode": 0, "elapsed_s": 0.16720429900010458, "stdout": "", "stderr": ""}
+{"event": "hook-started", "name": "glib-compile-schemas.hook", "exec": "/usr/bin/glib-compile-schemas /usr/share/glib-2.0/schemas", "needs_targets": false, "target_count": 53}
+{"event": "hook-finished", "name": "glib-compile-schemas.hook", "returncode": 0, "elapsed_s": 0.20799920499985092, "stdout": "", "stderr": ""}
+{"event": "hook-started", "name": "gtk-query-immodules-3.0.hook", "exec": "/usr/bin/gtk-query-immodules-3.0 --update-cache", "needs_targets": false, "target_count": 14}
+{"event": "hook-finished", "name": "gtk-query-immodules-3.0.hook", "returncode": 0, "elapsed_s": 0.8450624590000189, "stdout": "", "stderr": ""}
+{"event": "hook-started", "name": "gtk-update-icon-cache.hook", "exec": "/usr/share/libalpm/scripts/gtk-update-icon-cache", "needs_targets": true, "target_count": 27}
+{"event": "hook-finished", "name": "gtk-update-icon-cache.hook", "returncode": 0, "elapsed_s": 24.07639475299993, "stdout": "", "stderr": ""}
+{"event": "hook-started", "name": "gtk4-querymodules.hook", "exec": "/usr/share/libalpm/scripts/gtk4-querymodules", "needs_targets": true, "target_count": 1}
+{"event": "hook-finished", "name": "gtk4-querymodules.hook", "returncode": 0, "elapsed_s": 1.0773284450001483, "stdout": "", "stderr": ""}
+{"event": "hook-started", "name": "gvfsd.hook", "exec": "/bin/sh -c 'pkill --signal USR1 --require-handler --exact gvfsd || true'", "needs_targets": false, "target_count": 24}
+{"event": "hook-finished", "name": "gvfsd.hook", "returncode": 0, "elapsed_s": 0.23825815000009243, "stdout": "", "stderr": ""}
+{"event": "hook-started", "name": "luarocks-make-manifest-5.1.hook", "exec": "/usr/bin/luarocks-admin make_manifest --local-tree --lua-version=5.1 /usr/lib/luarocks/rocks-5.1/", "needs_targets": false, "target_count": 6}
+{"event": "hook-finished", "name": "luarocks-make-manifest-5.1.hook", "returncode": 0, "elapsed_s": 1.8573753170001055, "stdout": "Making manifest for /usr/lib/luarocks/rocks-5.1/\n", "stderr": ""}
+{"event": "hook-started", "name": "texinfo-install.hook", "exec": "/bin/sh -c 'while read -r f; do if test -f \"$f\"; then install-info \"$f\" /usr/share/info/dir 2> /dev/null; fi; done'", "needs_targets": true, "target_count": 183}
+{"event": "hook-finished", "name": "texinfo-install.hook", "returncode": 0, "elapsed_s": 47.90222201400002, "stdout": "", "stderr": ""}
+{"event": "hook-started", "name": "update-desktop-database.hook", "exec": "/usr/bin/update-desktop-database --quiet", "needs_targets": false, "target_count": 69}
+{"event": "hook-finished", "name": "update-desktop-database.hook", "returncode": 0, "elapsed_s": 0.1745268639999722, "stdout": "", "stderr": ""}
+{"event": "all-hooks-complete", "count": 32}

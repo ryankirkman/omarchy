@@ -1,0 +1,9 @@
+TARGET SOURCE    FSTYPE OPTIONS
+/boot  /dev/vda1 vfat   rw,relatime,fmask=0077,dmask=0077,codepage=437,iocharset=ascii,shortname=mixed,utf8,errors=remount-ro
+total 16
+drwx------ 5 root root 4096 Sep  6 02:48 EFI
+-rwx------ 1 root root 1380 Sep  6 02:48 limine.conf
+-rwx------ 1 root root  620 Sep  6 02:48 limine.conf.old
+drwx------ 2 root root 4096 Sep  6 02:48 loader
+root=PARTUUID=f55ac3cc-dc55-4291-8470-81c55feefd42 zswap.enabled=0 rootflags=subvol=@ rw rootfstype=btrfs  resume=/dev/vda2 resume_offset=1453833 initramfs_async=0 quiet splash loglevel=0 systemd.show_status=false rd.udev.log_level=0 vt.global_cursor_default=0 console=uart,io,0x3f8 console=tty0
+Linux omarchy-benchmark 7.1.9-arch1-2 #1 SMP PREEMPT_DYNAMIC Fri, 21 Aug 2026 22:18:59 +0000 x86_64 GNU/Linux

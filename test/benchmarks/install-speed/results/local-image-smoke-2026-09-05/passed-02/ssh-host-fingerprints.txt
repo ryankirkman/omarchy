@@ -1,0 +1,4 @@
+256 SHA256:3ZTyoIx5MZgIPKOECufufxkb/WkrDxA1TLYNQlS0w/g root@omarchy-benchmark (ECDSA)
+256 SHA256:Jn+WIQC4qh69utRnuft0hJvG7TTRvRsiLt1QCxSPC0A root@omarchy-benchmark (ED25519)
+256 SHA256:FzyMrEJgclZ1Y9CINpKOitZkog9/CE5VYyzFUTALThA root@omarchy-benchmark (MLDSA44-ED25519)
+3072 SHA256:MPTBh8GPuTAtZ+nrW9CrQv80Jjrnszi3PJgtvpXjPtc root@omarchy-benchmark (RSA)

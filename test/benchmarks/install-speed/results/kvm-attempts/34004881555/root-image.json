@@ -1,0 +1,21 @@
+{
+  "schema_version": 1,
+  "upstream_commit": "dbffaa6c65344d644627a023c28661e08382b8fa",
+  "virtual_bytes": 6174015488,
+  "file_bytes": 3669206528,
+  "sha256": "f6311784770f5ab77bb734df9db6d12752d961ad6fd7685d37ce9254707fdd96",
+  "compression": "Btrfs compress-force=zstd:15; qcow2 zstd 1MiB clusters",
+  "qemu_version": "qemu-img version 8.2.2 (Debian 1:8.2.2+ds-0ubuntu1.18)",
+  "verification": [
+    "guest Btrfs data checksums",
+    "qemu-img check",
+    "qemu-img compare raw versus qcow2",
+    "SHA-256"
+  ],
+  "image_package_delta": {
+    "baseline_packages": 941,
+    "image_packages": 941,
+    "remaining_packages": {},
+    "reasons_source": "baseline pacman -Qqe"
+  }
+}

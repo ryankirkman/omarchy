@@ -1,0 +1,117 @@
+#!/usr/bin/env python3
+"""Host-only archive and preflight contracts; these are not guest boot tests."""
+
+import gzip
+import importlib.util
+import os
+from pathlib import Path
+import stat
+import subprocess
+import tempfile
+import unittest
+
+spec = importlib.util.spec_from_file_location("overlay", Path(__file__).with_name("make-initramfs.py"))
+overlay = importlib.util.module_from_spec(spec)
+spec.loader.exec_module(overlay)
+
+
+class OverlayContracts(unittest.TestCase):
+  def fixture(self):
+    return overlay.make_cpio({
+      "config": (stat.S_IFREG | 0o644, b'EARLYHOOKS="udev"\nLATEHOOKS="archiso_pxe_common plymouth"\n'),
+      "init": (stat.S_IFREG | 0o755, b'"$mount_handler" /new_root\nrun_hookfunctions \'run_latehook\' \'late hook\' $LATEHOOKS\n'),
+    })
+
+  def test_archive_modes_and_content(self):
+    original = self.fixture()
+    combined, metadata = overlay.build(original, "control", b"#!/bin/bash\ntrue\n")
+    self.assertEqual(combined[:len(original)], original)
+    entries = overlay.initramfs_files(combined)
+    self.assertIn(b'LATEHOOKS="archiso_pxe_common plymouth"', entries["config"][1])
+    self.assertTrue(entries["config"][1].endswith(b'LATEHOOKS="$LATEHOOKS omarchy_benchmark"\n'))
+    self.assertEqual(entries["hooks/omarchy_benchmark"][0], stat.S_IFREG | 0o755)
+    self.assertEqual(metadata["original_initramfs_sha256"], overlay.sha256(original))
+
+  def test_early_and_compressed_archive(self):
+    early = overlay.make_cpio({"early_cpio": (stat.S_IFREG | 0o644, b"1\n")})
+    files = overlay.initramfs_files(early + gzip.compress(self.fixture(), mtime=0))
+    self.assertIn("early_cpio", files)
+    self.assertIn("config", files)
+
+  def test_refuse_incompatible_or_double_overlay(self):
+    with self.assertRaises(ValueError):
+      overlay.build(overlay.make_cpio({}), "control", b"true")
+    combined, _ = overlay.build(self.fixture(), "control", b"true")
+    with self.assertRaises(ValueError):
+      overlay.build(combined, "control", b"true")
+
+  def test_reserved_paths_and_symlinks_rejected(self):
+    with tempfile.TemporaryDirectory() as directory:
+      payload = Path(directory)
+      (payload / "escape").symlink_to("/etc/passwd")
+      with self.assertRaises(ValueError):
+        overlay.build(self.fixture(), "candidate", b"true", payload)
+      (payload / "escape").unlink()
+      (payload / "root").mkdir()
+      (payload / "root/.automated_script.sh").write_text("unexpected")
+      with self.assertRaises(ValueError):
+        overlay.build(self.fixture(), "candidate", b"true", payload)
+
+  def test_preflight_failure_precedes_autoinstall(self):
+    text = overlay.wrapper("candidate").decode()
+    self.assertLess(text.index("preflight.sh"), text.index("exec /root/.automated_script.benchmark-original.sh"))
+    self.assertIn("exit 1", text[text.index("preflight.sh"):text.index("preflight-complete")])
+    self.assertIn("if [[ 'builder' == 'builder' ]]", overlay.wrapper("builder").decode())
+
+  def test_hook_keeps_existing_directory_permissions(self):
+    with tempfile.TemporaryDirectory() as directory:
+      base = Path(directory)
+      root, payload = base / "new_root", base / "payload"
+      (root / "root").mkdir(parents=True, mode=0o700)
+      (payload / "root").mkdir(parents=True)
+      (payload / "root/script").write_text("preserved")
+      (payload / "root/script").chmod(0o755)
+      (payload / "top-level").write_text("also copied")
+      filelist = base / "files"
+      filelist.write_text("root/script\ntop-level\n")
+      copy_function = overlay.HOOK.decode().split("\nrun_latehook()", 1)[0]
+      copy_function = copy_function.replace("/omarchy-benchmark-payload", str(payload)).replace("/new_root", str(root)).replace("/omarchy-benchmark-files", str(filelist))
+      subprocess.run(["sh", "-c", copy_function + "\ncopy_benchmark_payload\n"], check=True)
+      self.assertEqual(stat.S_IMODE((root / "root").stat().st_mode), 0o700)
+      self.assertEqual(stat.S_IMODE((root / "root/script").stat().st_mode), 0o755)
+      self.assertEqual((root / "top-level").read_text(), "also copied")
+
+  def test_truncated_archive_rejected(self):
+    with self.assertRaises(ValueError):
+      overlay.cpio_entries(self.fixture()[:120])
+
+  def test_prefetch_switch_reaches_original_after_preflight(self):
+    for mode in ("candidate", "control"):
+      for disabled in (False, True):
+        with self.subTest(mode=mode, disabled=disabled), tempfile.TemporaryDirectory() as directory:
+          base = Path(directory)
+          (base / "bin").mkdir()
+          (base / "bin/tty").write_text("#!/bin/bash\necho /dev/tty1\n")
+          (base / "bin/tty").chmod(0o755)
+          (base / "preflight").write_text(f"#!/bin/bash\necho verified >'{base}/verified'\n")
+          (base / "preflight").chmod(0o755)
+          (base / "original").write_text(f"#!/bin/bash\n[[ -f '{base}/verified' ]] || exit 1\nprintf '%s' \"${{OMARCHY_NO_PREFETCH-unset}}\" >'{base}/prefetch'\n")
+          (base / "original").chmod(0o755)
+          script = overlay.wrapper(mode, disabled).decode()
+          for source, target in {
+            "/usr/local/lib/omarchy-benchmark/preflight.sh": str(base / "preflight"),
+            "/root/.automated_script.benchmark-original.sh": str(base / "original"),
+            "/run/omarchy-benchmark": str(base / "run"),
+            "/var/log": str(base / "log"),
+          }.items():
+            script = script.replace(source, target)
+          environment = dict(os.environ, PATH=str(base / "bin") + ":" + os.environ["PATH"])
+          environment.pop("OMARCHY_NO_PREFETCH", None)
+          subprocess.run(["bash", "-c", script], env=environment, check=True)
+          self.assertEqual((base / "prefetch").read_text(), "1" if disabled else "unset")
+          _, metadata = overlay.build(self.fixture(), mode, (base / "preflight").read_bytes(), disable_package_prefetch=disabled)
+          self.assertEqual(metadata["disable_package_prefetch"], disabled)
+
+
+if __name__ == "__main__":
+  unittest.main()

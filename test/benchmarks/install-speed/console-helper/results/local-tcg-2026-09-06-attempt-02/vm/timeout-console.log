@@ -1,0 +1,520 @@
+
+
+omarchy-benchmark login: root
+
+[CREDENTIAL LINE REDACTED]
+[root@omarchy-benchmark ~]# printf '\nOMARCHY_CONSOLE_c8d90491457948178cb99b320853ea28_UID\n'; id -u; printf 'OMARCHY_CONSOLE_c8d90491457948178cb99b320853ea28_UID_END\n'
+
+
+OMARCHY_CONSOLE_c8d90491457948178cb99b320853ea28_UID
+0
+OMARCHY_CONSOLE_c8d90491457948178cb99b320853ea28_UID_END
+[root@omarchy-benchmark ~]# timeout 42 bash -c 'printf '"'"'\nCOMMAND waiting-jobs\n'"'"'
+
+> env LC_ALL=C TERM=dumb SYSTEMD_COLORS=0 SYSTEMD_PAGER=cat timeout 4 bash -c '"'"'systemctl list-jobs --no-pager'"'"'
+
+> printf '"'"'COMMAND_EXIT %s\n'"'"' "$?"
+
+> printf '"'"'\nCOMMAND failed-units\n'"'"'
+
+> env LC_ALL=C TERM=dumb SYSTEMD_COLORS=0 SYSTEMD_PAGER=cat timeout 4 bash -c '"'"'systemctl --failed --no-pager'"'"'
+
+> printf '"'"'COMMAND_EXIT %s\n'"'"' "$?"
+
+> printf '"'"'\nCOMMAND boot-units\n'"'"'
+
+> env LC_ALL=C TERM=dumb SYSTEMD_COLORS=0 SYSTEMD_PAGER=cat timeout 4 bash -c '"'"'systemctl show --property=Id --property=ActiveState --property=SubState --property=Result --property=Job --property=MainPID --property=ControlPID --property=TimeoutStartUSec plymouth-start.service plymouth-read-write.service plymouth-quit.service plymouth-quit-wait.service NetworkManager.service sshd.service sshdgenkeys.service ufw.service network.target sysinit.target basic.target'"'"'
+
+> printf '"'"'COMMAND_EXIT %s\n'"'"' "$?"
+
+> printf '"'"'\nCOMMAND process-waits\n'"'"'
+
+> env LC_ALL=C TERM=dumb SYSTEMD_COLORS=0 SYSTEMD_PAGER=cat timeout 4 bash -c '"'"'ps -e -o pid,ppid,stat,etimes,wchan:32,comm'"'"'
+
+> printf '"'"'COMMAND_EXIT %s\n'"'"' "$?"
+
+> printf '"'"'\nCOMMAND addresses\n'"'"'
+
+> env LC_ALL=C TERM=dumb SYSTEMD_COLORS=0 SYSTEMD_PAGER=cat timeout 4 bash -c '"'"'ip -brief address'"'"'
+
+> printf '"'"'COMMAND_EXIT %s\n'"'"' "$?"
+
+> printf '"'"'\nCOMMAND routes\n'"'"'
+
+> env LC_ALL=C TERM=dumb SYSTEMD_COLORS=0 SYSTEMD_PAGER=cat timeout 4 bash -c '"'"'ip route show table all'"'"'
+
+> printf '"'"'COMMAND_EXIT %s\n'"'"' "$?"
+
+> printf '"'"'\nCOMMAND listeners\n'"'"'
+
+> env LC_ALL=C TERM=dumb SYSTEMD_COLORS=0 SYSTEMD_PAGER=cat timeout 4 bash -c '"'"'ss -lntup'"'"'
+
+> printf '"'"'COMMAND_EXIT %s\n'"'"' "$?"
+
+> printf '"'"'\nCOMMAND critical-chain\n'"'"'
+
+> env LC_ALL=C TERM=dumb SYSTEMD_COLORS=0 SYSTEMD_PAGER=cat timeout 4 bash -c '"'"'systemd-analyze --no-pager critical-chain'"'"'
+
+> printf '"'"'COMMAND_EXIT %s\n'"'"' "$?"
+
+> printf '"'"'\nCOMMAND recent-boot-journal\n'"'"'
+
+> env LC_ALL=C TERM=dumb SYSTEMD_COLORS=0 SYSTEMD_PAGER=cat timeout 4 bash -c '"'"'journalctl -b -n 100 --no-pager -o short-monotonic'"'"'
+
+> printf '"'"'COMMAND_EXIT %s\n'"'"' "$?"
+
+> printf '"'"'\nCOMMAND plymouth-kernel-waits\n'"'"'
+
+> env LC_ALL=C TERM=dumb SYSTEMD_COLORS=0 SYSTEMD_PAGER=cat timeout 4 bash -c '"'"'count=0
+
+> for p in /proc/[0-9]*; do
+
+>   IFS= read -r name < "$p/comm" 2>/dev/null || continue
+
+>   case "$name" in plymouth|plymouthd) ;; *) continue ;; esac
+
+>   count=$((count + 1)); [ "$count" -le 8 ] || break
+
+>   printf '"'"'"'"'"'"'"'"'\nPROCESS %s %s\n'"'"'"'"'"'"'"'"' "${p##*/}" "$name"
+
+>   for item in wchan stack syscall; do
+
+>     printf '"'"'"'"'"'"'"'"'%s\n'"'"'"'"'"'"'"'"' "$item"; cat "$p/$item" 2>/dev/null
+
+>   done
+
+>   fds=0
+
+>   for fd in "$p"/fd/*; do
+
+>     fds=$((fds + 1)); [ "$fds" -le 64 ] || break
+
+>     printf '"'"'"'"'"'"'"'"'fd %s: '"'"'"'"'"'"'"'"' "${fd##*/}"; readlink "$fd"
+
+>   done
+
+> done'"'"'
+
+> printf '"'"'COMMAND_EXIT %s\n'"'"' "$?"'; printf '\nOMARCHY_CONSOLE_c8d90491457948178cb99b320853ea28_DONE:%s\n' "$?"
+
+
+COMMAND waiting-jobs
+JOB UNIT                             TYPE  STATE
+1   graphical.target                 start waiting
+160 cloud-final.service              start waiting
+103 archlinux-keyring-wkd-sync.timer start waiting
+56  systemd-time-wait-sync.service   start running
+159 cloud-init.target                start waiting
+101 shadow.timer                     start waiting
+57  time-sync.target                 start waiting
+102 man-db.timer                     start waiting
+192 pacman-init.service              start waiting
+100 timers.target                    start waiting
+2   multi-user.target                start waiting
+
+11 jobs listed.
+COMMAND_EXIT 0
+
+COMMAND failed-units
+  UNIT LOAD ACTIVE SUB DESCRIPTION
+
+0 loaded units listed.
+COMMAND_EXIT 0
+
+COMMAND boot-units
+Id=plymouth-start.service
+ActiveState=active
+SubState=exited
+Job=
+TimeoutStartUSec=1min 30s
+MainPID=0
+ControlPID=0
+Result=success
+
+Id=plymouth-read-write.service
+ActiveState=active
+SubState=exited
+Job=
+TimeoutStartUSec=infinity
+MainPID=0
+ControlPID=0
+Result=success
+
+Id=plymouth-quit.service
+ActiveState=active
+SubState=exited
+Job=
+TimeoutStartUSec=20s
+MainPID=0
+ControlPID=0
+Result=success
+
+Id=plymouth-quit-wait.service
+ActiveState=active
+SubState=exited
+Job=
+TimeoutStartUSec=infinity
+MainPID=0
+ControlPID=0
+Result=success
+
+Id=NetworkManager.service
+ActiveState=inactive
+SubState=dead
+Job=
+TimeoutStartUSec=1min 30s
+MainPID=0
+ControlPID=0
+Result=success
+
+Id=sshd.service
+ActiveState=inactive
+SubState=dead
+Job=
+TimeoutStartUSec=1min 30s
+MainPID=0
+ControlPID=0
+Result=success
+
+Id=sshdgenkeys.service
+ActiveState=inactive
+SubState=dead
+Job=
+TimeoutStartUSec=infinity
+MainPID=0
+ControlPID=0
+Result=success
+
+Id=ufw.service
+ActiveState=inactive
+SubState=dead
+Job=
+TimeoutStartUSec=1min 30s
+MainPID=0
+ControlPID=0
+Result=success
+
+Id=network.target
+ActiveState=active
+SubState=active
+Job=
+
+Id=sysinit.target
+ActiveState=active
+SubState=active
+Job=
+
+Id=basic.target
+ActiveState=active
+SubState=active
+Job=
+COMMAND_EXIT 0
+
+COMMAND process-waits
+    PID    PPID STAT ELAPSED WCHAN                            COMMAND
+      1       0 Ss       242 do_epoll_wait                    systemd
+      2       0 S        242 kthreadd                         kthreadd
+      3       2 S        242 kthread_worker_fn                pool_workqueue_rel
+      4       2 I<       242 rescuer_thread                   kworker/R-rcu_gp
+      5       2 I<       242 rescuer_thread                   kworker/R-sync_wq
+      6       2 I<       242 rescuer_thread                   kworker/R-kvfree_r
+      7       2 I<       242 rescuer_thread                   kworker/R-slub_flu
+      8       2 I<       242 rescuer_thread                   kworker/R-netns
+      9       2 I        242 worker_thread                    kworker/0:0-events
+     10       2 I        242 worker_thread                    kworker/0:1-rcu_gp
+     11       2 I<       242 worker_thread                    kworker/0:0H-kbloc
+     12       2 I        242 worker_thread                    kworker/u16:0-asyn
+     13       2 I<       242 rescuer_thread                   kworker/R-mm_percp
+     14       2 I        242 worker_thread                    kworker/u16:1-asyn
+     15       2 S        242 smpboot_thread_fn                ksoftirqd/0
+     16       2 I        242 rcu_gp_kthread                   rcu_preempt
+     17       2 S        242 rcu_boost_kthread                rcub/0
+     18       2 S        242 kthread_worker_fn                rcu_exp_par_gp_kth
+     19       2 S        242 kthread_worker_fn                rcu_exp_gp_kthread
+     20       2 S        242 smpboot_thread_fn                migration/0
+     21       2 S        242 kprobe_optimizer_thread          kprobe-optimizer
+     22       2 S        242 smpboot_thread_fn                idle_inject/0
+     23       2 S        242 smpboot_thread_fn                cpuhp/0
+     24       2 S        242 smpboot_thread_fn                cpuhp/1
+     25       2 S        242 smpboot_thread_fn                idle_inject/1
+     26       2 S        242 smpboot_thread_fn                migration/1
+     27       2 S        242 smpboot_thread_fn                ksoftirqd/1
+     28       2 I        242 worker_thread                    kworker/1:0-events
+     29       2 I<       242 worker_thread                    kworker/1:0H-kbloc
+     30       2 S        242 smpboot_thread_fn                cpuhp/2
+     31       2 S        242 smpboot_thread_fn                idle_inject/2
+     32       2 S        242 smpboot_thread_fn                migration/2
+     33       2 S        242 smpboot_thread_fn                ksoftirqd/2
+     34       2 I        242 worker_thread                    kworker/2:0-events
+     35       2 I<       242 worker_thread                    kworker/2:0H-kbloc
+     36       2 S        242 smpboot_thread_fn                cpuhp/3
+     37       2 S        242 smpboot_thread_fn                idle_inject/3
+     38       2 S        242 smpboot_thread_fn                migration/3
+     39       2 S        242 smpboot_thread_fn                ksoftirqd/3
+     40       2 I        242 worker_thread                    kworker/3:0-events
+     41       2 I<       242 worker_thread                    kworker/3:0H-kbloc
+     42       2 S        241 devtmpfs_work_loop               kdevtmpfs
+     43       2 I<       241 rescuer_thread                   kworker/R-inet_fra
+     44       2 I        241 rcu_tasks_one_gp                 rcu_tasks_kthread
+     45       2 I        241 rcu_tasks_one_gp                 rcu_tasks_rude_kth
+     46       2 S        241 kauditd_thread                   kauditd
+     47       2 S        241 watchdog                         khungtaskd
+     48       2 I        241 worker_thread                    kworker/3:1-mm_per
+     49       2 I        241 worker_thread                    kworker/u16:2-even
+     50       2 S        241 oom_reaper                       oom_reaper
+     51       2 I        241 worker_thread                    kworker/1:1-mm_per
+     52       2 I<       241 rescuer_thread                   kworker/R-writebac
+     53       2 S        241 kcompactd                        kcompactd0
+     54       2 SN       241 ksm_scan_thread                  ksmd
+     55       2 I        241 worker_thread                    kworker/u16:3-asyn
+     56       2 SN       241 khugepaged                       khugepaged
+     57       2 I<       241 rescuer_thread                   kworker/R-kblockd
+     58       2 I<       241 rescuer_thread                   kworker/R-blkcg_pu
+     59       2 I<       241 rescuer_thread                   kworker/R-kintegri
+     60       2 S        241 irq_thread                       irq/9-acpi
+     61       2 I        241 worker_thread                    kworker/2:1-events
+     62       2 I<       241 rescuer_thread                   kworker/R-tpm_dev_
+     63       2 I<       241 rescuer_thread                   kworker/R-ata_sff
+     64       2 I<       241 rescuer_thread                   kworker/R-edac-pol
+     65       2 I<       241 rescuer_thread                   kworker/R-devfreq_
+     66       2 S        241 kthread_worker_fn                watchdogd
+     67       2 I<       241 rescuer_thread                   kworker/R-quota_ev
+     68       2 S        236 kswapd                           kswapd0
+     69       2 I<       236 rescuer_thread                   kworker/R-kthrotld
+     70       2 I<       236 rescuer_thread                   kworker/R-acpi_the
+     71       2 S        236 scsi_error_handler               scsi_eh_0
+     72       2 I<       236 rescuer_thread                   kworker/R-scsi_tmf
+     73       2 S        236 scsi_error_handler               scsi_eh_1
+     74       2 I<       236 rescuer_thread                   kworker/R-scsi_tmf
+     75       2 S        236 scsi_error_handler               scsi_eh_2
+     76       2 I<       236 rescuer_thread                   kworker/R-scsi_tmf
+     77       2 S        236 scsi_error_handler               scsi_eh_3
+     78       2 I<       236 rescuer_thread                   kworker/R-scsi_tmf
+     79       2 S        236 scsi_error_handler               scsi_eh_4
+     80       2 I<       236 rescuer_thread                   kworker/R-scsi_tmf
+     81       2 S        236 scsi_error_handler               scsi_eh_5
+     82       2 I<       236 rescuer_thread                   kworker/R-scsi_tmf
+     83       2 I        236 worker_thread                    kworker/u16:4-ttyS
+     84       2 I        236 worker_thread                    kworker/u16:5-even
+     85       2 I        236 worker_thread                    kworker/u16:6-even
+     86       2 I        236 worker_thread                    kworker/u16:7-even
+     87       2 I        236 worker_thread                    kworker/u16:8-pm
+     88       2 I        236 worker_thread                    kworker/u16:9
+     89       2 I        236 worker_thread                    kworker/u16:10-pm
+     90       2 I<       236 rescuer_thread                   kworker/R-mld
+     91       2 I<       236 rescuer_thread                   kworker/R-ipv6_add
+     92       2 I<       236 rescuer_thread                   kworker/R-kstrp
+     93       2 I        236 worker_thread                    kworker/1:2-events
+     95       2 I<       235 worker_thread                    kworker/3:1H
+     96       2 I<       235 worker_thread                    kworker/2:1H-kbloc
+     99       2 I<       235 rescuer_thread                   kworker/R-zswap-sh
+    100       2 I<       235 worker_thread                    kworker/u17:0
+    171       2 I        231 worker_thread                    kworker/0:2-mm_per
+    172       2 S        231 hwrng_fillfn                     hwrng
+    173       2 I        231 worker_thread                    kworker/2:2
+    174       2 S        231 scsi_error_handler               scsi_eh_6
+    175       2 I<       231 rescuer_thread                   kworker/R-scsi_tmf
+    176       2 S        231 usb_stor_control_thread          usb-storage
+    177       2 S        231 kthread_worker_fn                card1-crtc0
+    178       2 I<       231 rescuer_thread                   kworker/R-uas
+    179       2 I        231 worker_thread                    kworker/3:2-events
+    182       2 I<       230 worker_thread                    kworker/0:1H-kbloc
+    216       2 I<       230 worker_thread                    kworker/1:1H-kbloc
+    491       1 Ss       214 do_epoll_wait                    systemd-journal
+    495       1 Ss       214 do_epoll_wait                    systemd-time-wa
+    523       1 Ss       211 do_epoll_wait                    systemd-userdbd
+    526       1 Ss       211 do_epoll_wait                    systemd-nsresou
+    532       2 S        211 psi_rtpoll_worker                psimon
+    533     526 S        210 skb_wait_for_more_packets        systemd-nsresou
+    534     526 S        210 skb_wait_for_more_packets        systemd-nsresou
+    535     526 S        210 skb_wait_for_more_packets        systemd-nsresou
+    536     526 S        210 skb_wait_for_more_packets        systemd-nsresou
+    537     526 S        210 skb_wait_for_more_packets        systemd-nsresou
+    538       2 S        210 psi_rtpoll_worker                psimon
+    544       1 Ssl      209 do_epoll_wait                    systemd-timesyn
+    551       1 Ss       208 do_epoll_wait                    systemd-udevd
+    564     523 S        207 skb_wait_for_more_packets        systemd-userwor
+    565     523 S        207 skb_wait_for_more_packets        systemd-userwor
+    566     523 S        206 skb_wait_for_more_packets        systemd-userwor
+    567       2 S        206 psi_rtpoll_worker                psimon
+    626       1 Ss       195 do_epoll_wait                    dbus-broker-lau
+    627     626 S        194 do_epoll_wait                    dbus-broker
+    628       1 Ss       194 skb_wait_for_more_packets        python3
+    629       1 Ssl      194 poll_schedule_timeout.constprop. polkitd
+    631       1 Ss       194 do_epoll_wait                    systemd-homed
+    632       1 Ss       194 do_epoll_wait                    systemd-logind
+    641       2 S        193 psi_rtpoll_worker                psimon
+    667       1 Ssl      192 poll_schedule_timeout.constprop. ModemManager
+    681     628 S        178 anon_pipe_read                   tee
+    696       1 Ss       176 do_epoll_wait                    iwd
+    723       2 I<       175 rescuer_thread                   kworker/R-cfg80211
+    774       2 I        171 worker_thread                    kworker/2:3-mm_per
+    777       1 Ss       171 do_epoll_wait                    systemd-resolve
+    781       1 Ss       171 do_epoll_wait                    systemd-network
+    808       2 I        165 worker_thread                    kworker/0:3-rcu_gp
+    811       1 Ss       165 sigsuspend.isra.0                login
+    835       1 Ss       157 do_epoll_wait                    systemd
+    838     835 S        157 do_sigtimedwait.isra.0           (sd-pam)
+    844       2 S        155 psi_rtpoll_worker                psimon
+    847     811 Ss+      154 wait_woken                       zsh
+   1075       2 S        138 psi_rtpoll_worker                psimon
+   1076       1 Ss       137 sigsuspend.isra.0                login
+   1088       2 I          4 worker_thread                    kworker/1:3
+   1090       1 S          4 poll_schedule_timeout.constprop. (agetty)
+   1101    1076 Ss         1 do_wait                          bash
+   1115    1101 S+         1 sigsuspend.isra.0                timeout
+   1116    1115 S+         1 do_wait                          bash
+   1123    1116 S          0 sigsuspend.isra.0                timeout
+   1124    1123 R          0 -                                ps
+COMMAND_EXIT 0
+
+COMMAND addresses
+lo               UNKNOWN        127.0.0.1/8 ::1/128 
+enp0s4           UP             10.0.2.15/24 metric 1024 fec0::ab14:8990:8fd9:ce7b/64 fec0::5054:ff:fe12:3456/64 fe80::5054:ff:fe12:3456/64 
+COMMAND_EXIT 0
+
+COMMAND routes
+default via 10.0.2.2 dev enp0s4 proto dhcp src 10.0.2.15 metric 1024 
+10.0.2.0/24 dev enp0s4 proto kernel scope link src 10.0.2.15 metric 1024 
+10.0.2.2 dev enp0s4 proto dhcp scope link src 10.0.2.15 metric 1024 
+10.0.2.3 dev enp0s4 proto dhcp scope link src 10.0.2.15 metric 1024 
+local 10.0.2.15 dev enp0s4 table local proto kernel scope host src 10.0.2.15 
+broadcast 10.0.2.255 dev enp0s4 table local proto kernel scope link src 10.0.2.15 
+local 127.0.0.0/8 dev lo table local proto kernel scope host src 127.0.0.1 
+local 127.0.0.1 dev lo table local proto kernel scope host src 127.0.0.1 
+broadcast 127.255.255.255 dev lo table local proto kernel scope link src 127.0.0.1 
+fe80::/64 dev enp0s4 proto kernel metric 256 pref medium
+fec0::/64 dev enp0s4 proto ra metric 1024 expires 86229sec pref medium
+default nhid 559215661 via fe80::2 dev enp0s4 proto ra metric 1024 expires 1629sec pref medium
+local ::1 dev lo table local proto kernel metric 0 pref medium
+local fe80::5054:ff:fe12:3456 dev enp0s4 table local proto kernel metric 0 pref medium
+local fec0::5054:ff:fe12:3456 dev enp0s4 table local proto kernel metric 0 pref medium
+local fec0::ab14:8990:8fd9:ce7b dev enp0s4 table local proto kernel metric 0 pref medium
+multicast ff00::/8 dev enp0s4 table local proto kernel metric 256 pref medium
+COMMAND_EXIT 0
+
+COMMAND listeners
+Netid   State    Recv-Q   Send-Q     Local Address:Port     Peer Address:Port   Process                                                                         
+udp     UNCONN   0        0                0.0.0.0:5353          0.0.0.0:*       users:(("systemd-resolve",pid=777,fd=13))                                      
+udp     UNCONN   0        0             172.17.0.1:53            0.0.0.0:*       users:(("systemd-resolve",pid=777,fd=24))                                      
+udp     UNCONN   0        0             127.0.0.54:53            0.0.0.0:*       users:(("systemd-resolve",pid=777,fd=22))                                      
+udp     UNCONN   0        0          127.0.0.53%lo:53            0.0.0.0:*       users:(("systemd-resolve",pid=777,fd=20))                                      
+udp     UNCONN   0        0                   [::]:5353             [::]:*       users:(("systemd-resolve",pid=777,fd=14))                                      
+tcp     LISTEN   0        4096          172.17.0.1:53            0.0.0.0:*       users:(("systemd-resolve",pid=777,fd=25))                                      
+tcp     LISTEN   0        4096          127.0.0.54:53            0.0.0.0:*       users:(("systemd-resolve",pid=777,fd=23))                                      
+tcp     LISTEN   0        4096       127.0.0.53%lo:53            0.0.0.0:*       users:(("systemd-resolve",pid=777,fd=21))                                      
+COMMAND_EXIT 0
+
+COMMAND critical-chain
+Bootup is not yet finished (org.freedesktop.systemd1.Manager.FinishTimestampMonotonic=0).
+Please try again later.
+Hint: Use 'systemctl list-jobs' to see active jobs
+COMMAND_EXIT 1
+
+COMMAND recent-boot-journal
+[  164.041905] omarchy-benchmark systemd-resolved[777]: Using degraded feature set TCP instead of UDP for DNS server 10.0.2.3.
+[  164.045642] omarchy-benchmark systemd-resolved[777]: Using degraded feature set UDP instead of TCP for DNS server 10.0.2.3.
+[  164.055617] omarchy-benchmark systemd-resolved[777]: Using degraded feature set TCP instead of UDP for DNS server 10.0.2.3.
+[  164.058924] omarchy-benchmark systemd-resolved[777]: Using degraded feature set UDP instead of TCP for DNS server 10.0.2.3.
+[  164.067155] omarchy-benchmark systemd-resolved[777]: Using degraded feature set TCP instead of UDP for DNS server 10.0.2.3.
+[  164.069853] omarchy-benchmark systemd-resolved[777]: Using degraded feature set UDP instead of TCP for DNS server 10.0.2.3.
+[  164.076016] omarchy-benchmark systemd-resolved[777]: Using degraded feature set TCP instead of UDP for DNS server 10.0.2.3.
+[  164.078850] omarchy-benchmark systemd-resolved[777]: Using degraded feature set UDP instead of TCP for DNS server 10.0.2.3.
+[  164.087544] omarchy-benchmark systemd-resolved[777]: Using degraded feature set TCP instead of UDP for DNS server 10.0.2.3.
+[  164.090513] omarchy-benchmark systemd-resolved[777]: Using degraded feature set UDP instead of TCP for DNS server 10.0.2.3.
+[  164.121487] omarchy-benchmark systemd-resolved[777]: Using degraded feature set TCP instead of UDP for DNS server 10.0.2.3.
+[  164.124259] omarchy-benchmark systemd-resolved[777]: Using degraded feature set UDP instead of TCP for DNS server 10.0.2.3.
+[  164.131474] omarchy-benchmark systemd-resolved[777]: Using degraded feature set TCP instead of UDP for DNS server 10.0.2.3.
+[  164.134414] omarchy-benchmark systemd-resolved[777]: Using degraded feature set UDP instead of TCP for DNS server 10.0.2.3.
+[  164.144769] omarchy-benchmark systemd-resolved[777]: Using degraded feature set TCP instead of UDP for DNS server 10.0.2.3.
+[  164.147832] omarchy-benchmark systemd-resolved[777]: Using degraded feature set UDP instead of TCP for DNS server 10.0.2.3.
+[  194.213908] omarchy-benchmark systemd-resolved[777]: Using degraded feature set TCP instead of UDP for DNS server 10.0.2.3.
+[  194.218369] omarchy-benchmark systemd-resolved[777]: Using degraded feature set UDP instead of TCP for DNS server 10.0.2.3.
+[  194.225247] omarchy-benchmark systemd-resolved[777]: Using degraded feature set TCP instead of UDP for DNS server 10.0.2.3.
+[  194.227814] omarchy-benchmark systemd-resolved[777]: Using degraded feature set UDP instead of TCP for DNS server 10.0.2.3.
+[  194.237026] omarchy-benchmark systemd-resolved[777]: Using degraded feature set TCP instead of UDP for DNS server 10.0.2.3.
+[  194.240232] omarchy-benchmark systemd-resolved[777]: Using degraded feature set UDP instead of TCP for DNS server 10.0.2.3.
+[  194.249649] omarchy-benchmark systemd-resolved[777]: Using degraded feature set TCP instead of UDP for DNS server 10.0.2.3.
+[  194.252926] omarchy-benchmark systemd-resolved[777]: Using degraded feature set UDP instead of TCP for DNS server 10.0.2.3.
+[  194.260749] omarchy-benchmark systemd-resolved[777]: Using degraded feature set TCP instead of UDP for DNS server 10.0.2.3.
+[  194.269993] omarchy-benchmark systemd-resolved[777]: Using degraded feature set UDP instead of TCP for DNS server 10.0.2.3.
+[  194.279043] omarchy-benchmark systemd-resolved[777]: Using degraded feature set TCP instead of UDP for DNS server 10.0.2.3.
+[  194.281964] omarchy-benchmark systemd-resolved[777]: Using degraded feature set UDP instead of TCP for DNS server 10.0.2.3.
+[  194.293817] omarchy-benchmark systemd-resolved[777]: Using degraded feature set TCP instead of UDP for DNS server 10.0.2.3.
+[  194.296741] omarchy-benchmark systemd-resolved[777]: Using degraded feature set UDP instead of TCP for DNS server 10.0.2.3.
+[  194.305522] omarchy-benchmark systemd-resolved[777]: Using degraded feature set TCP instead of UDP for DNS server 10.0.2.3.
+[  194.308819] omarchy-benchmark systemd-resolved[777]: Using degraded feature set UDP instead of TCP for DNS server 10.0.2.3.
+[  194.318807] omarchy-benchmark systemd-resolved[777]: Using degraded feature set TCP instead of UDP for DNS server 10.0.2.3.
+[  194.321947] omarchy-benchmark systemd-resolved[777]: Using degraded feature set UDP instead of TCP for DNS server 10.0.2.3.
+[  194.330407] omarchy-benchmark systemd-resolved[777]: Using degraded feature set TCP instead of UDP for DNS server 10.0.2.3.
+[  194.332819] omarchy-benchmark systemd-resolved[777]: Using degraded feature set UDP instead of TCP for DNS server 10.0.2.3.
+[  194.339543] omarchy-benchmark systemd-resolved[777]: Using degraded feature set TCP instead of UDP for DNS server 10.0.2.3.
+[  194.342721] omarchy-benchmark systemd-resolved[777]: Using degraded feature set UDP instead of TCP for DNS server 10.0.2.3.
+[  194.352458] omarchy-benchmark systemd-resolved[777]: Using degraded feature set TCP instead of UDP for DNS server 10.0.2.3.
+[  194.355579] omarchy-benchmark systemd-resolved[777]: Using degraded feature set UDP instead of TCP for DNS server 10.0.2.3.
+[  194.363749] omarchy-benchmark systemd-resolved[777]: Using degraded feature set TCP instead of UDP for DNS server 10.0.2.3.
+[  194.366677] omarchy-benchmark systemd-resolved[777]: Using degraded feature set UDP instead of TCP for DNS server 10.0.2.3.
+[  194.373925] omarchy-benchmark systemd-resolved[777]: Using degraded feature set TCP instead of UDP for DNS server 10.0.2.3.
+[  194.377022] omarchy-benchmark systemd-resolved[777]: Using degraded feature set UDP instead of TCP for DNS server 10.0.2.3.
+[  194.386568] omarchy-benchmark systemd-resolved[777]: Using degraded feature set TCP instead of UDP for DNS server 10.0.2.3.
+[  194.389847] omarchy-benchmark systemd-resolved[777]: Using degraded feature set UDP instead of TCP for DNS server 10.0.2.3.
+[  224.463876] omarchy-benchmark systemd-resolved[777]: Using degraded feature set TCP instead of UDP for DNS server 10.0.2.3.
+[  224.470492] omarchy-benchmark systemd-resolved[777]: Using degraded feature set UDP instead of TCP for DNS server 10.0.2.3.
+[  224.477727] omarchy-benchmark systemd-resolved[777]: Using degraded feature set TCP instead of UDP for DNS server 10.0.2.3.
+[  224.480797] omarchy-benchmark systemd-resolved[777]: Using degraded feature set UDP instead of TCP for DNS server 10.0.2.3.
+[  224.489791] omarchy-benchmark systemd-resolved[777]: Using degraded feature set TCP instead of UDP for DNS server 10.0.2.3.
+[  224.492755] omarchy-benchmark systemd-resolved[777]: Using degraded feature set UDP instead of TCP for DNS server 10.0.2.3.
+[  224.500680] omarchy-benchmark systemd-resolved[777]: Using degraded feature set TCP instead of UDP for DNS server 10.0.2.3.
+[  224.504501] omarchy-benchmark systemd-resolved[777]: Using degraded feature set UDP instead of TCP for DNS server 10.0.2.3.
+[  224.512065] omarchy-benchmark systemd-resolved[777]: Using degraded feature set TCP instead of UDP for DNS server 10.0.2.3.
+[  224.515615] omarchy-benchmark systemd-resolved[777]: Using degraded feature set UDP instead of TCP for DNS server 10.0.2.3.
+[  224.525698] omarchy-benchmark systemd-resolved[777]: Using degraded feature set TCP instead of UDP for DNS server 10.0.2.3.
+[  224.530025] omarchy-benchmark systemd-resolved[777]: Using degraded feature set UDP instead of TCP for DNS server 10.0.2.3.
+[  224.539715] omarchy-benchmark systemd-resolved[777]: Using degraded feature set TCP instead of UDP for DNS server 10.0.2.3.
+[  224.543330] omarchy-benchmark systemd-resolved[777]: Using degraded feature set UDP instead of TCP for DNS server 10.0.2.3.
+[  224.551663] omarchy-benchmark systemd-resolved[777]: Using degraded feature set TCP instead of UDP for DNS server 10.0.2.3.
+[  224.554741] omarchy-benchmark systemd-resolved[777]: Using degraded feature set UDP instead of TCP for DNS server 10.0.2.3.
+[  224.565638] omarchy-benchmark systemd-resolved[777]: Using degraded feature set TCP instead of UDP for DNS server 10.0.2.3.
+[  224.570620] omarchy-benchmark systemd-resolved[777]: Using degraded feature set UDP instead of TCP for DNS server 10.0.2.3.
+[  224.580504] omarchy-benchmark systemd-resolved[777]: Using degraded feature set TCP instead of UDP for DNS server 10.0.2.3.
+[  224.583355] omarchy-benchmark systemd-resolved[777]: Using degraded feature set UDP instead of TCP for DNS server 10.0.2.3.
+[  224.591688] omarchy-benchmark systemd-resolved[777]: Using degraded feature set TCP instead of UDP for DNS server 10.0.2.3.
+[  224.594859] omarchy-benchmark systemd-resolved[777]: Using degraded feature set UDP instead of TCP for DNS server 10.0.2.3.
+[  224.606449] omarchy-benchmark systemd-resolved[777]: Using degraded feature set TCP instead of UDP for DNS server 10.0.2.3.
+[  224.610004] omarchy-benchmark systemd-resolved[777]: Using degraded feature set UDP instead of TCP for DNS server 10.0.2.3.
+[  224.618640] omarchy-benchmark systemd-resolved[777]: Using degraded feature set TCP instead of UDP for DNS server 10.0.2.3.
+[  224.621356] omarchy-benchmark systemd-resolved[777]: Using degraded feature set UDP instead of TCP for DNS server 10.0.2.3.
+[  224.627326] omarchy-benchmark systemd-resolved[777]: Using degraded feature set TCP instead of UDP for DNS server 10.0.2.3.
+[  224.629946] omarchy-benchmark systemd-resolved[777]: Using degraded feature set UDP instead of TCP for DNS server 10.0.2.3.
+[  224.641204] omarchy-benchmark systemd-resolved[777]: Using degraded feature set TCP instead of UDP for DNS server 10.0.2.3.
+[  224.645276] omarchy-benchmark systemd-resolved[777]: Using degraded feature set UDP instead of TCP for DNS server 10.0.2.3.
+[  238.270972] omarchy-benchmark systemd[1]: Started Getty on tty2.
+[  238.274417] omarchy-benchmark audit[1]: SERVICE_START pid=1 uid=0 auid=4294967295 ses=4294967295 msg='unit=getty@tty2 comm="systemd" exe="/usr/lib/systemd/systemd" hostname=? addr=? terminal=? res=success'
+[  238.280406] omarchy-benchmark kernel: audit: type=1130 audit(1788653016.243:366): pid=1 uid=0 auid=4294967295 ses=4294967295 msg='unit=getty@tty2 comm="systemd" exe="/usr/lib/systemd/systemd" hostname=? addr=? terminal=? res=success'
+[  238.648833] omarchy-benchmark (udev-worker)[1091]: sr0: Process '/usr/sbin/pktsetup -i -d 11:0' failed with exit code 1.
+[  240.502420] omarchy-benchmark audit[1076]: AUDIT1100 pid=1076 uid=0 auid=4294967295 ses=4294967295 msg='op=PAM:authentication grantors=pam_shells,pam_faillock,pam_permit,pam_faillock acct="root" exe="/usr/bin/login" hostname=omarchy-benchmark addr=? terminal=/dev/ttyS0 res=success'
+[  240.505428] omarchy-benchmark kernel: audit: type=1100 audit(1788653018.471:367): pid=1076 uid=0 auid=4294967295 ses=4294967295 msg='op=PAM:authentication grantors=pam_shells,pam_faillock,pam_permit,pam_faillock acct="root" exe="/usr/bin/login" hostname=omarchy-benchmark addr=? terminal=/dev/ttyS0 res=success'
+[  240.554419] omarchy-benchmark audit[1076]: AUDIT1101 pid=1076 uid=0 auid=4294967295 ses=4294967295 msg='op=PAM:accounting grantors=pam_access,pam_unix,pam_permit,pam_time acct="root" exe="/usr/bin/login" hostname=omarchy-benchmark addr=? terminal=/dev/ttyS0 res=success'
+[  240.556472] omarchy-benchmark kernel: audit: type=1101 audit(1788653018.523:368): pid=1076 uid=0 auid=4294967295 ses=4294967295 msg='op=PAM:accounting grantors=pam_access,pam_unix,pam_permit,pam_time acct="root" exe="/usr/bin/login" hostname=omarchy-benchmark addr=? terminal=/dev/ttyS0 res=success'
+[  240.556417] omarchy-benchmark audit[1076]: AUDIT1103 pid=1076 uid=0 auid=4294967295 ses=4294967295 msg='op=PAM:setcred grantors=pam_shells,pam_faillock,pam_permit,pam_faillock acct="root" exe="/usr/bin/login" hostname=omarchy-benchmark addr=? terminal=/dev/ttyS0 res=success'
+[  240.559234] omarchy-benchmark kernel: audit: type=1103 audit(1788653018.525:369): pid=1076 uid=0 auid=4294967295 ses=4294967295 msg='op=PAM:setcred grantors=pam_shells,pam_faillock,pam_permit,pam_faillock acct="root" exe="/usr/bin/login" hostname=omarchy-benchmark addr=? terminal=/dev/ttyS0 res=success'
+[  240.558416] omarchy-benchmark audit[1076]: SYSCALL arch=c000003e syscall=1 success=yes exit=1 a0=3 a1=7ffff75cb250 a2=1 a3=0 items=0 ppid=1 pid=1076 auid=0 uid=0 gid=0 euid=0 suid=0 fsuid=0 egid=0 sgid=0 fsgid=0 tty=ttyS0 ses=3 comm="login" exe="/usr/bin/login" key=(null)
+[  240.558417] omarchy-benchmark audit: PROCTITLE proctitle=2F62696E2F6C6F67696E002D2D
+[  240.560640] omarchy-benchmark kernel: audit: type=1006 audit(1788653018.527:370): pid=1076 uid=0 old-auid=4294967295 auid=0 tty=ttyS0 old-ses=4294967295 ses=3 res=1
+[  240.560738] omarchy-benchmark kernel: audit: type=1300 audit(1788653018.527:370): arch=c000003e syscall=1 success=yes exit=1 a0=3 a1=7ffff75cb250 a2=1 a3=0 items=0 ppid=1 pid=1076 auid=0 uid=0 gid=0 euid=0 suid=0 fsuid=0 egid=0 sgid=0 fsgid=0 tty=ttyS0 ses=3 comm="login" exe="/usr/bin/login" key=(null)
+[  240.560853] omarchy-benchmark kernel: audit: type=1327 audit(1788653018.527:370): proctitle=2F62696E2F6C6F67696E002D2D
+[  240.564519] omarchy-benchmark login[1076]: pam_unix(login:session): session opened for user root(uid=0) by root(uid=0)
+[  240.690036] omarchy-benchmark systemd-logind[632]: New session '3' of user 'root' with class 'user-early' and type 'tty'.
+[  240.705742] omarchy-benchmark systemd[1]: Started Session 3 of User root.
+[  240.721422] omarchy-benchmark audit[1076]: AUDIT1105 pid=1076 uid=0 auid=0 ses=3 msg='op=PAM:session_open grantors=pam_loginuid,pam_keyinit,pam_systemd_home,pam_limits,pam_unix,pam_permit,pam_lastlog2,pam_mail,pam_umask,pam_systemd,pam_env acct="root" exe="/usr/bin/login" hostname=omarchy-benchmark addr=? terminal=/dev/ttyS0 res=success'
+[  240.722417] omarchy-benchmark audit[1076]: AUDIT1110 pid=1076 uid=0 auid=0 ses=3 msg='op=PAM:setcred grantors=pam_shells,pam_faillock,pam_permit,pam_faillock acct="root" exe="/usr/bin/login" hostname=omarchy-benchmark addr=? terminal=/dev/ttyS0 res=success'
+[  240.724656] omarchy-benchmark kernel: audit: type=1105 audit(1788653018.690:371): pid=1076 uid=0 auid=0 ses=3 msg='op=PAM:session_open grantors=pam_loginuid,pam_keyinit,pam_systemd_home,pam_limits,pam_unix,pam_permit,pam_lastlog2,pam_mail,pam_umask,pam_systemd,pam_env acct="root" exe="/usr/bin/login" hostname=omarchy-benchmark addr=? terminal=/dev/ttyS0 res=success'
+[  240.725041] omarchy-benchmark kernel: audit: type=1110 audit(1788653018.691:372): pid=1076 uid=0 auid=0 ses=3 msg='op=PAM:setcred grantors=pam_shells,pam_faillock,pam_permit,pam_faillock acct="root" exe="/usr/bin/login" hostname=omarchy-benchmark addr=? terminal=/dev/ttyS0 res=success'
+[  240.759416] omarchy-benchmark login[1076]: DIALUP AT ttyS0 BY root
+[  240.759554] omarchy-benchmark login[1076]: ROOT LOGIN ON ttyS0
+COMMAND_EXIT 0
+
+COMMAND plymouth-kernel-waits
+COMMAND_EXIT 0
+
+OMARCHY_CONSOLE_c8d90491457948178cb99b320853ea28_DONE:0

@@ -1,0 +1,31 @@
+{
+  "schema_version": 1,
+  "iso_bytes": 3698065408,
+  "iso_sha256": "19de1071bc7825078324c21243b4371f5bb6f4d9f47608b16c11288d22919e97",
+  "root_image_path": "/arch/x86_64/omarchy-root.btrfs.qcow2",
+  "root_image_bytes": 3681644544,
+  "root_image_sha256": "6ef64246e8b7d01e8f129046bae0d8e41228f7f195fd4c1ffb8fe00e4d00ca3e",
+  "extent_count": 1,
+  "verified_against": {
+    "schema_version": 1,
+    "upstream_commit": "dbffaa6c65344d644627a023c28661e08382b8fa",
+    "virtual_bytes": 6174015488,
+    "file_bytes": 3681644544,
+    "sha256": "6ef64246e8b7d01e8f129046bae0d8e41228f7f195fd4c1ffb8fe00e4d00ca3e",
+    "compression": "Btrfs compress-force=zstd:15; qcow2 zstd 1MiB clusters",
+    "qemu_version": "qemu-img version 8.2.2 (Debian 1:8.2.2+ds-0ubuntu1.18)",
+    "verification": [
+      "guest Btrfs data checksums",
+      "qemu-img check",
+      "qemu-img compare raw versus qcow2",
+      "SHA-256"
+    ],
+    "image_package_delta": {
+      "baseline_packages": 941,
+      "image_packages": 941,
+      "remaining_packages": {},
+      "reasons_source": "baseline pacman -Qqe"
+    }
+  },
+  "status": "verified"
+}

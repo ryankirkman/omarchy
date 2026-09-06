@@ -1,0 +1,17 @@
+PASS owned serial fixture isolation; no host serial access
+PASS overlap-and-redraw
+PASS failure-during-effect
+PASS phase-unobserved-fallback
+PASS late-logo-fallback
+PASS missing-logo
+PASS deferred
+PASS effect-error
+PASS effect-timeout-status
+PASS release-failure
+PASS declined-prompt
+....
+----------------------------------------------------------------------
+Ran 4 tests in 0.067s
+
+OK
+PASS pinned full-dashboard contracts and payload activation contracts

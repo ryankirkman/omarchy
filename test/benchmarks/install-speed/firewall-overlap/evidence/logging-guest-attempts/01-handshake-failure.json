@@ -1,0 +1,8 @@
+{
+  "ok": true,
+  "result": {
+    "returncode": 1,
+    "stdout": "",
+    "stderr": "Traceback (most recent call last):\n  File \"/tmp/omarchy-setup-contracts/logging-bind/guest-contract.py\", line 220, in <module>\n    main()\n    ~~~~^^\n  File \"/tmp/omarchy-setup-contracts/logging-bind/guest-contract.py\", line 130, in main\n    raise RuntimeError('Real mounted child did not reach the isolation handshake')\nRuntimeError: Real mounted child did not reach the isolation handshake\n"
+  }
+}

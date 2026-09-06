@@ -1,0 +1,7 @@
+{
+  "schema_version": 1,
+  "builder_run": "/home/runner/work/_temp/omarchy-install-speed/builder",
+  "baseline_run": "/home/runner/work/_temp/omarchy-install-evidence/calibration",
+  "status": "complete",
+  "host_build_seconds": 522.056002942
+}

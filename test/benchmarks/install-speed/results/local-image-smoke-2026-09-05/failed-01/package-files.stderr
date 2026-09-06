@@ -1,0 +1,6 @@
+warning: database file for 'core' does not exist (use '-Sy' to download)
+warning: database file for 'extra' does not exist (use '-Sy' to download)
+warning: database file for 'multilib' does not exist (use '-Sy' to download)
+warning: database file for 'omarchy' does not exist (use '-Sy' to download)
+warning: cups: /var/log/cups/ (No such file or directory)
+warning: filesystem: /var/log/old/ (No such file or directory)

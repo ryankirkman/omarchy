@@ -1,0 +1,50 @@
+{
+  "01-guest-contract.py": {
+    "sha256": "34006a8c800bfedb21f83bbb9f1f0c8d67b7aca9d85daddc323bbd24ff50743a",
+    "bytes": 12179
+  },
+  "01-handshake-failure.json": {
+    "sha256": "0b26f0a3238d1e7eb391c6d071e1d80bfe5b84f5fd94b30479084b5c08417177",
+    "bytes": 494
+  },
+  "02-captured-failure.json": {
+    "sha256": "58fffd8a021ffa9011cc55cb598f2d33e88a4117591e2aeb11cd0a527ae4401f",
+    "bytes": 919
+  },
+  "02-guest-contract.py": {
+    "sha256": "479e9dd78dc83dc25c42a318c5633c0508e020964cd2715134c78d203b560ac1",
+    "bytes": 12397
+  },
+  "03-all-calls-parsed.json": {
+    "sha256": "a26acd676bed93b19a3eb9a4fa0dc82cc535f90c319b71b1fa786609691c7d5d",
+    "bytes": 7606
+  },
+  "03-all-calls-result.json": {
+    "sha256": "260c50c2e11032ee75acefa2eb535637ca782118d438c7da10e34f3c65041d32",
+    "bytes": 8259
+  },
+  "03-guest-contract.py": {
+    "sha256": "42d3f43b0540ae5c4fd0f6bc5a7a848b8223ec313752507b3870927424700dda",
+    "bytes": 12767
+  },
+  "04-guest-contract.py": {
+    "sha256": "14122f3bb037d796ba1b2575ebbf1fdd64ba84c752f446228927fb6118f5430f",
+    "bytes": 14569
+  },
+  "04-system-only-parsed.json": {
+    "sha256": "6a9c4475bba2fc88916538af117ea1ba933e17d81f147ac09186144bf3359422",
+    "bytes": 11824
+  },
+  "04-system-only-result.json": {
+    "sha256": "03f54f75c7aea5f5f3267aadbda2d0e945289844a686f7e4a75d3d9147eff4c3",
+    "bytes": 12802
+  },
+  "arch-chroot-source.json": {
+    "sha256": "51d4107b3ce0b30544dbeac45888a275bb605ec3637aea94499e33073872528e",
+    "bytes": 3031
+  },
+  "attempts.json": {
+    "sha256": "fcd10beca4d35fb88aeeea2fa864850f30e518804e200ef11ed936510cd8e744",
+    "bytes": 1992
+  }
+}

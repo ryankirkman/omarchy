@@ -1,0 +1,17 @@
+{
+  "schema_version": 1,
+  "workflow_run_id": 33988339199,
+  "workflow_job_id": 101365918203,
+  "repository_commit": "94977d6352f24591fecad0cbffd63c090b076b33",
+  "artifact_id": 9976088833,
+  "artifact_zip_sha256": "b757e09fa7bf2f11738a807bd1e75730324f087317154a2cb77121fbbca5d5a5",
+  "calibration_status": "installed-and-booted",
+  "calibration_host_readiness_lower_s": 176.62254972,
+  "calibration_host_readiness_upper_s": 181.04675779899998,
+  "calibration_guest_installer_seconds": 129.39099764823914,
+  "calibration_packages": 941,
+  "comparison_status": "not-started",
+  "image_build_status": "failed",
+  "image_build_guest_log_sha256": "766e5636c4b2c93635a96d429b9ce28a9e55b04a76f51e4cc862c58dc56bc02b",
+  "image_build_failure_evidence_limit": "Guest unit exited 1 after package-reason normalization. Redirected package-file validation output was not retained by the older driver, so the exact failed native paths are unknown."
+}

@@ -1,0 +1,160 @@
+{
+  "schema_version": 1,
+  "status": "installed-and-booted",
+  "iso": "/tmp/omarchy-bench/downloads/omarchy-4.0.2.iso",
+  "iso_sha256": "2ef8e624aa1bec7e277e28056b8535a6c9373ba48d7ede3f1a01cb6d2373cfb8",
+  "qemu_version": "QEMU emulator version 8.2.2 (Debian 1:8.2.2+ds-0ubuntu1.18)",
+  "qemu_argv": [
+    "/tmp/omarchy-bench/toolchain/usr/bin/qemu-system-x86_64",
+    "-L",
+    "/tmp/omarchy-bench/toolchain/usr/share/qemu",
+    "-machine",
+    "q35,accel=tcg",
+    "-cpu",
+    "max",
+    "-smp",
+    "4",
+    "-m",
+    "8192",
+    "-drive",
+    "if=pflash,format=raw,readonly=on,file=/tmp/omarchy-bench/toolchain/usr/share/OVMF/OVMF_CODE_4M.fd",
+    "-drive",
+    "if=pflash,format=raw,file=/tmp/omarchy-bench/baseline-03/OVMF_VARS_4M.fd",
+    "-drive",
+    "file=/tmp/omarchy-bench/baseline-03/target.qcow2,format=qcow2,if=none,id=target,cache=writeback",
+    "-device",
+    "virtio-blk-pci,drive=target,bootindex=1",
+    "-device",
+    "virtio-vga,romfile=/tmp/omarchy-bench/toolchain/usr/share/seabios/vgabios-virtio.bin",
+    "-display",
+    "none",
+    "-usb",
+    "-device",
+    "usb-tablet",
+    "-object",
+    "rng-random,id=rng0,filename=/dev/urandom",
+    "-device",
+    "virtio-rng-pci,rng=rng0",
+    "-netdev",
+    "user,id=net0,hostfwd=tcp:127.0.0.1:24022-:22",
+    "-device",
+    "virtio-net-pci,netdev=net0,romfile=",
+    "-qmp",
+    "tcp:127.0.0.1:24444,server=on,wait=off",
+    "-serial",
+    "file:/tmp/omarchy-bench/baseline-03/serial.log",
+    "-drive",
+    "file=/tmp/omarchy-bench/downloads/omarchy-4.0.2.iso,media=cdrom,if=none,format=raw,id=iso,cache=writeback,readonly=on",
+    "-device",
+    "ide-cd,drive=iso,bootindex=2",
+    "-drive",
+    "file=/tmp/omarchy-bench/baseline-03/cidata.img,format=raw,if=none,id=cidata",
+    "-device",
+    "usb-storage,drive=cidata"
+  ],
+  "accelerator": "tcg",
+  "cpu_count": 4,
+  "memory_mib": 8192,
+  "fresh_target": true,
+  "fresh_nvram": true,
+  "disk_format": "qcow2",
+  "disk_virtual_bytes": 42949672960,
+  "disk_cache": "writeback",
+  "iso_cache": "writeback",
+  "readiness_poll_interval_s": 30,
+  "started_at": 1788630677.2121327,
+  "hostname": "omarchy-benchmark",
+  "measurement_interrupted": false,
+  "network": "QEMU user networking; ISO installs packages from its own bundled mirror",
+  "encryption": false,
+  "filesystem": "btrfs compress=zstd",
+  "interventions": [
+    {
+      "at_host_wall_s": 56.12502125000174,
+      "action": "qmp",
+      "execute": "query-status"
+    },
+    {
+      "at_host_wall_s": 329.79962203300965,
+      "action": "qmp",
+      "execute": "query-status"
+    },
+    {
+      "at_host_wall_s": 591.9624238240067,
+      "action": "qmp",
+      "execute": "query-status"
+    },
+    {
+      "at_host_wall_s": 1245.0862653840013,
+      "action": "qmp",
+      "execute": "query-status"
+    },
+    {
+      "at_host_wall_s": 1650.5706443180097,
+      "action": "ssh",
+      "command": "cat /etc/machine-id",
+      "sudo": true,
+      "timeout": 180
+    },
+    {
+      "at_host_wall_s": 1657.4314186100091,
+      "action": "ssh",
+      "command": "for key in /etc/ssh/ssh_host_*_key.pub; do ssh-keygen -E sha256 -lf \"$key\"; done",
+      "sudo": true,
+      "timeout": 180
+    },
+    {
+      "at_host_wall_s": 1661.4645761660067,
+      "action": "ssh",
+      "command": "gpg --homedir /etc/pacman.d/gnupg --with-colons --list-secret-keys",
+      "sudo": true,
+      "timeout": 180
+    },
+    {
+      "at_host_wall_s": 1665.0347795530106,
+      "action": "ssh",
+      "command": "findmnt -n -o UUID /",
+      "sudo": true,
+      "timeout": 180
+    },
+    {
+      "at_host_wall_s": 1667.95878830101,
+      "action": "ssh",
+      "command": "btrfs subvolume list -puq /; findmnt --json -t btrfs",
+      "sudo": true,
+      "timeout": 180
+    },
+    {
+      "at_host_wall_s": 1671.1958857820136,
+      "action": "ssh",
+      "command": "find /boot -type f -printf '%P %s bytes\\n' | LC_ALL=C sort",
+      "sudo": true,
+      "timeout": 180
+    },
+    {
+      "at_host_wall_s": 1674.2171748270048,
+      "action": "ssh",
+      "command": "systemd-analyze blame --no-pager",
+      "sudo": true,
+      "timeout": 180
+    },
+    {
+      "at_host_wall_s": 1685.8715279880125,
+      "action": "ssh",
+      "command": "systemd-analyze critical-chain --no-pager",
+      "sudo": true,
+      "timeout": 180
+    },
+    {
+      "at_host_wall_s": 1730.9816186380049,
+      "action": "ssh",
+      "command": "systemctl poweroff",
+      "sudo": true,
+      "timeout": 120
+    }
+  ],
+  "first_installed_ssh_wall_s": 1597.4470829710044,
+  "validation_passed": true,
+  "collected_at": 1788632318.6637967,
+  "qemu_exit_status": 0
+}

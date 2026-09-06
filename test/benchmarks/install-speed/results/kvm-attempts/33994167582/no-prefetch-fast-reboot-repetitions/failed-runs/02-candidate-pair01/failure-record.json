@@ -1,0 +1,112 @@
+{
+  "schema_version": 1,
+  "status": "failed",
+  "measurement_valid": false,
+  "failure": "Runner failed with exit 1; evidence/disk retained at /home/runner/work/_temp/omarchy-install-speed/fresh-installs-image-no-package-prefetch-fast-reboot/02-candidate-pair01",
+  "runner_exit_status": 1,
+  "source_run_directory": "/home/runner/work/_temp/omarchy-install-speed/fresh-installs-image-no-package-prefetch-fast-reboot/02-candidate-pair01",
+  "captured_at": 1788647321.6749408,
+  "private_keys_and_virtual_disks_excluded": true,
+  "files": {
+    "manifest.json": {
+      "sha256": "d7131c5f0f4fc65ff31bea18fc712021487b301630cd27fad5548a3dc1adcb18",
+      "bytes": 5632
+    },
+    "install-timing.json": {
+      "sha256": "4041135bd4043e53df7c5dd3c255a196cd00ae9e6f6da75194bd263e48f9e8b8",
+      "bytes": 3066
+    },
+    "validation.json": {
+      "sha256": "123b870f41e9c60a3c9dc8fedcf053a2fcf39c566897fa927de3de0eadde447c",
+      "bytes": 220
+    },
+    "identity.json": {
+      "sha256": "99688f378ca06e547a438a7ae0ab727520e17b49df92028d5a7242033abcce2b",
+      "bytes": 459
+    },
+    "package-manifest.txt": {
+      "sha256": "f69fe12f4d2b530f56f28b6f350380eaae2e0ea679d88abedd0d032f0b0df89d",
+      "bytes": 18343
+    },
+    "package-explicit.txt": {
+      "sha256": "37d06fc7de2487901f81513bf70f3e592d7245cd656d6c34089ccc1f258055f9",
+      "bytes": 1705
+    },
+    "package-files.txt": {
+      "sha256": "5b501e2ef951a921a004c72ce90497acc7047f27a0f1c1fd12acbb9f26c8ec38",
+      "bytes": 41163
+    },
+    "package-files.stderr": {
+      "sha256": "5b6482796f084d9f1a7c88a251d30d1f9d46a2bad8adb9401253e706a28c0018",
+      "bytes": 300
+    },
+    "installed-root.json": {
+      "sha256": "cebc725cbd245afc4139ebbe70d7a3010beb56dc36ead369327bb8504f5a9c59",
+      "bytes": 132
+    },
+    "installed-boot.txt": {
+      "sha256": "a5d05333bc34636ed8b6a0b17b7d39c4076a275c69559d2921dfe6965583a216",
+      "bytes": 776
+    },
+    "machine-id.txt": {
+      "sha256": "78ccc1c7954b2c2d324ab6e1173ed9c3f27f7e6bce567387cd78286ea7e448c1",
+      "bytes": 33
+    },
+    "ssh-host-fingerprints.txt": {
+      "sha256": "74d00b5df88fb7bb1f26e2d05d0ac9b0185fa67cb8de1ad9a52ef63c28c95cce",
+      "bytes": 355
+    },
+    "pacman-master-keys.txt": {
+      "sha256": "78cefdde941a48ea38e35e3b69640f3f84d00290cc3fc4c1b8b5612b76aa2e42",
+      "bytes": 293
+    },
+    "btrfs-uuid.txt": {
+      "sha256": "5da7d3639297fee86e9c7950d4a939b66d1a342dac68ad7ec748ef41831ae6bd",
+      "bytes": 37
+    },
+    "btrfs-subvolumes.txt": {
+      "sha256": "c1db318f6e3a5bb254046c24ec46bfb9c2e45c96a4cfea0049ee7bc3157c7420",
+      "bytes": 2296
+    },
+    "uki-files.txt": {
+      "sha256": "2a5f50a368711cb8cb4da49440f7116b62ff87f4798a23263f65f04aff0c2e42",
+      "bytes": 266
+    },
+    "serial.log": {
+      "sha256": "f9644f8562d3f74a62966c364d0c8d81ff29b814b1c7e5f95d76ff7e95bbafb0",
+      "bytes": 17042
+    },
+    "qemu.log": {
+      "sha256": "97baa4b232b0f5f69278a855ae39da2b29ed124ace8de62d44d4062c629f748c",
+      "bytes": 78
+    },
+    "systemd-analyze-blame.txt": {
+      "sha256": "968344ba9e7f1006fcc15e39f0bd14a3d6f26fb5cfe98cfc263fe921dbee0eb1",
+      "bytes": 3353
+    },
+    "systemd-analyze-critical-chain.txt": {
+      "sha256": "9352e0dadebc45ae5883900b0b055462294b756330b8eb024cd293dbd7c144b8",
+      "bytes": 1346
+    },
+    "standalone-reboot.json": {
+      "sha256": "ab2315258a0558e4a85753215af6a4e9d39c2aad994a71619725d39963b13e58",
+      "bytes": 6117
+    },
+    "progress.json": {
+      "sha256": "1857e440beacf86a4e348298945bc690e7c9d3dc62a21b2ee669223ce3a68371",
+      "bytes": 251
+    },
+    "latest-screen.png": {
+      "sha256": "05713dbacb00cfa92e8cad1581147b0f1349f6ee14c97d122440aff36011bd53",
+      "bytes": 3057
+    },
+    "last-failed-ssh-probe.json": {
+      "sha256": "4f96329bb09eebf88c4ffa0f16516a9cf1acfe332153564bc4c2a31c445521c3",
+      "bytes": 176
+    }
+  },
+  "capture_errors": {},
+  "runner_sha256": "dc36ec7b12de11b4b03649b6bde303e13abfc5ec86bcdd9a0402b463bc7e882f",
+  "comparator_sha256": "7fb8a6d38dc516a0bf6ff79810888bd4c10018e9ba124a45785e89ea2eec6af4",
+  "repeat_driver_sha256": "bfc86b70adfb4410ffb35143541439c8bbebcde191d884375332375587125557"
+}

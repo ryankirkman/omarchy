@@ -1,0 +1,11 @@
+{"event": "started", "run_dir": "/home/runner/work/_temp/omarchy-install-speed/image-no-package-prefetch-fast-reboot-early-verify-failed-run-rescue/vm", "pid": 5003}
+{"event": "progress", "host_wall_s": 1.0044807830004174, "target_allocated_bytes": 200704, "host_free_bytes": 57075560448, "collected": false, "vm_status": {"status": "running", "singlestep": false, "running": true}}
+{"event": "progress", "host_wall_s": 5.055653881000126, "target_allocated_bytes": 200704, "host_free_bytes": 57075544064, "collected": false, "vm_status": {"status": "running", "singlestep": false, "running": true}}
+{"event": "progress", "host_wall_s": 9.10206016200027, "target_allocated_bytes": 200704, "host_free_bytes": 57075544064, "collected": false, "vm_status": {"status": "running", "singlestep": false, "running": true}}
+{"event": "progress", "host_wall_s": 13.13421753700004, "target_allocated_bytes": 200704, "host_free_bytes": 57075548160, "collected": false, "vm_status": {"status": "running", "singlestep": false, "running": true}}
+{"event": "progress", "host_wall_s": 15.350285175000408, "target_allocated_bytes": 200704, "host_free_bytes": 57075544064, "collected": false, "vm_status": {"status": "running", "singlestep": false, "running": true}}
+{"event": "progress", "host_wall_s": 17.512780624000243, "target_allocated_bytes": 200704, "host_free_bytes": 57075544064, "collected": false, "vm_status": {"status": "running", "singlestep": false, "running": true}}
+{"event": "progress", "host_wall_s": 19.67455903400014, "target_allocated_bytes": 200704, "host_free_bytes": 57075544064, "collected": false, "vm_status": {"status": "running", "singlestep": false, "running": true}}
+{"event": "builder-ssh-ready", "run_dir": "/home/runner/work/_temp/omarchy-install-speed/image-no-package-prefetch-fast-reboot-early-verify-failed-run-rescue/vm"}
+{"event": "progress", "host_wall_s": 22.102045948000068, "target_allocated_bytes": 200704, "host_free_bytes": 57075478528, "collected": true, "vm_status": {"status": "running", "singlestep": false, "running": true}}
+{"event": "progress", "host_wall_s": 24.308300717000293, "target_allocated_bytes": 200704, "host_free_bytes": 57075408896, "collected": true, "vm_status": {"status": "running", "singlestep": false, "running": true}}

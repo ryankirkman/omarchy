@@ -1,0 +1,380 @@
+Autoinstall configuration found on cidata drive; skipping the configurator.
+
+    Installing Omarchy for omarchy → /mnt
+
+    › Preparing live environment
+
+    › cleaning up holders on install disk: /dev/vda
+Cleaning up existing holders on install disk: /dev/vda
+
+    › loading configurator output
+
+    › Preparing install target
+
+    › boot medium: /dev/sr1 on /dev/sr1, scheduler: none [mq-deadline] kyber bfq
+
+    › Installing Arch + Omarchy
+
+    › partitioning + formatting + encrypting
+Wiping partitions and metadata: /dev/vda
+Creating partitions: /dev/vda
+Creating subvolumes: /dev/vda2
+
+    › timing: partition, format, and encrypt: 4.126s
+
+    › opening installer context
+Skipping waiting for automatic time sync (this can cause issues if time is out of sync during installation)
+Skipped reflector...
+
+    › timing: mount and validate target: 2.369s
+
+    › restoring root filesystem (3511 MiB qcow2, 5888 MiB virtual)
+Current fsid: 51a18a79-7bde-4aeb-8895-181970407957
+New fsid: 84326ec3-ec37-43c8-abab-f2a8bef1e20e
+Set superblock flag CHANGING_FSID
+Change fsid in extent tree
+Change fsid in chunk tree
+Clear superblock flag CHANGING_FSID
+Fsid change finished
+
+    › making the image the root subvolume
+
+    › timing: unpack root image: 51.566s
+
+    › installing per-machine packages (mkinitcpio deferred to final Limine UKI build)
+Wrote to /mnt/etc/vconsole.conf using  and default8x16
+Setting keyboard language to 
+Keyboard language was not changed from default (no language specified)
+
+    › timing: per-machine package delta: 12.442s
+Enabling service systemd-zram-setup@zram0.service
+
+    › installing bootloader (Limine)
+BootCurrent: 0001
+Timeout: 0 seconds
+BootOrder: 0004,0002,0001,0000,0003
+Boot0000* UiApp	FvVol(7cb8bdc9-f8eb-4f34-aaea-3ee4af6516a1)/FvFile(462caa21-7614-4503-836e-8ab6f4662331)
+      dp: 04 07 14 00 c9 bd b8 7c eb f8 34 4f aa ea 3e e4 af 65 16 a1 / 04 06 14 00 21 aa 2c 46 14 76 03 45 83 6e 8a b6 f4 66 23 31 / 7f ff 04 00
+Boot0001* UEFI QEMU DVD-ROM QM00011 	PciRoot(0x0)/Pci(0x1f,0x2)/Sata(5,65535,0)걎脈鼑䵙຅᫢ⱒ뉙
+      dp: 02 01 0c 00 d0 41 03 0a 00 00 00 00 / 01 01 06 00 02 1f / 03 12 0a 00 05 00 ff ff 00 00 / 7f ff 04 00
+    data: 4e ac 08 81 11 9f 59 4d 85 0e e2 1a 52 2c 59 b2
+Boot0002* UEFI Misc Device	PciRoot(0x0)/Pci(0x1,0x0)걎脈鼑䵙຅᫢ⱒ뉙
+      dp: 02 01 0c 00 d0 41 03 0a 00 00 00 00 / 01 01 06 00 00 01 / 7f ff 04 00
+    data: 4e ac 08 81 11 9f 59 4d 85 0e e2 1a 52 2c 59 b2
+Boot0003* EFI Internal Shell	FvVol(7cb8bdc9-f8eb-4f34-aaea-3ee4af6516a1)/FvFile(7c04a583-9e3e-4f1c-ad65-e05268d0b4d1)
+      dp: 04 07 14 00 c9 bd b8 7c eb f8 34 4f aa ea 3e e4 af 65 16 a1 / 04 06 14 00 83 a5 04 7c 3e 9e 1c 4f ad 65 e0 52 68 d0 b4 d1 / 7f ff 04 00
+Boot0004* Limine	HD(1,GPT,c5544d90-774f-4999-b3ef-2d6f84a12d6a,0x800,0x400000)/\EFI\limine\limine_x64.efi
+      dp: 04 01 2a 00 01 00 00 00 00 08 00 00 00 00 00 00 00 00 40 00 00 00 00 00 90 4d 54 c5 4f 77 99 49 b3 ef 2d 6f 84 a1 2d 6a 02 02 / 04 04 3a 00 5c 00 45 00 46 00 49 00 5c 00 6c 00 69 00 6d 00 69 00 6e 00 65 00 5c 00 6c 00 69 00 6d 00 69 00 6e 00 65 00 5f 00 78 00 36 00 34 00 2e 00 65 00 66 00 69 00 00 00 / 7f ff 04 00
+
+    › writing Limine config
+
+    › timing: configure Limine: 0.871s
+
+    › creating user (with /etc/skel populated)
+Creating user omarchy
+Setting password for omarchy
+Enabling sudo permissions for omarchy
+
+    › timing: create user: 15.625s
+
+    › applying archinstall application selections
+
+    › initializing per-machine pacman keyring (background unit)
+
+    › timing: write target metadata: 4.371s
+
+
+    › Configuring hibernation
+Creating Btrfs subvolume
+Create subvolume '//swap'
+Creating swapfile in Btrfs subvolume
+create swapfile /swap/swapfile size 7.74GiB (8310890496) page size 4096
+Adding swapfile to /etc/fstab
+Enabling swap on /swap/swapfile
+Adding resume hook to /etc/mkinitcpio.conf.d/omarchy_resume.conf
+Adding resume kernel parameters
+
+    › Configuring system
+=== Omarchy Target Setup Started: 2026-09-05 21:32:47 ===
+=== Omarchy Setup Started: 2026-09-05 21:32:47 ===
+[2026-09-05 21:32:48] Starting: /usr/share/omarchy/install/config/theme-system.sh
+[2026-09-05 21:32:51] Completed: /usr/share/omarchy/install/config/theme-system.sh
+[2026-09-05 21:32:51] Starting: /usr/share/omarchy/install/config/browser-policy.sh
+[2026-09-05 21:32:52] Completed: /usr/share/omarchy/install/config/browser-policy.sh
+[2026-09-05 21:32:52] Starting: /usr/share/omarchy/install/config/increase-lockout-limit.sh
+[2026-09-05 21:32:52] Completed: /usr/share/omarchy/install/config/increase-lockout-limit.sh
+[2026-09-05 21:32:52] Starting: /usr/share/omarchy/install/config/lockscreen-pam.sh
+Configuring lock screen password authentication...
+[2026-09-05 21:32:55] Completed: /usr/share/omarchy/install/config/lockscreen-pam.sh
+[2026-09-05 21:32:55] Starting: /usr/share/omarchy/install/config/fix-powerprofilesctl-shebang.sh
+[2026-09-05 21:32:55] Completed: /usr/share/omarchy/install/config/fix-powerprofilesctl-shebang.sh
+[2026-09-05 21:32:55] Starting: /usr/share/omarchy/install/config/ssh-command-path.sh
+[2026-09-05 21:32:55] Completed: /usr/share/omarchy/install/config/ssh-command-path.sh
+[2026-09-05 21:32:56] Starting: /usr/share/omarchy/install/config/ssh-keepalive.sh
+[2026-09-05 21:32:56] Completed: /usr/share/omarchy/install/config/ssh-keepalive.sh
+[2026-09-05 21:32:56] Starting: /usr/share/omarchy/install/config/docker.sh
+[2026-09-05 21:32:56] Completed: /usr/share/omarchy/install/config/docker.sh
+[2026-09-05 21:32:56] Starting: /usr/share/omarchy/install/config/snapper.sh
+Configuring Omarchy Snapper snapshot retention
+[2026-09-05 21:32:58] Completed: /usr/share/omarchy/install/config/snapper.sh
+[2026-09-05 21:32:58] Starting: /usr/share/omarchy/install/config/locate.sh
+Configuring locate to skip Btrfs snapshots and index Btrfs subvolumes
+[2026-09-05 21:32:58] Completed: /usr/share/omarchy/install/config/locate.sh
+[2026-09-05 21:32:58] Starting: /usr/share/omarchy/install/config/enable-services.sh
+Created symlink '/etc/systemd/system/printer.target.wants/cups.service' → '/usr/lib/systemd/system/cups.service'.
+Created symlink '/etc/systemd/system/multi-user.target.wants/cups.service' → '/usr/lib/systemd/system/cups.service'.
+Created symlink '/etc/systemd/system/sockets.target.wants/cups.socket' → '/usr/lib/systemd/system/cups.socket'.
+Created symlink '/etc/systemd/system/multi-user.target.wants/cups.path' → '/usr/lib/systemd/system/cups.path'.
+Created symlink '/etc/systemd/system/dbus-org.freedesktop.Avahi.service' → '/usr/lib/systemd/system/avahi-daemon.service'.
+Created symlink '/etc/systemd/system/multi-user.target.wants/avahi-daemon.service' → '/usr/lib/systemd/system/avahi-daemon.service'.
+Created symlink '/etc/systemd/system/sockets.target.wants/avahi-daemon.socket' → '/usr/lib/systemd/system/avahi-daemon.socket'.
+Created symlink '/etc/systemd/system/basic.target.wants/linux-modules-cleanup.service' → '/usr/lib/systemd/system/linux-modules-cleanup.service'.
+Created symlink '/etc/systemd/system/sockets.target.wants/docker.socket' → '/usr/lib/systemd/system/docker.socket'.
+Created symlink '/etc/systemd/system/dbus-org.freedesktop.resolve1.service' → '/usr/lib/systemd/system/systemd-resolved.service'.
+Created symlink '/etc/systemd/system/sysinit.target.wants/systemd-resolved.service' → '/usr/lib/systemd/system/systemd-resolved.service'.
+Created symlink '/etc/systemd/system/sockets.target.wants/systemd-resolved-varlink.socket' → '/usr/lib/systemd/system/systemd-resolved-varlink.socket'.
+Created symlink '/etc/systemd/system/sockets.target.wants/systemd-resolved-monitor.socket' → '/usr/lib/systemd/system/systemd-resolved-monitor.socket'.
+Created symlink '/etc/systemd/system/multi-user.target.wants/NetworkManager.service' → '/usr/lib/systemd/system/NetworkManager.service'.
+Created symlink '/etc/systemd/system/dbus-org.freedesktop.nm-dispatcher.service' → '/usr/lib/systemd/system/NetworkManager-dispatcher.service'.
+Created symlink '/etc/systemd/system/network-online.target.wants/NetworkManager-wait-online.service' → '/usr/lib/systemd/system/NetworkManager-wait-online.service'.
+Created symlink '/etc/systemd/system/NetworkManager-wait-online.service' → '/dev/null'.
+Created symlink '/etc/systemd/system/graphical.target.wants/power-profiles-daemon.service' → '/usr/lib/systemd/system/power-profiles-daemon.service'.
+Created symlink '/etc/systemd/system/display-manager.service' → '/usr/lib/systemd/system/sddm.service'.
+Created symlink '/etc/systemd/system/dbus-org.freedesktop.oom1.service' → '/usr/lib/systemd/system/systemd-oomd.service'.
+Created symlink '/etc/systemd/system/multi-user.target.wants/systemd-oomd.service' → '/usr/lib/systemd/system/systemd-oomd.service'.
+Created symlink '/etc/systemd/system/sockets.target.wants/systemd-oomd.socket' → '/usr/lib/systemd/system/systemd-oomd.socket'.
+[2026-09-05 21:33:00] Completed: /usr/share/omarchy/install/config/enable-services.sh
+[2026-09-05 21:33:00] Starting: /usr/share/omarchy/install/config/firewall.sh
+Default incoming policy changed to 'deny'
+(be sure to update your rules accordingly)
+Default outgoing policy changed to 'allow'
+(be sure to update your rules accordingly)
+Rules updated
+Rules updated (v6)
+Rules updated
+Rules updated (v6)
+Rules updated
+Rules updated
+--- /etc/ufw/after.rules	2026-09-05 21:33:04.032471986 +0000
++++ /tmp/tmp.cXZ5pLWQvZ	2026-09-05 21:33:16.282824034 +0000
+@@ -28,3 +28,28 @@
+ 
+ # don't delete the 'COMMIT' line or these rules won't be processed
+ COMMIT
++# BEGIN UFW AND DOCKER
++*filter
++:ufw-user-forward - [0:0]
++:ufw-docker-logging-deny - [0:0]
++:DOCKER-USER - [0:0]
++-A DOCKER-USER -j ufw-user-forward
++
++-A DOCKER-USER -m conntrack --ctstate RELATED,ESTABLISHED -j RETURN
++-A DOCKER-USER -m conntrack --ctstate INVALID -j DROP
++-A DOCKER-USER -i docker0 -o docker0 -j ACCEPT
++
++-A DOCKER-USER -j RETURN -s 10.0.0.0/8
++-A DOCKER-USER -j RETURN -s 172.16.0.0/12
++-A DOCKER-USER -j RETURN -s 192.168.0.0/16
++-A DOCKER-USER -j ufw-docker-logging-deny -m conntrack --ctstate NEW -d 10.0.0.0/8
++-A DOCKER-USER -j ufw-docker-logging-deny -m conntrack --ctstate NEW -d 172.16.0.0/12
++-A DOCKER-USER -j ufw-docker-logging-deny -m conntrack --ctstate NEW -d 192.168.0.0/16
++
++-A DOCKER-USER -j RETURN
++
++-A ufw-docker-logging-deny -m limit --limit 3/min --limit-burst 10 -j LOG --log-prefix "[UFW DOCKER BLOCK] "
++-A ufw-docker-logging-deny -j DROP
++
++COMMIT
++# END UFW AND DOCKER
+
+Backing up /etc/ufw/after.rules to /etc/ufw/after.rules-ufw-docker~2026-09-05-213316~
+# BEGIN UFW AND DOCKER
+*filter
+:ufw6-user-forward - [0:0]
+:ufw6-docker-logging-deny - [0:0]
+:DOCKER-USER - [0:0]
+-A DOCKER-USER -j ufw6-user-forward
+
+-A DOCKER-USER -m conntrack --ctstate RELATED,ESTABLISHED -j RETURN
+-A DOCKER-USER -m conntrack --ctstate INVALID -j DROP
+-A DOCKER-USER -i docker0 -o docker0 -j ACCEPT
+
+-A DOCKER-USER -j RETURN -s fd00::/8
+-A DOCKER-USER -j ufw6-docker-logging-deny -m conntrack --ctstate NEW -d fd00::/8
+
+-A DOCKER-USER -j RETURN
+
+-A ufw6-docker-logging-deny -m limit --limit 3/min --limit-burst 10 -j LOG --log-prefix "[UFW DOCKER BLOCK] "
+-A ufw6-docker-logging-deny -j DROP
+
+COMMIT
+# END UFW AND DOCKER
+--- /etc/ufw/after6.rules	2026-09-05 21:33:04.038155547 +0000
++++ /tmp/tmp.g154KkRduP	2026-09-05 21:33:16.717824047 +0000
+@@ -25,3 +25,24 @@
+ 
+ # don't delete the 'COMMIT' line or these rules won't be processed
+ COMMIT
++# BEGIN UFW AND DOCKER
++*filter
++:ufw6-user-forward - [0:0]
++:ufw6-docker-logging-deny - [0:0]
++:DOCKER-USER - [0:0]
++-A DOCKER-USER -j ufw6-user-forward
++
++-A DOCKER-USER -m conntrack --ctstate RELATED,ESTABLISHED -j RETURN
++-A DOCKER-USER -m conntrack --ctstate INVALID -j DROP
++-A DOCKER-USER -i docker0 -o docker0 -j ACCEPT
++
++-A DOCKER-USER -j RETURN -s fd00::/8
++-A DOCKER-USER -j ufw6-docker-logging-deny -m conntrack --ctstate NEW -d fd00::/8
++
++-A DOCKER-USER -j RETURN
++
++-A ufw6-docker-logging-deny -m limit --limit 3/min --limit-burst 10 -j LOG --log-prefix "[UFW DOCKER BLOCK] "
++-A ufw6-docker-logging-deny -j DROP
++
++COMMIT
++# END UFW AND DOCKER
+
+Backing up /etc/ufw/after6.rules to /etc/ufw/after6.rules-ufw-docker~2026-09-05-213316~
+
+Please restart UFW service manually by using the following command:
+    sudo systemctl restart ufw
+Created symlink '/etc/systemd/system/multi-user.target.wants/ufw.service' → '/usr/lib/systemd/system/ufw.service'.
+[2026-09-05 21:33:17] Completed: /usr/share/omarchy/install/config/firewall.sh
+[2026-09-05 21:33:17] Starting: /usr/share/omarchy/install/hardware/asus-rog.sh
+[2026-09-05 21:33:17] Completed: /usr/share/omarchy/install/hardware/asus-rog.sh
+[2026-09-05 21:33:17] Starting: /usr/share/omarchy/install/hardware/framework16.sh
+[2026-09-05 21:33:18] Completed: /usr/share/omarchy/install/hardware/framework16.sh
+[2026-09-05 21:33:18] Starting: /usr/share/omarchy/install/hardware/dell-xps-touchpad-haptics.sh
+[2026-09-05 21:33:18] Completed: /usr/share/omarchy/install/hardware/dell-xps-touchpad-haptics.sh
+[2026-09-05 21:33:19] Starting: /usr/share/omarchy/install/hardware/surface.sh
+[2026-09-05 21:33:19] Completed: /usr/share/omarchy/install/hardware/surface.sh
+[2026-09-05 21:33:19] Starting: /usr/share/omarchy/install/hardware/network.sh
+[2026-09-05 21:33:20] Completed: /usr/share/omarchy/install/hardware/network.sh
+[2026-09-05 21:33:20] Starting: /usr/share/omarchy/install/hardware/set-wireless-regdom.sh
+[2026-09-05 21:33:21] Completed: /usr/share/omarchy/install/hardware/set-wireless-regdom.sh
+[2026-09-05 21:33:21] Starting: /usr/share/omarchy/install/hardware/fix-fkeys.sh
+[2026-09-05 21:33:22] Completed: /usr/share/omarchy/install/hardware/fix-fkeys.sh
+[2026-09-05 21:33:22] Starting: /usr/share/omarchy/install/hardware/fix-synaptic-touchpad.sh
+[2026-09-05 21:33:22] Completed: /usr/share/omarchy/install/hardware/fix-synaptic-touchpad.sh
+[2026-09-05 21:33:22] Starting: /usr/share/omarchy/install/hardware/bluetooth.sh
+Created symlink '/etc/systemd/system/dbus-org.bluez.service' → '/usr/lib/systemd/system/bluetooth.service'.
+Created symlink '/etc/systemd/system/bluetooth.target.wants/bluetooth.service' → '/usr/lib/systemd/system/bluetooth.service'.
+[2026-09-05 21:33:22] Completed: /usr/share/omarchy/install/hardware/bluetooth.sh
+[2026-09-05 21:33:22] Starting: /usr/share/omarchy/install/hardware/nvidia.sh
+[2026-09-05 21:33:23] Completed: /usr/share/omarchy/install/hardware/nvidia.sh
+[2026-09-05 21:33:23] Starting: /usr/share/omarchy/install/hardware/vulkan.sh
+[2026-09-05 21:33:23] Completed: /usr/share/omarchy/install/hardware/vulkan.sh
+[2026-09-05 21:33:23] Starting: /usr/share/omarchy/install/hardware/intel/video-acceleration.sh
+[2026-09-05 21:33:24] Completed: /usr/share/omarchy/install/hardware/intel/video-acceleration.sh
+[2026-09-05 21:33:24] Starting: /usr/share/omarchy/install/hardware/intel/lpmd.sh
+[2026-09-05 21:33:24] Completed: /usr/share/omarchy/install/hardware/intel/lpmd.sh
+[2026-09-05 21:33:24] Starting: /usr/share/omarchy/install/hardware/intel/thermald.sh
+[2026-09-05 21:33:24] Completed: /usr/share/omarchy/install/hardware/intel/thermald.sh
+[2026-09-05 21:33:24] Starting: /usr/share/omarchy/install/hardware/intel/ptl-kernel.sh
+[2026-09-05 21:33:25] Completed: /usr/share/omarchy/install/hardware/intel/ptl-kernel.sh
+[2026-09-05 21:33:25] Starting: /usr/share/omarchy/install/hardware/intel/ipu7-camera.sh
+[2026-09-05 21:33:25] Completed: /usr/share/omarchy/install/hardware/intel/ipu7-camera.sh
+[2026-09-05 21:33:25] Starting: /usr/share/omarchy/install/hardware/intel/fred.sh
+[2026-09-05 21:33:25] Completed: /usr/share/omarchy/install/hardware/intel/fred.sh
+[2026-09-05 21:33:25] Starting: /usr/share/omarchy/install/hardware/intel/fix-wifi7-eht.sh
+[2026-09-05 21:33:26] Completed: /usr/share/omarchy/install/hardware/intel/fix-wifi7-eht.sh
+[2026-09-05 21:33:26] Starting: /usr/share/omarchy/install/hardware/intel/sof-firmware.sh
+[2026-09-05 21:33:26] Completed: /usr/share/omarchy/install/hardware/intel/sof-firmware.sh
+[2026-09-05 21:33:26] Starting: /usr/share/omarchy/install/hardware/asus/fix-asus-ptl-display-backlight.sh
+[2026-09-05 21:33:27] Completed: /usr/share/omarchy/install/hardware/asus/fix-asus-ptl-display-backlight.sh
+[2026-09-05 21:33:27] Starting: /usr/share/omarchy/install/hardware/asus/fix-asus-ptl-b9406-display.sh
+[2026-09-05 21:33:27] Completed: /usr/share/omarchy/install/hardware/asus/fix-asus-ptl-b9406-display.sh
+[2026-09-05 21:33:27] Starting: /usr/share/omarchy/install/hardware/asus/fix-asus-ptl-b9406-touchpad.sh
+[2026-09-05 21:33:28] Completed: /usr/share/omarchy/install/hardware/asus/fix-asus-ptl-b9406-touchpad.sh
+[2026-09-05 21:33:28] Starting: /usr/share/omarchy/install/hardware/asus/fix-z13-touchpad.sh
+[2026-09-05 21:33:28] Completed: /usr/share/omarchy/install/hardware/asus/fix-z13-touchpad.sh
+[2026-09-05 21:33:28] Starting: /usr/share/omarchy/install/hardware/framework/qmk-hid.sh
+[2026-09-05 21:33:29] Completed: /usr/share/omarchy/install/hardware/framework/qmk-hid.sh
+[2026-09-05 21:33:29] Starting: /usr/share/omarchy/install/hardware/apple/fix-spi-keyboard.sh
+[2026-09-05 21:33:29] Completed: /usr/share/omarchy/install/hardware/apple/fix-spi-keyboard.sh
+[2026-09-05 21:33:29] Starting: /usr/share/omarchy/install/hardware/apple/fix-suspend-nvme.sh
+[2026-09-05 21:33:29] Completed: /usr/share/omarchy/install/hardware/apple/fix-suspend-nvme.sh
+[2026-09-05 21:33:29] Starting: /usr/share/omarchy/install/hardware/apple/fix-t2.sh
+[2026-09-05 21:33:29] Completed: /usr/share/omarchy/install/hardware/apple/fix-t2.sh
+[2026-09-05 21:33:29] Starting: /usr/share/omarchy/install/hardware/apple/fix-brcmfmac-supplicant.sh
+[2026-09-05 21:33:30] Completed: /usr/share/omarchy/install/hardware/apple/fix-brcmfmac-supplicant.sh
+[2026-09-05 21:33:30] Starting: /usr/share/omarchy/install/hardware/lenovo/fix-yoga-pro7-bass-speakers.sh
+[2026-09-05 21:33:30] Completed: /usr/share/omarchy/install/hardware/lenovo/fix-yoga-pro7-bass-speakers.sh
+[2026-09-05 21:33:30] Starting: /usr/share/omarchy/install/hardware/fix-bcm43xx.sh
+[2026-09-05 21:33:31] Completed: /usr/share/omarchy/install/hardware/fix-bcm43xx.sh
+[2026-09-05 21:33:31] Starting: /usr/share/omarchy/install/hardware/fix-surface-keyboard.sh
+[2026-09-05 21:33:31] Completed: /usr/share/omarchy/install/hardware/fix-surface-keyboard.sh
+[2026-09-05 21:33:31] Starting: /usr/share/omarchy/install/hardware/fix-yt6801-ethernet-adapter.sh
+[2026-09-05 21:33:32] Completed: /usr/share/omarchy/install/hardware/fix-yt6801-ethernet-adapter.sh
+[2026-09-05 21:33:32] Starting: /usr/share/omarchy/install/hardware/fix-tuxedo-backlight.sh
+[2026-09-05 21:33:32] Completed: /usr/share/omarchy/install/hardware/fix-tuxedo-backlight.sh
+[2026-09-05 21:33:32] Starting: /usr/share/omarchy/install/hardware/speaker-tuning.sh
+[2026-09-05 21:33:32] Completed: /usr/share/omarchy/install/hardware/speaker-tuning.sh
+[2026-09-05 21:33:33] Starting: /usr/share/omarchy/install/hardware/pacman.sh
+[2026-09-05 21:33:33] Completed: /usr/share/omarchy/install/hardware/pacman.sh
+[2026-09-05 21:33:33] Starting: /usr/share/omarchy/install/login/sddm.sh
+[2026-09-05 21:33:33] Completed: /usr/share/omarchy/install/login/sddm.sh
+[2026-09-05 21:33:33] Starting: /usr/share/omarchy/install/post-install/pacman.sh
+[2026-09-05 21:33:34] Completed: /usr/share/omarchy/install/post-install/pacman.sh
+[2026-09-05 21:33:34] Starting: /usr/share/omarchy/install/post-install/udev.sh
+[2026-09-05 21:33:34] Completed: /usr/share/omarchy/install/post-install/udev.sh
+[2026-09-05 21:33:35] Starting: /usr/share/omarchy/install/post-install/localdb.sh
+[2026-09-05 21:33:46] Completed: /usr/share/omarchy/install/post-install/localdb.sh
+=== Omarchy Setup Completed: 2026-09-05 21:33:46 ===
+Omarchy setup: 1m 0s
+
+    › Staging provisioning
+
+    › stashing Node tarball for offline first-boot setup
+
+    › Finalizing boot and user setup
+
+    › Finalizing Limine boot [boot branch]
+
+    › Finalizing user [user branch]
+[2026-09-05 21:33:52] Starting: /usr/share/omarchy/install/user/theme.sh
+Updating Limine fallback EFI...
+Updating /boot/EFI/limine/limine_x64.efi...
+Creating a backup /boot/EFI/limine/limine_x64.bak...
+Limine EFI update completed successfully.
+Building UKI for linux (7.1.9-arch1-2)
+==> Using drop-in configuration file: 'omarchy_hooks.conf'
+==> Using drop-in configuration file: 'omarchy_resume.conf'
+==> Using drop-in configuration file: 'thunderbolt_module.conf'
+==> Using drop-in configuration file: 'zz-omarchy-resume.conf'
+==> Using drop-in configuration file: 'zz-omarchy-unencrypted-root.conf'
+==> Starting build: '7.1.9-arch1-2'
+  -> Running build hook: [base]
+[2026-09-05 21:34:05] Completed: /usr/share/omarchy/install/user/theme.sh
+[2026-09-05 21:34:05] Starting: /usr/share/omarchy/install/user/chromium.sh
+[2026-09-05 21:34:06] Completed: /usr/share/omarchy/install/user/chromium.sh
+[2026-09-05 21:34:06] Starting: /usr/share/omarchy/install/user/git.sh
+[2026-09-05 21:34:07] Completed: /usr/share/omarchy/install/user/git.sh
+[2026-09-05 21:34:07] Starting: /usr/share/omarchy/install/user/xcompose.sh
+[2026-09-05 21:34:07] Completed: /usr/share/omarchy/install/user/xcompose.sh
+[2026-09-05 21:34:07] Starting: /usr/share/omarchy/install/user/mise-work.sh
+mise trusted ~/Work
+  -> Running build hook: [udev]
+  -> Running build hook: [plymouth]
+mise WARN  mise-versions endpoint=version_list tool=node outcome=failed status=0 fallback=true error="error sending request"
+mise ~/.config/mise/config.toml tools: node@26.8.1
+[2026-09-05 21:34:27] Completed: /usr/share/omarchy/install/user/mise-work.sh
+[2026-09-05 21:34:27] Starting: /usr/share/omarchy/install/user/hardware/asus/fix-audio-mixer.sh
+[2026-09-05 21:34:28] Completed: /usr/share/omarchy/install/user/hardware/asus/fix-audio-mixer.sh
+[2026-09-05 21:34:28] Starting: /usr/share/omarchy/install/user/hardware/asus/fix-mic.sh
+[2026-09-05 21:34:28] Completed: /usr/share/omarchy/install/user/hardware/asus/fix-mic.sh
+[2026-09-05 21:34:28] Starting: /usr/share/omarchy/install/user/hardware/framework/fix-f13-amd-audio-input.sh
+[2026-09-05 21:34:29] Completed: /usr/share/omarchy/install/user/hardware/framework/fix-f13-amd-audio-input.sh
+[2026-09-05 21:34:29] Starting: /usr/share/omarchy/install/user/hardware/dell/xps13-text-scaling.sh
+[2026-09-05 21:34:29] Completed: /usr/share/omarchy/install/user/hardware/dell/xps13-text-scaling.sh
+[2026-09-05 21:34:29] Starting: /usr/share/omarchy/install/user/hardware/fix-nouveau-cursor.sh
+lspci: Unable to load libkmod resources: error -2
+[2026-09-05 21:34:30] Completed: /usr/share/omarchy/install/user/hardware/fix-nouveau-cursor.sh
+[2026-09-05 21:34:30] Starting: /usr/share/omarchy/install/user/default-keyring.sh
+[2026-09-05 21:34:30] Completed: /usr/share/omarchy/install/user/default-keyring.sh
+[2026-09-05 21:34:30] Starting: /usr/share/omarchy/install/user/mise.sh
+[2026-09-05 21:34:34] Completed: /usr/share/omarchy/install/user/mise.sh
+User finalization complete.

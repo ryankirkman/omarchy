@@ -1,0 +1,5 @@
+{
+  "status": "failed",
+  "error_type": "CalledProcessError",
+  "error": "Command '['/usr/bin/python3', '/home/runner/work/omarchy/omarchy/test/benchmarks/iso-vm.py', 'run', '--iso-source', '/home/runner/work/_temp/omarchy-install-speed/iso-harness', '--run-dir', '/home/runner/work/_temp/omarchy-install-speed/calibration', '--cpus', '4', '--memory', '8192', '--accelerator', 'kvm', '--poll-interval', '2', '--timeout', '1800', '--test-overlay-sha256', '192b782af42c164e78453f2b3b122b5ac1849dbbc5e382b76780827c0dcc38c2', '--iso', '/home/runner/work/_temp/omarchy-install-speed/firmware-initramfs-control.iso', '--verify-standalone-reboot', '--source-cache', 'cold', '--installed-boot-timeout', '300']' returned non-zero exit status 1."
+}

@@ -1,0 +1,12 @@
+{
+  "booted_installed_root": true,
+  "package_files_exit_status": 0,
+  "root_mount": [
+    {
+      "source": "/dev/vda2[/@]",
+      "fstype": "btrfs",
+      "target": "/"
+    }
+  ],
+  "validated_at": 1788646530.7454436
+}

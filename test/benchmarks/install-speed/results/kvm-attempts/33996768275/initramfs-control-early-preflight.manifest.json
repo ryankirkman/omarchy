@@ -1,0 +1,39 @@
+{
+  "schema_version": 1,
+  "mode": "control",
+  "disable_package_prefetch": false,
+  "original_initramfs_sha256": "6e3e15b983da69df4e18df2f1489fa854980b395b28546355d0f6dc13914694e",
+  "original_config_sha256": "1e00045b8b2979c16cbc7a943a708b136a1989c7407889a96b8450632ea9deba",
+  "hook_sha256": "cba3c7709fe79e1bd7cfde845867c72f64ce8377eaeb275076be4e9faf2243d7",
+  "payload": [
+    {
+      "path": "etc/systemd/system/getty@tty1.service.d/50-omarchy-benchmark-preflight.conf",
+      "mode": "0o644",
+      "sha256": "72fcffa6f06bc07d7603090cbf940dae8f44cd0a8c413bdd8522c4380177627e"
+    },
+    {
+      "path": "etc/systemd/system/omarchy-benchmark-preflight.service",
+      "mode": "0o644",
+      "sha256": "3d1dd8ee1e50faf930a9cda5a6be836ba0ce082233727ea72e81e74bfd61f5ad"
+    },
+    {
+      "path": "root/.automated_script.sh",
+      "mode": "0o755",
+      "sha256": "07964905427be657b2cd7a06ca0e0bf9df536dbed50c174ac222c3d380ade339"
+    },
+    {
+      "path": "usr/local/lib/omarchy-benchmark/preflight.sh",
+      "mode": "0o755",
+      "sha256": "d3fb34efdeddf00cc4e5cc7fca39747c441c980b6d7f7a0c8ac43062552c6d57"
+    },
+    {
+      "path": "usr/local/lib/omarchy-benchmark/run-early-preflight.sh",
+      "mode": "0o755",
+      "sha256": "4627c231faa8266e65ab76a6d9ff467f9bc0e023759f664f38f890e2d24251d4"
+    }
+  ],
+  "early_preflight": true,
+  "appended_archive_bytes": 9216,
+  "appended_archive_sha256": "a3544102d9c86d98f17bd1221c63b4e0ffa22d658067402ad114f44561bed51d",
+  "output_initramfs_sha256": "1ebaa5e147cd6bc6f011bb9efd21e1c8fa1489f917ca386b99d9b1eaa39f2158"
+}

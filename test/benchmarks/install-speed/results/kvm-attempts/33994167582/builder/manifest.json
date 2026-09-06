@@ -1,0 +1,370 @@
+{
+  "schema_version": 1,
+  "status": "builder-ssh-ready",
+  "mode": "builder",
+  "iso": "/home/runner/work/_temp/omarchy-install-speed/omarchy-4.0.2.iso",
+  "iso_sha256": "2ef8e624aa1bec7e277e28056b8535a6c9373ba48d7ede3f1a01cb6d2373cfb8",
+  "qemu_version": "QEMU emulator version 8.2.2 (Debian 1:8.2.2+ds-0ubuntu1.18)",
+  "qemu_argv": [
+    "/usr/bin/qemu-system-x86_64",
+    "-L",
+    "/usr/share/qemu",
+    "-machine",
+    "q35,accel=kvm",
+    "-cpu",
+    "host",
+    "-smp",
+    "4",
+    "-m",
+    "8192",
+    "-drive",
+    "if=pflash,format=raw,readonly=on,file=/usr/share/OVMF/OVMF_CODE_4M.fd",
+    "-drive",
+    "if=pflash,format=raw,file=/home/runner/work/_temp/omarchy-install-speed/builder/OVMF_VARS_4M.fd",
+    "-drive",
+    "file=/home/runner/work/_temp/omarchy-install-speed/builder/target.qcow2,format=qcow2,if=none,id=target,cache=writeback",
+    "-device",
+    "virtio-blk-pci,drive=target,bootindex=1",
+    "-device",
+    "virtio-vga,romfile=/usr/share/seabios/vgabios-virtio.bin",
+    "-display",
+    "none",
+    "-usb",
+    "-device",
+    "usb-tablet",
+    "-object",
+    "rng-random,id=rng0,filename=/dev/urandom",
+    "-device",
+    "virtio-rng-pci,rng=rng0",
+    "-netdev",
+    "user,id=net0,hostfwd=tcp:127.0.0.1:24022-:22",
+    "-device",
+    "virtio-net-pci,netdev=net0,romfile=",
+    "-qmp",
+    "tcp:127.0.0.1:24444,server=on,wait=off",
+    "-serial",
+    "file:/home/runner/work/_temp/omarchy-install-speed/builder/serial.log",
+    "-drive",
+    "file=/home/runner/work/_temp/omarchy-install-speed/omarchy-4.0.2.iso,media=cdrom,if=none,format=raw,id=iso,cache=writeback,readonly=on",
+    "-device",
+    "ide-cd,drive=iso,bootindex=2",
+    "-drive",
+    "file=/home/runner/work/_temp/omarchy-install-speed/builder/cidata.img,format=raw,if=none,id=cidata",
+    "-device",
+    "usb-storage,drive=cidata",
+    "-kernel",
+    "/home/runner/work/_temp/omarchy-install-speed/vmlinuz-linux-t2",
+    "-initrd",
+    "/home/runner/work/_temp/omarchy-install-speed/initramfs-builder.img",
+    "-append",
+    "archisobasedir=arch archisosearchuuid=2026-08-31-03-24-58-00 quiet splash xe.enable_panel_replay=0 initramfs_async=0 copytoram=n",
+    "-drive",
+    "file=/home/runner/work/_temp/omarchy-install-speed/root-build.raw,if=none,id=imagebuild,format=raw,cache=none,discard=unmap,detect-zeroes=unmap",
+    "-device",
+    "virtio-blk-pci,drive=imagebuild,serial=OMARCHY_IMAGE_BUILD"
+  ],
+  "accelerator": "kvm",
+  "cpu_count": 4,
+  "memory_mib": 8192,
+  "fresh_target": true,
+  "fresh_nvram": true,
+  "disk_format": "qcow2",
+  "disk_virtual_bytes": 42949672960,
+  "disk_cache": "writeback",
+  "iso_cache": "writeback",
+  "readiness_poll_interval_s": 2,
+  "installed_boot_timeout_s": null,
+  "started_at": 1788645415.7414732,
+  "hostname": "omarchy-benchmark",
+  "measurement_interrupted": false,
+  "network": "QEMU user networking; ISO installs packages from its own bundled mirror",
+  "encryption": false,
+  "filesystem": "btrfs compress=zstd",
+  "interventions": [
+    {
+      "at_host_wall_s": 21.898734106999996,
+      "action": "ssh",
+      "command": "set -euo pipefail\ntest ! -e /run/baseline-manifests\nmkdir /run/baseline-manifests\nprintf %s YWJzZWlsLWNwcCAyMDI2MDgxNy4wLTEKYWNsIDIuNC4wLTEKYWR3YWl0YS1jdXJzb3JzIDUwLjAtMQphZHdhaXRhLWZvbnRzIDUwLjAtMQphZHdhaXRhLWljb24tdGhlbWUgNTAuMC0xCmFkd2FpdGEtaWNvbi10aGVtZS1sZWdhY3kgNDYuMi0zCmFldGhlciA0LjI5LjYtMQphbHNhLWNhcmQtcHJvZmlsZXMgMToxLjYuOC0xCmFsc2EtbGliIDEuMi4xNi4xLTEKYWxzYS10b3BvbG9neS1jb25mIDEuMi41LjEtNAphbHNhLXVjbS1jb25mIDEuMi4xNi4xLTEKYWxzYS11dGlscyAxLjIuMTYtMQphb20gMy4xNC4xLTEKYXBwc3RyZWFtIDEuMS42LTEKYXF1YW1hcmluZSAwLjE0LjAtMgphcmNobGludXgta2V5cmluZyAyMDI2MDcyNy0xCmFyZ29uMiAyMDE5MDcwMi02CmFzZGNvbnRyb2wgMTowLjYuMC0yCmF0LXNwaTItY29yZSAyLjYwLjYtMQphdHRpY2EgNi4yOS4wLTEKYXR0ciAyLjYuMC0xCmF1ZGl0IDQuMi4xLTEKYXV0b2NvbmYgMi43My0xCmF1dG9tYWtlIDEuMTguMS0xCmF2YWhpIDE6MC45cmM1LTEKYXlhdGFuYS1pZG8gMC4xMC40LTEKYmFzZSAzLTMKYmFzZS1kZXZlbCAxLTIKYmFzaCA1LjMuMTUtMQpiYXNoLWNvbXBsZXRpb24gMi4xOC4wLTEKYmF0IDAuMjYuMS0yCmJpbnV0aWxzIDIuNDctNApiaXNvbiAzLjguMi04CmJsYXMgMy4xMi4xLTIKYmx1ZXogNS44Ny0yCmJsdWV6LWxpYnMgNS44Ny0yCmJsdWV6LXRvb2xzIDAuMi4wLTYKYmx1ZXotdXRpbHMgNS44Ny0yCmJvbHQgMC45LjExLTMKYm9vc3QtbGlicyAxLjkyLjAtMQpicmVlemUtaWNvbnMgNi4yOS4wLTEKYnJpZ2h0bmVzc2N0bCAwLjUuMS0zCmJyb3RsaSAxLjIuMC0xCmJ0b3AgMS40LjctMQpidHJmcy1wcm9ncyA3LjEtMQpidWJibGV3cmFwIDAuMTEuMi0xCmJ6aXAyIDEuMC44LTYKYy1hcmVzIDEuMzQuOC0xCmNhLWNlcnRpZmljYXRlcyAyMDI0MDYxOC0xCmNhLWNlcnRpZmljYXRlcy1tb3ppbGxhIDMuMTI3LTEKY2EtY2VydGlmaWNhdGVzLXV0aWxzIDIwMjQwNjE4LTEKY2Fpcm8gMS4xOC40LTEKY2JsYXMgMy4xMi4xLTIKY2RwYXJhbm9pYSAxMC4yLTEwCmNmaXRzaW8gMTo0LjcuMC0xCmNocm9taXVtIDE1MS4wLjc5MjIuMTczLTEKY2lmcy11dGlscyA3LjUtMQpjbGFuZyAyMi4xLjgtMQpjbGlhbXAgMS42My4yLTEKY2x1Y2VuZSAyLjMuMy40LTE3CmNvbXBpbGVyLXJ0IDIyLjEuOC0xCmNvbnRhaW5lcmQgMi4zLjQtMQpjb252ZXJ0bGl0IDEuOC0xMwpjb3JldXRpbHMgOS4xMS0yCmNwaW8gMi4xNS0zCmNwcHRyYWNlIDEuMC40LTIKY3JhY2tsaWIgMi4xMC4zLTEKY3J5cHRzZXR1cCAyLjguNy0xCmN1cHMgMjoyLjQuMTktMQpjdXBzLWZpbHRlcnMgMi4wLjEtMgpjdXBzLXBrLWhlbHBlciAwLjIuNy0yCmN1cmwgOC4yMS4wLTEKZGF2MWQgMS41LjQtMQpkYjUuMyA1LjMuMjgtNwpkYnVzIDEuMTYuMi0xCmRidXMtYnJva2VyIDM3LTMKZGJ1cy1icm9rZXItdW5pdHMgMzctMwpkYnVzLXVuaXRzIDM3LTMKZGNvbmYgMC40OS4wLTEKZGRjdXRpbCAyLjIuNy0xCmRlYnVnZWRpdCA1LjMtMgpkZWZhdWx0LWN1cnNvcnMgMy0xCmRlbm8gMi45LjUtMQpkZXNrdG9wLWZpbGUtdXRpbHMgMC4yOC0xCmRldmljZS1tYXBwZXIgMi4wMy40Mi0xCmRpZmZ1dGlscyAzLjEyLTIKZGp2dWxpYnJlIDMuNS4zMC4xLTEKZG9ja2VyIDE6MjkuNy4yLTEKZG9ja2VyLWJ1aWxkeCAwLjM2LjEtMQpkb2NrZXItY29tcG9zZSA1LjUuMC0xCmRvc2ZzdG9vbHMgNC4yLTUKZG90bmV0LWhvc3QgMTAuMC4xMS5zZGsxMTEtMQpkb3RuZXQtcnVudGltZSAxMC4wLjExLnNkazExMS0xCmRvdWJsZS1jb252ZXJzaW9uIDMuNC4wLTEKZHVhLWNsaSAyLjQyLjEtMQpkdWt0YXBlIDIuNy4wLTcKZTJmc3Byb2dzIDEuNDcuNC0xCmVib29rLXRvb2xzIDAuMi4yLTkKZWZpYm9vdG1nciAxOC00CmVmaXZhciAzOS0yCmVsZWN0cm9uNDMgNDMuNC4xLTEKZWxmdXRpbHMgMC4xOTYtMQplbmNoYW50IDIuOC4xNS0yCmV2aW5jZSAxOjQ4LjQtMQpleGVtcGkgMi42LjYtMwpleGZhdHByb2dzIDEuNC4zLTEKZXhpdjIgMC4yOC44LTIKZXhwYWMgMTAtMTMKZXhwYXQgMi44LjMtMQplemEgMC4yMy41LTIKZmFrZXJvb3QgMToxLjM3LjItMwpmYXN0ZmV0Y2ggMi42Ny4xLTEKZmNmdCAzLjMuMy0xCmZjaXR4NSA1LjEuMjEtMQpmY2l0eDUtZ3RrIDUuMS43LTEKZmNpdHg1LXF0IDUuMS4xNC0yCmZkIDEwLjQuMi0yCmZmbXBlZyAyOjkuMC4xLTEKZmZtcGVndGh1bWJuYWlsZXIgMi4zLjAtMgpmZnR3IDMuMy4xMS0xCmZpbGUgNS40OC0xCmZpbGVzeXN0ZW0gMjAyNS4xMC4xMi0xCmZpbmR1dGlscyA0LjExLjAtMQpmbGFjIDEuNS4wLTEKZmxleCAyLjYuNC02CmZtdCAxMi4yLjAtMQpmb250Y29uZmlnIDI6Mi4xOC4zLTIKZm9vdCAxLjI3LjAtMgpmcmVlZ2x1dCAzLjguMC0xCmZyZWV0eXBlMiAyLjE0LjMtMQpmcmVpMHItcGx1Z2lucyAzLjUuMC0xCmZyaWJpZGkgMS4wLjE2LTIKZnVzZS1jb21tb24gMy4xOC4yLTEKZnVzZTMgMy4xOC4yLTEKZnpmIDAuNzQuMy0xCmdhdmwgMi4wLjEtMgpnYXdrIDUuNC4xLTEKZ2MgOC4yLjEyLTEKZ2NjIDE2LjIuMStyMjMrZ2Q1NjQyNTNlYjZjOC0xCmdjYy1saWJzIDE2LjIuMStyMjMrZ2Q1NjQyNTNlYjZjOC0xCmdjciAzLjQxLjItMgpnY3ItNCA0LjQuMC4xLTEKZ2RiIDE3LjItMQpnZGItY29tbW9uIDE3LjItMQpnZGJtIDEuMjYtMgpnZGstcGl4YnVmMiAyLjQ0LjctMQpnZXR0ZXh0IDEuMC0yCmdleGl2MiAwLjE2LjItMgpnZXhpdjItY29tbW9uIDAuMTYuMi0yCmdob3N0c2NyaXB0IDEwLjA3LjEtMQpnaWZsaWIgNi4xLjMtMgpnaXQgMi41NS4wLTEKZ2pzIDI6MS44OC4xLTEKZ2xpYi1uZXR3b3JraW5nIDE6Mi44MC4xLTEKZ2xpYjIgMi44OC4zLTEKZ2xpYmMgMi40NCtyMjQrZzE2YmUxNTE4NDk1Zi0xCmdsc2xhbmcgMToxLjQuMzU3LjAtMQpnbHUgOS4wLjMtMwpnbHljaW4gMi4xLjUtMgpnbHljaW4tZ3RrNCAyLjEuNS0yCmdtcCA2LjMuMC0zCmdub21lLWF1dG9hciAwLjQuNS0xCmdub21lLWRlc2t0b3AgMTo0NC41LTEKZ25vbWUtZGVza3RvcC00IDE6NDQuNS0xCmdub21lLWRlc2t0b3AtY29tbW9uIDE6NDQuNS0xCmdub21lLWRpc2stdXRpbGl0eSA0Ni4xLTMKZ25vbWUta2V5cmluZyAxOjUwLjAtMQpnbm9tZS10aGVtZXMtZXh0cmEgMTozLjI4LTEKZ251bGliLWwxMG4gMjAyNDEyMzEtMQpnbnVwZyAyLjQuOS0zCmdudXRscyAzLjguMTMtMgpnb2JqZWN0LWludHJvc3BlY3Rpb24tcnVudGltZSAxLjg2LjAtMgpncGVyZnRvb2xzIDIuMTguMS0xCmdwZ21lIDIuMS4yLTEKZ3BnbWVwcCAyLjEuMC0xCmdwbSAxLjIwLjcucjM4LmdlODJkMWE2LTYKZ3B1LXNjcmVlbi1yZWNvcmRlciA2LjAuMS0xCmdyYXBoZW5lIDEuMTAuOC0yCmdyYXBoaXRlIDE6MS4zLjE1LTEKZ3JlcCAzLjEyLTIKZ3JpbSAxLjUuMC0yCmdyb2ZmIDEuMjQuMS0xCmdzZXR0aW5ncy1kZXNrdG9wLXNjaGVtYXMgNTAuMS0xCmdzZXR0aW5ncy1zeXN0ZW0tc2NoZW1hcyA1MC4xLTEKZ3Nmb250cyAyMDIwMDkxMC02CmdzbSAxLjAuMjQtMQpnc3BlbGwgMS4xNC40LTEKZ3NzZHAgMS42LjYtMQpnc3QtcGx1Z2luLWd0ayAxLjI4LjYtMgpnc3QtcGx1Z2luLXBpcGV3aXJlIDE6MS42LjgtMQpnc3QtcGx1Z2lucy1iYWQtbGlicyAxLjI4LjYtMgpnc3QtcGx1Z2lucy1iYXNlIDEuMjguNi0yCmdzdC1wbHVnaW5zLWJhc2UtbGlicyAxLjI4LjYtMgpnc3RyZWFtZXIgMS4yOC42LTIKZ3Rlc3QgMS4xNy4wLTIKZ3RrLXVwZGF0ZS1pY29uLWNhY2hlIDE6NC4yMi40LTEKZ3RrMyAxOjMuMjQuNTItMQpndGs0IDE6NC4yMi40LTEKZ3RrNC1sYXllci1zaGVsbCAxLjMuMC0xCmd0a3NvdXJjZXZpZXc0IDQuOC40LTIKZ3VpbGUgMy4wLjExLTEKZ3VtIDIuMC4wLTEKZ3VwbnAgMToxLjYuMTAtMQpndXBucC1kbG5hIDAuMTIuMC01Cmd1cG5wLWlnZCAxLjYuMC0yCmd2ZnMgMS42MC4yLTEKZ3Zmcy1tdHAgMS42MC4yLTEKZ3Zmcy1uZnMgMS42MC4yLTEKZ3Zmcy1zbWIgMS42MC4yLTEKZ3ppcCAxLjE0LTIKaGFyZmJ1enogMTQuMy4xLTEKaGFyZmJ1enotaWN1IDE0LjMuMS0xCmhlcmRyIDAuOC4yLTEKaGljb2xvci1pY29uLXRoZW1lIDAuMTgtMQpoaWRhcGkgMC4xNS4wLTEKaGlnaHdheSAxLjQuMC0xCmh1bnNwZWxsIDEuNy4zLTEKaHdkYXRhIDAuNDEwLTEKaHdsb2MgMi4xNC4wLTEKaHlwaGVuIDIuOC45LTEKaHlwcmN1cnNvciAwLjEuMTMtNwpoeXByZ3JhcGhpY3MgMC41LjEtNApoeXBybGFuZCAwLjU2LjItMQpoeXBybGFuZC1ndWl1dGlscyAwLjIuMi0yCmh5cHJsYW5kLXByZXZpZXctc2hhcmUtcGlja2VyIDAuMi4xLTEKaHlwcmxhbmcgMC42LjgtNQpoeXBycGlja2VyIDAuNC43LTMKaHlwcnN1bnNldCAwLjQuMC0zCmh5cHJ0b29sa2l0IDAuNS40LTQKaHlwcnV0aWxzIDAuMTQuMS0xCmh5cHJ3YXlsYW5kLXNjYW5uZXIgMC40LjYtMQpoeXByd2lyZSAwLjMuMS0zCmkyYy10b29scyA0LjQtNAppYW5hLWV0YyAyMDI2MDYxNy0xCmljdSA3OC4zLTEKaWpzIDAuMzUtNwppbWFnZW1hZ2ljayA3LjEuMi4zMC0xCmltYXRoIDMuMi4zLTEKaW12IDUuMC4xLTIKaW5ldHV0aWxzIDIuOC0xCmluaXBhcnNlciA0LjIuNi0yCmlub3RpZnktdG9vbHMgNC4yNS45LjAtMQppbnhpIDMuMy40MS4xLTEKaXByb3V0ZTIgNy4yLjAtMQppcHRhYmxlcyAxOjEuOC4xMy0xCmlwdXRpbHMgMjAyNTA2MDUtMQppc28tY29kZXMgNC4yMC4xLTEKaXcgNi4xNy0xCmphbnNzb24gMi4xNS4xLTEKamFzcGVyIDQuMi45LTEKamJpZzJkZWMgMC4yMC0yCmpiaWdraXQgMi4xLTgKamVtYWxsb2MgMTo1LjMuMS0zCmpxIDEuOC4yLTEKanMxNDAgMTQwLjE0LjAtMQpqc29uLWMgMC4xOS0xCmpzb24tZ2xpYiAxLjEwLjgtMQprYWNjb3VudHMtaW50ZWdyYXRpb24gMjYuMDguMC0xCmthcmNoaXZlIDYuMjkuMC0xCmtiZCAyLjEwLjAtMQprYm9va21hcmtzIDYuMjkuMC0xCmtjbXV0aWxzIDYuMjkuMC0xCmtjb2RlY3MgNi4yOS4wLTEKa2NvbG9yc2NoZW1lIDYuMjkuMC0xCmtjb21wbGV0aW9uIDYuMjkuMC0xCmtjb25maWcgNi4yOS4wLTEKa2NvbmZpZ3dpZGdldHMgNi4yOS4wLTEKa2NvcmVhZGRvbnMgNi4yOS4wLTEKa2NyYXNoIDYuMjkuMC0xCmtkYnVzYWRkb25zIDYuMjkuMC0xCmtkZG9ja3dpZGdldHMgMi40LjEtMQprZGVubGl2ZSAyNi4wOC4wLTEKa2VybmVsLW1vZHVsZXMtaG9vayAwLjEuNy0zCmtleXV0aWxzIDEuNi4zLTQKa2ZpbGVtZXRhZGF0YSA2LjI5LjAtMQprZ2xvYmFsYWNjZWwgNi4yOS4wLTEKa2d1aWFkZG9ucyA2LjI5LjAtMQpraTE4biA2LjI5LjAtMQpraWNvbnRoZW1lcyA2LjI5LjAtMQpraW8gNi4yOS4wLTIKa2lyaWdhbWkgNi4yOS4wLTEKa2l0ZW1tb2RlbHMgNi4yOS4wLTEKa2l0ZW12aWV3cyA2LjI5LjAtMQpram9id2lkZ2V0cyA2LjI5LjAtMQprbW9kIDM0LjItMQprbmV3c3R1ZmYgNi4yOS4wLTEKa25vdGlmaWNhdGlvbnMgNi4yOS4wLTEKa25vdGlmeWNvbmZpZyA2LjI5LjAtMQprcGFja2FnZSA2LjI5LjAtMQprcmI1IDEuMjIuMi0xCmtzZXJ2aWNlIDYuMjkuMC0xCmt0ZXh0d2lkZ2V0cyA2LjI5LjAtMQprd2FsbGV0IDYuMjkuMC0xCmt3aWRnZXRzYWRkb25zIDYuMjkuMC0xCmt3aW5kb3dzeXN0ZW0gNi4yOS4wLTEKa3htbGd1aSA2LjI5LjAtMQpsLXNtYXNoIDIuMTQuNS00CmxhbWUgNC4wLTEKbGFwYWNrIDMuMTIuMS0yCmxhenlkb2NrZXIgMC4yNS4yLTEKbGF6eWdpdCAwLjY0LjEtMQpsY21zMiAyLjE5LjEtMQpsZGIgMjo0LjI0LjYtMQpsZWFuY3J5cHRvIDEuOC4wLTEKbGVwdG9uaWNhIDEuODcuMC0xCmxlc3MgMTo3MDQtMQpsaWJhYncgMC4xLjQtMQpsaWJhY2NvdW50cy1nbGliIDEuMjctMwpsaWJhY2NvdW50cy1xdCAxLjE3LTIKbGliYWR3YWl0YSAxOjEuOS4zLTEKbGliYXJjaGl2ZSAzLjguOS0xCmxpYmFzYW4gMTYuMi4xK3IyMytnZDU2NDI1M2ViNmM4LTEKbGliYXNzIDAuMTcuNS0xCmxpYmFzc3VhbiAzLjAuMC0xCmxpYmFzeW5jbnMgMTowLjgrcjMrZzY4Y2Q1YWYtMwpsaWJhdGFzbWFydCAwLjE5LTgKbGliYXRvbWljIDE2LjIuMStyMjMrZ2Q1NjQyNTNlYjZjOC0xCmxpYmF0b21pY19vcHMgNy44LjItMgpsaWJhdmMxMzk0IDAuNS40LTcKbGliYXZpZiAxLjQuMi0xCmxpYmF5YXRhbmEtYXBwaW5kaWNhdG9yIDAuNi4wLTEKbGliYXlhdGFuYS1pbmRpY2F0b3IgMC45LjUtMQpsaWJiMiAwLjk4LjEtMwpsaWJibGFrZTMgMS44LjctMQpsaWJibG9ja2RldiAzLjUuMC0yCmxpYmJsb2NrZGV2LWNyeXB0byAzLjUuMC0yCmxpYmJsb2NrZGV2LWZzIDMuNS4wLTIKbGliYmxvY2tkZXYtbG9vcCAzLjUuMC0yCmxpYmJsb2NrZGV2LW1kcmFpZCAzLjUuMC0yCmxpYmJsb2NrZGV2LW52bWUgMy41LjAtMgpsaWJibG9ja2Rldi1wYXJ0IDMuNS4wLTIKbGliYmxvY2tkZXYtc21hcnQgMy41LjAtMgpsaWJibG9ja2Rldi1zd2FwIDMuNS4wLTIKbGliYmx1cmF5IDEuNC4xLTEKbGliYnBmIDEuNy4wLTEKbGliYnMyYiAzLjEuMC0xMApsaWJic2QgMC4xMi4yLTIKbGliYnl0ZXNpemUgMi4xMi0zCmxpYmNhbmJlcnJhIDE6MC4zMCtyMitnYzA2MjBlNC02CmxpYmNhcCAyLjc4LTEKbGliY2FwLW5nIDAuOS4zLTEKbGliY2RpbyAyLjMuMC0xCmxpYmNkaW8tcGFyYW5vaWEgMTAuMisyLjAuMi0yCmxpYmNkciAwLjEuOS0xCmxpYmNnaWYgMC41LjMtMQpsaWJjbG91ZHByb3ZpZGVycyAwLjQuMC0xCmxpYmNtaXMgMC42LjMtMgpsaWJjb2xvcmQgMS40LjgtMQpsaWJjdWUgMi4zLjAtMgpsaWJjdXBzIDI6Mi40LjE5LTEKbGliY3Vwc2ZpbHRlcnMgMi4xLjEtNApsaWJkYWVtb24gMC4xNC02CmxpYmRhdGFjaGFubmVsIDAuMjQuNS0yCmxpYmRhdHJpZSAwLjIuMTQtMQpsaWJkYnVzbWVudS1nbGliIDE4LjEwLjIwMTgwOTE3LTIKbGliZGJ1c21lbnUtZ3RrMyAxOC4xMC4yMDE4MDkxNy0yCmxpYmRjMTM5NCAyLjIuNy0yCmxpYmRlMjY1IDEuMS4xLTEKbGliZGVjb3IgMC4yLjUtMQpsaWJkZWZsYXRlIDEuMjYtMQpsaWJkaXNwbGF5LWluZm8gMC4zLjAtMQpsaWJkb3ZpIDMuNC4wLTEKbGliZHJtIDIuNC4xMzQtMQpsaWJkdmRuYXYgNy4wLjAtMQpsaWJkdmRyZWFkIDcuMS4xLTEKbGliZHdhcmYgMToyLjMuMi0xCmxpYmUtYm9vayAwLjEuNC0xCmxpYmVidXIxMjggMS4yLjYtMgpsaWJlZGl0IDIwMjYwNTEyXzMuMS0xCmxpYmVpIDEuNi4wLTEKbGliZWxmIDAuMTk2LTEKbGliZXBveHkgMS41LjEwLTMKbGliZXB1YmdlbiAwLjEuMS02CmxpYmV0b255ZWsgMC4xLjEzLTIKbGliZXZkZXYgMS4xMy43LTEKbGliZXZlbnQgMi4xLjEzLTIKbGliZXhpZiAwLjYuMjYtMQpsaWJleHR0ZXh0Y2F0IDMuNC44LTEKbGliZmRrLWFhYyAyLjAuMy0yCmxpYmZmaSAzLjguMC0xCmxpYmZvbnRlbmMgMS4xLjktMQpsaWJmcmVlYXB0eCAwLjIuMi0xCmxpYmZyZWVoYW5kIDAuMS4zLTEKbGliZnlhbWwgMC45LjYtMwpsaWJnY2MgMTYuMi4xK3IyMytnZDU2NDI1M2ViNmM4LTEKbGliZ2NyeXB0IDEuMTIuMi0xCmxpYmdmb3J0cmFuIDE2LjIuMStyMjMrZ2Q1NjQyNTNlYjZjOC0xCmxpYmdpcmVwb3NpdG9yeSAxLjg2LjAtMgpsaWJnaXQyIDE6MS45LjctMQpsaWJnbHZuZCAxLjcuMC0zCmxpYmdvbXAgMTYuMi4xK3IyMytnZDU2NDI1M2ViNmM4LTEKbGliZ3BnLWVycm9yIDEuNjEtMQpsaWJnc2YgMS4xNC41OC0xCmxpYmd1ZGV2IDIzOC0zCmxpYmd4cHMgMC4zLjItNQpsaWJoYW5keSAxLjguMy0yCmxpYmhlaWYgMS4yMy4xLTQKbGliaHdhc2FuIDE2LjIuMStyMjMrZ2Q1NjQyNTNlYjZjOC0xCmxpYmljZSAxLjEuMi0xCmxpYmlkbiAxLjQ0LTEKbGliaWRuMiAyLjMuOC0xCmxpYmllYzYxODgzIDEuMi4wLTkKbGliaW1hZ2VxdWFudCA0LjQuMS0yCmxpYmltb2JpbGVkZXZpY2UgMS40LjAtMgpsaWJpbW9iaWxlZGV2aWNlLWdsdWUgMS4zLjItMQpsaWJpbmloIDYyLTIKbGliaW5wdXQgMS4zMS4zLTEKbGliaXB0Y2RhdGEgMS4wLjUtNQpsaWJpc2wgMC4yOC0xCmxpYml4aW9uIDAuMjAuMC04CmxpYmpwZWctdHVyYm8gMy4yLjAtMgpsaWJqdWljZSAxLjcuMy0xCmxpYmp4bCAwLjEyLjAtMQpsaWJrc2JhIDEuOC4wLTEKbGlibGFuZ3RhZyAwLjYuOC0xCmxpYmxjMyAxLjEuMy0yCmxpYmxkYWMgMi4wLjIuNi0xCmxpYmxkYXAgMi42LjEzLTEKbGlibHFyIDAuNC4zLTEKbGlibHNhbiAxNi4yLjErcjIzK2dkNTY0MjUzZWI2YzgtMQpsaWJsdXYgMS41Mi4xLTEKbGlibWFrZXBrZy1kcm9waW5zIDIwLTIKbGlibWFuZXR0ZSAwLjIuMTMtMgpsaWJtZCAxLjIuMC0xCmxpYm1tLWdsaWIgMS4yNC4yLTEKbGlibW5nIDIuMC4zLTQKbGlibW5sIDEuMC41LTIKbGlibW9kcGx1ZyAwLjguOS4wLTcKbGlibXBjIDEuNC4xLTEKbGlibXNwdWIgMC4xLjUtMQpsaWJtdHAgMS4xLjIzLTEKbGlibXdhdyAwLjMuMjMtMQpsaWJteXNvZmEgMS4zLjUtMQpsaWJuYXV0aWx1cy1leHRlbnNpb24gNTAuMi4yLTEKbGlibmRwIDEuOS0xCmxpYm5ldGZpbHRlcl9jb25udHJhY2sgMS4xLjEtMQpsaWJuZXd0IDAuNTIuMjUtMgpsaWJuZm5ldGxpbmsgMS4wLjItMgpsaWJuZnMgNi4wLjItNQpsaWJuZnRubCAxLjMuMS0xCmxpYm5naHR0cDIgMS43MC4wLTEKbGlibmdodHRwMyAxLjE4LjAtMQpsaWJuZ3RjcDIgMS4yNS4wLTEKbGlibmljZSAwLjEuMjMtMQpsaWJubCAzLjEyLjAtMQpsaWJubSAxLjU4LjEtMQpsaWJub3RpZnkgMC44LjgtMQpsaWJuc2JtcCAwLjEuNy0yCmxpYm5zZ2lmIDEuMC4wLTIKbGlibnNsIDIuMC4xLTIKbGlibnVtYmVydGV4dCAxLjAuMTEtMwpsaWJudm1lIDEuMTYuMi0yCmxpYm9iamMgMTYuMi4xK3IyMytnZDU2NDI1M2ViNmM4LTEKbGlib2RmZ2VuIDAuMS44LTUKbGlib2dnIDEuMy42LTEKbGlib3Blbm1wdCAwLjguOC0xCmxpYm9yY3VzIDAuMjEuMC03CmxpYm9zaW5mbyAxLjEyLjAtMwpsaWJwMTEta2l0IDAuMjYuNS0xCmxpYnBhZ2VtYWtlciAwLjAuNC01CmxpYnBhcGVyIDIuMi44LTEKbGlicGF0aHJzIDAuMi41LTIKbGlicGNhcCAxLjEwLjYtMQpsaWJwY2lhY2Nlc3MgMC4xOS0xCmxpYnBnbSA1LjMuMTI4LTQKbGlicGlwZWxpbmUgMS41LjgtMQpsaWJwaXBld2lyZSAxOjEuNi44LTEKbGlicGxhY2VibyA3LjM2MC4xLTYKbGlicGxpc3QgMi43LjAtMwpsaWJwbmcgMS42LjU4LTIKbGlicG9ydGFsIDAuMTAuMC0xCmxpYnBvcnRhbC1ndGs0IDAuMTAuMC0xCmxpYnBwZCAyLjEuMS0yCmxpYnByb3h5IDAuNS4xMi0xCmxpYnBzbCAwLjIxLjUtMgpsaWJwdWxzZSAxNy4wK3I5OCtnYjA5NjcwNGMwLTEKbGlicHdxdWFsaXR5IDEuNC41LTcKbGlicXVhZG1hdGggMTYuMi4xK3IyMytnZDU2NDI1M2ViNmM4LTEKbGlicXhwIDAuMC4zLTEKbGlicmFxbSAwLjExLjAtMQpsaWJyYXcxMzk0IDIuMS4yLTQKbGlicmVvZmZpY2UtZnJlc2ggMjYuMi41LTMKbGlicmV2ZW5nZSAwLjAuNi0xCmxpYnJzdmcgMjoyLjYyLjMtMQpsaWJzYW1wbGVyYXRlIDAuMi4yLTMKbGlic2FzbCAyLjEuMjgtNQpsaWJzZWNjb21wIDIuNi4wLTEKbGlic2VjcmV0IDAuMjEuNy0xCmxpYnNpeGVsIDEuMTAuNS0xCmxpYnNtIDEuMi42LTEKbGlic25kZmlsZSAxLjIuMi00CmxpYnNvZGl1bSAxLjAuMjItMQpsaWJzb3VwMyAzLjYuNi0yCmxpYnNveHIgMC4xLjMtNQpsaWJzcGVjdHJlIDAuMi4xMi0yCmxpYnNydHAgMToyLjguMC0xCmxpYnNzaCAwLjEyLjItMQpsaWJzc2gyIDEuMTEuMS03CmxpYnN0YXJvZmZpY2UgMC4wLjgtMQpsaWJzdGRjKysgMTYuMi4xK3IyMytnZDU2NDI1M2ViNmM4LTEKbGlic3RlbW1lciAzLjEuMS0xCmxpYnN5bmN0ZXggMjAyNi4wLTIKbGlic3lzcHJvZi1jYXB0dXJlIDUwLjAtNgpsaWJ0YXNuMSA0LjIxLjAtMQpsaWJ0YXRzdSAxLjAuNS0xCmxpYnRlYW0gMS4zMi0zCmxpYnRoYWkgMC4xLjMwLTEKbGlidGhlb3JhIDEuMi4wLTEKbGlidGlmZiA0LjcuMi0xCmxpYnRpcnBjIDEuMy43LTEKbGlidG9tbWF0aCAxLjMuMC0yCmxpYnRvb2wgMi42LjItNQpsaWJ0c2FuIDE2LjIuMStyMjMrZ2Q1NjQyNTNlYjZjOC0xCmxpYnVic2FuIDE2LjIuMStyMjMrZ2Q1NjQyNTNlYjZjOC0xCmxpYnVuaWJyZWFrIDcuMC0xCmxpYnVuaXN0cmluZyAxLjQuMi0xCmxpYnVud2luZCAxLjguMi0xCmxpYnVyaW5nIDIuMTUtMQpsaWJ1c2IgMS4wLjMwLTEKbGlidXNibXV4ZCAyLjEuMS0yCmxpYnV0ZW1wdGVyIDEuMi4zLTEKbGlidXRmOHByb2MgMi4xMS4zLTEKbGlidXYgMS41Mi4xLTEKbGlidmEgMi4yNC4xLTEKbGlidmRwYXUgMS41LTQKbGlidmVydG8gMC4zLjItNgpsaWJ2aXBzIDguMTguNS0xCmxpYnZpc2lvIDAuMS4xMS0xCmxpYnZvcmJpcyAxLjMuNy00CmxpYnZwbCAyLjE3LjAtMQpsaWJ2cHggMS4xNi4wLTMKbGlidnRlcm0gMC4zLjMtMgpsaWJ3YWNvbSAyLjE5LjEtMQpsaWJ3YmNsaWVudCAyOjQuMjQuNi0xCmxpYndlYnAgMS42LjAtMgpsaWJ3aXJlcGx1bWJlciAwLjUuMTUtMQpsaWJ3cGQgMC4xMC4zLTYKbGlid3BzIDAuNC4xNC00CmxpYngxMSAxLjguMTMtMQpsaWJ4YXUgMS4wLjEyLTEKbGlieGNiIDEuMTcuMC0xCmxpYnhjb21wb3NpdGUgMC40LjctMQpsaWJ4Y3J5cHQgNC41LjItMQpsaWJ4Y3Vyc29yIDEuMi4zLTEKbGlieGN2dCAwLjEuMy0xCmxpYnhkYW1hZ2UgMS4xLjctMQpsaWJ4ZG1jcCAxLjEuNS0yCmxpYnhleHQgMS4zLjctMQpsaWJ4Zml4ZXMgNi4wLjItMQpsaWJ4Zm9udDIgMi4wLjktMQpsaWJ4ZnQgMi4zLjktMQpsaWJ4aSAxLjguMy0xCmxpYnhpbmVyYW1hIDEuMS42LTEKbGlieGtiY29tbW9uIDEuMTMuMi0xCmxpYnhrYmNvbW1vbi14MTEgMS4xMy4yLTEKbGlieGtiZmlsZSAxLjIuMC0xCmxpYnhtbDIgMi4xNS4zLTEKbGlieG1sYiAwLjMuMjktMQpsaWJ4bXUgMS4zLjEtMQpsaWJ4cHJlc2VudCAxLjAuMi0xCmxpYnhyYW5kciAxLjUuNS0xCmxpYnhyZW5kZXIgMC45LjEyLTEKbGlieHNobWZlbmNlIDEuMy4zLTEKbGlieHNsdCAxLjEuNDUtMgpsaWJ4c3MgMS4yLjUtMQpsaWJ4dCAxLjMuMS0xCmxpYnh0c3QgMS4yLjUtMQpsaWJ4diAxLjAuMTMtMQpsaWJ4eGY4NnZtIDEuMS43LTEKbGlieWFtbCAwLjIuNS0zCmxpYnl1diByMjkyMSs2NDQyNTFmMjUtMQpsaWJ6aXAgMS4xMS40LTEKbGliem1mIDAuMC4yLTIwCmxpY2Vuc2VzIDIwMjQwNzI4LTEKbGlsdiAwLjI4LjAtMQpsaW1pbmUgMTIuNi4wLTEKbGltaW5lLW1raW5pdGNwaW8taG9vayAxLjM3LjEtMQpsaW1pbmUtc25hcHBlci1zeW5jIDEuMzEuMC0xCmxpbnV4IDcuMS45LmFyY2gxLTIKbGludXgtYXBpLWhlYWRlcnMgNy4yLTEKbGludXgtZmlybXdhcmUgMjAyNjA4MTAtMgpsaW51eC1maXJtd2FyZS1hbWRncHUgMjAyNjA4MTAtMgpsaW51eC1maXJtd2FyZS1hdGhlcm9zIDIwMjYwODEwLTIKbGludXgtZmlybXdhcmUtYnJvYWRjb20gMjAyNjA4MTAtMgpsaW51eC1maXJtd2FyZS1jaXJydXMgMjAyNjA4MTAtMgpsaW51eC1maXJtd2FyZS1pbnRlbCAyMDI2MDgxMC0yCmxpbnV4LWZpcm13YXJlLW1lZGlhdGVrIDIwMjYwODEwLTIKbGludXgtZmlybXdhcmUtbnZpZGlhIDIwMjYwODEwLTIKbGludXgtZmlybXdhcmUtb3RoZXIgMjAyNjA4MTAtMgpsaW51eC1maXJtd2FyZS1yYWRlb24gMjAyNjA4MTAtMgpsaW51eC1maXJtd2FyZS1yZWFsdGVrIDIwMjYwODEwLTIKbGludXgtZmlybXdhcmUtd2hlbmNlIDIwMjYwODEwLTIKbGxodHRwIDkuMy4xLTEKbGx2bSAyMi4xLjgtMgpsbHZtLWxpYnMgMjIuMS44LTIKbG1fc2Vuc29ycyAxOjMuNi4yLTEKbG1kYiAwLjkuMzUtMQpsb2NhbHNlYXJjaCAzLjExLjEtMgpsb2NhbHNlbmQgMS4xOC4yLTEKbHBzb2x2ZSA1LjUuMi4xNC0xCmx1YSA1LjUuMS0xCmx1YS1sdWFyb2NrcyAzLjEzLjAtNQpsdWE1MSA1LjEuNS0xMwpsdWE1MS1scGVnIDEuMS4wLTUKbHVhNTQgNS40LjgtNgpsdWFqaXQgMi4xLjE3ODcxNjU4NTkrMWVlNzc4YS0xCmx1YXJvY2tzIDMuMTMuMC01Cmx2MiAxLjE4LjEwLTIKbHo0IDE6MS4xMC4wLTIKbHpvIDIuMTAtNQptNCAxLjQuMjEtMgptYWtlIDQuNC4xLTMKbWFuLWRiIDIuMTMuMS0yCm1hcmlhZGItbGlicyAxMi4zLjItNAptYmVkdGxzMyAzLjYuNy0xCm1kNGMgMC41LjMtMQptZGFkbSA0LjYtMgptZWRpYS1wbGF5ZXItaW5mbyAyNi0xCm1lc2EgMToyNi4yLjEtMQptaW5pemlwIDE6MS4zLjItMwptaXNlLWJpbiAyMDI2LjguMTQtMQpta2luaXRjcGlvIDQxLjEtMQpta2luaXRjcGlvLWJ1c3lib3ggMS4zNi4xLTEKbWx0IDcuNDAuMC0zCm1vYmlsZS1icm9hZGJhbmQtcHJvdmlkZXItaW5mbyAyMDI1MTEwMS0xCm1vb25saWdodC1xdCA2LjEuMC03Cm1wZGVjaW1hbCA0LjAuMS0zCm1wZnIgNC4yLjItMQptcGcxMjMgMS4zMy43LTEKbXB2IDE6MC40MS4wLTQKbXB2LW1wcmlzIDEuMi0yCm1zZ3BhY2stYyA3LjAuMS0xCm10ZGV2IDEuMS43LTEKbXVqcyAxLjMuOS0xCm11cGFyc2VyIDIuMy41LTIKbmF1dGlsdXMgNTAuMi4yLTEKbmF1dGlsdXMtcHl0aG9uIDQuMS4wLTMKbmN1cnNlcyA2LjYtMgpuZW9uIDAuMzcuMS0xCm5lb3ZpbSAwLjEyLjUtMQpuZXR0bGUgNC4wLTEKbmV0d29ya21hbmFnZXIgMS41OC4xLTEKbmZ0YWJsZXMgMToxLjEuNi0zCm5vdG8tZm9udHMgMToyMDI2LjA4LjAxLTEKbm90by1mb250cy1jamsgMjAyNDA3MzAtMQpub3RvLWZvbnRzLWVtb2ppIDE6Mi4wNTEtMQpucHRoIDEuOC0xCm5zcHIgNC40MC0xCm5zcyAzLjEyNy0xCm5zcy1tZG5zIDAuMTUuMS0yCm9icy1zdHVkaW8gMzIuMi4yLTEKb2JzaWRpYW4gMS4xMy43LTIKb2NsLWljZCAyLjMuNS0xCm9tYWNhbGMgMC4yLjItMQpvbWFjdXQgMC40LjAtMQpvbWFyY2h5IDQuMC4yLTEKb21hcmNoeS1rZXlyaW5nIDIwMjUxMDI3LTEKb21hcmNoeS1udmltIDIwMjYuOC4xMy0xCm9tYXJjaHktc2V0dGluZ3MgNC4wLjItMQpvbWF3cml0ZSAwLjUuMC0xCm9uZXRiYiAyMDIzLjEuMC0xCm9uaWd1cnVtYSA2LjkuMTAtMQpvcGVuYWwgMS4yNS4yLTIKb3BlbmNvcmUtYW1yIDAuMS42LTIKb3BlbmN2IDUuMC4wLTkKb3BlbmV4ciAzLjQuMTUtMQpvcGVuaDI2NCAyLjYuMC0yCm9wZW5qcGVnMiAyLjUuNC0xCm9wZW5qcGggMC4zMS4wLTEKb3BlbnNzaCAxMC41cDEtMQpvcGVuc3NsIDMuNi4zLTEKb3BlbnRpbWVsaW5laW8gMC4xOC4xLTMKb3B1cyAxLjYuMS0xCm9yYyAwLjQuNDItMQpvc2luZm8tZGIgMjAyNjA4MTItMQpwMTEta2l0IDAuMjYuNS0xCnBhY21hbiA3LjEuMC5yOS5nNTRkOTQxMS0yCnBhY21hbi1jb250cmliIDEuMTMuMS0xCnBhY21hbi1taXJyb3JsaXN0IDIwMjYwNjEwLTEKcGFtIDEuNy4yLTIKcGFtYmFzZSAyMDI2MDYxNi0xCnBhbWl4ZXIgMS42LTQKcGFuZ28gMToxLjU4LjItMQpwYXJ0ZWQgMy43LTEKcGF0Y2ggMi44LTEKcGNpdXRpbHMgMy4xNS4wLTEKcGNyZSA4LjQ1LTUKcGNyZTIgMTAuNDctMQpwY3NjbGl0ZSAyLjUuMS0xCnBlcmwgNS40Mi4yLTIKcGVybC1lcnJvciAwLjE3MDMwLTMKcGVybC1tYWlsdG9vbHMgMi4yMi0zCnBlcmwtdGltZWRhdGUgMi4zNS0xCnBpbmVudHJ5IDEuMy4zLTEKcGludGEgMy4xLjItMgpwaXBld2lyZSAxOjEuNi44LTEKcGlwZXdpcmUtYWxzYSAxOjEuNi44LTEKcGlwZXdpcmUtYXVkaW8gMToxLjYuOC0xCnBpcGV3aXJlLWphY2sgMToxLjYuOC0xCnBpcGV3aXJlLXB1bHNlIDE6MS42LjgtMQpwaXhtYW4gMC40Ni40LTEKcGtnY29uZiAzLjAuNS0xCnBsb2NhdGUgMS4xLjI0LTIKcGx5bW91dGggMjYuMTM0LjIyMi0yCnBvbGtpdCAxMjctMwpwb3BwbGVyIDI2LjA4LjAtMQpwb3BwbGVyLWRhdGEgMC40LjEyLTIKcG9wcGxlci1nbGliIDI2LjA4LjAtMQpwb3BwbGVyLXF0NiAyNi4wOC4wLTEKcG9wdCAxLjE5LTIKcG9ydGF1ZGlvIDE6MTkuNy4wLTQKcG9zdGdyZXNxbC1saWJzIDE4LjYtMQpwb3dlci1wcm9maWxlcy1kYWVtb24gMC4zMC0xCnByb2Nwcy1uZyA0LjAuNy0xCnByb3RvYnVmIDM1LjEtMgpwc21pc2MgMjMuNy0yCnB1Z2l4bWwgMS4xNi0xCnB1cnBvc2UgNi4yOS4wLTEKcHl0aG9uIDMuMTQuNy0xCnB5dGhvbi1hYWYyIDEuNy4xLTQKcHl0aG9uLWNhaXJvIDEuMjkuMS0xCnB5dGhvbi1jZXJ0aWZpIDIwMjYuMDcuMjItMQpweXRob24tY2hhcnNldC1ub3JtYWxpemVyIDMuNC43LTEKcHl0aG9uLWNvbG9yYW1hIDAuNC42LTYKcHl0aG9uLWRidXMgMS40LjAtMgpweXRob24tZG9jb3B0IDAuNi4yLTE1CnB5dGhvbi1mYXN0anNvbnNjaGVtYSAyLjIxLjItMgpweXRob24tZ29iamVjdCAzLjU2LjMtMQpweXRob24taWRuYSAzLjE5LTEKcHl0aG9uLWxhcmstcGFyc2VyIDEuMy4xLTIKcHl0aG9uLXBhY2thZ2luZyAyNi4zLTEKcHl0aG9uLXBvZXRyeS1jb3JlIDIuNC4xLTEKcHl0aG9uLXB5Y3VwcyAyLjAuNC00CnB5dGhvbi1weXhkZyAwLjI4LTcKcHl0aG9uLXJlcXVlc3RzIDIuMzQuMi0xCnB5dGhvbi1zaHRhYiAxLjExLjAtMQpweXRob24tdGVybWNvbG9yIDMuMy4wLTEKcHl0aG9uLXR5cGluZ19leHRlbnNpb25zIDQuMTYuMC0xCnB5dGhvbi11cmxsaWIzIDIuNy4wLTEKcHl0aG9uLXlhbWwgNi4wLjMtMgpxY2EtcXQ2IDIuMy4xMC04CnFlbXUtdXNlci1zdGF0aWMgMTEuMS4wLTEKcWVtdS11c2VyLXN0YXRpYy1iaW5mbXQgMTEuMS4wLTEKcW9pIHIzNTAuNDQ2MWNjMy0xCnFwZGYgMTIuNC4wLTEKcXFjMi1kZXNrdG9wLXN0eWxlIDYuMjkuMC0yCnFyY29kZWdlbmNwcC1jbWFrZSAxLjguMC00CnFyZW5jb2RlIDQuMS4xLTQKcXQ2LTVjb21wYXQgNi4xMS4yLTEKcXQ2LWJhc2UgNi4xMS4yLTIKcXQ2LWRlY2xhcmF0aXZlIDYuMTEuMi0xCnF0Ni1pbWFnZWZvcm1hdHMgNi4xMS4yLTEKcXQ2LW11bHRpbWVkaWEgNi4xMS4yLTEKcXQ2LW11bHRpbWVkaWEtZmZtcGVnIDYuMTEuMi0xCnF0Ni1uZXR3b3JrYXV0aCA2LjExLjItMQpxdDYtcG9zaXRpb25pbmcgNi4xMS4yLTEKcXQ2LXNoYWRlcnRvb2xzIDYuMTEuMi0xCnF0Ni1zcGVlY2ggNi4xMS4yLTEKcXQ2LXN2ZyA2LjExLjItMQpxdDYtdHJhbnNsYXRpb25zIDYuMTEuMi0xCnF0Ni13YXlsYW5kIDYuMTEuMi0xCnF0Ni13ZWJjaGFubmVsIDYuMTEuMi0xCnF0Ni13ZWJlbmdpbmUgNi4xMS4yLTEKcXVpY2tzaGVsbCAwLjMuMS0xCnJhcHRvciAyLjAuMTYtOQpyYXNxYWwgMTowLjkuMzMtOQpyYXYxZSAwLjguMS0zCnJlMiAyOjIwMjUuMTEuMDUtNgpyZWFkbGluZSA4LjMuMDAzLTEKcmVkbGFuZCAxOjEuMC4xNy0xMApyaXBncmVwIDE1LjIuMC0xCnJubm9pc2UgMTowLjItMQpyc3luYyAzLjUuMC0xCnJ1YmJlcmJhbmQgNC4wLjAtMgpydWJ5IDMuNC4xMC0xCnJ1YnlnZW1zIDMuNi45LTEKcnVuYyAxLjUuMS0xCnNiYyAyLjItMQpzZGJ1cy1jcHAgMi4zLjEtMQpzZGRtIDAuMjEuMC03CnNkbDItY29tcGF0IDIuMzIuNzAtMQpzZGwyX3R0ZiAyLjI0LjAtMgpzZGwzIDMuNC4xNC0xCnNlYXRkIDAuOS4zLTEKc2VkIDQuMTAtMgpzZXJkIDAuMzIuMTAtMQpzaGFkZXJjIDIwMjYuMy0xCnNoYWRvdyA0LjIwLjAuYXJjaDEtMQpzaGFyZWQtbWltZS1pbmZvIDIuNS4xLTIKc2lnbm9uLWt3YWxsZXQtZXh0ZW5zaW9uIDI2LjA4LjAtMQpzaWdub24tcGx1Z2luLW9hdXRoMiAwLjI1LTQKc2lnbm9uLXVpIDAuMTcrMjAyMzEwMTYtNApzaWdub25kIDguNjEtNApzaW1kZSAwLjguMi0xCnNsYW5nIDIuMy4zLTQKc2x1cnAgMS41LjAtMgpzbWJjbGllbnQgMjo0LjI0LjYtMQpzbmFwcGVyIDAuMTMuMS0zCnNuYXBweSAxLjIuMi0zCnNuZGlvIDEuMTAuMC0xCnNvY2F0IDEuOC4xLjMtMQpzb2xpZCA2LjI5LjAtMQpzb25uZXQgNi4yOS4wLTEKc29yZCAwLjE2LjIyLTEKc291bmQtdGhlbWUtZnJlZWRlc2t0b3AgMC44LTYKc291cmNlLWhpZ2hsaWdodCAzLjEuOS0xOQpzcGFuZHNwIDAuMC42LTcKc3BkbG9nIDEuMTcuMC0yCnNwZWV4IDEuMi4xLTIKc3BlZXhkc3AgMS4yLjEtMgpzcGlydi10b29scyAxOjEuNC4zNTcuMC0xCnNxbGl0ZSAzLjUzLjQtMQpzcmF0b20gMC42LjIyLTEKc3J0IDEuNS42LTEKc3RhcnNoaXAgMS4yNi4wLTEKc3VkbyAxLjkuMTcucDItNgpzdXNoaSA1MC4wLTEKc3Z0LWF2MSA0LjIuMC0xCnN5bmRpY2F0aW9uIDYuMjkuMC0xCnN5c3RlbS1jb25maWctcHJpbnRlciAxLjUuMTgtNgpzeXN0ZW1kIDI2MS4yLTEKc3lzdGVtZC1saWJzIDI2MS4yLTEKc3lzdGVtZC1zeXN2Y29tcGF0IDI2MS4yLTEKdGFnbGliIDIuMy4xLTEKdGFsbG9jIDIuNS4wLTEKdGFyIDEuMzUtNQp0ZGIgMS40LjE1LTEKdGVuc2FrdSAwLjI4LjAtMQp0ZXNzZXJhY3QgNS41LjMtMQp0ZXNzZXJhY3QtZGF0YS1lbmcgMjo0LjEuMC01CnRlc3NlcmFjdC1kYXRhLW9zZCAyOjQuMS4wLTUKdGV2ZW50IDE6MC4xNy4yLTEKdGV4aW5mbyA3LjMtMQp0aW55c3BhcnFsIDMuMTEuMS0xCnRsZHIgMy40LjQtMQp0bXV4IDMuN19jLTEKdG9iaS10cnkgMS44LjEtMwp0b21scGx1c3BsdXMgMy40LjAtMgp0b3RlbS1wbC1wYXJzZXIgMy4yNi43LTEKdHBtMi10c3MgNC4yLjAtMgp0cmVlLXNpdHRlciAwLjI2LjktMQp0cmVlLXNpdHRlci1jIDAuMjQuMS0yCnRyZWUtc2l0dGVyLWNsaSAwLjI2LjktMQp0cmVlLXNpdHRlci1sdWEgMC41LjAtMwp0cmVlLXNpdHRlci1tYXJrZG93biAwLjUuMy0yCnRyZWUtc2l0dGVyLXF1ZXJ5IDAuOC4wLTIKdHJlZS1zaXR0ZXItdmltIDAuOC4xLTMKdHJlZS1zaXR0ZXItdmltZG9jIDQuMS4wLTIKdHNsaWIgMS4yNC0xCnR0Zi1pYS13cml0ZXIgMjAxODEyMjUtMQp0dGYtamV0YnJhaW5zLW1vbm8tbmVyZC1iYXNpYyAzLjUuMC0xCnR0Zi1saWJlcmF0aW9uIDIuMS41LTIKdHRmeCAwLjMuMi0xCnR6ZGF0YSAyMDI2Yy0xCnR6dXBkYXRlIDMuMS4wLTEKdWNoYXJkZXQgMC4wLjgtNAp1ZGlza2llIDIuNy4wLTIKdWRpc2tzMiAyLjExLjItMQp1ZncgMC4zNi4yLTcKdWZ3LWRvY2tlciAyNTExMjMtMQp1bmliaWxpdW0gMi4xLjItMQp1bnppcCA2LjAtMjMKdXBvd2VyIDEuOTEuMy0xCnVzYWdlIDUuMS4wLTEKdXRoYXNoIDIuMy4wLTMKdXRpbC1saW51eCAyLjQyLjItMQp1dGlsLWxpbnV4LWxpYnMgMi40Mi4yLTEKdXdzbSAwLjI2LjctMQp2NGwtdXRpbHMgMS4zMi4wLTIKdmFwb3Vyc3ludGggNzctMgp2ZXJkaWN0IDEuNC41LTIKdmlkLnN0YWIgMS4xLjEtMwp2bWFmIDMuMi4wLTEKdm9sdW1lX2tleSAwLjMuMTItMTIKdnVsa2FuLWljZC1sb2FkZXIgMS40LjM1Ny4wLTEKd2F5bGFuZCAxLjI2LjAtMQp3YXlsYW5kLXByb3RvY29scyAxLjQ5LTEKd2Via2l0Mmd0ay00LjEgMi41Mi42LTEKd2VicnRjLWF1ZGlvLXByb2Nlc3NpbmctMSAxLjMtNQp3aGljaCAyLjI1LTEKd2hvaXMgNS42LjYtMQp3aXJlbGVzcy1yZWdkYiAyMDI2LjA1LjMwLTEKd2lyZXBsdW1iZXIgMC41LjE1LTEKd2wtY2xpcGJvYXJkIDE6Mi4zLjAtMQp3b2ZmMiAxLjAuMi02CndvZmYyLWZvbnQtYXdlc29tZSA3LjMuMS0xCndwYV9zdXBwbGljYW50IDI6Mi4xMi0xCnd0eXBlIDAuNC0yCngyNjQgMzowLjE2NS5yMzIyMi5iMzU2MDVhLTIKeDI2NSA0LjMtMQp4Y2ItaW1ka2l0IDEuMC45LTEKeGNiLXByb3RvIDEuMTcuMC00CnhjYi11dGlsIDAuNC4xLTIKeGNiLXV0aWwtY3Vyc29yIDAuMS42LTEKeGNiLXV0aWwtZXJyb3JzIDEuMC4xLTIKeGNiLXV0aWwtaW1hZ2UgMC40LjEtMwp4Y2ItdXRpbC1rZXlzeW1zIDAuNC4xLTUKeGNiLXV0aWwtcmVuZGVydXRpbCAwLjMuMTAtMgp4Y2ItdXRpbC13bSAwLjQuMi0yCnhkZy1kYnVzLXByb3h5IDAuMS44LTEKeGRnLWRlc2t0b3AtcG9ydGFsIDEuMjIuMS0yCnhkZy1kZXNrdG9wLXBvcnRhbC1ndGsgMS4xNS4zLTEKeGRnLWRlc2t0b3AtcG9ydGFsLWh5cHJsYW5kIDEuNC4xLTEKeGRnLXRlcm1pbmFsLWV4ZWMgMC4xNC4zLTEKeGRnLXVzZXItZGlycyAwLjIwLTEKeGRnLXVzZXItZGlycy1ndGsgMC4xNi0xCnhkZy11dGlscyAxLjIuMS0yCnhmODYtaW5wdXQtbGliaW5wdXQgMS41LjAtMQp4a2V5Ym9hcmQtY29uZmlnIDIuNDgtMQp4bWxzZWMgMS4zLjEyLTEKeG9yZy1mb250cy1lbmNvZGluZ3MgMS4xLjAtMgp4b3JnLXNlcnZlciAyMS4xLjI0LTEKeG9yZy1zZXJ2ZXItY29tbW9uIDIxLjEuMjQtMQp4b3JnLXNldHhrYm1hcCAxLjMuNS0xCnhvcmcteGF1dGggMS4xLjUtMQp4b3JnLXhrYmNvbXAgMS41LjAtMQp4b3JnLXhwcm9wIDEuMi44LTEKeG9yZy14d2F5bGFuZCAyNC4xLjEzLTEKeG9yZ3Byb3RvIDIwMjUuMS0xCnhvdXJuYWxwcCAxLjMuNy0xCnh2aWRjb3JlIDEuMy43LTQKeHhoYXNoIDAuOC4zLTEKeHogNS44LjMtMQp5YXJ1LWljb24tdGhlbWUgMjYuMDQuNS4xdWJ1bnR1LTEKeWF5IDEzLjAuMS0xCnlvZ2EgMy4yLjEtMQp5dC1kbHAgMjAyNi4wOC4xOS0xCnl0LWRscC1lanMgMC44LjAtMQp5eWpzb24gMC4xMi4wLTEKemJhciAwLjIzLjkzLTcKemVyb21xIDQuMy41LTMKemltZyAzLjAuNi0yCnppbnQgMi4xNi4wLTIKemlwIDMuMC0xNAp6aXggMC44LjItMQp6bGliIDE6MS4zLjItMwp6bGliLW5nIDIuMy4zLTEKem94aWRlIDAuMTAuMC0xCnpyYW0tZ2VuZXJhdG9yIDEuMi4xLTEKenN0ZCAxLjUuNy0zCnp4aW5nLWNwcCAzLjEuMS0xCg== | base64 -d > /run/baseline-manifests/package-manifest.txt\nprintf %s YWV0aGVyCmFsc2EtdXRpbHMKYXNkY29udHJvbApiYXNlCmJhc2UtZGV2ZWwKYmFzaC1jb21wbGV0aW9uCmJhdApibHVlegpibHVlei10b29scwpibHVlei11dGlscwpib2x0CmJyaWdodG5lc3NjdGwKYnRvcApidHJmcy1wcm9ncwpjaHJvbWl1bQpjbGFuZwpjbGlhbXAKY3VwcwpjdXBzLWZpbHRlcnMKY3Vwcy1way1oZWxwZXIKZGRjdXRpbApkb2NrZXIKZG9ja2VyLWJ1aWxkeApkb2NrZXItY29tcG9zZQpkb3Nmc3Rvb2xzCmRvdG5ldC1ydW50aW1lCmR1YS1jbGkKZWZpYm9vdG1ncgpldmluY2UKZXhmYXRwcm9ncwpleHBhYwplemEKZmFzdGZldGNoCmZjaXR4NQpmY2l0eDUtZ3RrCmZjaXR4NS1xdApmZApmZm1wZWd0aHVtYm5haWxlcgpmb290CmZ6ZgpnaXQKZ25vbWUtZGlzay11dGlsaXR5Cmdub21lLWtleXJpbmcKZ25vbWUtdGhlbWVzLWV4dHJhCmdwdS1zY3JlZW4tcmVjb3JkZXIKZ3JpbQpnc3QtcGx1Z2luLXBpcGV3aXJlCmd2ZnMtbXRwCmd2ZnMtbmZzCmd2ZnMtc21iCmhlcmRyCmh5cHJsYW5kCmh5cHJsYW5kLWd1aXV0aWxzCmh5cHJsYW5kLXByZXZpZXctc2hhcmUtcGlja2VyCmh5cHJwaWNrZXIKaHlwcnN1bnNldAppbWFnZW1hZ2ljawppbXYKaW5ldHV0aWxzCmlub3RpZnktdG9vbHMKaW54aQpqcQprZGVubGl2ZQprZXJuZWwtbW9kdWxlcy1ob29rCmxhenlkb2NrZXIKbGF6eWdpdApsZXNzCmxpYnB1bHNlCmxpYnJlb2ZmaWNlLWZyZXNoCmxpYnZpcHMKbGlieWFtbApsaW1pbmUKbGludXgKbGludXgtZmlybXdhcmUKbGx2bQpsb2NhbHNlbmQKbHVhNTEKbHVhcm9ja3MKbWFuLWRiCm1hcmlhZGItbGlicwptaXNlLWJpbgpta2luaXRjcGlvCm1vb25saWdodC1xdAptcHYKbXB2LW1wcmlzCm5hdXRpbHVzCm5hdXRpbHVzLXB5dGhvbgpuZXR3b3JrbWFuYWdlcgpub3RvLWZvbnRzCm5vdG8tZm9udHMtY2prCm5vdG8tZm9udHMtZW1vamkKbnNzLW1kbnMKb2JzLXN0dWRpbwpvYnNpZGlhbgpvbWFjYWxjCm9tYWN1dApvbWFyY2h5Cm9tYXJjaHkta2V5cmluZwpvbWFyY2h5LW52aW0Kb21hcmNoeS1zZXR0aW5ncwpvbWF3cml0ZQpwYWNtYW4tY29udHJpYgpwYW1peGVyCnBpbnRhCnBpcGV3aXJlCnBpcGV3aXJlLWFsc2EKcGlwZXdpcmUtamFjawpwaXBld2lyZS1wdWxzZQpwbG9jYXRlCnBvc3RncmVzcWwtbGlicwpwb3dlci1wcm9maWxlcy1kYWVtb24KcHl0aG9uLWdvYmplY3QKcHl0aG9uLXBvZXRyeS1jb3JlCnFlbXUtdXNlci1zdGF0aWMtYmluZm10CnFyZW5jb2RlCnF0Ni1pbWFnZWZvcm1hdHMKcXVpY2tzaGVsbApyaXBncmVwCnJ1YnkKc2RkbQpzbHVycApzb2NhdApzdGFyc2hpcApzdWRvCnN1c2hpCnN5c3RlbS1jb25maWctcHJpbnRlcgp0ZW5zYWt1CnRlc3NlcmFjdAp0ZXNzZXJhY3QtZGF0YS1lbmcKdGxkcgp0bXV4CnRvYmktdHJ5CnRyZWUtc2l0dGVyLWNsaQp0dGYtaWEtd3JpdGVyCnR0Zi1qZXRicmFpbnMtbW9uby1uZXJkLWJhc2ljCnR0ZngKdHp1cGRhdGUKdWRpc2tpZQp1ZncKdWZ3LWRvY2tlcgp1c2FnZQp1d3NtCndob2lzCndpcmVsZXNzLXJlZ2RiCndpcmVwbHVtYmVyCndsLWNsaXBib2FyZAp3b2ZmMi1mb250LWF3ZXNvbWUKd3R5cGUKeGRnLWRlc2t0b3AtcG9ydGFsLWd0awp4ZGctZGVza3RvcC1wb3J0YWwtaHlwcmxhbmQKeGRnLXRlcm1pbmFsLWV4ZWMKeG91cm5hbHBwCnlhcnUtaWNvbi10aGVtZQp5YXkKeXQtZGxwCnpiYXIKem94aWRlCnpyYW0tZ2VuZXJhdG9yCg== | base64 -d > /run/baseline-manifests/package-explicit.txt\nsystemd-run --unit=omarchy-image-build --property=StandardOutput=append:/var/log/omarchy-image-build.log --property=StandardError=append:/var/log/omarchy-image-build.log /bin/bash /usr/local/lib/omarchy-benchmark/image-builder/build-root-from-iso.sh /usr/local/lib/omarchy-benchmark/image-builder /run/baseline-manifests /run/image-build-output",
+      "timeout": 60
+    },
+    {
+      "at_host_wall_s": 23.111602300999948,
+      "action": "ssh",
+      "command": "systemctl show omarchy-image-build.service -p ActiveState -p Result -p ExecMainStatus",
+      "timeout": 60
+    },
+    {
+      "at_host_wall_s": 39.598826239999994,
+      "action": "ssh",
+      "command": "systemctl show omarchy-image-build.service -p ActiveState -p Result -p ExecMainStatus",
+      "timeout": 60
+    },
+    {
+      "at_host_wall_s": 55.05306170299997,
+      "action": "ssh",
+      "command": "systemctl show omarchy-image-build.service -p ActiveState -p Result -p ExecMainStatus",
+      "timeout": 60
+    },
+    {
+      "at_host_wall_s": 71.69743752299996,
+      "action": "ssh",
+      "command": "systemctl show omarchy-image-build.service -p ActiveState -p Result -p ExecMainStatus",
+      "timeout": 60
+    },
+    {
+      "at_host_wall_s": 88.51138425599999,
+      "action": "ssh",
+      "command": "systemctl show omarchy-image-build.service -p ActiveState -p Result -p ExecMainStatus",
+      "timeout": 60
+    },
+    {
+      "at_host_wall_s": 105.484604037,
+      "action": "ssh",
+      "command": "systemctl show omarchy-image-build.service -p ActiveState -p Result -p ExecMainStatus",
+      "timeout": 60
+    },
+    {
+      "at_host_wall_s": 121.13206413999995,
+      "action": "ssh",
+      "command": "systemctl show omarchy-image-build.service -p ActiveState -p Result -p ExecMainStatus",
+      "timeout": 60
+    },
+    {
+      "at_host_wall_s": 137.919176456,
+      "action": "ssh",
+      "command": "systemctl show omarchy-image-build.service -p ActiveState -p Result -p ExecMainStatus",
+      "timeout": 60
+    },
+    {
+      "at_host_wall_s": 154.70224690899994,
+      "action": "ssh",
+      "command": "systemctl show omarchy-image-build.service -p ActiveState -p Result -p ExecMainStatus",
+      "timeout": 60
+    },
+    {
+      "at_host_wall_s": 171.303239517,
+      "action": "ssh",
+      "command": "systemctl show omarchy-image-build.service -p ActiveState -p Result -p ExecMainStatus",
+      "timeout": 60
+    },
+    {
+      "at_host_wall_s": 186.91135997499993,
+      "action": "ssh",
+      "command": "systemctl show omarchy-image-build.service -p ActiveState -p Result -p ExecMainStatus",
+      "timeout": 60
+    },
+    {
+      "at_host_wall_s": 203.72325214300002,
+      "action": "ssh",
+      "command": "systemctl show omarchy-image-build.service -p ActiveState -p Result -p ExecMainStatus",
+      "timeout": 60
+    },
+    {
+      "at_host_wall_s": 220.66199486299996,
+      "action": "ssh",
+      "command": "systemctl show omarchy-image-build.service -p ActiveState -p Result -p ExecMainStatus",
+      "timeout": 60
+    },
+    {
+      "at_host_wall_s": 237.81521466600003,
+      "action": "ssh",
+      "command": "systemctl show omarchy-image-build.service -p ActiveState -p Result -p ExecMainStatus",
+      "timeout": 60
+    },
+    {
+      "at_host_wall_s": 253.931325201,
+      "action": "ssh",
+      "command": "systemctl show omarchy-image-build.service -p ActiveState -p Result -p ExecMainStatus",
+      "timeout": 60
+    },
+    {
+      "at_host_wall_s": 270.65835032699994,
+      "action": "ssh",
+      "command": "systemctl show omarchy-image-build.service -p ActiveState -p Result -p ExecMainStatus",
+      "timeout": 60
+    },
+    {
+      "at_host_wall_s": 287.91311874799993,
+      "action": "ssh",
+      "command": "systemctl show omarchy-image-build.service -p ActiveState -p Result -p ExecMainStatus",
+      "timeout": 60
+    },
+    {
+      "at_host_wall_s": 304.13681744599995,
+      "action": "ssh",
+      "command": "systemctl show omarchy-image-build.service -p ActiveState -p Result -p ExecMainStatus",
+      "timeout": 60
+    },
+    {
+      "at_host_wall_s": 320.792572035,
+      "action": "ssh",
+      "command": "systemctl show omarchy-image-build.service -p ActiveState -p Result -p ExecMainStatus",
+      "timeout": 60
+    },
+    {
+      "at_host_wall_s": 337.40425729199995,
+      "action": "ssh",
+      "command": "systemctl show omarchy-image-build.service -p ActiveState -p Result -p ExecMainStatus",
+      "timeout": 60
+    },
+    {
+      "at_host_wall_s": 353.17166874599997,
+      "action": "ssh",
+      "command": "systemctl show omarchy-image-build.service -p ActiveState -p Result -p ExecMainStatus",
+      "timeout": 60
+    },
+    {
+      "at_host_wall_s": 369.05256493099995,
+      "action": "ssh",
+      "command": "systemctl show omarchy-image-build.service -p ActiveState -p Result -p ExecMainStatus",
+      "timeout": 60
+    },
+    {
+      "at_host_wall_s": 385.81297608799997,
+      "action": "ssh",
+      "command": "systemctl show omarchy-image-build.service -p ActiveState -p Result -p ExecMainStatus",
+      "timeout": 60
+    },
+    {
+      "at_host_wall_s": 402.509347021,
+      "action": "ssh",
+      "command": "systemctl show omarchy-image-build.service -p ActiveState -p Result -p ExecMainStatus",
+      "timeout": 60
+    },
+    {
+      "at_host_wall_s": 418.510735637,
+      "action": "ssh",
+      "command": "systemctl show omarchy-image-build.service -p ActiveState -p Result -p ExecMainStatus",
+      "timeout": 60
+    },
+    {
+      "at_host_wall_s": 434.23499716399994,
+      "action": "ssh",
+      "command": "systemctl show omarchy-image-build.service -p ActiveState -p Result -p ExecMainStatus",
+      "timeout": 60
+    },
+    {
+      "at_host_wall_s": 450.89218301299996,
+      "action": "ssh",
+      "command": "systemctl show omarchy-image-build.service -p ActiveState -p Result -p ExecMainStatus",
+      "timeout": 60
+    },
+    {
+      "at_host_wall_s": 467.7598364269999,
+      "action": "ssh",
+      "command": "systemctl show omarchy-image-build.service -p ActiveState -p Result -p ExecMainStatus",
+      "timeout": 60
+    },
+    {
+      "at_host_wall_s": 484.45033159199994,
+      "action": "ssh",
+      "command": "systemctl show omarchy-image-build.service -p ActiveState -p Result -p ExecMainStatus",
+      "timeout": 60
+    },
+    {
+      "at_host_wall_s": 500.055611586,
+      "action": "ssh",
+      "command": "systemctl show omarchy-image-build.service -p ActiveState -p Result -p ExecMainStatus",
+      "timeout": 60
+    },
+    {
+      "at_host_wall_s": 516.8432147419999,
+      "action": "ssh",
+      "command": "systemctl show omarchy-image-build.service -p ActiveState -p Result -p ExecMainStatus",
+      "timeout": 60
+    },
+    {
+      "at_host_wall_s": 533.8183520349999,
+      "action": "ssh",
+      "command": "systemctl show omarchy-image-build.service -p ActiveState -p Result -p ExecMainStatus",
+      "timeout": 60
+    },
+    {
+      "at_host_wall_s": 550.7030520139999,
+      "action": "ssh",
+      "command": "systemctl show omarchy-image-build.service -p ActiveState -p Result -p ExecMainStatus",
+      "timeout": 60
+    },
+    {
+      "at_host_wall_s": 566.555811963,
+      "action": "ssh",
+      "command": "systemctl show omarchy-image-build.service -p ActiveState -p Result -p ExecMainStatus",
+      "timeout": 60
+    },
+    {
+      "at_host_wall_s": 583.683432133,
+      "action": "ssh",
+      "command": "systemctl show omarchy-image-build.service -p ActiveState -p Result -p ExecMainStatus",
+      "timeout": 60
+    },
+    {
+      "at_host_wall_s": 599.3676598459999,
+      "action": "ssh",
+      "command": "systemctl show omarchy-image-build.service -p ActiveState -p Result -p ExecMainStatus",
+      "timeout": 60
+    },
+    {
+      "at_host_wall_s": 615.2424975179999,
+      "action": "ssh",
+      "command": "systemctl show omarchy-image-build.service -p ActiveState -p Result -p ExecMainStatus",
+      "timeout": 60
+    },
+    {
+      "at_host_wall_s": 631.9090384859999,
+      "action": "ssh",
+      "command": "systemctl show omarchy-image-build.service -p ActiveState -p Result -p ExecMainStatus",
+      "timeout": 60
+    },
+    {
+      "at_host_wall_s": 648.4878126249998,
+      "action": "ssh",
+      "command": "systemctl show omarchy-image-build.service -p ActiveState -p Result -p ExecMainStatus",
+      "timeout": 60
+    },
+    {
+      "at_host_wall_s": 664.0334154749999,
+      "action": "ssh",
+      "command": "systemctl show omarchy-image-build.service -p ActiveState -p Result -p ExecMainStatus",
+      "timeout": 60
+    },
+    {
+      "at_host_wall_s": 680.539240071,
+      "action": "ssh",
+      "command": "systemctl show omarchy-image-build.service -p ActiveState -p Result -p ExecMainStatus",
+      "timeout": 60
+    },
+    {
+      "at_host_wall_s": 681.723424111,
+      "action": "ssh",
+      "command": "cat /var/log/omarchy-image-build.log",
+      "timeout": 60
+    },
+    {
+      "at_host_wall_s": 682.9468571739999,
+      "action": "ssh",
+      "command": "python3 -c 'import base64,io,stat,tarfile\nfrom pathlib import Path\nroot = Path('\"'\"'/run/image-build-output'\"'\"')\nnames = ['\"'\"'btrfs-check.txt'\"'\"', '\"'\"'btrfs-compression.txt'\"'\"', '\"'\"'build-status.txt'\"'\"', '\"'\"'image-explicit-packages-actual.txt'\"'\"', '\"'\"'image-explicit-packages.txt'\"'\"', '\"'\"'image-package-delta.json'\"'\"', '\"'\"'image-package-files.txt'\"'\"', '\"'\"'image-package-manifest.txt'\"'\"', '\"'\"'image-targets.txt'\"'\"', '\"'\"'raw-image-size.txt'\"'\"']\nfiles = []\ntotal = 0\nfor name in names:\n    path = root / name\n    if not path.exists():\n        continue\n    info = path.lstat()\n    if not stat.S_ISREG(info.st_mode):\n        raise RuntimeError('\"'\"'Build diagnostic must be a regular file: '\"'\"' + name)\n    total += info.st_size\n    if total > 20971520:\n        raise RuntimeError('\"'\"'Build diagnostics exceed the size limit'\"'\"')\n    files.append((path, name))\ndata = io.BytesIO()\nwith tarfile.open(fileobj=data, mode='\"'\"'w:gz'\"'\"') as archive:\n    for path, name in files:\n        archive.add(path, arcname=name, recursive=False)\nprint(base64.b64encode(data.getvalue()).decode())\n'",
+      "timeout": 60
+    },
+    {
+      "at_host_wall_s": 684.212038053,
+      "action": "ssh",
+      "command": "systemctl poweroff",
+      "timeout": 30
+    }
+  ],
+  "cidata_configuration_sha256": "f777e75252acfa5f08a706c785d9582138ac43305b51e0be5d8ab6ed166273b3",
+  "test_overlay_sha256": "5129cefa7397c8d7072911c311649755e2276a576f27f746994fbd42b16412dc",
+  "extra_media": [],
+  "source_cache": "conditioned",
+  "media_cache_preconditioning": "sha256-read-iso-then-extra-media-in-array-order-then-kernel-then-initrd-before-vm-start",
+  "direct_kernel_boot": true,
+  "direct_kernel_sha256": "6dd21ab00a39f04a9ede184a8f7ee4a3613f409a0b615f8abb1edfd009930838",
+  "direct_initrd_sha256": "5129cefa7397c8d7072911c311649755e2276a576f27f746994fbd42b16412dc",
+  "direct_kernel_command_line": "archisobasedir=arch archisosearchuuid=2026-08-31-03-24-58-00 quiet splash xe.enable_panel_replay=0 initramfs_async=0 copytoram=n",
+  "reboot_strategy": "guest-firmware-reboot",
+  "verify_standalone_reboot": false,
+  "standalone_reboot_timeout_s": null,
+  "vm_started_at_monotonic_s": 437.105317402,
+  "first_builder_ssh_wall_s": 19.897646221000002,
+  "qemu_exit_status": 0
+}

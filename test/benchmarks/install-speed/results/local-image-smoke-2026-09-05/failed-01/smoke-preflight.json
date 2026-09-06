@@ -1,0 +1,90 @@
+{
+  "schema_version": 1,
+  "kind": "unpaired-functional-candidate-smoke",
+  "speedup_claim": false,
+  "launch_argv": [
+    "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python",
+    "/workspace/scratch/38a4d12ea30d/omarchy/test/benchmarks/iso-vm.py",
+    "run",
+    "--iso",
+    "/tmp/omarchy-bench/omarchy-candidate-firmware-smoke.iso",
+    "--iso-source",
+    "/workspace/scratch/38a4d12ea30d/omarchy-iso",
+    "--toolchain",
+    "/tmp/omarchy-bench/toolchain",
+    "--run-dir",
+    "/tmp/omarchy-bench/candidate-firmware-smoke-01",
+    "--cpus",
+    "4",
+    "--memory",
+    "8192",
+    "--accelerator",
+    "tcg",
+    "--poll-interval",
+    "10",
+    "--timeout",
+    "5400",
+    "--installed-boot-timeout",
+    "900",
+    "--test-overlay-sha256",
+    "7fe1bd0921c25d830cae6f28724dddb209eb2f003caba75322432d727c76ce34",
+    "--extra-qemu-args-json",
+    "[\"-drive\", \"file=/tmp/omarchy-bench/fast-image.iso,media=cdrom,format=raw,if=none,id=fastimage,readonly=on,cache=writeback\", \"-device\", \"ide-cd,drive=fastimage,id=fastimage-cd,bus=ide.1\"]",
+    "--keep-running",
+    "--verify-standalone-reboot",
+    "--standalone-reboot-timeout",
+    "1200"
+  ],
+  "prepared_at": 1788639837.7516987,
+  "free_before_vm_bytes": 10259480576,
+  "repo_commit": "9b8f07fce174d0d6ea62bdedcd3533ab380c7ed0",
+  "source_files": {
+    "test/benchmarks/iso-vm.py": "660841e4325e8ef435f329511d99f0fd2b1b1b84cc3cf78243d4331f4d88628b",
+    "test/benchmarks/install-speed/firmware-fixture/repack-iso.py": "1a6375a5317ae327769154a1b17a5826cec5b95334e3e52a3d65953b568bf6a7"
+  },
+  "supplementary_media": {
+    "schema_version": 1,
+    "iso_bytes": 3697973248,
+    "iso_sha256": "add515a8db48541779613d4071d7b140a9df64c07d79070f4b4472d13fe36892",
+    "root_image_path": "/arch/x86_64/omarchy-root.btrfs.qcow2",
+    "root_image_bytes": 3681644544,
+    "root_image_sha256": "6ef64246e8b7d01e8f129046bae0d8e41228f7f195fd4c1ffb8fe00e4d00ca3e",
+    "extent_count": 1,
+    "verified_against": {
+      "schema_version": 1,
+      "upstream_commit": "dbffaa6c65344d644627a023c28661e08382b8fa",
+      "virtual_bytes": 6174015488,
+      "file_bytes": 3681644544,
+      "sha256": "6ef64246e8b7d01e8f129046bae0d8e41228f7f195fd4c1ffb8fe00e4d00ca3e",
+      "compression": "Btrfs compress-force=zstd:15; qcow2 zstd 1MiB clusters",
+      "qemu_version": "qemu-img version 8.2.2 (Debian 1:8.2.2+ds-0ubuntu1.18)",
+      "verification": [
+        "guest Btrfs data checksums",
+        "qemu-img check",
+        "qemu-img compare raw versus qcow2",
+        "SHA-256"
+      ],
+      "image_package_delta": {
+        "baseline_packages": 941,
+        "image_packages": 941,
+        "remaining_packages": {},
+        "reasons_source": "baseline pacman -Qqe"
+      }
+    },
+    "status": "verified"
+  },
+  "firmware_media_manifest": "/tmp/omarchy-bench/omarchy-candidate-firmware-smoke.iso.manifest.json",
+  "firmware_iso_sha256": "d57c4a348843ae246fe54b3ab9da0cb863b2bcdb400ed1f66af796abb7592b6a",
+  "image_build_provenance": {
+    "schema_version": 1,
+    "status": "complete-recovered-build",
+    "baseline_run": "/tmp/omarchy-bench/baseline-03",
+    "interrupted_builder_run": "/tmp/omarchy-bench/builder-01",
+    "recovery_builder_run": "/tmp/omarchy-bench/builder-02",
+    "collection_epoch": 1788639366.105646,
+    "archive_sha256": "05fcd7d226df4c497138d8400c304965e1a86a5b888d0b4c82a83a534b087a75",
+    "cleanup_fix_commit": "bd08eb3",
+    "build_time_not_install_time": true,
+    "recovery_note": "941 package records initially existed, but final three malformed DB records required exact-archive reinstall; all 941 DBs verified against source archive metadata; 32 post-hooks replayed; all regular payload files in final six packages verified; Qk0 and all Btrfs data checksums passed."
+  }
+}

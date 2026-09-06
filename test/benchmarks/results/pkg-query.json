@@ -1,0 +1,363 @@
+{
+  "benchmark": "package-helper real-pacman queries on a synthetic local database",
+  "scope": "component only; no package installation or whole-install speed claim",
+  "baseline_commit": "e8e92c5092c9bbbf3d7fc5240f8551fd1eeaced9",
+  "candidate_head": "e8e92c5092c9bbbf3d7fc5240f8551fd1eeaced9",
+  "candidate_source": "working tree",
+  "kernel": "Linux-6.18.35-x86_64-with-glibc2.39",
+  "pacman_version": ".--.                  Pacman v6.0.2 - libalpm v13.0.2\n/ _.-' .-.  .-.  .-.   Copyright (C) 2006-2021 Pacman Development Team\n\\  '-. '-'  '-'  '-'   Copyright (C) 2002-2006 Judd Vinet\n '--'\n                       This program may be freely redistributed under\n                       the terms of the GNU General Public License.",
+  "database_packages": 1500,
+  "cache_state": "warm after private fixture validation and per-workload warmups",
+  "repetitions": 5,
+  "warmups": 2,
+  "results": [
+    {
+      "helper": "omarchy-pkg-add",
+      "targets": 1,
+      "scenario": "all-present",
+      "baseline_median_ms": 155.191714,
+      "candidate_median_ms": 184.434607,
+      "speedup": 0.8414457380007864,
+      "samples_ms": {
+        "baseline": [
+          130.369245,
+          118.923728,
+          155.191714,
+          193.044416,
+          173.650146
+        ],
+        "candidate": [
+          184.434607,
+          232.571956,
+          150.426531,
+          202.421433,
+          181.413125
+        ]
+      }
+    },
+    {
+      "helper": "omarchy-pkg-add",
+      "targets": 3,
+      "scenario": "all-present",
+      "baseline_median_ms": 300.060301,
+      "candidate_median_ms": 92.728185,
+      "speedup": 3.2359125868795986,
+      "samples_ms": {
+        "baseline": [
+          412.451614,
+          318.037969,
+          300.060301,
+          177.106514,
+          90.464866
+        ],
+        "candidate": [
+          151.811512,
+          165.629084,
+          92.728185,
+          86.143492,
+          22.788864
+        ]
+      }
+    },
+    {
+      "helper": "omarchy-pkg-add",
+      "targets": 5,
+      "scenario": "all-present",
+      "baseline_median_ms": 484.641949,
+      "candidate_median_ms": 107.170379,
+      "speedup": 4.522163246245495,
+      "samples_ms": {
+        "baseline": [
+          204.574032,
+          429.092003,
+          613.093415,
+          484.641949,
+          579.941279
+        ],
+        "candidate": [
+          52.402379,
+          52.306654,
+          130.324502,
+          107.170379,
+          135.988016
+        ]
+      }
+    },
+    {
+      "helper": "omarchy-pkg-add",
+      "targets": 16,
+      "scenario": "all-present",
+      "baseline_median_ms": 1362.509672,
+      "candidate_median_ms": 125.916726,
+      "speedup": 10.820720290964363,
+      "samples_ms": {
+        "baseline": [
+          1357.624267,
+          1424.043749,
+          1561.968152,
+          1362.509672,
+          1263.71312
+        ],
+        "candidate": [
+          114.825671,
+          179.245983,
+          129.531712,
+          125.916726,
+          77.608149
+        ]
+      }
+    },
+    {
+      "helper": "omarchy-pkg-present",
+      "targets": 1,
+      "scenario": "all-present",
+      "baseline_median_ms": 30.843895,
+      "candidate_median_ms": 24.205564,
+      "speedup": 1.2742481439391373,
+      "samples_ms": {
+        "baseline": [
+          30.843895,
+          30.97576,
+          31.864621,
+          21.811192,
+          23.719998
+        ],
+        "candidate": [
+          24.178504,
+          24.205564,
+          23.970778,
+          34.140388,
+          24.217182
+        ]
+      }
+    },
+    {
+      "helper": "omarchy-pkg-present",
+      "targets": 3,
+      "scenario": "all-present",
+      "baseline_median_ms": 78.500859,
+      "candidate_median_ms": 26.324549,
+      "speedup": 2.9820400341901396,
+      "samples_ms": {
+        "baseline": [
+          101.911793,
+          64.573627,
+          78.500859,
+          112.557933,
+          45.217706
+        ],
+        "candidate": [
+          26.122486,
+          34.876153,
+          26.324549,
+          39.991147,
+          16.809764
+        ]
+      }
+    },
+    {
+      "helper": "omarchy-pkg-present",
+      "targets": 5,
+      "scenario": "all-present",
+      "baseline_median_ms": 157.709786,
+      "candidate_median_ms": 31.969822,
+      "speedup": 4.933083018103761,
+      "samples_ms": {
+        "baseline": [
+          172.300826,
+          131.243308,
+          157.709786,
+          163.917029,
+          127.690697
+        ],
+        "candidate": [
+          31.803005,
+          27.740973,
+          43.104397,
+          31.969822,
+          32.383171
+        ]
+      }
+    },
+    {
+      "helper": "omarchy-pkg-present",
+      "targets": 16,
+      "scenario": "all-present",
+      "baseline_median_ms": 658.809778,
+      "candidate_median_ms": 39.267036,
+      "speedup": 16.777680342361467,
+      "samples_ms": {
+        "baseline": [
+          759.04547,
+          805.211238,
+          658.809778,
+          463.474291,
+          418.169716
+        ],
+        "candidate": [
+          39.267036,
+          84.098401,
+          31.856509,
+          35.875096,
+          44.433229
+        ]
+      }
+    },
+    {
+      "helper": "omarchy-pkg-present",
+      "targets": 5,
+      "scenario": "missing-first",
+      "baseline_median_ms": 62.308155,
+      "candidate_median_ms": 67.829259,
+      "speedup": 0.9186029144148546,
+      "samples_ms": {
+        "baseline": [
+          95.995986,
+          62.308155,
+          62.386862,
+          50.105346,
+          58.498486
+        ],
+        "candidate": [
+          108.028782,
+          43.147543,
+          67.829259,
+          47.011532,
+          68.578574
+        ]
+      }
+    },
+    {
+      "helper": "omarchy-pkg-missing",
+      "targets": 1,
+      "scenario": "all-present",
+      "baseline_median_ms": 27.551394,
+      "candidate_median_ms": 25.063038,
+      "speedup": 1.099283893676417,
+      "samples_ms": {
+        "baseline": [
+          27.416589,
+          44.078356,
+          17.565269,
+          27.551394,
+          34.201357
+        ],
+        "candidate": [
+          42.703879,
+          42.936902,
+          24.676047,
+          23.870899,
+          25.063038
+        ]
+      }
+    },
+    {
+      "helper": "omarchy-pkg-missing",
+      "targets": 3,
+      "scenario": "all-present",
+      "baseline_median_ms": 84.233245,
+      "candidate_median_ms": 30.156291,
+      "speedup": 2.793222979576633,
+      "samples_ms": {
+        "baseline": [
+          84.233245,
+          83.315131,
+          93.852885,
+          84.342926,
+          79.689773
+        ],
+        "candidate": [
+          47.6703,
+          30.156291,
+          28.505005,
+          34.795905,
+          23.485311
+        ]
+      }
+    },
+    {
+      "helper": "omarchy-pkg-missing",
+      "targets": 5,
+      "scenario": "all-present",
+      "baseline_median_ms": 241.349887,
+      "candidate_median_ms": 48.207262,
+      "speedup": 5.006504766854421,
+      "samples_ms": {
+        "baseline": [
+          241.349887,
+          247.415169,
+          225.769278,
+          292.16114,
+          238.635083
+        ],
+        "candidate": [
+          64.23146,
+          56.515167,
+          46.426515,
+          27.745127,
+          48.207262
+        ]
+      }
+    },
+    {
+      "helper": "omarchy-pkg-missing",
+      "targets": 16,
+      "scenario": "all-present",
+      "baseline_median_ms": 691.325953,
+      "candidate_median_ms": 59.221489,
+      "speedup": 11.67356587403603,
+      "samples_ms": {
+        "baseline": [
+          639.863781,
+          911.343237,
+          658.890141,
+          691.325953,
+          800.55667
+        ],
+        "candidate": [
+          59.221489,
+          60.119605,
+          55.175405,
+          43.289133,
+          79.269734
+        ]
+      }
+    },
+    {
+      "helper": "omarchy-pkg-missing",
+      "targets": 5,
+      "scenario": "missing-first",
+      "baseline_median_ms": 107.718042,
+      "candidate_median_ms": 111.997827,
+      "speedup": 0.9617868925260487,
+      "samples_ms": {
+        "baseline": [
+          118.104747,
+          99.999111,
+          100.108122,
+          110.263378,
+          107.718042
+        ],
+        "candidate": [
+          128.021544,
+          103.965362,
+          111.978154,
+          137.770977,
+          111.997827
+        ]
+      }
+    }
+  ],
+  "helper_sha256": {
+    "baseline": {
+      "omarchy-pkg-add": "76bf74a1e4e65d07a29c06ebc5a621bf36662efc0a175ffc53b723bd80339a3e",
+      "omarchy-pkg-present": "32ea3b03185958cb3d071ba10386c3629c97a1d2c70500ce52fbd223b27656e7",
+      "omarchy-pkg-missing": "c4f92a3341fc894614ca93a6134d284742ceff8c01e1712c8d484f74207a1473"
+    },
+    "candidate": {
+      "omarchy-pkg-add": "5bcc92919f2e462e35687050aef7b2cbb68c9a28972618023154f7867001524f",
+      "omarchy-pkg-present": "78b848027ae53302f37834251aeef9ba0deb426adb7956f69df625736ce7f18c",
+      "omarchy-pkg-missing": "bfd8bd0ea344a8f10276a8a8e5d332e8b35360d0c7d6b97efa7fae5b4b2a983a"
+    }
+  }
+}

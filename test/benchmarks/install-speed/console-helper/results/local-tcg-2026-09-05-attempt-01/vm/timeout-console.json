@@ -1,0 +1,16 @@
+{
+  "schema_version": 1,
+  "measurement_valid": false,
+  "status": "failed",
+  "after_measurement_failure": true,
+  "original_failure": "Install timed out after 240s",
+  "budget_seconds": 90,
+  "output_limit_bytes": 262144,
+  "authenticated_root": false,
+  "commands_started": false,
+  "interventions": [],
+  "helper_sha256": "9a4c7355e9c6459b43e98dda43b1ed55dd97e118e34d16e7ba338d4931fcc8cb",
+  "error_type": "RuntimeError",
+  "error": "Unrecognized serial0 file backend; console capture refused",
+  "elapsed_seconds": 0.0024481400032527745
+}

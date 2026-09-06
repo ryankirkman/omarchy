@@ -1,0 +1,8 @@
+{
+  "path": "/tmp/omarchy-bench/image-media/arch/x86_64/omarchy-root.btrfs.qcow2",
+  "bytes": 3681644544,
+  "reclaimed_after": "verified bytes embedded in supplementary ISO",
+  "iso_sha256": "add515a8db48541779613d4071d7b140a9df64c07d79070f4b4472d13fe36892",
+  "root_image_sha256": "6ef64246e8b7d01e8f129046bae0d8e41228f7f195fd4c1ffb8fe00e4d00ca3e",
+  "epoch": 1788639706.523792
+}

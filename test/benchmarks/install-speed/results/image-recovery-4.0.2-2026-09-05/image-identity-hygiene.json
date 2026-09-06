@@ -1,0 +1,25 @@
+{
+  "machine_id_bytes": 0,
+  "pacman_private_keyring_absent": true,
+  "ssh_host_keys_absent": true,
+  "resolver_sha256": "5557d8e601b17a80d1ea7de78a9869be69637cb6a02fbfe334e22fdf64e61d4c",
+  "resolver_is_packaged_default": true,
+  "owned_log_directories": {
+    "var/log/cups": {
+      "mode": "0o755",
+      "uid": 0,
+      "gid": 0
+    },
+    "var/log/old": {
+      "mode": "0o755",
+      "uid": 0,
+      "gid": 0
+    },
+    "var/log/journal": {
+      "mode": "0o2755",
+      "uid": 0,
+      "gid": 981
+    }
+  },
+  "journal_directory_children": []
+}

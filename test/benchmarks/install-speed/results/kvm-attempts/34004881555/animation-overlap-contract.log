@@ -1,0 +1,8 @@
+Traceback (most recent call last):
+  File "/home/runner/work/omarchy/omarchy/test/benchmarks/install-speed/animation-overlap/contract-test.py", line 440, in <module>
+    main()
+  File "/home/runner/work/omarchy/omarchy/test/benchmarks/install-speed/animation-overlap/contract-test.py", line 396, in main
+    require(not serial.exists() or not stat.S_ISCHR(serial.stat().st_mode),
+  File "/home/runner/work/omarchy/omarchy/test/benchmarks/install-speed/animation-overlap/contract-test.py", line 177, in require
+    raise AssertionError(message)
+AssertionError: Run this host contract where /dev/ttyS0 is absent; real benchmark markers must not write a host serial port

@@ -1,0 +1,5 @@
+{
+  "action": "ssh",
+  "command": "systemctl poweroff",
+  "timeout": 30
+}

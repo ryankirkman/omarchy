@@ -1,0 +1,6 @@
+{
+  "started_host_wall_s": 19.694615445999943,
+  "finished_host_wall_s": 19.86915356599991,
+  "returncode": 255,
+  "stderr": "root@127.0.0.1: Permission denied (publickey,password).\n"
+}

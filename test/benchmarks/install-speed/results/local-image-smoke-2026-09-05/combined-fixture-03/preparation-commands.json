@@ -1,0 +1,30 @@
+[
+  [
+    "python",
+    "/workspace/scratch/38a4d12ea30d/omarchy/test/benchmarks/install-speed/fast-reboot/prepare-payload.py",
+    "--iso-source",
+    "/tmp/omarchy-iso-fast",
+    "--base-payload",
+    "/tmp/omarchy-bench/early-verify-base-payload",
+    "--output",
+    "/tmp/omarchy-bench/early-verify-fast-reboot-payload"
+  ],
+  [
+    "python",
+    "/workspace/scratch/38a4d12ea30d/omarchy/test/benchmarks/install-speed/boot-overlay/make-initramfs.py",
+    "--initramfs",
+    "/tmp/omarchy-bench/initramfs-linux-t2.img",
+    "--output",
+    "/tmp/omarchy-bench/initramfs-benchmark-candidate-early-verify-03.img",
+    "--mode",
+    "candidate",
+    "--preflight-script",
+    "/workspace/scratch/38a4d12ea30d/omarchy/test/benchmarks/install-speed/fast-reboot/candidate-preflight.sh",
+    "--payload-dir",
+    "/tmp/omarchy-bench/early-verify-fast-reboot-payload",
+    "--disable-package-prefetch",
+    "--early-preflight",
+    "--expected-initramfs-sha256",
+    "6e3e15b983da69df4e18df2f1489fa854980b395b28546355d0f6dc13914694e"
+  ]
+]

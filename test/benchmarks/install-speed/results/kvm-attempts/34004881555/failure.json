@@ -1,0 +1,5 @@
+{
+  "status": "failed",
+  "error_type": "CalledProcessError",
+  "error": "Command '['/usr/bin/python3', PosixPath('/home/runner/work/omarchy/omarchy/test/benchmarks/install-speed/animation-overlap/contract-test.py'), '--iso-source', PosixPath('/home/runner/work/_temp/omarchy-install-speed/iso-fast')]' returned non-zero exit status 1."
+}

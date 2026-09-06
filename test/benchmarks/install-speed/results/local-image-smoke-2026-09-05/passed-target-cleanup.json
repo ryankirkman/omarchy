@@ -1,0 +1,23 @@
+{
+  "schema_version": 1,
+  "action": "reclaim stopped validated smoke target",
+  "run": "candidate-firmware-smoke-02",
+  "removed_path": "/tmp/omarchy-bench/candidate-firmware-smoke-02/target.qcow2",
+  "logical_file_bytes": 4833083392,
+  "allocated_file_bytes": 4833783808,
+  "target_sha256": "0137081a2eec56bd2167e360377e451b1d9e17bb3c0966724e0ffc59de764124",
+  "sealed_manifest_sha256": "78d92e2a9014cac4c3328b98c78306518346a6de6b089d3475b5cd5aa0af3b6d",
+  "original_seal_sha256": "fa99d870cad587899cad35a02e4b9950c56bc840cd36969683a5250967c36435",
+  "verified_sealed_file_count": 33,
+  "evidence_published_commit": "2571cf66a3c409fc06c74ad7f90fa195e7d530e1",
+  "publication_tree": "6a10dd53ca64aeb46f1ec958c0f81b7f6a9203a3",
+  "qemu_exit_status": 0,
+  "runner_exit_status": 0,
+  "process_dead_evidence": "Supervisor session 88835 completed with exit 0 after ordinary guest systemctl poweroff; final manifest records QEMU exit 0. No replacement VM was launched.",
+  "source_root_image_unchanged": true,
+  "fixed_supplemental_iso_retained": "/tmp/omarchy-bench/fast-image-fixed.iso",
+  "free_before_bytes": 5414146048,
+  "time": 1788643230.8234084,
+  "free_after_bytes": 10247929856,
+  "status": "completed"
+}

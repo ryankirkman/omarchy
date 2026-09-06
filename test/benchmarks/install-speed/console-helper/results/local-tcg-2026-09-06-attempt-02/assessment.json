@@ -1,0 +1,85 @@
+{
+  "schema_version": 1,
+  "functional_test_passed": true,
+  "measurement_valid": false,
+  "verdict": "Actual post-failure helper authenticated the disposable root console, verified nonce-bound UID 0 and captured all ten fixed read-only diagnostic command results. The deliberately failed install measurement stayed invalid.",
+  "fixture_ready_marker_present": true,
+  "real_console_login_prompt_present": true,
+  "nonce_uid_zero_verified": true,
+  "command_results": [
+    {
+      "name": "waiting-jobs",
+      "exit_status": 0
+    },
+    {
+      "name": "failed-units",
+      "exit_status": 0
+    },
+    {
+      "name": "boot-units",
+      "exit_status": 0
+    },
+    {
+      "name": "process-waits",
+      "exit_status": 0
+    },
+    {
+      "name": "addresses",
+      "exit_status": 0
+    },
+    {
+      "name": "routes",
+      "exit_status": 0
+    },
+    {
+      "name": "listeners",
+      "exit_status": 0
+    },
+    {
+      "name": "critical-chain",
+      "exit_status": 1
+    },
+    {
+      "name": "recent-boot-journal",
+      "exit_status": 0
+    },
+    {
+      "name": "plymouth-kernel-waits",
+      "exit_status": 0
+    }
+  ],
+  "suite_exit_status": 0,
+  "critical_chain_nonzero_retained": true,
+  "original_serial": {
+    "bytes_before_switch": 655,
+    "bytes": 655,
+    "sha256": "b2bec4cc408b5fa8120339f40689a049168aede148158ddce57161811c3e3715",
+    "bytes_received_before_backend_detached": 0,
+    "preservation": "Original file is closed by chardev-change and never opened for writing by diagnostics",
+    "unchanged_during_console_capture": true
+  },
+  "target_file_bytes": 197248,
+  "target_allocated_bytes": 200704,
+  "target_sha256": "04082b5e0bf83aa59cde7b5bb9328d9707bb1e6389bbf5bc824ed23111cb225e",
+  "target_entire_virtual_range_zero": true,
+  "target_written_data_extents": false,
+  "runner_exit_status": 1,
+  "frozen_source_sha256": {
+    "postfailure-console.py": "52400893cb2bfdf957b5408c5fbb97ec428f42290a5f74a1b5ee7c84ef3cc884",
+    "iso-vm.py": "f32a662fbea7bda6687a89fef2c0de1680386dab9c188c6e1f592da059eef499",
+    "live-preflight.sh": "68e8f1e22f9b1f5c5d3b842e8c89e96e43c9c1f089f6f72f9f62ff1c2fee12ce"
+  },
+  "qemu_termination_evidence": "qemu.log records SIGTERM; frozen runner waits for QEMU in its exception path before returning, and post-exit qemu-img info/map acquired ordinary image access.",
+  "no_installation_started_evidence": [
+    "mode-builder wrapper never invokes preserved original installer",
+    "fixture ready marker includes successful check for no orchestrator.main process",
+    "target map covers all 42,949,672,960 virtual bytes with zero=true,data=false,present=false"
+  ],
+  "notes": [
+    "The same initrd/preflight/official ISO/kernel as attempt01 were reused with a fresh target and NVRAM. Only the frozen helper/runner changed.",
+    "All ten commands ran and their exit statuses are retained; critical-chain returned1, so this does not claim every diagnostic command returned0.",
+    "No private SSH key, CIDATA image/configuration credentials, target disk, NVRAM, ISO, or initramfs is committed.",
+    "The documented disposable fixture password in preflight was applied only inside this live guest.",
+    "This is console functional evidence only: no installation time or speedup claim."
+  ]
+}

@@ -1,0 +1,535 @@
+{
+  "cases": [
+    {
+      "case": "512-on",
+      "expected": {
+        "image_sha256": "0de5c726016e9f2163a43a42d97020f32ffacb759f28d915a86281a5059ae8ea",
+        "prefill_sha256": "079b18e949a02a9e2965b2d01d96f59f99298f17c9215ee269e3baa127044f5f",
+        "trailing_sha256": "70c4eaba55c4010d636ac5b46ee640423ddcd44736057ad95429ea4fa4440e8a"
+      },
+      "hardware": {
+        "by_id": "/dev/disk/by-id/virtio-OMARCHY_DIO_512_ON",
+        "capabilities": {
+          "discard_max_bytes": 2147483136,
+          "write_zeroes_max_bytes": 2147483136
+        },
+        "device": "/dev/vdb",
+        "logical_sector_bytes": 512,
+        "major_minor": "254:16",
+        "no_partitions_holders_slaves_or_swap": true,
+        "physical_sector_bytes": 512,
+        "read_only": false,
+        "serial": "OMARCHY_DIO_512_ON",
+        "size_bytes": 100663296,
+        "sysfs": "/sys/devices/pci0000:00/0000:00:05.0/virtio4/block/vdb",
+        "unmounted": true
+      },
+      "prefill_bytes_verified": 100663296,
+      "prefill_sha256": "079b18e949a02a9e2965b2d01d96f59f99298f17c9215ee269e3baa127044f5f",
+      "restore_commands": [
+        {
+          "argv": [
+            "qemu-img",
+            "convert",
+            "-q",
+            "-f",
+            "qcow2",
+            "-O",
+            "raw",
+            "-W",
+            "-n",
+            "-t",
+            "none",
+            "-m",
+            "8",
+            "/dev/vdf",
+            "/dev/vdb"
+          ],
+          "cwd": null,
+          "executable": "qemu-img"
+        }
+      ],
+      "restore_runtime_error": null,
+      "status": "passed",
+      "verification": {
+        "bytes_compared": 100663296,
+        "first_mismatch": null,
+        "image_sha256": "0de5c726016e9f2163a43a42d97020f32ffacb759f28d915a86281a5059ae8ea",
+        "trailing_sha256": "70c4eaba55c4010d636ac5b46ee640423ddcd44736057ad95429ea4fa4440e8a",
+        "whole_device_sha256": "4f8a1ead17aacf473f9d77918aaf97ce596dd5a27d08bd335471a00996b67da5"
+      }
+    },
+    {
+      "case": "512-off",
+      "expected": {
+        "image_sha256": "0de5c726016e9f2163a43a42d97020f32ffacb759f28d915a86281a5059ae8ea",
+        "prefill_sha256": "079b18e949a02a9e2965b2d01d96f59f99298f17c9215ee269e3baa127044f5f",
+        "trailing_sha256": "70c4eaba55c4010d636ac5b46ee640423ddcd44736057ad95429ea4fa4440e8a"
+      },
+      "hardware": {
+        "by_id": "/dev/disk/by-id/virtio-OMARCHY_DIO_512_OFF",
+        "capabilities": {
+          "discard_max_bytes": 0,
+          "write_zeroes_max_bytes": 0
+        },
+        "device": "/dev/vdc",
+        "logical_sector_bytes": 512,
+        "major_minor": "254:32",
+        "no_partitions_holders_slaves_or_swap": true,
+        "physical_sector_bytes": 512,
+        "read_only": false,
+        "serial": "OMARCHY_DIO_512_OFF",
+        "size_bytes": 100663296,
+        "sysfs": "/sys/devices/pci0000:00/0000:00:06.0/virtio5/block/vdc",
+        "unmounted": true
+      },
+      "prefill_bytes_verified": 100663296,
+      "prefill_sha256": "079b18e949a02a9e2965b2d01d96f59f99298f17c9215ee269e3baa127044f5f",
+      "restore_commands": [
+        {
+          "argv": [
+            "qemu-img",
+            "convert",
+            "-q",
+            "-f",
+            "qcow2",
+            "-O",
+            "raw",
+            "-W",
+            "-n",
+            "-t",
+            "none",
+            "-m",
+            "8",
+            "/dev/vdf",
+            "/dev/vdc"
+          ],
+          "cwd": null,
+          "executable": "qemu-img"
+        }
+      ],
+      "restore_runtime_error": null,
+      "status": "passed",
+      "verification": {
+        "bytes_compared": 100663296,
+        "first_mismatch": null,
+        "image_sha256": "0de5c726016e9f2163a43a42d97020f32ffacb759f28d915a86281a5059ae8ea",
+        "trailing_sha256": "70c4eaba55c4010d636ac5b46ee640423ddcd44736057ad95429ea4fa4440e8a",
+        "whole_device_sha256": "4f8a1ead17aacf473f9d77918aaf97ce596dd5a27d08bd335471a00996b67da5"
+      }
+    },
+    {
+      "case": "4096-on",
+      "expected": {
+        "image_sha256": "0de5c726016e9f2163a43a42d97020f32ffacb759f28d915a86281a5059ae8ea",
+        "prefill_sha256": "079b18e949a02a9e2965b2d01d96f59f99298f17c9215ee269e3baa127044f5f",
+        "trailing_sha256": "70c4eaba55c4010d636ac5b46ee640423ddcd44736057ad95429ea4fa4440e8a"
+      },
+      "hardware": {
+        "by_id": "/dev/disk/by-id/virtio-OMARCHY_DIO_4096_ON",
+        "capabilities": {
+          "discard_max_bytes": 2147483136,
+          "write_zeroes_max_bytes": 2147483136
+        },
+        "device": "/dev/vdd",
+        "logical_sector_bytes": 4096,
+        "major_minor": "254:48",
+        "no_partitions_holders_slaves_or_swap": true,
+        "physical_sector_bytes": 4096,
+        "read_only": false,
+        "serial": "OMARCHY_DIO_4096_ON",
+        "size_bytes": 100663296,
+        "sysfs": "/sys/devices/pci0000:00/0000:00:07.0/virtio6/block/vdd",
+        "unmounted": true
+      },
+      "prefill_bytes_verified": 100663296,
+      "prefill_sha256": "079b18e949a02a9e2965b2d01d96f59f99298f17c9215ee269e3baa127044f5f",
+      "restore_commands": [
+        {
+          "argv": [
+            "qemu-img",
+            "convert",
+            "-q",
+            "-f",
+            "qcow2",
+            "-O",
+            "raw",
+            "-W",
+            "-n",
+            "-t",
+            "none",
+            "-m",
+            "8",
+            "/dev/vdf",
+            "/dev/vdd"
+          ],
+          "cwd": null,
+          "executable": "qemu-img"
+        }
+      ],
+      "restore_runtime_error": null,
+      "status": "passed",
+      "verification": {
+        "bytes_compared": 100663296,
+        "first_mismatch": null,
+        "image_sha256": "0de5c726016e9f2163a43a42d97020f32ffacb759f28d915a86281a5059ae8ea",
+        "trailing_sha256": "70c4eaba55c4010d636ac5b46ee640423ddcd44736057ad95429ea4fa4440e8a",
+        "whole_device_sha256": "4f8a1ead17aacf473f9d77918aaf97ce596dd5a27d08bd335471a00996b67da5"
+      }
+    },
+    {
+      "case": "4096-off",
+      "expected": {
+        "image_sha256": "0de5c726016e9f2163a43a42d97020f32ffacb759f28d915a86281a5059ae8ea",
+        "prefill_sha256": "079b18e949a02a9e2965b2d01d96f59f99298f17c9215ee269e3baa127044f5f",
+        "trailing_sha256": "70c4eaba55c4010d636ac5b46ee640423ddcd44736057ad95429ea4fa4440e8a"
+      },
+      "hardware": {
+        "by_id": "/dev/disk/by-id/virtio-OMARCHY_DIO_4096_OFF",
+        "capabilities": {
+          "discard_max_bytes": 0,
+          "write_zeroes_max_bytes": 0
+        },
+        "device": "/dev/vde",
+        "logical_sector_bytes": 4096,
+        "major_minor": "254:64",
+        "no_partitions_holders_slaves_or_swap": true,
+        "physical_sector_bytes": 4096,
+        "read_only": false,
+        "serial": "OMARCHY_DIO_4096_OFF",
+        "size_bytes": 100663296,
+        "sysfs": "/sys/devices/pci0000:00/0000:00:08.0/virtio7/block/vde",
+        "unmounted": true
+      },
+      "prefill_bytes_verified": 100663296,
+      "prefill_sha256": "079b18e949a02a9e2965b2d01d96f59f99298f17c9215ee269e3baa127044f5f",
+      "restore_commands": [
+        {
+          "argv": [
+            "qemu-img",
+            "convert",
+            "-q",
+            "-f",
+            "qcow2",
+            "-O",
+            "raw",
+            "-W",
+            "-n",
+            "-t",
+            "none",
+            "-m",
+            "8",
+            "/dev/vdf",
+            "/dev/vde"
+          ],
+          "cwd": null,
+          "executable": "qemu-img"
+        }
+      ],
+      "restore_runtime_error": null,
+      "status": "passed",
+      "verification": {
+        "bytes_compared": 100663296,
+        "first_mismatch": null,
+        "image_sha256": "0de5c726016e9f2163a43a42d97020f32ffacb759f28d915a86281a5059ae8ea",
+        "trailing_sha256": "70c4eaba55c4010d636ac5b46ee640423ddcd44736057ad95429ea4fa4440e8a",
+        "whole_device_sha256": "4f8a1ead17aacf473f9d77918aaf97ce596dd5a27d08bd335471a00996b67da5"
+      }
+    }
+  ],
+  "completed_at": "2026-09-05T22:33:44.848358+00:00",
+  "expected": {
+    "image_sha256": "0de5c726016e9f2163a43a42d97020f32ffacb759f28d915a86281a5059ae8ea",
+    "prefill_sha256": "079b18e949a02a9e2965b2d01d96f59f99298f17c9215ee269e3baa127044f5f",
+    "trailing_sha256": "70c4eaba55c4010d636ac5b46ee640423ddcd44736057ad95429ea4fa4440e8a"
+  },
+  "fixture_manifest_sha256": "4a0ba09ad6d73f025a85cbbe762ff07c9a3a0c66372fedb3bd5be7bace111660",
+  "limits": [
+    "No installation-speed claim",
+    "No physical hardware claim",
+    "No power-loss or persistence-after-host-crash claim",
+    "No mounted filesystem workload"
+  ],
+  "measurement_valid": false,
+  "phases_sha256": "8787646c45b164b4fde2abb894c87ece46e9c8f180ff96fede9ed23b2723a458",
+  "qemu_img_executable": "/tmp/omarchy-direct-restore/qemu/qemu-img",
+  "qemu_img_version": "qemu-img version 8.2.2 (Debian 1:8.2.2+ds-0ubuntu1.18)\nCopyright (c) 2003-2023 Fabrice Bellard and the QEMU Project developers",
+  "readonly_error": {
+    "after_sha256": "4f8a1ead17aacf473f9d77918aaf97ce596dd5a27d08bd335471a00996b67da5",
+    "before_sha256": "4f8a1ead17aacf473f9d77918aaf97ce596dd5a27d08bd335471a00996b67da5",
+    "bytes_verified_unchanged": 100663296,
+    "case": "4096-off",
+    "hardware": {
+      "by_id": "/dev/disk/by-id/virtio-OMARCHY_DIO_4096_OFF",
+      "capabilities": {
+        "discard_max_bytes": 0,
+        "write_zeroes_max_bytes": 0
+      },
+      "device": "/dev/vde",
+      "logical_sector_bytes": 4096,
+      "major_minor": "254:64",
+      "no_partitions_holders_slaves_or_swap": true,
+      "physical_sector_bytes": 4096,
+      "read_only": true,
+      "serial": "OMARCHY_DIO_4096_OFF",
+      "size_bytes": 100663296,
+      "sysfs": "/sys/devices/pci0000:00/0000:00:08.0/virtio7/block/vde",
+      "unmounted": true
+    },
+    "restore_commands": [
+      {
+        "argv": [
+          "qemu-img",
+          "convert",
+          "-q",
+          "-f",
+          "qcow2",
+          "-O",
+          "raw",
+          "-W",
+          "-n",
+          "-t",
+          "none",
+          "-m",
+          "8",
+          "/dev/vdf",
+          "/dev/vde"
+        ],
+        "cwd": null,
+        "executable": "qemu-img"
+      }
+    ],
+    "restore_runtime_error": "root filesystem restore failed: qemu-img: Could not open '/dev/vde': The device is not writable: Permission denied",
+    "status": "passed",
+    "target_left_read_only": true
+  },
+  "schema_version": 1,
+  "scope": "Real qemu-img byte correctness on four disposable virtual block devices",
+  "source_after": {
+    "by_id": "/dev/disk/by-id/virtio-OMARCHY_DIO_SOURCE",
+    "capabilities": {
+      "discard_max_bytes": 2147483136,
+      "write_zeroes_max_bytes": 2147483136
+    },
+    "container_sha256": "418d9577ed74d2c59587cace353605baf7e7688f964b50ad4ca62b8c417d286b",
+    "device": "/dev/vdf",
+    "logical_sector_bytes": 512,
+    "major_minor": "254:80",
+    "no_partitions_holders_slaves_or_swap": true,
+    "physical_sector_bytes": 512,
+    "qemu_img_info": {
+      "actual-size": 0,
+      "children": [
+        {
+          "info": {
+            "actual-size": 0,
+            "children": [],
+            "dirty-flag": false,
+            "filename": "/dev/vdf",
+            "format": "host_device",
+            "format-specific": {
+              "data": {},
+              "type": "file"
+            },
+            "virtual-size": 14680064
+          },
+          "name": "file"
+        }
+      ],
+      "cluster-size": 1048576,
+      "dirty-flag": false,
+      "filename": "/dev/vdf",
+      "format": "qcow2",
+      "format-specific": {
+        "data": {
+          "compat": "1.1",
+          "compression-type": "zstd",
+          "corrupt": false,
+          "extended-l2": false,
+          "lazy-refcounts": false,
+          "refcount-bits": 16
+        },
+        "type": "qcow2"
+      },
+      "virtual-size": 67108864
+    },
+    "qemu_img_map": [
+      {
+        "compressed": true,
+        "data": true,
+        "depth": 0,
+        "length": 16777216,
+        "present": true,
+        "start": 0,
+        "zero": false
+      },
+      {
+        "compressed": false,
+        "data": true,
+        "depth": 0,
+        "length": 8388608,
+        "offset": 6291456,
+        "present": true,
+        "start": 16777216,
+        "zero": false
+      },
+      {
+        "compressed": false,
+        "data": false,
+        "depth": 0,
+        "length": 16777216,
+        "present": false,
+        "start": 25165824,
+        "zero": true
+      },
+      {
+        "compressed": true,
+        "data": true,
+        "depth": 0,
+        "length": 8388608,
+        "present": true,
+        "start": 41943040,
+        "zero": false
+      },
+      {
+        "compressed": false,
+        "data": false,
+        "depth": 0,
+        "length": 15728640,
+        "present": false,
+        "start": 50331648,
+        "zero": true
+      },
+      {
+        "compressed": true,
+        "data": true,
+        "depth": 0,
+        "length": 1048576,
+        "present": true,
+        "start": 66060288,
+        "zero": false
+      }
+    ],
+    "read_only": true,
+    "serial": "OMARCHY_DIO_SOURCE",
+    "size_bytes": 14680064,
+    "sysfs": "/sys/devices/pci0000:00/0000:00:09.0/virtio8/block/vdf",
+    "unmounted": true
+  },
+  "source_before": {
+    "by_id": "/dev/disk/by-id/virtio-OMARCHY_DIO_SOURCE",
+    "capabilities": {
+      "discard_max_bytes": 2147483136,
+      "write_zeroes_max_bytes": 2147483136
+    },
+    "container_sha256": "418d9577ed74d2c59587cace353605baf7e7688f964b50ad4ca62b8c417d286b",
+    "device": "/dev/vdf",
+    "logical_sector_bytes": 512,
+    "major_minor": "254:80",
+    "no_partitions_holders_slaves_or_swap": true,
+    "physical_sector_bytes": 512,
+    "qemu_img_info": {
+      "actual-size": 0,
+      "children": [
+        {
+          "info": {
+            "actual-size": 0,
+            "children": [],
+            "dirty-flag": false,
+            "filename": "/dev/vdf",
+            "format": "host_device",
+            "format-specific": {
+              "data": {},
+              "type": "file"
+            },
+            "virtual-size": 14680064
+          },
+          "name": "file"
+        }
+      ],
+      "cluster-size": 1048576,
+      "dirty-flag": false,
+      "filename": "/dev/vdf",
+      "format": "qcow2",
+      "format-specific": {
+        "data": {
+          "compat": "1.1",
+          "compression-type": "zstd",
+          "corrupt": false,
+          "extended-l2": false,
+          "lazy-refcounts": false,
+          "refcount-bits": 16
+        },
+        "type": "qcow2"
+      },
+      "virtual-size": 67108864
+    },
+    "qemu_img_map": [
+      {
+        "compressed": true,
+        "data": true,
+        "depth": 0,
+        "length": 16777216,
+        "present": true,
+        "start": 0,
+        "zero": false
+      },
+      {
+        "compressed": false,
+        "data": true,
+        "depth": 0,
+        "length": 8388608,
+        "offset": 6291456,
+        "present": true,
+        "start": 16777216,
+        "zero": false
+      },
+      {
+        "compressed": false,
+        "data": false,
+        "depth": 0,
+        "length": 16777216,
+        "present": false,
+        "start": 25165824,
+        "zero": true
+      },
+      {
+        "compressed": true,
+        "data": true,
+        "depth": 0,
+        "length": 8388608,
+        "present": true,
+        "start": 41943040,
+        "zero": false
+      },
+      {
+        "compressed": false,
+        "data": false,
+        "depth": 0,
+        "length": 15728640,
+        "present": false,
+        "start": 50331648,
+        "zero": true
+      },
+      {
+        "compressed": true,
+        "data": true,
+        "depth": 0,
+        "length": 1048576,
+        "present": true,
+        "start": 66060288,
+        "zero": false
+      }
+    ],
+    "read_only": true,
+    "serial": "OMARCHY_DIO_SOURCE",
+    "size_bytes": 14680064,
+    "sysfs": "/sys/devices/pci0000:00/0000:00:09.0/virtio8/block/vdf",
+    "unmounted": true
+  },
+  "source_unchanged": true,
+  "speedup_claim": false,
+  "started_at": "2026-09-05T22:33:10.160802+00:00",
+  "status": "passed",
+  "virtualization": "qemu"
+}

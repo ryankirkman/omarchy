@@ -1,0 +1,20 @@
+{
+  "schema_version": 1,
+  "observed_at": 1788643893.4888127,
+  "markers": [
+    "\u001b[0m\u001b[30m\u001b[40m\u001b[2J\u001b[01;01H\u001b[0m\u001b[37m\u001b[40m\u001b[H\u001b[J\u001b[1;1HOMARCHY_BENCHMARK_EARLY_PREFLIGHT started 1c9259a9-8f9e-4520-a173-bb61e2117d0c 50.01",
+    "OMARCHY_BENCHMARK_EARLY_PREFLIGHT finished 1c9259a9-8f9e-4520-a173-bb61e2117d0c 57.40"
+  ],
+  "latest_progress": {
+    "event": "progress",
+    "host_wall_s": 165.6363134060084,
+    "target_allocated_bytes": 3568349184,
+    "host_free_bytes": 6424186880,
+    "collected": false,
+    "vm_status": {
+      "status": "running",
+      "singlestep": false,
+      "running": true
+    }
+  }
+}

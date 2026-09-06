@@ -1,0 +1,36 @@
+{"event": "started", "run_dir": "/tmp/omarchy-bench/console-helper-smoke-02/vm", "pid": 27}
+{"event": "progress", "host_wall_s": 1.0033747859997675, "target_allocated_bytes": 200704, "host_free_bytes": 8358338560, "collected": false, "vm_status": {"status": "running", "singlestep": false, "running": true}}
+{"event": "progress", "host_wall_s": 11.040561233996414, "target_allocated_bytes": 200704, "host_free_bytes": 8358162432, "collected": false, "vm_status": {"status": "running", "singlestep": false, "running": true}}
+{"event": "progress", "host_wall_s": 21.071976826002356, "target_allocated_bytes": 200704, "host_free_bytes": 8357986304, "collected": false, "vm_status": {"status": "running", "singlestep": false, "running": true}}
+{"event": "progress", "host_wall_s": 31.107294372995966, "target_allocated_bytes": 200704, "host_free_bytes": 8357449728, "collected": false, "vm_status": {"status": "running", "singlestep": false, "running": true}}
+{"event": "progress", "host_wall_s": 41.147657195993816, "target_allocated_bytes": 200704, "host_free_bytes": 8357289984, "collected": false, "vm_status": {"status": "running", "singlestep": false, "running": true}}
+{"event": "progress", "host_wall_s": 51.17850823700428, "target_allocated_bytes": 200704, "host_free_bytes": 8357122048, "collected": false, "vm_status": {"status": "running", "singlestep": false, "running": true}}
+{"event": "progress", "host_wall_s": 61.21102029399481, "target_allocated_bytes": 200704, "host_free_bytes": 8356958208, "collected": false, "vm_status": {"status": "running", "singlestep": false, "running": true}}
+{"event": "progress", "host_wall_s": 71.24619769600395, "target_allocated_bytes": 200704, "host_free_bytes": 8356810752, "collected": false, "vm_status": {"status": "running", "singlestep": false, "running": true}}
+{"event": "progress", "host_wall_s": 81.27885798200441, "target_allocated_bytes": 200704, "host_free_bytes": 8356634624, "collected": false, "vm_status": {"status": "running", "singlestep": false, "running": true}}
+{"event": "progress", "host_wall_s": 91.31796127499547, "target_allocated_bytes": 200704, "host_free_bytes": 8356478976, "collected": false, "vm_status": {"status": "running", "singlestep": false, "running": true}}
+{"event": "progress", "host_wall_s": 102.14565071499965, "target_allocated_bytes": 200704, "host_free_bytes": 8356151296, "collected": false, "vm_status": {"status": "running", "singlestep": false, "running": true}}
+{"event": "progress", "host_wall_s": 112.84349935100181, "target_allocated_bytes": 200704, "host_free_bytes": 8355983360, "collected": false, "vm_status": {"status": "running", "singlestep": false, "running": true}}
+{"event": "progress", "host_wall_s": 122.87335094499576, "target_allocated_bytes": 200704, "host_free_bytes": 8355819520, "collected": false, "vm_status": {"status": "running", "singlestep": false, "running": true}}
+{"event": "progress", "host_wall_s": 132.90291466299095, "target_allocated_bytes": 200704, "host_free_bytes": 8355667968, "collected": false, "vm_status": {"status": "running", "singlestep": false, "running": true}}
+{"event": "progress", "host_wall_s": 142.93596381299722, "target_allocated_bytes": 200704, "host_free_bytes": 8355504128, "collected": false, "vm_status": {"status": "running", "singlestep": false, "running": true}}
+{"event": "progress", "host_wall_s": 152.96310288300447, "target_allocated_bytes": 200704, "host_free_bytes": 8355344384, "collected": false, "vm_status": {"status": "running", "singlestep": false, "running": true}}
+{"event": "progress", "host_wall_s": 162.99244151299354, "target_allocated_bytes": 200704, "host_free_bytes": 8355180544, "collected": false, "vm_status": {"status": "running", "singlestep": false, "running": true}}
+{"event": "progress", "host_wall_s": 173.0208891719958, "target_allocated_bytes": 200704, "host_free_bytes": 8355016704, "collected": false, "vm_status": {"status": "running", "singlestep": false, "running": true}}
+{"event": "progress", "host_wall_s": 183.0508109779912, "target_allocated_bytes": 200704, "host_free_bytes": 8355016704, "collected": false, "vm_status": {"status": "running", "singlestep": false, "running": true}}
+{"event": "progress", "host_wall_s": 193.07847554399632, "target_allocated_bytes": 200704, "host_free_bytes": 8355012608, "collected": false, "vm_status": {"status": "running", "singlestep": false, "running": true}}
+{"event": "progress", "host_wall_s": 203.10822154799826, "target_allocated_bytes": 200704, "host_free_bytes": 8355012608, "collected": false, "vm_status": {"status": "running", "singlestep": false, "running": true}}
+{"event": "progress", "host_wall_s": 213.13681157799147, "target_allocated_bytes": 200704, "host_free_bytes": 8355012608, "collected": false, "vm_status": {"status": "running", "singlestep": false, "running": true}}
+{"event": "progress", "host_wall_s": 223.16466127400054, "target_allocated_bytes": 200704, "host_free_bytes": 8355012608, "collected": false, "vm_status": {"status": "running", "singlestep": false, "running": true}}
+{"event": "progress", "host_wall_s": 233.1937945249956, "target_allocated_bytes": 200704, "host_free_bytes": 8355012608, "collected": false, "vm_status": {"status": "running", "singlestep": false, "running": true}}
+{"event": "progress", "host_wall_s": 243.2236163990019, "target_allocated_bytes": 200704, "host_free_bytes": 8355012608, "collected": false, "vm_status": {"status": "running", "singlestep": false, "running": true}}
+Traceback (most recent call last):
+  File "/tmp/omarchy-bench/console-helper-smoke-02/source/iso-vm.py", line 882, in <module>
+    main()
+  File "/tmp/omarchy-bench/console-helper-smoke-02/source/iso-vm.py", line 868, in main
+    supervisor.start()
+  File "/tmp/omarchy-bench/console-helper-smoke-02/source/iso-vm.py", line 801, in start
+    self.fail_timeout(reason)
+  File "/tmp/omarchy-bench/console-helper-smoke-02/source/iso-vm.py", line 260, in fail_timeout
+    raise RuntimeError(reason + "; failed measurement and diagnostic evidence retained")
+RuntimeError: Install timed out after 240s; failed measurement and diagnostic evidence retained

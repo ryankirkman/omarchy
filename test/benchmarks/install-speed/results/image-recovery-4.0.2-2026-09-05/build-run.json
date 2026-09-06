@@ -1,0 +1,12 @@
+{
+  "schema_version": 1,
+  "status": "complete-recovered-build",
+  "baseline_run": "/tmp/omarchy-bench/baseline-03",
+  "interrupted_builder_run": "/tmp/omarchy-bench/builder-01",
+  "recovery_builder_run": "/tmp/omarchy-bench/builder-02",
+  "collection_epoch": 1788639366.105646,
+  "archive_sha256": "05fcd7d226df4c497138d8400c304965e1a86a5b888d0b4c82a83a534b087a75",
+  "cleanup_fix_commit": "bd08eb3",
+  "build_time_not_install_time": true,
+  "recovery_note": "941 package records initially existed, but final three malformed DB records required exact-archive reinstall; all 941 DBs verified against source archive metadata; 32 post-hooks replayed; all regular payload files in final six packages verified; Qk0 and all Btrfs data checksums passed."
+}

@@ -1,0 +1,19 @@
+{
+  "schema_version": 1,
+  "status": "unvalidated-excluded",
+  "run_id": 33984888220,
+  "job_id": 101356480514,
+  "source_commit": "eeca85f55070caf5558142162ba224232adc3d2e",
+  "artifact_id": 9974908267,
+  "artifact_sha256": "5f16adb86d30c153029c4a21d507fe2062419728ee58277ae169822ab0af6545",
+  "installed_system_boot_verified": false,
+  "package_manifest_collected": false,
+  "eligible_for_speed_comparison": false,
+  "failure": "QMP disconnected during first guest reboot before QEMU process exit was observed",
+  "runner_region": "eastus",
+  "runner_image": "ubuntu-24.04/20260831.293.1",
+  "real_kvm_create_vm_succeeded": true,
+  "free_disk_after_setup_reported": "104 GiB",
+  "official_iso_download_wall_seconds_reported": 16,
+  "notes": "No download tokens, private VM keys, cidata or disk images are included."
+}

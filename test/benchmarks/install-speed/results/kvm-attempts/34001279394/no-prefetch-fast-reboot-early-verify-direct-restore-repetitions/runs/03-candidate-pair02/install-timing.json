@@ -1,0 +1,127 @@
+{
+  "started_at": 1788656135.1385467,
+  "target": "/mnt",
+  "total_phases": 9,
+  "current_index": 8,
+  "current_phase": "Installation complete",
+  "phases": [
+    {
+      "name": "Preparing live environment",
+      "status": "ok",
+      "elapsed": 0.12368619300000105
+    },
+    {
+      "name": "Preparing install target",
+      "status": "ok",
+      "elapsed": 0.0680994720000001
+    },
+    {
+      "name": "Installing Arch + Omarchy",
+      "status": "ok",
+      "elapsed": 21.978178771,
+      "substeps": [
+        {
+          "name": "partition, format, and encrypt",
+          "elapsed": 0.3658355370000024
+        },
+        {
+          "name": "mount and validate target",
+          "elapsed": 0.08263227299999798
+        },
+        {
+          "name": "unpack root image",
+          "elapsed": 16.573401426999997
+        },
+        {
+          "name": "per-machine package delta",
+          "elapsed": 1.4117507469999993
+        },
+        {
+          "name": "configure Limine",
+          "elapsed": 0.11201586399999997
+        },
+        {
+          "name": "create user",
+          "elapsed": 2.280618270000005
+        },
+        {
+          "name": "write target metadata",
+          "elapsed": 0.26122231000000085
+        }
+      ]
+    },
+    {
+      "name": "Configuring hibernation",
+      "status": "ok",
+      "elapsed": 0.4005743499999994
+    },
+    {
+      "name": "Configuring system",
+      "status": "ok",
+      "elapsed": 7.2284272220000005
+    },
+    {
+      "name": "Staging provisioning",
+      "status": "ok",
+      "elapsed": 0.31108367600000264
+    },
+    {
+      "name": "Finalizing boot and user setup",
+      "status": "ok",
+      "elapsed": 10.375813977,
+      "substeps": [
+        {
+          "name": "Finalizing Limine boot",
+          "branch": "boot",
+          "status": "ok",
+          "elapsed": 10.374686742000002
+        },
+        {
+          "name": "Finalizing user",
+          "branch": "user",
+          "status": "ok",
+          "elapsed": 5.902751799999997
+        },
+        {
+          "name": "Configuring login",
+          "branch": "user",
+          "status": "ok",
+          "elapsed": 0.0894537040000003
+        },
+        {
+          "name": "Configuring SSH access",
+          "branch": "user",
+          "status": "ok",
+          "elapsed": 0.3015880459999991
+        },
+        {
+          "name": "Configuring Tailscale",
+          "branch": "user",
+          "status": "ok",
+          "elapsed": 1.3730000034684053e-06
+        },
+        {
+          "name": "Configuring DNS resolver",
+          "branch": "user",
+          "status": "ok",
+          "elapsed": 0.00040920700000413035
+        }
+      ]
+    },
+    {
+      "name": "Validating boot setup",
+      "status": "ok",
+      "elapsed": 0.006979846999996653
+    },
+    {
+      "name": "Creating factory snapshot",
+      "status": "ok",
+      "elapsed": 0.1146408809999997
+    }
+  ],
+  "phase_started_at": 1788656176.127292,
+  "finished_at": 1788656176.24227,
+  "duration_seconds": 40.610869570000006,
+  "installed_packages": 941,
+  "expected_packages": 942
+}

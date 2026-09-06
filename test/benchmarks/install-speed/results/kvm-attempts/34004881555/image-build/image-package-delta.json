@@ -1,0 +1,6 @@
+{
+  "baseline_packages": 941,
+  "image_packages": 941,
+  "remaining_packages": {},
+  "reasons_source": "baseline pacman -Qqe"
+}

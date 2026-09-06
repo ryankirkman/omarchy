@@ -1,0 +1,56 @@
+xorriso 1.5.6 : RockRidge filesystem manipulator, libburnia project.
+
+xorriso : NOTE : ISO image bears MBR with  -boot_image any partition_offset=16
+xorriso : NOTE : Loading ISO image tree from LBA 0
+xorriso : UPDATE :     103 nodes read in 1 seconds
+libisofs: NOTE : Found hidden El-Torito image for EFI.
+libisofs: NOTE : EFI image start and size: 3029103 * 2048 , 47104 * 512
+xorriso : NOTE : Detected El-Torito boot information which currently is set to be discarded
+Drive current: -indev '/home/runner/work/_temp/omarchy-install-speed/omarchy-4.0.2.iso'
+Media current: stdio file, overwriteable
+Media status : is written , is appendable
+Boot record  : El Torito , MBR isohybrid cyl-align-off GPT
+Media summary: 1 session, 3040895 data blocks, 5939m data, 79.4g free
+Volume id    : 'OMARCHY_202608'
+Drive current: -outdev '/home/runner/work/_temp/omarchy-install-speed/firmware-initramfs-control.iso'
+Media current: stdio file, overwriteable
+Media status : is blank
+Media summary: 0 sessions, 0 data blocks, 0 data, 79.4g free
+xorriso : NOTE : Replayed 20 boot related commands
+xorriso : UPDATE :       1 files added in 1 seconds
+Added to ISO image: file '/arch/boot/x86_64/initramfs-linux-t2.img'='/home/runner/work/_temp/omarchy-install-speed/initramfs-control.img'
+xorriso : NOTE : Copying to System Area: 32768 bytes from file '--interval:imported_iso:0s-15s:zero_mbrpt,zero_gpt:/home/runner/work/_temp/omarchy-install-speed/omarchy-4.0.2.iso'
+libisofs: NOTE : Automatically adjusted MBR geometry to 1023/188/63
+xorriso : UPDATE : Writing:      63681s    2.1%   fifo  99%  buf  50%
+xorriso : UPDATE : Writing:     221184s    7.3%   fifo 100%  buf  50%  332.4xD 
+xorriso : UPDATE : Writing:     424720s   14.0%   fifo  99%  buf  50%  300.7xD 
+xorriso : UPDATE : Writing:     622592s   20.5%   fifo 100%  buf  50%  292.3xD 
+xorriso : UPDATE : Writing:     827392s   27.2%   fifo 100%  buf  50%  302.5xD 
+xorriso : UPDATE : Writing:    1024000s   33.7%   fifo 100%  buf  50%  290.4xD 
+xorriso : UPDATE : Writing:    1204224s   39.6%   fifo 100%  buf  50%  295.8xD 
+xorriso : UPDATE : Writing:    1409024s   46.3%   fifo 100%  buf  50%  302.5xD 
+xorriso : UPDATE : Writing:    1605632s   52.8%   fifo 100%  buf  50%  290.4xD 
+xorriso : UPDATE : Writing:    1802240s   59.3%   fifo 100%  buf  50%  290.4xD 
+xorriso : UPDATE : Writing:    2007040s   66.0%   fifo 100%  buf  50%  302.5xD 
+xorriso : UPDATE : Writing:    2203648s   72.5%   fifo 100%  buf  50%  290.4xD 
+xorriso : UPDATE : Writing:    2408448s   79.2%   fifo 100%  buf  50%  302.6xD 
+xorriso : UPDATE : Writing:    2605056s   85.7%   fifo 100%  buf  50%  290.4xD 
+xorriso : UPDATE : Writing:    2809856s   92.4%   fifo 100%  buf  50%  302.5xD 
+xorriso : UPDATE : Writing:    3006464s   98.9%   fifo 100%  buf  50%  290.5xD 
+ISO image produced: 3040746 sectors
+Written to medium : 3040912 sectors at LBA 48
+Writing to '/home/runner/work/_temp/omarchy-install-speed/firmware-initramfs-control.iso' completed successfully.
+
+xorriso : NOTE : Re-assessing -outdev '/home/runner/work/_temp/omarchy-install-speed/firmware-initramfs-control.iso'
+xorriso : NOTE : ISO image bears MBR with  -boot_image any partition_offset=16
+xorriso : NOTE : Loading ISO image tree from LBA 0
+xorriso : UPDATE :     103 nodes read in 1 seconds
+libisofs: NOTE : Found hidden El-Torito image for EFI.
+libisofs: NOTE : EFI image start and size: 3029002 * 2048 , 47104 * 512
+xorriso : NOTE : Detected El-Torito boot information which currently is set to be discarded
+Drive current: -dev '/home/runner/work/_temp/omarchy-install-speed/firmware-initramfs-control.iso'
+Media current: stdio file, overwriteable
+Media status : is written , is appendable
+Boot record  : El Torito , MBR isohybrid cyl-align-off GPT
+Media summary: 1 session, 3040746 data blocks, 5939m data, 73.6g free
+Volume id    : 'OMARCHY_202608'

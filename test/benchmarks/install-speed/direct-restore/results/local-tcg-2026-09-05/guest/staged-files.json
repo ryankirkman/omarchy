@@ -1,0 +1,17 @@
+[
+  {
+    "name": "guest-test.py",
+    "bytes": 19732,
+    "sha256": "193472db6ea04d44755867095a9fde7e0b82da02482cae5d9b87afd37a0f8d7f"
+  },
+  {
+    "name": "phases_impl.py",
+    "bytes": 119539,
+    "sha256": "8787646c45b164b4fde2abb894c87ece46e9c8f180ff96fede9ed23b2723a458"
+  },
+  {
+    "name": "fixture-manifest.json",
+    "bytes": 3194,
+    "sha256": "4a0ba09ad6d73f025a85cbbe762ff07c9a3a0c66372fedb3bd5be7bace111660"
+  }
+]

@@ -1,0 +1,18 @@
+test_actual_preflight_composes_once_and_rejects_corruption_and_drift (__main__.LocaldbOverlapContract.test_actual_preflight_composes_once_and_rejects_corruption_and_drift) ... ok
+test_deferred_provisioning_retains_original_serial_command (__main__.LocaldbOverlapContract.test_deferred_provisioning_retains_original_serial_command) ... ok
+test_every_target_source_drift_is_rejected_before_setup (__main__.LocaldbOverlapContract.test_every_target_source_drift_is_rejected_before_setup) ... ok
+test_exact_source_pins_and_only_expected_functions_change (__main__.LocaldbOverlapContract.test_exact_source_pins_and_only_expected_functions_change) ... ok
+test_existing_parallel_branch_overlaps_and_joins_required_index (__main__.LocaldbOverlapContract.test_existing_parallel_branch_overlaps_and_joins_required_index) ... ok
+test_index_failure_is_joined_before_parallel_phase_raises (__main__.LocaldbOverlapContract.test_index_failure_is_joined_before_parallel_phase_raises) ... ok
+test_missing_symlink_and_shell_anchor_drift_are_rejected (__main__.LocaldbOverlapContract.test_missing_symlink_and_shell_anchor_drift_are_rejected) ... ok
+test_nonexecutable_system_script_is_rejected (__main__.LocaldbOverlapContract.test_nonexecutable_system_script_is_rejected) ... ok
+test_payload_preserves_every_base_file_and_records_full_provenance (__main__.LocaldbOverlapContract.test_payload_preserves_every_base_file_and_records_full_provenance) ... ok
+test_payload_rejects_changed_base_and_output_collisions (__main__.LocaldbOverlapContract.test_payload_rejects_changed_base_and_output_collisions) ... ok
+test_real_shell_index_runs_exactly_once_late_with_original_logging (__main__.LocaldbOverlapContract.test_real_shell_index_runs_exactly_once_late_with_original_logging) ... ok
+test_real_updatedb_error_propagates_and_keeps_failure_log (__main__.LocaldbOverlapContract.test_real_updatedb_error_propagates_and_keeps_failure_log) ... ok
+test_source_and_each_patch_anchor_fail_closed (__main__.LocaldbOverlapContract.test_source_and_each_patch_anchor_fail_closed) ... ok
+
+----------------------------------------------------------------------
+Ran 13 tests in 0.446s
+
+OK

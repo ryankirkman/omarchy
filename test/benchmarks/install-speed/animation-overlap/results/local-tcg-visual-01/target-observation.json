@@ -1,0 +1,13 @@
+{
+  "schema_version": 1,
+  "purpose": "read-only observation after clean guest poweroff; target retained",
+  "path": "/tmp/omarchy-bench/animation-visual-01/vm/target.qcow2",
+  "sha256": "04082b5e0bf83aa59cde7b5bb9328d9707bb1e6389bbf5bc824ed23111cb225e",
+  "file_bytes": 197248,
+  "allocated_bytes": 200704,
+  "virtual_bytes": 42949672960,
+  "entire_virtual_range_zero": true,
+  "qemu_exit_status": 0,
+  "supervisor_returncode": 0,
+  "no_target_cleanup_performed": true
+}

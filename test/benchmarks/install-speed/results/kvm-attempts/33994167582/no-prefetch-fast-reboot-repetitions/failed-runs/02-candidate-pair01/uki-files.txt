@@ -1,0 +1,8 @@
+EFI/BOOT/BOOTX64.EFI 368640 bytes
+EFI/Linux/omarchy_linux.efi 36360704 bytes
+EFI/limine/limine_x64.bak 378880 bytes
+EFI/limine/limine_x64.efi 368640 bytes
+limine.conf 1380 bytes
+limine.conf.old 620 bytes
+loader/boot-secret-mixin 32 bytes
+loader/random-seed 32 bytes

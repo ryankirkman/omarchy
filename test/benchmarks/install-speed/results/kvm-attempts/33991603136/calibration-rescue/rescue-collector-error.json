@@ -1,0 +1,5 @@
+{
+  "returncode": 1,
+  "stdout": "",
+  "stderr": "Traceback (most recent call last):\n  File \"/usr/local/lib/omarchy-benchmark/collect-failed-install.py\", line 169, in <module>\n    print(json.dumps(collect(), indent=2))\n                     ~~~~~~~^^\n  File \"/usr/local/lib/omarchy-benchmark/collect-failed-install.py\", line 107, in collect\n    required(['mount', '-t', 'btrfs', '-o', 'ro,nologreplay,subvolid=5,nosuid,nodev', roots[0], str(top)])\n    ~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/usr/local/lib/omarchy-benchmark/collect-failed-install.py\", line 36, in required\n    result = subprocess.run(argv, text=True, capture_output=True, timeout=20, check=True)\n  File \"/usr/lib/python3.14/subprocess.py\", line 578, in run\n    raise CalledProcessError(retcode, process.args,\n                             output=stdout, stderr=stderr)\nsubprocess.CalledProcessError: Command '['mount', '-t', 'btrfs', '-o', 'ro,nologreplay,subvolid=5,nosuid,nodev', '/dev/vdb2', '/run/omarchy-failed-install/btrfs']' returned non-zero exit status 32.\n"
+}

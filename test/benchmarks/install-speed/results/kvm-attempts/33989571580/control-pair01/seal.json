@@ -1,0 +1,125 @@
+{
+  "schema_version": 1,
+  "sealed_at": 1788640835.5126565,
+  "source_run_directory": "/home/runner/work/_temp/omarchy-install-speed/fresh-installs-upstream-image/01-control-pair01",
+  "qemu_exit_status": 0,
+  "runner_exit_status": 0,
+  "private_keys_and_virtual_disks_excluded": true,
+  "files": {
+    "manifest.json": {
+      "sha256": "dfba63ed77178a2e66d2feba1e8caae0c7d74cc4fce139bd41acc63711243342",
+      "bytes": 5445
+    },
+    "install-timing.json": {
+      "sha256": "22e530d09d1b85a1bc40a4785e5ebf3c2f52c0e030185249bdcf9a498f49f254",
+      "bytes": 1865
+    },
+    "validation.json": {
+      "sha256": "7a37cc4fd0d65137f5f159b34b1f46833c6b623135225001fe174447b9f092e1",
+      "bytes": 220
+    },
+    "identity.json": {
+      "sha256": "3328a985504db37a3c3acbcd2d2f786093bbd85abf24bb3da19d92d8d30c2330",
+      "bytes": 459
+    },
+    "package-manifest.txt": {
+      "sha256": "f69fe12f4d2b530f56f28b6f350380eaae2e0ea679d88abedd0d032f0b0df89d",
+      "bytes": 18343
+    },
+    "package-explicit.txt": {
+      "sha256": "37d06fc7de2487901f81513bf70f3e592d7245cd656d6c34089ccc1f258055f9",
+      "bytes": 1705
+    },
+    "package-files.txt": {
+      "sha256": "5b501e2ef951a921a004c72ce90497acc7047f27a0f1c1fd12acbb9f26c8ec38",
+      "bytes": 41163
+    },
+    "package-files.stderr": {
+      "sha256": "5b6482796f084d9f1a7c88a251d30d1f9d46a2bad8adb9401253e706a28c0018",
+      "bytes": 300
+    },
+    "installed-root.json": {
+      "sha256": "cebc725cbd245afc4139ebbe70d7a3010beb56dc36ead369327bb8504f5a9c59",
+      "bytes": 132
+    },
+    "installed-boot.txt": {
+      "sha256": "67b02652a0bb410df51da358f8fb7ff30e63bd4cdd55f785cad75e7d29926966",
+      "bytes": 776
+    },
+    "machine-id.txt": {
+      "sha256": "9c1fd8d72b5f274dbe2527d00ad8ad6135c1327d10d5ce70e27503c4c6892353",
+      "bytes": 33
+    },
+    "ssh-host-fingerprints.txt": {
+      "sha256": "1ea4bd879df4106ed577b73304c27cac816c8f0c8f411bbd0d1a4eaa061faae3",
+      "bytes": 355
+    },
+    "pacman-master-keys.txt": {
+      "sha256": "479b305c38143e809c117c973f66c0c519982be061a45f8dbc097e1d7beea2f7",
+      "bytes": 293
+    },
+    "btrfs-uuid.txt": {
+      "sha256": "643d96ca74dd69d73bcde1e881af5b5db232d64802b3d6a5e06cd37d288e3244",
+      "bytes": 37
+    },
+    "btrfs-subvolumes.txt": {
+      "sha256": "5736ae4b08dbd7d1bba9d955c3851acabda8d096455602837889682e5eef39f3",
+      "bytes": 2295
+    },
+    "uki-files.txt": {
+      "sha256": "d37b17ae00ba1fe47a767a2c7e160e0bd4b9a5d003317d811a2621fc826f36f1",
+      "bytes": 266
+    },
+    "serial.log": {
+      "sha256": "540f6b0904e3fe24c384481f0e10ae4f65a6e57292d444122a6c95d34c29216f",
+      "bytes": 31978
+    },
+    "qemu.log": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    "installed-screen.png": {
+      "sha256": "c002095c2a60d70eb395f04c6e96657036879559417f0cb36e9437b9e68c5c06",
+      "bytes": 8676
+    },
+    "standalone-reboot.json": {
+      "sha256": "b76915c35b7b8b1caaea4d849deb119fc0a0f6a5e2dce554d76b63e354ddd80c",
+      "bytes": 10644
+    },
+    "standalone-root.json": {
+      "sha256": "cebc725cbd245afc4139ebbe70d7a3010beb56dc36ead369327bb8504f5a9c59",
+      "bytes": 132
+    },
+    "standalone-identity.json": {
+      "sha256": "3328a985504db37a3c3acbcd2d2f786093bbd85abf24bb3da19d92d8d30c2330",
+      "bytes": 459
+    },
+    "standalone-machine-id.txt": {
+      "sha256": "9c1fd8d72b5f274dbe2527d00ad8ad6135c1327d10d5ce70e27503c4c6892353",
+      "bytes": 33
+    },
+    "standalone-ssh-host-fingerprints.txt": {
+      "sha256": "1ea4bd879df4106ed577b73304c27cac816c8f0c8f411bbd0d1a4eaa061faae3",
+      "bytes": 355
+    },
+    "standalone-pacman-master-keys.txt": {
+      "sha256": "479b305c38143e809c117c973f66c0c519982be061a45f8dbc097e1d7beea2f7",
+      "bytes": 293
+    },
+    "standalone-btrfs-uuid.txt": {
+      "sha256": "643d96ca74dd69d73bcde1e881af5b5db232d64802b3d6a5e06cd37d288e3244",
+      "bytes": 37
+    },
+    "standalone-btrfs-subvolumes.txt": {
+      "sha256": "d6dac23f4aa820ae60aa3002c7a467cb41998fddc392bdca38118e4311801d37",
+      "bytes": 2295
+    },
+    "standalone-uki-files.txt": {
+      "sha256": "d37b17ae00ba1fe47a767a2c7e160e0bd4b9a5d003317d811a2621fc826f36f1",
+      "bytes": 266
+    }
+  },
+  "runner_sha256": "82eb53ade0ff5af2b6bb4edeaa7b2ea8fcb65fe9acab9617c4ef506acce0d8bc",
+  "comparator_sha256": "2a2b20082a73da77fbafb929c3a6aa44d06ae94d380dcab04db90460e1951044",
+  "repeat_driver_sha256": "6a0aa234aafeb555155f12d45f4d0a1bf6c1e49cc998186c228ef82c1ab05232"
+}

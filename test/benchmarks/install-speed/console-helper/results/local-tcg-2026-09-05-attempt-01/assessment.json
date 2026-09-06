@@ -1,0 +1,27 @@
+{
+  "schema_version": 1,
+  "functional_test_passed": false,
+  "measurement_valid": false,
+  "verdict": "Helper failed closed at original serial-backend validation; no console input or commands were sent. Exact rejected query-chardev result was not persisted by this version.",
+  "fixture_ready_marker_present": true,
+  "real_console_login_prompt_present": true,
+  "original_serial_sha256": "c5bb1e7b71480bec70d37475a732d560cafea976b0549d079dbd3d50c3c719a7",
+  "original_serial_bytes": 653,
+  "target_file_bytes": 197248,
+  "target_allocated_bytes": 200704,
+  "target_sha256": "04082b5e0bf83aa59cde7b5bb9328d9707bb1e6389bbf5bc824ed23111cb225e",
+  "target_entire_virtual_range_zero": true,
+  "target_written_data_extents": false,
+  "runner_exit_status": 1,
+  "qemu_termination_evidence": "qemu.log records SIGTERM; frozen runner waits for QEMU in its exception path before returning, and post-exit qemu-img info/map acquired ordinary image access.",
+  "no_installation_started_evidence": [
+    "mode-builder wrapper never invokes preserved original installer",
+    "fixture ready marker includes successful check for no orchestrator.main process",
+    "target map covers all 42,949,672,960 virtual bytes with zero=true,data=false,present=false"
+  ],
+  "notes": [
+    "This is a deliberately invalid live-builder functional test, not an installation or speed measurement.",
+    "No private SSH key, CIDATA image/configuration credentials, target disk, NVRAM, ISO, or initramfs is committed.",
+    "The preflight contains the documented disposable fixture password, applied only inside the live guest."
+  ]
+}

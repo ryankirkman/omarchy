@@ -1,0 +1,59 @@
+{
+  "case": "4096-off",
+  "expected": {
+    "image_sha256": "0de5c726016e9f2163a43a42d97020f32ffacb759f28d915a86281a5059ae8ea",
+    "prefill_sha256": "079b18e949a02a9e2965b2d01d96f59f99298f17c9215ee269e3baa127044f5f",
+    "trailing_sha256": "70c4eaba55c4010d636ac5b46ee640423ddcd44736057ad95429ea4fa4440e8a"
+  },
+  "hardware": {
+    "by_id": "/dev/disk/by-id/virtio-OMARCHY_DIO_4096_OFF",
+    "capabilities": {
+      "discard_max_bytes": 0,
+      "write_zeroes_max_bytes": 0
+    },
+    "device": "/dev/vde",
+    "logical_sector_bytes": 4096,
+    "major_minor": "254:64",
+    "no_partitions_holders_slaves_or_swap": true,
+    "physical_sector_bytes": 4096,
+    "read_only": false,
+    "serial": "OMARCHY_DIO_4096_OFF",
+    "size_bytes": 100663296,
+    "sysfs": "/sys/devices/pci0000:00/0000:00:08.0/virtio7/block/vde",
+    "unmounted": true
+  },
+  "prefill_bytes_verified": 100663296,
+  "prefill_sha256": "079b18e949a02a9e2965b2d01d96f59f99298f17c9215ee269e3baa127044f5f",
+  "restore_commands": [
+    {
+      "argv": [
+        "qemu-img",
+        "convert",
+        "-q",
+        "-f",
+        "qcow2",
+        "-O",
+        "raw",
+        "-W",
+        "-n",
+        "-t",
+        "none",
+        "-m",
+        "8",
+        "/dev/vdf",
+        "/dev/vde"
+      ],
+      "cwd": null,
+      "executable": "qemu-img"
+    }
+  ],
+  "restore_runtime_error": null,
+  "status": "passed",
+  "verification": {
+    "bytes_compared": 100663296,
+    "first_mismatch": null,
+    "image_sha256": "0de5c726016e9f2163a43a42d97020f32ffacb759f28d915a86281a5059ae8ea",
+    "trailing_sha256": "70c4eaba55c4010d636ac5b46ee640423ddcd44736057ad95429ea4fa4440e8a",
+    "whole_device_sha256": "4f8a1ead17aacf473f9d77918aaf97ce596dd5a27d08bd335471a00996b67da5"
+  }
+}

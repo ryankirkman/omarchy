@@ -1,0 +1,27 @@
+{
+  "schema_version": 1,
+  "disposition": "rejected component performance screen; not selected for native trial",
+  "logging_scope": "all-target-setup-commands",
+  "production_sources": {
+    "contract-test.py": "79882edca61a7c073141c20be3572a0a1378e7717f915b3b9503c1b0a20aaa6d",
+    "guard.py": "639365971a6080341de18705a5ca504322bb4574ed72e86605fccac0180eb466",
+    "guest-contract.py": "42d3f43b0540ae5c4fd0f6bc5a7a848b8223ec313752507b3870927424700dda",
+    "patch.py": "c960c3bd4d11af7f284de6ddc7e9d4d44315ab69127cf5504de51af37d899765",
+    "payload-contract-test.py": "9b0ef87eed5def2d57656e829dded9bb4c70a016cba7a10865be901dde2b84ed",
+    "preflight.sh": "7d6f8fc57b6ba23c4a324e74da4ee9ea99b9260f23c9e6dfa73d45295c5ca339",
+    "prepare-payload.py": "87e9efa78cc10e5b16424c45ca4b08e2817099823d4ca8f42388b0edd5931a1a"
+  },
+  "files": [
+    {
+      "path": "payload.manifest.json",
+      "bytes": 8360,
+      "sha256": "ce2a26e6816a9c375217d5b154e5d55ef021f0439a2a5e81f4f282eed868cbc2"
+    },
+    {
+      "path": "logging-guest-result.json",
+      "bytes": 7606,
+      "sha256": "a26acd676bed93b19a3eb9a4fa0dc82cc535f90c319b71b1fa786609691c7d5d"
+    }
+  ],
+  "native_install_performance_claim": false
+}

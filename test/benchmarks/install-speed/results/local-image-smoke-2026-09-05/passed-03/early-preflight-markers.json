@@ -1,0 +1,13 @@
+{
+  "schema_version": 1,
+  "source_file": "serial.log",
+  "source_sha256": "16e83e3180ccb321a4f024038485d0f8459ea29e4c239f769c5a475fbf24bfa7",
+  "live_boot_id": "1c9259a9-8f9e-4520-a173-bb61e2117d0c",
+  "started_guest_uptime_s": 50.01,
+  "finished_guest_uptime_s": 57.4,
+  "one_successful_activation_pair": true,
+  "markers_describe_preflight_activation_not_full_root_image_verification": true,
+  "ordering_failure_observed": false,
+  "installed_boot_id": "1663bc5e-1fa3-4ac1-87c0-570127ccdab8",
+  "standalone_boot_id": "d3530455-5e2e-417b-8f34-d1a8359e5f72"
+}

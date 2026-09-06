@@ -1,0 +1,8 @@
+{
+  "ok": true,
+  "result": {
+    "returncode": 0,
+    "stdout": "ActiveState=inactive\nSubState=dead\nExecMainStatus=0\n",
+    "stderr": ""
+  }
+}

@@ -1,0 +1,126 @@
+{
+  "plan": {
+    "schema_version": 1,
+    "pairs": 3,
+    "first": "control",
+    "run_root": "/home/runner/work/_temp/omarchy-install-speed/fresh-installs-upstream-image",
+    "evidence_root": "/home/runner/work/_temp/omarchy-install-evidence/repetitions",
+    "templates": {
+      "control": [
+        "/usr/bin/python3",
+        "/home/runner/work/omarchy/omarchy/test/benchmarks/iso-vm.py",
+        "run",
+        "--iso-source",
+        "/home/runner/work/_temp/omarchy-install-speed/iso-harness",
+        "--cpus",
+        "4",
+        "--memory",
+        "8192",
+        "--accelerator",
+        "kvm",
+        "--poll-interval",
+        "2",
+        "--timeout",
+        "1800",
+        "--test-overlay-sha256",
+        "192b782af42c164e78453f2b3b122b5ac1849dbbc5e382b76780827c0dcc38c2",
+        "--iso",
+        "/home/runner/work/_temp/omarchy-install-speed/firmware-initramfs-control.iso",
+        "--verify-standalone-reboot",
+        "--extra-qemu-args-json",
+        "[\"-drive\", \"file=/home/runner/work/_temp/omarchy-install-speed/fast-image.iso,if=none,id=fastimage,format=raw,readonly=on,cache=writeback,media=cdrom\", \"-device\", \"ide-cd,drive=fastimage,bus=ide.1,id=fastimage-cd\"]",
+        "--source-cache",
+        "cold",
+        "--installed-boot-timeout",
+        "300",
+        "--mode",
+        "install"
+      ],
+      "candidate": [
+        "/usr/bin/python3",
+        "/home/runner/work/omarchy/omarchy/test/benchmarks/iso-vm.py",
+        "run",
+        "--iso-source",
+        "/home/runner/work/_temp/omarchy-install-speed/iso-harness",
+        "--cpus",
+        "4",
+        "--memory",
+        "8192",
+        "--accelerator",
+        "kvm",
+        "--poll-interval",
+        "2",
+        "--timeout",
+        "1800",
+        "--test-overlay-sha256",
+        "85e27405fe4a797191a765d9381e6ae32303f848d4f2502ea6beb7a78b312fc2",
+        "--iso",
+        "/home/runner/work/_temp/omarchy-install-speed/firmware-initramfs-candidate.iso",
+        "--verify-standalone-reboot",
+        "--extra-qemu-args-json",
+        "[\"-drive\", \"file=/home/runner/work/_temp/omarchy-install-speed/fast-image.iso,if=none,id=fastimage,format=raw,readonly=on,cache=writeback,media=cdrom\", \"-device\", \"ide-cd,drive=fastimage,bus=ide.1,id=fastimage-cd\"]",
+        "--source-cache",
+        "cold",
+        "--installed-boot-timeout",
+        "300",
+        "--mode",
+        "install"
+      ]
+    },
+    "order": [
+      {
+        "name": "01-control-pair01",
+        "revision": "control",
+        "pair": 1
+      },
+      {
+        "name": "02-candidate-pair01",
+        "revision": "candidate",
+        "pair": 1
+      },
+      {
+        "name": "03-candidate-pair02",
+        "revision": "candidate",
+        "pair": 2
+      },
+      {
+        "name": "04-control-pair02",
+        "revision": "control",
+        "pair": 2
+      },
+      {
+        "name": "05-control-pair03",
+        "revision": "control",
+        "pair": 3
+      },
+      {
+        "name": "06-candidate-pair03",
+        "revision": "candidate",
+        "pair": 3
+      }
+    ],
+    "source_provenance": {
+      "runner_sha256": "82eb53ade0ff5af2b6bb4edeaa7b2ea8fcb65fe9acab9617c4ef506acce0d8bc",
+      "comparator_sha256": "2a2b20082a73da77fbafb929c3a6aa44d06ae94d380dcab04db90460e1951044",
+      "repeat_driver_sha256": "6a0aa234aafeb555155f12d45f4d0a1bf6c1e49cc998186c228ef82c1ab05232"
+    }
+  },
+  "started_at": 1788640590.365466,
+  "status": "failed",
+  "runs": [
+    {
+      "name": "01-control-pair01",
+      "revision": "control",
+      "pair": 1,
+      "evidence": "/home/runner/work/_temp/omarchy-install-evidence/repetitions/runs/01-control-pair01",
+      "runner_exit_status": 0,
+      "reclamation": {
+        "target": "/home/runner/work/_temp/omarchy-install-speed/fresh-installs-upstream-image/01-control-pair01/target.qcow2",
+        "reclaimed_allocated_bytes": 6123880448,
+        "at": 1788640835.67454
+      }
+    }
+  ],
+  "failure": "Runner failed with exit 1; evidence/disk retained at /home/runner/work/_temp/omarchy-install-speed/fresh-installs-upstream-image/02-candidate-pair01",
+  "failed_at": 1788640979.7440374
+}

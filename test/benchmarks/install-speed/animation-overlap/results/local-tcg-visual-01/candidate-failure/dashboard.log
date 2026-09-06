@@ -1,0 +1,6 @@
+OMARCHY_BENCHMARK_ANIMATION begin 30bbfe11-3633-49e3-950b-b0468e1c94fc 223.90 finalizing
+Scripted visual fixture complete; no installation was performed.
+OMARCHY_BENCHMARK_ANIMATION end 30bbfe11-3633-49e3-950b-b0468e1c94fc 228.36 0
+[dashboard] installer child exited with status 17
+[dashboard] last installer phase: Finalizing boot and user setup
+[dashboard] failed phase: Finalizing boot and user setup: Scripted visual-fixture failure

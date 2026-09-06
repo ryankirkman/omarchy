@@ -1,0 +1,5 @@
+{
+  "status": "failed",
+  "error_type": "RuntimeError",
+  "error": "Repeated install series failed: image-no-package-prefetch-fast-reboot-early-verify: 1"
+}

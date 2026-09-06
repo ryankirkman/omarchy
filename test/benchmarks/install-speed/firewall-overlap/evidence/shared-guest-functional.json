@@ -1,0 +1,63 @@
+{
+  "schema_version": 1,
+  "scope": "Exercise exact firewall shell writes inside a disposable guest's tiny chroot.\n\nUFW/systemctl are recording dependencies: this verifies filesystem placement,\nnamespace isolation and original error logging, not live netfilter behavior.\n",
+  "phases_sha256": "f5235ae1ed7e6a783978d2f51e49fc3e0d44c687f218967a599a104101e0070c",
+  "target_disk_used": false,
+  "packages_installed": false,
+  "live_firewall_commands_executed": false,
+  "guest_binary_sha256": {
+    "/usr/bin/bash": "575e03ac834b739349a4484de481abcd06a6f7193cefc795260a32a1943f20a5",
+    "/usr/bin/env": "08392d72874da4f88c619ee717f2b4a5f28ba0534ff8cf1083fb2edc37d6475f",
+    "/usr/bin/date": "8c40f636dad194d945ba65c6ce18a412e8dffc595a9a80f9874515f79411e6ac",
+    "/usr/bin/mktemp": "4c6e6310ed292881c17a53e1f04cba7da96782be6d6a9aa6d90049ee9581d751",
+    "/usr/bin/cat": "2308dc9636749387465a29433a188f436f0a89b095759e4ccd5bdbc04447c3b4",
+    "/usr/bin/sed": "c16be69e87ba0f9c5f364e3d25060d872629e26ba9db8681ad962f4485f6f31a",
+    "/usr/bin/chmod": "152cf9a81c2d3066687b76fd0256346d2aecb58d16f81f7db758e13ea404dc65",
+    "/usr/bin/rm": "d5b182ba415bf4571cb6712c96dcee160dcb317c86814879a3fda36ef46ec36b",
+    "/lib64/ld-linux-x86-64.so.2": "d011113b7054c641c8ca064f58bcc23804fd2654a3dff2444dad06ddeda61bfb",
+    "/usr/lib/libattr.so.1": "6eb652fa1725b44f57fb03cff98da6f23ebe156fa0641eb3a7cbf7ba1817be2c",
+    "/usr/lib/libc.so.6": "e221b10fee9ee4776d8f0f1701253bc06817f7a4dbe6c5292487277d0bf8ffff",
+    "/usr/lib/libncursesw.so.6": "7498a0b0f75deb5417e109d1853679f1a6b201e52e03b247c914fec0a36e3a5b",
+    "/usr/lib/libreadline.so.8": "e860c46c8ec8a37d9ade7cc5eb75e6973a3bb12c8cdc50f849887f88095da200",
+    "/usr/lib64/ld-linux-x86-64.so.2": "d011113b7054c641c8ca064f58bcc23804fd2654a3dff2444dad06ddeda61bfb"
+  },
+  "cases": [
+    {
+      "status": 0,
+      "passed": true,
+      "target_package_bytes_unchanged": true,
+      "pending_required_setup": false,
+      "ufw_configuration": "ENABLED=yes\n",
+      "command_intents": [
+        "ufw default deny incoming",
+        "ufw default allow outgoing",
+        "ufw allow 53317/udp",
+        "ufw allow 53317/tcp",
+        "ufw allow in proto udp from 172.16.0.0/12 to 172.17.0.1 port 53 comment allow-docker-dns",
+        "ufw allow in proto udp from 192.168.0.0/16 to 172.17.0.1 port 53 comment allow-docker-dns",
+        "docker-rules",
+        "enable-ufw"
+      ],
+      "stdout": "[2026-09-06 03:22:51] Starting: /usr/share/omarchy/install/config/firewall.sh\n[2026-09-06 03:22:52] Completed: /usr/share/omarchy/install/config/firewall.sh\n",
+      "stderr": "==> WARNING: /tmp/omarchy-firewall-guest-xrvo3_mi/target-0 is not a mountpoint. This may have undesirable side effects.\n",
+      "parent_target_mount_absent": true
+    },
+    {
+      "status": 23,
+      "passed": true,
+      "target_package_bytes_unchanged": true,
+      "pending_required_setup": true,
+      "ufw_configuration": "ENABLED=no\n",
+      "command_intents": [
+        "ufw default deny incoming"
+      ],
+      "stdout": "[2026-09-06 03:22:54] Starting: /usr/share/omarchy/install/config/firewall.sh\n[2026-09-06 03:22:54] Failed: /usr/share/omarchy/install/config/firewall.sh (exit code: 23)\n",
+      "stderr": "==> WARNING: /tmp/omarchy-firewall-guest-xrvo3_mi/target-23 is not a mountpoint. This may have undesirable side effects.\n",
+      "parent_target_mount_absent": true
+    }
+  ],
+  "fixture": "/tmp/omarchy-firewall-guest-xrvo3_mi",
+  "fixture_removed": true,
+  "guest_ufw_configuration_unchanged": true,
+  "status": "passed"
+}

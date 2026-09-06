@@ -1,0 +1,6 @@
+{
+  "started_host_wall_s": 242.73187562800013,
+  "finished_host_wall_s": 242.7370756970049,
+  "returncode": 255,
+  "stderr": "kex_exchange_identification: read: Connection reset by peer\n"
+}

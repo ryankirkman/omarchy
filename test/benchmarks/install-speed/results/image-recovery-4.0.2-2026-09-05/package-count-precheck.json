@@ -1,0 +1,14 @@
+{
+  "zbar": {
+    "baseline": 64,
+    "recovered": 0
+  },
+  "zoxide": {
+    "baseline": 31,
+    "recovered": 0
+  },
+  "zram-generator": {
+    "baseline": 19,
+    "recovered": 0
+  }
+}

@@ -1,0 +1,40 @@
+xorriso 1.5.6 : RockRidge filesystem manipulator, libburnia project.
+
+xorriso : NOTE : Loading ISO image tree from LBA 0
+xorriso : UPDATE :      12 nodes read in 1 seconds
+Drive current: -indev '/tmp/omarchy-bench/fast-image.iso'
+Media current: stdio file, overwriteable
+Media status : is written , is appendable
+Media summary: 1 session, 1805651 data blocks, 3527m data, 5222m free
+Volume id    : 'OMARCHY_FAST_IMAGE'
+Drive current: -outdev '/tmp/omarchy-bench/fast-image-fixed.iso'
+Media current: stdio file, overwriteable
+Media status : is blank
+Media summary: 0 sessions, 0 data blocks, 0 data, 5222m free
+xorriso : UPDATE :       1 files added in 1 seconds
+Added to ISO image: file '/installer-overlay.tar'='/tmp/omarchy-bench/subvolume-fixed-bundles-v2/installer-overlay.tar'
+xorriso : UPDATE :       1 files added in 1 seconds
+Added to ISO image: file '/installer-overlay.tar.sha256'='/tmp/omarchy-bench/subvolume-fixed-bundles-v2/installer-overlay.tar.sha256'
+xorriso : UPDATE :       1 files added in 1 seconds
+Added to ISO image: file '/installer-overlay.manifest.json'='/tmp/omarchy-bench/subvolume-fixed-bundles-v2/installer-overlay.manifest.json'
+xorriso : UPDATE : Writing:     112496s    6.2%   fifo   8%  buf  50%
+xorriso : UPDATE : Writing:     549456s   30.4%   fifo 100%  buf  50%  717.0xD 
+xorriso : UPDATE : Writing:     706064s   39.1%   fifo 100%  buf  50%  231.3xD 
+xorriso : UPDATE : Writing:     877600s   48.6%   fifo  99%  buf  50%  253.4xD 
+xorriso : UPDATE : Writing:    1041360s   57.7%   fifo  98%  buf  50%  241.9xD 
+xorriso : UPDATE : Writing:    1184112s   65.6%   fifo 100%  buf  50%  209.7xD 
+xorriso : UPDATE : Writing:    1346160s   74.6%   fifo  69%  buf  50%  238.8xD 
+xorriso : UPDATE : Writing:    1513616s   83.8%   fifo  99%  buf  50%  246.7xD 
+xorriso : UPDATE : Writing:    1682736s   93.2%   fifo 100%  buf  50%  249.8xD 
+ISO image produced: 1805493 sectors
+Written to medium : 1805664 sectors at LBA 32
+Writing to '/tmp/omarchy-bench/fast-image-fixed.iso' completed successfully.
+
+xorriso : NOTE : Re-assessing -outdev '/tmp/omarchy-bench/fast-image-fixed.iso'
+xorriso : NOTE : Loading ISO image tree from LBA 0
+xorriso : UPDATE :      12 nodes read in 1 seconds
+Drive current: -dev '/tmp/omarchy-bench/fast-image-fixed.iso'
+Media current: stdio file, overwriteable
+Media status : is written , is appendable
+Media summary: 1 session, 1805493 data blocks, 3526m data, 1696m free
+Volume id    : 'OMARCHY_FAST_IMAGE'

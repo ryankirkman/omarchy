@@ -1,0 +1,52 @@
+{
+  "schema_version": 1,
+  "status": "verified firmware fixture with observed early activation; install acceptance pending",
+  "variant": "image-no-package-prefetch-fast-reboot-early-verify",
+  "speedup_claim": false,
+  "files": {
+    "fast-reboot-payload-manifest.json": {
+      "sha256": "ebd0d1fbbb7af680fd15eb453fd56f2930371156f6c926bc0cef8cee8e587f3d",
+      "bytes": 1453
+    },
+    "firmware-manifest.json": {
+      "sha256": "1cfabb9a81fb26a128f5b185ba653e86f0fcab7e5cdb1a5116b44b8b882023ab",
+      "bytes": 21834
+    },
+    "firmware-repack.log": {
+      "sha256": "52817dca6edde645c3c290246b7a57fb997fd77b72128d2b0937c6430c2e1330",
+      "bytes": 3893
+    },
+    "first-observed-early-markers.json": {
+      "sha256": "12a4a292332d2173def8553f55287395a0cd30330aa6392fb6e12d12292c21fe",
+      "bytes": 667
+    },
+    "initramfs-manifest.json": {
+      "sha256": "7e95be54942150e7d8013d006936f0a5cd31d146f5630c4a3866f0176f4a3443",
+      "bytes": 2784
+    },
+    "original-firmware-manifest.json": {
+      "sha256": "338d05b149ca692e5178f3811c647548220130e09fd46f20b2cd6de749e3fba3",
+      "bytes": 20069
+    },
+    "preparation-1.log": {
+      "sha256": "ebd0d1fbbb7af680fd15eb453fd56f2930371156f6c926bc0cef8cee8e587f3d",
+      "bytes": 1453
+    },
+    "preparation-2.log": {
+      "sha256": "c572637324a7df5167f61cca731f3d936e7b238b6669e0991045c456efc0956d",
+      "bytes": 2971
+    },
+    "preparation-commands.json": {
+      "sha256": "58093612ae77e9efd5a01ffca79eefaea41cf91dc624db7c157e839779b37c57",
+      "bytes": 1036
+    },
+    "smoke-preflight.json": {
+      "sha256": "7f2c4217cf77c977d220866a566d3765e0eaba25ed90b6f86bca2393bce01450",
+      "bytes": 5251
+    },
+    "superseded-firmware-cleanup.json": {
+      "sha256": "6d0db1f65b826e9b7c3bd63d9e1fd90f89c92b7e5ba59d826c4ff2c34409fb1e",
+      "bytes": 894
+    }
+  }
+}

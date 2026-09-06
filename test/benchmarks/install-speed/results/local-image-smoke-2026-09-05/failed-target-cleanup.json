@@ -1,0 +1,19 @@
+{
+  "schema_version": 1,
+  "action": "reclaim stopped diagnosed failed target",
+  "run": "candidate-firmware-smoke-01",
+  "removed_path": "/tmp/omarchy-bench/candidate-firmware-smoke-01/target.qcow2",
+  "logical_file_bytes": 4774690816,
+  "allocated_file_bytes": 4775313408,
+  "target_sha256": "81790fa9a6063d9ad272a9299f8de0d5747f28752b01a41c54f2837d18ca0519",
+  "failed_manifest_sha256": "a5d2eae56889ab27d3b91b16d70cd5fcbbfbff0beccc63cc59e953ab5831a95e",
+  "failure_evidence_published_commit": "d931066f6e9e79983acf49bdf3dcc9cd219e721e",
+  "publication_tree": "d3185c78fbf045ecb6588e77551f2b618be42d35",
+  "stop_evidence": "Supervisor completed exit 1; qemu.log records termination on signal 15",
+  "no_runtime_repair_performed": true,
+  "source_root_image_unchanged": true,
+  "free_before_bytes": 5478588416,
+  "time": 1788641876.5742016,
+  "free_after_bytes": 10253901824,
+  "status": "completed"
+}

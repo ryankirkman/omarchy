@@ -1,0 +1,1088 @@
+{
+  "schema_version": 1,
+  "scope": "Original GitHub artifact files only; original per-sample seals are unchanged",
+  "artifact_zip_sha256": "58d687a240a5317bec1f362d73cac71dfd22fa6307e085d9be6547710a10e8dc",
+  "original_file_count": 270,
+  "files": {
+    "animation-overlap-contract.log": {
+      "bytes": 456,
+      "sha256": "f70e9bc590544cf12b50e0030d688deba97a2204e2c3fd29f006203ba3d23820"
+    },
+    "animation-overlap.manifest.json": {
+      "bytes": 5629,
+      "sha256": "0c7563d93d0ea95c2104bf7fbec2b50acb64dce304a32f1f55b54a6123729959"
+    },
+    "builder/last-failed-ssh-probe.json": {
+      "bytes": 188,
+      "sha256": "e13bf088211a3980c9d7601260c1dd9497e13090469aee679545fcc28f534cf6"
+    },
+    "builder/latest-screen.png": {
+      "bytes": 3057,
+      "sha256": "05713dbacb00cfa92e8cad1581147b0f1349f6ee14c97d122440aff36011bd53"
+    },
+    "builder/manifest.json": {
+      "bytes": 40929,
+      "sha256": "80408bb9d1e25c2ec4de9c999f25e7af053196938154e6d691211d8d55eaf685"
+    },
+    "builder/progress.json": {
+      "bytes": 241,
+      "sha256": "9bbe52cc61c4e7c9d92b6545d709ef214e31eb141df20484539dabcf2dd3be55"
+    },
+    "builder/qemu.log": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "builder/serial.log": {
+      "bytes": 87,
+      "sha256": "e1156c9971b32fa096fa70290161cf4bad3f49f066ddd30746fd3e6f75a16fa6"
+    },
+    "builder-supervisor.log": {
+      "bytes": 64618,
+      "sha256": "3810f33653a347db38bdf76c3c9ac5bea88a283f811ebcaeebe077166caf24cb"
+    },
+    "calibration/btrfs-subvolumes.txt": {
+      "bytes": 2295,
+      "sha256": "af76ab0760597ed38288f498c8d54537aaca2fd5b48fbd7ea0d1624e4588a269"
+    },
+    "calibration/btrfs-uuid.txt": {
+      "bytes": 37,
+      "sha256": "ca36bfdf8aada0453924354578de57bc8202522800bf6ca14108472771a02c5c"
+    },
+    "calibration/identity.json": {
+      "bytes": 459,
+      "sha256": "f22feae76a3a77e97bb161e4a77751f42d1724cbb1be49da8e03912b24071e49"
+    },
+    "calibration/install-timing.json": {
+      "bytes": 1865,
+      "sha256": "f022d117b241dbcdc1c9388f1771bf2e6282ae5d9cb2104fe085488e83eecb1f"
+    },
+    "calibration/installed-boot.txt": {
+      "bytes": 776,
+      "sha256": "f33882140499b48fa2f2926993b4e853b30f2db93bf575b4a819ceea99806d6f"
+    },
+    "calibration/installed-root.json": {
+      "bytes": 132,
+      "sha256": "cebc725cbd245afc4139ebbe70d7a3010beb56dc36ead369327bb8504f5a9c59"
+    },
+    "calibration/last-failed-ssh-probe.json": {
+      "bytes": 171,
+      "sha256": "37056cbe84b08f927ffd6ba5c22fa255d5782e8e66e4ea8464f6bb3fe932f9bb"
+    },
+    "calibration/latest-screen.png": {
+      "bytes": 3057,
+      "sha256": "05713dbacb00cfa92e8cad1581147b0f1349f6ee14c97d122440aff36011bd53"
+    },
+    "calibration/machine-id.txt": {
+      "bytes": 33,
+      "sha256": "4bdbcf3f23b8dfdf68f9dc374a8d0ea5302f0dc40ca586d230699a1b7b14435f"
+    },
+    "calibration/manifest.json": {
+      "bytes": 4252,
+      "sha256": "6a1d7caf87639cf8462bc329f27239ad33a8668f521ef38a2a75d34931d943dc"
+    },
+    "calibration/package-explicit.txt": {
+      "bytes": 1705,
+      "sha256": "37d06fc7de2487901f81513bf70f3e592d7245cd656d6c34089ccc1f258055f9"
+    },
+    "calibration/package-files.stderr": {
+      "bytes": 300,
+      "sha256": "5b6482796f084d9f1a7c88a251d30d1f9d46a2bad8adb9401253e706a28c0018"
+    },
+    "calibration/package-files.txt": {
+      "bytes": 41163,
+      "sha256": "5b501e2ef951a921a004c72ce90497acc7047f27a0f1c1fd12acbb9f26c8ec38"
+    },
+    "calibration/package-manifest.txt": {
+      "bytes": 18343,
+      "sha256": "f69fe12f4d2b530f56f28b6f350380eaae2e0ea679d88abedd0d032f0b0df89d"
+    },
+    "calibration/pacman-master-keys.txt": {
+      "bytes": 293,
+      "sha256": "e549ca3452be3ca1bf05d8e6ee2de64308a738bdb38a5fd0b02ba41a6d5b0f0b"
+    },
+    "calibration/progress.json": {
+      "bytes": 250,
+      "sha256": "6bbc49a432aa078bc0a7326cb0bab4cb494b7ce5eae9f7c6b1781cb2aa4b56bd"
+    },
+    "calibration/qemu.log": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "calibration/serial.log": {
+      "bytes": 31624,
+      "sha256": "64188ed7de253abbded1dfd8ba297a7e4715ac4c3a6db524ba16cc769c40507c"
+    },
+    "calibration/ssh-host-fingerprints.txt": {
+      "bytes": 355,
+      "sha256": "b9e0d5cac2bded7c224d87522bf3095d2a1461a0fda5f34167eb45b6f58f33e0"
+    },
+    "calibration/standalone-btrfs-subvolumes.txt": {
+      "bytes": 2295,
+      "sha256": "902994e615952267a3d5fc68f213cd665eccdf15bdf96923715e58f9027fd344"
+    },
+    "calibration/standalone-btrfs-uuid.txt": {
+      "bytes": 37,
+      "sha256": "ca36bfdf8aada0453924354578de57bc8202522800bf6ca14108472771a02c5c"
+    },
+    "calibration/standalone-identity.json": {
+      "bytes": 459,
+      "sha256": "f22feae76a3a77e97bb161e4a77751f42d1724cbb1be49da8e03912b24071e49"
+    },
+    "calibration/standalone-last-failed-ssh-probe.json": {
+      "bytes": 187,
+      "sha256": "a18717dfe63e2c87cb7106da661c8ba56a0461453ee4ed50a839138816d0ec82"
+    },
+    "calibration/standalone-machine-id.txt": {
+      "bytes": 33,
+      "sha256": "4bdbcf3f23b8dfdf68f9dc374a8d0ea5302f0dc40ca586d230699a1b7b14435f"
+    },
+    "calibration/standalone-pacman-master-keys.txt": {
+      "bytes": 293,
+      "sha256": "e549ca3452be3ca1bf05d8e6ee2de64308a738bdb38a5fd0b02ba41a6d5b0f0b"
+    },
+    "calibration/standalone-reboot.json": {
+      "bytes": 9840,
+      "sha256": "52b36b464a624fcc09b7b5ac354eee64c286fe2f671aa4f0e1571f788cab2d31"
+    },
+    "calibration/standalone-root.json": {
+      "bytes": 132,
+      "sha256": "cebc725cbd245afc4139ebbe70d7a3010beb56dc36ead369327bb8504f5a9c59"
+    },
+    "calibration/standalone-ssh-host-fingerprints.txt": {
+      "bytes": 355,
+      "sha256": "b9e0d5cac2bded7c224d87522bf3095d2a1461a0fda5f34167eb45b6f58f33e0"
+    },
+    "calibration/standalone-uki-files.txt": {
+      "bytes": 266,
+      "sha256": "d37b17ae00ba1fe47a767a2c7e160e0bd4b9a5d003317d811a2621fc826f36f1"
+    },
+    "calibration/systemd-analyze-blame.txt": {
+      "bytes": 3353,
+      "sha256": "7ba650fa985a790b407309107afbf9c017acb211efd8d36773ec6ed6e63138e4"
+    },
+    "calibration/systemd-analyze-critical-chain.txt": {
+      "bytes": 1118,
+      "sha256": "7eacdbd8552324c247631ad7bfa49656a2c83708ccc9b33466aa703627b21f1d"
+    },
+    "calibration/uki-files.txt": {
+      "bytes": 266,
+      "sha256": "d37b17ae00ba1fe47a767a2c7e160e0bd4b9a5d003317d811a2621fc826f36f1"
+    },
+    "calibration/validation.json": {
+      "bytes": 221,
+      "sha256": "5915f0af38a8356c82cbba338efacd3fcdfac915e93d398bab27daab208c59c7"
+    },
+    "cold-cache-preflight.log": {
+      "bytes": 92,
+      "sha256": "b36a8eafbab19ad75146957dd07408caf770697413b9a1c424e878fefbbc78d1"
+    },
+    "direct-restore-contract.log": {
+      "bytes": 1350,
+      "sha256": "b55342af259c9c835382c97b9e1e520d2c43613fe6d179066d67383422f54c83"
+    },
+    "direct-restore.manifest.json": {
+      "bytes": 3382,
+      "sha256": "37b03228ddbc63e47decff26f768c410bf06a534c1e447a61568b9f9e451b9ed"
+    },
+    "disk-budget.json": {
+      "bytes": 107,
+      "sha256": "659b02f449149034036f99d50ad5880099625cb0655efa75953b7123a53a12a5"
+    },
+    "experiment.json": {
+      "bytes": 5161,
+      "sha256": "95f4334f7bce8130629802033c71ed07e1f589d2a809c7a9d78db4457a4823d9"
+    },
+    "fast-reboot-contract.log": {
+      "bytes": 488,
+      "sha256": "be1f0c4ea4efbb612f133a41571ddcc1dc1260eadd29c1e088cb0ccbfeca02c6"
+    },
+    "fast-reboot.manifest.json": {
+      "bytes": 1453,
+      "sha256": "ebd0d1fbbb7af680fd15eb453fd56f2930371156f6c926bc0cef8cee8e587f3d"
+    },
+    "firmware-initramfs-candidate-no-prefetch-fast-reboot-early-verify-direct-restore-overlap.iso.manifest.json": {
+      "bytes": 24486,
+      "sha256": "60776699f5969eee0f6c6f8f4aec2f30b740cc9c2bbaca952d084be3f28f6b5e"
+    },
+    "firmware-initramfs-candidate-no-prefetch-fast-reboot-early-verify-direct-restore-overlap.iso.repack.log": {
+      "bytes": 4156,
+      "sha256": "0995930f5fd493104c2ac50f386d4885eaa1c4c6da5bf654f05c5192dcc0cd7a"
+    },
+    "firmware-initramfs-control-early-preflight.iso.manifest.json": {
+      "bytes": 20596,
+      "sha256": "9dba83927b3cbdbca1c8ab4ebc522acc48170711ebd8e7d3d7575e7e43c135a0"
+    },
+    "firmware-initramfs-control-early-preflight.iso.repack.log": {
+      "bytes": 4166,
+      "sha256": "893c099268861a8bf25a690e098e892d50028cc3de5e12b2b854afe6279ff0bc"
+    },
+    "firmware-initramfs-control.iso.manifest.json": {
+      "bytes": 19911,
+      "sha256": "91c6e91fd6152bdb355306957a1f08a90eee450ab62f2ce97bacc5392d4150d4"
+    },
+    "firmware-initramfs-control.iso.repack.log": {
+      "bytes": 3846,
+      "sha256": "ecc26d3435705d6b422e25bf9b81f2f0d32c2d5739c9fd8e0a32cd442ddc6a7f"
+    },
+    "host-packages.txt": {
+      "bytes": 40667,
+      "sha256": "eaf9c200086096dbd5130fa897027313f00e8f39b5190eecc78888fa2ef3dbaa"
+    },
+    "image-build/baseline-package-explicit.txt": {
+      "bytes": 1705,
+      "sha256": "37d06fc7de2487901f81513bf70f3e592d7245cd656d6c34089ccc1f258055f9"
+    },
+    "image-build/baseline-package-manifest.txt": {
+      "bytes": 18343,
+      "sha256": "f69fe12f4d2b530f56f28b6f350380eaae2e0ea679d88abedd0d032f0b0df89d"
+    },
+    "image-build/btrfs-check.txt": {
+      "bytes": 665,
+      "sha256": "0a0714bc02e5763a7b74c4e9ff189fd6c41026309794d7b929dbe5ddb88cc2a5"
+    },
+    "image-build/btrfs-compression.txt": {
+      "bytes": 23,
+      "sha256": "901966a36e71b5e581ecc7d5f13fdbfb2be8b8d3ae5c667a1ba580ec1586feb5"
+    },
+    "image-build/build-progress.json": {
+      "bytes": 115,
+      "sha256": "cb7adce10e4460319e41f1a48a90db665996cf6ce18fd0ba53f6a0642103242d"
+    },
+    "image-build/build-run.json": {
+      "bytes": 249,
+      "sha256": "329f03d526ecf6432b4e97b03071367ea03fc407d8f561c9fa6473bc0ddaada5"
+    },
+    "image-build/build-status.txt": {
+      "bytes": 15,
+      "sha256": "836159d6ec827f0f4a66280068b751297f179c69ea5e110a01f731bb7d259961"
+    },
+    "image-build/guest-build.log": {
+      "bytes": 178474,
+      "sha256": "a2b94d5cc4acded8645ec9e5a3396b8fe3701c89a6cb89a271122127abf53299"
+    },
+    "image-build/image-explicit-packages-actual.txt": {
+      "bytes": 1705,
+      "sha256": "37d06fc7de2487901f81513bf70f3e592d7245cd656d6c34089ccc1f258055f9"
+    },
+    "image-build/image-explicit-packages.txt": {
+      "bytes": 1705,
+      "sha256": "37d06fc7de2487901f81513bf70f3e592d7245cd656d6c34089ccc1f258055f9"
+    },
+    "image-build/image-package-delta.json": {
+      "bytes": 128,
+      "sha256": "84ef90eb2ea1fecc31eadb05c540481426d5e855cede90d4b8ab4f25c3a2f765"
+    },
+    "image-build/image-package-files.txt": {
+      "bytes": 41163,
+      "sha256": "5b501e2ef951a921a004c72ce90497acc7047f27a0f1c1fd12acbb9f26c8ec38"
+    },
+    "image-build/image-package-manifest.txt": {
+      "bytes": 18343,
+      "sha256": "f69fe12f4d2b530f56f28b6f350380eaae2e0ea679d88abedd0d032f0b0df89d"
+    },
+    "image-build/image-targets.txt": {
+      "bytes": 1781,
+      "sha256": "7f56a0aa3ec28bc757bce3371a6c25620580d1f369b892302c820bc4b3f88a43"
+    },
+    "image-build/raw-image-size.txt": {
+      "bytes": 11,
+      "sha256": "4ec6f2997edee06903a4e9016e3951ea175c801925fe151d5d5eea90dd9cd3d9"
+    },
+    "image-media-verification.json": {
+      "bytes": 1113,
+      "sha256": "fc4ec07177b6b27ccfc997824f8d9768d57ab874d54e7c2e8d93aeaf08790a9c"
+    },
+    "initramfs-builder.manifest.json": {
+      "bytes": 2362,
+      "sha256": "1cfd5e31f0bcfa6977daee650654c38b0b27f936a215c7ca41b96a3dfe1440ff"
+    },
+    "initramfs-candidate-no-prefetch-fast-reboot-early-verify-direct-restore-overlap.manifest.json": {
+      "bytes": 5193,
+      "sha256": "a15859a3b7e7a452c4f3bf4b179aa17d4e33494b5ebc9e6a3717b06abae03199"
+    },
+    "initramfs-control-early-preflight.manifest.json": {
+      "bytes": 1575,
+      "sha256": "b16d19c715984ecf7ebde254deae3f5803b494fe6c7670c2f85a33f191fa8c46"
+    },
+    "initramfs-control.manifest.json": {
+      "bytes": 954,
+      "sha256": "cf2de9676c98c8fd067b9151c923e177cd1405fec70922ed954da7f5fdeb097e"
+    },
+    "localdb-overlap-contract.log": {
+      "bytes": 2407,
+      "sha256": "acb4e8ce99911fdc89cd9d90ed0e03b0ac0faa361ae2c644c5fcc80c9b78c2c7"
+    },
+    "localdb-overlap.manifest.json": {
+      "bytes": 4691,
+      "sha256": "22f1ff097d12c649ecb60a01d477f7c0c70b8722b9e444a9a06b9e91df2b263e"
+    },
+    "no-prefetch-fast-reboot-early-verify-direct-restore-overlap-repetitions/comparison.json": {
+      "bytes": 257331,
+      "sha256": "95398c3bf507d246b62b99da52d948384acffc1bdb743cda94edef52c0bfa486"
+    },
+    "no-prefetch-fast-reboot-early-verify-direct-restore-overlap-repetitions/runs/01-control-pair01/btrfs-subvolumes.txt": {
+      "bytes": 2295,
+      "sha256": "2ce6b9a6226e184629b69433c0e53b2809af07509d0474c3c0c3389a207c9acb"
+    },
+    "no-prefetch-fast-reboot-early-verify-direct-restore-overlap-repetitions/runs/01-control-pair01/btrfs-uuid.txt": {
+      "bytes": 37,
+      "sha256": "a9805f8f27f557c5cd0f5847b0cdb28ce046642124796ce14330006d5fd1c2ea"
+    },
+    "no-prefetch-fast-reboot-early-verify-direct-restore-overlap-repetitions/runs/01-control-pair01/identity.json": {
+      "bytes": 459,
+      "sha256": "70a558db04924332b9b330cde9811f636830c278ba5eeffc0c1241ad845ebea5"
+    },
+    "no-prefetch-fast-reboot-early-verify-direct-restore-overlap-repetitions/runs/01-control-pair01/install-timing.json": {
+      "bytes": 1864,
+      "sha256": "4b6a96ce8c6dc08c8c9d50d55e3f37f56dd7083444f2959fd38048f26bb9cddc"
+    },
+    "no-prefetch-fast-reboot-early-verify-direct-restore-overlap-repetitions/runs/01-control-pair01/installed-boot.txt": {
+      "bytes": 776,
+      "sha256": "7f779577ddeca63e224061300706620185526a45d470ee173efcf43acb52ebe3"
+    },
+    "no-prefetch-fast-reboot-early-verify-direct-restore-overlap-repetitions/runs/01-control-pair01/installed-root.json": {
+      "bytes": 132,
+      "sha256": "cebc725cbd245afc4139ebbe70d7a3010beb56dc36ead369327bb8504f5a9c59"
+    },
+    "no-prefetch-fast-reboot-early-verify-direct-restore-overlap-repetitions/runs/01-control-pair01/installed-screen.png": {
+      "bytes": 8676,
+      "sha256": "c002095c2a60d70eb395f04c6e96657036879559417f0cb36e9437b9e68c5c06"
+    },
+    "no-prefetch-fast-reboot-early-verify-direct-restore-overlap-repetitions/runs/01-control-pair01/machine-id.txt": {
+      "bytes": 33,
+      "sha256": "0ac13a92b4496a83510a178ec6e1dd8542f07e8b2f94265948d1eb514036d29d"
+    },
+    "no-prefetch-fast-reboot-early-verify-direct-restore-overlap-repetitions/runs/01-control-pair01/manifest.json": {
+      "bytes": 5733,
+      "sha256": "4fcb796099d9ad354fc4d8a3ee9b9cf59d6b2f23293f688d469b503aabc666f6"
+    },
+    "no-prefetch-fast-reboot-early-verify-direct-restore-overlap-repetitions/runs/01-control-pair01/package-explicit.txt": {
+      "bytes": 1705,
+      "sha256": "37d06fc7de2487901f81513bf70f3e592d7245cd656d6c34089ccc1f258055f9"
+    },
+    "no-prefetch-fast-reboot-early-verify-direct-restore-overlap-repetitions/runs/01-control-pair01/package-files.stderr": {
+      "bytes": 300,
+      "sha256": "5b6482796f084d9f1a7c88a251d30d1f9d46a2bad8adb9401253e706a28c0018"
+    },
+    "no-prefetch-fast-reboot-early-verify-direct-restore-overlap-repetitions/runs/01-control-pair01/package-files.txt": {
+      "bytes": 41163,
+      "sha256": "5b501e2ef951a921a004c72ce90497acc7047f27a0f1c1fd12acbb9f26c8ec38"
+    },
+    "no-prefetch-fast-reboot-early-verify-direct-restore-overlap-repetitions/runs/01-control-pair01/package-manifest.txt": {
+      "bytes": 18343,
+      "sha256": "f69fe12f4d2b530f56f28b6f350380eaae2e0ea679d88abedd0d032f0b0df89d"
+    },
+    "no-prefetch-fast-reboot-early-verify-direct-restore-overlap-repetitions/runs/01-control-pair01/pacman-master-keys.txt": {
+      "bytes": 293,
+      "sha256": "ab124d963f2f0d0d2d391b7b9494413a47cb05e1c0a784ac2d9be25b55c58913"
+    },
+    "no-prefetch-fast-reboot-early-verify-direct-restore-overlap-repetitions/runs/01-control-pair01/qemu.log": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "no-prefetch-fast-reboot-early-verify-direct-restore-overlap-repetitions/runs/01-control-pair01/seal.json": {
+      "bytes": 4864,
+      "sha256": "ea55685c8f52218f87a4fcf684b5829fcabc1e1238e434bbba366ff7f6ac7c71"
+    },
+    "no-prefetch-fast-reboot-early-verify-direct-restore-overlap-repetitions/runs/01-control-pair01/serial.log": {
+      "bytes": 32081,
+      "sha256": "8222195194b7e106f4081b5a34842ea3e25eab1ee52889482bf0f78e4c5e760a"
+    },
+    "no-prefetch-fast-reboot-early-verify-direct-restore-overlap-repetitions/runs/01-control-pair01/ssh-host-fingerprints.txt": {
+      "bytes": 355,
+      "sha256": "bc238964c066ed9d687f89f2e105769cd7c939c6b3cf5fbf4ef2c167cd139961"
+    },
+    "no-prefetch-fast-reboot-early-verify-direct-restore-overlap-repetitions/runs/01-control-pair01/standalone-btrfs-subvolumes.txt": {
+      "bytes": 2295,
+      "sha256": "787fe613648bedc9ceb9b3f3da286d1874af5ccf0f56f1bcb176eb4d499f53fa"
+    },
+    "no-prefetch-fast-reboot-early-verify-direct-restore-overlap-repetitions/runs/01-control-pair01/standalone-btrfs-uuid.txt": {
+      "bytes": 37,
+      "sha256": "a9805f8f27f557c5cd0f5847b0cdb28ce046642124796ce14330006d5fd1c2ea"
+    },
+    "no-prefetch-fast-reboot-early-verify-direct-restore-overlap-repetitions/runs/01-control-pair01/standalone-identity.json": {
+      "bytes": 459,
+      "sha256": "70a558db04924332b9b330cde9811f636830c278ba5eeffc0c1241ad845ebea5"
+    },
+    "no-prefetch-fast-reboot-early-verify-direct-restore-overlap-repetitions/runs/01-control-pair01/standalone-machine-id.txt": {
+      "bytes": 33,
+      "sha256": "0ac13a92b4496a83510a178ec6e1dd8542f07e8b2f94265948d1eb514036d29d"
+    },
+    "no-prefetch-fast-reboot-early-verify-direct-restore-overlap-repetitions/runs/01-control-pair01/standalone-pacman-master-keys.txt": {
+      "bytes": 293,
+      "sha256": "ab124d963f2f0d0d2d391b7b9494413a47cb05e1c0a784ac2d9be25b55c58913"
+    },
+    "no-prefetch-fast-reboot-early-verify-direct-restore-overlap-repetitions/runs/01-control-pair01/standalone-reboot.json": {
+      "bytes": 11121,
+      "sha256": "28058313e8cc1e79d45357db713ddd9c8086b641decd0e9c7f607827596bba05"
+    },
+    "no-prefetch-fast-reboot-early-verify-direct-restore-overlap-repetitions/runs/01-control-pair01/standalone-root.json": {
+      "bytes": 132,
+      "sha256": "cebc725cbd245afc4139ebbe70d7a3010beb56dc36ead369327bb8504f5a9c59"
+    },
+    "no-prefetch-fast-reboot-early-verify-direct-restore-overlap-repetitions/runs/01-control-pair01/standalone-ssh-host-fingerprints.txt": {
+      "bytes": 355,
+      "sha256": "bc238964c066ed9d687f89f2e105769cd7c939c6b3cf5fbf4ef2c167cd139961"
+    },
+    "no-prefetch-fast-reboot-early-verify-direct-restore-overlap-repetitions/runs/01-control-pair01/standalone-uki-files.txt": {
+      "bytes": 266,
+      "sha256": "d37b17ae00ba1fe47a767a2c7e160e0bd4b9a5d003317d811a2621fc826f36f1"
+    },
+    "no-prefetch-fast-reboot-early-verify-direct-restore-overlap-repetitions/runs/01-control-pair01/systemd-analyze-blame.txt": {
+      "bytes": 3353,
+      "sha256": "be96d348b53b05f87a8519bbd806b548b988ece4166219d13a12555a25793a1a"
+    },
+    "no-prefetch-fast-reboot-early-verify-direct-restore-overlap-repetitions/runs/01-control-pair01/systemd-analyze-critical-chain.txt": {
+      "bytes": 1117,
+      "sha256": "0ddf56d1ec1feb1ee1af8d75153d3fb5281118f357013b9c5ea328136835c138"
+    },
+    "no-prefetch-fast-reboot-early-verify-direct-restore-overlap-repetitions/runs/01-control-pair01/uki-files.txt": {
+      "bytes": 266,
+      "sha256": "d37b17ae00ba1fe47a767a2c7e160e0bd4b9a5d003317d811a2621fc826f36f1"
+    },
+    "no-prefetch-fast-reboot-early-verify-direct-restore-overlap-repetitions/runs/01-control-pair01/validation.json": {
+      "bytes": 221,
+      "sha256": "6c90e81033a6b59609407973de286c64cc053752fbe55e1b4df1b9f976c48c5b"
+    },
+    "no-prefetch-fast-reboot-early-verify-direct-restore-overlap-repetitions/runs/02-candidate-pair01/btrfs-subvolumes.txt": {
+      "bytes": 2296,
+      "sha256": "ee60e1f46306fa7669f390e039cfd93188a18dc5759271dde7bdca7f1cf1341c"
+    },
+    "no-prefetch-fast-reboot-early-verify-direct-restore-overlap-repetitions/runs/02-candidate-pair01/btrfs-uuid.txt": {
+      "bytes": 37,
+      "sha256": "7cdee0f7056ce886e6720bec7b53416934fd838de95cb81955aa2af0ca354982"
+    },
+    "no-prefetch-fast-reboot-early-verify-direct-restore-overlap-repetitions/runs/02-candidate-pair01/identity.json": {
+      "bytes": 459,
+      "sha256": "3169eb6568777ceeb5f60ca1e9b6b8e30c0aeba537981b9fdf5d0a783736e5cd"
+    },
+    "no-prefetch-fast-reboot-early-verify-direct-restore-overlap-repetitions/runs/02-candidate-pair01/install-timing.json": {
+      "bytes": 3249,
+      "sha256": "f18f271bb031ae33b9504060c0ef1de1a819f74dc9c5e009d779140c1c23a625"
+    },
+    "no-prefetch-fast-reboot-early-verify-direct-restore-overlap-repetitions/runs/02-candidate-pair01/installed-boot.txt": {
+      "bytes": 776,
+      "sha256": "c0813f0349a8064609f36d0d63838e85d36df43d90a19c52591d0225add93d4c"
+    },
+    "no-prefetch-fast-reboot-early-verify-direct-restore-overlap-repetitions/runs/02-candidate-pair01/installed-root.json": {
+      "bytes": 132,
+      "sha256": "cebc725cbd245afc4139ebbe70d7a3010beb56dc36ead369327bb8504f5a9c59"
+    },
+    "no-prefetch-fast-reboot-early-verify-direct-restore-overlap-repetitions/runs/02-candidate-pair01/installed-screen.png": {
+      "bytes": 8676,
+      "sha256": "c002095c2a60d70eb395f04c6e96657036879559417f0cb36e9437b9e68c5c06"
+    },
+    "no-prefetch-fast-reboot-early-verify-direct-restore-overlap-repetitions/runs/02-candidate-pair01/machine-id.txt": {
+      "bytes": 33,
+      "sha256": "f96ce01a2136cae0855e47bc7cd4c3f4c9faa5db723886c54997626503b5e4bb"
+    },
+    "no-prefetch-fast-reboot-early-verify-direct-restore-overlap-repetitions/runs/02-candidate-pair01/manifest.json": {
+      "bytes": 5875,
+      "sha256": "8888f92dd1d38fb5b98cce2cee22652fd542e0b8c880a518682d916188ce3ee3"
+    },
+    "no-prefetch-fast-reboot-early-verify-direct-restore-overlap-repetitions/runs/02-candidate-pair01/package-explicit.txt": {
+      "bytes": 1705,
+      "sha256": "37d06fc7de2487901f81513bf70f3e592d7245cd656d6c34089ccc1f258055f9"
+    },
+    "no-prefetch-fast-reboot-early-verify-direct-restore-overlap-repetitions/runs/02-candidate-pair01/package-files.stderr": {
+      "bytes": 300,
+      "sha256": "5b6482796f084d9f1a7c88a251d30d1f9d46a2bad8adb9401253e706a28c0018"
+    },
+    "no-prefetch-fast-reboot-early-verify-direct-restore-overlap-repetitions/runs/02-candidate-pair01/package-files.txt": {
+      "bytes": 41163,
+      "sha256": "5b501e2ef951a921a004c72ce90497acc7047f27a0f1c1fd12acbb9f26c8ec38"
+    },
+    "no-prefetch-fast-reboot-early-verify-direct-restore-overlap-repetitions/runs/02-candidate-pair01/package-manifest.txt": {
+      "bytes": 18343,
+      "sha256": "f69fe12f4d2b530f56f28b6f350380eaae2e0ea679d88abedd0d032f0b0df89d"
+    },
+    "no-prefetch-fast-reboot-early-verify-direct-restore-overlap-repetitions/runs/02-candidate-pair01/pacman-master-keys.txt": {
+      "bytes": 293,
+      "sha256": "ac1cda77bad03a54784bb013153aaa06fc0e00976242c5f1b2f9a957fa91db2f"
+    },
+    "no-prefetch-fast-reboot-early-verify-direct-restore-overlap-repetitions/runs/02-candidate-pair01/qemu.log": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "no-prefetch-fast-reboot-early-verify-direct-restore-overlap-repetitions/runs/02-candidate-pair01/seal.json": {
+      "bytes": 4866,
+      "sha256": "392c48dc8f351716d63ddadfe460531e3064d302eb020161f0dccbb63bb5916f"
+    },
+    "no-prefetch-fast-reboot-early-verify-direct-restore-overlap-repetitions/runs/02-candidate-pair01/serial.log": {
+      "bytes": 31831,
+      "sha256": "4d46f788bc7c6c1daa7d868b08d728308d5814a216b12a7166efba8776a02808"
+    },
+    "no-prefetch-fast-reboot-early-verify-direct-restore-overlap-repetitions/runs/02-candidate-pair01/ssh-host-fingerprints.txt": {
+      "bytes": 355,
+      "sha256": "1ec5e81a22039112dd17ac7c1a6ee6320bea69c306a4ca2ed089fc89dac15773"
+    },
+    "no-prefetch-fast-reboot-early-verify-direct-restore-overlap-repetitions/runs/02-candidate-pair01/standalone-btrfs-subvolumes.txt": {
+      "bytes": 2296,
+      "sha256": "b51df4e06785dc3d209339e4c3424d277c56bbb80fd8161a2894cefbadff2286"
+    },
+    "no-prefetch-fast-reboot-early-verify-direct-restore-overlap-repetitions/runs/02-candidate-pair01/standalone-btrfs-uuid.txt": {
+      "bytes": 37,
+      "sha256": "7cdee0f7056ce886e6720bec7b53416934fd838de95cb81955aa2af0ca354982"
+    },
+    "no-prefetch-fast-reboot-early-verify-direct-restore-overlap-repetitions/runs/02-candidate-pair01/standalone-identity.json": {
+      "bytes": 459,
+      "sha256": "3169eb6568777ceeb5f60ca1e9b6b8e30c0aeba537981b9fdf5d0a783736e5cd"
+    },
+    "no-prefetch-fast-reboot-early-verify-direct-restore-overlap-repetitions/runs/02-candidate-pair01/standalone-machine-id.txt": {
+      "bytes": 33,
+      "sha256": "f96ce01a2136cae0855e47bc7cd4c3f4c9faa5db723886c54997626503b5e4bb"
+    },
+    "no-prefetch-fast-reboot-early-verify-direct-restore-overlap-repetitions/runs/02-candidate-pair01/standalone-pacman-master-keys.txt": {
+      "bytes": 293,
+      "sha256": "ac1cda77bad03a54784bb013153aaa06fc0e00976242c5f1b2f9a957fa91db2f"
+    },
+    "no-prefetch-fast-reboot-early-verify-direct-restore-overlap-repetitions/runs/02-candidate-pair01/standalone-reboot.json": {
+      "bytes": 11128,
+      "sha256": "72c443e3ad99affa9bd4cbd22cc3bdf9fd379fff5744772eb8a8fd23c665e974"
+    },
+    "no-prefetch-fast-reboot-early-verify-direct-restore-overlap-repetitions/runs/02-candidate-pair01/standalone-root.json": {
+      "bytes": 132,
+      "sha256": "cebc725cbd245afc4139ebbe70d7a3010beb56dc36ead369327bb8504f5a9c59"
+    },
+    "no-prefetch-fast-reboot-early-verify-direct-restore-overlap-repetitions/runs/02-candidate-pair01/standalone-ssh-host-fingerprints.txt": {
+      "bytes": 355,
+      "sha256": "1ec5e81a22039112dd17ac7c1a6ee6320bea69c306a4ca2ed089fc89dac15773"
+    },
+    "no-prefetch-fast-reboot-early-verify-direct-restore-overlap-repetitions/runs/02-candidate-pair01/standalone-uki-files.txt": {
+      "bytes": 266,
+      "sha256": "2a5f50a368711cb8cb4da49440f7116b62ff87f4798a23263f65f04aff0c2e42"
+    },
+    "no-prefetch-fast-reboot-early-verify-direct-restore-overlap-repetitions/runs/02-candidate-pair01/systemd-analyze-blame.txt": {
+      "bytes": 3353,
+      "sha256": "d9538a9b654e7dcc8543e4c659ad3c995638f39c435dcfbc1d2b910065790d33"
+    },
+    "no-prefetch-fast-reboot-early-verify-direct-restore-overlap-repetitions/runs/02-candidate-pair01/systemd-analyze-critical-chain.txt": {
+      "bytes": 1117,
+      "sha256": "6595161af7f8d5021708fdd362f6aadf55afd3ff434afad9f17353bdfedd3970"
+    },
+    "no-prefetch-fast-reboot-early-verify-direct-restore-overlap-repetitions/runs/02-candidate-pair01/uki-files.txt": {
+      "bytes": 266,
+      "sha256": "2a5f50a368711cb8cb4da49440f7116b62ff87f4798a23263f65f04aff0c2e42"
+    },
+    "no-prefetch-fast-reboot-early-verify-direct-restore-overlap-repetitions/runs/02-candidate-pair01/validation.json": {
+      "bytes": 221,
+      "sha256": "10f04d9c5628a46b007c8a63696943ffc3040d8c2f576f63a63d19e7a8df6892"
+    },
+    "no-prefetch-fast-reboot-early-verify-direct-restore-overlap-repetitions/runs/03-candidate-pair02/btrfs-subvolumes.txt": {
+      "bytes": 2296,
+      "sha256": "f8e57f01f78c9faf2f1befd0016a3975cabdd51c8fec76191bc49d7daec8a16c"
+    },
+    "no-prefetch-fast-reboot-early-verify-direct-restore-overlap-repetitions/runs/03-candidate-pair02/btrfs-uuid.txt": {
+      "bytes": 37,
+      "sha256": "668846d2116d2308e5fda4ca8859898acb5ef2260295c9061fe68da20b0bfedb"
+    },
+    "no-prefetch-fast-reboot-early-verify-direct-restore-overlap-repetitions/runs/03-candidate-pair02/identity.json": {
+      "bytes": 459,
+      "sha256": "225ab8f2f9d9cf493d00cf75729542047f9cb82011f20cae2a2ffec3c5170b1e"
+    },
+    "no-prefetch-fast-reboot-early-verify-direct-restore-overlap-repetitions/runs/03-candidate-pair02/install-timing.json": {
+      "bytes": 3233,
+      "sha256": "a41dec9dd008187a1df1914661fd87282a6f05ddb561d34aedc2c59658f2efe1"
+    },
+    "no-prefetch-fast-reboot-early-verify-direct-restore-overlap-repetitions/runs/03-candidate-pair02/installed-boot.txt": {
+      "bytes": 776,
+      "sha256": "73d4aadca9f58dd9ce7b3aaf75c066485279946492ab8cd6b4d541d17924a7c4"
+    },
+    "no-prefetch-fast-reboot-early-verify-direct-restore-overlap-repetitions/runs/03-candidate-pair02/installed-root.json": {
+      "bytes": 132,
+      "sha256": "cebc725cbd245afc4139ebbe70d7a3010beb56dc36ead369327bb8504f5a9c59"
+    },
+    "no-prefetch-fast-reboot-early-verify-direct-restore-overlap-repetitions/runs/03-candidate-pair02/installed-screen.png": {
+      "bytes": 8676,
+      "sha256": "c002095c2a60d70eb395f04c6e96657036879559417f0cb36e9437b9e68c5c06"
+    },
+    "no-prefetch-fast-reboot-early-verify-direct-restore-overlap-repetitions/runs/03-candidate-pair02/machine-id.txt": {
+      "bytes": 33,
+      "sha256": "910635f13483a816d922f3cb4b4662c93dd45810d78729d9f83fbfbacdc31500"
+    },
+    "no-prefetch-fast-reboot-early-verify-direct-restore-overlap-repetitions/runs/03-candidate-pair02/manifest.json": {
+      "bytes": 5875,
+      "sha256": "4d5e21945f553ee541889e3b46a4cae44e123b5c9957d6d1341f991d775149b5"
+    },
+    "no-prefetch-fast-reboot-early-verify-direct-restore-overlap-repetitions/runs/03-candidate-pair02/package-explicit.txt": {
+      "bytes": 1705,
+      "sha256": "37d06fc7de2487901f81513bf70f3e592d7245cd656d6c34089ccc1f258055f9"
+    },
+    "no-prefetch-fast-reboot-early-verify-direct-restore-overlap-repetitions/runs/03-candidate-pair02/package-files.stderr": {
+      "bytes": 300,
+      "sha256": "5b6482796f084d9f1a7c88a251d30d1f9d46a2bad8adb9401253e706a28c0018"
+    },
+    "no-prefetch-fast-reboot-early-verify-direct-restore-overlap-repetitions/runs/03-candidate-pair02/package-files.txt": {
+      "bytes": 41163,
+      "sha256": "5b501e2ef951a921a004c72ce90497acc7047f27a0f1c1fd12acbb9f26c8ec38"
+    },
+    "no-prefetch-fast-reboot-early-verify-direct-restore-overlap-repetitions/runs/03-candidate-pair02/package-manifest.txt": {
+      "bytes": 18343,
+      "sha256": "f69fe12f4d2b530f56f28b6f350380eaae2e0ea679d88abedd0d032f0b0df89d"
+    },
+    "no-prefetch-fast-reboot-early-verify-direct-restore-overlap-repetitions/runs/03-candidate-pair02/pacman-master-keys.txt": {
+      "bytes": 293,
+      "sha256": "d50dfe156b329efc3966633fa4d7b075ad2a4b09507884bdf28f5ab1994e46b0"
+    },
+    "no-prefetch-fast-reboot-early-verify-direct-restore-overlap-repetitions/runs/03-candidate-pair02/qemu.log": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "no-prefetch-fast-reboot-early-verify-direct-restore-overlap-repetitions/runs/03-candidate-pair02/seal.json": {
+      "bytes": 4866,
+      "sha256": "06766f3a122ee30a914d498e779d4f7f3640cba9dc133c3eb21729c053380cbb"
+    },
+    "no-prefetch-fast-reboot-early-verify-direct-restore-overlap-repetitions/runs/03-candidate-pair02/serial.log": {
+      "bytes": 31969,
+      "sha256": "c09e4365398c3fcc2cda0c33538c87dfb6776ffd6341b001b3e45731f7faf00d"
+    },
+    "no-prefetch-fast-reboot-early-verify-direct-restore-overlap-repetitions/runs/03-candidate-pair02/ssh-host-fingerprints.txt": {
+      "bytes": 355,
+      "sha256": "9b6e3fcdc2cf673cadd047ce9be6e642160e48b72593a15d37c601f6e2cd4c03"
+    },
+    "no-prefetch-fast-reboot-early-verify-direct-restore-overlap-repetitions/runs/03-candidate-pair02/standalone-btrfs-subvolumes.txt": {
+      "bytes": 2296,
+      "sha256": "3a20a734b5889b16803fce5923d9f0f8edeb537ea5a48c0bd4d712cb9457e078"
+    },
+    "no-prefetch-fast-reboot-early-verify-direct-restore-overlap-repetitions/runs/03-candidate-pair02/standalone-btrfs-uuid.txt": {
+      "bytes": 37,
+      "sha256": "668846d2116d2308e5fda4ca8859898acb5ef2260295c9061fe68da20b0bfedb"
+    },
+    "no-prefetch-fast-reboot-early-verify-direct-restore-overlap-repetitions/runs/03-candidate-pair02/standalone-identity.json": {
+      "bytes": 459,
+      "sha256": "225ab8f2f9d9cf493d00cf75729542047f9cb82011f20cae2a2ffec3c5170b1e"
+    },
+    "no-prefetch-fast-reboot-early-verify-direct-restore-overlap-repetitions/runs/03-candidate-pair02/standalone-machine-id.txt": {
+      "bytes": 33,
+      "sha256": "910635f13483a816d922f3cb4b4662c93dd45810d78729d9f83fbfbacdc31500"
+    },
+    "no-prefetch-fast-reboot-early-verify-direct-restore-overlap-repetitions/runs/03-candidate-pair02/standalone-pacman-master-keys.txt": {
+      "bytes": 293,
+      "sha256": "d50dfe156b329efc3966633fa4d7b075ad2a4b09507884bdf28f5ab1994e46b0"
+    },
+    "no-prefetch-fast-reboot-early-verify-direct-restore-overlap-repetitions/runs/03-candidate-pair02/standalone-reboot.json": {
+      "bytes": 11138,
+      "sha256": "e4fcd56ade0b4f0faea53ee02e4f5e92ae403ed846df7470f8e2290a9ff4cf3c"
+    },
+    "no-prefetch-fast-reboot-early-verify-direct-restore-overlap-repetitions/runs/03-candidate-pair02/standalone-root.json": {
+      "bytes": 132,
+      "sha256": "cebc725cbd245afc4139ebbe70d7a3010beb56dc36ead369327bb8504f5a9c59"
+    },
+    "no-prefetch-fast-reboot-early-verify-direct-restore-overlap-repetitions/runs/03-candidate-pair02/standalone-ssh-host-fingerprints.txt": {
+      "bytes": 355,
+      "sha256": "9b6e3fcdc2cf673cadd047ce9be6e642160e48b72593a15d37c601f6e2cd4c03"
+    },
+    "no-prefetch-fast-reboot-early-verify-direct-restore-overlap-repetitions/runs/03-candidate-pair02/standalone-uki-files.txt": {
+      "bytes": 266,
+      "sha256": "2a5f50a368711cb8cb4da49440f7116b62ff87f4798a23263f65f04aff0c2e42"
+    },
+    "no-prefetch-fast-reboot-early-verify-direct-restore-overlap-repetitions/runs/03-candidate-pair02/systemd-analyze-blame.txt": {
+      "bytes": 3353,
+      "sha256": "7d72e4ef7e4f6ac4ac110712bf9ccadd1f70dd5450804141104050139989d92c"
+    },
+    "no-prefetch-fast-reboot-early-verify-direct-restore-overlap-repetitions/runs/03-candidate-pair02/systemd-analyze-critical-chain.txt": {
+      "bytes": 1345,
+      "sha256": "6a972047900e1e66e27a1c20f5a8c51df98b83d2198d94d9f53771b7eea2f05f"
+    },
+    "no-prefetch-fast-reboot-early-verify-direct-restore-overlap-repetitions/runs/03-candidate-pair02/uki-files.txt": {
+      "bytes": 266,
+      "sha256": "2a5f50a368711cb8cb4da49440f7116b62ff87f4798a23263f65f04aff0c2e42"
+    },
+    "no-prefetch-fast-reboot-early-verify-direct-restore-overlap-repetitions/runs/03-candidate-pair02/validation.json": {
+      "bytes": 221,
+      "sha256": "752b4dcd50414e69cf923527e0e6af60c9a5091080991604f94ea9641813f3ad"
+    },
+    "no-prefetch-fast-reboot-early-verify-direct-restore-overlap-repetitions/runs/04-control-pair02/btrfs-subvolumes.txt": {
+      "bytes": 2295,
+      "sha256": "b8862178db4a9dcc5deb1d81f2ebadf5ccfc6cc2a280676b81a926171395c0df"
+    },
+    "no-prefetch-fast-reboot-early-verify-direct-restore-overlap-repetitions/runs/04-control-pair02/btrfs-uuid.txt": {
+      "bytes": 37,
+      "sha256": "56ac2654a633723e10c05eb55dfb81775d275ba66452644a0dcffd8afa8fbcd1"
+    },
+    "no-prefetch-fast-reboot-early-verify-direct-restore-overlap-repetitions/runs/04-control-pair02/identity.json": {
+      "bytes": 459,
+      "sha256": "880a200b5201020399ba723503fa191ca2541f090db87a7a7bb28cb9c8ea9f6b"
+    },
+    "no-prefetch-fast-reboot-early-verify-direct-restore-overlap-repetitions/runs/04-control-pair02/install-timing.json": {
+      "bytes": 1861,
+      "sha256": "ee0a1c2aca2aed9b9f1acd839e39bb184aec944babe6e5aee9eba2b0cd0776c5"
+    },
+    "no-prefetch-fast-reboot-early-verify-direct-restore-overlap-repetitions/runs/04-control-pair02/installed-boot.txt": {
+      "bytes": 776,
+      "sha256": "6b61878e6048d232cbcca46e1cbc53eec917d9efd4ed553eb016551c74170c3a"
+    },
+    "no-prefetch-fast-reboot-early-verify-direct-restore-overlap-repetitions/runs/04-control-pair02/installed-root.json": {
+      "bytes": 132,
+      "sha256": "cebc725cbd245afc4139ebbe70d7a3010beb56dc36ead369327bb8504f5a9c59"
+    },
+    "no-prefetch-fast-reboot-early-verify-direct-restore-overlap-repetitions/runs/04-control-pair02/installed-screen.png": {
+      "bytes": 8676,
+      "sha256": "c002095c2a60d70eb395f04c6e96657036879559417f0cb36e9437b9e68c5c06"
+    },
+    "no-prefetch-fast-reboot-early-verify-direct-restore-overlap-repetitions/runs/04-control-pair02/machine-id.txt": {
+      "bytes": 33,
+      "sha256": "44041f18dcd4c5e925559d122fe9613fd083f895e82359e542428bb61e4de731"
+    },
+    "no-prefetch-fast-reboot-early-verify-direct-restore-overlap-repetitions/runs/04-control-pair02/manifest.json": {
+      "bytes": 5731,
+      "sha256": "cd075aa804ddfe6595847e59100faf3114873efb1edd4c25ad0ff17a30a83666"
+    },
+    "no-prefetch-fast-reboot-early-verify-direct-restore-overlap-repetitions/runs/04-control-pair02/package-explicit.txt": {
+      "bytes": 1705,
+      "sha256": "37d06fc7de2487901f81513bf70f3e592d7245cd656d6c34089ccc1f258055f9"
+    },
+    "no-prefetch-fast-reboot-early-verify-direct-restore-overlap-repetitions/runs/04-control-pair02/package-files.stderr": {
+      "bytes": 300,
+      "sha256": "5b6482796f084d9f1a7c88a251d30d1f9d46a2bad8adb9401253e706a28c0018"
+    },
+    "no-prefetch-fast-reboot-early-verify-direct-restore-overlap-repetitions/runs/04-control-pair02/package-files.txt": {
+      "bytes": 41163,
+      "sha256": "5b501e2ef951a921a004c72ce90497acc7047f27a0f1c1fd12acbb9f26c8ec38"
+    },
+    "no-prefetch-fast-reboot-early-verify-direct-restore-overlap-repetitions/runs/04-control-pair02/package-manifest.txt": {
+      "bytes": 18343,
+      "sha256": "f69fe12f4d2b530f56f28b6f350380eaae2e0ea679d88abedd0d032f0b0df89d"
+    },
+    "no-prefetch-fast-reboot-early-verify-direct-restore-overlap-repetitions/runs/04-control-pair02/pacman-master-keys.txt": {
+      "bytes": 293,
+      "sha256": "233db45baa17dc1edea6f4a0573699e1feca3244fa86035070ebfbcda456ca7c"
+    },
+    "no-prefetch-fast-reboot-early-verify-direct-restore-overlap-repetitions/runs/04-control-pair02/qemu.log": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "no-prefetch-fast-reboot-early-verify-direct-restore-overlap-repetitions/runs/04-control-pair02/seal.json": {
+      "bytes": 4864,
+      "sha256": "a0edfab58e0b3ca72f6dd4a6219abe67a0e814b90b8bbf4cce41f6291e81cb0b"
+    },
+    "no-prefetch-fast-reboot-early-verify-direct-restore-overlap-repetitions/runs/04-control-pair02/serial.log": {
+      "bytes": 32115,
+      "sha256": "f8a08903ca6da85f0daf383749d739e820d6f0c299515ec64d53887b7ecc539f"
+    },
+    "no-prefetch-fast-reboot-early-verify-direct-restore-overlap-repetitions/runs/04-control-pair02/ssh-host-fingerprints.txt": {
+      "bytes": 355,
+      "sha256": "2e2166e95f0c15a1a85bb1bba4361222bacef954b039ce50bab4f07d067c4343"
+    },
+    "no-prefetch-fast-reboot-early-verify-direct-restore-overlap-repetitions/runs/04-control-pair02/standalone-btrfs-subvolumes.txt": {
+      "bytes": 2295,
+      "sha256": "2bbf36d40d90facb2f134bf714c755b01634ea035adcf6fecbe57eab98f8c172"
+    },
+    "no-prefetch-fast-reboot-early-verify-direct-restore-overlap-repetitions/runs/04-control-pair02/standalone-btrfs-uuid.txt": {
+      "bytes": 37,
+      "sha256": "56ac2654a633723e10c05eb55dfb81775d275ba66452644a0dcffd8afa8fbcd1"
+    },
+    "no-prefetch-fast-reboot-early-verify-direct-restore-overlap-repetitions/runs/04-control-pair02/standalone-identity.json": {
+      "bytes": 459,
+      "sha256": "880a200b5201020399ba723503fa191ca2541f090db87a7a7bb28cb9c8ea9f6b"
+    },
+    "no-prefetch-fast-reboot-early-verify-direct-restore-overlap-repetitions/runs/04-control-pair02/standalone-machine-id.txt": {
+      "bytes": 33,
+      "sha256": "44041f18dcd4c5e925559d122fe9613fd083f895e82359e542428bb61e4de731"
+    },
+    "no-prefetch-fast-reboot-early-verify-direct-restore-overlap-repetitions/runs/04-control-pair02/standalone-pacman-master-keys.txt": {
+      "bytes": 293,
+      "sha256": "233db45baa17dc1edea6f4a0573699e1feca3244fa86035070ebfbcda456ca7c"
+    },
+    "no-prefetch-fast-reboot-early-verify-direct-restore-overlap-repetitions/runs/04-control-pair02/standalone-reboot.json": {
+      "bytes": 11124,
+      "sha256": "412d37b3d0c80ec4ea291a9e2e29df418bfbf704d75385c54511101a33fdd91e"
+    },
+    "no-prefetch-fast-reboot-early-verify-direct-restore-overlap-repetitions/runs/04-control-pair02/standalone-root.json": {
+      "bytes": 132,
+      "sha256": "cebc725cbd245afc4139ebbe70d7a3010beb56dc36ead369327bb8504f5a9c59"
+    },
+    "no-prefetch-fast-reboot-early-verify-direct-restore-overlap-repetitions/runs/04-control-pair02/standalone-ssh-host-fingerprints.txt": {
+      "bytes": 355,
+      "sha256": "2e2166e95f0c15a1a85bb1bba4361222bacef954b039ce50bab4f07d067c4343"
+    },
+    "no-prefetch-fast-reboot-early-verify-direct-restore-overlap-repetitions/runs/04-control-pair02/standalone-uki-files.txt": {
+      "bytes": 266,
+      "sha256": "d37b17ae00ba1fe47a767a2c7e160e0bd4b9a5d003317d811a2621fc826f36f1"
+    },
+    "no-prefetch-fast-reboot-early-verify-direct-restore-overlap-repetitions/runs/04-control-pair02/systemd-analyze-blame.txt": {
+      "bytes": 3353,
+      "sha256": "87bb18165b73be996e0c1c96b9ef3571341681cf4938eeaedaddcfe145bacdce"
+    },
+    "no-prefetch-fast-reboot-early-verify-direct-restore-overlap-repetitions/runs/04-control-pair02/systemd-analyze-critical-chain.txt": {
+      "bytes": 1345,
+      "sha256": "90baf6b446a4c8df3460485d643bf1fdc3512ad875d4f1dbf1ba7974171230e4"
+    },
+    "no-prefetch-fast-reboot-early-verify-direct-restore-overlap-repetitions/runs/04-control-pair02/uki-files.txt": {
+      "bytes": 266,
+      "sha256": "d37b17ae00ba1fe47a767a2c7e160e0bd4b9a5d003317d811a2621fc826f36f1"
+    },
+    "no-prefetch-fast-reboot-early-verify-direct-restore-overlap-repetitions/runs/04-control-pair02/validation.json": {
+      "bytes": 221,
+      "sha256": "bfd662aa149024f3cfec48a68fd704dcad0dff832a58861482b2556faff35a46"
+    },
+    "no-prefetch-fast-reboot-early-verify-direct-restore-overlap-repetitions/runs/05-control-pair03/btrfs-subvolumes.txt": {
+      "bytes": 2295,
+      "sha256": "e1abd050e44e912b55d9c7d9b29cfda648d0833aad736ec8f98ac623fe3e5cb7"
+    },
+    "no-prefetch-fast-reboot-early-verify-direct-restore-overlap-repetitions/runs/05-control-pair03/btrfs-uuid.txt": {
+      "bytes": 37,
+      "sha256": "cccebb789a76c43595c81a4861840d86bd31d302845def111dcded7ce4deed2a"
+    },
+    "no-prefetch-fast-reboot-early-verify-direct-restore-overlap-repetitions/runs/05-control-pair03/identity.json": {
+      "bytes": 459,
+      "sha256": "ddad9f6446633e5b91f2575ef4187b03e51f7e438a28fef697625f8cec943e48"
+    },
+    "no-prefetch-fast-reboot-early-verify-direct-restore-overlap-repetitions/runs/05-control-pair03/install-timing.json": {
+      "bytes": 1864,
+      "sha256": "7ca95ab2087fc056258a1675e6fab27beb74395158d66f7ec16a8525f372d7ec"
+    },
+    "no-prefetch-fast-reboot-early-verify-direct-restore-overlap-repetitions/runs/05-control-pair03/installed-boot.txt": {
+      "bytes": 776,
+      "sha256": "be3fe3466af778679d4c0d31b66003c8c4835724ece37edab11d929a22bd9e21"
+    },
+    "no-prefetch-fast-reboot-early-verify-direct-restore-overlap-repetitions/runs/05-control-pair03/installed-root.json": {
+      "bytes": 132,
+      "sha256": "cebc725cbd245afc4139ebbe70d7a3010beb56dc36ead369327bb8504f5a9c59"
+    },
+    "no-prefetch-fast-reboot-early-verify-direct-restore-overlap-repetitions/runs/05-control-pair03/installed-screen.png": {
+      "bytes": 8676,
+      "sha256": "c002095c2a60d70eb395f04c6e96657036879559417f0cb36e9437b9e68c5c06"
+    },
+    "no-prefetch-fast-reboot-early-verify-direct-restore-overlap-repetitions/runs/05-control-pair03/machine-id.txt": {
+      "bytes": 33,
+      "sha256": "6695b54a73c1942c8407542463e3ce5a79524e37f477508f5df0a6ab03524420"
+    },
+    "no-prefetch-fast-reboot-early-verify-direct-restore-overlap-repetitions/runs/05-control-pair03/manifest.json": {
+      "bytes": 5727,
+      "sha256": "86bf338b980c5b5912c16c3dc07727d9c553967c6f4c3b6040e3dad2b21a35e5"
+    },
+    "no-prefetch-fast-reboot-early-verify-direct-restore-overlap-repetitions/runs/05-control-pair03/package-explicit.txt": {
+      "bytes": 1705,
+      "sha256": "37d06fc7de2487901f81513bf70f3e592d7245cd656d6c34089ccc1f258055f9"
+    },
+    "no-prefetch-fast-reboot-early-verify-direct-restore-overlap-repetitions/runs/05-control-pair03/package-files.stderr": {
+      "bytes": 300,
+      "sha256": "5b6482796f084d9f1a7c88a251d30d1f9d46a2bad8adb9401253e706a28c0018"
+    },
+    "no-prefetch-fast-reboot-early-verify-direct-restore-overlap-repetitions/runs/05-control-pair03/package-files.txt": {
+      "bytes": 41163,
+      "sha256": "5b501e2ef951a921a004c72ce90497acc7047f27a0f1c1fd12acbb9f26c8ec38"
+    },
+    "no-prefetch-fast-reboot-early-verify-direct-restore-overlap-repetitions/runs/05-control-pair03/package-manifest.txt": {
+      "bytes": 18343,
+      "sha256": "f69fe12f4d2b530f56f28b6f350380eaae2e0ea679d88abedd0d032f0b0df89d"
+    },
+    "no-prefetch-fast-reboot-early-verify-direct-restore-overlap-repetitions/runs/05-control-pair03/pacman-master-keys.txt": {
+      "bytes": 293,
+      "sha256": "6ff7fb8d85609edc6b084265516f8876a8f790794f039862387f08de5b22f4ef"
+    },
+    "no-prefetch-fast-reboot-early-verify-direct-restore-overlap-repetitions/runs/05-control-pair03/qemu.log": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "no-prefetch-fast-reboot-early-verify-direct-restore-overlap-repetitions/runs/05-control-pair03/seal.json": {
+      "bytes": 4864,
+      "sha256": "ba5e568b589c47bc0ba42b4a65956795117c76739ab8a39c2c323930afca6883"
+    },
+    "no-prefetch-fast-reboot-early-verify-direct-restore-overlap-repetitions/runs/05-control-pair03/serial.log": {
+      "bytes": 32172,
+      "sha256": "607ca962cf59b38b94ed8db2657ff7025b8712863aa4bc0ad289259775d41d70"
+    },
+    "no-prefetch-fast-reboot-early-verify-direct-restore-overlap-repetitions/runs/05-control-pair03/ssh-host-fingerprints.txt": {
+      "bytes": 355,
+      "sha256": "0ae1b2ca250bc1b872adeb9284ffb00cc1254c2f3a73ed0cc3db4f29bb7e9fa3"
+    },
+    "no-prefetch-fast-reboot-early-verify-direct-restore-overlap-repetitions/runs/05-control-pair03/standalone-btrfs-subvolumes.txt": {
+      "bytes": 2295,
+      "sha256": "190730dd178ec32998f1b28fa7a3f0bc549ce4736cb87d5096668dcb57fc0b0b"
+    },
+    "no-prefetch-fast-reboot-early-verify-direct-restore-overlap-repetitions/runs/05-control-pair03/standalone-btrfs-uuid.txt": {
+      "bytes": 37,
+      "sha256": "cccebb789a76c43595c81a4861840d86bd31d302845def111dcded7ce4deed2a"
+    },
+    "no-prefetch-fast-reboot-early-verify-direct-restore-overlap-repetitions/runs/05-control-pair03/standalone-identity.json": {
+      "bytes": 459,
+      "sha256": "ddad9f6446633e5b91f2575ef4187b03e51f7e438a28fef697625f8cec943e48"
+    },
+    "no-prefetch-fast-reboot-early-verify-direct-restore-overlap-repetitions/runs/05-control-pair03/standalone-machine-id.txt": {
+      "bytes": 33,
+      "sha256": "6695b54a73c1942c8407542463e3ce5a79524e37f477508f5df0a6ab03524420"
+    },
+    "no-prefetch-fast-reboot-early-verify-direct-restore-overlap-repetitions/runs/05-control-pair03/standalone-pacman-master-keys.txt": {
+      "bytes": 293,
+      "sha256": "6ff7fb8d85609edc6b084265516f8876a8f790794f039862387f08de5b22f4ef"
+    },
+    "no-prefetch-fast-reboot-early-verify-direct-restore-overlap-repetitions/runs/05-control-pair03/standalone-reboot.json": {
+      "bytes": 11123,
+      "sha256": "2c08f2bc0c137e282c70784fa08feb75d19d5e17c6024d43014d7b10d5142df6"
+    },
+    "no-prefetch-fast-reboot-early-verify-direct-restore-overlap-repetitions/runs/05-control-pair03/standalone-root.json": {
+      "bytes": 132,
+      "sha256": "cebc725cbd245afc4139ebbe70d7a3010beb56dc36ead369327bb8504f5a9c59"
+    },
+    "no-prefetch-fast-reboot-early-verify-direct-restore-overlap-repetitions/runs/05-control-pair03/standalone-ssh-host-fingerprints.txt": {
+      "bytes": 355,
+      "sha256": "0ae1b2ca250bc1b872adeb9284ffb00cc1254c2f3a73ed0cc3db4f29bb7e9fa3"
+    },
+    "no-prefetch-fast-reboot-early-verify-direct-restore-overlap-repetitions/runs/05-control-pair03/standalone-uki-files.txt": {
+      "bytes": 266,
+      "sha256": "d37b17ae00ba1fe47a767a2c7e160e0bd4b9a5d003317d811a2621fc826f36f1"
+    },
+    "no-prefetch-fast-reboot-early-verify-direct-restore-overlap-repetitions/runs/05-control-pair03/systemd-analyze-blame.txt": {
+      "bytes": 3353,
+      "sha256": "abc844c925e51ff405959864ed6627e3977d026bc726ddf0eeb77375a054c060"
+    },
+    "no-prefetch-fast-reboot-early-verify-direct-restore-overlap-repetitions/runs/05-control-pair03/systemd-analyze-critical-chain.txt": {
+      "bytes": 1117,
+      "sha256": "5b57d955b7a1b4e777607fe3e64d2416bcaf4105b5e4861bab6f70cb2bb1f4af"
+    },
+    "no-prefetch-fast-reboot-early-verify-direct-restore-overlap-repetitions/runs/05-control-pair03/uki-files.txt": {
+      "bytes": 266,
+      "sha256": "d37b17ae00ba1fe47a767a2c7e160e0bd4b9a5d003317d811a2621fc826f36f1"
+    },
+    "no-prefetch-fast-reboot-early-verify-direct-restore-overlap-repetitions/runs/05-control-pair03/validation.json": {
+      "bytes": 220,
+      "sha256": "245324f8cca3b6e826948b1dc7d103f294b71b5f44c4e9b8daf55aed0eba7b09"
+    },
+    "no-prefetch-fast-reboot-early-verify-direct-restore-overlap-repetitions/runs/06-candidate-pair03/btrfs-subvolumes.txt": {
+      "bytes": 2296,
+      "sha256": "7f96ce7b6ff05211f821386a43625d807e63e4715c48abe40433659ed6538527"
+    },
+    "no-prefetch-fast-reboot-early-verify-direct-restore-overlap-repetitions/runs/06-candidate-pair03/btrfs-uuid.txt": {
+      "bytes": 37,
+      "sha256": "2447f94de7261c1b32443781f3c99cb03f31970ad76869ef174deca7351a5fba"
+    },
+    "no-prefetch-fast-reboot-early-verify-direct-restore-overlap-repetitions/runs/06-candidate-pair03/identity.json": {
+      "bytes": 459,
+      "sha256": "416cf6ea95748dda1f2d6b65b2248c441ed9423437810a71634ffea146bbb444"
+    },
+    "no-prefetch-fast-reboot-early-verify-direct-restore-overlap-repetitions/runs/06-candidate-pair03/install-timing.json": {
+      "bytes": 3241,
+      "sha256": "f53a038db70ca5a53877e8afc591d3fd126344bf60a102d6c447401537c5c1a7"
+    },
+    "no-prefetch-fast-reboot-early-verify-direct-restore-overlap-repetitions/runs/06-candidate-pair03/installed-boot.txt": {
+      "bytes": 776,
+      "sha256": "d529afc676f85d2d2ea470f4f739029f7ea7892f989956baaf3f4d64cce0b52c"
+    },
+    "no-prefetch-fast-reboot-early-verify-direct-restore-overlap-repetitions/runs/06-candidate-pair03/installed-root.json": {
+      "bytes": 132,
+      "sha256": "cebc725cbd245afc4139ebbe70d7a3010beb56dc36ead369327bb8504f5a9c59"
+    },
+    "no-prefetch-fast-reboot-early-verify-direct-restore-overlap-repetitions/runs/06-candidate-pair03/installed-screen.png": {
+      "bytes": 8676,
+      "sha256": "c002095c2a60d70eb395f04c6e96657036879559417f0cb36e9437b9e68c5c06"
+    },
+    "no-prefetch-fast-reboot-early-verify-direct-restore-overlap-repetitions/runs/06-candidate-pair03/machine-id.txt": {
+      "bytes": 33,
+      "sha256": "d39f0a96a71559073dbb443eb2f71e821aad6cff2b08eb2711c8fa13445680ee"
+    },
+    "no-prefetch-fast-reboot-early-verify-direct-restore-overlap-repetitions/runs/06-candidate-pair03/manifest.json": {
+      "bytes": 5874,
+      "sha256": "ba02e0e6710b7ac179dfcd08197ff01e76ee1ebef08abe32f1e1d9a2129ab3e5"
+    },
+    "no-prefetch-fast-reboot-early-verify-direct-restore-overlap-repetitions/runs/06-candidate-pair03/package-explicit.txt": {
+      "bytes": 1705,
+      "sha256": "37d06fc7de2487901f81513bf70f3e592d7245cd656d6c34089ccc1f258055f9"
+    },
+    "no-prefetch-fast-reboot-early-verify-direct-restore-overlap-repetitions/runs/06-candidate-pair03/package-files.stderr": {
+      "bytes": 300,
+      "sha256": "5b6482796f084d9f1a7c88a251d30d1f9d46a2bad8adb9401253e706a28c0018"
+    },
+    "no-prefetch-fast-reboot-early-verify-direct-restore-overlap-repetitions/runs/06-candidate-pair03/package-files.txt": {
+      "bytes": 41163,
+      "sha256": "5b501e2ef951a921a004c72ce90497acc7047f27a0f1c1fd12acbb9f26c8ec38"
+    },
+    "no-prefetch-fast-reboot-early-verify-direct-restore-overlap-repetitions/runs/06-candidate-pair03/package-manifest.txt": {
+      "bytes": 18343,
+      "sha256": "f69fe12f4d2b530f56f28b6f350380eaae2e0ea679d88abedd0d032f0b0df89d"
+    },
+    "no-prefetch-fast-reboot-early-verify-direct-restore-overlap-repetitions/runs/06-candidate-pair03/pacman-master-keys.txt": {
+      "bytes": 293,
+      "sha256": "e06ed8efec4a33c29c7b9fb5d48aa0fc6a9450a6ad7e3fd2ae67b4d99237876e"
+    },
+    "no-prefetch-fast-reboot-early-verify-direct-restore-overlap-repetitions/runs/06-candidate-pair03/qemu.log": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "no-prefetch-fast-reboot-early-verify-direct-restore-overlap-repetitions/runs/06-candidate-pair03/seal.json": {
+      "bytes": 4866,
+      "sha256": "ce3a9bb37f3c655eb71a51790dc6abd3e30fcee63a1b998999191d625251961d"
+    },
+    "no-prefetch-fast-reboot-early-verify-direct-restore-overlap-repetitions/runs/06-candidate-pair03/serial.log": {
+      "bytes": 31846,
+      "sha256": "b98c23e9fe571afd37e02ac17d60ab1dfdab5537dbc735a98ac65aa329801610"
+    },
+    "no-prefetch-fast-reboot-early-verify-direct-restore-overlap-repetitions/runs/06-candidate-pair03/ssh-host-fingerprints.txt": {
+      "bytes": 355,
+      "sha256": "4780c9fd5062a788dc466b47f2941883ef71c45a974b1c2997f81648eb8e5476"
+    },
+    "no-prefetch-fast-reboot-early-verify-direct-restore-overlap-repetitions/runs/06-candidate-pair03/standalone-btrfs-subvolumes.txt": {
+      "bytes": 2296,
+      "sha256": "2e7393522cdd376f7fce31793be916feb71da46f07abced6b53575d328ae7883"
+    },
+    "no-prefetch-fast-reboot-early-verify-direct-restore-overlap-repetitions/runs/06-candidate-pair03/standalone-btrfs-uuid.txt": {
+      "bytes": 37,
+      "sha256": "2447f94de7261c1b32443781f3c99cb03f31970ad76869ef174deca7351a5fba"
+    },
+    "no-prefetch-fast-reboot-early-verify-direct-restore-overlap-repetitions/runs/06-candidate-pair03/standalone-identity.json": {
+      "bytes": 459,
+      "sha256": "416cf6ea95748dda1f2d6b65b2248c441ed9423437810a71634ffea146bbb444"
+    },
+    "no-prefetch-fast-reboot-early-verify-direct-restore-overlap-repetitions/runs/06-candidate-pair03/standalone-machine-id.txt": {
+      "bytes": 33,
+      "sha256": "d39f0a96a71559073dbb443eb2f71e821aad6cff2b08eb2711c8fa13445680ee"
+    },
+    "no-prefetch-fast-reboot-early-verify-direct-restore-overlap-repetitions/runs/06-candidate-pair03/standalone-pacman-master-keys.txt": {
+      "bytes": 293,
+      "sha256": "e06ed8efec4a33c29c7b9fb5d48aa0fc6a9450a6ad7e3fd2ae67b4d99237876e"
+    },
+    "no-prefetch-fast-reboot-early-verify-direct-restore-overlap-repetitions/runs/06-candidate-pair03/standalone-reboot.json": {
+      "bytes": 11136,
+      "sha256": "5393f80c3d516f1f918a3744101d065c3ac8ccba1c3c2f528e935d61a495b92b"
+    },
+    "no-prefetch-fast-reboot-early-verify-direct-restore-overlap-repetitions/runs/06-candidate-pair03/standalone-root.json": {
+      "bytes": 132,
+      "sha256": "cebc725cbd245afc4139ebbe70d7a3010beb56dc36ead369327bb8504f5a9c59"
+    },
+    "no-prefetch-fast-reboot-early-verify-direct-restore-overlap-repetitions/runs/06-candidate-pair03/standalone-ssh-host-fingerprints.txt": {
+      "bytes": 355,
+      "sha256": "4780c9fd5062a788dc466b47f2941883ef71c45a974b1c2997f81648eb8e5476"
+    },
+    "no-prefetch-fast-reboot-early-verify-direct-restore-overlap-repetitions/runs/06-candidate-pair03/standalone-uki-files.txt": {
+      "bytes": 266,
+      "sha256": "2a5f50a368711cb8cb4da49440f7116b62ff87f4798a23263f65f04aff0c2e42"
+    },
+    "no-prefetch-fast-reboot-early-verify-direct-restore-overlap-repetitions/runs/06-candidate-pair03/systemd-analyze-blame.txt": {
+      "bytes": 3353,
+      "sha256": "4ab1f756fc634550e4d308b06220cd46920e3e72aff13faf17ddb94dffa48567"
+    },
+    "no-prefetch-fast-reboot-early-verify-direct-restore-overlap-repetitions/runs/06-candidate-pair03/systemd-analyze-critical-chain.txt": {
+      "bytes": 1345,
+      "sha256": "f775eebf113dbc2589c79467408a3dd5559579ad97d00cfdcd91607a3738c895"
+    },
+    "no-prefetch-fast-reboot-early-verify-direct-restore-overlap-repetitions/runs/06-candidate-pair03/uki-files.txt": {
+      "bytes": 266,
+      "sha256": "2a5f50a368711cb8cb4da49440f7116b62ff87f4798a23263f65f04aff0c2e42"
+    },
+    "no-prefetch-fast-reboot-early-verify-direct-restore-overlap-repetitions/runs/06-candidate-pair03/validation.json": {
+      "bytes": 220,
+      "sha256": "bee9061c2852988db2fb6579117958c708a85c3ac9a39bab6b383ad261f732ad"
+    },
+    "no-prefetch-fast-reboot-early-verify-direct-restore-overlap-repetitions/series.json": {
+      "bytes": 7389,
+      "sha256": "f604ee63e19c28e9bfcf0d0213cf6fa0beb5ecb9c34f13462c2b35b79e1c5e0f"
+    },
+    "root-image.json": {
+      "bytes": 681,
+      "sha256": "37e816a653713a75fb7d1cfb823e9a492432745399818ddae275f9946c2f898b"
+    },
+    "runner-after.txt": {
+      "bytes": 436,
+      "sha256": "a3a3a39b53272731bf30405f0cab88783ab7c2cdea6e44bafb16316a138ba1b5"
+    },
+    "runner-before.txt": {
+      "bytes": 4172,
+      "sha256": "34b21d4f71b40d3966ab81467022f745524eb711f9becf612ad84a8283731550"
+    },
+    "runner-image.txt": {
+      "bytes": 24,
+      "sha256": "7ef3cf88f0b9abbc463eb815da6a918272cd777a5c87584ead39f0054d74b186"
+    }
+  }
+}

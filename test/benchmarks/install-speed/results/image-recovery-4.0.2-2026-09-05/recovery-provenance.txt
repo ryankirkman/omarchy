@@ -1,0 +1,1 @@
+Recovered interrupted VM: preserved malformed final 3 DB records; reinstalled exact official zbar/zoxide/zram-generator archives; checked all 941 DB identities/file lists/MTREE/scriptlets against source archives; replayed matching PostTransaction hooks before cleanup and validation.

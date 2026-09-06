@@ -1,0 +1,556 @@
+{
+  "schema_version": 1,
+  "status": "verified-content-not-yet-boot-tested",
+  "fixture": "release-firmware-grub-with-benchmark-initramfs",
+  "source_sha256": "2ef8e624aa1bec7e277e28056b8535a6c9373ba48d7ede3f1a01cb6d2373cfb8",
+  "output_sha256": "d57c4a348843ae246fe54b3ab9da0cb863b2bcdb400ed1f66af796abb7592b6a",
+  "output_bytes": 6227886080,
+  "initramfs_sha256": "7fe1bd0921c25d830cae6f28724dddb209eb2f003caba75322432d727c76ce34",
+  "overlay_manifest_sha256": "cf6c89b9a52f07efac0ddcadec8d6b82950861e0c6dbed06bd0ceb792445b4d9",
+  "overlay": {
+    "schema_version": 1,
+    "mode": "candidate",
+    "original_initramfs_sha256": "6e3e15b983da69df4e18df2f1489fa854980b395b28546355d0f6dc13914694e",
+    "original_config_sha256": "1e00045b8b2979c16cbc7a943a708b136a1989c7407889a96b8450632ea9deba",
+    "hook_sha256": "cba3c7709fe79e1bd7cfde845867c72f64ce8377eaeb275076be4e9faf2243d7",
+    "payload": [
+      {
+        "path": "root/.automated_script.sh",
+        "mode": "0o755",
+        "sha256": "79d7ee05b6966c3737c92689852474db6efa9b93b6d18ef92521051b86fde45f"
+      },
+      {
+        "path": "usr/local/lib/omarchy-benchmark/activate-installer-overlay.sh",
+        "mode": "0o644",
+        "sha256": "388814f2aa33ee0202eb48a83a3df4eaf10c22d907cf6bba57b8c209e389126a"
+      },
+      {
+        "path": "usr/local/lib/omarchy-benchmark/preflight.sh",
+        "mode": "0o755",
+        "sha256": "ba833c405435621e4718edb4911e3d8ddd27c84bace0729cd97fe26456ae5010"
+      }
+    ],
+    "appended_archive_bytes": 8192,
+    "appended_archive_sha256": "941807efe9926dabfa4445df473cd5a78c183740eb3af751ef67c53c13763c65",
+    "output_initramfs_sha256": "7fe1bd0921c25d830cae6f28724dddb209eb2f003caba75322432d727c76ce34"
+  },
+  "volume": {
+    "Volume Id": "OMARCHY_202608",
+    "Publisher Id": "OMARCHY <HTTPS://OMARCHY.ORG>",
+    "App Id": "OMARCHY INSTALLER",
+    "Creation Time": "2026083103245800",
+    "Modif. Time": "2026083103245800"
+  },
+  "boot_entries": [
+    {
+      "index": 1,
+      "platform": "BIOS",
+      "bootable": "y",
+      "emulation": "none",
+      "load_segment": "0x0000",
+      "partition_type": "0x00",
+      "load_sectors": 4,
+      "lba": 122
+    },
+    {
+      "index": 2,
+      "platform": "UEFI",
+      "bootable": "y",
+      "emulation": "none",
+      "load_segment": "0x0000",
+      "partition_type": "0x00",
+      "load_sectors": 47104,
+      "lba": 3029004
+    }
+  ],
+  "efi_boot_images": [
+    {
+      "bytes": 24117248,
+      "sha256": "c9ed43cb902a30992cc4f43e2086ae54b83f868e22b9195f30e5d41a48103b84",
+      "comparison": "byte-identical"
+    }
+  ],
+  "files": {
+    "/EFI/BOOT/BOOTIA32.EFI": {
+      "bytes": 6238208,
+      "sha256": "49eeaedcda76010b71346918216aa0d87d64a9f4368cfc5fbd15a8bffb303281",
+      "comparison": "byte-identical"
+    },
+    "/EFI/BOOT/BOOTx64.EFI": {
+      "bytes": 7712768,
+      "sha256": "bb00f815a4cde63296c5dc68f7d5d69844507f9685519a61d114157d6c7eb944",
+      "comparison": "byte-identical"
+    },
+    "/arch/boot/x86_64/initramfs-linux-t2.img": {
+      "bytes": 253467096,
+      "sha256": "7fe1bd0921c25d830cae6f28724dddb209eb2f003caba75322432d727c76ce34",
+      "comparison": "replacement"
+    },
+    "/arch/boot/x86_64/vmlinuz-linux-t2": {
+      "bytes": 17097216,
+      "sha256": "6dd21ab00a39f04a9ede184a8f7ee4a3613f409a0b615f8abb1edfd009930838",
+      "comparison": "byte-identical"
+    },
+    "/arch/grubenv": {
+      "bytes": 1024,
+      "sha256": "48666c9343e5c5a0f979542d464b58be22cdd95517aa12463305fde4eaeda0fb",
+      "comparison": "byte-identical"
+    },
+    "/arch/pkglist.x86_64.txt": {
+      "bytes": 9441,
+      "sha256": "a7938f22bf6abde148010bf55e84d19533e4bf991f3a857b092fc0069bbfc1c8",
+      "comparison": "byte-identical"
+    },
+    "/arch/version": {
+      "bytes": 11,
+      "sha256": "e152746798046fba5db99e9ffdbffdd4d408fe3180b1fd3a03601d361653463a",
+      "comparison": "byte-identical"
+    },
+    "/arch/x86_64/airootfs.sfs": {
+      "bytes": 5915328512,
+      "sha256": "b6a3f3fd4cb3a1e15955fea71d9ca2a253f25523f42774b00b9ef3cb1c806090",
+      "comparison": "byte-identical"
+    },
+    "/arch/x86_64/airootfs.sha512": {
+      "bytes": 143,
+      "sha256": "af4568798f40fdcf3dfb6129cef519439156a2a352e741fd6045454a0307d76b",
+      "comparison": "byte-identical"
+    },
+    "/boot/2026-08-31-03-24-58-00.uuid": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "comparison": "byte-identical"
+    },
+    "/boot/grub/grub.cfg": {
+      "bytes": 3222,
+      "sha256": "a7281b3f4c9ea75ef1c15c153de21addd57961184d2db342851f0628649f7098",
+      "comparison": "byte-identical"
+    },
+    "/boot/grub/grubenv": {
+      "bytes": 1024,
+      "sha256": "7ec31aeb9681368eb07f9663f79b7fddcb19217da51953cd10928c35ed98c53a",
+      "comparison": "byte-identical"
+    },
+    "/boot/grub/loopback.cfg": {
+      "bytes": 2864,
+      "sha256": "eb088b4647b2d468fc591a306c7fd6c3115c05511d0b97997a33848eb998e537",
+      "comparison": "byte-identical"
+    },
+    "/boot/memtest86+/LICENSE": {
+      "bytes": 17337,
+      "sha256": "aaf135472f81c5b4a0dca9367e5bb5e9750032b5bebe5442b36e4c0a47430df3",
+      "comparison": "byte-identical"
+    },
+    "/boot/memtest86+/memtest": {
+      "bytes": 155992,
+      "sha256": "a244ebfee8669e6b969c647f9501b789fb4346caff698c4eae75f8a9f1f2f1a6",
+      "comparison": "byte-identical"
+    },
+    "/boot/memtest86+/memtest.efi": {
+      "bytes": 157184,
+      "sha256": "68d4177dea6b42fc357e0b075803f17fdacfb85eec608e6d0417aae04e68237b",
+      "comparison": "byte-identical"
+    },
+    "/boot/syslinux/archiso_head.cfg": {
+      "bytes": 814,
+      "sha256": "7d2f6b084f11d98108265a07c2510c8b3ff59cdbeb71745607932463adb185cc",
+      "comparison": "byte-identical"
+    },
+    "/boot/syslinux/archiso_pxe-linux.cfg": {
+      "bytes": 1216,
+      "sha256": "1e7ec5f04f38a91a6bfff80a7fce84e1be71eb9cdd0bde4e45bb570073b098f5",
+      "comparison": "byte-identical"
+    },
+    "/boot/syslinux/archiso_pxe.cfg": {
+      "bytes": 82,
+      "sha256": "62feb6fcf309bd126df912cbeec80391da6cc92e45946c8f74b8c53f668dbe2c",
+      "comparison": "byte-identical"
+    },
+    "/boot/syslinux/archiso_sys-linux.cfg": {
+      "bytes": 896,
+      "sha256": "92b2a1f221debe460256bd2fa00feb1c1ea4d4dc7373c39f41299a42f66f1c4f",
+      "comparison": "byte-identical"
+    },
+    "/boot/syslinux/archiso_sys.cfg": {
+      "bytes": 110,
+      "sha256": "a01f0f30574cfb3887a02568e0d0826bf770d6f5781a945e1a31200e30fd20b8",
+      "comparison": "byte-identical"
+    },
+    "/boot/syslinux/archiso_tail.cfg": {
+      "bytes": 748,
+      "sha256": "dc55a881c29021dd7883da8bd09eca5c505d2589c22d4b58f9f728f8bb4e772d",
+      "comparison": "byte-identical"
+    },
+    "/boot/syslinux/cat.c32": {
+      "bytes": 1836,
+      "sha256": "3cbdf93ca671755c7dbb16f2d5970eda857e0e1aa85e07d2e97558b9bcc7f857",
+      "comparison": "byte-identical"
+    },
+    "/boot/syslinux/chain.c32": {
+      "bytes": 25036,
+      "sha256": "2f83ee65317eb1a300d389c91db14fab4dd0f2ed1635777957abaa71d0fd2824",
+      "comparison": "byte-identical"
+    },
+    "/boot/syslinux/cmd.c32": {
+      "bytes": 1484,
+      "sha256": "ad4d665bbf93339579ce0a68a5eeda02cf6bb3318b3d9f454677e9a38036d092",
+      "comparison": "byte-identical"
+    },
+    "/boot/syslinux/cmenu.c32": {
+      "bytes": 3900,
+      "sha256": "e1951242020f3d584f8956f025cf38c2ce2140eed675eec7d30703ae55ced380",
+      "comparison": "byte-identical"
+    },
+    "/boot/syslinux/config.c32": {
+      "bytes": 1720,
+      "sha256": "85f5ae2fb88ff1de1cd94a0c28cbd58b0b5f58df98c1663d4c8eea5e2d21fe14",
+      "comparison": "byte-identical"
+    },
+    "/boot/syslinux/cptime.c32": {
+      "bytes": 4492,
+      "sha256": "14909f06be9541518a6f76041288845cd4901cec2eb90d6f1b9a241e85556b5f",
+      "comparison": "byte-identical"
+    },
+    "/boot/syslinux/cpu.c32": {
+      "bytes": 4728,
+      "sha256": "de69f57887c07a7044e6a643a85e58239dd0a081620aa53f43dc8094c68bba74",
+      "comparison": "byte-identical"
+    },
+    "/boot/syslinux/cpuid.c32": {
+      "bytes": 2000,
+      "sha256": "8c7546f34f32e51970ea3c16ac6233a64b0987688c77bfeeaa7ae82dcecf3775",
+      "comparison": "byte-identical"
+    },
+    "/boot/syslinux/cpuidtest.c32": {
+      "bytes": 3000,
+      "sha256": "a56a71ca43bd83e8bc047a96092e88588379ab7d896c315ee30f1b388095f806",
+      "comparison": "byte-identical"
+    },
+    "/boot/syslinux/debug.c32": {
+      "bytes": 1820,
+      "sha256": "ab2756c50517d45a94b6dff57804d330985537ad7bdab2aa8df65fa1d89f680b",
+      "comparison": "byte-identical"
+    },
+    "/boot/syslinux/dhcp.c32": {
+      "bytes": 4228,
+      "sha256": "c89e9ef22563b225fbbdf24d19d25b6bd3043e3e35b609f95b87d2fc47fa8ed4",
+      "comparison": "byte-identical"
+    },
+    "/boot/syslinux/dir.c32": {
+      "bytes": 3200,
+      "sha256": "fcfacfc4bbeed6349e6ce6dc2b29b947a5cd421e39e876c866e6df63e7439a3e",
+      "comparison": "byte-identical"
+    },
+    "/boot/syslinux/disk.c32": {
+      "bytes": 2236,
+      "sha256": "cff78cfe9f2f42baedfc0fd89c070bf65818c54c9abbb10654995f1109b20962",
+      "comparison": "byte-identical"
+    },
+    "/boot/syslinux/dmi.c32": {
+      "bytes": 8920,
+      "sha256": "a1a974848bd4c1b201652c2bcc4d2a5f41946f92a25bdc40753c8a812f321e89",
+      "comparison": "byte-identical"
+    },
+    "/boot/syslinux/dmitest.c32": {
+      "bytes": 12628,
+      "sha256": "f4e30431a440fc31891fb300b3507d84d4e145dc17fa099050dacf9a8009c4b5",
+      "comparison": "byte-identical"
+    },
+    "/boot/syslinux/elf.c32": {
+      "bytes": 3524,
+      "sha256": "8b3bc50a66ad4d4d96868a8a6ec60d9778f23b36b9f9771ef49fd01eb27d341c",
+      "comparison": "byte-identical"
+    },
+    "/boot/syslinux/ethersel.c32": {
+      "bytes": 2952,
+      "sha256": "d407fd5d6be57e2d0c134426a1c9027e96c589947175206e450e8e856abff1af",
+      "comparison": "byte-identical"
+    },
+    "/boot/syslinux/gfxboot.c32": {
+      "bytes": 10472,
+      "sha256": "e484c721dcf3b4c675004bb4a8d66bed3bc77362128a10b130fd060d2e3ef7dc",
+      "comparison": "byte-identical"
+    },
+    "/boot/syslinux/gpxecmd.c32": {
+      "bytes": 1832,
+      "sha256": "fabcbdbe29070012e3b0d46485a6af9f5991d65f40534ebe68c33ed61e1c76ae",
+      "comparison": "byte-identical"
+    },
+    "/boot/syslinux/hdt.c32": {
+      "bytes": 163540,
+      "sha256": "187341d1dfff4ee6de1b922598c2551ffcbae5a12b601f27560f40b7eac8e262",
+      "comparison": "byte-identical"
+    },
+    "/boot/syslinux/hdt/modalias.gz": {
+      "bytes": 182893,
+      "sha256": "3a70103bde69e689af3480eb6e59827a15891cabe8823b75fcbd3da7e9cf52b3",
+      "comparison": "byte-identical"
+    },
+    "/boot/syslinux/hdt/pciids.gz": {
+      "bytes": 370780,
+      "sha256": "0b195780731a7069fc3d92ed4450384d354f772b0783c9cef1777d398c76eb7c",
+      "comparison": "byte-identical"
+    },
+    "/boot/syslinux/hexdump.c32": {
+      "bytes": 3924,
+      "sha256": "9842b32a5c685fc5fa08fc3bb28f8de5bf469b28179c6b0fb853db0562ccb48d",
+      "comparison": "byte-identical"
+    },
+    "/boot/syslinux/host.c32": {
+      "bytes": 2048,
+      "sha256": "7f6b5baa4f42892d09edcb80ce59ebd97d34187b9b59919e2f1e7e4e3e28133a",
+      "comparison": "byte-identical"
+    },
+    "/boot/syslinux/ifcpu.c32": {
+      "bytes": 4332,
+      "sha256": "8c262d6cd4c3299a99210113445d99c2d35bf30b820a2dc28bc77554970bf3b9",
+      "comparison": "byte-identical"
+    },
+    "/boot/syslinux/ifcpu64.c32": {
+      "bytes": 2032,
+      "sha256": "eb9f13456bb048f9ead3a17d29870db7fbb421c08a7f047f35298578ff95d131",
+      "comparison": "byte-identical"
+    },
+    "/boot/syslinux/ifmemdsk.c32": {
+      "bytes": 4476,
+      "sha256": "ae68791e0147ca2efc587bf7b7cfc1dfabe8d4eacdd825a1a748221f46cde47c",
+      "comparison": "byte-identical"
+    },
+    "/boot/syslinux/ifplop.c32": {
+      "bytes": 2144,
+      "sha256": "94ffdfb1f7a80dedf83610226edbd6ba019b3709623748b45cbe85a89d956ccb",
+      "comparison": "byte-identical"
+    },
+    "/boot/syslinux/isohdpfx.bin": {
+      "bytes": 432,
+      "sha256": "7b43a4dd2061e95da55af51d57a2385c257d64444ee2a62264bcf634a1d0945b",
+      "comparison": "byte-identical"
+    },
+    "/boot/syslinux/isolinux.bin": {
+      "bytes": 38912,
+      "sha256": "036d041722b078d258c577cb159e3a87124bd6c4b5a58197072e9d9b675f05e8",
+      "comparison": "boot-info-table-normalized"
+    },
+    "/boot/syslinux/kbdmap.c32": {
+      "bytes": 1900,
+      "sha256": "6ed505e1d08261c79e9f13294f06a4a1b640278761b561284146c944e2587950",
+      "comparison": "byte-identical"
+    },
+    "/boot/syslinux/kontron_wdt.c32": {
+      "bytes": 5080,
+      "sha256": "4c4b9f55618414f268f905b2ea2eed97a01dab6c6dee3b9c4db192bfdd780242",
+      "comparison": "byte-identical"
+    },
+    "/boot/syslinux/ldlinux.c32": {
+      "bytes": 118572,
+      "sha256": "9d197a5207020d8c161e483802705a9f8422e877c4fa1597fe050ea255fc7804",
+      "comparison": "byte-identical"
+    },
+    "/boot/syslinux/lfs.c32": {
+      "bytes": 5316,
+      "sha256": "1c88be0939d6f5a1d9dd760193af8ab679c374149e4a554259509e18b2c96dec",
+      "comparison": "byte-identical"
+    },
+    "/boot/syslinux/libcom32.c32": {
+      "bytes": 167228,
+      "sha256": "8f8fbae734eaea64ce9acf075bcc52e65be56dba3f46c295131eb2aecd41c14e",
+      "comparison": "byte-identical"
+    },
+    "/boot/syslinux/libgpl.c32": {
+      "bytes": 68332,
+      "sha256": "6bdbdc8932e3fbf727c924f27dfea4221157f5611a947f1ae9ae7b4f595b8bff",
+      "comparison": "byte-identical"
+    },
+    "/boot/syslinux/liblua.c32": {
+      "bytes": 102056,
+      "sha256": "39bee43baaa3fe44f5da839bbbf0c2a338d7614473571ac5ef303e11096c123f",
+      "comparison": "byte-identical"
+    },
+    "/boot/syslinux/libmenu.c32": {
+      "bytes": 23680,
+      "sha256": "aba6484352002b73249424d03503b847aadccef8da218884b07d52eb3a1db790",
+      "comparison": "byte-identical"
+    },
+    "/boot/syslinux/libutil.c32": {
+      "bytes": 25132,
+      "sha256": "02a703ceaf09eb872238960202cfb77cdadb4f6dede12e6213aa207b17ab5ecd",
+      "comparison": "byte-identical"
+    },
+    "/boot/syslinux/linux.c32": {
+      "bytes": 4908,
+      "sha256": "7a3d830a15b63b36f9a9a73d0922a7ac3eb1dac02e6ddb001b7db6da2b1229d4",
+      "comparison": "byte-identical"
+    },
+    "/boot/syslinux/lpxelinux.0": {
+      "bytes": 74161,
+      "sha256": "7e6fe4325c609d863bdad76e8eaf639b069f5696173d1370ebd2e0bb93293115",
+      "comparison": "byte-identical"
+    },
+    "/boot/syslinux/ls.c32": {
+      "bytes": 3204,
+      "sha256": "04671783935a3aa70936e20c53b9f8eec52a4a8043999b5539712938de5b72c5",
+      "comparison": "byte-identical"
+    },
+    "/boot/syslinux/lua.c32": {
+      "bytes": 7164,
+      "sha256": "52ec1e7c7143ea9868df0c4f7872d1cb163778a25d510ff832e0d447f39fd4e0",
+      "comparison": "byte-identical"
+    },
+    "/boot/syslinux/mboot.c32": {
+      "bytes": 11276,
+      "sha256": "c9cbd9bb3e18689d6c6b68a791740193a33fdd1851dd8b3313104a2bf8370332",
+      "comparison": "byte-identical"
+    },
+    "/boot/syslinux/memdisk": {
+      "bytes": 26664,
+      "sha256": "79c0c946a7d11aa8f661e1e8466b2bf78d7dbacf8dcb40577a0aa24e616a6f66",
+      "comparison": "byte-identical"
+    },
+    "/boot/syslinux/meminfo.c32": {
+      "bytes": 2696,
+      "sha256": "42e6c72b4522c9debd53000e0800c09c8a78748bdae7a85f0f3b916e1d87c599",
+      "comparison": "byte-identical"
+    },
+    "/boot/syslinux/menu.c32": {
+      "bytes": 26104,
+      "sha256": "d237bfa628dc3c20f6e40a86e930a0b5652e9494e27533235a3584a4e04ebc20",
+      "comparison": "byte-identical"
+    },
+    "/boot/syslinux/pci.c32": {
+      "bytes": 3676,
+      "sha256": "798f5c8a7a4b37838a02ab8ed3f10175d7c42e077a1351040044e00f38228fc0",
+      "comparison": "byte-identical"
+    },
+    "/boot/syslinux/pcitest.c32": {
+      "bytes": 3716,
+      "sha256": "bc1193bddfed6c0e6ee7f471445941fca95a922f94c2a60f7a5a94f6263e886c",
+      "comparison": "byte-identical"
+    },
+    "/boot/syslinux/pmload.c32": {
+      "bytes": 3240,
+      "sha256": "9be0d01cdd928b658952db5210b141e6ad911d3c3c3647e83e225378107e05d2",
+      "comparison": "byte-identical"
+    },
+    "/boot/syslinux/poweroff.c32": {
+      "bytes": 1896,
+      "sha256": "901dbbec04b17a585c139d23ddda239cb2c79716091a0b00a5b37a3c3fe8b971",
+      "comparison": "byte-identical"
+    },
+    "/boot/syslinux/prdhcp.c32": {
+      "bytes": 3340,
+      "sha256": "9f7439943a2f190a45c15e28396c19fae2e78c5659bdae8e46a7904abdccd2cf",
+      "comparison": "byte-identical"
+    },
+    "/boot/syslinux/pwd.c32": {
+      "bytes": 1724,
+      "sha256": "810f3e7267a05e5d6d19b777f9679dd6a4d510230efa77d86c932cd66d273498",
+      "comparison": "byte-identical"
+    },
+    "/boot/syslinux/pxechn.c32": {
+      "bytes": 12604,
+      "sha256": "1ee19067efc7a370e3d4b208218908287cdfb0aabd54e64adb6e6c52e984e6ec",
+      "comparison": "byte-identical"
+    },
+    "/boot/syslinux/reboot.c32": {
+      "bytes": 1616,
+      "sha256": "6e98891ec74854eec7d0cfb19a75e1793edff10d10799f3f4a676f76ba5eca83",
+      "comparison": "byte-identical"
+    },
+    "/boot/syslinux/rosh.c32": {
+      "bytes": 14060,
+      "sha256": "1f6ff187ffbbd90e2f9b7ad140a2517c9886d5c17e7e4c2dd63a52d541562b0d",
+      "comparison": "byte-identical"
+    },
+    "/boot/syslinux/sanboot.c32": {
+      "bytes": 1860,
+      "sha256": "c1029f5a6e5fb8739361460119becd7910378de9430759332678a71bfe4b89c5",
+      "comparison": "byte-identical"
+    },
+    "/boot/syslinux/sdi.c32": {
+      "bytes": 3188,
+      "sha256": "fabf93f993429383cfacfe5fc31e0d3e91f994a2ff6ca862a33e52cbef81cd30",
+      "comparison": "byte-identical"
+    },
+    "/boot/syslinux/splash.png": {
+      "bytes": 45400,
+      "sha256": "efedc11aeaaf6743dccd68df40f5f7cb71fe0efea9a4f24b8ce8b6e3ca73f686",
+      "comparison": "byte-identical"
+    },
+    "/boot/syslinux/sysdump.c32": {
+      "bytes": 14948,
+      "sha256": "00febcb2045d35e65fa5930d0d0445b33641b4cee11fab3ea2d1d4d969e36efe",
+      "comparison": "byte-identical"
+    },
+    "/boot/syslinux/syslinux.c32": {
+      "bytes": 9148,
+      "sha256": "2f5347cd89e3c0ca7750e5c46f27b136869d348c903b30ad7edf1fc49817e072",
+      "comparison": "byte-identical"
+    },
+    "/boot/syslinux/syslinux.cfg": {
+      "bytes": 153,
+      "sha256": "51d33be8381fdd5770868934679f6307e8ce70d24d6d06befda2cec6c9292e65",
+      "comparison": "byte-identical"
+    },
+    "/boot/syslinux/vesa.c32": {
+      "bytes": 3240,
+      "sha256": "ad91e90989bbd1f8571e6b63e3cfd7eec1d694f2f90ad080eb1970d1e3b6629d",
+      "comparison": "byte-identical"
+    },
+    "/boot/syslinux/vesainfo.c32": {
+      "bytes": 2412,
+      "sha256": "3b51be7afb66d4fe88c60b07b338fd5624e377486d8a90138c37fa12994f2761",
+      "comparison": "byte-identical"
+    },
+    "/boot/syslinux/vesamenu.c32": {
+      "bytes": 26624,
+      "sha256": "e025fe00bd3d0b94ee16cc6ea9c62efb032d960cfbd2868d5bd7c723afcc366c",
+      "comparison": "byte-identical"
+    },
+    "/boot/syslinux/vpdtest.c32": {
+      "bytes": 2096,
+      "sha256": "52bd52081e33de0849ed8b05a8fc7423ff0a3bc169ee908edf2242f66c708298",
+      "comparison": "byte-identical"
+    },
+    "/boot/syslinux/whichsys.c32": {
+      "bytes": 2748,
+      "sha256": "37542d017f3c6127013d3f2f5f579229962974edcff601521a58e58b1ae58461",
+      "comparison": "byte-identical"
+    },
+    "/boot/syslinux/zzjson.c32": {
+      "bytes": 3808,
+      "sha256": "16861dd559d8c1fb2e0b523fb8f1b4d5a79310a71b7226288f5b284e784d708c",
+      "comparison": "byte-identical"
+    },
+    "/shellx64.efi": {
+      "bytes": 1155072,
+      "sha256": "8fa4931ef35765dd16c8df96ef945efac7d65ac17f8e48ff82db06eeb1bb21a5",
+      "comparison": "byte-identical"
+    }
+  },
+  "repack_argv": [
+    "/tmp/omarchy-bench/toolchain/usr/bin/xorriso",
+    "-indev",
+    "/tmp/omarchy-bench/downloads/omarchy-4.0.2.iso",
+    "-outdev",
+    "/tmp/omarchy-bench/omarchy-candidate-firmware-smoke.iso",
+    "-boot_image",
+    "any",
+    "replay",
+    "-map",
+    "/tmp/omarchy-bench/initramfs-benchmark-candidate-v3.img",
+    "/arch/boot/x86_64/initramfs-linux-t2.img",
+    "-volume_date",
+    "c",
+    "2026083103245800",
+    "-volume_date",
+    "m",
+    "2026083103245800",
+    "-volume_date",
+    "uuid",
+    "2026083103245800",
+    "-commit",
+    "-end"
+  ],
+  "kernel_command_line_changed": false,
+  "standalone_installed_boot_validated": false
+}

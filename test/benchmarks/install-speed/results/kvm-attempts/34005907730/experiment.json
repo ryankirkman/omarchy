@@ -1,0 +1,109 @@
+{
+  "schema_version": 1,
+  "status": "comparisons-complete",
+  "iso_url": "https://iso.omarchy.org/omarchy-4.0.2.iso",
+  "iso_sha256": "2ef8e624aa1bec7e277e28056b8535a6c9373ba48d7ede3f1a01cb6d2373cfb8",
+  "upstream_fast_pin": "dbffaa6c65344d644627a023c28661e08382b8fa",
+  "cidata_harness_pin": "2673c613d9a71e23920e43fbb951238145e0f1e8",
+  "repository_commit": "dac5b17d12d0fac41052e1695620e3b3784a5063",
+  "github_run_id": "34005907730",
+  "github_run_attempt": "1",
+  "accelerator": "kvm",
+  "cpus": 4,
+  "memory_mib": 8192,
+  "pairs_per_variant": 3,
+  "variants": [
+    "image-no-package-prefetch-fast-reboot-early-verify-direct-restore-overlap"
+  ],
+  "comparisons": {
+    "image-no-package-prefetch-fast-reboot-early-verify-direct-restore-overlap": {
+      "status": "complete",
+      "exit_status": 2,
+      "comparison": "no-prefetch-fast-reboot-early-verify-direct-restore-overlap-repetitions/comparison.json",
+      "full_clock_twofold_verified": false
+    }
+  },
+  "boot_method": "firmware",
+  "firmware_fixtures": {
+    "192b782af42c164e78453f2b3b122b5ac1849dbbc5e382b76780827c0dcc38c2": {
+      "iso_sha256": "19d37a0a3a192ac391593d8a5f9a32b082bdd12b757cfdfdc8813447dcecddbc",
+      "manifest": "firmware-initramfs-control.iso.manifest.json",
+      "iso_bytes": 6227886080,
+      "standalone_reboot_required": true
+    },
+    "1ebaa5e147cd6bc6f011bb9efd21e1c8fa1489f917ca386b99d9b1eaa39f2158": {
+      "iso_sha256": "c0f81eea6d8ab480e1dd45870ab9a2ba8fe1bd4136471c37cdd5c85ca6aba91f",
+      "manifest": "firmware-initramfs-control-early-preflight.iso.manifest.json",
+      "iso_bytes": 6227886080,
+      "standalone_reboot_required": true
+    },
+    "53d1e83569dfe7187aeafb314e8cde387af12db5176c5f7f216950be9a2f3190": {
+      "iso_sha256": "7f0031852c78af19db0bfe2ff01db3ddeb1aa1a64cdd31bbf0b82ecb42d29df7",
+      "manifest": "firmware-initramfs-candidate-no-prefetch-fast-reboot-early-verify-direct-restore-overlap.iso.manifest.json",
+      "iso_bytes": 6228213760,
+      "standalone_reboot_required": true
+    }
+  },
+  "install_timeout_seconds": 600,
+  "standalone_reboot_timeout_seconds": 180,
+  "source_cache": "cold",
+  "cache_policy": "Require verified source-page eviction after integrity reads and before timing; see per-run evidence",
+  "build_time_in_install_time": false,
+  "fast_reboot_variant": {
+    "schema_version": 1,
+    "variant": "image-no-package-prefetch-fast-reboot",
+    "upstream_commit": "dbffaa6c65344d644627a023c28661e08382b8fa",
+    "upstream_pr": "https://github.com/omacom-io/omarchy-iso/pull/145",
+    "upstream_credit": "Anton Hvornum; pinned Omarchy ISO PR145 dashboard and release helper (MIT)",
+    "changes_to_upstream": [
+      "Make both release-helper sync failures abort the release"
+    ],
+    "guest_reboot_only": true,
+    "host_reset_used": false,
+    "files": [
+      {
+        "path": "usr/local/lib/omarchy-benchmark/fast-reboot/omarchy-install-dashboard",
+        "sha256": "4871faded220498542e1d01a0cbae3f98c21ea5b4eea6bab94fa9e62b415ad89",
+        "upstream_sha256": "4871faded220498542e1d01a0cbae3f98c21ea5b4eea6bab94fa9e62b415ad89"
+      },
+      {
+        "path": "usr/local/lib/omarchy-benchmark/fast-reboot/omarchy-release-install-target",
+        "sha256": "de6a8aafc0f587e868bd8db2d3fdee25da90f468a4919e3f89ba9aeb357818b6",
+        "upstream_sha256": "b8503f3aabd572441a43a8412251767d51a410a6604ad2b31b31bdb8909af97b"
+      },
+      {
+        "path": "usr/local/lib/omarchy-benchmark/fast-reboot/LICENSE",
+        "sha256": "e2b1e3778a6ada6d6eee5f48c028f885e9797313f4c5705929bdc5b99db569d3",
+        "upstream_sha256": null
+      },
+      {
+        "path": "usr/local/lib/omarchy-benchmark/fast-reboot/image-candidate-preflight.sh",
+        "sha256": "ba833c405435621e4718edb4911e3d8ddd27c84bace0729cd97fe26456ae5010",
+        "upstream_sha256": null
+      }
+    ]
+  },
+  "finalization_overlap_variant": {
+    "variant": "image-no-package-prefetch-fast-reboot-early-verify-direct-restore-overlap",
+    "base_variant": "image-no-package-prefetch-fast-reboot-early-verify-direct-restore",
+    "control_initramfs_sha256": "1ebaa5e147cd6bc6f011bb9efd21e1c8fa1489f917ca386b99d9b1eaa39f2158",
+    "candidate_initramfs_sha256": "53d1e83569dfe7187aeafb314e8cde387af12db5176c5f7f216950be9a2f3190",
+    "fast_reboot_manifest": "fast-reboot.manifest.json",
+    "preflight_script_sha256": "510a502d0f4388a43b137e2e22e1b65eaa10a271b299c8c31131365bbbd94b5a",
+    "matched_control": "early service with no-op preflight",
+    "source_cache": "cold",
+    "boot_method": "firmware",
+    "pairs": 3,
+    "comparison": "no-prefetch-fast-reboot-early-verify-direct-restore-overlap-repetitions/comparison.json",
+    "payload_manifest": "animation-overlap.manifest.json",
+    "supplemental_image_changed": false,
+    "target_cache": "none",
+    "component_manifests": [
+      "direct-restore.manifest.json",
+      "localdb-overlap.manifest.json",
+      "animation-overlap.manifest.json"
+    ],
+    "required_work": "File index joins existing finalization; complete animation precedes release-gated completion",
+    "payload_manifest_sha256": "0c7563d93d0ea95c2104bf7fbec2b50acb64dce304a32f1f55b54a6123729959"
+  }
+}

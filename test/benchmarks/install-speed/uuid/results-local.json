@@ -1,0 +1,168 @@
+{
+  "schema_version": 1,
+  "benchmark": "unmounted Btrfs UUID stage, cached local regular-file fixture",
+  "full_install_measured": false,
+  "limitations": [
+    "Not a complete installer measurement",
+    "No mount, two-clone simultaneous-mount, installed-boot, Limine, or Snapper rollback validation",
+    "Repository corpus is smaller than a complete installed distribution",
+    "Fixture cloning and validation occur outside timing and warm local filesystem caches",
+    "Regular-file I/O rather than a physical block device or LUKS mapper"
+  ],
+  "system": {
+    "platform": "Linux-6.18.35-x86_64-with-glibc2.39",
+    "cpu_count": 9,
+    "machine": "x86_64",
+    "btrfs_version": "btrfs-progs v6.6.3"
+  },
+  "source": {
+    "path": "/workspace/scratch/38a4d12ea30d/omarchy",
+    "commit": "70c6d2f72f756789c0c279d12b95f525c4def94b",
+    "tracked_diff_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "tracked_files": 1773,
+    "bytes": 76237951,
+    "manifest_sha256": "5476820c9f157c90c5837667d882999c2aaef4bc0907c8edc88598a6dad32957"
+  },
+  "image": {
+    "bytes": 1073741824,
+    "identity": {
+      "fsid": "992d62af-789e-4525-888e-329f49bc0cbc",
+      "metadata_uuid": "00000000-0000-0000-0000-000000000000",
+      "dev_item.uuid": "92a8a7ed-a0a6-4bb1-b1bf-ad51cf2be015",
+      "dev_item.fsid": "992d62af-789e-4525-888e-329f49bc0cbc",
+      "incompat_flags": 833
+    },
+    "initial_validation": {
+      "btrfs_check": "pass",
+      "restored_manifest": "identical",
+      "check_output": "Opening filesystem to check...\nChecking filesystem on /workspace/scratch/38a4d12ea30d/omarchy-bench/uuid/omarchy-uuid-jzjynodl/baseline.btrfs\nUUID: 992d62af-789e-4525-888e-329f49bc0cbc\nfound 79122432 bytes used, no error found\ntotal csum bytes: 74116\ntotal tree bytes: 3227648\ntotal fs tree bytes: 2916352\ntotal extent tree bytes: 81920\nbtree space waste bytes: 781647\nfile data blocks allocated: 75894784\n referenced 75894784\n[1/7] checking root items\n[2/7] checking extents\n[3/7] checking free space tree\n[4/7] checking fs roots\n[5/7] checking csums against data\n[6/7] checking root refs\n[7/7] checking quota groups skipped (not enabled on this FS)\n"
+    }
+  },
+  "results": [
+    {
+      "repetition": 0,
+      "mode": "full",
+      "elapsed_seconds": 0.09231197399640223,
+      "identity": {
+        "fsid": "81a97322-4333-466e-a234-4eb394e9e60c",
+        "metadata_uuid": "00000000-0000-0000-0000-000000000000",
+        "dev_item.uuid": "92a8a7ed-a0a6-4bb1-b1bf-ad51cf2be015",
+        "dev_item.fsid": "81a97322-4333-466e-a234-4eb394e9e60c",
+        "incompat_flags": 833
+      },
+      "validation": {
+        "btrfs_check": "pass",
+        "restored_manifest": "identical",
+        "check_output": "Opening filesystem to check...\nChecking filesystem on /workspace/scratch/38a4d12ea30d/omarchy-bench/uuid/omarchy-uuid-jzjynodl/full-0.btrfs\nUUID: 81a97322-4333-466e-a234-4eb394e9e60c\nfound 79122432 bytes used, no error found\ntotal csum bytes: 74116\ntotal tree bytes: 3227648\ntotal fs tree bytes: 2916352\ntotal extent tree bytes: 81920\nbtree space waste bytes: 781647\nfile data blocks allocated: 75894784\n referenced 75894784\n[1/7] checking root items\n[2/7] checking extents\n[3/7] checking free space tree\n[4/7] checking fs roots\n[5/7] checking csums against data\n[6/7] checking root refs\n[7/7] checking quota groups skipped (not enabled on this FS)\n"
+      },
+      "tune_output": "Current fsid: 992d62af-789e-4525-888e-329f49bc0cbc\nNew fsid: 81a97322-4333-466e-a234-4eb394e9e60c\nSet superblock flag CHANGING_FSID\nChange fsid in extent tree\nChange fsid in chunk tree\nClear superblock flag CHANGING_FSID\nFsid change finished\n"
+    },
+    {
+      "repetition": 0,
+      "mode": "metadata",
+      "elapsed_seconds": 0.017412282999430317,
+      "identity": {
+        "fsid": "57a141dc-995a-4eb0-ab01-cf495242866a",
+        "metadata_uuid": "992d62af-789e-4525-888e-329f49bc0cbc",
+        "dev_item.uuid": "92a8a7ed-a0a6-4bb1-b1bf-ad51cf2be015",
+        "dev_item.fsid": "992d62af-789e-4525-888e-329f49bc0cbc",
+        "incompat_flags": 1857
+      },
+      "validation": {
+        "btrfs_check": "pass",
+        "restored_manifest": "identical",
+        "check_output": "Opening filesystem to check...\nChecking filesystem on /workspace/scratch/38a4d12ea30d/omarchy-bench/uuid/omarchy-uuid-jzjynodl/metadata-0.btrfs\nUUID: 57a141dc-995a-4eb0-ab01-cf495242866a\nfound 79122432 bytes used, no error found\ntotal csum bytes: 74116\ntotal tree bytes: 3227648\ntotal fs tree bytes: 2916352\ntotal extent tree bytes: 81920\nbtree space waste bytes: 781622\nfile data blocks allocated: 75894784\n referenced 75894784\n[1/7] checking root items\n[2/7] checking extents\n[3/7] checking free space tree\n[4/7] checking fs roots\n[5/7] checking csums against data\n[6/7] checking root refs\n[7/7] checking quota groups skipped (not enabled on this FS)\n"
+      },
+      "tune_output": "WARNING: failed to open /dev/btrfs-control, skipping device registration: No such file or directory\n"
+    },
+    {
+      "repetition": 1,
+      "mode": "metadata",
+      "elapsed_seconds": 0.02787761100626085,
+      "identity": {
+        "fsid": "d41f1c6f-ae26-43b5-8892-a075186bf924",
+        "metadata_uuid": "992d62af-789e-4525-888e-329f49bc0cbc",
+        "dev_item.uuid": "92a8a7ed-a0a6-4bb1-b1bf-ad51cf2be015",
+        "dev_item.fsid": "992d62af-789e-4525-888e-329f49bc0cbc",
+        "incompat_flags": 1857
+      },
+      "validation": {
+        "btrfs_check": "pass",
+        "restored_manifest": "identical",
+        "check_output": "Opening filesystem to check...\nChecking filesystem on /workspace/scratch/38a4d12ea30d/omarchy-bench/uuid/omarchy-uuid-jzjynodl/metadata-1.btrfs\nUUID: d41f1c6f-ae26-43b5-8892-a075186bf924\nfound 79122432 bytes used, no error found\ntotal csum bytes: 74116\ntotal tree bytes: 3227648\ntotal fs tree bytes: 2916352\ntotal extent tree bytes: 81920\nbtree space waste bytes: 781622\nfile data blocks allocated: 75894784\n referenced 75894784\n[1/7] checking root items\n[2/7] checking extents\n[3/7] checking free space tree\n[4/7] checking fs roots\n[5/7] checking csums against data\n[6/7] checking root refs\n[7/7] checking quota groups skipped (not enabled on this FS)\n"
+      },
+      "tune_output": "WARNING: failed to open /dev/btrfs-control, skipping device registration: No such file or directory\n"
+    },
+    {
+      "repetition": 1,
+      "mode": "full",
+      "elapsed_seconds": 0.1799294939992251,
+      "identity": {
+        "fsid": "08289304-4b55-47ea-84f5-9ff91b1ea0ae",
+        "metadata_uuid": "00000000-0000-0000-0000-000000000000",
+        "dev_item.uuid": "92a8a7ed-a0a6-4bb1-b1bf-ad51cf2be015",
+        "dev_item.fsid": "08289304-4b55-47ea-84f5-9ff91b1ea0ae",
+        "incompat_flags": 833
+      },
+      "validation": {
+        "btrfs_check": "pass",
+        "restored_manifest": "identical",
+        "check_output": "Opening filesystem to check...\nChecking filesystem on /workspace/scratch/38a4d12ea30d/omarchy-bench/uuid/omarchy-uuid-jzjynodl/full-1.btrfs\nUUID: 08289304-4b55-47ea-84f5-9ff91b1ea0ae\nfound 79122432 bytes used, no error found\ntotal csum bytes: 74116\ntotal tree bytes: 3227648\ntotal fs tree bytes: 2916352\ntotal extent tree bytes: 81920\nbtree space waste bytes: 781647\nfile data blocks allocated: 75894784\n referenced 75894784\n[1/7] checking root items\n[2/7] checking extents\n[3/7] checking free space tree\n[4/7] checking fs roots\n[5/7] checking csums against data\n[6/7] checking root refs\n[7/7] checking quota groups skipped (not enabled on this FS)\n"
+      },
+      "tune_output": "Current fsid: 992d62af-789e-4525-888e-329f49bc0cbc\nNew fsid: 08289304-4b55-47ea-84f5-9ff91b1ea0ae\nSet superblock flag CHANGING_FSID\nChange fsid in extent tree\nChange fsid in chunk tree\nClear superblock flag CHANGING_FSID\nFsid change finished\n"
+    },
+    {
+      "repetition": 2,
+      "mode": "full",
+      "elapsed_seconds": 0.11491793199820677,
+      "identity": {
+        "fsid": "c17c803f-2694-4aa0-8d93-0ebe7e94dd5b",
+        "metadata_uuid": "00000000-0000-0000-0000-000000000000",
+        "dev_item.uuid": "92a8a7ed-a0a6-4bb1-b1bf-ad51cf2be015",
+        "dev_item.fsid": "c17c803f-2694-4aa0-8d93-0ebe7e94dd5b",
+        "incompat_flags": 833
+      },
+      "validation": {
+        "btrfs_check": "pass",
+        "restored_manifest": "identical",
+        "check_output": "Opening filesystem to check...\nChecking filesystem on /workspace/scratch/38a4d12ea30d/omarchy-bench/uuid/omarchy-uuid-jzjynodl/full-2.btrfs\nUUID: c17c803f-2694-4aa0-8d93-0ebe7e94dd5b\nfound 79122432 bytes used, no error found\ntotal csum bytes: 74116\ntotal tree bytes: 3227648\ntotal fs tree bytes: 2916352\ntotal extent tree bytes: 81920\nbtree space waste bytes: 781647\nfile data blocks allocated: 75894784\n referenced 75894784\n[1/7] checking root items\n[2/7] checking extents\n[3/7] checking free space tree\n[4/7] checking fs roots\n[5/7] checking csums against data\n[6/7] checking root refs\n[7/7] checking quota groups skipped (not enabled on this FS)\n"
+      },
+      "tune_output": "Current fsid: 992d62af-789e-4525-888e-329f49bc0cbc\nNew fsid: c17c803f-2694-4aa0-8d93-0ebe7e94dd5b\nSet superblock flag CHANGING_FSID\nChange fsid in extent tree\nChange fsid in chunk tree\nClear superblock flag CHANGING_FSID\nFsid change finished\n"
+    },
+    {
+      "repetition": 2,
+      "mode": "metadata",
+      "elapsed_seconds": 0.03191244199842913,
+      "identity": {
+        "fsid": "2edd98f4-8220-45f0-89dd-b477e3e41e8d",
+        "metadata_uuid": "992d62af-789e-4525-888e-329f49bc0cbc",
+        "dev_item.uuid": "92a8a7ed-a0a6-4bb1-b1bf-ad51cf2be015",
+        "dev_item.fsid": "992d62af-789e-4525-888e-329f49bc0cbc",
+        "incompat_flags": 1857
+      },
+      "validation": {
+        "btrfs_check": "pass",
+        "restored_manifest": "identical",
+        "check_output": "Opening filesystem to check...\nChecking filesystem on /workspace/scratch/38a4d12ea30d/omarchy-bench/uuid/omarchy-uuid-jzjynodl/metadata-2.btrfs\nUUID: 2edd98f4-8220-45f0-89dd-b477e3e41e8d\nfound 79122432 bytes used, no error found\ntotal csum bytes: 74116\ntotal tree bytes: 3227648\ntotal fs tree bytes: 2916352\ntotal extent tree bytes: 81920\nbtree space waste bytes: 781622\nfile data blocks allocated: 75894784\n referenced 75894784\n[1/7] checking root items\n[2/7] checking extents\n[3/7] checking free space tree\n[4/7] checking fs roots\n[5/7] checking csums against data\n[6/7] checking root refs\n[7/7] checking quota groups skipped (not enabled on this FS)\n"
+      },
+      "tune_output": "WARNING: failed to open /dev/btrfs-control, skipping device registration: No such file or directory\n"
+    }
+  ],
+  "summary": {
+    "full": {
+      "median_seconds": 0.11491793199820677,
+      "mean_seconds": 0.12905313333127802,
+      "stdev_seconds": 0.04548692548860728,
+      "min_seconds": 0.09231197399640223,
+      "max_seconds": 0.1799294939992251
+    },
+    "metadata": {
+      "median_seconds": 0.02787761100626085,
+      "mean_seconds": 0.025734112001373433,
+      "stdev_seconds": 0.007483955754614439,
+      "min_seconds": 0.017412282999430317,
+      "max_seconds": 0.03191244199842913
+    }
+  },
+  "stage_speedup_median": 4.122230271898052
+}

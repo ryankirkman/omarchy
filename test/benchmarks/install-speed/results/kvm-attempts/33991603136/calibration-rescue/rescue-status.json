@@ -1,0 +1,11 @@
+{
+  "schema_version": 1,
+  "measurement_valid": false,
+  "purpose": "Read-only failure forensics",
+  "failed_run": "/home/runner/work/_temp/omarchy-install-speed/calibration",
+  "status": "failed",
+  "target_readonly": true,
+  "error_type": "RuntimeError",
+  "error": "Read-only guest collector failed; see rescue-collector-error.json",
+  "host_rescue_seconds": 44.01738888700015
+}

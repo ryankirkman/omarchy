@@ -1,0 +1,45 @@
++ ssh-keygen -q -t ed25519 -N  -C disposable-readonly-rescue -f /home/runner/work/_temp/omarchy-install-speed/calibration-rescue/rescue-key
++ /usr/bin/python3 /home/runner/work/omarchy/omarchy/test/benchmarks/install-speed/boot-overlay/make-initramfs.py --initramfs /home/runner/work/_temp/omarchy-install-speed/initramfs-linux-t2.img --expected-initramfs-sha256 6e3e15b983da69df4e18df2f1489fa854980b395b28546355d0f6dc13914694e --mode builder --payload-dir /home/runner/work/_temp/omarchy-install-speed/calibration-rescue/payload --preflight-script /home/runner/work/omarchy/omarchy/test/benchmarks/install-speed/boot-overlay/builder-preflight.sh --output /home/runner/work/_temp/omarchy-install-speed/calibration-rescue/initramfs-rescue.img
+{
+  "initramfs": "/home/runner/work/_temp/omarchy-install-speed/calibration-rescue/initramfs-rescue.img",
+  "manifest": "/home/runner/work/_temp/omarchy-install-speed/calibration-rescue/initramfs-rescue.img.manifest.json",
+  "schema_version": 1,
+  "mode": "builder",
+  "disable_package_prefetch": false,
+  "original_initramfs_sha256": "6e3e15b983da69df4e18df2f1489fa854980b395b28546355d0f6dc13914694e",
+  "original_config_sha256": "1e00045b8b2979c16cbc7a943a708b136a1989c7407889a96b8450632ea9deba",
+  "hook_sha256": "cba3c7709fe79e1bd7cfde845867c72f64ce8377eaeb275076be4e9faf2243d7",
+  "payload": [
+    {
+      "path": "root/.automated_script.sh",
+      "mode": "0o755",
+      "sha256": "c0db7f3ab972e798a8c0d1ebaab4656a5c879f80348a602556e810d4ce021c2e"
+    },
+    {
+      "path": "usr/local/lib/omarchy-benchmark/builder-key.pub",
+      "mode": "0o644",
+      "sha256": "550c827e93af04ece2ec42345a710663df837d75dab34769cc427ac8c522309d"
+    },
+    {
+      "path": "usr/local/lib/omarchy-benchmark/collect-failed-install.py",
+      "mode": "0o644",
+      "sha256": "2c576c9f045ba2de2cf62fd0c7042f3c77c1c01b3cd6a26fbebc118776fdf641"
+    },
+    {
+      "path": "usr/local/lib/omarchy-benchmark/preflight.sh",
+      "mode": "0o755",
+      "sha256": "3dca5f259428975c81d74c37936a1beeb267642f7a2db0dd1f47be4957c2c42c"
+    }
+  ],
+  "appended_archive_bytes": 14848,
+  "appended_archive_sha256": "095a1202cdb61e926a3141f6aac38b830dc818d50e09c6b77c667af02fd860b3",
+  "output_initramfs_sha256": "0093a3cbf1118e329a2a2575a3fac31e867374727aa0d621786236a0fb290b93"
+}
+Traceback (most recent call last):
+  File "/home/runner/work/omarchy/omarchy/test/benchmarks/install-speed/native-ci/rescue-failed-install.py", line 122, in <module>
+    main()
+  File "/home/runner/work/omarchy/omarchy/test/benchmarks/install-speed/native-ci/rescue-failed-install.py", line 114, in main
+    execute(args)
+  File "/home/runner/work/omarchy/omarchy/test/benchmarks/install-speed/native-ci/rescue-failed-install.py", line 88, in execute
+    raise RuntimeError('Read-only guest collector failed; see rescue-collector-error.json')
+RuntimeError: Read-only guest collector failed; see rescue-collector-error.json

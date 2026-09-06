@@ -1,0 +1,67 @@
+{
+  "schema_version": 1,
+  "status": "verified",
+  "after_install_and_standalone_gates": true,
+  "read_only_source_inspection": true,
+  "source_unmounted_and_detached": true,
+  "requires_review": [],
+  "source_file_contents_read": false,
+  "files": {
+    "complete.json": {
+      "sha256": "03101f2250b23d4aa2fe1dfc2ab23ecddf0c6e64be3aafcf0ae7bbbfda102bb3",
+      "bytes": 300
+    },
+    "inspect-sealed-source.sh": {
+      "sha256": "80dbcdbb9fcd9c1aca5e19c79ea9bf915b60539830099655170c34bd07d7533a",
+      "bytes": 3878
+    },
+    "post-validate-inspect-02.py": {
+      "sha256": "110629f57d4b6dcb48d32f7869357fe2bdabd6f9d7295ea82752eb4cfb6e29c6",
+      "bytes": 4148
+    },
+    "poweroff-response.json": {
+      "sha256": "9325bf2786dd543abdb51638fb7493864ec81eeb1cc45681fe98388dbf9170f6",
+      "bytes": 92
+    },
+    "pre-inspection-manifest.json": {
+      "sha256": "dc87d47cb58be51a9c9c99b3e1c7abbe65251c031a646e9c25d42f9b1eec70f8",
+      "bytes": 4505
+    },
+    "sealed-source-01.json": {
+      "sha256": "d2eeea10fd7db3510fdc39d032e76e77d1ac4378a911cf6e2c43fcd827cd3ca8",
+      "bytes": 527
+    },
+    "sealed-source-02.json": {
+      "sha256": "f5d1fe3b7c26c958b157694a50d5b718670c5f32be8c933aa34fd0f9e7e28b01",
+      "bytes": 304
+    },
+    "sealed-source-03.json": {
+      "sha256": "453b96453661b3b7874a82ecafccc398a1b18ed311b6363d773c666df0d32bdf",
+      "bytes": 6470
+    },
+    "sealed-source-04.json": {
+      "sha256": "2efdadef9fdcb831e8bead7b5b9fa7aae234ec2c84486e21fc647c39a7f16787",
+      "bytes": 815
+    },
+    "sealed-source-05.json": {
+      "sha256": "c36fcf2049ece5872efb3136947918bd2a69a541d1e74f8a26ef00b794f4d61e",
+      "bytes": 192
+    },
+    "sealed-source-06.json": {
+      "sha256": "44b0e5d824c7995ff260cd5a6bada97e13fee30ab013691ef341ce49a6dcbc41",
+      "bytes": 382
+    },
+    "sealed-source-07.json": {
+      "sha256": "595c1f63de911c8a453739e3c21150a4db5541812a8f83f624430057d97809c7",
+      "bytes": 197
+    },
+    "smoke-preflight.json": {
+      "sha256": "b559584060592a58d481e7515b6dbbd0e74f16e8b7d5b495cb69a90522ba15b4",
+      "bytes": 4365
+    },
+    "source-byte-range.json": {
+      "sha256": "18c8dbe200d3617fcf1632a816039703dc05b69ff2ff90b300dec793638c63f3",
+      "bytes": 2462
+    }
+  }
+}

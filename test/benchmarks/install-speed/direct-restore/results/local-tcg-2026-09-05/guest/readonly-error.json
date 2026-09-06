@@ -1,0 +1,49 @@
+{
+  "after_sha256": "4f8a1ead17aacf473f9d77918aaf97ce596dd5a27d08bd335471a00996b67da5",
+  "before_sha256": "4f8a1ead17aacf473f9d77918aaf97ce596dd5a27d08bd335471a00996b67da5",
+  "bytes_verified_unchanged": 100663296,
+  "case": "4096-off",
+  "hardware": {
+    "by_id": "/dev/disk/by-id/virtio-OMARCHY_DIO_4096_OFF",
+    "capabilities": {
+      "discard_max_bytes": 0,
+      "write_zeroes_max_bytes": 0
+    },
+    "device": "/dev/vde",
+    "logical_sector_bytes": 4096,
+    "major_minor": "254:64",
+    "no_partitions_holders_slaves_or_swap": true,
+    "physical_sector_bytes": 4096,
+    "read_only": true,
+    "serial": "OMARCHY_DIO_4096_OFF",
+    "size_bytes": 100663296,
+    "sysfs": "/sys/devices/pci0000:00/0000:00:08.0/virtio7/block/vde",
+    "unmounted": true
+  },
+  "restore_commands": [
+    {
+      "argv": [
+        "qemu-img",
+        "convert",
+        "-q",
+        "-f",
+        "qcow2",
+        "-O",
+        "raw",
+        "-W",
+        "-n",
+        "-t",
+        "none",
+        "-m",
+        "8",
+        "/dev/vdf",
+        "/dev/vde"
+      ],
+      "cwd": null,
+      "executable": "qemu-img"
+    }
+  ],
+  "restore_runtime_error": "root filesystem restore failed: qemu-img: Could not open '/dev/vde': The device is not writable: Permission denied",
+  "status": "passed",
+  "target_left_read_only": true
+}

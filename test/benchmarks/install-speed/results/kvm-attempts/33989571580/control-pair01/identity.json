@@ -1,0 +1,11 @@
+{
+  "machine_id": "449f1cbcaca84248a6ac636616a5edc9",
+  "ssh_host_key_fingerprints": [
+    "SHA256:S8iDEZQkyxn5tpWGD7QMNsDcPDbwTAeL+vmHglcKMUs",
+    "SHA256:H/3SKW97he8DA+ymRZwTjMT4iEcRDJwGGvxmRTBuNsc",
+    "SHA256:Q3nBorh++L3EYJrOyVPaldUWPz3pyKjBWTBIZi3wXl4",
+    "SHA256:IaTEb0ri0tZNBV39jvpaRovX9CXfhTAcEfFBUIco2jw"
+  ],
+  "pacman_master_key_fingerprint": "62587746FC24D0280B1E8A2FA4E210AB8A42D1C6",
+  "btrfs_uuid": "8d4883e5-75e9-4240-8e15-5bc755dc48a6"
+}

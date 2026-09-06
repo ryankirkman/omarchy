@@ -1,0 +1,69 @@
+{
+  "schema_version": 1,
+  "mode": "candidate",
+  "disable_package_prefetch": true,
+  "original_initramfs_sha256": "6e3e15b983da69df4e18df2f1489fa854980b395b28546355d0f6dc13914694e",
+  "original_config_sha256": "1e00045b8b2979c16cbc7a943a708b136a1989c7407889a96b8450632ea9deba",
+  "hook_sha256": "cba3c7709fe79e1bd7cfde845867c72f64ce8377eaeb275076be4e9faf2243d7",
+  "payload": [
+    {
+      "path": "etc/systemd/system/getty@tty1.service.d/50-omarchy-benchmark-preflight.conf",
+      "mode": "0o644",
+      "sha256": "72fcffa6f06bc07d7603090cbf940dae8f44cd0a8c413bdd8522c4380177627e"
+    },
+    {
+      "path": "etc/systemd/system/omarchy-benchmark-preflight.service",
+      "mode": "0o644",
+      "sha256": "3d1dd8ee1e50faf930a9cda5a6be836ba0ce082233727ea72e81e74bfd61f5ad"
+    },
+    {
+      "path": "root/.automated_script.sh",
+      "mode": "0o755",
+      "sha256": "c4bbdf6e1a6d7044c46cf41ddc8af1642de369969981af349a4d1c87c9d4853b"
+    },
+    {
+      "path": "usr/local/lib/omarchy-benchmark/activate-installer-overlay.sh",
+      "mode": "0o644",
+      "sha256": "388814f2aa33ee0202eb48a83a3df4eaf10c22d907cf6bba57b8c209e389126a"
+    },
+    {
+      "path": "usr/local/lib/omarchy-benchmark/fast-reboot/LICENSE",
+      "mode": "0o644",
+      "sha256": "e2b1e3778a6ada6d6eee5f48c028f885e9797313f4c5705929bdc5b99db569d3"
+    },
+    {
+      "path": "usr/local/lib/omarchy-benchmark/fast-reboot/image-candidate-preflight.sh",
+      "mode": "0o755",
+      "sha256": "ba833c405435621e4718edb4911e3d8ddd27c84bace0729cd97fe26456ae5010"
+    },
+    {
+      "path": "usr/local/lib/omarchy-benchmark/fast-reboot/omarchy-install-dashboard",
+      "mode": "0o755",
+      "sha256": "4871faded220498542e1d01a0cbae3f98c21ea5b4eea6bab94fa9e62b415ad89"
+    },
+    {
+      "path": "usr/local/lib/omarchy-benchmark/fast-reboot/omarchy-release-install-target",
+      "mode": "0o755",
+      "sha256": "de6a8aafc0f587e868bd8db2d3fdee25da90f468a4919e3f89ba9aeb357818b6"
+    },
+    {
+      "path": "usr/local/lib/omarchy-benchmark/fast-reboot/payload.sha256",
+      "mode": "0o644",
+      "sha256": "69ff549a4e6b4d0900c1670ca48ee6ea1663341e1aa70e5c3d607cdf5d5467f9"
+    },
+    {
+      "path": "usr/local/lib/omarchy-benchmark/preflight.sh",
+      "mode": "0o755",
+      "sha256": "5a43425e190b15d4852313b5ef07cebae0c9e41dc76f3851311028409d2a9230"
+    },
+    {
+      "path": "usr/local/lib/omarchy-benchmark/run-early-preflight.sh",
+      "mode": "0o755",
+      "sha256": "730c7a6317923c3c07eebb1e6da910b96de9873ecaec74c4f46d54aa0a6123de"
+    }
+  ],
+  "early_preflight": true,
+  "appended_archive_bytes": 60416,
+  "appended_archive_sha256": "b542bea933471f7b6231f4e6b8e9b1325e2edd4d402624379938bd8a7ae6e00c",
+  "output_initramfs_sha256": "2158e16256b11404100f130f22e1855e537e22e38b3b82510a63c2fc03f82895"
+}

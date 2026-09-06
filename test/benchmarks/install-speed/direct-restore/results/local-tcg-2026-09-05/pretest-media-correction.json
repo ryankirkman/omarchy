@@ -1,0 +1,20 @@
+{
+  "stage": "before guest test or target prefill",
+  "failed_request": "02-portable-qemu.json",
+  "diagnosis": "Supplemental enumerated sr0; official ISO sr1. Initial read-only mount consumed no matching tool member and stopped.",
+  "correction": "Use verified OMARCHY_FAST_IMAGE filesystem label and expected member SHA. Unmount original extra read-only mount before correction.",
+  "original_target_allocated_bytes": {
+    "target-512-on.raw": 0,
+    "target-512-off.raw": 0,
+    "target-4096-off.raw": 0,
+    "target-4096-on.raw": 0
+  },
+  "guest_test_changed": false,
+  "restore_function_changed": false,
+  "restore_commands_before_correction": 0,
+  "second_pretest_failure": "Tool tar paths have two prefix components before qemu/. Initial strip-components=3 extracted sibling bin/lib directories; binary guard stopped before execution. Corrected to strip-components=2.",
+  "failed_requests": [
+    "02-portable-qemu.json",
+    "02b-correct-media-label.json"
+  ]
+}

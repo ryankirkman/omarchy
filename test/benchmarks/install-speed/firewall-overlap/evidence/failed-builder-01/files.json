@@ -1,0 +1,50 @@
+{
+  "launch.json": {
+    "sha256": "122ccf29094faabc8e4c2b04c2604ea7712bc45cda9f8afae0e32c740099ef16",
+    "bytes": 1396
+  },
+  "qemu.log": {
+    "sha256": "6052710bfb5e11af3e6e62aac7b3c020fe2a354dc4cb9caefbb29d38362d8ea3",
+    "bytes": 76
+  },
+  "serial.log": {
+    "sha256": "e1156c9971b32fa096fa70290161cf4bad3f49f066ddd30746fd3e6f75a16fa6",
+    "bytes": 87
+  },
+  "source/iso-vm.py": {
+    "sha256": "0b907bbcf536ec78e8b321b28819a123a1e800670cea6dac0a718ea2cc71057e",
+    "bytes": 49301
+  },
+  "source/postfailure-console.py": {
+    "sha256": "52400893cb2bfdf957b5408c5fbb97ec428f42290a5f74a1b5ee7c84ef3cc884",
+    "bytes": 12726
+  },
+  "supervisor-completion.json": {
+    "sha256": "feb243ce7ff233ab44e06158b71cfa32a5bed73306be0980c8199eb1d07a1e76",
+    "bytes": 56
+  },
+  "timeout-after-escape.png": {
+    "sha256": "5dd0abb4edc61d8788eea2febfd203135c6bf916df4a7834a7074217ca959b3e",
+    "bytes": 7102
+  },
+  "timeout-after-tty2.png": {
+    "sha256": "5dd0abb4edc61d8788eea2febfd203135c6bf916df4a7834a7074217ca959b3e",
+    "bytes": 7102
+  },
+  "timeout-before-keys.png": {
+    "sha256": "5dd0abb4edc61d8788eea2febfd203135c6bf916df4a7834a7074217ca959b3e",
+    "bytes": 7102
+  },
+  "timeout-console.json": {
+    "sha256": "2e64c40c9b75049e17340448f4f3bb0d0332b6f2200b67fa25cf768ce846cd0e",
+    "bytes": 2666
+  },
+  "timeout-console.log": {
+    "sha256": "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b",
+    "bytes": 1
+  },
+  "timeout-diagnostics.json": {
+    "sha256": "d93c0f84dc5de6ec9745814b5ecc3dc1d4a84ff9bb791172074da8b80e685553",
+    "bytes": 10276
+  }
+}

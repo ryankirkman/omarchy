@@ -1,0 +1,8 @@
+{
+  "ok": true,
+  "result": {
+    "returncode": 1,
+    "stdout": "/tmp/omarchy-direct-restore/media/qemu-img-live.tar: OK\n/tmp/omarchy-direct-restore/qemu/bin/qemu-img: FAILED open or read\n",
+    "stderr": "sha256sum: /tmp/omarchy-direct-restore/qemu/bin/qemu-img: No such file or directory\nsha256sum: WARNING: 1 listed file could not be read\n"
+  }
+}

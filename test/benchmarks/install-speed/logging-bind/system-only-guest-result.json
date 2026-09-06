@@ -1,0 +1,285 @@
+{
+  "schema_version": 1,
+  "scope": "Actual private file bind and arch-chroot on an owned minimal /tmp fixture; no installed disk, package changes or installation-speed claim",
+  "logging_scope": "serial-system-finalizer-only",
+  "source_sha256": {
+    "guard.py": "639365971a6080341de18705a5ca504322bb4574ed72e86605fccac0180eb466",
+    "original-helper": "61a13abcc44fd5241e9882f1bcfed833e10e0ed19ad42c34a08efe1973b70d27",
+    "optimized-helper": "1d8151adb150bc1dfe930b30e7039978591add500a132b9951152d7a8a23d715"
+  },
+  "cases": [
+    {
+      "case": "root-success",
+      "passed": true,
+      "exit_status": 0,
+      "uid": 0,
+      "parent_observed_original_while_child_mounted": true,
+      "original_file_and_metadata_unchanged": true,
+      "parent_mount_absent": true,
+      "seconds_for_functional_check_only": 5.193780562000029,
+      "stdout": "=== Omarchy Setup Started: 2026-09-06 00:00:00 ===\n[2026-09-06 03:36:12] Starting: /opt/logging-bind-contract/leaf.sh\nLEAF_OUTPUT\n[2026-09-06 03:36:13] Completed: /opt/logging-bind-contract/leaf.sh\n[2026-09-06 03:36:13] Starting: /opt/logging-bind-contract/leaf.sh\nLEAF_OUTPUT\n[2026-09-06 03:36:13] Completed: /opt/logging-bind-contract/leaf.sh\n=== Omarchy Setup Completed: 2026-09-06 03:36:13 ===\nOmarchy setup: 216m 13s\nGUARD_GUEST_UID=0\n",
+      "stderr": "==> WARNING: /tmp/omarchy-logging-bind-guest-mx8h0sz5/target is not a mountpoint. This may have undesirable side effects.\n"
+    },
+    {
+      "case": "user-success",
+      "passed": true,
+      "exit_status": 0,
+      "uid": 65534,
+      "parent_observed_original_while_child_mounted": false,
+      "original_file_and_metadata_unchanged": true,
+      "parent_mount_absent": true,
+      "seconds_for_functional_check_only": 4.423741918000019,
+      "stdout": "=== Omarchy Setup Started: 2026-09-06 00:00:00 ===\n[2026-09-06 03:36:17] Starting: /opt/logging-bind-contract/leaf.sh\nLEAF_OUTPUT\n[2026-09-06 03:36:17] Completed: /opt/logging-bind-contract/leaf.sh\n[2026-09-06 03:36:17] Starting: /opt/logging-bind-contract/leaf.sh\nLEAF_OUTPUT\n[2026-09-06 03:36:17] Completed: /opt/logging-bind-contract/leaf.sh\n=== Omarchy Setup Completed: 2026-09-06 03:36:17 ===\nOmarchy setup: 216m 17s\nGUARD_GUEST_UID=65534\n",
+      "stderr": "==> WARNING: /tmp/omarchy-logging-bind-guest-mx8h0sz5/target is not a mountpoint. This may have undesirable side effects.\n"
+    },
+    {
+      "case": "root-failure",
+      "passed": true,
+      "exit_status": 37,
+      "uid": 0,
+      "parent_observed_original_while_child_mounted": false,
+      "original_file_and_metadata_unchanged": true,
+      "parent_mount_absent": true,
+      "seconds_for_functional_check_only": 4.51623810000001,
+      "stdout": "=== Omarchy Setup Started: 2026-09-06 00:00:00 ===\n[2026-09-06 03:36:21] Starting: /opt/logging-bind-contract/leaf.sh\nLEAF_OUTPUT\n[2026-09-06 03:36:22] Completed: /opt/logging-bind-contract/leaf.sh\n[2026-09-06 03:36:22] Starting: /opt/logging-bind-contract/leaf.sh\nLEAF_OUTPUT\n[2026-09-06 03:36:22] Completed: /opt/logging-bind-contract/leaf.sh\n=== Omarchy Setup Completed: 2026-09-06 03:36:22 ===\nOmarchy setup: 216m 22s\nGUARD_GUEST_UID=0\n",
+      "stderr": "==> WARNING: /tmp/omarchy-logging-bind-guest-mx8h0sz5/target is not a mountpoint. This may have undesirable side effects.\n"
+    }
+  ],
+  "copied_guest_binary_sha256": {
+    "/usr/bin/bash": "575e03ac834b739349a4484de481abcd06a6f7193cefc795260a32a1943f20a5",
+    "/usr/bin/date": "8c40f636dad194d945ba65c6ce18a412e8dffc595a9a80f9874515f79411e6ac",
+    "/lib64/ld-linux-x86-64.so.2": "d011113b7054c641c8ca064f58bcc23804fd2654a3dff2444dad06ddeda61bfb",
+    "/usr/lib/libc.so.6": "e221b10fee9ee4776d8f0f1701253bc06817f7a4dbe6c5292487277d0bf8ffff",
+    "/usr/lib/libncursesw.so.6": "7498a0b0f75deb5417e109d1853679f1a6b201e52e03b247c914fec0a36e3a5b",
+    "/usr/lib/libreadline.so.8": "e860c46c8ec8a37d9ade7cc5eb75e6973a3bb12c8cdc50f849887f88095da200",
+    "/usr/lib64/ld-linux-x86-64.so.2": "d011113b7054c641c8ca064f58bcc23804fd2654a3dff2444dad06ddeda61bfb"
+  },
+  "fixture": "/tmp/omarchy-logging-bind-guest-mx8h0sz5",
+  "source_helper_unchanged": true,
+  "component_timing": {
+    "scope": "TCG guest only; real Bash/date and four private chroot lifecycles, 63 trivial leaves; no native or full-install inference",
+    "logging_scope": "serial-system-finalizer-only",
+    "candidate_guard_calls_per_sample": 1,
+    "samples": [
+      {
+        "pair": 1,
+        "label": "baseline",
+        "seconds": 15.617234773000064,
+        "invocations": [
+          {
+            "leaves": 49,
+            "seconds": 8.831049968999992,
+            "execution_path": "original-private-chroot",
+            "observed_helper": "original",
+            "original_package_file_and_parent_mount_unchanged": true
+          },
+          {
+            "leaves": 1,
+            "seconds": 1.8098496950000253,
+            "execution_path": "original-private-chroot",
+            "observed_helper": "original",
+            "original_package_file_and_parent_mount_unchanged": true
+          },
+          {
+            "leaves": 12,
+            "seconds": 3.3639716989999897,
+            "execution_path": "original-private-chroot",
+            "observed_helper": "original",
+            "original_package_file_and_parent_mount_unchanged": true
+          },
+          {
+            "leaves": 1,
+            "seconds": 1.2911048949999895,
+            "execution_path": "original-private-chroot",
+            "observed_helper": "original",
+            "original_package_file_and_parent_mount_unchanged": true
+          }
+        ]
+      },
+      {
+        "pair": 1,
+        "label": "candidate",
+        "seconds": 12.076731655999993,
+        "invocations": [
+          {
+            "leaves": 49,
+            "seconds": 6.366564054000037,
+            "execution_path": "private-logging-bind",
+            "observed_helper": "optimized",
+            "original_package_file_and_parent_mount_unchanged": true
+          },
+          {
+            "leaves": 1,
+            "seconds": 1.17767831499998,
+            "execution_path": "original-private-chroot",
+            "observed_helper": "original",
+            "original_package_file_and_parent_mount_unchanged": true
+          },
+          {
+            "leaves": 12,
+            "seconds": 2.9411270790000117,
+            "execution_path": "original-private-chroot",
+            "observed_helper": "original",
+            "original_package_file_and_parent_mount_unchanged": true
+          },
+          {
+            "leaves": 1,
+            "seconds": 1.2763521470000114,
+            "execution_path": "original-private-chroot",
+            "observed_helper": "original",
+            "original_package_file_and_parent_mount_unchanged": true
+          }
+        ]
+      },
+      {
+        "pair": 2,
+        "label": "candidate",
+        "seconds": 12.665244510000093,
+        "invocations": [
+          {
+            "leaves": 49,
+            "seconds": 6.993833988999995,
+            "execution_path": "private-logging-bind",
+            "observed_helper": "optimized",
+            "original_package_file_and_parent_mount_unchanged": true
+          },
+          {
+            "leaves": 1,
+            "seconds": 1.255011629000137,
+            "execution_path": "original-private-chroot",
+            "observed_helper": "original",
+            "original_package_file_and_parent_mount_unchanged": true
+          },
+          {
+            "leaves": 12,
+            "seconds": 2.9245739299999514,
+            "execution_path": "original-private-chroot",
+            "observed_helper": "original",
+            "original_package_file_and_parent_mount_unchanged": true
+          },
+          {
+            "leaves": 1,
+            "seconds": 1.2127799390000291,
+            "execution_path": "original-private-chroot",
+            "observed_helper": "original",
+            "original_package_file_and_parent_mount_unchanged": true
+          }
+        ]
+      },
+      {
+        "pair": 2,
+        "label": "baseline",
+        "seconds": 15.316386915999828,
+        "invocations": [
+          {
+            "leaves": 49,
+            "seconds": 8.988411515000053,
+            "execution_path": "original-private-chroot",
+            "observed_helper": "original",
+            "original_package_file_and_parent_mount_unchanged": true
+          },
+          {
+            "leaves": 1,
+            "seconds": 1.4582595039998978,
+            "execution_path": "original-private-chroot",
+            "observed_helper": "original",
+            "original_package_file_and_parent_mount_unchanged": true
+          },
+          {
+            "leaves": 12,
+            "seconds": 3.2163051929999256,
+            "execution_path": "original-private-chroot",
+            "observed_helper": "original",
+            "original_package_file_and_parent_mount_unchanged": true
+          },
+          {
+            "leaves": 1,
+            "seconds": 1.2767422919998808,
+            "execution_path": "original-private-chroot",
+            "observed_helper": "original",
+            "original_package_file_and_parent_mount_unchanged": true
+          }
+        ]
+      },
+      {
+        "pair": 3,
+        "label": "baseline",
+        "seconds": 14.31735859499986,
+        "invocations": [
+          {
+            "leaves": 49,
+            "seconds": 8.87284851000004,
+            "execution_path": "original-private-chroot",
+            "observed_helper": "original",
+            "original_package_file_and_parent_mount_unchanged": true
+          },
+          {
+            "leaves": 1,
+            "seconds": 1.2091177859999789,
+            "execution_path": "original-private-chroot",
+            "observed_helper": "original",
+            "original_package_file_and_parent_mount_unchanged": true
+          },
+          {
+            "leaves": 12,
+            "seconds": 2.7999853520000215,
+            "execution_path": "original-private-chroot",
+            "observed_helper": "original",
+            "original_package_file_and_parent_mount_unchanged": true
+          },
+          {
+            "leaves": 1,
+            "seconds": 1.1481435059999967,
+            "execution_path": "original-private-chroot",
+            "observed_helper": "original",
+            "original_package_file_and_parent_mount_unchanged": true
+          }
+        ]
+      },
+      {
+        "pair": 3,
+        "label": "candidate",
+        "seconds": 11.764140886000177,
+        "invocations": [
+          {
+            "leaves": 49,
+            "seconds": 6.311024447000136,
+            "execution_path": "private-logging-bind",
+            "observed_helper": "optimized",
+            "original_package_file_and_parent_mount_unchanged": true
+          },
+          {
+            "leaves": 1,
+            "seconds": 1.2085288319999563,
+            "execution_path": "original-private-chroot",
+            "observed_helper": "original",
+            "original_package_file_and_parent_mount_unchanged": true
+          },
+          {
+            "leaves": 12,
+            "seconds": 2.6861571530000674,
+            "execution_path": "original-private-chroot",
+            "observed_helper": "original",
+            "original_package_file_and_parent_mount_unchanged": true
+          },
+          {
+            "leaves": 1,
+            "seconds": 1.2747134919998189,
+            "execution_path": "original-private-chroot",
+            "observed_helper": "original",
+            "original_package_file_and_parent_mount_unchanged": true
+          }
+        ]
+      }
+    ],
+    "median_seconds": {
+      "baseline": 15.316386915999828,
+      "candidate": 12.076731655999993
+    },
+    "median_saved_seconds": 3.239655259999836,
+    "median_speedup": 1.2682559613213151,
+    "all_logged_leaves_verified": true
+  },
+  "fixture_removed": true,
+  "status": "passed"
+}

@@ -1,0 +1,15 @@
+{
+  "started_at": 1788658447.0608149,
+  "target": "/tmp/omarchy-animation-visual/candidate-failure/unused-target",
+  "total_phases": 9,
+  "current_index": 6,
+  "current_phase": "Finalizing boot and user setup",
+  "phases": [
+    {
+      "name": "Finalizing boot and user setup",
+      "status": "failed",
+      "error": "Scripted visual-fixture failure"
+    }
+  ],
+  "phase_started_at": 1788658448.0699456
+}

@@ -1,0 +1,37 @@
+{
+  "schema_version": 1,
+  "workflow_run_id": 33989571580,
+  "workflow_job_id": 101369264452,
+  "repository_commit": "65d0548fdfcaca2577f68393391ab2f01f0d7a4f",
+  "artifact_id": 9976597278,
+  "artifact_zip_sha256": "1817feb4d0abdd9366fa967566f30c931e56de0d7d6493269c71f911b871e8c5",
+  "samples": {
+    "calibration": {
+      "status": "installed-and-booted",
+      "host_readiness_lower_s": 194.20628838700003,
+      "host_readiness_upper_s": 198.63061708600003,
+      "guest_installer_seconds": 137.20114374160767,
+      "packages": 941,
+      "standalone_reboot_passed": true,
+      "source_cache_resident_pages": [
+        0
+      ]
+    },
+    "control": {
+      "status": "installed-and-booted",
+      "host_readiness_lower_s": 186.64428095899984,
+      "host_readiness_upper_s": 189.07511974399995,
+      "guest_installer_seconds": 131.54208302497864,
+      "packages": 941,
+      "standalone_reboot_passed": true,
+      "source_cache_resident_pages": [
+        0,
+        0
+      ]
+    }
+  },
+  "image_build_status": "complete",
+  "image_build_guest_log_sha256": "69a6e989b2aa63b56c3db97a9cd1250d0cefd70b8e0980cded8e1abcc5fb4690",
+  "comparison_status": "incomplete-candidate-runner-exit-1",
+  "candidate_failure_evidence_limit": "The older repetition driver did not export unsealed failed-run files. Only native job progress and the series failure are retained; no exact candidate error or valid candidate timing is available."
+}

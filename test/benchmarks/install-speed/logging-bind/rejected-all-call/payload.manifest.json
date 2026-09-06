@@ -1,0 +1,211 @@
+{
+  "schema_version": 1,
+  "variant": "image-no-package-prefetch-fast-reboot-early-verify-direct-restore-overlap-firewall-logging",
+  "component": "private-logging-bind",
+  "base_variant": "image-no-package-prefetch-fast-reboot-early-verify-direct-restore-overlap-firewall",
+  "upstream_commit": "dbffaa6c65344d644627a023c28661e08382b8fa",
+  "source_phases_sha256": "f5235ae1ed7e6a783978d2f51e49fc3e0d44c687f218967a599a104101e0070c",
+  "phases_sha256": "6f8502bb71ca7d93e80e0a3acae5e07234bf450160af4727a7dce51d95f48c8b",
+  "base_preflight_sha256": "e58a6ed01ff672115ebf8a95be4cb40b622e17c1066393a4aa7954d8378a44eb",
+  "original_logger_sha256": "61a13abcc44fd5241e9882f1bcfed833e10e0ed19ad42c34a08efe1973b70d27",
+  "logger_sha256": "1d8151adb150bc1dfe930b30e7039978591add500a132b9951152d7a8a23d715",
+  "guard_sha256": "639365971a6080341de18705a5ca504322bb4574ed72e86605fccac0180eb466",
+  "source_phases_path": "usr/local/lib/omarchy-benchmark/firewall-overlap/phases_impl.py",
+  "dashboard_sha256": "33a77a5ed86df5d6d14b39a027237b888c65b4dbaa7855c10e4a78865f89111d",
+  "base_payload_manifest_sha256": "ae108fbb9f406a24d3cfb56a357319f9138e9aa9e47f13a28d38c5f040467442",
+  "preflight_sha256": "7d6f8fc57b6ba23c4a324e74da4ee9ea99b9260f23c9e6dfa73d45295c5ca339",
+  "supplemental_image_changed": false,
+  "target_package_files_changed": false,
+  "activation_order": [
+    "verify complete logging bind staging",
+    "inherited preflight exactly once",
+    "verify exact inherited live phases",
+    "install verified logging bind phases"
+  ],
+  "changes": [
+    "Bind the pinned optimized logger read-only inside each existing private setup namespace",
+    "Retain original package-owned logger bytes and unchanged localdb source guards"
+  ],
+  "files": [
+    {
+      "path": "usr/local/lib/omarchy-benchmark/activate-installer-overlay.sh",
+      "sha256": "388814f2aa33ee0202eb48a83a3df4eaf10c22d907cf6bba57b8c209e389126a",
+      "mode": "0o644",
+      "bytes": 2313
+    },
+    {
+      "path": "usr/local/lib/omarchy-benchmark/animation-overlap/LICENSE",
+      "sha256": "e2b1e3778a6ada6d6eee5f48c028f885e9797313f4c5705929bdc5b99db569d3",
+      "mode": "0o644",
+      "bytes": 1070
+    },
+    {
+      "path": "usr/local/lib/omarchy-benchmark/animation-overlap/base-preflight.sh",
+      "sha256": "fcf43c628a2aaa15b61d02a0bb8af02ce9eeea5f4c169f66bb05dc5475f2c8a2",
+      "mode": "0o755",
+      "bytes": 773
+    },
+    {
+      "path": "usr/local/lib/omarchy-benchmark/animation-overlap/omarchy-install-dashboard",
+      "sha256": "33a77a5ed86df5d6d14b39a027237b888c65b4dbaa7855c10e4a78865f89111d",
+      "mode": "0o755",
+      "bytes": 39548
+    },
+    {
+      "path": "usr/local/lib/omarchy-benchmark/animation-overlap/payload.sha256",
+      "sha256": "f1df97293e6efb06686490c8f681834d045fd78ada5e88984420a0c5ac85088b",
+      "mode": "0o644",
+      "bytes": 250
+    },
+    {
+      "path": "usr/local/lib/omarchy-benchmark/direct-restore/LICENSE",
+      "sha256": "e2b1e3778a6ada6d6eee5f48c028f885e9797313f4c5705929bdc5b99db569d3",
+      "mode": "0o644",
+      "bytes": 1070
+    },
+    {
+      "path": "usr/local/lib/omarchy-benchmark/direct-restore/fast-reboot-preflight.sh",
+      "sha256": "5a43425e190b15d4852313b5ef07cebae0c9e41dc76f3851311028409d2a9230",
+      "mode": "0o755",
+      "bytes": 902
+    },
+    {
+      "path": "usr/local/lib/omarchy-benchmark/direct-restore/payload.sha256",
+      "sha256": "f4df24b9a8ea5122b92cf815368d3c0c71cad6536266aaec218ec957e11c8501",
+      "mode": "0o644",
+      "bytes": 246
+    },
+    {
+      "path": "usr/local/lib/omarchy-benchmark/direct-restore/phases_impl.py",
+      "sha256": "8787646c45b164b4fde2abb894c87ece46e9c8f180ff96fede9ed23b2723a458",
+      "mode": "0o644",
+      "bytes": 119539
+    },
+    {
+      "path": "usr/local/lib/omarchy-benchmark/fast-reboot/LICENSE",
+      "sha256": "e2b1e3778a6ada6d6eee5f48c028f885e9797313f4c5705929bdc5b99db569d3",
+      "mode": "0o644",
+      "bytes": 1070
+    },
+    {
+      "path": "usr/local/lib/omarchy-benchmark/fast-reboot/image-candidate-preflight.sh",
+      "sha256": "ba833c405435621e4718edb4911e3d8ddd27c84bace0729cd97fe26456ae5010",
+      "mode": "0o755",
+      "bytes": 511
+    },
+    {
+      "path": "usr/local/lib/omarchy-benchmark/fast-reboot/omarchy-install-dashboard",
+      "sha256": "4871faded220498542e1d01a0cbae3f98c21ea5b4eea6bab94fa9e62b415ad89",
+      "mode": "0o755",
+      "bytes": 37767
+    },
+    {
+      "path": "usr/local/lib/omarchy-benchmark/fast-reboot/omarchy-release-install-target",
+      "sha256": "de6a8aafc0f587e868bd8db2d3fdee25da90f468a4919e3f89ba9aeb357818b6",
+      "mode": "0o755",
+      "bytes": 5273
+    },
+    {
+      "path": "usr/local/lib/omarchy-benchmark/fast-reboot/payload.sha256",
+      "sha256": "69ff549a4e6b4d0900c1670ca48ee6ea1663341e1aa70e5c3d607cdf5d5467f9",
+      "mode": "0o644",
+      "bytes": 358
+    },
+    {
+      "path": "usr/local/lib/omarchy-benchmark/firewall-overlap/LICENSE",
+      "sha256": "e2b1e3778a6ada6d6eee5f48c028f885e9797313f4c5705929bdc5b99db569d3",
+      "mode": "0o644",
+      "bytes": 1070
+    },
+    {
+      "path": "usr/local/lib/omarchy-benchmark/firewall-overlap/base-preflight.sh",
+      "sha256": "510a502d0f4388a43b137e2e22e1b65eaa10a271b299c8c31131365bbbd94b5a",
+      "mode": "0o755",
+      "bytes": 655
+    },
+    {
+      "path": "usr/local/lib/omarchy-benchmark/firewall-overlap/payload.sha256",
+      "sha256": "b5a9131aed5ae1a41e4488e6a606387d298f0721573fcd505dbaab81a3cc1731",
+      "mode": "0o644",
+      "bytes": 239
+    },
+    {
+      "path": "usr/local/lib/omarchy-benchmark/firewall-overlap/phases_impl.py",
+      "sha256": "f5235ae1ed7e6a783978d2f51e49fc3e0d44c687f218967a599a104101e0070c",
+      "mode": "0o644",
+      "bytes": 125812
+    },
+    {
+      "path": "usr/local/lib/omarchy-benchmark/localdb-overlap/LICENSE",
+      "sha256": "e2b1e3778a6ada6d6eee5f48c028f885e9797313f4c5705929bdc5b99db569d3",
+      "mode": "0o644",
+      "bytes": 1070
+    },
+    {
+      "path": "usr/local/lib/omarchy-benchmark/localdb-overlap/direct-restore-preflight.sh",
+      "sha256": "1d3e8c3b82507eaf4b3977e93d1adf6af54eacdf65449d3c94ac33d6dae9aee3",
+      "mode": "0o755",
+      "bytes": 842
+    },
+    {
+      "path": "usr/local/lib/omarchy-benchmark/localdb-overlap/payload.sha256",
+      "sha256": "34d1ae1033837076dc27364abfc99d302752ebf21e66298a30dd79047f531b47",
+      "mode": "0o644",
+      "bytes": 249
+    },
+    {
+      "path": "usr/local/lib/omarchy-benchmark/localdb-overlap/phases_impl.py",
+      "sha256": "6914997592990435c723688e594ed189192e961423324b505a66be0de1948128",
+      "mode": "0o644",
+      "bytes": 122721
+    },
+    {
+      "path": "usr/local/lib/omarchy-benchmark/logging-bind/LICENSE.omarchy",
+      "sha256": "717ba1949502290f8e47688ae2e323acd06c8ca47aec9f7596b15f678c1af4a2",
+      "mode": "0o644",
+      "bytes": 1063
+    },
+    {
+      "path": "usr/local/lib/omarchy-benchmark/logging-bind/LICENSE.omarchy-iso",
+      "sha256": "e2b1e3778a6ada6d6eee5f48c028f885e9797313f4c5705929bdc5b99db569d3",
+      "mode": "0o644",
+      "bytes": 1070
+    },
+    {
+      "path": "usr/local/lib/omarchy-benchmark/logging-bind/activation.json",
+      "sha256": "ffbb3c8f92a396374e9ce96164c31f9413650e2cb96f8a2846f9df1c8d14b63f",
+      "mode": "0o644",
+      "bytes": 782
+    },
+    {
+      "path": "usr/local/lib/omarchy-benchmark/logging-bind/base-preflight.sh",
+      "sha256": "e58a6ed01ff672115ebf8a95be4cb40b622e17c1066393a4aa7954d8378a44eb",
+      "mode": "0o755",
+      "bytes": 656
+    },
+    {
+      "path": "usr/local/lib/omarchy-benchmark/logging-bind/guard.py",
+      "sha256": "639365971a6080341de18705a5ca504322bb4574ed72e86605fccac0180eb466",
+      "mode": "0o644",
+      "bytes": 6702
+    },
+    {
+      "path": "usr/local/lib/omarchy-benchmark/logging-bind/logging.sh",
+      "sha256": "1d8151adb150bc1dfe930b30e7039978591add500a132b9951152d7a8a23d715",
+      "mode": "0o644",
+      "bytes": 2247
+    },
+    {
+      "path": "usr/local/lib/omarchy-benchmark/logging-bind/payload.sha256",
+      "sha256": "f8d50ad62498eef33e5c2486d16fc3fec58598dd2a4ce650b4d8350e1acb7a99",
+      "mode": "0o644",
+      "bytes": 567
+    },
+    {
+      "path": "usr/local/lib/omarchy-benchmark/logging-bind/phases_impl.py",
+      "sha256": "6f8502bb71ca7d93e80e0a3acae5e07234bf450160af4727a7dce51d95f48c8b",
+      "mode": "0o644",
+      "bytes": 126711
+    }
+  ]
+}

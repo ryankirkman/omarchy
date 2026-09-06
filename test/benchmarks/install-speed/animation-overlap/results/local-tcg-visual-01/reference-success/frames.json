@@ -1,0 +1,149 @@
+{
+  "purpose": "QMP console frames sampled by unchanged supervisor; not native timing",
+  "frames": [
+    {
+      "file": "frame-0000.png",
+      "observed_host_monotonic_s": 110770.595558045,
+      "supervisor_progress_host_wall_s": 160.51931552999304,
+      "sha256": "edf7bf16d325de11032b6b1538a73eafb0ea961ce843b0fee6311b8cbbac0603"
+    },
+    {
+      "file": "frame-0001.png",
+      "observed_host_monotonic_s": 110771.59768528,
+      "supervisor_progress_host_wall_s": 161.54706253300537,
+      "sha256": "14536d67e390d64ae464439b7ac14f33e3902d49793780846d129caa3587cf67"
+    },
+    {
+      "file": "frame-0002.png",
+      "observed_host_monotonic_s": 110772.600601474,
+      "supervisor_progress_host_wall_s": 162.57294812100008,
+      "sha256": "edf7bf16d325de11032b6b1538a73eafb0ea961ce843b0fee6311b8cbbac0603"
+    },
+    {
+      "file": "frame-0003.png",
+      "observed_host_monotonic_s": 110773.602594571,
+      "supervisor_progress_host_wall_s": 163.59335658699274,
+      "sha256": "2183f294ee25b5dd41b7ba16c86f50c08219069a721a9f60a56e9ea7bd561085"
+    },
+    {
+      "file": "frame-0004.png",
+      "observed_host_monotonic_s": 110774.604395375,
+      "supervisor_progress_host_wall_s": 164.61274486000184,
+      "sha256": "ac4d2aefa9528c00cb18bbb35d71ac12939f2a28871fcdab625a8f4441799fac"
+    },
+    {
+      "file": "frame-0005.png",
+      "observed_host_monotonic_s": 110775.606080019,
+      "supervisor_progress_host_wall_s": 165.63808879599674,
+      "sha256": "ce632bd03833a2d7857f20e4f2cf4c9821eb630352b501c1135fa2a5245c296a"
+    },
+    {
+      "file": "frame-0006.png",
+      "observed_host_monotonic_s": 110776.615659768,
+      "supervisor_progress_host_wall_s": 166.66148909600452,
+      "sha256": "ce632bd03833a2d7857f20e4f2cf4c9821eb630352b501c1135fa2a5245c296a"
+    },
+    {
+      "file": "frame-0007.png",
+      "observed_host_monotonic_s": 110777.82074165,
+      "supervisor_progress_host_wall_s": 167.6819014329958,
+      "sha256": "ce632bd03833a2d7857f20e4f2cf4c9821eb630352b501c1135fa2a5245c296a"
+    },
+    {
+      "file": "frame-0008.png",
+      "observed_host_monotonic_s": 110780.225093378,
+      "supervisor_progress_host_wall_s": 169.99301443700097,
+      "sha256": "ce632bd03833a2d7857f20e4f2cf4c9821eb630352b501c1135fa2a5245c296a"
+    },
+    {
+      "file": "frame-0009.png",
+      "observed_host_monotonic_s": 110781.026592409,
+      "supervisor_progress_host_wall_s": 171.01664211599564,
+      "sha256": "ce632bd03833a2d7857f20e4f2cf4c9821eb630352b501c1135fa2a5245c296a"
+    },
+    {
+      "file": "frame-0010.png",
+      "observed_host_monotonic_s": 110782.02849554,
+      "supervisor_progress_host_wall_s": 172.04103090999706,
+      "sha256": "cfa7aa7a7b48c1273866443ea80220f242ec22e4d625c50fd102635e6985bf77"
+    },
+    {
+      "file": "frame-0011.png",
+      "observed_host_monotonic_s": 110783.030272382,
+      "supervisor_progress_host_wall_s": 173.06383246699988,
+      "sha256": "cfa7aa7a7b48c1273866443ea80220f242ec22e4d625c50fd102635e6985bf77"
+    },
+    {
+      "file": "frame-0012.png",
+      "observed_host_monotonic_s": 110785.233439591,
+      "supervisor_progress_host_wall_s": 175.06364104000386,
+      "sha256": "cfa7aa7a7b48c1273866443ea80220f242ec22e4d625c50fd102635e6985bf77"
+    },
+    {
+      "file": "frame-0013.png",
+      "observed_host_monotonic_s": 110786.034863509,
+      "supervisor_progress_host_wall_s": 176.08286532100465,
+      "sha256": "cfa7aa7a7b48c1273866443ea80220f242ec22e4d625c50fd102635e6985bf77"
+    },
+    {
+      "file": "frame-0014.png",
+      "observed_host_monotonic_s": 110787.240673183,
+      "supervisor_progress_host_wall_s": 177.10383140400518,
+      "sha256": "cfa7aa7a7b48c1273866443ea80220f242ec22e4d625c50fd102635e6985bf77"
+    },
+    {
+      "file": "frame-0015.png",
+      "observed_host_monotonic_s": 110788.242455662,
+      "supervisor_progress_host_wall_s": 178.12318940200203,
+      "sha256": "681bfd489d594f962fc772c99ebf7680170e82531b556aadfc2520e8f539c576"
+    },
+    {
+      "file": "frame-0016.png",
+      "observed_host_monotonic_s": 110790.247905107,
+      "supervisor_progress_host_wall_s": 180.11205734699615,
+      "sha256": "681bfd489d594f962fc772c99ebf7680170e82531b556aadfc2520e8f539c576"
+    },
+    {
+      "file": "frame-0017.png",
+      "observed_host_monotonic_s": 110791.25064468,
+      "supervisor_progress_host_wall_s": 181.13200383499498,
+      "sha256": "681bfd489d594f962fc772c99ebf7680170e82531b556aadfc2520e8f539c576"
+    },
+    {
+      "file": "frame-0018.png",
+      "observed_host_monotonic_s": 110792.253023445,
+      "supervisor_progress_host_wall_s": 182.15084983500128,
+      "sha256": "681bfd489d594f962fc772c99ebf7680170e82531b556aadfc2520e8f539c576"
+    },
+    {
+      "file": "frame-0019.png",
+      "observed_host_monotonic_s": 110793.254770058,
+      "supervisor_progress_host_wall_s": 183.17031209499692,
+      "sha256": "1818d63038b31bce974e5b491ad6a32bf8186d8e80f4b93d9702733b5b265429"
+    },
+    {
+      "file": "frame-0020.png",
+      "observed_host_monotonic_s": 110795.257691707,
+      "supervisor_progress_host_wall_s": 185.0449522449926,
+      "sha256": "f761d1b1a119137fae1d6b2ffe62f3890f1f627d3296f949273170eade0b57f6"
+    },
+    {
+      "file": "frame-0021.png",
+      "observed_host_monotonic_s": 110796.059051208,
+      "supervisor_progress_host_wall_s": 186.0705689650058,
+      "sha256": "eaa8a970e7716e0d79be1ec15a8d68eb7334e8f2b0bdd4ff6980f414b77b60b9"
+    },
+    {
+      "file": "frame-0022.png",
+      "observed_host_monotonic_s": 110797.061170986,
+      "supervisor_progress_host_wall_s": 187.094862664002,
+      "sha256": "b080191ab038a47ea9f0920e21b80052f509d171e56d614371b758c77e93a133"
+    },
+    {
+      "file": "frame-0023.png",
+      "observed_host_monotonic_s": 110798.062799872,
+      "supervisor_progress_host_wall_s": 188.11493523900572,
+      "sha256": "1818d63038b31bce974e5b491ad6a32bf8186d8e80f4b93d9702733b5b265429"
+    }
+  ]
+}

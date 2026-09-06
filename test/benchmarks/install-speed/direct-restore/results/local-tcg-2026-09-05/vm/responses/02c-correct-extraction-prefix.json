@@ -1,0 +1,8 @@
+{
+  "ok": true,
+  "result": {
+    "returncode": 0,
+    "stdout": "/tmp/omarchy-direct-restore/qemu/bin/qemu-img: OK\n",
+    "stderr": ""
+  }
+}

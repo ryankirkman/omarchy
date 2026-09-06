@@ -1,0 +1,32 @@
+[
+  {
+    "case": "valid checksum",
+    "returncode": 0,
+    "stdout": "omarchy-root.btrfs.qcow2: OK\n",
+    "stderr": ""
+  },
+  {
+    "case": "corrupt image",
+    "returncode": 1,
+    "stdout": "omarchy-root.btrfs.qcow2: FAILED\n",
+    "stderr": "sha256sum: WARNING: 1 computed checksum did NOT match\n"
+  },
+  {
+    "case": "malformed manifest",
+    "returncode": 1,
+    "stdout": "",
+    "stderr": "sha256sum: omarchy-root.btrfs.qcow2.sha256: no properly formatted checksum lines found\n"
+  },
+  {
+    "case": "valid record plus malformed record",
+    "returncode": 1,
+    "stdout": "omarchy-root.btrfs.qcow2: OK\n",
+    "stderr": "sha256sum: WARNING: 1 line is improperly formatted\n"
+  },
+  {
+    "case": "missing image",
+    "returncode": 1,
+    "stdout": "omarchy-root.btrfs.qcow2: FAILED open or read\n",
+    "stderr": "sha256sum: omarchy-root.btrfs.qcow2: No such file or directory\nsha256sum: WARNING: 1 listed file could not be read\n"
+  }
+]

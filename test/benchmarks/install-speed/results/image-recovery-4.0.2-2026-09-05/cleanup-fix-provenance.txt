@@ -1,0 +1,1 @@
+bd08eb3: preserve owned log paths and restore packaged resolver default; archive extraction repaired the four previously deleted paths, then tmpfiles policy was reapplied.

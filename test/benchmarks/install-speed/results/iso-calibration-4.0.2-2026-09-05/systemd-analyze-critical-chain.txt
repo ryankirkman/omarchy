@@ -1,0 +1,19 @@
+The time when unit became active or started is printed after the "@" character.
+The time the unit took to start is printed after the "+" character.
+
+graphical.target @36.338s
+└─power-profiles-daemon.service @34.673s +1.661s
+  └─multi-user.target @34.632s
+    └─sshd.service @34.337s +287ms
+      └─network.target @32.433s
+        └─NetworkManager.service @29.370s +3.047s
+          └─basic.target @29.349s
+            └─dbus-broker.service @28.969s +370ms
+              └─dbus.socket @28.828s +718us
+                └─sysinit.target @28.794s
+                  └─systemd-update-done.service @28.568s +220ms
+                    └─ldconfig.service @16.448s +12.034s
+                      └─systemd-tmpfiles-setup.service @14.567s +1.822s
+                        └─systemd-journal-flush.service @13.914s +629ms
+                          └─var-log.mount @13.192s +517ms
+                            └─dev-vda2.device @5.534s +7.603s

@@ -1,0 +1,39 @@
+{
+  "schema_version": 1,
+  "workflow_run_id": 33994167582,
+  "workflow_job_id": 101381570081,
+  "repository": "ryankirkman/omarchy",
+  "commit": "c32d0873de0f2bc37ae3545f14f8e79846466db9",
+  "artifact_id": 9978073562,
+  "artifact_zip_sha256": "34c248943ff8711bbbfe0462fd92874f99e4b16688d74f50f6f0c2bff1ab8bac",
+  "artifact_original_file_count": 130,
+  "status": "first-candidate-standalone-reboot-failed",
+  "full_comparison_valid": false,
+  "twofold_verified": false,
+  "image_built": true,
+  "image_build_host_seconds": 661.0632440090001,
+  "boot_method": "firmware",
+  "source_cache": "cold",
+  "validated_control": {
+    "path": "no-prefetch-fast-reboot-repetitions/runs/01-control-pair01",
+    "host_readiness_lower_seconds": 217.179975325,
+    "host_readiness_upper_seconds": 221.70824409299985,
+    "guest_installer_seconds": 167.53630185127258,
+    "packages": 941,
+    "explicit_packages": 158,
+    "complete_qk_rows": 941,
+    "standalone_reboot_passed": true,
+    "original_seal_hashes_rechecked": 30
+  },
+  "failed_candidate": {
+    "path": "no-prefetch-fast-reboot-repetitions/failed-runs/02-candidate-pair01",
+    "status": "standalone-reboot-failed",
+    "first_installed_ssh_host_seconds": 112.784049439,
+    "guest_installer_seconds": 64.358335408,
+    "package_versions_reasons_and_counts_match_control": true,
+    "package_files_exit_status": 0,
+    "standalone_reboot_passed": false,
+    "accepted_measurement": false,
+    "failure": "Standalone reboot did not become ready within 600s"
+  }
+}

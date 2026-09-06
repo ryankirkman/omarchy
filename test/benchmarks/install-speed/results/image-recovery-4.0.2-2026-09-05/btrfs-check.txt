@@ -1,0 +1,19 @@
+[1/8] checking log skipped (none written)
+[2/8] checking root items
+[3/8] checking extents
+[4/8] checking free space tree
+[5/8] checking fs roots
+[6/8] checking csums against data
+[7/8] checking root refs
+[8/8] checking quota groups skipped (not enabled on this FS)
+Opening filesystem to check...
+Checking filesystem on /dev/disk/by-id/virtio-OMARCHY_IMAGE_BUILD
+UUID: 51a18a79-7bde-4aeb-8895-181970407957
+found 3986796544 bytes used, no error found
+total csum bytes: 3647644
+total tree bytes: 251609088
+total fs tree bytes: 235438080
+total extent tree bytes: 11730944
+btree space waste bytes: 34903456
+file data blocks allocated: 3735187456
+ referenced 8544772096
