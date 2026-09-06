@@ -1,0 +1,16 @@
+{
+  "status": "passed",
+  "measurement_valid": false,
+  "purpose": "Real early component validation reused once by later payload preparation",
+  "upstream_commit": "dbffaa6c65344d644627a023c28661e08382b8fa",
+  "validated_source_files": 21,
+  "contract_logs": {
+    "localdb-overlap-contract.log": "d0cb47a0973d5d342653f6a1f1c1a8a553c419f72ac39a490c2af894f9fa3d07",
+    "animation-overlap-contract.log": "6c0df2640f64fc3022ffa86c63af932303bcd6359fd7c24c863df3bea34fe46f"
+  },
+  "final_payload_manifest_sha256": "0c7563d93d0ea95c2104bf7fbec2b50acb64dce304a32f1f55b54a6123729959",
+  "final_payload_files": 18,
+  "identical_to_previous_runtime_payload": true,
+  "previous_preparation": "local-overlap-preparation-2026-09-06",
+  "native_driver_sha256": "d0be21d29dbcd2211aa02c290fb4b98d938b00f5f7275da566bb00a2db8fd055"
+}

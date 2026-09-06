@@ -1,0 +1,1310 @@
+{
+  "schema_version": 1,
+  "purpose": "Read-only parser check against preexisting local TCG installer logs; no new install, native result or speed claim",
+  "parser_source": "test/benchmarks/iso-vm.py",
+  "parser_source_sha256": "0b907bbcf536ec78e8b321b28819a123a1e800670cea6dac0a718ea2cc71057e",
+  "source_logs_not_modified": true,
+  "raw_logs_not_retained": true,
+  "observations": [
+    {
+      "source_path": "/tmp/omarchy-bench/candidate-firmware-smoke-02/install.log",
+      "source_sha256": "ce7f72bb8336c796d317e6b9feb0536bcc42c6d367f5a7259aa223f43f570456",
+      "source_bytes": 22920,
+      "derived": {
+        "schema_version": 1,
+        "advisory_only": true,
+        "source": "/var/log/omarchy-install.log",
+        "source_read_exit_status": 0,
+        "clock": "guest-wall-clock",
+        "resolution_seconds": 1,
+        "timezone": "unspecified-guest-local-time",
+        "used_for_timing_acceptance": false,
+        "event_limit": 512,
+        "truncated": false,
+        "status": "available",
+        "events": [
+          {
+            "timestamp_text": "2026-09-05 21:03:16",
+            "event": "Starting",
+            "path": "/usr/share/omarchy/install/config/theme-system.sh"
+          },
+          {
+            "timestamp_text": "2026-09-05 21:03:19",
+            "event": "Completed",
+            "path": "/usr/share/omarchy/install/config/theme-system.sh"
+          },
+          {
+            "timestamp_text": "2026-09-05 21:03:19",
+            "event": "Starting",
+            "path": "/usr/share/omarchy/install/config/browser-policy.sh"
+          },
+          {
+            "timestamp_text": "2026-09-05 21:03:20",
+            "event": "Completed",
+            "path": "/usr/share/omarchy/install/config/browser-policy.sh"
+          },
+          {
+            "timestamp_text": "2026-09-05 21:03:20",
+            "event": "Starting",
+            "path": "/usr/share/omarchy/install/config/increase-lockout-limit.sh"
+          },
+          {
+            "timestamp_text": "2026-09-05 21:03:20",
+            "event": "Completed",
+            "path": "/usr/share/omarchy/install/config/increase-lockout-limit.sh"
+          },
+          {
+            "timestamp_text": "2026-09-05 21:03:21",
+            "event": "Starting",
+            "path": "/usr/share/omarchy/install/config/lockscreen-pam.sh"
+          },
+          {
+            "timestamp_text": "2026-09-05 21:03:23",
+            "event": "Completed",
+            "path": "/usr/share/omarchy/install/config/lockscreen-pam.sh"
+          },
+          {
+            "timestamp_text": "2026-09-05 21:03:23",
+            "event": "Starting",
+            "path": "/usr/share/omarchy/install/config/fix-powerprofilesctl-shebang.sh"
+          },
+          {
+            "timestamp_text": "2026-09-05 21:03:24",
+            "event": "Completed",
+            "path": "/usr/share/omarchy/install/config/fix-powerprofilesctl-shebang.sh"
+          },
+          {
+            "timestamp_text": "2026-09-05 21:03:24",
+            "event": "Starting",
+            "path": "/usr/share/omarchy/install/config/ssh-command-path.sh"
+          },
+          {
+            "timestamp_text": "2026-09-05 21:03:24",
+            "event": "Completed",
+            "path": "/usr/share/omarchy/install/config/ssh-command-path.sh"
+          },
+          {
+            "timestamp_text": "2026-09-05 21:03:24",
+            "event": "Starting",
+            "path": "/usr/share/omarchy/install/config/ssh-keepalive.sh"
+          },
+          {
+            "timestamp_text": "2026-09-05 21:03:25",
+            "event": "Completed",
+            "path": "/usr/share/omarchy/install/config/ssh-keepalive.sh"
+          },
+          {
+            "timestamp_text": "2026-09-05 21:03:25",
+            "event": "Starting",
+            "path": "/usr/share/omarchy/install/config/docker.sh"
+          },
+          {
+            "timestamp_text": "2026-09-05 21:03:25",
+            "event": "Completed",
+            "path": "/usr/share/omarchy/install/config/docker.sh"
+          },
+          {
+            "timestamp_text": "2026-09-05 21:03:25",
+            "event": "Starting",
+            "path": "/usr/share/omarchy/install/config/snapper.sh"
+          },
+          {
+            "timestamp_text": "2026-09-05 21:03:27",
+            "event": "Completed",
+            "path": "/usr/share/omarchy/install/config/snapper.sh"
+          },
+          {
+            "timestamp_text": "2026-09-05 21:03:27",
+            "event": "Starting",
+            "path": "/usr/share/omarchy/install/config/locate.sh"
+          },
+          {
+            "timestamp_text": "2026-09-05 21:03:27",
+            "event": "Completed",
+            "path": "/usr/share/omarchy/install/config/locate.sh"
+          },
+          {
+            "timestamp_text": "2026-09-05 21:03:27",
+            "event": "Starting",
+            "path": "/usr/share/omarchy/install/config/enable-services.sh"
+          },
+          {
+            "timestamp_text": "2026-09-05 21:03:28",
+            "event": "Completed",
+            "path": "/usr/share/omarchy/install/config/enable-services.sh"
+          },
+          {
+            "timestamp_text": "2026-09-05 21:03:28",
+            "event": "Starting",
+            "path": "/usr/share/omarchy/install/config/firewall.sh"
+          },
+          {
+            "timestamp_text": "2026-09-05 21:03:49",
+            "event": "Completed",
+            "path": "/usr/share/omarchy/install/config/firewall.sh"
+          },
+          {
+            "timestamp_text": "2026-09-05 21:03:49",
+            "event": "Starting",
+            "path": "/usr/share/omarchy/install/hardware/asus-rog.sh"
+          },
+          {
+            "timestamp_text": "2026-09-05 21:03:49",
+            "event": "Completed",
+            "path": "/usr/share/omarchy/install/hardware/asus-rog.sh"
+          },
+          {
+            "timestamp_text": "2026-09-05 21:03:49",
+            "event": "Starting",
+            "path": "/usr/share/omarchy/install/hardware/framework16.sh"
+          },
+          {
+            "timestamp_text": "2026-09-05 21:03:50",
+            "event": "Completed",
+            "path": "/usr/share/omarchy/install/hardware/framework16.sh"
+          },
+          {
+            "timestamp_text": "2026-09-05 21:03:50",
+            "event": "Starting",
+            "path": "/usr/share/omarchy/install/hardware/dell-xps-touchpad-haptics.sh"
+          },
+          {
+            "timestamp_text": "2026-09-05 21:03:51",
+            "event": "Completed",
+            "path": "/usr/share/omarchy/install/hardware/dell-xps-touchpad-haptics.sh"
+          },
+          {
+            "timestamp_text": "2026-09-05 21:03:51",
+            "event": "Starting",
+            "path": "/usr/share/omarchy/install/hardware/surface.sh"
+          },
+          {
+            "timestamp_text": "2026-09-05 21:03:51",
+            "event": "Completed",
+            "path": "/usr/share/omarchy/install/hardware/surface.sh"
+          },
+          {
+            "timestamp_text": "2026-09-05 21:03:51",
+            "event": "Starting",
+            "path": "/usr/share/omarchy/install/hardware/network.sh"
+          },
+          {
+            "timestamp_text": "2026-09-05 21:03:52",
+            "event": "Completed",
+            "path": "/usr/share/omarchy/install/hardware/network.sh"
+          },
+          {
+            "timestamp_text": "2026-09-05 21:03:52",
+            "event": "Starting",
+            "path": "/usr/share/omarchy/install/hardware/set-wireless-regdom.sh"
+          },
+          {
+            "timestamp_text": "2026-09-05 21:03:53",
+            "event": "Completed",
+            "path": "/usr/share/omarchy/install/hardware/set-wireless-regdom.sh"
+          },
+          {
+            "timestamp_text": "2026-09-05 21:03:53",
+            "event": "Starting",
+            "path": "/usr/share/omarchy/install/hardware/fix-fkeys.sh"
+          },
+          {
+            "timestamp_text": "2026-09-05 21:03:54",
+            "event": "Completed",
+            "path": "/usr/share/omarchy/install/hardware/fix-fkeys.sh"
+          },
+          {
+            "timestamp_text": "2026-09-05 21:03:54",
+            "event": "Starting",
+            "path": "/usr/share/omarchy/install/hardware/fix-synaptic-touchpad.sh"
+          },
+          {
+            "timestamp_text": "2026-09-05 21:03:54",
+            "event": "Completed",
+            "path": "/usr/share/omarchy/install/hardware/fix-synaptic-touchpad.sh"
+          },
+          {
+            "timestamp_text": "2026-09-05 21:03:54",
+            "event": "Starting",
+            "path": "/usr/share/omarchy/install/hardware/bluetooth.sh"
+          },
+          {
+            "timestamp_text": "2026-09-05 21:03:55",
+            "event": "Completed",
+            "path": "/usr/share/omarchy/install/hardware/bluetooth.sh"
+          },
+          {
+            "timestamp_text": "2026-09-05 21:03:55",
+            "event": "Starting",
+            "path": "/usr/share/omarchy/install/hardware/nvidia.sh"
+          },
+          {
+            "timestamp_text": "2026-09-05 21:03:55",
+            "event": "Completed",
+            "path": "/usr/share/omarchy/install/hardware/nvidia.sh"
+          },
+          {
+            "timestamp_text": "2026-09-05 21:03:55",
+            "event": "Starting",
+            "path": "/usr/share/omarchy/install/hardware/vulkan.sh"
+          },
+          {
+            "timestamp_text": "2026-09-05 21:03:56",
+            "event": "Completed",
+            "path": "/usr/share/omarchy/install/hardware/vulkan.sh"
+          },
+          {
+            "timestamp_text": "2026-09-05 21:03:56",
+            "event": "Starting",
+            "path": "/usr/share/omarchy/install/hardware/intel/video-acceleration.sh"
+          },
+          {
+            "timestamp_text": "2026-09-05 21:03:57",
+            "event": "Completed",
+            "path": "/usr/share/omarchy/install/hardware/intel/video-acceleration.sh"
+          },
+          {
+            "timestamp_text": "2026-09-05 21:03:57",
+            "event": "Starting",
+            "path": "/usr/share/omarchy/install/hardware/intel/lpmd.sh"
+          },
+          {
+            "timestamp_text": "2026-09-05 21:03:57",
+            "event": "Completed",
+            "path": "/usr/share/omarchy/install/hardware/intel/lpmd.sh"
+          },
+          {
+            "timestamp_text": "2026-09-05 21:03:57",
+            "event": "Starting",
+            "path": "/usr/share/omarchy/install/hardware/intel/thermald.sh"
+          },
+          {
+            "timestamp_text": "2026-09-05 21:03:57",
+            "event": "Completed",
+            "path": "/usr/share/omarchy/install/hardware/intel/thermald.sh"
+          },
+          {
+            "timestamp_text": "2026-09-05 21:03:57",
+            "event": "Starting",
+            "path": "/usr/share/omarchy/install/hardware/intel/ptl-kernel.sh"
+          },
+          {
+            "timestamp_text": "2026-09-05 21:03:58",
+            "event": "Completed",
+            "path": "/usr/share/omarchy/install/hardware/intel/ptl-kernel.sh"
+          },
+          {
+            "timestamp_text": "2026-09-05 21:03:58",
+            "event": "Starting",
+            "path": "/usr/share/omarchy/install/hardware/intel/ipu7-camera.sh"
+          },
+          {
+            "timestamp_text": "2026-09-05 21:03:58",
+            "event": "Completed",
+            "path": "/usr/share/omarchy/install/hardware/intel/ipu7-camera.sh"
+          },
+          {
+            "timestamp_text": "2026-09-05 21:03:58",
+            "event": "Starting",
+            "path": "/usr/share/omarchy/install/hardware/intel/fred.sh"
+          },
+          {
+            "timestamp_text": "2026-09-05 21:03:58",
+            "event": "Completed",
+            "path": "/usr/share/omarchy/install/hardware/intel/fred.sh"
+          },
+          {
+            "timestamp_text": "2026-09-05 21:03:59",
+            "event": "Starting",
+            "path": "/usr/share/omarchy/install/hardware/intel/fix-wifi7-eht.sh"
+          },
+          {
+            "timestamp_text": "2026-09-05 21:03:59",
+            "event": "Completed",
+            "path": "/usr/share/omarchy/install/hardware/intel/fix-wifi7-eht.sh"
+          },
+          {
+            "timestamp_text": "2026-09-05 21:03:59",
+            "event": "Starting",
+            "path": "/usr/share/omarchy/install/hardware/intel/sof-firmware.sh"
+          },
+          {
+            "timestamp_text": "2026-09-05 21:03:59",
+            "event": "Completed",
+            "path": "/usr/share/omarchy/install/hardware/intel/sof-firmware.sh"
+          },
+          {
+            "timestamp_text": "2026-09-05 21:03:59",
+            "event": "Starting",
+            "path": "/usr/share/omarchy/install/hardware/asus/fix-asus-ptl-display-backlight.sh"
+          },
+          {
+            "timestamp_text": "2026-09-05 21:04:00",
+            "event": "Completed",
+            "path": "/usr/share/omarchy/install/hardware/asus/fix-asus-ptl-display-backlight.sh"
+          },
+          {
+            "timestamp_text": "2026-09-05 21:04:00",
+            "event": "Starting",
+            "path": "/usr/share/omarchy/install/hardware/asus/fix-asus-ptl-b9406-display.sh"
+          },
+          {
+            "timestamp_text": "2026-09-05 21:04:01",
+            "event": "Completed",
+            "path": "/usr/share/omarchy/install/hardware/asus/fix-asus-ptl-b9406-display.sh"
+          },
+          {
+            "timestamp_text": "2026-09-05 21:04:01",
+            "event": "Starting",
+            "path": "/usr/share/omarchy/install/hardware/asus/fix-asus-ptl-b9406-touchpad.sh"
+          },
+          {
+            "timestamp_text": "2026-09-05 21:04:01",
+            "event": "Completed",
+            "path": "/usr/share/omarchy/install/hardware/asus/fix-asus-ptl-b9406-touchpad.sh"
+          },
+          {
+            "timestamp_text": "2026-09-05 21:04:01",
+            "event": "Starting",
+            "path": "/usr/share/omarchy/install/hardware/asus/fix-z13-touchpad.sh"
+          },
+          {
+            "timestamp_text": "2026-09-05 21:04:01",
+            "event": "Completed",
+            "path": "/usr/share/omarchy/install/hardware/asus/fix-z13-touchpad.sh"
+          },
+          {
+            "timestamp_text": "2026-09-05 21:04:01",
+            "event": "Starting",
+            "path": "/usr/share/omarchy/install/hardware/framework/qmk-hid.sh"
+          },
+          {
+            "timestamp_text": "2026-09-05 21:04:02",
+            "event": "Completed",
+            "path": "/usr/share/omarchy/install/hardware/framework/qmk-hid.sh"
+          },
+          {
+            "timestamp_text": "2026-09-05 21:04:02",
+            "event": "Starting",
+            "path": "/usr/share/omarchy/install/hardware/apple/fix-spi-keyboard.sh"
+          },
+          {
+            "timestamp_text": "2026-09-05 21:04:02",
+            "event": "Completed",
+            "path": "/usr/share/omarchy/install/hardware/apple/fix-spi-keyboard.sh"
+          },
+          {
+            "timestamp_text": "2026-09-05 21:04:02",
+            "event": "Starting",
+            "path": "/usr/share/omarchy/install/hardware/apple/fix-suspend-nvme.sh"
+          },
+          {
+            "timestamp_text": "2026-09-05 21:04:02",
+            "event": "Completed",
+            "path": "/usr/share/omarchy/install/hardware/apple/fix-suspend-nvme.sh"
+          },
+          {
+            "timestamp_text": "2026-09-05 21:04:02",
+            "event": "Starting",
+            "path": "/usr/share/omarchy/install/hardware/apple/fix-t2.sh"
+          },
+          {
+            "timestamp_text": "2026-09-05 21:04:03",
+            "event": "Completed",
+            "path": "/usr/share/omarchy/install/hardware/apple/fix-t2.sh"
+          },
+          {
+            "timestamp_text": "2026-09-05 21:04:03",
+            "event": "Starting",
+            "path": "/usr/share/omarchy/install/hardware/apple/fix-brcmfmac-supplicant.sh"
+          },
+          {
+            "timestamp_text": "2026-09-05 21:04:03",
+            "event": "Completed",
+            "path": "/usr/share/omarchy/install/hardware/apple/fix-brcmfmac-supplicant.sh"
+          },
+          {
+            "timestamp_text": "2026-09-05 21:04:03",
+            "event": "Starting",
+            "path": "/usr/share/omarchy/install/hardware/lenovo/fix-yoga-pro7-bass-speakers.sh"
+          },
+          {
+            "timestamp_text": "2026-09-05 21:04:03",
+            "event": "Completed",
+            "path": "/usr/share/omarchy/install/hardware/lenovo/fix-yoga-pro7-bass-speakers.sh"
+          },
+          {
+            "timestamp_text": "2026-09-05 21:04:03",
+            "event": "Starting",
+            "path": "/usr/share/omarchy/install/hardware/fix-bcm43xx.sh"
+          },
+          {
+            "timestamp_text": "2026-09-05 21:04:04",
+            "event": "Completed",
+            "path": "/usr/share/omarchy/install/hardware/fix-bcm43xx.sh"
+          },
+          {
+            "timestamp_text": "2026-09-05 21:04:04",
+            "event": "Starting",
+            "path": "/usr/share/omarchy/install/hardware/fix-surface-keyboard.sh"
+          },
+          {
+            "timestamp_text": "2026-09-05 21:04:04",
+            "event": "Completed",
+            "path": "/usr/share/omarchy/install/hardware/fix-surface-keyboard.sh"
+          },
+          {
+            "timestamp_text": "2026-09-05 21:04:04",
+            "event": "Starting",
+            "path": "/usr/share/omarchy/install/hardware/fix-yt6801-ethernet-adapter.sh"
+          },
+          {
+            "timestamp_text": "2026-09-05 21:04:04",
+            "event": "Completed",
+            "path": "/usr/share/omarchy/install/hardware/fix-yt6801-ethernet-adapter.sh"
+          },
+          {
+            "timestamp_text": "2026-09-05 21:04:05",
+            "event": "Starting",
+            "path": "/usr/share/omarchy/install/hardware/fix-tuxedo-backlight.sh"
+          },
+          {
+            "timestamp_text": "2026-09-05 21:04:05",
+            "event": "Completed",
+            "path": "/usr/share/omarchy/install/hardware/fix-tuxedo-backlight.sh"
+          },
+          {
+            "timestamp_text": "2026-09-05 21:04:05",
+            "event": "Starting",
+            "path": "/usr/share/omarchy/install/hardware/speaker-tuning.sh"
+          },
+          {
+            "timestamp_text": "2026-09-05 21:04:05",
+            "event": "Completed",
+            "path": "/usr/share/omarchy/install/hardware/speaker-tuning.sh"
+          },
+          {
+            "timestamp_text": "2026-09-05 21:04:05",
+            "event": "Starting",
+            "path": "/usr/share/omarchy/install/hardware/pacman.sh"
+          },
+          {
+            "timestamp_text": "2026-09-05 21:04:05",
+            "event": "Completed",
+            "path": "/usr/share/omarchy/install/hardware/pacman.sh"
+          },
+          {
+            "timestamp_text": "2026-09-05 21:04:06",
+            "event": "Starting",
+            "path": "/usr/share/omarchy/install/login/sddm.sh"
+          },
+          {
+            "timestamp_text": "2026-09-05 21:04:06",
+            "event": "Completed",
+            "path": "/usr/share/omarchy/install/login/sddm.sh"
+          },
+          {
+            "timestamp_text": "2026-09-05 21:04:06",
+            "event": "Starting",
+            "path": "/usr/share/omarchy/install/post-install/pacman.sh"
+          },
+          {
+            "timestamp_text": "2026-09-05 21:04:07",
+            "event": "Completed",
+            "path": "/usr/share/omarchy/install/post-install/pacman.sh"
+          },
+          {
+            "timestamp_text": "2026-09-05 21:04:07",
+            "event": "Starting",
+            "path": "/usr/share/omarchy/install/post-install/udev.sh"
+          },
+          {
+            "timestamp_text": "2026-09-05 21:04:07",
+            "event": "Completed",
+            "path": "/usr/share/omarchy/install/post-install/udev.sh"
+          },
+          {
+            "timestamp_text": "2026-09-05 21:04:07",
+            "event": "Starting",
+            "path": "/usr/share/omarchy/install/post-install/localdb.sh"
+          },
+          {
+            "timestamp_text": "2026-09-05 21:04:19",
+            "event": "Completed",
+            "path": "/usr/share/omarchy/install/post-install/localdb.sh"
+          },
+          {
+            "timestamp_text": "2026-09-05 21:04:24",
+            "event": "Starting",
+            "path": "/usr/share/omarchy/install/user/theme.sh"
+          },
+          {
+            "timestamp_text": "2026-09-05 21:04:38",
+            "event": "Completed",
+            "path": "/usr/share/omarchy/install/user/theme.sh"
+          },
+          {
+            "timestamp_text": "2026-09-05 21:04:38",
+            "event": "Starting",
+            "path": "/usr/share/omarchy/install/user/chromium.sh"
+          },
+          {
+            "timestamp_text": "2026-09-05 21:04:39",
+            "event": "Completed",
+            "path": "/usr/share/omarchy/install/user/chromium.sh"
+          },
+          {
+            "timestamp_text": "2026-09-05 21:04:39",
+            "event": "Starting",
+            "path": "/usr/share/omarchy/install/user/git.sh"
+          },
+          {
+            "timestamp_text": "2026-09-05 21:04:40",
+            "event": "Completed",
+            "path": "/usr/share/omarchy/install/user/git.sh"
+          },
+          {
+            "timestamp_text": "2026-09-05 21:04:40",
+            "event": "Starting",
+            "path": "/usr/share/omarchy/install/user/xcompose.sh"
+          },
+          {
+            "timestamp_text": "2026-09-05 21:04:40",
+            "event": "Completed",
+            "path": "/usr/share/omarchy/install/user/xcompose.sh"
+          },
+          {
+            "timestamp_text": "2026-09-05 21:04:40",
+            "event": "Starting",
+            "path": "/usr/share/omarchy/install/user/mise-work.sh"
+          },
+          {
+            "timestamp_text": "2026-09-05 21:04:59",
+            "event": "Completed",
+            "path": "/usr/share/omarchy/install/user/mise-work.sh"
+          },
+          {
+            "timestamp_text": "2026-09-05 21:04:59",
+            "event": "Starting",
+            "path": "/usr/share/omarchy/install/user/hardware/asus/fix-audio-mixer.sh"
+          },
+          {
+            "timestamp_text": "2026-09-05 21:04:59",
+            "event": "Completed",
+            "path": "/usr/share/omarchy/install/user/hardware/asus/fix-audio-mixer.sh"
+          },
+          {
+            "timestamp_text": "2026-09-05 21:04:59",
+            "event": "Starting",
+            "path": "/usr/share/omarchy/install/user/hardware/asus/fix-mic.sh"
+          },
+          {
+            "timestamp_text": "2026-09-05 21:05:00",
+            "event": "Completed",
+            "path": "/usr/share/omarchy/install/user/hardware/asus/fix-mic.sh"
+          },
+          {
+            "timestamp_text": "2026-09-05 21:05:00",
+            "event": "Starting",
+            "path": "/usr/share/omarchy/install/user/hardware/framework/fix-f13-amd-audio-input.sh"
+          },
+          {
+            "timestamp_text": "2026-09-05 21:05:00",
+            "event": "Completed",
+            "path": "/usr/share/omarchy/install/user/hardware/framework/fix-f13-amd-audio-input.sh"
+          },
+          {
+            "timestamp_text": "2026-09-05 21:05:00",
+            "event": "Starting",
+            "path": "/usr/share/omarchy/install/user/hardware/dell/xps13-text-scaling.sh"
+          },
+          {
+            "timestamp_text": "2026-09-05 21:05:01",
+            "event": "Completed",
+            "path": "/usr/share/omarchy/install/user/hardware/dell/xps13-text-scaling.sh"
+          },
+          {
+            "timestamp_text": "2026-09-05 21:05:01",
+            "event": "Starting",
+            "path": "/usr/share/omarchy/install/user/hardware/fix-nouveau-cursor.sh"
+          },
+          {
+            "timestamp_text": "2026-09-05 21:05:01",
+            "event": "Completed",
+            "path": "/usr/share/omarchy/install/user/hardware/fix-nouveau-cursor.sh"
+          },
+          {
+            "timestamp_text": "2026-09-05 21:05:02",
+            "event": "Starting",
+            "path": "/usr/share/omarchy/install/user/default-keyring.sh"
+          },
+          {
+            "timestamp_text": "2026-09-05 21:05:02",
+            "event": "Completed",
+            "path": "/usr/share/omarchy/install/user/default-keyring.sh"
+          },
+          {
+            "timestamp_text": "2026-09-05 21:05:02",
+            "event": "Starting",
+            "path": "/usr/share/omarchy/install/user/mise.sh"
+          },
+          {
+            "timestamp_text": "2026-09-05 21:05:07",
+            "event": "Completed",
+            "path": "/usr/share/omarchy/install/user/mise.sh"
+          }
+        ]
+      }
+    },
+    {
+      "source_path": "/tmp/omarchy-bench/baseline-03/install.log",
+      "source_sha256": "18c665e31e7466d3b43d88ac4c0a7995c447f5356bf634fe6c330575e979f591",
+      "source_bytes": 136403,
+      "derived": {
+        "schema_version": 1,
+        "advisory_only": true,
+        "source": "/var/log/omarchy-install.log",
+        "source_read_exit_status": 0,
+        "clock": "guest-wall-clock",
+        "resolution_seconds": 1,
+        "timezone": "unspecified-guest-local-time",
+        "used_for_timing_acceptance": false,
+        "event_limit": 512,
+        "truncated": false,
+        "status": "available",
+        "events": [
+          {
+            "timestamp_text": "2026-09-05 18:09:07",
+            "event": "Starting",
+            "path": "/usr/share/omarchy/install/config/theme-system.sh"
+          },
+          {
+            "timestamp_text": "2026-09-05 18:09:08",
+            "event": "Completed",
+            "path": "/usr/share/omarchy/install/config/theme-system.sh"
+          },
+          {
+            "timestamp_text": "2026-09-05 18:09:08",
+            "event": "Starting",
+            "path": "/usr/share/omarchy/install/config/browser-policy.sh"
+          },
+          {
+            "timestamp_text": "2026-09-05 18:09:09",
+            "event": "Completed",
+            "path": "/usr/share/omarchy/install/config/browser-policy.sh"
+          },
+          {
+            "timestamp_text": "2026-09-05 18:09:09",
+            "event": "Starting",
+            "path": "/usr/share/omarchy/install/config/increase-lockout-limit.sh"
+          },
+          {
+            "timestamp_text": "2026-09-05 18:09:09",
+            "event": "Completed",
+            "path": "/usr/share/omarchy/install/config/increase-lockout-limit.sh"
+          },
+          {
+            "timestamp_text": "2026-09-05 18:09:09",
+            "event": "Starting",
+            "path": "/usr/share/omarchy/install/config/lockscreen-pam.sh"
+          },
+          {
+            "timestamp_text": "2026-09-05 18:09:11",
+            "event": "Completed",
+            "path": "/usr/share/omarchy/install/config/lockscreen-pam.sh"
+          },
+          {
+            "timestamp_text": "2026-09-05 18:09:11",
+            "event": "Starting",
+            "path": "/usr/share/omarchy/install/config/fix-powerprofilesctl-shebang.sh"
+          },
+          {
+            "timestamp_text": "2026-09-05 18:09:12",
+            "event": "Completed",
+            "path": "/usr/share/omarchy/install/config/fix-powerprofilesctl-shebang.sh"
+          },
+          {
+            "timestamp_text": "2026-09-05 18:09:12",
+            "event": "Starting",
+            "path": "/usr/share/omarchy/install/config/ssh-command-path.sh"
+          },
+          {
+            "timestamp_text": "2026-09-05 18:09:12",
+            "event": "Completed",
+            "path": "/usr/share/omarchy/install/config/ssh-command-path.sh"
+          },
+          {
+            "timestamp_text": "2026-09-05 18:09:12",
+            "event": "Starting",
+            "path": "/usr/share/omarchy/install/config/ssh-keepalive.sh"
+          },
+          {
+            "timestamp_text": "2026-09-05 18:09:12",
+            "event": "Completed",
+            "path": "/usr/share/omarchy/install/config/ssh-keepalive.sh"
+          },
+          {
+            "timestamp_text": "2026-09-05 18:09:12",
+            "event": "Starting",
+            "path": "/usr/share/omarchy/install/config/docker.sh"
+          },
+          {
+            "timestamp_text": "2026-09-05 18:09:12",
+            "event": "Completed",
+            "path": "/usr/share/omarchy/install/config/docker.sh"
+          },
+          {
+            "timestamp_text": "2026-09-05 18:09:13",
+            "event": "Starting",
+            "path": "/usr/share/omarchy/install/config/snapper.sh"
+          },
+          {
+            "timestamp_text": "2026-09-05 18:09:14",
+            "event": "Completed",
+            "path": "/usr/share/omarchy/install/config/snapper.sh"
+          },
+          {
+            "timestamp_text": "2026-09-05 18:09:14",
+            "event": "Starting",
+            "path": "/usr/share/omarchy/install/config/locate.sh"
+          },
+          {
+            "timestamp_text": "2026-09-05 18:09:15",
+            "event": "Completed",
+            "path": "/usr/share/omarchy/install/config/locate.sh"
+          },
+          {
+            "timestamp_text": "2026-09-05 18:09:15",
+            "event": "Starting",
+            "path": "/usr/share/omarchy/install/config/enable-services.sh"
+          },
+          {
+            "timestamp_text": "2026-09-05 18:09:16",
+            "event": "Completed",
+            "path": "/usr/share/omarchy/install/config/enable-services.sh"
+          },
+          {
+            "timestamp_text": "2026-09-05 18:09:16",
+            "event": "Starting",
+            "path": "/usr/share/omarchy/install/config/firewall.sh"
+          },
+          {
+            "timestamp_text": "2026-09-05 18:09:35",
+            "event": "Completed",
+            "path": "/usr/share/omarchy/install/config/firewall.sh"
+          },
+          {
+            "timestamp_text": "2026-09-05 18:09:35",
+            "event": "Starting",
+            "path": "/usr/share/omarchy/install/hardware/asus-rog.sh"
+          },
+          {
+            "timestamp_text": "2026-09-05 18:09:36",
+            "event": "Completed",
+            "path": "/usr/share/omarchy/install/hardware/asus-rog.sh"
+          },
+          {
+            "timestamp_text": "2026-09-05 18:09:36",
+            "event": "Starting",
+            "path": "/usr/share/omarchy/install/hardware/framework16.sh"
+          },
+          {
+            "timestamp_text": "2026-09-05 18:09:36",
+            "event": "Completed",
+            "path": "/usr/share/omarchy/install/hardware/framework16.sh"
+          },
+          {
+            "timestamp_text": "2026-09-05 18:09:36",
+            "event": "Starting",
+            "path": "/usr/share/omarchy/install/hardware/dell-xps-touchpad-haptics.sh"
+          },
+          {
+            "timestamp_text": "2026-09-05 18:09:36",
+            "event": "Completed",
+            "path": "/usr/share/omarchy/install/hardware/dell-xps-touchpad-haptics.sh"
+          },
+          {
+            "timestamp_text": "2026-09-05 18:09:36",
+            "event": "Starting",
+            "path": "/usr/share/omarchy/install/hardware/surface.sh"
+          },
+          {
+            "timestamp_text": "2026-09-05 18:09:37",
+            "event": "Completed",
+            "path": "/usr/share/omarchy/install/hardware/surface.sh"
+          },
+          {
+            "timestamp_text": "2026-09-05 18:09:37",
+            "event": "Starting",
+            "path": "/usr/share/omarchy/install/hardware/network.sh"
+          },
+          {
+            "timestamp_text": "2026-09-05 18:09:38",
+            "event": "Completed",
+            "path": "/usr/share/omarchy/install/hardware/network.sh"
+          },
+          {
+            "timestamp_text": "2026-09-05 18:09:38",
+            "event": "Starting",
+            "path": "/usr/share/omarchy/install/hardware/set-wireless-regdom.sh"
+          },
+          {
+            "timestamp_text": "2026-09-05 18:09:39",
+            "event": "Completed",
+            "path": "/usr/share/omarchy/install/hardware/set-wireless-regdom.sh"
+          },
+          {
+            "timestamp_text": "2026-09-05 18:09:39",
+            "event": "Starting",
+            "path": "/usr/share/omarchy/install/hardware/fix-fkeys.sh"
+          },
+          {
+            "timestamp_text": "2026-09-05 18:09:40",
+            "event": "Completed",
+            "path": "/usr/share/omarchy/install/hardware/fix-fkeys.sh"
+          },
+          {
+            "timestamp_text": "2026-09-05 18:09:40",
+            "event": "Starting",
+            "path": "/usr/share/omarchy/install/hardware/fix-synaptic-touchpad.sh"
+          },
+          {
+            "timestamp_text": "2026-09-05 18:09:40",
+            "event": "Completed",
+            "path": "/usr/share/omarchy/install/hardware/fix-synaptic-touchpad.sh"
+          },
+          {
+            "timestamp_text": "2026-09-05 18:09:40",
+            "event": "Starting",
+            "path": "/usr/share/omarchy/install/hardware/bluetooth.sh"
+          },
+          {
+            "timestamp_text": "2026-09-05 18:09:40",
+            "event": "Completed",
+            "path": "/usr/share/omarchy/install/hardware/bluetooth.sh"
+          },
+          {
+            "timestamp_text": "2026-09-05 18:09:40",
+            "event": "Starting",
+            "path": "/usr/share/omarchy/install/hardware/nvidia.sh"
+          },
+          {
+            "timestamp_text": "2026-09-05 18:09:41",
+            "event": "Completed",
+            "path": "/usr/share/omarchy/install/hardware/nvidia.sh"
+          },
+          {
+            "timestamp_text": "2026-09-05 18:09:41",
+            "event": "Starting",
+            "path": "/usr/share/omarchy/install/hardware/vulkan.sh"
+          },
+          {
+            "timestamp_text": "2026-09-05 18:09:41",
+            "event": "Completed",
+            "path": "/usr/share/omarchy/install/hardware/vulkan.sh"
+          },
+          {
+            "timestamp_text": "2026-09-05 18:09:41",
+            "event": "Starting",
+            "path": "/usr/share/omarchy/install/hardware/intel/video-acceleration.sh"
+          },
+          {
+            "timestamp_text": "2026-09-05 18:09:42",
+            "event": "Completed",
+            "path": "/usr/share/omarchy/install/hardware/intel/video-acceleration.sh"
+          },
+          {
+            "timestamp_text": "2026-09-05 18:09:42",
+            "event": "Starting",
+            "path": "/usr/share/omarchy/install/hardware/intel/lpmd.sh"
+          },
+          {
+            "timestamp_text": "2026-09-05 18:09:42",
+            "event": "Completed",
+            "path": "/usr/share/omarchy/install/hardware/intel/lpmd.sh"
+          },
+          {
+            "timestamp_text": "2026-09-05 18:09:42",
+            "event": "Starting",
+            "path": "/usr/share/omarchy/install/hardware/intel/thermald.sh"
+          },
+          {
+            "timestamp_text": "2026-09-05 18:09:42",
+            "event": "Completed",
+            "path": "/usr/share/omarchy/install/hardware/intel/thermald.sh"
+          },
+          {
+            "timestamp_text": "2026-09-05 18:09:42",
+            "event": "Starting",
+            "path": "/usr/share/omarchy/install/hardware/intel/ptl-kernel.sh"
+          },
+          {
+            "timestamp_text": "2026-09-05 18:09:43",
+            "event": "Completed",
+            "path": "/usr/share/omarchy/install/hardware/intel/ptl-kernel.sh"
+          },
+          {
+            "timestamp_text": "2026-09-05 18:09:43",
+            "event": "Starting",
+            "path": "/usr/share/omarchy/install/hardware/intel/ipu7-camera.sh"
+          },
+          {
+            "timestamp_text": "2026-09-05 18:09:43",
+            "event": "Completed",
+            "path": "/usr/share/omarchy/install/hardware/intel/ipu7-camera.sh"
+          },
+          {
+            "timestamp_text": "2026-09-05 18:09:43",
+            "event": "Starting",
+            "path": "/usr/share/omarchy/install/hardware/intel/fred.sh"
+          },
+          {
+            "timestamp_text": "2026-09-05 18:09:44",
+            "event": "Completed",
+            "path": "/usr/share/omarchy/install/hardware/intel/fred.sh"
+          },
+          {
+            "timestamp_text": "2026-09-05 18:09:44",
+            "event": "Starting",
+            "path": "/usr/share/omarchy/install/hardware/intel/fix-wifi7-eht.sh"
+          },
+          {
+            "timestamp_text": "2026-09-05 18:09:44",
+            "event": "Completed",
+            "path": "/usr/share/omarchy/install/hardware/intel/fix-wifi7-eht.sh"
+          },
+          {
+            "timestamp_text": "2026-09-05 18:09:44",
+            "event": "Starting",
+            "path": "/usr/share/omarchy/install/hardware/intel/sof-firmware.sh"
+          },
+          {
+            "timestamp_text": "2026-09-05 18:09:44",
+            "event": "Completed",
+            "path": "/usr/share/omarchy/install/hardware/intel/sof-firmware.sh"
+          },
+          {
+            "timestamp_text": "2026-09-05 18:09:44",
+            "event": "Starting",
+            "path": "/usr/share/omarchy/install/hardware/asus/fix-asus-ptl-display-backlight.sh"
+          },
+          {
+            "timestamp_text": "2026-09-05 18:09:45",
+            "event": "Completed",
+            "path": "/usr/share/omarchy/install/hardware/asus/fix-asus-ptl-display-backlight.sh"
+          },
+          {
+            "timestamp_text": "2026-09-05 18:09:45",
+            "event": "Starting",
+            "path": "/usr/share/omarchy/install/hardware/asus/fix-asus-ptl-b9406-display.sh"
+          },
+          {
+            "timestamp_text": "2026-09-05 18:09:45",
+            "event": "Completed",
+            "path": "/usr/share/omarchy/install/hardware/asus/fix-asus-ptl-b9406-display.sh"
+          },
+          {
+            "timestamp_text": "2026-09-05 18:09:46",
+            "event": "Starting",
+            "path": "/usr/share/omarchy/install/hardware/asus/fix-asus-ptl-b9406-touchpad.sh"
+          },
+          {
+            "timestamp_text": "2026-09-05 18:09:46",
+            "event": "Completed",
+            "path": "/usr/share/omarchy/install/hardware/asus/fix-asus-ptl-b9406-touchpad.sh"
+          },
+          {
+            "timestamp_text": "2026-09-05 18:09:46",
+            "event": "Starting",
+            "path": "/usr/share/omarchy/install/hardware/asus/fix-z13-touchpad.sh"
+          },
+          {
+            "timestamp_text": "2026-09-05 18:09:46",
+            "event": "Completed",
+            "path": "/usr/share/omarchy/install/hardware/asus/fix-z13-touchpad.sh"
+          },
+          {
+            "timestamp_text": "2026-09-05 18:09:46",
+            "event": "Starting",
+            "path": "/usr/share/omarchy/install/hardware/framework/qmk-hid.sh"
+          },
+          {
+            "timestamp_text": "2026-09-05 18:09:47",
+            "event": "Completed",
+            "path": "/usr/share/omarchy/install/hardware/framework/qmk-hid.sh"
+          },
+          {
+            "timestamp_text": "2026-09-05 18:09:47",
+            "event": "Starting",
+            "path": "/usr/share/omarchy/install/hardware/apple/fix-spi-keyboard.sh"
+          },
+          {
+            "timestamp_text": "2026-09-05 18:09:47",
+            "event": "Completed",
+            "path": "/usr/share/omarchy/install/hardware/apple/fix-spi-keyboard.sh"
+          },
+          {
+            "timestamp_text": "2026-09-05 18:09:47",
+            "event": "Starting",
+            "path": "/usr/share/omarchy/install/hardware/apple/fix-suspend-nvme.sh"
+          },
+          {
+            "timestamp_text": "2026-09-05 18:09:47",
+            "event": "Completed",
+            "path": "/usr/share/omarchy/install/hardware/apple/fix-suspend-nvme.sh"
+          },
+          {
+            "timestamp_text": "2026-09-05 18:09:47",
+            "event": "Starting",
+            "path": "/usr/share/omarchy/install/hardware/apple/fix-t2.sh"
+          },
+          {
+            "timestamp_text": "2026-09-05 18:09:47",
+            "event": "Completed",
+            "path": "/usr/share/omarchy/install/hardware/apple/fix-t2.sh"
+          },
+          {
+            "timestamp_text": "2026-09-05 18:09:47",
+            "event": "Starting",
+            "path": "/usr/share/omarchy/install/hardware/apple/fix-brcmfmac-supplicant.sh"
+          },
+          {
+            "timestamp_text": "2026-09-05 18:09:48",
+            "event": "Completed",
+            "path": "/usr/share/omarchy/install/hardware/apple/fix-brcmfmac-supplicant.sh"
+          },
+          {
+            "timestamp_text": "2026-09-05 18:09:48",
+            "event": "Starting",
+            "path": "/usr/share/omarchy/install/hardware/lenovo/fix-yoga-pro7-bass-speakers.sh"
+          },
+          {
+            "timestamp_text": "2026-09-05 18:09:48",
+            "event": "Completed",
+            "path": "/usr/share/omarchy/install/hardware/lenovo/fix-yoga-pro7-bass-speakers.sh"
+          },
+          {
+            "timestamp_text": "2026-09-05 18:09:48",
+            "event": "Starting",
+            "path": "/usr/share/omarchy/install/hardware/fix-bcm43xx.sh"
+          },
+          {
+            "timestamp_text": "2026-09-05 18:09:49",
+            "event": "Completed",
+            "path": "/usr/share/omarchy/install/hardware/fix-bcm43xx.sh"
+          },
+          {
+            "timestamp_text": "2026-09-05 18:09:49",
+            "event": "Starting",
+            "path": "/usr/share/omarchy/install/hardware/fix-surface-keyboard.sh"
+          },
+          {
+            "timestamp_text": "2026-09-05 18:09:49",
+            "event": "Completed",
+            "path": "/usr/share/omarchy/install/hardware/fix-surface-keyboard.sh"
+          },
+          {
+            "timestamp_text": "2026-09-05 18:09:49",
+            "event": "Starting",
+            "path": "/usr/share/omarchy/install/hardware/fix-yt6801-ethernet-adapter.sh"
+          },
+          {
+            "timestamp_text": "2026-09-05 18:09:50",
+            "event": "Completed",
+            "path": "/usr/share/omarchy/install/hardware/fix-yt6801-ethernet-adapter.sh"
+          },
+          {
+            "timestamp_text": "2026-09-05 18:09:50",
+            "event": "Starting",
+            "path": "/usr/share/omarchy/install/hardware/fix-tuxedo-backlight.sh"
+          },
+          {
+            "timestamp_text": "2026-09-05 18:09:50",
+            "event": "Completed",
+            "path": "/usr/share/omarchy/install/hardware/fix-tuxedo-backlight.sh"
+          },
+          {
+            "timestamp_text": "2026-09-05 18:09:50",
+            "event": "Starting",
+            "path": "/usr/share/omarchy/install/hardware/speaker-tuning.sh"
+          },
+          {
+            "timestamp_text": "2026-09-05 18:09:50",
+            "event": "Completed",
+            "path": "/usr/share/omarchy/install/hardware/speaker-tuning.sh"
+          },
+          {
+            "timestamp_text": "2026-09-05 18:09:50",
+            "event": "Starting",
+            "path": "/usr/share/omarchy/install/hardware/pacman.sh"
+          },
+          {
+            "timestamp_text": "2026-09-05 18:09:51",
+            "event": "Completed",
+            "path": "/usr/share/omarchy/install/hardware/pacman.sh"
+          },
+          {
+            "timestamp_text": "2026-09-05 18:09:51",
+            "event": "Starting",
+            "path": "/usr/share/omarchy/install/login/sddm.sh"
+          },
+          {
+            "timestamp_text": "2026-09-05 18:09:51",
+            "event": "Completed",
+            "path": "/usr/share/omarchy/install/login/sddm.sh"
+          },
+          {
+            "timestamp_text": "2026-09-05 18:09:51",
+            "event": "Starting",
+            "path": "/usr/share/omarchy/install/post-install/pacman.sh"
+          },
+          {
+            "timestamp_text": "2026-09-05 18:09:52",
+            "event": "Completed",
+            "path": "/usr/share/omarchy/install/post-install/pacman.sh"
+          },
+          {
+            "timestamp_text": "2026-09-05 18:09:52",
+            "event": "Starting",
+            "path": "/usr/share/omarchy/install/post-install/udev.sh"
+          },
+          {
+            "timestamp_text": "2026-09-05 18:09:52",
+            "event": "Completed",
+            "path": "/usr/share/omarchy/install/post-install/udev.sh"
+          },
+          {
+            "timestamp_text": "2026-09-05 18:09:52",
+            "event": "Starting",
+            "path": "/usr/share/omarchy/install/post-install/localdb.sh"
+          },
+          {
+            "timestamp_text": "2026-09-05 18:10:01",
+            "event": "Completed",
+            "path": "/usr/share/omarchy/install/post-install/localdb.sh"
+          },
+          {
+            "timestamp_text": "2026-09-05 18:13:56",
+            "event": "Starting",
+            "path": "/usr/share/omarchy/install/user/theme.sh"
+          },
+          {
+            "timestamp_text": "2026-09-05 18:14:07",
+            "event": "Completed",
+            "path": "/usr/share/omarchy/install/user/theme.sh"
+          },
+          {
+            "timestamp_text": "2026-09-05 18:14:07",
+            "event": "Starting",
+            "path": "/usr/share/omarchy/install/user/chromium.sh"
+          },
+          {
+            "timestamp_text": "2026-09-05 18:14:09",
+            "event": "Completed",
+            "path": "/usr/share/omarchy/install/user/chromium.sh"
+          },
+          {
+            "timestamp_text": "2026-09-05 18:14:09",
+            "event": "Starting",
+            "path": "/usr/share/omarchy/install/user/git.sh"
+          },
+          {
+            "timestamp_text": "2026-09-05 18:14:09",
+            "event": "Completed",
+            "path": "/usr/share/omarchy/install/user/git.sh"
+          },
+          {
+            "timestamp_text": "2026-09-05 18:14:09",
+            "event": "Starting",
+            "path": "/usr/share/omarchy/install/user/xcompose.sh"
+          },
+          {
+            "timestamp_text": "2026-09-05 18:14:10",
+            "event": "Completed",
+            "path": "/usr/share/omarchy/install/user/xcompose.sh"
+          },
+          {
+            "timestamp_text": "2026-09-05 18:14:10",
+            "event": "Starting",
+            "path": "/usr/share/omarchy/install/user/mise-work.sh"
+          },
+          {
+            "timestamp_text": "2026-09-05 18:14:24",
+            "event": "Completed",
+            "path": "/usr/share/omarchy/install/user/mise-work.sh"
+          },
+          {
+            "timestamp_text": "2026-09-05 18:14:24",
+            "event": "Starting",
+            "path": "/usr/share/omarchy/install/user/hardware/asus/fix-audio-mixer.sh"
+          },
+          {
+            "timestamp_text": "2026-09-05 18:14:24",
+            "event": "Completed",
+            "path": "/usr/share/omarchy/install/user/hardware/asus/fix-audio-mixer.sh"
+          },
+          {
+            "timestamp_text": "2026-09-05 18:14:24",
+            "event": "Starting",
+            "path": "/usr/share/omarchy/install/user/hardware/asus/fix-mic.sh"
+          },
+          {
+            "timestamp_text": "2026-09-05 18:14:24",
+            "event": "Completed",
+            "path": "/usr/share/omarchy/install/user/hardware/asus/fix-mic.sh"
+          },
+          {
+            "timestamp_text": "2026-09-05 18:14:24",
+            "event": "Starting",
+            "path": "/usr/share/omarchy/install/user/hardware/framework/fix-f13-amd-audio-input.sh"
+          },
+          {
+            "timestamp_text": "2026-09-05 18:14:25",
+            "event": "Completed",
+            "path": "/usr/share/omarchy/install/user/hardware/framework/fix-f13-amd-audio-input.sh"
+          },
+          {
+            "timestamp_text": "2026-09-05 18:14:25",
+            "event": "Starting",
+            "path": "/usr/share/omarchy/install/user/hardware/dell/xps13-text-scaling.sh"
+          },
+          {
+            "timestamp_text": "2026-09-05 18:14:25",
+            "event": "Completed",
+            "path": "/usr/share/omarchy/install/user/hardware/dell/xps13-text-scaling.sh"
+          },
+          {
+            "timestamp_text": "2026-09-05 18:14:25",
+            "event": "Starting",
+            "path": "/usr/share/omarchy/install/user/hardware/fix-nouveau-cursor.sh"
+          },
+          {
+            "timestamp_text": "2026-09-05 18:14:26",
+            "event": "Completed",
+            "path": "/usr/share/omarchy/install/user/hardware/fix-nouveau-cursor.sh"
+          },
+          {
+            "timestamp_text": "2026-09-05 18:14:26",
+            "event": "Starting",
+            "path": "/usr/share/omarchy/install/user/default-keyring.sh"
+          },
+          {
+            "timestamp_text": "2026-09-05 18:14:26",
+            "event": "Completed",
+            "path": "/usr/share/omarchy/install/user/default-keyring.sh"
+          },
+          {
+            "timestamp_text": "2026-09-05 18:14:26",
+            "event": "Starting",
+            "path": "/usr/share/omarchy/install/user/mise.sh"
+          },
+          {
+            "timestamp_text": "2026-09-05 18:14:30",
+            "event": "Completed",
+            "path": "/usr/share/omarchy/install/user/mise.sh"
+          }
+        ]
+      }
+    }
+  ]
+}

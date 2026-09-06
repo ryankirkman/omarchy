@@ -8,12 +8,14 @@ and SSH control even when separate tool invocations have separate network namesp
 import argparse
 from contextlib import ExitStack
 import ctypes
+from datetime import datetime
 import hashlib
 import importlib.util
 import json
 import mmap
 import os
 from pathlib import Path
+import re
 import shlex
 import shutil
 import socket
@@ -38,6 +40,62 @@ def require_success(result, description):
   if result.returncode:
     raise RuntimeError(f"{description}: {result.stderr}\n{result.stdout}")
   return result.stdout
+
+
+INSTALL_LOG_EVENT_LIMIT = 512
+INSTALL_LOG_EVENT = re.compile(
+  r"\[([0-9]{4}-[0-9]{2}-[0-9]{2} [0-9]{2}:[0-9]{2}:[0-9]{2})\] "
+  r"(Starting|Completed|Failed): "
+  r"(/usr/share/omarchy/install/(?:[A-Za-z0-9_-][A-Za-z0-9._-]*/)*"
+  r"[A-Za-z0-9_-][A-Za-z0-9._-]*\.sh)"
+  r"(?: \(exit code: ([1-9][0-9]{0,2})\))?"
+)
+
+
+def parse_install_log_events(stdout, returncode=0):
+  """Keep only bounded script event fields, never raw log messages or commands.
+
+  These guest-local wall-clock stamps are advisory, second-resolution records.
+  They are neither monotonic durations nor evidence used to accept a sample.
+  """
+  result = {
+    "schema_version": 1, "advisory_only": True,
+    "source": "/var/log/omarchy-install.log", "source_read_exit_status": returncode,
+    "clock": "guest-wall-clock", "resolution_seconds": 1,
+    "timezone": "unspecified-guest-local-time", "used_for_timing_acceptance": False,
+    "event_limit": INSTALL_LOG_EVENT_LIMIT, "truncated": False,
+    "status": "unavailable" if returncode else "no-recognized-events", "events": [],
+  }
+  if returncode:
+    return result
+  for line in stdout.split("\n"):
+    # A complete accepted record is at most 576 ASCII characters. The path
+    # grammar excludes traversal, shell syntax, whitespace and control bytes.
+    line = line.removesuffix("\r")
+    if len(line) > 576:
+      continue
+    match = INSTALL_LOG_EVENT.fullmatch(line)
+    if not match:
+      continue
+    timestamp, event, path, code = match.groups()
+    if len(path) > 512 or (event == "Failed") != (code is not None):
+      continue
+    if code is not None and int(code) > 255:
+      continue
+    try:
+      datetime.fromisoformat(timestamp)
+    except ValueError:
+      continue
+    if len(result["events"]) == INSTALL_LOG_EVENT_LIMIT:
+      result["truncated"] = True
+      break
+    record = {"timestamp_text": timestamp, "event": event, "path": path}
+    if code is not None:
+      record["exit_code"] = int(code)
+    result["events"].append(record)
+  if result["events"]:
+    result["status"] = "available"
+  return result
 
 
 def executable(name, prefix):
@@ -506,6 +564,11 @@ class Supervisor:
       result = self.ssh(command, sudo=sudo, timeout=180)
       (self.directory / filename).write_text(result.stdout)
       (self.directory / (filename + ".stderr")).write_text(result.stderr)
+      if filename == "install.log":
+        # collect() follows the measured SSH readiness clock. Reuse this
+        # existing read; missing logs and absent stamps remain advisory only.
+        write_json(self.directory / "install-log-events.json",
+                   parse_install_log_events(result.stdout, result.returncode))
       if filename.startswith("package-") and result.returncode:
         raise RuntimeError(f"Failed to collect {filename}: {result.stderr}")
     files = self.ssh("LC_ALL=C pacman -Qk", sudo=True, timeout=1200)

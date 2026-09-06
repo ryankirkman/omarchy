@@ -19,7 +19,7 @@ HERE = Path(__file__).resolve().parent
 RUNNER = HERE.parent / "iso-vm.py"
 COMPARATOR = HERE.parent / "compare-installs.py"
 EVIDENCE_FILES = (
-  "manifest.json", "install-timing.json", "validation.json", "identity.json",
+  "manifest.json", "install-timing.json", "install-log-events.json", "validation.json", "identity.json",
   "package-manifest.txt", "package-explicit.txt", "package-files.txt", "package-files.stderr",
   "installed-root.json", "installed-boot.txt", "machine-id.txt", "ssh-host-fingerprints.txt",
   "pacman-master-keys.txt", "btrfs-uuid.txt", "btrfs-subvolumes.txt", "uki-files.txt",

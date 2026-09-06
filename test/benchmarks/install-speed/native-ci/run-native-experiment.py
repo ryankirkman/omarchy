@@ -16,6 +16,7 @@ import subprocess
 import sys
 import tarfile
 import time
+from typing import NamedTuple
 import uuid
 
 ISO_URL = 'https://iso.omarchy.org/omarchy-4.0.2.iso'
@@ -29,7 +30,7 @@ DIRECT_RESTORE_VARIANT = EARLY_VERIFY_VARIANT + '-direct-restore'
 FINALIZATION_OVERLAP_VARIANT = DIRECT_RESTORE_VARIANT + '-overlap'
 EARLY_VARIANTS = (EARLY_VERIFY_VARIANT, DIRECT_RESTORE_VARIANT, FINALIZATION_OVERLAP_VARIANT)
 EVIDENCE_FILES = {
-  'manifest.json', 'validation.json', 'install-timing.json', 'package-manifest.txt',
+  'manifest.json', 'validation.json', 'install-timing.json', 'install-log-events.json', 'package-manifest.txt',
   'package-explicit.txt', 'package-files.txt', 'package-files.stderr', 'identity.json',
   'installed-root.json', 'installed-boot.txt', 'machine-id.txt', 'btrfs-uuid.txt',
   'btrfs-subvolumes.txt', 'ssh-host-fingerprints.txt', 'pacman-master-keys.txt',
@@ -149,15 +150,76 @@ def early_preflight_provenance(variant, control, candidate, preflight, source_ca
   return record
 
 
-def prepare_finalization_overlap(bench, work, evidence, fast, payload):
-  """Layer index scheduling and animation onto an immutable direct-write payload."""
-  preflight = bench / 'install-speed/image/direct-restore-preflight.sh'
-  for component in ('localdb-overlap', 'animation-overlap'):
+OVERLAP_COMPONENTS = ('localdb-overlap', 'animation-overlap')
+OVERLAP_SOURCE_FILES = (
+  'localdb-overlap/contract-test.py', 'localdb-overlap/patch.py',
+  'localdb-overlap/prepare-payload.py', 'localdb-overlap/preflight.sh',
+  'animation-overlap/contract-test.py', 'animation-overlap/payload-contract-test.py', 'animation-overlap/dashboard_patch.py',
+  'animation-overlap/prepare-payload.py', 'animation-overlap/preflight.sh',
+  'fast-reboot/prepare-payload.py', 'fast-reboot/candidate-preflight.sh',
+  'image/direct-restore-payload.py', 'image/direct_restore.py', 'image/root_image_mounts.py',
+  'image/direct-restore-preflight.sh', 'image/candidate-preflight.sh', 'image/activate-installer-overlay.sh',
+  'localdb-overlap/fixtures/runtime/usr/bin/omarchy-apply-system',
+  'localdb-overlap/fixtures/runtime/usr/share/omarchy/install/helpers/logging.sh',
+  'localdb-overlap/fixtures/runtime/usr/share/omarchy/install/post-install/all.sh',
+  'localdb-overlap/fixtures/runtime/usr/share/omarchy/install/post-install/localdb.sh',
+)
+
+
+class _OverlapValidation(NamedTuple):
+  bench: Path
+  fast: Path
+  evidence: Path
+  sources: tuple
+  logs: tuple
+
+
+def overlap_source_fingerprint(bench, fast):
+  """Hash only the selected contracts, producers and their local inputs."""
+  upstream = subprocess.check_output(['git', '-C', str(fast), 'rev-parse', 'HEAD'], text=True).strip()
+  if upstream != FAST_PIN:
+    raise RuntimeError('Overlap contracts require the selected upstream commit')
+  files = []
+  for name in OVERLAP_SOURCE_FILES:
+    path = bench / 'install-speed' / name
+    if path.is_symlink() or not path.is_file():
+      raise RuntimeError(f'Overlap source must be a regular file: {name}')
+    files.append((name, digest(path), path.stat().st_mode & 0o7777))
+  return upstream, tuple(files)
+
+
+def validate_finalization_overlap(bench, evidence, fast):
+  sources = overlap_source_fingerprint(bench, fast)
+  logs = []
+  for component in OVERLAP_COMPONENTS:
     scripts = bench / 'install-speed' / component
-    output = work / ('candidate-' + component + '-payload')
-    with (evidence / (component + '-contract.log')).open('w') as log:
+    path = evidence / (component + '-contract.log')
+    with path.open('w') as log:
       command([sys.executable, scripts / 'contract-test.py', '--iso-source', fast],
         stdout=log, stderr=subprocess.STDOUT, timeout=120)
+    logs.append((path.name, digest(path)))
+  if overlap_source_fingerprint(bench, fast) != sources:
+    raise RuntimeError('Overlap sources changed during contract validation')
+  return _OverlapValidation(bench.resolve(), fast.resolve(), evidence.resolve(), sources, tuple(logs))
+
+
+def prepare_finalization_overlap(bench, work, evidence, fast, payload, *, validation=None):
+  """Layer verified components; standalone callers still run their contracts."""
+  if validation is None:
+    validation = validate_finalization_overlap(bench, evidence, fast)
+  if (type(validation) is not _OverlapValidation or
+      (validation.bench, validation.fast, validation.evidence) != (bench.resolve(), fast.resolve(), evidence.resolve())):
+    raise RuntimeError('Overlap preparation requires its matching contract validation result')
+  if overlap_source_fingerprint(bench, fast) != validation.sources:
+    raise RuntimeError('Overlap sources changed after contract validation')
+  logs = tuple((component + '-contract.log', digest(evidence / (component + '-contract.log')))
+    for component in OVERLAP_COMPONENTS)
+  if logs != validation.logs:
+    raise RuntimeError('Overlap contract evidence changed after validation')
+  preflight = bench / 'install-speed/image/direct-restore-preflight.sh'
+  for component in OVERLAP_COMPONENTS:
+    scripts = bench / 'install-speed' / component
+    output = work / ('candidate-' + component + '-payload')
     argv = [sys.executable, scripts / 'prepare-payload.py', '--iso-source', fast,
       '--base-payload', payload, '--output', output]
     if component == 'animation-overlap':
@@ -439,6 +501,9 @@ def execute(args):
   if args.diagnostic_calibrations is not None:
     provenance.update(diagnostic_provenance(args.diagnostic_calibrations))
   save_json(evidence / 'experiment.json', provenance)
+  overlap_validation = None
+  if args.diagnostic_calibrations is None and FINALIZATION_OVERLAP_VARIANT in args.variants:
+    overlap_validation = validate_finalization_overlap(bench, evidence, fast)
   iso = work / 'omarchy-4.0.2.iso'
   command(['curl', '--fail', '--location', '--retry', '3', '--output', iso, ISO_URL])
   if digest(iso) != ISO_SHA256:
@@ -704,7 +769,8 @@ def execute(args):
         # verified initramfs payload installs the direct patch only after
         # ordinary activation, without building another root-image ISO.
       if variant == FINALIZATION_OVERLAP_VARIANT:
-        payload, preflight, source_manifest = prepare_finalization_overlap(bench, work, evidence, fast, payload)
+        payload, preflight, source_manifest = prepare_finalization_overlap(bench, work, evidence, fast, payload,
+          validation=overlap_validation)
       if variant in EARLY_VARIANTS:
         configuration = early_variant_configuration(variant)
         early_control_initrd, early_candidate = early_preflight_pair(make_initrd, payload, preflight,

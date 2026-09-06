@@ -264,7 +264,7 @@ class NativeContract(unittest.TestCase):
       root = Path(temporary)
       args = module.parse_arguments(['--repo', str(DIRECTORY.parents[3]), '--work', str(root / 'work'),
         '--evidence', str(root / 'evidence'), '--boot-method', 'firmware', '--source-cache', 'cold',
-        '--diagnostic-calibrations', '2'])
+        '--diagnostic-calibrations', '2', '--variants', module.FINALIZATION_OVERLAP_VARIANT])
       def prepare(argv, **kwargs):
         if Path(str(argv[1])).name == 'make-initramfs.py':
           output = Path(argv[argv.index('--output') + 1])
@@ -283,8 +283,10 @@ class NativeContract(unittest.TestCase):
           patch.object(module.subprocess, 'check_output', return_value='fixture-commit\n'), \
           patch.object(module, 'digest', side_effect=lambda path: module.ISO_SHA256 if path.suffix == '.iso' else module.INITRD_SHA256), \
           patch.object(module, 'command', side_effect=prepare) as commands, \
+          patch.object(module, 'validate_finalization_overlap') as validate, \
           patch.object(module, 'calibration_stage', return_value=None) as stage:
         self.assertEqual(module.execute(args), 0)
+      validate.assert_not_called()
       stage.assert_called_once()
       self.assertEqual(stage.call_args.args[2], 2)
       self.assertFalse(stage.call_args.args[3]['measurement_valid'])
@@ -333,13 +335,25 @@ class NativeContract(unittest.TestCase):
       calls = []
       def command(argv, **kwargs):
         calls.append(list(map(str, argv)))
+        if Path(argv[1]).name == 'contract-test.py':
+          kwargs['stdout'].write(Path(argv[1]).parent.name + ' passed\n')
         if Path(argv[1]).name == 'prepare-payload.py':
           output = Path(argv[argv.index('--output') + 1])
           source = Path(argv[argv.index('--base-payload') + 1])
           module.shutil.copytree(source, output)
           output.with_name(output.name + '.manifest.json').write_text(json.dumps({'component': Path(argv[1]).parent.name}))
-      with patch.object(module, 'command', side_effect=command):
-        payload, preflight, manifest = module.prepare_finalization_overlap(bench, work, evidence, fast, base)
+      with patch.object(module, 'command', side_effect=command), \
+          patch.object(module, 'overlap_source_fingerprint', return_value=('pinned-source', ())), \
+          patch.object(module, 'validate_finalization_overlap', wraps=module.validate_finalization_overlap) as validate:
+        validation = module.validate_finalization_overlap(bench, evidence, fast)
+        payload, preflight, manifest = module.prepare_finalization_overlap(bench, work, evidence, fast, base,
+          validation=validation)
+      validate.assert_called_once_with(bench, evidence, fast)
+      self.assertEqual([(Path(argv[1]).parent.name, Path(argv[1]).name) for argv in calls], [
+        ('localdb-overlap', 'contract-test.py'), ('animation-overlap', 'contract-test.py'),
+        ('localdb-overlap', 'prepare-payload.py'), ('animation-overlap', 'prepare-payload.py')])
+      self.assertEqual(validation.logs, tuple((component + '-contract.log',
+        module.digest(evidence / (component + '-contract.log'))) for component in module.OVERLAP_COMPONENTS))
       producers = [argv for argv in calls if Path(argv[1]).name == 'prepare-payload.py']
       self.assertEqual([Path(argv[1]).parent.name for argv in producers], ['localdb-overlap', 'animation-overlap'])
       self.assertEqual(producers[1][producers[1].index('--base-payload') + 1],
@@ -378,7 +392,8 @@ class NativeContract(unittest.TestCase):
       def command(argv, **kwargs):
         calls.append(list(map(str, argv)))
         raise subprocess.CalledProcessError(7, argv)
-      with patch.object(module, 'command', side_effect=command):
+      with patch.object(module, 'command', side_effect=command), \
+          patch.object(module, 'overlap_source_fingerprint', return_value=('pinned-source', ())):
         with self.assertRaises(subprocess.CalledProcessError):
           module.prepare_finalization_overlap(root / 'bench', root / 'work', evidence,
             root / 'source', root / 'base')
@@ -386,6 +401,119 @@ class NativeContract(unittest.TestCase):
       self.assertEqual(Path(calls[0][1]).parent.name, 'localdb-overlap')
       self.assertFalse((root / 'work').exists())
       self.assertFalse((evidence / 'animation-overlap.manifest.json').exists())
+
+  def test_overlap_execute_component_failures_precede_download_and_install(self):
+    for failed_component in module.OVERLAP_COMPONENTS:
+      with self.subTest(component=failed_component), tempfile.TemporaryDirectory() as temporary:
+        root = Path(temporary)
+        args = module.parse_arguments(['--repo', str(DIRECTORY.parents[3]), '--work', str(root / 'work'),
+          '--evidence', str(root / 'evidence'), '--boot-method', 'firmware', '--source-cache', 'cold',
+          '--variants', module.FINALIZATION_OVERLAP_VARIANT])
+        calls = []
+        failure = subprocess.CalledProcessError(7, ['component-contract'])
+        def command(argv, **kwargs):
+          calls.append(list(map(str, argv)))
+          script = Path(str(argv[1]))
+          if script.name == 'contract-test.py':
+            self.assertTrue((args.evidence / 'experiment.json').is_file())
+            self.assertEqual(checkout.call_count, 2)
+            kwargs['stdout'].write(script.parent.name + ' fixture result\n')
+            if script.parent.name == failed_component:
+              raise failure
+          else:
+            self.assertEqual(script.name, 'iso-vm-source-cache-test.sh')
+        original_open, original_close = os.open, os.close
+        def open_kvm(path, *args, **kwargs):
+          return 1000000 if path == '/dev/kvm' else original_open(path, *args, **kwargs)
+        def close_kvm(fd):
+          if fd not in (1000000, 1000001):
+            original_close(fd)
+        with patch.object(module.os, 'open', side_effect=open_kvm), patch.object(module.os, 'close', side_effect=close_kvm), \
+            patch.object(module.fcntl, 'ioctl', side_effect=[12, 1000001]), \
+            patch.object(module, 'disk_budget', return_value={}), patch.object(module, 'git_checkout') as checkout, \
+            patch.object(module.subprocess, 'check_output', return_value='fixture-commit\n'), \
+            patch.object(module, 'overlap_source_fingerprint', return_value=('pinned-source', ())), \
+            patch.object(module, 'command', side_effect=command), \
+            patch.object(module, 'calibration_stage') as calibration:
+          with self.assertRaises(subprocess.CalledProcessError) as caught:
+            module.execute(args)
+        self.assertIs(caught.exception, failure)
+        calibration.assert_not_called()
+        contracts = [Path(argv[1]).parent.name for argv in calls if Path(argv[1]).name == 'contract-test.py']
+        self.assertEqual(contracts, list(module.OVERLAP_COMPONENTS[:module.OVERLAP_COMPONENTS.index(failed_component) + 1]))
+        self.assertEqual(list(args.work.iterdir()), [])
+        self.assertEqual([call.args[1] for call in checkout.call_args_list], [module.HARNESS_PIN, module.FAST_PIN])
+
+  def test_overlap_validation_rejects_stale_sources_logs_and_context_before_preparation(self):
+    for change in ('source', 'log', 'missing-log', 'bench', 'fast', 'evidence', 'wrong-type', 'log-record'):
+      with self.subTest(change=change), tempfile.TemporaryDirectory() as temporary:
+        root = Path(temporary)
+        bench, evidence, fast = (root / name for name in ('bench', 'evidence', 'fast'))
+        evidence.mkdir()
+        def command(argv, **kwargs):
+          kwargs['stdout'].write(Path(argv[1]).parent.name + ' passed\n')
+        with patch.object(module, 'command', side_effect=command) as commands, \
+            patch.object(module, 'overlap_source_fingerprint', return_value=('pinned-source', ())) as fingerprint:
+          validation = module.validate_finalization_overlap(bench, evidence, fast)
+          with self.assertRaises(AttributeError):
+            validation.sources = ('changed', ())
+          commands.reset_mock()
+          if change == 'source':
+            fingerprint.return_value = ('changed-source', ())
+          elif change == 'log':
+            (evidence / 'localdb-overlap-contract.log').write_text('changed result\n')
+          elif change == 'missing-log':
+            (evidence / 'animation-overlap-contract.log').unlink()
+          elif change == 'bench':
+            bench = root / 'other-bench'
+          elif change == 'fast':
+            fast = root / 'other-fast'
+          elif change == 'evidence':
+            evidence = root / 'other-evidence'
+          elif change == 'wrong-type':
+            validation = True
+          elif change == 'log-record':
+            validation = validation._replace(logs=())
+          with self.assertRaises((RuntimeError, FileNotFoundError)):
+            module.prepare_finalization_overlap(bench, root / 'work', evidence, fast, root / 'base',
+              validation=validation)
+          commands.assert_not_called()
+        self.assertFalse((root / 'work').exists())
+
+  def test_overlap_fingerprint_detects_actual_local_source_byte_and_mode_drift(self):
+    with tempfile.TemporaryDirectory() as temporary:
+      root = Path(temporary)
+      bench, fast = root / 'bench', root / 'fast'
+      evidence = root / 'evidence'
+      evidence.mkdir()
+      for name in module.OVERLAP_SOURCE_FILES:
+        source = bench / 'install-speed' / name
+        source.parent.mkdir(parents=True, exist_ok=True)
+        source.write_text(name + '\n')
+        source.chmod(0o644)
+      def command(argv, **kwargs):
+        kwargs['stdout'].write(Path(argv[1]).parent.name + ' passed\n')
+      with patch.object(module.subprocess, 'check_output', return_value=module.FAST_PIN + '\n') as upstream, \
+          patch.object(module, 'command', side_effect=command) as commands:
+        validation = module.validate_finalization_overlap(bench, evidence, fast)
+        original = validation.sources
+        source = bench / 'install-speed/animation-overlap/payload-contract-test.py'
+        source.write_text('changed contract\n')
+        changed_bytes = module.overlap_source_fingerprint(bench, fast)
+        self.assertNotEqual(original, changed_bytes)
+        commands.reset_mock()
+        with self.assertRaisesRegex(RuntimeError, 'sources changed after'):
+          module.prepare_finalization_overlap(bench, root / 'work', evidence, fast, root / 'base',
+            validation=validation)
+        commands.assert_not_called()
+        source.chmod(0o755)
+        self.assertNotEqual(changed_bytes, module.overlap_source_fingerprint(bench, fast))
+        source.unlink()
+        with self.assertRaisesRegex(RuntimeError, 'regular file'):
+          module.overlap_source_fingerprint(bench, fast)
+        upstream.return_value = 'unselected-upstream-commit\n'
+        with self.assertRaisesRegex(RuntimeError, 'selected upstream commit'):
+          module.overlap_source_fingerprint(bench, fast)
 
   def test_early_verify_builds_matched_control_and_fast_reboot_candidate(self):
     # Exercise native fixture selection against the real overlay builder on a
