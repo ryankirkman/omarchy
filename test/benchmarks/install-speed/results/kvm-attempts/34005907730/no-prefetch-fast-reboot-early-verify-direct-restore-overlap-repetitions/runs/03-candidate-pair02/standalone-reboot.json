@@ -1,0 +1,376 @@
+{
+  "schema_version": 1,
+  "passed": true,
+  "outside_install_timing": true,
+  "original_first_installed_ssh_wall_s": 74.84693491000007,
+  "validation_started_host_wall_s": 82.06990730100006,
+  "qemu_pid_before": 7156,
+  "root_before": [
+    {
+      "source": "/dev/vda2[/@]",
+      "fstype": "btrfs",
+      "target": "/"
+    }
+  ],
+  "identity_before": {
+    "machine_id": "30c6e362f25f49b9bd4c6945337f79b4",
+    "ssh_host_key_fingerprints": [
+      "SHA256:x9odruVYzQRQaI+u8YVNOdZiWpD/y4bm5gq+iDS61Uc",
+      "SHA256:cqA+EeFQA/RXomaq8cj8duze+4KcB1AXfvWaV9y0d/k",
+      "SHA256:kysteRdCfSwZ5GgSZtvCnad4m2WhqFqPCDeuAPkqgy8",
+      "SHA256:3R8GIupK6SbWOpoQ/H02jIA6OaTqzqgZ6xl+jOYKLnw"
+    ],
+    "pacman_master_key_fingerprint": "DE99E95D3C5BC31BDE82534D82CB6E0086DB322A",
+    "btrfs_uuid": "a946db46-4310-4e5f-98b2-b1a1cf911699"
+  },
+  "media_plan": [
+    {
+      "drive_id": "iso",
+      "device_id": "installer-cd",
+      "kind": "cdrom"
+    },
+    {
+      "drive_id": "fastimage",
+      "device_id": "fastimage-cd",
+      "kind": "cdrom"
+    },
+    {
+      "drive_id": "cidata",
+      "device_id": "cidata-usb",
+      "kind": "usb-storage"
+    }
+  ],
+  "observed_ssh_disconnect": true,
+  "boot_id_before": "3a8533ad-e7ba-48bb-bb21-1402a18b685a",
+  "media_removal": {
+    "device_deleted_event": {
+      "timestamp": {
+        "seconds": 1788662379,
+        "microseconds": 901191
+      },
+      "event": "DEVICE_DELETED",
+      "data": {
+        "device": "cidata-usb",
+        "path": "/machine/peripheral/cidata-usb"
+      }
+    },
+    "query_block": [
+      {
+        "device": "pflash0",
+        "locked": false,
+        "removable": false,
+        "inserted": {
+          "iops_rd": 0,
+          "detect_zeroes": "off",
+          "image": {
+            "virtual-size": 3653632,
+            "filename": "/usr/share/OVMF/OVMF_CODE_4M.fd",
+            "format": "raw",
+            "actual-size": 3653632,
+            "dirty-flag": false
+          },
+          "iops_wr": 0,
+          "ro": true,
+          "node-name": "#block103",
+          "backing_file_depth": 0,
+          "drv": "raw",
+          "iops": 0,
+          "bps_wr": 0,
+          "write_threshold": 0,
+          "encrypted": false,
+          "bps": 0,
+          "bps_rd": 0,
+          "cache": {
+            "no-flush": false,
+            "direct": false,
+            "writeback": true
+          },
+          "file": "/usr/share/OVMF/OVMF_CODE_4M.fd"
+        },
+        "qdev": "/machine/system.flash0",
+        "type": "unknown"
+      },
+      {
+        "device": "pflash1",
+        "locked": false,
+        "removable": false,
+        "inserted": {
+          "iops_rd": 0,
+          "detect_zeroes": "off",
+          "image": {
+            "virtual-size": 540672,
+            "filename": "/home/runner/work/_temp/omarchy-install-speed/fresh-installs-image-no-package-prefetch-fast-reboot-early-verify-direct-restore-overlap/03-candidate-pair02/OVMF_VARS_4M.fd",
+            "format": "raw",
+            "actual-size": 540672,
+            "dirty-flag": false
+          },
+          "iops_wr": 0,
+          "ro": false,
+          "node-name": "#block322",
+          "backing_file_depth": 0,
+          "drv": "raw",
+          "iops": 0,
+          "bps_wr": 0,
+          "write_threshold": 0,
+          "encrypted": false,
+          "bps": 0,
+          "bps_rd": 0,
+          "cache": {
+            "no-flush": false,
+            "direct": false,
+            "writeback": true
+          },
+          "file": "/home/runner/work/_temp/omarchy-install-speed/fresh-installs-image-no-package-prefetch-fast-reboot-early-verify-direct-restore-overlap/03-candidate-pair02/OVMF_VARS_4M.fd"
+        },
+        "qdev": "/machine/system.flash1",
+        "type": "unknown"
+      },
+      {
+        "io-status": "ok",
+        "device": "target",
+        "locked": false,
+        "removable": false,
+        "inserted": {
+          "iops_rd": 0,
+          "detect_zeroes": "off",
+          "image": {
+            "virtual-size": 42949672960,
+            "filename": "/home/runner/work/_temp/omarchy-install-speed/fresh-installs-image-no-package-prefetch-fast-reboot-early-verify-direct-restore-overlap/03-candidate-pair02/target.qcow2",
+            "cluster-size": 65536,
+            "format": "qcow2",
+            "actual-size": 4807393280,
+            "format-specific": {
+              "type": "qcow2",
+              "data": {
+                "compat": "1.1",
+                "compression-type": "zlib",
+                "lazy-refcounts": false,
+                "refcount-bits": 16,
+                "corrupt": false,
+                "extended-l2": false
+              }
+            },
+            "dirty-flag": false
+          },
+          "iops_wr": 0,
+          "ro": false,
+          "node-name": "#block511",
+          "backing_file_depth": 0,
+          "drv": "qcow2",
+          "iops": 0,
+          "bps_wr": 0,
+          "write_threshold": 0,
+          "encrypted": false,
+          "bps": 0,
+          "bps_rd": 0,
+          "cache": {
+            "no-flush": false,
+            "direct": false,
+            "writeback": true
+          },
+          "file": "/home/runner/work/_temp/omarchy-install-speed/fresh-installs-image-no-package-prefetch-fast-reboot-early-verify-direct-restore-overlap/03-candidate-pair02/target.qcow2"
+        },
+        "qdev": "/machine/peripheral-anon/device[0]/virtio-backend",
+        "type": "unknown"
+      },
+      {
+        "io-status": "ok",
+        "device": "iso",
+        "locked": false,
+        "removable": true,
+        "qdev": "installer-cd",
+        "tray_open": true,
+        "type": "unknown"
+      },
+      {
+        "io-status": "ok",
+        "device": "fastimage",
+        "locked": false,
+        "removable": true,
+        "qdev": "fastimage-cd",
+        "tray_open": true,
+        "type": "unknown"
+      },
+      {
+        "device": "sd0",
+        "locked": false,
+        "removable": true,
+        "type": "unknown"
+      }
+    ]
+  },
+  "media_removed_host_wall_s": 82.41454672700002,
+  "reboot_command": {
+    "returncode": 0,
+    "stdout": "",
+    "stderr": ""
+  },
+  "reboot_requested_host_wall_s": 82.62802423599987,
+  "last_disconnected_host_wall_s": 100.26714277499991,
+  "boot_id_after": "7ab1a64d-12a0-46a6-92e1-ad6b9686c048",
+  "standalone_ssh_ready_host_wall_s": 101.58012967500008,
+  "root_after": [
+    {
+      "source": "/dev/vda2[/@]",
+      "fstype": "btrfs",
+      "target": "/"
+    }
+  ],
+  "identity_after": {
+    "machine_id": "30c6e362f25f49b9bd4c6945337f79b4",
+    "ssh_host_key_fingerprints": [
+      "SHA256:x9odruVYzQRQaI+u8YVNOdZiWpD/y4bm5gq+iDS61Uc",
+      "SHA256:cqA+EeFQA/RXomaq8cj8duze+4KcB1AXfvWaV9y0d/k",
+      "SHA256:kysteRdCfSwZ5GgSZtvCnad4m2WhqFqPCDeuAPkqgy8",
+      "SHA256:3R8GIupK6SbWOpoQ/H02jIA6OaTqzqgZ6xl+jOYKLnw"
+    ],
+    "pacman_master_key_fingerprint": "DE99E95D3C5BC31BDE82534D82CB6E0086DB322A",
+    "btrfs_uuid": "a946db46-4310-4e5f-98b2-b1a1cf911699"
+  },
+  "media_after_reboot": [
+    {
+      "device": "pflash0",
+      "locked": false,
+      "removable": false,
+      "inserted": {
+        "iops_rd": 0,
+        "detect_zeroes": "off",
+        "image": {
+          "virtual-size": 3653632,
+          "filename": "/usr/share/OVMF/OVMF_CODE_4M.fd",
+          "format": "raw",
+          "actual-size": 3653632,
+          "dirty-flag": false
+        },
+        "iops_wr": 0,
+        "ro": true,
+        "node-name": "#block103",
+        "backing_file_depth": 0,
+        "drv": "raw",
+        "iops": 0,
+        "bps_wr": 0,
+        "write_threshold": 0,
+        "encrypted": false,
+        "bps": 0,
+        "bps_rd": 0,
+        "cache": {
+          "no-flush": false,
+          "direct": false,
+          "writeback": true
+        },
+        "file": "/usr/share/OVMF/OVMF_CODE_4M.fd"
+      },
+      "qdev": "/machine/system.flash0",
+      "type": "unknown"
+    },
+    {
+      "device": "pflash1",
+      "locked": false,
+      "removable": false,
+      "inserted": {
+        "iops_rd": 0,
+        "detect_zeroes": "off",
+        "image": {
+          "virtual-size": 540672,
+          "filename": "/home/runner/work/_temp/omarchy-install-speed/fresh-installs-image-no-package-prefetch-fast-reboot-early-verify-direct-restore-overlap/03-candidate-pair02/OVMF_VARS_4M.fd",
+          "format": "raw",
+          "actual-size": 540672,
+          "dirty-flag": false
+        },
+        "iops_wr": 0,
+        "ro": false,
+        "node-name": "#block322",
+        "backing_file_depth": 0,
+        "drv": "raw",
+        "iops": 0,
+        "bps_wr": 0,
+        "write_threshold": 0,
+        "encrypted": false,
+        "bps": 0,
+        "bps_rd": 0,
+        "cache": {
+          "no-flush": false,
+          "direct": false,
+          "writeback": true
+        },
+        "file": "/home/runner/work/_temp/omarchy-install-speed/fresh-installs-image-no-package-prefetch-fast-reboot-early-verify-direct-restore-overlap/03-candidate-pair02/OVMF_VARS_4M.fd"
+      },
+      "qdev": "/machine/system.flash1",
+      "type": "unknown"
+    },
+    {
+      "io-status": "ok",
+      "device": "target",
+      "locked": false,
+      "removable": false,
+      "inserted": {
+        "iops_rd": 0,
+        "detect_zeroes": "off",
+        "image": {
+          "virtual-size": 42949672960,
+          "filename": "/home/runner/work/_temp/omarchy-install-speed/fresh-installs-image-no-package-prefetch-fast-reboot-early-verify-direct-restore-overlap/03-candidate-pair02/target.qcow2",
+          "cluster-size": 65536,
+          "format": "qcow2",
+          "actual-size": 4826865664,
+          "format-specific": {
+            "type": "qcow2",
+            "data": {
+              "compat": "1.1",
+              "compression-type": "zlib",
+              "lazy-refcounts": false,
+              "refcount-bits": 16,
+              "corrupt": false,
+              "extended-l2": false
+            }
+          },
+          "dirty-flag": false
+        },
+        "iops_wr": 0,
+        "ro": false,
+        "node-name": "#block511",
+        "backing_file_depth": 0,
+        "drv": "qcow2",
+        "iops": 0,
+        "bps_wr": 0,
+        "write_threshold": 0,
+        "encrypted": false,
+        "bps": 0,
+        "bps_rd": 0,
+        "cache": {
+          "no-flush": false,
+          "direct": false,
+          "writeback": true
+        },
+        "file": "/home/runner/work/_temp/omarchy-install-speed/fresh-installs-image-no-package-prefetch-fast-reboot-early-verify-direct-restore-overlap/03-candidate-pair02/target.qcow2"
+      },
+      "qdev": "/machine/peripheral-anon/device[0]/virtio-backend",
+      "type": "unknown"
+    },
+    {
+      "io-status": "ok",
+      "device": "iso",
+      "locked": true,
+      "removable": true,
+      "qdev": "installer-cd",
+      "tray_open": false,
+      "type": "unknown"
+    },
+    {
+      "io-status": "ok",
+      "device": "fastimage",
+      "locked": true,
+      "removable": true,
+      "qdev": "fastimage-cd",
+      "tray_open": false,
+      "type": "unknown"
+    },
+    {
+      "device": "sd0",
+      "locked": false,
+      "removable": true,
+      "type": "unknown"
+    }
+  ],
+  "qemu_pid_after": 7156,
+  "validation_finished_host_wall_s": 103.0645444889999
+}

@@ -2,7 +2,7 @@
 
 The optimization target is a complete successful installation into a fresh VM disk, with the same package names and versions, a successful installed-system boot, and no missing package files. Component benchmarks are useful for finding waste, but do not satisfy that target. The initial source baseline is `e8e92c5092c9bbbf3d7fc5240f8551fd1eeaced9` on the fork's `quattro` branch.
 
-The first complete three-pair native trial passed every installation and reboot gate but missed the full-clock target: **1.89833× conservatively**, or 1.96853× using median observed readiness times. Its installer phases alone were 3.26002× faster at the median. The earlier 2.19046× observation remains a single validated pair with a different candidate. These results are kept separate; optimization continues toward a repeated full-clock result above 2×.
+The latest complete three-pair native trial passed every installation and reboot gate and reached **2.07731× at the median** on the full clock. Its conservative bound is **1.99957×**, a narrow miss of the unchanged twofold acceptance gate. The earlier complete direct-write trial reached 1.89833× conservatively; the earlier 2.19046× observation remains a single validated pair with a different candidate. These results are kept separate; optimization continues toward a repeated conservative full-clock result above 2×.
 
 ## Scope and ownership
 
@@ -39,7 +39,7 @@ The [Btrfs UUID experiment](../test/benchmarks/install-speed/uuid/README.md) mea
 
 The [checksum comparison](../test/benchmarks/install-speed/checksum-findings.md) rejected replacing the ISO's SHA-256 checker with OpenSSL. Both actual Arch binaries already use OpenSSL; complete-image measurements showed essentially no gain. The shipping checksum/failure behavior is unchanged. A separate [chunk-verification prototype](../test/benchmarks/install-speed/hash/README.md) changes the manifest format and remains experimental; its modest host-only result does not justify default integration.
 
-The next native candidate [overlaps required file indexing](../test/benchmarks/install-speed/localdb-overlap/README.md) with boot preparation and [runs the complete logo animation](../test/benchmarks/install-speed/animation-overlap/README.md) during the existing finalization child. The index must join before validation and the factory snapshot, and completion/removal messaging still waits for successful target release. Local shell, payload, real indexing-engine and real-console checks passed. The combined candidate has no native speed result yet; its selected recipe and separate provenance are in the [native experiment protocol](../test/benchmarks/install-speed/native-ci/README.md#overlapping-required-finalization-work).
+The latest native candidate [overlaps required file indexing](../test/benchmarks/install-speed/localdb-overlap/README.md) with boot preparation and [runs the complete logo animation](../test/benchmarks/install-speed/animation-overlap/README.md) during the existing finalization child. The index must join before validation and the factory snapshot, and completion/removal messaging still waits for successful target release. Local shell, payload, real indexing-engine and real-console checks passed, followed by all six fresh native installs and media-free second boots. Its selected recipe and separate provenance are in the [native experiment protocol](../test/benchmarks/install-speed/native-ci/README.md#overlapping-required-finalization-work); the complete result appears below.
 
 ## Complete-install measurement
 
@@ -134,3 +134,19 @@ That diagnostic run exited before image building or comparisons. It supplies fou
 The median observed speedup is 1.968526×. The conservative bound is 187.697 / 98.875 = **1.898331×**, so the full-clock twofold flag is false. This is a valid performance miss, not an installation or boot failure. All 941 package versions, explicit/dependency reasons, complete file-count rows, fresh identities, cold-source-page checks and clean exits passed. The shared image build took 782.082 seconds outside installation timing.
 
 Candidate installer phases took 40.087–41.530 seconds. Root-image unpacking took 16.520–16.654 seconds, configuring the system took 7.228–7.608 seconds, and parallel boot/user finalization took 9.701–10.977 seconds. These identify the remaining work; comparison with another run cannot isolate the incremental effect of direct I/O. This trial would need its slowest candidate readiness bound at or below 93.849 seconds to pass the unchanged conservative target, a gap of about 5.03 seconds. No sample was retried, dropped or substituted.
+
+## Complete three-pair finalization-overlap comparison
+
+[Run 34005907730](https://github.com/ryankirkman/omarchy/actions/runs/34005907730) completed all six fresh installations and all six ordinary second boots without installation media. The [270 original artifact files](../test/benchmarks/install-speed/results/kvm-attempts/34005907730/) retain the comparison and original sample seals. All 180 sample-seal hashes and the strict comparison were independently rechecked.
+
+| Full-clock readiness interval | Control | Finalization-overlap candidate |
+| --- | ---: | ---: |
+| Pair 1 | 161.862–166.325 s | 71.053–75.465 s |
+| Pair 2 | 151.205–155.584 s | 70.453–74.847 s |
+| Pair 3 | 150.897–155.341 s | 70.543–74.897 s |
+
+The median observed speedup is **2.077305×**, from 155.584 to 74.897 seconds. The conservative bound is 150.896607851 / 75.464546259 = **1.999569537×**. The strict twofold flag remains false: the slowest candidate's upper bound exceeds half the fastest control's lower bound by 0.016242 seconds. No sample was retried, dropped, substituted or rounded into a pass. All 941 package versions, 158 explicit reasons, 941 complete file-count rows, distinct installation identities, cold-source checks and clean QEMU exits passed. The shared image build took 619.064 seconds outside per-install timing.
+
+Candidate installer phases took 30.718–31.203 seconds, separately from the full clock. Image unpacking took 14.321–14.532 seconds and boot finalization took 9.082–9.411 seconds. The ordered user branch, including required file indexing, took 7.849–8.825 seconds and joined before the boot branch finished in every sample. The complete finalization animation ran for 4.14–4.28 guest-uptime seconds and exited successfully in all three candidates. These timings confirm overlap in the tested candidate; comparison with a different Actions run does not isolate the incremental savings of either component.
+
+The preceding attempt, [34004881555](https://github.com/ryankirkman/omarchy/actions/runs/34004881555), completed calibration and image building but stopped at a host-only contract test before measuring any pairs. Its test refused a host character device at `/dev/ttyS0`. The corrected contract uses an owned temporary sink and does not touch host serial devices; installer payload bytes were unchanged. That failed attempt is retained separately and contributes no paired timings.

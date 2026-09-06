@@ -1,0 +1,11 @@
+ok - successful-release
+ok - successful-encrypted-release
+ok - first-sync-failure-falls-back
+ok - last-sync-failure-falls-back
+ok - unmount-failure-falls-back
+ok - mapper-close-failure-falls-back
+ok - unanswerable-mapper-falls-back
+ok - immediate-systemctl-fallback
+ok - graceful-systemctl-fallback
+ok - variant activates after normal overlay, and corrupt payload aborts before activation
+ok - pinned payload provenance, release ordering and all reboot fallbacks; no real reboot executed
