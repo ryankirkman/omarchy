@@ -1,0 +1,20 @@
+{
+  "schema_version": 1,
+  "logging_scope": "serial-system-finalizer-only",
+  "claim_scope": "fresh TCG component regression screen only; no native or full-install inference",
+  "one_time_controller_module_load_in_component_stopwatch": false,
+  "result": {
+    "path": "system-only-guest-result.json",
+    "bytes": 11824,
+    "sha256": "6a9c4475bba2fc88916538af117ea1ba933e17d81f147ac09186144bf3359422"
+  },
+  "source_sha256": {
+    "contract-test.py": "79882edca61a7c073141c20be3572a0a1378e7717f915b3b9503c1b0a20aaa6d",
+    "guard.py": "639365971a6080341de18705a5ca504322bb4574ed72e86605fccac0180eb466",
+    "guest-contract.py": "14122f3bb037d796ba1b2575ebbf1fdd64ba84c752f446228927fb6118f5430f",
+    "patch.py": "1c7ef3cc17eaca73c56bd24735f6bbe96a1b317d68e90ca338d0bcf6438ae8fa",
+    "payload-contract-test.py": "2d630d1af13351ca4f535a559c43e8c0885722aab632fd888d0dc8451188450f",
+    "preflight.sh": "70842c07219139c13d7ef742d47aee35367477dab5577c697fdaf99e224ad586",
+    "prepare-payload.py": "052e8a91bf01816da41f0cf1406b5c5392560ce18481aa17c1ed86a5c7926e35"
+  }
+}

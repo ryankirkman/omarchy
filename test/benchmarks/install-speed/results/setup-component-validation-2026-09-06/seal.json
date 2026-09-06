@@ -1,0 +1,41 @@
+{
+  "scope": "Finalized host component contracts and actual native payload preparation only; no VM or install timing",
+  "files": {
+    "animation-overlap-contract.log": {
+      "bytes": 456,
+      "sha256": "a684ad77112f0579f3d730f71203ae7ad37e839d269daab90e02412b4e573797"
+    },
+    "firewall-overlap-contract.log": {
+      "bytes": 105,
+      "sha256": "bcc00aae62dbed820ecf4e735ce356127b8c1ad0847c4a6509514498f8015067"
+    },
+    "firewall-overlap.manifest.json": {
+      "bytes": 6707,
+      "sha256": "ae108fbb9f406a24d3cfb56a357319f9138e9aa9e47f13a28d38c5f040467442"
+    },
+    "localdb-overlap-contract.log": {
+      "bytes": 2152,
+      "sha256": "d0ce7266cb035f4727b24b4f63dd73212dc3dd71f9dea6c7960d63e08a0bd2cf"
+    },
+    "logging-bind-contract.log": {
+      "bytes": 3117,
+      "sha256": "b70de49f244bc6e75f0ce80830d7b0b528295ca9aa521fa1caf845a61c9595ff"
+    },
+    "logging-bind.manifest.json": {
+      "bytes": 8360,
+      "sha256": "ce2a26e6816a9c375217d5b154e5d55ef021f0439a2a5e81f4f282eed868cbc2"
+    },
+    "native-contract.log": {
+      "bytes": 103,
+      "sha256": "f9ac9d11ca408a88041b7ef3abfad4d4836dfed259a75dd305e3314381f0199e"
+    },
+    "preparation.json": {
+      "bytes": 6753,
+      "sha256": "93ad4307d93be3fec00ab4c3eb85aa1f5292f94e287464f634dc11b0f6b1bcef"
+    },
+    "preparation.log": {
+      "bytes": 18094,
+      "sha256": "82b8edf7ac907ce531025050d35891a4194c63c8c760f3275fbe482ce2cfa74d"
+    }
+  }
+}

@@ -1,0 +1,49 @@
+{
+  "schema_version": 1,
+  "scope": "All attempts are diagnostic-only TCG component fixtures; no installation or native performance acceptance",
+  "attempts": [
+    {
+      "number": 1,
+      "source": "01-guest-contract.py",
+      "response": "01-handshake-failure.json",
+      "status": "fixture-failed",
+      "error": "Missing child output before first handshake",
+      "source_sha256": "34006a8c800bfedb21f83bbb9f1f0c8d67b7aca9d85daddc323bbd24ff50743a"
+    },
+    {
+      "number": 2,
+      "source": "02-guest-contract.py",
+      "response": "02-captured-failure.json",
+      "status": "fixture-failed",
+      "error": "arch-chroot temporary /tmp mount hid fixture leaf and handshake files",
+      "source_sha256": "479e9dd78dc83dc25c42a318c5633c0508e020964cd2715134c78d203b560ac1"
+    },
+    {
+      "number": 3,
+      "source": "03-guest-contract.py",
+      "response": "03-all-calls-result.json",
+      "parsed_result": "03-all-calls-parsed.json",
+      "status": "functional-pass-performance-regression",
+      "median_baseline_seconds": 14.641953022999928,
+      "median_candidate_seconds": 15.879115259999935,
+      "all_three_component_pairs_slower": true,
+      "accepted_for_native_speed_claim": false,
+      "source_sha256": "42d3f43b0540ae5c4fd0f6bc5a7a848b8223ec313752507b3870927424700dda"
+    },
+    {
+      "number": 4,
+      "source": "04-guest-contract.py",
+      "response": "04-system-only-result.json",
+      "parsed_result": "04-system-only-parsed.json",
+      "status": "functional-pass-component-improvement",
+      "logging_scope": "serial-system-finalizer-only",
+      "median_baseline_seconds": 15.316386915999828,
+      "median_candidate_seconds": 12.076731655999993,
+      "median_saved_seconds": 3.239655259999836,
+      "median_speedup": 1.2682559613213151,
+      "all_three_component_pairs_faster": true,
+      "accepted_for_native_speed_claim": false,
+      "source_sha256": "14122f3bb037d796ba1b2575ebbf1fdd64ba84c752f446228927fb6118f5430f"
+    }
+  ]
+}

@@ -1,0 +1,202 @@
+{
+  "reason": "Install timed out after 600s",
+  "after_measurement_failure": true,
+  "steps": [
+    {
+      "label": "usernet",
+      "host_wall_s": 601.5979197330016,
+      "result": "Hub -1 (net0):\r\n  Protocol[State]    FD  Source Address  Port   Dest. Address  Port RecvQ SendQ\r\n  TCP[SYN_SENT]      43       127.0.0.1 24022       10.0.2.15    22     0     0\r\n  TCP[SYN_SENT]      42       127.0.0.1 24022       10.0.2.15    22     0     0\r\n  TCP[SYN_SENT]      41       127.0.0.1 24022       10.0.2.15    22     0     0\r\n  TCP[SYN_SENT]      40       127.0.0.1 24022       10.0.2.15    22     0     0\r\n  TCP[SYN_SENT]      35       127.0.0.1 24022       10.0.2.15    22     0     0\r\n  TCP[SYN_SENT]      25       127.0.0.1 24022       10.0.2.15    22     0     0\r\n  TCP[SYN_SENT]      23       127.0.0.1 24022       10.0.2.15    22     0     0\r\n  TCP[SYN_SENT]      24       127.0.0.1 24022       10.0.2.15    22     0     0\r\n  TCP[SYN_SENT]      54       127.0.0.1 24022       10.0.2.15    22     0     0\r\n  TCP[SYN_SENT]      22       127.0.0.1 24022       10.0.2.15    22     0     0\r\n  TCP[SYN_SENT]      53       127.0.0.1 24022       10.0.2.15    22     0     0\r\n  TCP[SYN_SENT]      52       127.0.0.1 24022       10.0.2.15    22     0     0\r\n  TCP[SYN_SENT]      51       127.0.0.1 24022       10.0.2.15    22     0     0\r\n  TCP[SYN_SENT]      50       127.0.0.1 24022       10.0.2.15    22     0     0\r\n  TCP[SYN_SENT]      49       127.0.0.1 24022       10.0.2.15    22     0     0\r\n  TCP[SYN_SENT]      48       127.0.0.1 24022       10.0.2.15    22     0     0\r\n  TCP[SYN_SENT]      47       127.0.0.1 24022       10.0.2.15    22     0     0\r\n  TCP[SYN_SENT]      46       127.0.0.1 24022       10.0.2.15    22     0     0\r\n  TCP[SYN_SENT]      45       127.0.0.1 24022       10.0.2.15    22     0     0\r\n  TCP[HOST_FORWARD]  16       127.0.0.1 24022       10.0.2.15    22     0     0\r\n"
+    },
+    {
+      "label": "network",
+      "host_wall_s": 601.6066369000037,
+      "result": "virtio-net-pci.0: index=0,type=nic,model=virtio-net-pci,macaddr=52:54:00:12:34:56\r\n \\ net0: index=0,type=user,net=10.0.2.0,restrict=off\r\n"
+    },
+    {
+      "label": "before-keys",
+      "host_wall_s": 601.6075856600073,
+      "result": "/tmp/omarchy-bench/setup-overlap-functional-01/vm/timeout-before-keys.png"
+    },
+    {
+      "label": "send-escape",
+      "host_wall_s": 601.6401413560088,
+      "result": {}
+    },
+    {
+      "label": "after-escape",
+      "host_wall_s": 602.6417433870083,
+      "result": "/tmp/omarchy-bench/setup-overlap-functional-01/vm/timeout-after-escape.png"
+    },
+    {
+      "label": "send-tty2",
+      "host_wall_s": 602.6692712570075,
+      "result": {}
+    },
+    {
+      "label": "after-tty2",
+      "host_wall_s": 603.671029227,
+      "result": "/tmp/omarchy-bench/setup-overlap-functional-01/vm/timeout-after-tty2.png"
+    },
+    {
+      "label": "cpus",
+      "host_wall_s": 603.6923241550103,
+      "result": [
+        {
+          "thread-id": 31,
+          "props": {
+            "core-id": 0,
+            "thread-id": 0,
+            "socket-id": 0
+          },
+          "qom-path": "/machine/unattached/device[0]",
+          "cpu-index": 0,
+          "target": "x86_64"
+        },
+        {
+          "thread-id": 32,
+          "props": {
+            "core-id": 1,
+            "thread-id": 0,
+            "socket-id": 0
+          },
+          "qom-path": "/machine/unattached/device[2]",
+          "cpu-index": 1,
+          "target": "x86_64"
+        },
+        {
+          "thread-id": 33,
+          "props": {
+            "core-id": 2,
+            "thread-id": 0,
+            "socket-id": 0
+          },
+          "qom-path": "/machine/unattached/device[3]",
+          "cpu-index": 2,
+          "target": "x86_64"
+        },
+        {
+          "thread-id": 34,
+          "props": {
+            "core-id": 3,
+            "thread-id": 0,
+            "socket-id": 0
+          },
+          "qom-path": "/machine/unattached/device[4]",
+          "cpu-index": 3,
+          "target": "x86_64"
+        }
+      ]
+    },
+    {
+      "label": "registers",
+      "host_wall_s": 603.6942664890084,
+      "result": "\r\nCPU#0\r\nRAX=0000000000000000 RBX=0000000000000000 RCX=00000000c0000080 RDX=0000000000000000\r\nRSI=00000000000000ff RDI=ff133b7637c18060 RBP=ff133b7682150000 RSP=ff69141680003fd8\r\nR8 =0000000000000000 R9 =0000000000000000 R10=0000000000000000 R11=0000000000000000\r\nR12=0000000000000000 R13=0000000000000000 R14=0000000000000000 R15=0000000000000000\r\nRIP=ffffffffb28f7cf5 RFL=00000046 [---Z-P-] CPL=0 II=0 A20=1 SMM=0 HLT=1\r\nES =0000 0000000000000000 00000000 00000000\r\nCS =0010 0000000000000000 ffffffff 00af9b00 DPL=0 CS64 [-RA]\r\nSS =0018 0000000000000000 ffffffff 00cf9300 DPL=0 DS   [-WA]\r\nDS =0000 0000000000000000 00000000 00000000\r\nFS =0000 0000000000000000 00000000 00000000\r\nGS =0000 ff133b7682150000 00000000 00000000\r\nLDT=0000 0000000000000000 00000000 00008200 DPL=0 LDT\r\nTR =0040 fffffe4ad20ae000 00004087 00008900 DPL=0 TSS64-avl\r\nGDT=     fffffe4ad20ac000 0000007f\r\nIDT=     fffffe0000000000 00000fff\r\nCR0=80050033 CR2=0000564bd93104b8 CR3=00000001187c5000 CR4=00751ef0\r\nDR0=0000000000000000 DR1=0000000000000000 DR2=0000000000000000 DR3=0000000000000000 \r\nDR6=00000000ffff0ff0 DR7=0000000000000400\r\nEFER=0000000000000d01\r\nFCW=037f FSW=0000 [ST=0] FTW=00 MXCSR=00001fa0\r\nFPR0=0000000000000000 0000 FPR1=0000000000000000 0000\r\nFPR2=0000000000000000 0000 FPR3=0000000000000000 0000\r\nFPR4=0000000000000000 0000 FPR5=0000000000000000 0000\r\nFPR6=0000000000000000 0000 FPR7=0000000000000000 0000\r\nYMM00=0000000000000000 0000000000000000 0000000000000000 403ebe65622b298b\r\nYMM01=0000000000000000 0000000000000000 0000000000000000 402de5c9db3926c0\r\nYMM02=0000000000000000 0000000000000000 0000000000000000 41c62a3e6c800000\r\nYMM03=0000000000000000 0000000000000000 0000000000000000 403ebe068e8b2ed9\r\nYMM04=0000000000000000 0000000000000000 0000000000000000 0000000000000000\r\nYMM05=0000000000000000 0000000000000000 0000000000000000 0000000000000000\r\nYMM06=0000000000000000 0000000000000000 0000000000000000 0000000000000000\r\nYMM07=0000000000000000 0000000000000000 0000000000000000 3fa351fd3c9b0000\r\nYMM08=0000000000000000 0000000000000000 0000000000000000 3fe77781de8b11f7\r\nYMM09=0000000000000000 0000000000000000 0000000000000000 0000000000000001\r\nYMM10=0000000000000000 0000000000000000 0000000000000000 0000000000000000\r\nYMM11=0000000000000000 0000000000000000 0000000000000000 0000000000000000\r\nYMM12=0000000000000000 0000000000000000 0000000000000000 0000000000000000\r\nYMM13=0000000000000000 0000000000000000 0000000000000000 0000000000000000\r\nYMM14=0000000000000000 0000000000000000 0000000000000000 0000000000000000\r\nYMM15=0000000000000000 0000000000000000 0000000000000000 0000000000000000\r\n"
+    },
+    {
+      "label": "live-console",
+      "host_wall_s": 603.6981391810114,
+      "result": {
+        "schema_version": 1,
+        "measurement_valid": false,
+        "status": "failed",
+        "after_measurement_failure": true,
+        "original_failure": "Install timed out after 600s",
+        "budget_seconds": 90,
+        "output_limit_bytes": 262144,
+        "authenticated_root": false,
+        "commands_started": false,
+        "interventions": [
+          {
+            "kind": "qmp-chardev-change",
+            "id": "serial0",
+            "backend": {
+              "type": "socket",
+              "data": {
+                "addr": {
+                  "type": "inet",
+                  "data": {
+                    "host": "127.0.0.1",
+                    "port": "0",
+                    "ipv4": true
+                  }
+                },
+                "server": true,
+                "wait": false,
+                "telnet": false
+              }
+            },
+            "at_monotonic_s": 117120.00025212
+          },
+          {
+            "kind": "refresh-login-prompt",
+            "at_monotonic_s": 117120.004217919,
+            "input": "\r"
+          }
+        ],
+        "helper_sha256": "52400893cb2bfdf957b5408c5fbb97ec428f42290a5f74a1b5ee7c84ef3cc884",
+        "observed_chardevs_before_guard": [
+          {
+            "frontend-open": true,
+            "filename": "vc",
+            "label": "parallel0"
+          },
+          {
+            "frontend-open": true,
+            "filename": "tcp:127.0.0.1:24444,server=on <-> 127.0.0.1:35702",
+            "label": "compat_monitor0"
+          },
+          {
+            "frontend-open": true,
+            "filename": "file",
+            "label": "serial0"
+          }
+        ],
+        "owned_qemu": {
+          "pid": 27,
+          "live": true,
+          "actual_argv_matches_manifest": true,
+          "serial_argument": "file:/tmp/omarchy-bench/setup-overlap-functional-01/vm/serial.log",
+          "argv_sha256": "7aebb1eaa730c05781154726eb85357dada16467df04f3018bb5e85b3586ac48"
+        },
+        "backend": {
+          "type": "socket",
+          "data": {
+            "addr": {
+              "type": "inet",
+              "data": {
+                "host": "127.0.0.1",
+                "port": "0",
+                "ipv4": true
+              }
+            },
+            "server": true,
+            "wait": false,
+            "telnet": false
+          }
+        },
+        "original_serial": {
+          "bytes_before_switch": 87,
+          "bytes": 87,
+          "sha256": "e1156c9971b32fa096fa70290161cf4bad3f49f066ddd30746fd3e6f75a16fa6",
+          "bytes_received_before_backend_detached": 0,
+          "preservation": "Original file is closed by chardev-change and never opened for writing by diagnostics",
+          "unchanged_during_console_capture": true
+        },
+        "observed_backend": {
+          "frontend-open": true,
+          "filename": "disconnected:tcp:127.0.0.1:37503,server=on",
+          "label": "serial0"
+        },
+        "connection": {
+          "host": "127.0.0.1",
+          "port": 37503
+        },
+        "error_type": "TimeoutError",
+        "error": "Expected console boundary did not arrive before its deadline",
+        "received_bytes": 0,
+        "output_truncated": false,
+        "elapsed_seconds": 20.011240207997616
+      }
+    }
+  ]
+}

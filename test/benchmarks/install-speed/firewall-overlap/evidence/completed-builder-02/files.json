@@ -1,0 +1,34 @@
+{
+  "completion.json": {
+    "sha256": "fb1b97c12fe522547308210454a30d285b721bf7c47603b2589f77cca744bff4",
+    "bytes": 2925
+  },
+  "contracts-source.json": {
+    "sha256": "8d1e5c9994e1c95264509f6e55b375c1aa25c7ea03c30beaed68fd48013fd5a2",
+    "bytes": 1167
+  },
+  "guest-cleanup.json": {
+    "sha256": "d758abf9e3894288c46a6c2c2dfd32c01fa2b6eeca292917b0ef9d4b90ef8c36",
+    "bytes": 413
+  },
+  "launch.json": {
+    "sha256": "f4c1cb1f1c9b06c7dfd212089ee5d3b233db38d9bcda38151c48b2282b0c78e7",
+    "bytes": 1748
+  },
+  "qemu.log": {
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "bytes": 0
+  },
+  "serial.log": {
+    "sha256": "e1156c9971b32fa096fa70290161cf4bad3f49f066ddd30746fd3e6f75a16fa6",
+    "bytes": 87
+  },
+  "supervisor-completion.json": {
+    "sha256": "d4df9e6f0ceb2c1703c31369aa747b45d64781d7e5649a5d0f152d3541b623c8",
+    "bytes": 57
+  },
+  "target-allocation-map.json": {
+    "sha256": "873bdf5b3af744fe0320013c53786b5bbc65d0cb2f910c6e283e05646f9a7381",
+    "bytes": 119
+  }
+}

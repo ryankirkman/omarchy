@@ -1,0 +1,32 @@
+test_command_preserves_root_user_and_arguments (__main__.GuardContract.test_command_preserves_root_user_and_arguments) ... ok
+test_exact_hashes_modes_and_no_symlink (__main__.GuardContract.test_exact_hashes_modes_and_no_symlink) ... ok
+test_owned_namespace_descriptor_and_child_failure_status (__main__.GuardContract.test_owned_namespace_descriptor_and_child_failure_status) ... ok
+test_parent_requires_unshare_and_no_existing_mount (__main__.GuardContract.test_parent_requires_unshare_and_no_existing_mount) ... ok
+test_private_lifecycle_joins_cleanup_and_propagates_failure (__main__.GuardContract.test_private_lifecycle_joins_cleanup_and_propagates_failure) ... ok
+test_readonly_setup_failure_cleans_without_running_child (__main__.GuardContract.test_readonly_setup_failure_cleans_without_running_child) ... ok
+test_same_namespace_rejected_before_mount_or_child (__main__.GuardContract.test_same_namespace_rejected_before_mount_or_child) ... ok
+test_target_parent_symlink_and_root_rejected (__main__.GuardContract.test_target_parent_symlink_and_root_rejected) ... ok
+test_unmount_failure_cannot_report_success (__main__.GuardContract.test_unmount_failure_cannot_report_success) ... ok
+
+----------------------------------------------------------------------
+Ran 9 tests in 0.012s
+
+OK
+test_activation_order_and_fail_closed_live_boundaries (__main__.PayloadContract.test_activation_order_and_fail_closed_live_boundaries) ... ok
+test_actual_generated_setup_finally_runs_for_success_child_failure_and_guard_refusal (__main__.PayloadContract.test_actual_generated_setup_finally_runs_for_success_child_failure_and_guard_refusal) ... ok
+test_changed_inherited_inventory_and_exact_source_pins_fail (__main__.PayloadContract.test_changed_inherited_inventory_and_exact_source_pins_fail) ... ok
+test_changed_repository_logger_is_rejected (__main__.PayloadContract.test_changed_repository_logger_is_rejected) ... ok
+test_corrupt_missing_extra_duplicate_symlink_and_mode_fail_before_activation (__main__.PayloadContract.test_corrupt_missing_extra_duplicate_symlink_and_mode_fail_before_activation) ... ok
+test_default_setup_keeps_original_child_execution_and_finally_cleanup (__main__.PayloadContract.test_default_setup_keeps_original_child_execution_and_finally_cleanup) ... ok
+test_exact_variants_preserve_every_inherited_file_and_mode (__main__.PayloadContract.test_exact_variants_preserve_every_inherited_file_and_mode) ... ok
+test_generated_phase_loads_exact_guard_once_and_preserves_argv (__main__.PayloadContract.test_generated_phase_loads_exact_guard_once_and_preserves_argv) ... ok
+test_generated_phase_rejects_missing_changed_and_symlink_guard_before_loading (__main__.PayloadContract.test_generated_phase_rejects_missing_changed_and_symlink_guard_before_loading) ... ok
+test_rehashed_unapproved_activation_is_rejected (__main__.PayloadContract.test_rehashed_unapproved_activation_is_rejected) ... ok
+test_symlinks_and_output_inside_base_are_rejected (__main__.PayloadContract.test_symlinks_and_output_inside_base_are_rejected) ... ok
+test_system_finalizer_is_sole_opt_in_and_always_retires_hook_mask (__main__.PayloadContract.test_system_finalizer_is_sole_opt_in_and_always_retires_hook_mask) ... ok
+test_unapproved_variant_pin_or_preflight_fails_before_staging (__main__.PayloadContract.test_unapproved_variant_pin_or_preflight_fails_before_staging) ... ok
+
+----------------------------------------------------------------------
+Ran 13 tests in 2.047s
+
+OK

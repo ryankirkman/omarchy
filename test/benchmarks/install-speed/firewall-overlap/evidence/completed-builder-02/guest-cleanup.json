@@ -1,0 +1,13 @@
+{
+  "scope": "Owned shared guest temporary contract staging/output cleanup only",
+  "removed": [
+    "/tmp/omarchy-setup-contracts",
+    "/tmp/firewall-overlap-guest-result.json",
+    "/tmp/logging-bind-guest-result-v3.json",
+    "/tmp/logging-bind-guest-result-system-only.json"
+  ],
+  "fixture_directories_remaining": [],
+  "fixture_mounts_remaining": [],
+  "staging_removed": true,
+  "outputs_removed": true
+}

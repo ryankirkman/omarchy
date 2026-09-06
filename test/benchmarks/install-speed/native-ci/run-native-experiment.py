@@ -28,7 +28,9 @@ CMDLINE = 'archisobasedir=arch archisosearchuuid=2026-08-31-03-24-58-00 quiet sp
 EARLY_VERIFY_VARIANT = 'image-no-package-prefetch-fast-reboot-early-verify'
 DIRECT_RESTORE_VARIANT = EARLY_VERIFY_VARIANT + '-direct-restore'
 FINALIZATION_OVERLAP_VARIANT = DIRECT_RESTORE_VARIANT + '-overlap'
-EARLY_VARIANTS = (EARLY_VERIFY_VARIANT, DIRECT_RESTORE_VARIANT, FINALIZATION_OVERLAP_VARIANT)
+SETUP_OVERLAP_VARIANT = FINALIZATION_OVERLAP_VARIANT + '-firewall-logging'
+OVERLAP_VARIANTS = (FINALIZATION_OVERLAP_VARIANT, SETUP_OVERLAP_VARIANT)
+EARLY_VARIANTS = (EARLY_VERIFY_VARIANT, DIRECT_RESTORE_VARIANT, *OVERLAP_VARIANTS)
 EVIDENCE_FILES = {
   'manifest.json', 'validation.json', 'install-timing.json', 'install-log-events.json', 'package-manifest.txt',
   'package-explicit.txt', 'package-files.txt', 'package-files.stderr', 'identity.json',
@@ -106,10 +108,12 @@ def early_variant_configuration(variant):
   if variant not in EARLY_VARIANTS:
     raise ValueError('Not an early-preflight variant')
   suffix = {EARLY_VERIFY_VARIANT: '', DIRECT_RESTORE_VARIANT: '-direct-restore',
-    FINALIZATION_OVERLAP_VARIANT: '-direct-restore-overlap'}[variant]
+    FINALIZATION_OVERLAP_VARIANT: '-direct-restore-overlap',
+    SETUP_OVERLAP_VARIANT: '-direct-restore-overlap-firewall-logging'}[variant]
   provenance_key = {EARLY_VERIFY_VARIANT: 'early_preflight_variant',
     DIRECT_RESTORE_VARIANT: 'direct_restore_variant',
-    FINALIZATION_OVERLAP_VARIANT: 'finalization_overlap_variant'}[variant]
+    FINALIZATION_OVERLAP_VARIANT: 'finalization_overlap_variant',
+    SETUP_OVERLAP_VARIANT: 'setup_overlap_variant'}[variant]
   return {'candidate_label': 'candidate-no-prefetch-fast-reboot-early-verify' + suffix,
     'output_name': 'no-prefetch-fast-reboot-early-verify' + suffix + '-repetitions',
     'provenance_key': provenance_key}
@@ -137,16 +141,23 @@ def early_preflight_provenance(variant, control, candidate, preflight, source_ca
     'source_cache': source_cache, 'boot_method': boot_method,
     'pairs': 3, 'comparison': configuration['output_name'] + '/comparison.json',
   }
-  if variant in (DIRECT_RESTORE_VARIANT, FINALIZATION_OVERLAP_VARIANT):
+  if variant in (DIRECT_RESTORE_VARIANT, *OVERLAP_VARIANTS):
     record.update({'base_variant': EARLY_VERIFY_VARIANT,
       'payload_manifest': 'direct-restore.manifest.json',
       'supplemental_image_changed': False, 'target_cache': 'none'})
-  if variant == FINALIZATION_OVERLAP_VARIANT:
+  if variant in OVERLAP_VARIANTS:
     record.update({'base_variant': DIRECT_RESTORE_VARIANT,
       'payload_manifest': 'animation-overlap.manifest.json',
       'component_manifests': ['direct-restore.manifest.json', 'localdb-overlap.manifest.json',
         'animation-overlap.manifest.json'],
       'required_work': 'File index joins existing finalization; complete animation precedes release-gated completion'})
+  if variant == SETUP_OVERLAP_VARIANT:
+    record.update({'base_variant': FINALIZATION_OVERLAP_VARIANT,
+      'payload_manifest': 'logging-bind.manifest.json',
+      'component_manifests': record['component_manifests'] +
+        ['firewall-overlap.manifest.json', 'logging-bind.manifest.json'],
+      'logging_scope': 'serial-system-finalizer-only',
+      'required_work': 'Unchanged firewall commands precede user setup and indexing in the joined user branch; only serial system setup sees the temporary private read-only logging helper'})
   return record
 
 
@@ -225,6 +236,76 @@ def prepare_finalization_overlap(bench, work, evidence, fast, payload, *, valida
     if component == 'animation-overlap':
       argv += ['--base-preflight', preflight]
     command(argv)
+    manifest = output.with_name(output.name + '.manifest.json')
+    shutil.copyfile(manifest, evidence / (component + '.manifest.json'))
+    payload, preflight = output, scripts / 'preflight.sh'
+  return payload, preflight, manifest
+
+
+SETUP_COMPONENTS = ('firewall-overlap', 'logging-bind')
+SETUP_SOURCE_FILES = (
+  'firewall-overlap/patch.py', 'firewall-overlap/prepare-payload.py',
+  'firewall-overlap/preflight.sh', 'firewall-overlap/contract-test.py',
+  'firewall-overlap/fixtures/runtime/usr/share/omarchy/install/config/all.sh',
+  'firewall-overlap/fixtures/runtime/usr/share/omarchy/install/config/firewall.sh',
+  'logging-bind/patch.py', 'logging-bind/guard.py', 'logging-bind/prepare-payload.py',
+  'logging-bind/preflight.sh', 'logging-bind/contract-test.py', 'logging-bind/payload-contract-test.py',
+  'logging-bind/guest-contract.py',
+)
+
+
+class _SetupValidation(NamedTuple):
+  bench: Path
+  fast: Path
+  evidence: Path
+  sources: tuple
+  logs: tuple
+
+
+def setup_source_fingerprint(bench, fast):
+  upstream, inherited = overlap_source_fingerprint(bench, fast)
+  files = list(inherited)
+  inputs = [(name, bench / 'install-speed' / name) for name in SETUP_SOURCE_FILES]
+  inputs.extend((name, bench.parents[1] / name) for name in ('install/helpers/logging.sh', 'LICENSE'))
+  for name, path in inputs:
+    if path.is_symlink() or not path.is_file():
+      raise RuntimeError(f'Setup optimization source must be a regular file: {name}')
+    files.append((name, digest(path), path.stat().st_mode & 0o7777))
+  return upstream, tuple(files)
+
+
+def validate_setup_overlap(bench, evidence, fast):
+  sources = setup_source_fingerprint(bench, fast)
+  logs = []
+  for component in SETUP_COMPONENTS:
+    scripts = bench / 'install-speed' / component
+    path = evidence / (component + '-contract.log')
+    with path.open('w') as log:
+      command([sys.executable, scripts / 'contract-test.py', '--iso-source', fast],
+        stdout=log, stderr=subprocess.STDOUT, timeout=120)
+    logs.append((path.name, digest(path)))
+  if setup_source_fingerprint(bench, fast) != sources:
+    raise RuntimeError('Setup optimization sources changed during contract validation')
+  return _SetupValidation(bench.resolve(), fast.resolve(), evidence.resolve(), sources, tuple(logs))
+
+
+def prepare_setup_overlap(bench, work, evidence, fast, payload, preflight, *, validation=None):
+  if validation is None:
+    validation = validate_setup_overlap(bench, evidence, fast)
+  if (type(validation) is not _SetupValidation or
+      (validation.bench, validation.fast, validation.evidence) != (bench.resolve(), fast.resolve(), evidence.resolve())):
+    raise RuntimeError('Setup preparation requires its matching contract validation result')
+  if setup_source_fingerprint(bench, fast) != validation.sources:
+    raise RuntimeError('Setup optimization sources changed after contract validation')
+  logs = tuple((component + '-contract.log', digest(evidence / (component + '-contract.log')))
+    for component in SETUP_COMPONENTS)
+  if logs != validation.logs:
+    raise RuntimeError('Setup optimization contract evidence changed after validation')
+  for component in SETUP_COMPONENTS:
+    scripts = bench / 'install-speed' / component
+    output = work / ('candidate-' + component + '-payload')
+    command([sys.executable, scripts / 'prepare-payload.py', '--iso-source', fast,
+      '--base-payload', payload, '--base-preflight', preflight, '--output', output])
     manifest = output.with_name(output.name + '.manifest.json')
     shutil.copyfile(manifest, evidence / (component + '.manifest.json'))
     payload, preflight = output, scripts / 'preflight.sh'
@@ -502,8 +583,11 @@ def execute(args):
     provenance.update(diagnostic_provenance(args.diagnostic_calibrations))
   save_json(evidence / 'experiment.json', provenance)
   overlap_validation = None
-  if args.diagnostic_calibrations is None and FINALIZATION_OVERLAP_VARIANT in args.variants:
+  setup_validation = None
+  if args.diagnostic_calibrations is None and any(variant in args.variants for variant in OVERLAP_VARIANTS):
     overlap_validation = validate_finalization_overlap(bench, evidence, fast)
+  if args.diagnostic_calibrations is None and SETUP_OVERLAP_VARIANT in args.variants:
+    setup_validation = validate_setup_overlap(bench, evidence, fast)
   iso = work / 'omarchy-4.0.2.iso'
   command(['curl', '--fail', '--location', '--retry', '3', '--output', iso, ISO_URL])
   if digest(iso) != ISO_SHA256:
@@ -710,6 +794,7 @@ def execute(args):
   fast_reboot = bench / 'install-speed/fast-reboot'
   fast_reboot_payload = None
   direct_restore_payload = None
+  finalization_overlap_payload = None
   early_control_initrd = None
 
   def prepare_fast_reboot_payload():
@@ -744,6 +829,13 @@ def execute(args):
       direct_restore_payload = output
     return direct_restore_payload
 
+  def prepare_finalization_overlap_payload():
+    nonlocal finalization_overlap_payload
+    if finalization_overlap_payload is None:
+      finalization_overlap_payload = prepare_finalization_overlap(bench, work, evidence, fast,
+        prepare_direct_restore_payload(), validation=overlap_validation)
+    return finalization_overlap_payload
+
   for variant in args.variants:
     if variant == 'upstream-image':
       candidate_initrd = make_initrd('candidate', candidate_payload, image / 'candidate-preflight.sh')
@@ -760,7 +852,7 @@ def execute(args):
       # which the original image overlay deliberately does not replace.
       payload = prepare_fast_reboot_payload()
       preflight = fast_reboot / 'candidate-preflight.sh'
-      if variant in (DIRECT_RESTORE_VARIANT, FINALIZATION_OVERLAP_VARIANT):
+      if variant in (DIRECT_RESTORE_VARIANT, *OVERLAP_VARIANTS):
         direct_payload = prepare_direct_restore_payload()
         source_manifest = direct_payload.with_name(direct_payload.name + '.manifest.json')
         payload = direct_payload
@@ -768,16 +860,18 @@ def execute(args):
         # The supplemental ISO retains its ordinary overlay. This small,
         # verified initramfs payload installs the direct patch only after
         # ordinary activation, without building another root-image ISO.
-      if variant == FINALIZATION_OVERLAP_VARIANT:
-        payload, preflight, source_manifest = prepare_finalization_overlap(bench, work, evidence, fast, payload,
-          validation=overlap_validation)
+      if variant in OVERLAP_VARIANTS:
+        payload, preflight, source_manifest = prepare_finalization_overlap_payload()
+      if variant == SETUP_OVERLAP_VARIANT:
+        payload, preflight, source_manifest = prepare_setup_overlap(bench, work, evidence, fast,
+          payload, preflight, validation=setup_validation)
       if variant in EARLY_VARIANTS:
         configuration = early_variant_configuration(variant)
         early_control_initrd, early_candidate = early_preflight_pair(make_initrd, payload, preflight,
           variant=variant, control=early_control_initrd)
         provenance[configuration['provenance_key']] = early_preflight_provenance(variant,
           early_control_initrd, early_candidate, preflight, args.source_cache, args.boot_method)
-        if variant in (DIRECT_RESTORE_VARIANT, FINALIZATION_OVERLAP_VARIANT):
+        if variant in (DIRECT_RESTORE_VARIANT, *OVERLAP_VARIANTS):
           provenance[configuration['provenance_key']]['payload_manifest_sha256'] = digest(source_manifest)
         save_json(evidence / 'experiment.json', provenance)
         measure_variant(variant, early_candidate, configuration['output_name'],

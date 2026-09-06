@@ -1,0 +1,8 @@
+{
+  "ok": true,
+  "result": {
+    "returncode": 1,
+    "stdout": "",
+    "stderr": "Traceback (most recent call last):\n  File \"/tmp/omarchy-setup-contracts/logging-bind/guest-contract-v2.py\", line 224, in <module>\n    main()\n    ~~~~^^\n  File \"/tmp/omarchy-setup-contracts/logging-bind/guest-contract-v2.py\", line 133, in main\n    raise RuntimeError(f'Real mounted child did not reach the isolation handshake; '\n      f'exit status {child.returncode}: {stdout}\\n{stderr}')\nRuntimeError: Real mounted child did not reach the isolation handshake; exit status 1: === Omarchy Setup Started: 2026-09-06 00:00:00 ===\n[2026-09-06 03:26:15] Starting: /tmp/leaf.sh\nbash: line 1: /tmp/leaf.sh: No such file or directory\n[2026-09-06 03:26:15] Failed: /tmp/leaf.sh (exit code: 1)\n\n==> WARNING: /tmp/omarchy-logging-bind-guest-kl73ig9v/target is not a mountpoint. This may have undesirable side effects.\n\n"
+  }
+}
