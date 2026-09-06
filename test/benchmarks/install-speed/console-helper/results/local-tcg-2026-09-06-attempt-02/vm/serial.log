@@ -1,0 +1,5 @@
+[2J[01;01H[=3h[2J[01;01H[2J[01;01H[=3h[2J[01;01H[2J[01;01H[=3h[2J[01;01HOMARCHY_CONSOLE_FIXTURE_READY builder_no_autoinstall root_bash sshd_masked
+[!p]104\[0m[?7h[1G[0J7[32766;32766H[6n8[!p]104\[0m[?7h[1G[0J7[32766;32766H[6n8]3008;start=8bd1170282024474ad9696078fb0f34e;user=root;hostname=omarchy-benchmark;machineid=2d51f2f0287f4090b3d5e9113d7e0964;bootid=6cc44943eea44013b371e1dd37374675;pid=1076;pidfdid=12512;comm=(agetty);servicename=serial-getty@ttyS0.service;invocationid=26fbaee23e204f6ca5010382007ebbc3;type=service\P+q6E616D65\
+Omarchy 7.1.8-arch1-Watanare-T2-3-t2 (ttyS0)
+
+omarchy-benchmark login: 

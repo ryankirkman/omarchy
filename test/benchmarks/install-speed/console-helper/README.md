@@ -32,3 +32,14 @@ recorded by that helper version, so the exact backend mismatch remains unresolve
 in this attempt. The runner exited 1 with an invalid timeout, and post-exit
 `qemu-img map` confirms the entire unused 40 GiB target is zero with no data
 extents. The result is a failed diagnostic test, not a functional pass.
+
+The fresh second attempt, `results/local-tcg-2026-09-06-attempt-02`, passed the
+console functional checks with the corrected backend guard at `3a8993d`. It
+reused the identical guest preflight and initramfs. The helper authenticated the
+real root console, verified the nonce-bound UID 0 response, and retained all ten
+fixed diagnostic command results. `critical-chain` returned 1 because systemd
+reported bootup was not yet finished; the other nine commands returned 0. The
+655-byte original serial log remained unchanged, and the target remained wholly
+zero. The runner still exited 1 with `status=timeout` and
+`validation_passed=false`. Both attempts preserve their original evidence and
+frozen source bytes under individual SHA-256 seals.

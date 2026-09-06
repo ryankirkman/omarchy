@@ -1,0 +1,134 @@
+{
+  "schema_version": 1,
+  "measurement_valid": false,
+  "status": "collected",
+  "after_measurement_failure": true,
+  "original_failure": "Install timed out after 240s",
+  "budget_seconds": 90,
+  "output_limit_bytes": 262144,
+  "authenticated_root": true,
+  "commands_started": true,
+  "interventions": [
+    {
+      "kind": "qmp-chardev-change",
+      "id": "serial0",
+      "backend": {
+        "type": "socket",
+        "data": {
+          "addr": {
+            "type": "inet",
+            "data": {
+              "host": "127.0.0.1",
+              "port": "0",
+              "ipv4": true
+            }
+          },
+          "server": true,
+          "wait": false,
+          "telnet": false
+        }
+      },
+      "at_monotonic_s": 105406.158171047
+    },
+    {
+      "kind": "refresh-login-prompt",
+      "at_monotonic_s": 105406.160787712,
+      "input": "\r"
+    },
+    {
+      "kind": "login-user",
+      "at_monotonic_s": 105406.167684195,
+      "input": "root\r"
+    },
+    {
+      "kind": "fixture-password",
+      "at_monotonic_s": 105406.972580571,
+      "input": "[FIXTURE CREDENTIAL OMITTED]"
+    },
+    {
+      "kind": "root-identity-challenge",
+      "at_monotonic_s": 105408.3235838,
+      "input": "printf '\\nOMARCHY_CONSOLE_c8d90491457948178cb99b320853ea28_UID\\n'; id -u; printf 'OMARCHY_CONSOLE_c8d90491457948178cb99b320853ea28_UID_END\\n'\r"
+    },
+    {
+      "kind": "readonly-diagnostic-commands",
+      "at_monotonic_s": 105408.400534531,
+      "input": "timeout 42 bash -c 'printf '\"'\"'\\nCOMMAND waiting-jobs\\n'\"'\"'\nenv LC_ALL=C TERM=dumb SYSTEMD_COLORS=0 SYSTEMD_PAGER=cat timeout 4 bash -c '\"'\"'systemctl list-jobs --no-pager'\"'\"'\nprintf '\"'\"'COMMAND_EXIT %s\\n'\"'\"' \"$?\"\nprintf '\"'\"'\\nCOMMAND failed-units\\n'\"'\"'\nenv LC_ALL=C TERM=dumb SYSTEMD_COLORS=0 SYSTEMD_PAGER=cat timeout 4 bash -c '\"'\"'systemctl --failed --no-pager'\"'\"'\nprintf '\"'\"'COMMAND_EXIT %s\\n'\"'\"' \"$?\"\nprintf '\"'\"'\\nCOMMAND boot-units\\n'\"'\"'\nenv LC_ALL=C TERM=dumb SYSTEMD_COLORS=0 SYSTEMD_PAGER=cat timeout 4 bash -c '\"'\"'systemctl show --property=Id --property=ActiveState --property=SubState --property=Result --property=Job --property=MainPID --property=ControlPID --property=TimeoutStartUSec plymouth-start.service plymouth-read-write.service plymouth-quit.service plymouth-quit-wait.service NetworkManager.service sshd.service sshdgenkeys.service ufw.service network.target sysinit.target basic.target'\"'\"'\nprintf '\"'\"'COMMAND_EXIT %s\\n'\"'\"' \"$?\"\nprintf '\"'\"'\\nCOMMAND process-waits\\n'\"'\"'\nenv LC_ALL=C TERM=dumb SYSTEMD_COLORS=0 SYSTEMD_PAGER=cat timeout 4 bash -c '\"'\"'ps -e -o pid,ppid,stat,etimes,wchan:32,comm'\"'\"'\nprintf '\"'\"'COMMAND_EXIT %s\\n'\"'\"' \"$?\"\nprintf '\"'\"'\\nCOMMAND addresses\\n'\"'\"'\nenv LC_ALL=C TERM=dumb SYSTEMD_COLORS=0 SYSTEMD_PAGER=cat timeout 4 bash -c '\"'\"'ip -brief address'\"'\"'\nprintf '\"'\"'COMMAND_EXIT %s\\n'\"'\"' \"$?\"\nprintf '\"'\"'\\nCOMMAND routes\\n'\"'\"'\nenv LC_ALL=C TERM=dumb SYSTEMD_COLORS=0 SYSTEMD_PAGER=cat timeout 4 bash -c '\"'\"'ip route show table all'\"'\"'\nprintf '\"'\"'COMMAND_EXIT %s\\n'\"'\"' \"$?\"\nprintf '\"'\"'\\nCOMMAND listeners\\n'\"'\"'\nenv LC_ALL=C TERM=dumb SYSTEMD_COLORS=0 SYSTEMD_PAGER=cat timeout 4 bash -c '\"'\"'ss -lntup'\"'\"'\nprintf '\"'\"'COMMAND_EXIT %s\\n'\"'\"' \"$?\"\nprintf '\"'\"'\\nCOMMAND critical-chain\\n'\"'\"'\nenv LC_ALL=C TERM=dumb SYSTEMD_COLORS=0 SYSTEMD_PAGER=cat timeout 4 bash -c '\"'\"'systemd-analyze --no-pager critical-chain'\"'\"'\nprintf '\"'\"'COMMAND_EXIT %s\\n'\"'\"' \"$?\"\nprintf '\"'\"'\\nCOMMAND recent-boot-journal\\n'\"'\"'\nenv LC_ALL=C TERM=dumb SYSTEMD_COLORS=0 SYSTEMD_PAGER=cat timeout 4 bash -c '\"'\"'journalctl -b -n 100 --no-pager -o short-monotonic'\"'\"'\nprintf '\"'\"'COMMAND_EXIT %s\\n'\"'\"' \"$?\"\nprintf '\"'\"'\\nCOMMAND plymouth-kernel-waits\\n'\"'\"'\nenv LC_ALL=C TERM=dumb SYSTEMD_COLORS=0 SYSTEMD_PAGER=cat timeout 4 bash -c '\"'\"'count=0\nfor p in /proc/[0-9]*; do\n  IFS= read -r name < \"$p/comm\" 2>/dev/null || continue\n  case \"$name\" in plymouth|plymouthd) ;; *) continue ;; esac\n  count=$((count + 1)); [ \"$count\" -le 8 ] || break\n  printf '\"'\"'\"'\"'\"'\"'\"'\"'\\nPROCESS %s %s\\n'\"'\"'\"'\"'\"'\"'\"'\"' \"${p##*/}\" \"$name\"\n  for item in wchan stack syscall; do\n    printf '\"'\"'\"'\"'\"'\"'\"'\"'%s\\n'\"'\"'\"'\"'\"'\"'\"'\"' \"$item\"; cat \"$p/$item\" 2>/dev/null\n  done\n  fds=0\n  for fd in \"$p\"/fd/*; do\n    fds=$((fds + 1)); [ \"$fds\" -le 64 ] || break\n    printf '\"'\"'\"'\"'\"'\"'\"'\"'fd %s: '\"'\"'\"'\"'\"'\"'\"'\"' \"${fd##*/}\"; readlink \"$fd\"\n  done\ndone'\"'\"'\nprintf '\"'\"'COMMAND_EXIT %s\\n'\"'\"' \"$?\"'; printf '\\nOMARCHY_CONSOLE_c8d90491457948178cb99b320853ea28_DONE:%s\\n' \"$?\"\r"
+    }
+  ],
+  "helper_sha256": "52400893cb2bfdf957b5408c5fbb97ec428f42290a5f74a1b5ee7c84ef3cc884",
+  "observed_chardevs_before_guard": [
+    {
+      "frontend-open": true,
+      "filename": "vc",
+      "label": "parallel0"
+    },
+    {
+      "frontend-open": true,
+      "filename": "tcp:127.0.0.1:24444,server=on <-> 127.0.0.1:57734",
+      "label": "compat_monitor0"
+    },
+    {
+      "frontend-open": true,
+      "filename": "file",
+      "label": "serial0"
+    }
+  ],
+  "owned_qemu": {
+    "pid": 27,
+    "live": true,
+    "actual_argv_matches_manifest": true,
+    "serial_argument": "file:/tmp/omarchy-bench/console-helper-smoke-02/vm/serial.log",
+    "argv_sha256": "a253ae773c5c70e2ba3273ba12b0dd614a984a51be1cf79ce5d1b66e5f499a49"
+  },
+  "backend": {
+    "type": "socket",
+    "data": {
+      "addr": {
+        "type": "inet",
+        "data": {
+          "host": "127.0.0.1",
+          "port": "0",
+          "ipv4": true
+        }
+      },
+      "server": true,
+      "wait": false,
+      "telnet": false
+    }
+  },
+  "original_serial": {
+    "bytes_before_switch": 655,
+    "bytes": 655,
+    "sha256": "b2bec4cc408b5fa8120339f40689a049168aede148158ddce57161811c3e3715",
+    "bytes_received_before_backend_detached": 0,
+    "preservation": "Original file is closed by chardev-change and never opened for writing by diagnostics",
+    "unchanged_during_console_capture": true
+  },
+  "observed_backend": {
+    "frontend-open": true,
+    "filename": "disconnected:tcp:127.0.0.1:33375,server=on",
+    "label": "serial0"
+  },
+  "connection": {
+    "host": "127.0.0.1",
+    "port": 33375
+  },
+  "command_names": [
+    "waiting-jobs",
+    "failed-units",
+    "boot-units",
+    "process-waits",
+    "addresses",
+    "routes",
+    "listeners",
+    "critical-chain",
+    "recent-boot-journal",
+    "plymouth-kernel-waits"
+  ],
+  "maximum_command_line_bytes": 470,
+  "suite_exit_status": 0,
+  "received_bytes": 37478,
+  "output_truncated": false,
+  "elapsed_seconds": 5.357858899995335
+}
