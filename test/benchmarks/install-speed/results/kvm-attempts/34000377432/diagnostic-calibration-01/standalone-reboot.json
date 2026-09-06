@@ -1,0 +1,353 @@
+{
+  "schema_version": 1,
+  "passed": true,
+  "outside_install_timing": true,
+  "original_first_installed_ssh_wall_s": 196.72600713999998,
+  "validation_started_host_wall_s": 206.89465878800002,
+  "qemu_pid_before": 3692,
+  "root_before": [
+    {
+      "source": "/dev/vda2[/@]",
+      "fstype": "btrfs",
+      "target": "/"
+    }
+  ],
+  "identity_before": {
+    "machine_id": "9283403345714933ace643d95d91e770",
+    "ssh_host_key_fingerprints": [
+      "SHA256:28UzIy6GFoNjUVwDgulrqhpsMBldkHOUxu6BHEr2OpE",
+      "SHA256:wmmY7v7v8Vhcx3Jfqwepr/GVHZQLYZeRphWsy1G9XK4",
+      "SHA256:Nec0VeZGPdgxoHZ31QcZwbHa9OrGHddVX0E+YyO1GJ4",
+      "SHA256:o1S+QCm8p2KfmwB1t3xJegnKFPEUVROJFhbHffz4p+w"
+    ],
+    "pacman_master_key_fingerprint": "F58D36CE68EA87228206BC56B16B01F11441BE59",
+    "btrfs_uuid": "e8d51dc9-b245-439e-909d-ca8e7fb6a532"
+  },
+  "media_plan": [
+    {
+      "drive_id": "iso",
+      "device_id": "installer-cd",
+      "kind": "cdrom"
+    },
+    {
+      "drive_id": "cidata",
+      "device_id": "cidata-usb",
+      "kind": "usb-storage"
+    }
+  ],
+  "observed_ssh_disconnect": true,
+  "boot_id_before": "d6d1e814-a2be-49bf-b051-243352548850",
+  "media_removal": {
+    "device_deleted_event": {
+      "timestamp": {
+        "seconds": 1788653438,
+        "microseconds": 283881
+      },
+      "event": "DEVICE_DELETED",
+      "data": {
+        "device": "cidata-usb",
+        "path": "/machine/peripheral/cidata-usb"
+      }
+    },
+    "query_block": [
+      {
+        "device": "pflash0",
+        "locked": false,
+        "removable": false,
+        "inserted": {
+          "iops_rd": 0,
+          "detect_zeroes": "off",
+          "image": {
+            "virtual-size": 3653632,
+            "filename": "/usr/share/OVMF/OVMF_CODE_4M.fd",
+            "format": "raw",
+            "actual-size": 3653632,
+            "dirty-flag": false
+          },
+          "iops_wr": 0,
+          "ro": true,
+          "node-name": "#block101",
+          "backing_file_depth": 0,
+          "drv": "raw",
+          "iops": 0,
+          "bps_wr": 0,
+          "write_threshold": 0,
+          "encrypted": false,
+          "bps": 0,
+          "bps_rd": 0,
+          "cache": {
+            "no-flush": false,
+            "direct": false,
+            "writeback": true
+          },
+          "file": "/usr/share/OVMF/OVMF_CODE_4M.fd"
+        },
+        "qdev": "/machine/system.flash0",
+        "type": "unknown"
+      },
+      {
+        "device": "pflash1",
+        "locked": false,
+        "removable": false,
+        "inserted": {
+          "iops_rd": 0,
+          "detect_zeroes": "off",
+          "image": {
+            "virtual-size": 540672,
+            "filename": "/home/runner/work/_temp/omarchy-install-speed/diagnostic-calibration-01/OVMF_VARS_4M.fd",
+            "format": "raw",
+            "actual-size": 540672,
+            "dirty-flag": false
+          },
+          "iops_wr": 0,
+          "ro": false,
+          "node-name": "#block313",
+          "backing_file_depth": 0,
+          "drv": "raw",
+          "iops": 0,
+          "bps_wr": 0,
+          "write_threshold": 0,
+          "encrypted": false,
+          "bps": 0,
+          "bps_rd": 0,
+          "cache": {
+            "no-flush": false,
+            "direct": false,
+            "writeback": true
+          },
+          "file": "/home/runner/work/_temp/omarchy-install-speed/diagnostic-calibration-01/OVMF_VARS_4M.fd"
+        },
+        "qdev": "/machine/system.flash1",
+        "type": "unknown"
+      },
+      {
+        "io-status": "ok",
+        "device": "target",
+        "locked": false,
+        "removable": false,
+        "inserted": {
+          "iops_rd": 0,
+          "detect_zeroes": "off",
+          "image": {
+            "virtual-size": 42949672960,
+            "filename": "/home/runner/work/_temp/omarchy-install-speed/diagnostic-calibration-01/target.qcow2",
+            "cluster-size": 65536,
+            "format": "qcow2",
+            "actual-size": 6153134080,
+            "format-specific": {
+              "type": "qcow2",
+              "data": {
+                "compat": "1.1",
+                "compression-type": "zlib",
+                "lazy-refcounts": false,
+                "refcount-bits": 16,
+                "corrupt": false,
+                "extended-l2": false
+              }
+            },
+            "dirty-flag": false
+          },
+          "iops_wr": 0,
+          "ro": false,
+          "node-name": "#block567",
+          "backing_file_depth": 0,
+          "drv": "qcow2",
+          "iops": 0,
+          "bps_wr": 0,
+          "write_threshold": 0,
+          "encrypted": false,
+          "bps": 0,
+          "bps_rd": 0,
+          "cache": {
+            "no-flush": false,
+            "direct": false,
+            "writeback": true
+          },
+          "file": "/home/runner/work/_temp/omarchy-install-speed/diagnostic-calibration-01/target.qcow2"
+        },
+        "qdev": "/machine/peripheral-anon/device[0]/virtio-backend",
+        "type": "unknown"
+      },
+      {
+        "io-status": "ok",
+        "device": "iso",
+        "locked": false,
+        "removable": true,
+        "qdev": "installer-cd",
+        "tray_open": true,
+        "type": "unknown"
+      },
+      {
+        "device": "sd0",
+        "locked": false,
+        "removable": true,
+        "type": "unknown"
+      }
+    ]
+  },
+  "media_removed_host_wall_s": 207.22277710700007,
+  "reboot_command": {
+    "returncode": 0,
+    "stdout": "",
+    "stderr": ""
+  },
+  "reboot_requested_host_wall_s": 207.458255442,
+  "last_disconnected_host_wall_s": 225.181012314,
+  "boot_id_after": "6b3a77ba-f640-464b-b7a4-80a287ca9533",
+  "standalone_ssh_ready_host_wall_s": 226.560164041,
+  "root_after": [
+    {
+      "source": "/dev/vda2[/@]",
+      "fstype": "btrfs",
+      "target": "/"
+    }
+  ],
+  "identity_after": {
+    "machine_id": "9283403345714933ace643d95d91e770",
+    "ssh_host_key_fingerprints": [
+      "SHA256:28UzIy6GFoNjUVwDgulrqhpsMBldkHOUxu6BHEr2OpE",
+      "SHA256:wmmY7v7v8Vhcx3Jfqwepr/GVHZQLYZeRphWsy1G9XK4",
+      "SHA256:Nec0VeZGPdgxoHZ31QcZwbHa9OrGHddVX0E+YyO1GJ4",
+      "SHA256:o1S+QCm8p2KfmwB1t3xJegnKFPEUVROJFhbHffz4p+w"
+    ],
+    "pacman_master_key_fingerprint": "F58D36CE68EA87228206BC56B16B01F11441BE59",
+    "btrfs_uuid": "e8d51dc9-b245-439e-909d-ca8e7fb6a532"
+  },
+  "media_after_reboot": [
+    {
+      "device": "pflash0",
+      "locked": false,
+      "removable": false,
+      "inserted": {
+        "iops_rd": 0,
+        "detect_zeroes": "off",
+        "image": {
+          "virtual-size": 3653632,
+          "filename": "/usr/share/OVMF/OVMF_CODE_4M.fd",
+          "format": "raw",
+          "actual-size": 3653632,
+          "dirty-flag": false
+        },
+        "iops_wr": 0,
+        "ro": true,
+        "node-name": "#block101",
+        "backing_file_depth": 0,
+        "drv": "raw",
+        "iops": 0,
+        "bps_wr": 0,
+        "write_threshold": 0,
+        "encrypted": false,
+        "bps": 0,
+        "bps_rd": 0,
+        "cache": {
+          "no-flush": false,
+          "direct": false,
+          "writeback": true
+        },
+        "file": "/usr/share/OVMF/OVMF_CODE_4M.fd"
+      },
+      "qdev": "/machine/system.flash0",
+      "type": "unknown"
+    },
+    {
+      "device": "pflash1",
+      "locked": false,
+      "removable": false,
+      "inserted": {
+        "iops_rd": 0,
+        "detect_zeroes": "off",
+        "image": {
+          "virtual-size": 540672,
+          "filename": "/home/runner/work/_temp/omarchy-install-speed/diagnostic-calibration-01/OVMF_VARS_4M.fd",
+          "format": "raw",
+          "actual-size": 540672,
+          "dirty-flag": false
+        },
+        "iops_wr": 0,
+        "ro": false,
+        "node-name": "#block313",
+        "backing_file_depth": 0,
+        "drv": "raw",
+        "iops": 0,
+        "bps_wr": 0,
+        "write_threshold": 0,
+        "encrypted": false,
+        "bps": 0,
+        "bps_rd": 0,
+        "cache": {
+          "no-flush": false,
+          "direct": false,
+          "writeback": true
+        },
+        "file": "/home/runner/work/_temp/omarchy-install-speed/diagnostic-calibration-01/OVMF_VARS_4M.fd"
+      },
+      "qdev": "/machine/system.flash1",
+      "type": "unknown"
+    },
+    {
+      "io-status": "ok",
+      "device": "target",
+      "locked": false,
+      "removable": false,
+      "inserted": {
+        "iops_rd": 0,
+        "detect_zeroes": "off",
+        "image": {
+          "virtual-size": 42949672960,
+          "filename": "/home/runner/work/_temp/omarchy-install-speed/diagnostic-calibration-01/target.qcow2",
+          "cluster-size": 65536,
+          "format": "qcow2",
+          "actual-size": 6154575872,
+          "format-specific": {
+            "type": "qcow2",
+            "data": {
+              "compat": "1.1",
+              "compression-type": "zlib",
+              "lazy-refcounts": false,
+              "refcount-bits": 16,
+              "corrupt": false,
+              "extended-l2": false
+            }
+          },
+          "dirty-flag": false
+        },
+        "iops_wr": 0,
+        "ro": false,
+        "node-name": "#block567",
+        "backing_file_depth": 0,
+        "drv": "qcow2",
+        "iops": 0,
+        "bps_wr": 0,
+        "write_threshold": 0,
+        "encrypted": false,
+        "bps": 0,
+        "bps_rd": 0,
+        "cache": {
+          "no-flush": false,
+          "direct": false,
+          "writeback": true
+        },
+        "file": "/home/runner/work/_temp/omarchy-install-speed/diagnostic-calibration-01/target.qcow2"
+      },
+      "qdev": "/machine/peripheral-anon/device[0]/virtio-backend",
+      "type": "unknown"
+    },
+    {
+      "io-status": "ok",
+      "device": "iso",
+      "locked": true,
+      "removable": true,
+      "qdev": "installer-cd",
+      "tray_open": false,
+      "type": "unknown"
+    },
+    {
+      "device": "sd0",
+      "locked": false,
+      "removable": true,
+      "type": "unknown"
+    }
+  ],
+  "qemu_pid_after": 3692,
+  "validation_finished_host_wall_s": 228.20015980100004
+}

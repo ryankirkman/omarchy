@@ -1,0 +1,395 @@
+[2J[01;01H[=3h[2J[01;01H[2J[01;01H[=3h[2J[01;01H[2J[01;01H[=3h[2J[01;01HBdsDxe: failed to load Boot0002 "UEFI Misc Device" from PciRoot(0x0)/Pci(0x1,0x0): Not Found
+BdsDxe: loading Boot0001 "UEFI QEMU DVD-ROM QM00011 " from PciRoot(0x0)/Pci(0x1F,0x2)/Sata(0x5,0xFFFF,0x0)
+BdsDxe: starting Boot0001 "UEFI QEMU DVD-ROM QM00011 " from PciRoot(0x0)/Pci(0x1F,0x2)/Sata(0x5,0xFFFF,0x0)
+[0m[30m[40m[2J[01;01H[0m[37m[40m[H[J[1;1H[2J[01;01H[=3h[2J[01;01H[2J[01;01H[=3h[2J[01;01H[2J[01;01H[=3h[2J[01;01HBdsDxe: loading Boot0004 "Limine" from HD(1,GPT,D9DFDF22-4D7A-489C-A774-084AB7309AEF,0x800,0x400000)/\EFI\limine\limine_x64.efi
+BdsDxe: starting Boot0004 "Limine" from HD(1,GPT,D9DFDF22-4D7A-489C-A774-084AB7309AEF,0x800,0x400000)/\EFI\limine\limine_x64.efi
+[01;01H[01;01H%Ga setfont: ERROR kdfontop.c:242 put_font_kdfontop: Unable to load such font with such kernel version
+ERROR: Failed to open encryption mapping: The device PARTUUID=38ebaeb2-05ee-44a1-b95b-08a6f8359584 is not a LUKS volume and the crypto= parameter was not specified.
+Unable to resume from device '/dev/vda2' (254:2) offset 1519003, continuing boot process.
+[18t7[32766;32766H[6n8[!p]104\[0m[?7h[1G[0J]3008;start=19c46eab5cfb4800b717189db0d9a268;user=root;hostname=omarchy-benchmark;machineid=02f0b0e1719d497cb2eebccff3b1dd46;bootid=e256248296694f90a57405f0f55815ed;pid=1;pidfdid=1;comm=systemd;type=boot\[[0;32m  OK  [0m] Finished [0;1;39mSet Up Additional Binary Formats[0m.
+[[0;32m  OK  [0m] Finished [0;1;39mFlush Journal to Persistent Storage[0m.
+         Starting [0;1;39mCreate System Files and Directories[0m...
+[[0;32m  OK  [0m] Finished [0;1;39mUpdate Boot Loader Random Seed[0m.
+[[0;32m  OK  [0m] Finished [0;1;39mCreate System Files and Directories[0m.
+         Starting [0;1;39mRebuild Dynamic Linker Cache[0m...
+         Starting [0;1;39mRebuild Journal Catalog[0m...
+         Starting [0;1;39mRecord System Boot/Shutdown in UTMP[0m...
+[[0;32m  OK  [0m] Finished [0;1;39mRecord System Boot/Shutdown in UTMP[0m.
+[[0;32m  OK  [0m] Finished [0;1;39mRebuild Journal Catalog[0m.
+[[0;32m  OK  [0m] Finished [0;1;39mRebuild Dynamic Linker Cache[0m.
+         Starting [0;1;39mUpdate is Completed[0m...
+[[0;32m  OK  [0m] Finished [0;1;39mUpdate is Completed[0m.
+[[0;32m  OK  [0m] Reached target [0;1;39mSystem Initialization[0m.
+[[0;32m  OK  [0m] Started [0;1;39mCUPS Scheduler[0m.
+[[0;32m  OK  [0m] Started [0;1;39mRefresh existing PGP keys of archlinux-keyring regularly[0m.
+[[0;32m  OK  [0m] Started [0;1;39mDaily man-db regeneration[0m.
+[[0;32m  OK  [0m] Started [0;1;39mUpdate the plocate database daily[0m.
+[[0;32m  OK  [0m] Started [0;1;39mDaily verification of password and group files[0m.
+[[0;32m  OK  [0m] Started [0;1;39mHourly Cleanup of Snapper Snapshots[0m.
+[[0;32m  OK  [0m] Started [0;1;39mDaily Cleanup of Temporary Directories[0m.
+[[0;32m  OK  [0m] Reached target [0;1;39mPath Units[0m.
+[[0;32m  OK  [0m] Reached target [0;1;39mTimer Units[0m.
+[[0;32m  OK  [0m] Listening on [0;1;39mAvahi mDNS/DNS-SD Stack Activation Socket[0m.
+[[0;32m  OK  [0m] Listening on [0;1;39mCUPS Scheduler[0m.
+[[0;32m  OK  [0m] Listening on [0;1;39mD-Bus System Message Bus Socket[0m.
+[[0;32m  OK  [0m] Listening on [0;1;39mGnuPG network certificate management daemon for /etc/pacman.d/gnupg[0m.
+         Starting [0;1;39mDocker Socket for the API[0m...
+[[0;32m  OK  [0m] Listening on [0;1;39mGnuPG cryptographic agent and passphrase cache (access for web browsers) for /etc/pacman.d/gnupg[0m.
+[[0;32m  OK  [0m] Listening on [0;1;39mGnuPG cryptographic agent and passphrase cache (restricted) for /etc/pacman.d/gnupg[0m.
+[[0;32m  OK  [0m] Listening on [0;1;39mGnuPG cryptographic agent (ssh-agent emulation) for /etc/pacman.d/gnupg[0m.
+[[0;32m  OK  [0m] Listening on [0;1;39mGnuPG cryptographic agent and passphrase cache for /etc/pacman.d/gnupg[0m.
+[[0;32m  OK  [0m] Listening on [0;1;39mGnuPG public key management service for /etc/pacman.d/gnupg[0m.
+[[0;32m  OK  [0m] Listening on [0;1;39mAuthorization Manager Agent Helper[0m.
+[[0;32m  OK  [0m] Listening on [0;1;39mOpenSSH Server Socket (systemd-ssh-generator, AF_UNIX Local)[0m.
+[[0;32m  OK  [0m] Listening on [0;1;39mUser Login Management Varlink Socket[0m.
+[[0;32m  OK  [0m] Listening on [0;1;39mVirtual Machine and Container Registration Service Socket[0m.
+         Starting [0;1;39mD-Bus System Message Bus[0m...
+[[0;32m  OK  [0m] Listening on [0;1;39mDocker Socket for the API[0m.
+[[0;32m  OK  [0m] Reached target [0;1;39mSocket Units[0m.
+[[0;32m  OK  [0m] Started [0;1;39mD-Bus System Message Bus[0m.
+[[0;32m  OK  [0m] Reached target [0;1;39mBasic System[0m.
+         Starting [0;1;39mNetwork Manager[0m...
+         Starting [0;1;39mAvahi mDNS/DNS-SD Stack[0m...
+[[0;32m  OK  [0m] Started [0;1;39m[limine-snapper-sync.service] automatically synchronizes boot entries with the Snapper snapshot list.[0m.
+         Starting [0;1;39mClean up modules from old kernels[0m...
+         Starting [0;1;39mSSH Key Generation[0m...
+         Starting [0;1;39mUser Login Management[0m...
+[[0;32m  OK  [0m] Finished [0;1;39mClean up modules from old kernels[0m.
+         Starting [0;1;39mHostname Service[0m...
+[[0;32m  OK  [0m] Finished [0;1;39mSSH Key Generation[0m.
+[[0;32m  OK  [0m] Started [0;1;39mAvahi mDNS/DNS-SD Stack[0m.
+[[0;32m  OK  [0m] Started [0;1;39mUser Login Management[0m.
+[[0;32m  OK  [0m] Started [0;1;39mHostname Service[0m.
+[[0;32m  OK  [0m] Listening on [0;1;39mLoad/Save RF Kill Switch Status /dev/rfkill Watch[0m.
+         Starting [0;1;39mNetwork Manager Script Dispatcher Service[0m...
+[[0;32m  OK  [0m] Started [0;1;39mNetwork Manager[0m.
+[[0;32m  OK  [0m] Reached target [0;1;39mNetwork[0m.
+         Starting [0;1;39mCUPS Scheduler[0m...
+         Starting [0;1;39mOpenSSH Daemon[0m...
+         Starting [0;1;39mPermit User Sessions[0m...
+[[0;32m  OK  [0m] Finished [0;1;39mPermit User Sessions[0m.
+[[0;32m  OK  [0m] Started [0;1;39mNetwork Manager Script Dispatcher Service[0m.
+         Starting [0;1;39mHold until boot process finishes up[0m...
+         Starting [0;1;39mTerminate Plymouth Boot Screen[0m...
+[[0;32m  OK  [0m] Started [0;1;39mOpenSSH Daemon[0m.
+[[0;32m  OK  [0m] Reached target [0;1;39mSSH Access Available[0m.
+[[0;32m  OK  [0m] Started [0;1;39mCUPS Scheduler[0m.
+[!p]104\[0m[?7h[1G[0J7[32766;32766H[6n8[!p]104\[0m[?7h[1G[0J7[32766;32766H[6n8]3008;start=936ad0f4309a451f8534f60af74d8700;user=root;hostname=omarchy-benchmark;machineid=02f0b0e1719d497cb2eebccff3b1dd46;bootid=e256248296694f90a57405f0f55815ed;pid=612;pidfdid=221;comm=(agetty);servicename=serial-getty@ttyS0.service;invocationid=526e249e02474afcaa1fde74c54290bc;type=service\P+q6E616D65\
+Omarchy 7.1.9-arch1-2 (ttyS0)
+
+omarchy-benchmark login: [!p]104\[0m[?7h[1G[0J7[32766;32766H[6n8]3008;end=936ad0f4309a451f8534f[[0;32m  OK  [0m] Stopped [0;1;39mUser Manager for UID 1000[0m.
+[[0;32m  OK  [0m] Removed slice [0;1;39mCUPS Slice[0m.
+[[0;32m  OK  [0m] Removed slice [0;1;39mSlice /system/serial-getty[0m.
+[[0;32m  OK  [0m] Stopped target [0;1;39mSystem Time Set[0m.
+[[0;32m  OK  [0m] Stopped [0;1;39mHold until boot process finishes up[0m.
+         Stopping [0;1;39mUser Runtime Directory /run/user/1000[0m...
+         Stopping [0;1;39mUser Manager for UID 961[0m...
+[[0;32m  OK  [0m] Unmounted [0;1;39m/run/user/1000[0m.
+[[0;32m  OK  [0m] Stopped [0;1;39mUser Runtime Directory /run/user/1000[0m.
+[[0;32m  OK  [0m] Stopped [0;1;39mUser Manager for UID 961[0m.
+[[0;32m  OK  [0m] Started [0;1;39mShow Plymouth Reboot Screen[0m.
+[[0;32m  OK  [0m] Removed slice [0;1;39mUser Slice of UID 1000[0m.
+         Starting [0;1;39mTell Plymouth To Jump To initramfs[0m...
+         Stopping [0;1;39mUserspace Out-Of-Memory (OOM) Killer[0m...
+         Stopping [0;1;39mPermit User Sessions[0m...
+         Stopping [0;1;39mUser Runtime Directory /run/user/961[0m...
+[[0;32m  OK  [0m] Stopped [0;1;39mUserspace Out-Of-Memory (OOM) Killer[0m.
+[[0;32m  OK  [0m] Unmounted [0;1;39m/run/user/961[0m.
+[[0;32m  OK  [0m] Stopped [0;1;39mPermit User Sessions[0m.
+[[0;32m  OK  [0m] Stopped [0;1;39mUser Runtime Directory /run/user/961[0m.
+[[0;32m  OK  [0m] Finished [0;1;39mTell Plymouth To Jump To initramfs[0m.
+[[0;32m  OK  [0m] Removed slice [0;1;39mUser Slice of UID 961[0m.
+[[0;32m  OK  [0m] Stopped target [0;1;39mNetwork[0m.
+[[0;32m  OK  [0m] Stopped target [0;1;39mRemote File Systems[0m.
+         Stopping [0;1;39mNetwork Manager[0m...
+         Stopping [0;1;39mUser Login Management[0m...
+[[0;32m  OK  [0m] Stopped [0;1;39mLoad JSON user/group Records from Credentials[0m.
+[[0;32m  OK  [0m] Stopped [0;1;39mNetwork Manager[0m.
+[[0;32m  OK  [0m] Stopped [0;1;39mUser Login Management[0m.
+[[0;32m  OK  [0m] Stopped target [0;1;39mBasic System[0m.
+[[0;32m  OK  [0m] Stopped [0;1;39mForward Password Requests to Plymouth Directory Watch[0m.
+[[0;32m  OK  [0m] Stopped target [0;1;39mPath Units[0m.
+[[0;32m  OK  [0m] Stopped [0;1;39mCUPS Scheduler[0m.
+[[0;32m  OK  [0m] Stopped target [0;1;39mSlice Units[0m.
+[[0;32m  OK  [0m] Removed slice [0;1;39mUser and Session Slice[0m.
+[[0;32m  OK  [0m] Stopped target [0;1;39mSocket Units[0m.
+[[0;32m  OK  [0m] Closed [0;1;39mAvahi mDNS/DNS-SD Stack Activation Socket[0m.
+[[0;32m  OK  [0m] Closed [0;1;39mCUPS Scheduler[0m.
+[[0;32m  OK  [0m] Closed [0;1;39mGnuPG network certificate management daemon for /etc/pacman.d/gnupg[0m.
+[[0;32m  OK  [0m] Removed slice [0;1;39mSlice /system/dirmngr[0m.
+[[0;32m  OK  [0m] Closed [0;1;39mDocker Socket for the API[0m.
+[[0;32m  OK  [0m] Closed [0;1;39mGnuPG cryptographic agent and passphrase cache (access for web browsers) for /etc/pacman.d/gnupg[0m.
+[[0;32m  OK  [0m] Removed slice [0;1;39mSlice /system/gpg-agent-browser[0m.
+[[0;32m  OK  [0m] Closed [0;1;39mGnuPG cryptographic agent and passphrase cache (restricted) for /etc/pacman.d/gnupg[0m.
+[[0;32m  OK  [0m] Removed slice [0;1;39mSlice /system/gpg-agent-extra[0m.
+[[0;32m  OK  [0m] Closed [0;1;39mGnuPG cryptographic agent (ssh-agent emulation) for /etc/pacman.d/gnupg[0m.
+[[0;32m  OK  [0m] Removed slice [0;1;39mSlice /system/gpg-agent-ssh[0m.
+[[0;32m  OK  [0m] Closed [0;1;39mGnuPG cryptographic agent and passphrase cache for /etc/pacman.d/gnupg[0m.
+[[0;32m  OK  [0m] Removed slice [0;1;39mSlice /system/gpg-agent[0m.
+[[0;32m  OK  [0m] Closed [0;1;39mGnuPG public key management service for /etc/pacman.d/gnupg[0m.
+[[0;32m  OK  [0m] Removed slice [0;1;39mSlice /system/keyboxd[0m.
+[[0;32m  OK  [0m] Closed [0;1;39mAuthorization Manager Agent Helper[0m.
+[[0;32m  OK  [0m] Closed [0;1;39mOpenSSH Server Socket (systemd-ssh-generator, AF_UNIX Local)[0m.
+[[0;32m  OK  [0m] Closed [0;1;39mHostname Service Socket[0m.
+[[0;32m  OK  [0m] Closed [0;1;39mDisk Image Download Service Socket[0m.
+[[0;32m  OK  [0m] Closed [0;1;39mUser Login Management Varlink Socket[0m.
+[[0;32m  OK  [0m] Closed [0;1;39mVirtual Machine and Container Registration Service Socket[0m.
+[[0;32m  OK  [0m] Closed [0;1;39mConsole Output Muting Service Socket[0m.
+[[0;32m  OK  [0m] Closed [0;1;39mUserspace Out-Of-Memory (OOM) Killer Socket[0m.
+[[0;32m  OK  [0m] Closed [0;1;39mDisk Repartitioning Service Socket[0m.
+         Stopping [0;1;39mD-Bus System Message Bus[0m...
+[[0;32m  OK  [0m] Stopped [0;1;39mD-Bus System Message Bus[0m.
+[[0;32m  OK  [0m] Closed [0;1;39mD-Bus System Message Bus Socket[0m.
+[[0;32m  OK  [0m] Stopped target [0;1;39mSystem Initialization[0m.
+[[0;32m  OK  [0m] Stopped target [0;1;39mLocal Encrypted Volumes[0m.
+[[0;32m  OK  [0m] Stopped [0;1;39mForward Password Requests to Wall Directory Watch[0m.
+[[0;32m  OK  [0m] Stopped target [0;1;39mImage Downloads[0m.
+[[0;32m  OK  [0m] Stopped target [0;1;39mLocal Integrity Protected Volumes[0m.
+[[0;32m  OK  [0m] Stopped target [0;1;39mLocal Verity Protected Volumes[0m.
+         Stopping [0;1;39mSet Up Additional Binary Formats[0m...
+[[0;32m  OK  [0m] Stopped [0;1;39mUpdate Boot Loader Random Seed[0m.
+         Stopping [0;1;39mLoad/Save OS Random Seed[0m...
+         Stopping [0;1;39mNetwork Name Resolution[0m...
+         Stopping [0;1;39mNetwork Time Synchronization[0m...
+[[0;32m  OK  [0m] Stopped [0;1;39mUpdate is Completed[0m.
+[[0;32m  OK  [0m] Stopped [0;1;39mRebuild Dynamic Linker Cache[0m.
+[[0;32m  OK  [0m] Stopped [0;1;39mRebuild Journal Catalog[0m.
+         Stopping [0;1;39mRecord System Boot/Shutdown in UTMP[0m...
+[[0;32m  OK  [0m] Stopped [0;1;39mNetwork Time Synchronization[0m.
+[[0;32m  OK  [0m] Stopped [0;1;39mSet Up Additional Binary Formats[0m.
+[[0;32m  OK  [0m] Stopped [0;1;39mNetwork Name Resolution[0m.
+[[0;32m  OK  [0m] Stopped [0;1;39mRecord System Boot/Shutdown in UTMP[0m.
+[[0;32m  OK  [0m] Stopped [0;1;39mLoad/Save OS Random Seed[0m.
+[[0;32m  OK  [0m] Unset automount [0;1;39mArbitrary Executable File Formats File System Automount Point[0m.
+[[0;32m  OK  [0m] Closed [0;1;39mResolve Monitor Varlink Socket[0m.
+[[0;32m  OK  [0m] Closed [0;1;39mResolve Service Varlink Socket[0m.
+[[0;32m  OK  [0m] Stopped [0;1;39mApply Kernel Variables[0m.
+[[0;32m  OK  [0m] Closed [0;1;39mProcess Core Dump Socket[0m.
+[[0;32m  OK  [0m] Stopped [0;1;39mLoad Kernel Modules[0m.
+[[0;32m  OK  [0m] Stopped [0;1;39mCreate System Files and Directories[0m.
+[[0;32m  OK  [0m] Stopped target [0;1;39mLocal File Systems[0m.
+         Unmounting [0;1;39m/boot[0m...
+         Unmounting [0;1;39m/home[0m...
+         Unmounting [0;1;39mTemporary Directory /tmp[0m...
+         Unmounting [0;1;39m/var/cache/pacman/pkg[0m...
+         Stopping [0;1;39mFlush Journal to Persistent Storage[0m...
+[[0;32m  OK  [0m] Unmounted [0;1;39m/boot[0m.
+[[0;32m  OK  [0m] Unmounted [0;1;39m/home[0m.
+[[0;32m  OK  [0m] Unmounted [0;1;39mTemporary Directory /tmp[0m.
+[[0;32m  OK  [0m] Unmounted [0;1;39m/var/cache/pacman/pkg[0m.
+[[0;32m  OK  [0m] Stopped target [0;1;39mSwaps[0m.
+         Deactivating swap [0;1;39m/dev/disk/by-diskseq/4[0m...
+         Deactivating swap [0;1;39m/swap/swapfile[0m...
+[[0;32m  OK  [0m] Stopped [0;1;39mFile System Check on /dev/disk/by-uuid/1958-6646[0m.
+[[0;32m  OK  [0m] Removed slice [0;1;39mSlice /system/systemd-fsck[0m.
+[[0;32m  OK  [0m] Stopped [0;1;39mFlush Journal to Persistent Storage[0m.
+         Unmounting [0;1;39m/var/log[0m...
+[[0;32m  OK  [0m] Deactivated swap [0;1;39m/dev/disk/by-diskseq/4[0m.
+[[0;32m  OK  [0m] Deactivated swap [0;1;39m/swap/swapfile[0m.
+[[0;32m  OK  [0m] Deactivated swap [0;1;39mCompressed Swap on /dev/zram0[0m.
+         Stopping [0;1;39mCreate swap on /dev/zram0[0m...
+[[0;32m  OK  [0m] Unmounted [0;1;39m/var/log[0m.
+[[0;32m  OK  [0m] Stopped target [0;1;39mPreparation for Local File Systems[0m.
+[[0;32m  OK  [0m] Reached target [0;1;39mUnmount All Filesystems[0m.
+[[0;32m  OK  [0m] Stopped [0;1;39mCreate Static Device Nodes in /dev[0m.
+[[0;32m  OK  [0m] Stopped [0;1;39mCreate System Users[0m.
+[[0;32m  OK  [0m] Stopped [0;1;39mRemount Root and Kernel File Systems[0m.
+[[0;32m  OK  [0m] Stopped [0;1;39mCreate Static Device Nodes in /dev gracefully[0m.
+[[0;32m  OK  [0m] Stopped [0;1;39mCreate swap on /dev/zram0[0m.
+[[0;32m  OK  [0m] Removed slice [0;1;39mSlice /system/systemd-zram-setup[0m.
+[[0;32m  OK  [0m] Reached target [0;1;39mSystem Shutdown[0m.
+[[0;32m  OK  [0m] Reached target [0;1;39mLate Shutdown Services[0m.
+[[0;32m  OK  [0m] Finished [0;1;39mSystem Reboot[0m.
+[[0;32m  OK  [0m] Reached target [0;1;39mSystem Reboot[0m.
+]3008;end=19c46eab5cfb4800b717189db0d9a268\[   23.435142] watchdog: watchdog0: watchdog did not stop!
+[   23.478216] reboot: Restarting system
+[2J[01;01H[=3h[2J[01;01H[2J[01;01H[=3h[2J[01;01H[2J[01;01H[=3h[2J[01;01HBdsDxe: loading Boot0004 "Limine" from HD(1,GPT,D9DFDF22-4D7A-489C-A774-084AB7309AEF,0x800,0x400000)/\EFI\limine\limine_x64.efi
+BdsDxe: starting Boot0004 "Limine" from HD(1,GPT,D9DFDF22-4D7A-489C-A774-084AB7309AEF,0x800,0x400000)/\EFI\limine\limine_x64.efi
+[01;01H[01;01H%Ga ERROR: Failed to open encryption mapping: The device PARTUUID=38ebaeb2-05ee-44a1-b95b-08a6f8359584 is not a LUKS volume and the crypto= parameter was not specified.
+Unable to resume from device '/dev/vda2' (254:2) offset 1519003, continuing boot process.
+[18t7[32766;32766H[6n8[!p]104\[0m[?7h[1G[0J]3008;start=d625c60ab60e4c8e84061878d77f0ce1;user=root;hostname=omarchy-benchmark;machineid=02f0b0e1719d497cb2eebccff3b1dd46;bootid=c08777c985f847fd88b2cf4c02b29ced;pid=1;pidfdid=1;comm=systemd;type=boot\[[0;32m  OK  [0m] Finished [0;1;39mLoad JSON user/group Records from Credentials[0m.
+[[0;32m  OK  [0m] Finished [0;1;39mTell Plymouth To Write Out Runtime Data[0m.
+         Starting [0;1;39mCreate System Files and Directories[0m...
+[[0;32m  OK  [0m] Finished [0;1;39mSet Up Additional Binary Formats[0m.
+[[0;32m  OK  [0m] Finished [0;1;39mUpdate Boot Loader Random Seed[0m.
+[[0;32m  OK  [0m] Finished [0;1;39mCreate System Files and Directories[0m.
+         Starting [0;1;39mRecord System Boot/Shutdown in UTMP[0m...
+[[0;32m  OK  [0m] Finished [0;1;39mRecord System Boot/Shutdown in UTMP[0m.
+[[0;32m  OK  [0m] Reached target [0;1;39mSystem Initialization[0m.
+[[0;32m  OK  [0m] Started [0;1;39mCUPS Scheduler[0m.
+[[0;32m  OK  [0m] Started [0;1;39mRefresh existing PGP keys of archlinux-keyring regularly[0m.
+[[0;32m  OK  [0m] Started [0;1;39mDaily man-db regeneration[0m.
+[[0;32m  OK  [0m] Started [0;1;39mUpdate the plocate database daily[0m.
+[[0;32m  OK  [0m] Started [0;1;39mDaily verification of password and group files[0m.
+[[0;32m  OK  [0m] Started [0;1;39mHourly Cleanup of Snapper Snapshots[0m.
+[[0;32m  OK  [0m] Started [0;1;39mDaily Cleanup of Temporary Directories[0m.
+[[0;32m  OK  [0m] Reached target [0;1;39mPath Units[0m.
+[[0;32m  OK  [0m] Reached target [0;1;39mTimer Units[0m.
+[[0;32m  OK  [0m] Listening on [0;1;39mAvahi mDNS/DNS-SD Stack Activation Socket[0m.
+[[0;32m  OK  [0m] Listening on [0;1;39mCUPS Scheduler[0m.
+[[0;32m  OK  [0m] Listening on [0;1;39mD-Bus System Message Bus Socket[0m.
+[[0;32m  OK  [0m] Listening on [0;1;39mGnuPG network certificate management daemon for /etc/pacman.d/gnupg[0m.
+         Starting [0;1;39mDocker Socket for the API[0m...
+[[0;32m  OK  [0m] Listening on [0;1;39mGnuPG cryptographic agent and passphrase cache (access for web browsers) for /etc/pacman.d/gnupg[0m.
+[[0;32m  OK  [0m] Listening on [0;1;39mGnuPG cryptographic agent and passphrase cache (restricted) for /etc/pacman.d/gnupg[0m.
+[[0;32m  OK  [0m] Listening on [0;1;39mGnuPG cryptographic agent (ssh-agent emulation) for /etc/pacman.d/gnupg[0m.
+[[0;32m  OK  [0m] Listening on [0;1;39mGnuPG cryptographic agent and passphrase cache for /etc/pacman.d/gnupg[0m.
+[[0;32m  OK  [0m] Listening on [0;1;39mGnuPG public key management service for /etc/pacman.d/gnupg[0m.
+[[0;32m  OK  [0m] Listening on [0;1;39mAuthorization Manager Agent Helper[0m.
+[[0;32m  OK  [0m] Listening on [0;1;39mOpenSSH Server Socket (systemd-ssh-generator, AF_UNIX Local)[0m.
+[[0;32m  OK  [0m] Listening on [0;1;39mUser Login Management Varlink Socket[0m.
+[[0;32m  OK  [0m] Listening on [0;1;39mVirtual Machine and Container Registration Service Socket[0m.
+         Starting [0;1;39mD-Bus System Message Bus[0m...
+[[0;32m  OK  [0m] Listening on [0;1;39mDocker Socket for the API[0m.
+[[0;32m  OK  [0m] Reached target [0;1;39mSocket Units[0m.
+[[0;32m  OK  [0m] Started [0;1;39mD-Bus System Message Bus[0m.
+[[0;32m  OK  [0m] Reached target [0;1;39mBasic System[0m.
+         Starting [0;1;39mNetwork Manager[0m...
+         Starting [0;1;39mAvahi mDNS/DNS-SD Stack[0m...
+[[0;32m  OK  [0m] Started [0;1;39m[limine-snapper-sync.service] automatically synchronizes boot entries with the Snapper snapshot list.[0m.
+         Starting [0;1;39mClean up modules from old kernels[0m...
+         Starting [0;1;39mUser Login Management[0m...
+[[0;32m  OK  [0m] Finished [0;1;39mClean up modules from old kernels[0m.
+         Starting [0;1;39mHostname Service[0m...
+[[0;32m  OK  [0m] Started [0;1;39mAvahi mDNS/DNS-SD Stack[0m.
+[[0;32m  OK  [0m] Started [0;1;39mUser Login Management[0m.
+[[0;32m  OK  [0m] Started [0;1;39mHostname Service[0m.
+[[0;32m  OK  [0m] Listening on [0;1;39mLoad/Save RF Kill Switch Status /dev/rfkill Watch[0m.
+         Starting [0;1;39mNetwork Manager Script Dispatcher Service[0m...
+[[0;32m  OK  [0m] Started [0;1;39mNetwork Manager[0m.
+[[0;32m  OK  [0m] Reached target [0;1;39mNetwork[0m.
+         Starting [0;1;39mCUPS Scheduler[0m...
+         Starting [0;1;39mOpenSSH Daemon[0m...
+         Starting [0;1;39mPermit User Sessions[0m...
+[[0;32m  OK  [0m] Finished [0;1;39mPermit User Sessions[0m.
+         Starting [0;1;39mHold until boot process finishes up[0m...
+         Starting [0;1;39mTerminate Plymouth Boot Screen[0m...
+[[0;32m  OK  [0m] Started [0;1;39mOpenSSH Daemon[0m.
+[[0;32m  OK  [0m] Reached target [0;1;39mSSH Access Available[0m.
+[[0;32m  OK  [0m] Started [0;1;39mNetwork Manager Script Dispatcher Service[0m.
+[[0;32m  OK  [0m] Started [0;1;39mCUPS Scheduler[0m.
+[!p]104\[0m[?7h[1G[0J7[32766;32766H[6n8[!p]104\[0m[?7h[1G[0J7[32766;32766H[6n8]3008;start=e11efec26d6841acbabb185c799239e1;user=root;hostname=omarchy-benchmark;machineid=02f0b0e1719d497cb2eebccff3b1dd46;bootid=c08777c985f847fd88b2cf4c02b29ced;pid=592;pidfdid=4249;comm=(agetty);servicename=serial-getty@ttyS0.service;invocationid=a008284431844fa1abe451966c4b7c01;type=service\P+q6E616D65\
+Omarchy 7.1.9-arch1-2 (ttyS0)
+
+omarchy-benchmark login: [!p]104\[0m[?7h[1G[0J7[32766;32766H[6n8]3008;end=e11efec26d6841acbabb185c799239e1\[[0;32m  OK  [0m] Stopped [0;1;39mUser Manager for UID 1000[0m.
+[[0;32m  OK  [0m] Stopped [0;1;39mSession c1 of User sddm[0m.
+[[0;32m  OK  [0m] Removed slice [0;1;39mCUPS Slice[0m.
+[[0;32m  OK  [0m] Removed slice [0;1;39mSlice /system/serial-getty[0m.
+[[0;32m  OK  [0m] Stopped target [0;1;39mSystem Time Set[0m.
+[[0;32m  OK  [0m] Stopped [0;1;39mHold until boot process finishes up[0m.
+         Stopping [0;1;39mUser Runtime Directory /run/user/1000[0m...
+         Stopping [0;1;39mUser Manager for UID 961[0m...
+[[0;32m  OK  [0m] Unmounted [0;1;39m/run/user/1000[0m.
+[[0;32m  OK  [0m] Stopped [0;1;39mUser Runtime Directory /run/user/1000[0m.
+[[0;32m  OK  [0m] Stopped [0;1;39mUser Manager for UID 961[0m.
+[[0;32m  OK  [0m] Started [0;1;39mShow Plymouth Power Off Screen[0m.
+[[0;32m  OK  [0m] Removed slice [0;1;39mUser Slice of UID 1000[0m.
+         Starting [0;1;39mTell Plymouth To Jump To initramfs[0m...
+         Stopping [0;1;39mUserspace Out-Of-Memory (OOM) Killer[0m...
+         Stopping [0;1;39mPermit User Sessions[0m...
+         Stopping [0;1;39mUser Runtime Directory /run/user/961[0m...
+[[0;32m  OK  [0m] Stopped [0;1;39mUserspace Out-Of-Memory (OOM) Killer[0m.
+[[0;32m  OK  [0m] Stopped [0;1;39mPermit User Sessions[0m.
+[[0;32m  OK  [0m] Unmounted [0;1;39m/run/user/961[0m.
+[[0;32m  OK  [0m] Stopped [0;1;39mUser Runtime Directory /run/user/961[0m.
+[[0;32m  OK  [0m] Removed slice [0;1;39mUser Slice of UID 961[0m.
+[[0;32m  OK  [0m] Stopped target [0;1;39mNetwork[0m.
+[[0;32m  OK  [0m] Stopped target [0;1;39mRemote File Systems[0m.
+         Stopping [0;1;39mNetwork Manager[0m...
+         Stopping [0;1;39mUser Login Management[0m...
+[[0;32m  OK  [0m] Stopped [0;1;39mLoad JSON user/group Records from Credentials[0m.
+[[0;32m  OK  [0m] Finished [0;1;39mTell Plymouth To Jump To initramfs[0m.
+[[0;32m  OK  [0m] Stopped [0;1;39mUser Login Management[0m.
+[[0;32m  OK  [0m] Stopped [0;1;39mNetwork Manager[0m.
+[[0;32m  OK  [0m] Stopped target [0;1;39mBasic System[0m.
+[[0;32m  OK  [0m] Stopped [0;1;39mForward Password Requests to Plymouth Directory Watch[0m.
+[[0;32m  OK  [0m] Stopped target [0;1;39mPath Units[0m.
+[[0;32m  OK  [0m] Stopped [0;1;39mCUPS Scheduler[0m.
+[[0;32m  OK  [0m] Stopped target [0;1;39mSlice Units[0m.
+[[0;32m  OK  [0m] Removed slice [0;1;39mUser and Session Slice[0m.
+[[0;32m  OK  [0m] Stopped target [0;1;39mSocket Units[0m.
+[[0;32m  OK  [0m] Closed [0;1;39mAvahi mDNS/DNS-SD Stack Activation Socket[0m.
+[[0;32m  OK  [0m] Closed [0;1;39mCUPS Scheduler[0m.
+[[0;32m  OK  [0m] Closed [0;1;39mGnuPG network certificate management daemon for /etc/pacman.d/gnupg[0m.
+[[0;32m  OK  [0m] Removed slice [0;1;39mSlice /system/dirmngr[0m.
+[[0;32m  OK  [0m] Closed [0;1;39mDocker Socket for the API[0m.
+[[0;32m  OK  [0m] Closed [0;1;39mGnuPG cryptographic agent and passphrase cache (access for web browsers) for /etc/pacman.d/gnupg[0m.
+[[0;32m  OK  [0m] Removed slice [0;1;39mSlice /system/gpg-agent-browser[0m.
+[[0;32m  OK  [0m] Closed [0;1;39mGnuPG cryptographic agent and passphrase cache (restricted) for /etc/pacman.d/gnupg[0m.
+[[0;32m  OK  [0m] Removed slice [0;1;39mSlice /system/gpg-agent-extra[0m.
+[[0;32m  OK  [0m] Closed [0;1;39mGnuPG cryptographic agent (ssh-agent emulation) for /etc/pacman.d/gnupg[0m.
+[[0;32m  OK  [0m] Removed slice [0;1;39mSlice /system/gpg-agent-ssh[0m.
+[[0;32m  OK  [0m] Closed [0;1;39mGnuPG cryptographic agent and passphrase cache for /etc/pacman.d/gnupg[0m.
+[[0;32m  OK  [0m] Removed slice [0;1;39mSlice /system/gpg-agent[0m.
+[[0;32m  OK  [0m] Closed [0;1;39mGnuPG public key management service for /etc/pacman.d/gnupg[0m.
+[[0;32m  OK  [0m] Removed slice [0;1;39mSlice /system/keyboxd[0m.
+[[0;32m  OK  [0m] Closed [0;1;39mAuthorization Manager Agent Helper[0m.
+[[0;32m  OK  [0m] Closed [0;1;39mOpenSSH Server Socket (systemd-ssh-generator, AF_UNIX Local)[0m.
+[[0;32m  OK  [0m] Closed [0;1;39mHostname Service Socket[0m.
+[[0;32m  OK  [0m] Closed [0;1;39mDisk Image Download Service Socket[0m.
+[[0;32m  OK  [0m] Closed [0;1;39mUser Login Management Varlink Socket[0m.
+[[0;32m  OK  [0m] Closed [0;1;39mVirtual Machine and Container Registration Service Socket[0m.
+[[0;32m  OK  [0m] Closed [0;1;39mConsole Output Muting Service Socket[0m.
+[[0;32m  OK  [0m] Closed [0;1;39mUserspace Out-Of-Memory (OOM) Killer Socket[0m.
+[[0;32m  OK  [0m] Closed [0;1;39mDisk Repartitioning Service Socket[0m.
+         Stopping [0;1;39mD-Bus System Message Bus[0m...
+[[0;32m  OK  [0m] Stopped [0;1;39mD-Bus System Message Bus[0m.
+[[0;32m  OK  [0m] Closed [0;1;39mD-Bus System Message Bus Socket[0m.
+[[0;32m  OK  [0m] Stopped target [0;1;39mSystem Initialization[0m.
+[[0;32m  OK  [0m] Stopped target [0;1;39mLocal Encrypted Volumes[0m.
+[[0;32m  OK  [0m] Stopped [0;1;39mForward Password Requests to Wall Directory Watch[0m.
+[[0;32m  OK  [0m] Stopped target [0;1;39mImage Downloads[0m.
+[[0;32m  OK  [0m] Stopped target [0;1;39mLocal Integrity Protected Volumes[0m.
+[[0;32m  OK  [0m] Stopped target [0;1;39mLocal Verity Protected Volumes[0m.
+         Stopping [0;1;39mSet Up Additional Binary Formats[0m...
+[[0;32m  OK  [0m] Stopped [0;1;39mUpdate Boot Loader Random Seed[0m.
+         Stopping [0;1;39mLoad/Save OS Random Seed[0m...
+         Stopping [0;1;39mNetwork Name Resolution[0m...
+         Stopping [0;1;39mNetwork Time Synchronization[0m...
+         Stopping [0;1;39mRecord System Boot/Shutdown in UTMP[0m...
+[[0;32m  OK  [0m] Stopped [0;1;39mNetwork Time Synchronization[0m.
+[[0;32m  OK  [0m] Stopped [0;1;39mNetwork Name Resolution[0m.
+[[0;32m  OK  [0m] Stopped [0;1;39mSet Up Additional Binary Formats[0m.
+[[0;32m  OK  [0m] Stopped [0;1;39mRecord System Boot/Shutdown in UTMP[0m.
+[[0;32m  OK  [0m] Unset automount [0;1;39mArbitrary Executable File Formats File System Automount Point[0m.
+[[0;32m  OK  [0m] Closed [0;1;39mResolve Monitor Varlink Socket[0m.
+[[0;32m  OK  [0m] Closed [0;1;39mResolve Service Varlink Socket[0m.
+[[0;32m  OK  [0m] Stopped [0;1;39mApply Kernel Variables[0m.
+[[0;32m  OK  [0m] Closed [0;1;39mProcess Core Dump Socket[0m.
+[[0;32m  OK  [0m] Stopped [0;1;39mLoad Kernel Modules[0m.
+[[0;32m  OK  [0m] Stopped [0;1;39mCreate System Files and Directories[0m.
+[[0;32m  OK  [0m] Stopped target [0;1;39mLocal File Systems[0m.
+         Unmounting [0;1;39m/boot[0m...
+         Unmounting [0;1;39m/home[0m...
+         Unmounting [0;1;39mTemporary Directory /tmp[0m...
+         Unmounting [0;1;39m/var/cache/pacman/pkg[0m...
+         Stopping [0;1;39mFlush Journal to Persistent Storage[0m...
+[[0;32m  OK  [0m] Stopped [0;1;39mLoad/Save OS Random Seed[0m.
+[[0;32m  OK  [0m] Unmounted [0;1;39m/home[0m.
+[[0;32m  OK  [0m] Unmounted [0;1;39mTemporary Directory /tmp[0m.
+[[0;32m  OK  [0m] Unmounted [0;1;39m/var/cache/pacman/pkg[0m.
+[[0;32m  OK  [0m] Unmounted [0;1;39m/boot[0m.
+[[0;32m  OK  [0m] Stopped target [0;1;39mSwaps[0m.
+         Deactivating swap [0;1;39m/dev/disk/by-diskseq/4[0m...
+         Deactivating swap [0;1;39m/swap/swapfile[0m...
+[[0;32m  OK  [0m] Stopped [0;1;39mFile System Check on /dev/disk/by-uuid/1958-6646[0m.
+[[0;32m  OK  [0m] Removed slice [0;1;39mSlice /system/systemd-fsck[0m.
+[[0;32m  OK  [0m] Stopped [0;1;39mFlush Journal to Persistent Storage[0m.
+         Unmounting [0;1;39m/var/log[0m...
+[[0;32m  OK  [0m] Deactivated swap [0;1;39m/dev/disk/by-diskseq/4[0m.
+[[0;32m  OK  [0m] Deactivated swap [0;1;39m/swap/swapfile[0m.
+[[0;32m  OK  [0m] Deactivated swap [0;1;39mCompressed Swap on /dev/zram0[0m.
+         Stopping [0;1;39mCreate swap on /dev/zram0[0m...
+[[0;32m  OK  [0m] Unmounted [0;1;39m/var/log[0m.
+[[0;32m  OK  [0m] Stopped target [0;1;39mPreparation for Local File Systems[0m.
+[[0;32m  OK  [0m] Reached target [0;1;39mUnmount All Filesystems[0m.
+[[0;32m  OK  [0m] Stopped [0;1;39mRemount Root and Kernel File Systems[0m.
+[[0;32m  OK  [0m] Stopped [0;1;39mCreate Static Device Nodes in /dev[0m.
+[[0;32m  OK  [0m] Stopped [0;1;39mCreate Static Device Nodes in /dev gracefully[0m.
+[[0;32m  OK  [0m] Stopped [0;1;39mCreate swap on /dev/zram0[0m.
+[[0;32m  OK  [0m] Removed slice [0;1;39mSlice /system/systemd-zram-setup[0m.
+[[0;32m  OK  [0m] Reached target [0;1;39mSystem Shutdown[0m.
+[[0;32m  OK  [0m] Reached target [0;1;39mLate Shutdown Services[0m.
+[[0;32m  OK  [0m] Finished [0;1;39mSystem Power Off[0m.
+[[0;32m  OK  [0m] Reached target [0;1;39mSystem Power Off[0m.
+]3008;end=d625c60ab60e4c8e84061878d77f0ce1\[   13.237484] reboot: Power down

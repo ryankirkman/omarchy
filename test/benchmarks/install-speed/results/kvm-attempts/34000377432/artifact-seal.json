@@ -1,0 +1,576 @@
+{
+  "schema_version": 1,
+  "scope": "Original GitHub artifact files only; no sample is converted into a paired measurement",
+  "artifact_zip_sha256": "b6ba89d2a970ab2744c704a69c9f8eecb6e745331e8f346c3bcb40d3d35ab958",
+  "original_file_count": 142,
+  "files": {
+    "cold-cache-preflight.log": {
+      "bytes": 92,
+      "sha256": "b36a8eafbab19ad75146957dd07408caf770697413b9a1c424e878fefbbc78d1"
+    },
+    "diagnostic-calibration-01/btrfs-subvolumes.txt": {
+      "bytes": 2295,
+      "sha256": "9a0e4f3376f1418183fd310ba5c60d8bdb6443c3882fdf52f2d13c83c60da494"
+    },
+    "diagnostic-calibration-01/btrfs-uuid.txt": {
+      "bytes": 37,
+      "sha256": "305f1b0c3bad8c83024bb1f3aed518d480540c63ab89bfa0819b35e95b8f6bd9"
+    },
+    "diagnostic-calibration-01/identity.json": {
+      "bytes": 459,
+      "sha256": "b695251064d2453912e255f664e7309f0fcb53e70472b77d81821e0701910c40"
+    },
+    "diagnostic-calibration-01/install-timing.json": {
+      "bytes": 1861,
+      "sha256": "bc0fd3925309adf13490d424ebac2e12b7d8bd1d6e1e6f36cd319a365a78ec47"
+    },
+    "diagnostic-calibration-01/installed-boot.txt": {
+      "bytes": 776,
+      "sha256": "72de0bba838a10d4f9dc8a3c302944acb53a8cb87a890c2b7df54aec2dccff18"
+    },
+    "diagnostic-calibration-01/installed-root.json": {
+      "bytes": 132,
+      "sha256": "cebc725cbd245afc4139ebbe70d7a3010beb56dc36ead369327bb8504f5a9c59"
+    },
+    "diagnostic-calibration-01/last-failed-ssh-probe.json": {
+      "bytes": 176,
+      "sha256": "d3784c4c514a2ff35a534c7cc870e3ba590bf18566242babdf338445ad4803da"
+    },
+    "diagnostic-calibration-01/latest-screen.png": {
+      "bytes": 32160,
+      "sha256": "bf9719f73b8d89778b16c113af57ae3d33fd9c84be6b8933c1d72c384b3b42f9"
+    },
+    "diagnostic-calibration-01/machine-id.txt": {
+      "bytes": 33,
+      "sha256": "d18fb8914106bc9b895a40422e5f1fec9334ebc67bb3b2f4bd1d635cb498a29e"
+    },
+    "diagnostic-calibration-01/manifest.json": {
+      "bytes": 4313,
+      "sha256": "23937cda41ffc8f214a1f600dcfad7fcdd19633bbb93e680e3dce77b6704214d"
+    },
+    "diagnostic-calibration-01/package-explicit.txt": {
+      "bytes": 1705,
+      "sha256": "37d06fc7de2487901f81513bf70f3e592d7245cd656d6c34089ccc1f258055f9"
+    },
+    "diagnostic-calibration-01/package-files.stderr": {
+      "bytes": 300,
+      "sha256": "5b6482796f084d9f1a7c88a251d30d1f9d46a2bad8adb9401253e706a28c0018"
+    },
+    "diagnostic-calibration-01/package-files.txt": {
+      "bytes": 41163,
+      "sha256": "5b501e2ef951a921a004c72ce90497acc7047f27a0f1c1fd12acbb9f26c8ec38"
+    },
+    "diagnostic-calibration-01/package-manifest.txt": {
+      "bytes": 18343,
+      "sha256": "f69fe12f4d2b530f56f28b6f350380eaae2e0ea679d88abedd0d032f0b0df89d"
+    },
+    "diagnostic-calibration-01/pacman-master-keys.txt": {
+      "bytes": 293,
+      "sha256": "0c8e05ba6330eae0201155ab2487537e000420510fa042dec6f4d2a848a295a1"
+    },
+    "diagnostic-calibration-01/progress.json": {
+      "bytes": 250,
+      "sha256": "f31cb99108e6f155b39482ba6a842320cc5d526d767e258fbf03f3a07278254d"
+    },
+    "diagnostic-calibration-01/qemu.log": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "diagnostic-calibration-01/serial.log": {
+      "bytes": 31965,
+      "sha256": "9db99bbe48f08331c42d1b7f7b22e01d2327aad28e81d6cb702c606815066c16"
+    },
+    "diagnostic-calibration-01/ssh-host-fingerprints.txt": {
+      "bytes": 355,
+      "sha256": "86de9ecd199b00968a8ac1e958416e38f9e912b05ec3ef7b67a3655f00219deb"
+    },
+    "diagnostic-calibration-01/standalone-btrfs-subvolumes.txt": {
+      "bytes": 2295,
+      "sha256": "bc31de5062f82fe31c3adf1c2d3d1703ac3b6b6ec81e14722ed7a18cdb62dd66"
+    },
+    "diagnostic-calibration-01/standalone-btrfs-uuid.txt": {
+      "bytes": 37,
+      "sha256": "305f1b0c3bad8c83024bb1f3aed518d480540c63ab89bfa0819b35e95b8f6bd9"
+    },
+    "diagnostic-calibration-01/standalone-identity.json": {
+      "bytes": 459,
+      "sha256": "b695251064d2453912e255f664e7309f0fcb53e70472b77d81821e0701910c40"
+    },
+    "diagnostic-calibration-01/standalone-last-failed-ssh-probe.json": {
+      "bytes": 182,
+      "sha256": "9444b3a0d5f868082ddd1c5caa65e416f41e81fb17ae1fece26040e945869233"
+    },
+    "diagnostic-calibration-01/standalone-machine-id.txt": {
+      "bytes": 33,
+      "sha256": "d18fb8914106bc9b895a40422e5f1fec9334ebc67bb3b2f4bd1d635cb498a29e"
+    },
+    "diagnostic-calibration-01/standalone-pacman-master-keys.txt": {
+      "bytes": 293,
+      "sha256": "0c8e05ba6330eae0201155ab2487537e000420510fa042dec6f4d2a848a295a1"
+    },
+    "diagnostic-calibration-01/standalone-reboot.json": {
+      "bytes": 9957,
+      "sha256": "1da4d88def8ded3936ef46fbd5e8a7b72da09c711c89d2f62f0ead7bda23cd3f"
+    },
+    "diagnostic-calibration-01/standalone-root.json": {
+      "bytes": 132,
+      "sha256": "cebc725cbd245afc4139ebbe70d7a3010beb56dc36ead369327bb8504f5a9c59"
+    },
+    "diagnostic-calibration-01/standalone-ssh-host-fingerprints.txt": {
+      "bytes": 355,
+      "sha256": "86de9ecd199b00968a8ac1e958416e38f9e912b05ec3ef7b67a3655f00219deb"
+    },
+    "diagnostic-calibration-01/standalone-uki-files.txt": {
+      "bytes": 266,
+      "sha256": "d37b17ae00ba1fe47a767a2c7e160e0bd4b9a5d003317d811a2621fc826f36f1"
+    },
+    "diagnostic-calibration-01/systemd-analyze-blame.txt": {
+      "bytes": 3353,
+      "sha256": "0486355ffbe98a19447df4daf0585264250d29645a74998d212fe89a86ae23b4"
+    },
+    "diagnostic-calibration-01/systemd-analyze-critical-chain.txt": {
+      "bytes": 1119,
+      "sha256": "57f455ad8b3da7114921d705b874d8ab64ead1cc3271b7e182ce04ae069111b7"
+    },
+    "diagnostic-calibration-01/uki-files.txt": {
+      "bytes": 266,
+      "sha256": "d37b17ae00ba1fe47a767a2c7e160e0bd4b9a5d003317d811a2621fc826f36f1"
+    },
+    "diagnostic-calibration-01/validation.json": {
+      "bytes": 220,
+      "sha256": "162a2b5527885e4d184afbc4fea9831d6d167703a887d535eb36efa1fc7420e1"
+    },
+    "diagnostic-calibration-02/btrfs-subvolumes.txt": {
+      "bytes": 2295,
+      "sha256": "3d68865d225a097394f2dc45ffad2122ae37e22ba768b1c8a15ef73cad5d0650"
+    },
+    "diagnostic-calibration-02/btrfs-uuid.txt": {
+      "bytes": 37,
+      "sha256": "5e181da7c370e0c6fbda3f19824b13f46bf5d12aab668991b1699f7e792e46f9"
+    },
+    "diagnostic-calibration-02/identity.json": {
+      "bytes": 459,
+      "sha256": "dd375b4232ddcea0f37e8d2112aeea4ca635222607f57c08faed0db64dcf4660"
+    },
+    "diagnostic-calibration-02/install-timing.json": {
+      "bytes": 1860,
+      "sha256": "0a6c9d5d6b51c7bef8d84311e579b27ba4553847c3ae05027e88df51f17dcc66"
+    },
+    "diagnostic-calibration-02/installed-boot.txt": {
+      "bytes": 776,
+      "sha256": "3844c393f89117706b008356c5957410aca23019dade7a428c12d7d5d29cb20d"
+    },
+    "diagnostic-calibration-02/installed-root.json": {
+      "bytes": 132,
+      "sha256": "cebc725cbd245afc4139ebbe70d7a3010beb56dc36ead369327bb8504f5a9c59"
+    },
+    "diagnostic-calibration-02/last-failed-ssh-probe.json": {
+      "bytes": 170,
+      "sha256": "ad19d052f63a73deac830678abcf94aa0670c152f1dde3462188ba6ed2f6b5c6"
+    },
+    "diagnostic-calibration-02/latest-screen.png": {
+      "bytes": 32170,
+      "sha256": "7f0cab898ec3f51c710740da74df9812948d205160820dfd988e1a6621a8665d"
+    },
+    "diagnostic-calibration-02/machine-id.txt": {
+      "bytes": 33,
+      "sha256": "26cf87002fac79c6002476ba2fbd2753e3442eab1596aee85ede4aa72557d64d"
+    },
+    "diagnostic-calibration-02/manifest.json": {
+      "bytes": 4308,
+      "sha256": "07b4e9fe84d189f5d56d8d63d0d4dac1a2f26b84954eac2c88ad0e7ff2ff4e02"
+    },
+    "diagnostic-calibration-02/package-explicit.txt": {
+      "bytes": 1705,
+      "sha256": "37d06fc7de2487901f81513bf70f3e592d7245cd656d6c34089ccc1f258055f9"
+    },
+    "diagnostic-calibration-02/package-files.stderr": {
+      "bytes": 300,
+      "sha256": "5b6482796f084d9f1a7c88a251d30d1f9d46a2bad8adb9401253e706a28c0018"
+    },
+    "diagnostic-calibration-02/package-files.txt": {
+      "bytes": 41163,
+      "sha256": "5b501e2ef951a921a004c72ce90497acc7047f27a0f1c1fd12acbb9f26c8ec38"
+    },
+    "diagnostic-calibration-02/package-manifest.txt": {
+      "bytes": 18343,
+      "sha256": "f69fe12f4d2b530f56f28b6f350380eaae2e0ea679d88abedd0d032f0b0df89d"
+    },
+    "diagnostic-calibration-02/pacman-master-keys.txt": {
+      "bytes": 293,
+      "sha256": "14450c0e0f9a1780297d448cffcc1bc8d24f3691fdd9d5c1ffcc0f1ec874d1ee"
+    },
+    "diagnostic-calibration-02/progress.json": {
+      "bytes": 245,
+      "sha256": "e5e7101cdad60de5144207d177d77e42dcc3e10826a06e18bcf859006122c0c3"
+    },
+    "diagnostic-calibration-02/qemu.log": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "diagnostic-calibration-02/serial.log": {
+      "bytes": 31573,
+      "sha256": "10b9611af8911443df3abb7c92f40398a49917377d8687ca02f2682ccedf88fe"
+    },
+    "diagnostic-calibration-02/ssh-host-fingerprints.txt": {
+      "bytes": 355,
+      "sha256": "7a9520c52a2240be59fc46e226d7335c9c543b09d3f720b25ed2462711e792cc"
+    },
+    "diagnostic-calibration-02/standalone-btrfs-subvolumes.txt": {
+      "bytes": 2295,
+      "sha256": "131fbe5ab279d6b84d50ce79d3e3f14d656d4bdae5d56cea72ef4b48a323befb"
+    },
+    "diagnostic-calibration-02/standalone-btrfs-uuid.txt": {
+      "bytes": 37,
+      "sha256": "5e181da7c370e0c6fbda3f19824b13f46bf5d12aab668991b1699f7e792e46f9"
+    },
+    "diagnostic-calibration-02/standalone-identity.json": {
+      "bytes": 459,
+      "sha256": "dd375b4232ddcea0f37e8d2112aeea4ca635222607f57c08faed0db64dcf4660"
+    },
+    "diagnostic-calibration-02/standalone-last-failed-ssh-probe.json": {
+      "bytes": 191,
+      "sha256": "1b8d9b0bbb6fec2d6cf6b3a592606b3a5fd8ec920412aba4943cb8918f04191e"
+    },
+    "diagnostic-calibration-02/standalone-machine-id.txt": {
+      "bytes": 33,
+      "sha256": "26cf87002fac79c6002476ba2fbd2753e3442eab1596aee85ede4aa72557d64d"
+    },
+    "diagnostic-calibration-02/standalone-pacman-master-keys.txt": {
+      "bytes": 293,
+      "sha256": "14450c0e0f9a1780297d448cffcc1bc8d24f3691fdd9d5c1ffcc0f1ec874d1ee"
+    },
+    "diagnostic-calibration-02/standalone-reboot.json": {
+      "bytes": 10020,
+      "sha256": "854a30abf861881681859ea80fe5fb0d499864a2cbdfa029136ceec00a57142b"
+    },
+    "diagnostic-calibration-02/standalone-root.json": {
+      "bytes": 132,
+      "sha256": "cebc725cbd245afc4139ebbe70d7a3010beb56dc36ead369327bb8504f5a9c59"
+    },
+    "diagnostic-calibration-02/standalone-ssh-host-fingerprints.txt": {
+      "bytes": 355,
+      "sha256": "7a9520c52a2240be59fc46e226d7335c9c543b09d3f720b25ed2462711e792cc"
+    },
+    "diagnostic-calibration-02/standalone-uki-files.txt": {
+      "bytes": 266,
+      "sha256": "d37b17ae00ba1fe47a767a2c7e160e0bd4b9a5d003317d811a2621fc826f36f1"
+    },
+    "diagnostic-calibration-02/systemd-analyze-blame.txt": {
+      "bytes": 3353,
+      "sha256": "921e9f2b298f71179bac2f08201f79b916eb45fb7c85413fba0178e42067a176"
+    },
+    "diagnostic-calibration-02/systemd-analyze-critical-chain.txt": {
+      "bytes": 1121,
+      "sha256": "b3872233cd8a831f13cd91025d578c1c110890aae77e57df1585708bbba20d53"
+    },
+    "diagnostic-calibration-02/uki-files.txt": {
+      "bytes": 266,
+      "sha256": "d37b17ae00ba1fe47a767a2c7e160e0bd4b9a5d003317d811a2621fc826f36f1"
+    },
+    "diagnostic-calibration-02/validation.json": {
+      "bytes": 221,
+      "sha256": "5e7b54e57ea0065b7e58798f29b2e60606ad4a617d9576ca51db2d1c72486875"
+    },
+    "diagnostic-calibration-03/btrfs-subvolumes.txt": {
+      "bytes": 2295,
+      "sha256": "4a231c7e11d12abad450e1deebcec379a7c33a27f6cec9c2bf35723f245039df"
+    },
+    "diagnostic-calibration-03/btrfs-uuid.txt": {
+      "bytes": 37,
+      "sha256": "0873cadb2b5dbdd73fab5a0d7fb7e80ead4fa290c689b4c6faa85306803e776e"
+    },
+    "diagnostic-calibration-03/identity.json": {
+      "bytes": 459,
+      "sha256": "cdcc6151b1a7115f0073008f94d9abd1207cc3c36bc9e7d698baf239279ea0ff"
+    },
+    "diagnostic-calibration-03/install-timing.json": {
+      "bytes": 1861,
+      "sha256": "65641c2aa4ab988557264d4e71fdd3f3638d70916540549e386002dd9fa2536f"
+    },
+    "diagnostic-calibration-03/installed-boot.txt": {
+      "bytes": 776,
+      "sha256": "8e28f032a8a32a35c32b8b9d7f53aeeb8dd0fd5deb54c15bdae1c76456167ed7"
+    },
+    "diagnostic-calibration-03/installed-root.json": {
+      "bytes": 132,
+      "sha256": "cebc725cbd245afc4139ebbe70d7a3010beb56dc36ead369327bb8504f5a9c59"
+    },
+    "diagnostic-calibration-03/last-failed-ssh-probe.json": {
+      "bytes": 170,
+      "sha256": "4cee872215c74bd9fb7da204b6cba9454005b724da8f59645a20131b1cfe6d7c"
+    },
+    "diagnostic-calibration-03/latest-screen.png": {
+      "bytes": 32169,
+      "sha256": "a8b2a83ed5948fd6a808c39011301e7cfcb24545c0571b8d135f461b81e12345"
+    },
+    "diagnostic-calibration-03/machine-id.txt": {
+      "bytes": 33,
+      "sha256": "9686407711dd1403567c8785f1af39bfce64dd48610f32772421a4ac5001f180"
+    },
+    "diagnostic-calibration-03/manifest.json": {
+      "bytes": 4309,
+      "sha256": "88e4ce8c5ace775d7e72b171633116642e21fe8fb8f8df199033f23656331791"
+    },
+    "diagnostic-calibration-03/package-explicit.txt": {
+      "bytes": 1705,
+      "sha256": "37d06fc7de2487901f81513bf70f3e592d7245cd656d6c34089ccc1f258055f9"
+    },
+    "diagnostic-calibration-03/package-files.stderr": {
+      "bytes": 300,
+      "sha256": "5b6482796f084d9f1a7c88a251d30d1f9d46a2bad8adb9401253e706a28c0018"
+    },
+    "diagnostic-calibration-03/package-files.txt": {
+      "bytes": 41163,
+      "sha256": "5b501e2ef951a921a004c72ce90497acc7047f27a0f1c1fd12acbb9f26c8ec38"
+    },
+    "diagnostic-calibration-03/package-manifest.txt": {
+      "bytes": 18343,
+      "sha256": "f69fe12f4d2b530f56f28b6f350380eaae2e0ea679d88abedd0d032f0b0df89d"
+    },
+    "diagnostic-calibration-03/pacman-master-keys.txt": {
+      "bytes": 293,
+      "sha256": "faa2df0e12d5fcea885a4d8a6ad980e12b2c3b32fed5792a3955403d6396a724"
+    },
+    "diagnostic-calibration-03/progress.json": {
+      "bytes": 250,
+      "sha256": "3aea7342a6021a16508f4e965de13ef33673b0355271b57501bccb0741571f7c"
+    },
+    "diagnostic-calibration-03/qemu.log": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "diagnostic-calibration-03/serial.log": {
+      "bytes": 31924,
+      "sha256": "49be02c40b6741db869f67edd2c88ff34ed037a6dd4caa3a593009bc1e517406"
+    },
+    "diagnostic-calibration-03/ssh-host-fingerprints.txt": {
+      "bytes": 355,
+      "sha256": "655ba3c98ed7a91abd88624caece32a6a7790e3e2fc4a106b68737c910d8ef04"
+    },
+    "diagnostic-calibration-03/standalone-btrfs-subvolumes.txt": {
+      "bytes": 2295,
+      "sha256": "3cc135394727be546dc9b1d73a516ac7a71308bdf447edbfce7011f3361a5818"
+    },
+    "diagnostic-calibration-03/standalone-btrfs-uuid.txt": {
+      "bytes": 37,
+      "sha256": "0873cadb2b5dbdd73fab5a0d7fb7e80ead4fa290c689b4c6faa85306803e776e"
+    },
+    "diagnostic-calibration-03/standalone-identity.json": {
+      "bytes": 459,
+      "sha256": "cdcc6151b1a7115f0073008f94d9abd1207cc3c36bc9e7d698baf239279ea0ff"
+    },
+    "diagnostic-calibration-03/standalone-last-failed-ssh-probe.json": {
+      "bytes": 192,
+      "sha256": "c2fb280322931142ba50acd87a9bca5383393a0d11fa7265361a09fe4087e481"
+    },
+    "diagnostic-calibration-03/standalone-machine-id.txt": {
+      "bytes": 33,
+      "sha256": "9686407711dd1403567c8785f1af39bfce64dd48610f32772421a4ac5001f180"
+    },
+    "diagnostic-calibration-03/standalone-pacman-master-keys.txt": {
+      "bytes": 293,
+      "sha256": "faa2df0e12d5fcea885a4d8a6ad980e12b2c3b32fed5792a3955403d6396a724"
+    },
+    "diagnostic-calibration-03/standalone-reboot.json": {
+      "bytes": 9968,
+      "sha256": "6f9c3ade9213dd4af686712df568bc473bd48381e4c02f3c76a406227a9c76f3"
+    },
+    "diagnostic-calibration-03/standalone-root.json": {
+      "bytes": 132,
+      "sha256": "cebc725cbd245afc4139ebbe70d7a3010beb56dc36ead369327bb8504f5a9c59"
+    },
+    "diagnostic-calibration-03/standalone-ssh-host-fingerprints.txt": {
+      "bytes": 355,
+      "sha256": "655ba3c98ed7a91abd88624caece32a6a7790e3e2fc4a106b68737c910d8ef04"
+    },
+    "diagnostic-calibration-03/standalone-uki-files.txt": {
+      "bytes": 266,
+      "sha256": "d37b17ae00ba1fe47a767a2c7e160e0bd4b9a5d003317d811a2621fc826f36f1"
+    },
+    "diagnostic-calibration-03/systemd-analyze-blame.txt": {
+      "bytes": 3353,
+      "sha256": "3a81f32279c7fd5c49ff784dd5a31a02e4942d5b39f57ebaff9b33510b01d9d8"
+    },
+    "diagnostic-calibration-03/systemd-analyze-critical-chain.txt": {
+      "bytes": 1348,
+      "sha256": "6c691456500e6903e271b19676bb40c01655e4d274535be963c9d672d7926c6e"
+    },
+    "diagnostic-calibration-03/uki-files.txt": {
+      "bytes": 266,
+      "sha256": "d37b17ae00ba1fe47a767a2c7e160e0bd4b9a5d003317d811a2621fc826f36f1"
+    },
+    "diagnostic-calibration-03/validation.json": {
+      "bytes": 221,
+      "sha256": "d2551b779a8a95d7f38e3c792474ac4c4db4ab47b94298a0aeb058d5072b2384"
+    },
+    "diagnostic-calibration-04/btrfs-subvolumes.txt": {
+      "bytes": 2295,
+      "sha256": "9bf529eb92729bc2401245147fd98373c16cfcaa3e4066c21a574cc157b76c4a"
+    },
+    "diagnostic-calibration-04/btrfs-uuid.txt": {
+      "bytes": 37,
+      "sha256": "cf5c353b91b2753a235cd197f29275f021799ff66f183488778827719fb8fa70"
+    },
+    "diagnostic-calibration-04/identity.json": {
+      "bytes": 459,
+      "sha256": "67bfae89c8b7697a3fda94c84ea4d850810026f580d0361360b56849ca456743"
+    },
+    "diagnostic-calibration-04/install-timing.json": {
+      "bytes": 1862,
+      "sha256": "dcb2066e642918b26c00c80002c17b9f13c466f2f4b236607905b1338ca48615"
+    },
+    "diagnostic-calibration-04/installed-boot.txt": {
+      "bytes": 776,
+      "sha256": "8b4925ec8938134ecdc5716429dd93f392182ac2e47fd39a695c137e2aa2a7c6"
+    },
+    "diagnostic-calibration-04/installed-root.json": {
+      "bytes": 132,
+      "sha256": "cebc725cbd245afc4139ebbe70d7a3010beb56dc36ead369327bb8504f5a9c59"
+    },
+    "diagnostic-calibration-04/last-failed-ssh-probe.json": {
+      "bytes": 175,
+      "sha256": "cf2b1ff10b1365650ef1e6f5478a9e9562eab1294a38204e8c03b2ad61e19532"
+    },
+    "diagnostic-calibration-04/latest-screen.png": {
+      "bytes": 3057,
+      "sha256": "05713dbacb00cfa92e8cad1581147b0f1349f6ee14c97d122440aff36011bd53"
+    },
+    "diagnostic-calibration-04/machine-id.txt": {
+      "bytes": 33,
+      "sha256": "aa603c8799a8ec9a571254056a9f01c04a99d7d37262591e17a124ecb8be5370"
+    },
+    "diagnostic-calibration-04/manifest.json": {
+      "bytes": 4308,
+      "sha256": "51788e8c6a85e270c836a5aef880e5a5a40843dd4c37bb9f496a164bc22b4733"
+    },
+    "diagnostic-calibration-04/package-explicit.txt": {
+      "bytes": 1705,
+      "sha256": "37d06fc7de2487901f81513bf70f3e592d7245cd656d6c34089ccc1f258055f9"
+    },
+    "diagnostic-calibration-04/package-files.stderr": {
+      "bytes": 300,
+      "sha256": "5b6482796f084d9f1a7c88a251d30d1f9d46a2bad8adb9401253e706a28c0018"
+    },
+    "diagnostic-calibration-04/package-files.txt": {
+      "bytes": 41163,
+      "sha256": "5b501e2ef951a921a004c72ce90497acc7047f27a0f1c1fd12acbb9f26c8ec38"
+    },
+    "diagnostic-calibration-04/package-manifest.txt": {
+      "bytes": 18343,
+      "sha256": "f69fe12f4d2b530f56f28b6f350380eaae2e0ea679d88abedd0d032f0b0df89d"
+    },
+    "diagnostic-calibration-04/pacman-master-keys.txt": {
+      "bytes": 293,
+      "sha256": "1331711a23f40f83770c17cd17b60b1875116e99ada76d026735152df8b38118"
+    },
+    "diagnostic-calibration-04/progress.json": {
+      "bytes": 250,
+      "sha256": "70498560bda72ca8bb5d5f1ec0f57dead2f588df3a41d3dd3f8b36747b79860d"
+    },
+    "diagnostic-calibration-04/qemu.log": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "diagnostic-calibration-04/serial.log": {
+      "bytes": 32183,
+      "sha256": "3b9b07104aa7e354bf5f303a9e7cdc4bd80c391bea1b34377b2762559d0309e0"
+    },
+    "diagnostic-calibration-04/ssh-host-fingerprints.txt": {
+      "bytes": 355,
+      "sha256": "d74449f290769ef632c458856623c33dccdd1729ddf8b4f6faa11189d8d94479"
+    },
+    "diagnostic-calibration-04/standalone-btrfs-subvolumes.txt": {
+      "bytes": 2295,
+      "sha256": "6c0337fad5a860afff48108fec68726fc29107eceb5e0a0c775eafe0e0b137da"
+    },
+    "diagnostic-calibration-04/standalone-btrfs-uuid.txt": {
+      "bytes": 37,
+      "sha256": "cf5c353b91b2753a235cd197f29275f021799ff66f183488778827719fb8fa70"
+    },
+    "diagnostic-calibration-04/standalone-identity.json": {
+      "bytes": 459,
+      "sha256": "67bfae89c8b7697a3fda94c84ea4d850810026f580d0361360b56849ca456743"
+    },
+    "diagnostic-calibration-04/standalone-last-failed-ssh-probe.json": {
+      "bytes": 192,
+      "sha256": "c0e66d46bc405cb35e104cf243350df7f45522e07ced78e132d12b956beaca4d"
+    },
+    "diagnostic-calibration-04/standalone-machine-id.txt": {
+      "bytes": 33,
+      "sha256": "aa603c8799a8ec9a571254056a9f01c04a99d7d37262591e17a124ecb8be5370"
+    },
+    "diagnostic-calibration-04/standalone-pacman-master-keys.txt": {
+      "bytes": 293,
+      "sha256": "1331711a23f40f83770c17cd17b60b1875116e99ada76d026735152df8b38118"
+    },
+    "diagnostic-calibration-04/standalone-reboot.json": {
+      "bytes": 9967,
+      "sha256": "35ef5535d9618c7f0390206e5af60ec545289b89d67f45825a77bf57637e4468"
+    },
+    "diagnostic-calibration-04/standalone-root.json": {
+      "bytes": 132,
+      "sha256": "cebc725cbd245afc4139ebbe70d7a3010beb56dc36ead369327bb8504f5a9c59"
+    },
+    "diagnostic-calibration-04/standalone-ssh-host-fingerprints.txt": {
+      "bytes": 355,
+      "sha256": "d74449f290769ef632c458856623c33dccdd1729ddf8b4f6faa11189d8d94479"
+    },
+    "diagnostic-calibration-04/standalone-uki-files.txt": {
+      "bytes": 266,
+      "sha256": "d37b17ae00ba1fe47a767a2c7e160e0bd4b9a5d003317d811a2621fc826f36f1"
+    },
+    "diagnostic-calibration-04/systemd-analyze-blame.txt": {
+      "bytes": 3353,
+      "sha256": "7fdb97c205f9c0c000d30a6bfb187456af3984c0140fdc93a3145568a160e96f"
+    },
+    "diagnostic-calibration-04/systemd-analyze-critical-chain.txt": {
+      "bytes": 1347,
+      "sha256": "e1d1eb517dfd60ac1746899378448b1f93c7f0acdc982078af5bf1ac42d3fd2c"
+    },
+    "diagnostic-calibration-04/uki-files.txt": {
+      "bytes": 266,
+      "sha256": "d37b17ae00ba1fe47a767a2c7e160e0bd4b9a5d003317d811a2621fc826f36f1"
+    },
+    "diagnostic-calibration-04/validation.json": {
+      "bytes": 221,
+      "sha256": "ffde23bab6b4a4dfb4c7a6d3059d2c2d1551d4f73694e51ab7c32cad6b2bb195"
+    },
+    "disk-budget.json": {
+      "bytes": 107,
+      "sha256": "3ca97aab586e631c941952d1d7da161ae59bbcfd95e957e79e94aa697d438438"
+    },
+    "experiment.json": {
+      "bytes": 1555,
+      "sha256": "1d60275ca3f5e3b9f68d1f10900b67cb307d2ca5d410efe9280ee1e66c24b289"
+    },
+    "firmware-initramfs-control.iso.manifest.json": {
+      "bytes": 19911,
+      "sha256": "39991ffedf56f032a1bcb491335c61c2be47981d1fcd4c0d1e7ed6743aa14757"
+    },
+    "firmware-initramfs-control.iso.repack.log": {
+      "bytes": 3846,
+      "sha256": "004986b5cfe60da532a679af7bb1e55839fa6449de290c52130f5ec10e9ecae0"
+    },
+    "host-packages.txt": {
+      "bytes": 40667,
+      "sha256": "eaf9c200086096dbd5130fa897027313f00e8f39b5190eecc78888fa2ef3dbaa"
+    },
+    "initramfs-control.manifest.json": {
+      "bytes": 954,
+      "sha256": "cf2de9676c98c8fd067b9151c923e177cd1405fec70922ed954da7f5fdeb097e"
+    },
+    "runner-after.txt": {
+      "bytes": 436,
+      "sha256": "1dd805dcca2fea542295097a0e0a5bce1ade7051b3ca7b693edc3014ffabd108"
+    },
+    "runner-before.txt": {
+      "bytes": 3945,
+      "sha256": "1a7b980b4b02604028f141606d07616afb34b8d67cc603c4baa0000372805415"
+    },
+    "runner-image.txt": {
+      "bytes": 24,
+      "sha256": "7ef3cf88f0b9abbc463eb815da6a918272cd777a5c87584ead39f0054d74b186"
+    }
+  }
+}

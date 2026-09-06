@@ -1,0 +1,6 @@
+{
+  "started_host_wall_s": 182.083952941,
+  "finished_host_wall_s": 185.0955393449999,
+  "returncode": 255,
+  "stderr": "Connection timed out during banner exchange\n"
+}
