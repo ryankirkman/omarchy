@@ -5,6 +5,7 @@ import contextlib
 import io
 import json
 import os
+import selectors
 import stat
 from pathlib import Path
 import subprocess
@@ -68,19 +69,45 @@ def failed_repeat_fixture(root, revision='candidate'):
 
 class NativeContract(unittest.TestCase):
   def test_timeout_terminates_child_group(self):
-    with tempfile.TemporaryDirectory() as temporary:
-      pid_file = Path(temporary) / 'child.pid'
-      script = "import pathlib,subprocess,sys,time; p=subprocess.Popen([sys.executable,'-c','import time; time.sleep(30)']); pathlib.Path(sys.argv[1]).write_text(str(p.pid)); time.sleep(30)"
-      with self.assertRaises(subprocess.TimeoutExpired):
-        module.command([sys.executable, '-c', script, pid_file], timeout=0.3)
-      pid = int(pid_file.read_text())
-      deadline = time.monotonic() + 3
-      while True:
-        stat = Path(f'/proc/{pid}/stat')
-        if not stat.exists() or stat.read_text().split()[2] == 'Z':
-          break
-        self.assertLess(time.monotonic(), deadline, 'child survived timeout cleanup')
-        time.sleep(0.05)
+    # /proc may expose a different PID namespace. Only our inherited writers
+    # determine EOF, and the ready marker proves the child actually started.
+    child_script = "import os,sys,time; os.write(int(sys.argv[1]),b'ready\\n'); time.sleep(30)"
+    parent_script = "import subprocess,sys,time; fd=int(sys.argv[1]); subprocess.Popen([sys.executable,'-c',sys.argv[2],str(fd)],pass_fds=(fd,)); time.sleep(30)"
+    for negative_control in (True, False):
+      with self.subTest(negative_control=negative_control):
+        read_fd, write_fd = os.pipe()
+        with os.fdopen(read_fd, 'rb', buffering=0) as reader, \
+            os.fdopen(write_fd, 'wb', buffering=0) as writer, selectors.DefaultSelector() as selector:
+          selector.register(reader, selectors.EVENT_READ)
+          if negative_control:
+            child = subprocess.Popen([sys.executable, '-c', child_script, str(write_fd)], pass_fds=(write_fd,))
+            try:
+              writer.close()
+              self.assertTrue(selector.select(3), 'owned child did not report ready')
+              self.assertEqual(reader.read(1024), b'ready\n')
+              self.assertIsNone(child.poll())
+              self.assertEqual(selector.select(0.1), [], 'live owned child must keep the pipe open')
+            finally:
+              child.kill()
+              child.wait(timeout=3)
+            expected = b''
+          else:
+            with self.assertRaises(subprocess.TimeoutExpired):
+              module.command([sys.executable, '-c', parent_script, str(write_fd), child_script],
+                timeout=1, pass_fds=(write_fd,))
+            writer.close()
+            expected = b'ready\n'
+          received = bytearray()
+          deadline = time.monotonic() + 3
+          while True:
+            remaining = deadline - time.monotonic()
+            self.assertGreater(remaining, 0, 'owned writer survived cleanup')
+            self.assertTrue(selector.select(remaining), 'owned writer survived cleanup')
+            chunk = reader.read(1024)
+            if not chunk:
+              break
+            received.extend(chunk)
+          self.assertEqual(received, expected)
 
   def test_evidence_excludes_private_and_large_state(self):
     with tempfile.TemporaryDirectory() as temporary:
