@@ -78,9 +78,6 @@ reject source/anchor drift, verify distinct opt-in provenance, and compare all
 six default outputs with pre-change checksums. Every other archive member and
 its metadata must remain identical.
 
-Those contracts do not establish block-device correctness or speed. A separate
-small VM fixture must restore nonzero data, allocated zeros and sparse ranges
-onto nonzero-prefilled devices; verify every restored byte and trailing guards;
-and cover 512/4096-byte sectors and unavailable zero offload. Full-install
-package/Qk, unique identity and standalone reboot validation remain required
-before accepting any installation measurement.
+Those contracts do not establish block-device correctness or speed. The [separate real block-device fixture](../direct-restore/results/local-tcg-2026-09-05/acceptance.json) has now passed all four combinations of 512-byte and 4 KiB logical sectors with zero offload enabled or disabled. Each case restored nonzero data, allocated zeros and sparse ranges onto a nonzero-prefilled device, verified the complete restored contents, and checked that the trailing 32 MiB remained unchanged. An actual read-only-device failure propagated without an application retry or fallback. After clean guest shutdown, independent host readback verified all four complete 96 MiB targets.
+
+These are functional results from QEMU 8.2.2 under software emulation, not native install-speed or physical-drive measurements. Full-install package/Qk, unique identity and standalone reboot validation remain required before accepting any installation timing. The direct-write variant has not yet completed a native comparison.
