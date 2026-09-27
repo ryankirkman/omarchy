@@ -1,0 +1,9 @@
+{
+  "checks": 960,
+  "rowChecks": 12388,
+  "allRolesEqual": true,
+  "selectionValuesEqual": true,
+  "selectionClampEqual": true,
+  "layoutSerialEqual": true,
+  "inputModeEqual": true
+}

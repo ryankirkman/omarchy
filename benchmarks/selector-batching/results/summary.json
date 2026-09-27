@@ -1,0 +1,306 @@
+[
+  {
+    "source": "benchmarks/selector-batching/results/filtering.json",
+    "metadata": {
+      "packages": [
+        "omarchy 4.0.4-1",
+        "quickshell 0.3.1-1",
+        "qt6-base 6.11.2-3",
+        "qt6-declarative 6.11.2-1"
+      ],
+      "sourceCommit": "c5b4db77d68e7fbce5cf11120712ea322557e967",
+      "stockMenuSha256": "343395c8d8e90992cdbd44c1b31a4606e4f04f5b13d0dbd8940ebd10ab506fd6",
+      "batchPatchSha256": "c5a9782d055305d217e6ee7beef5fd0c426774688bcfb3ba883ce718578b5766",
+      "mode": "typing",
+      "cpu": 0,
+      "rounds": 3,
+      "passes": 2,
+      "queries": {
+        "hyprland": [
+          "super",
+          "window",
+          "terminal",
+          "space super",
+          "splt wndw",
+          "zzzz",
+          ""
+        ],
+        "tmux": [
+          "prefix",
+          "window",
+          "pane",
+          "copy",
+          "zzzz",
+          ""
+        ],
+        "herdr": [
+          "navigate",
+          "workspace",
+          "prefix",
+          "window",
+          "zzzz",
+          ""
+        ]
+      },
+      "datasetHashes": {
+        "hyprland": "a2d3939658d9fb1ee9bf80ebb589215852018bf7876c3f0340079d425bf150fd",
+        "tmux": "9aa06fa59b6ad3da83ea419c5e96dc15f1788b88512c566e4989d54b85b27c78",
+        "herdr": "0437b544ffffd26913dd1735247f7315c42ece3ca9dfff0953c87ff0c377636d"
+      }
+    },
+    "summary": [
+      {
+        "dataset": "hyprland",
+        "variant": "stock",
+        "runs": 2,
+        "options": 236,
+        "samples": 492,
+        "frameMs": {
+          "mean": 6.285514014280908,
+          "median": 4.165519490838051,
+          "p95": 16.736778005957603
+        },
+        "handlerMs": {
+          "mean": 3.71742326251375,
+          "median": 1.354313001036644,
+          "p95": 14.308664008975029
+        },
+        "cpuMs": {
+          "mean": 5.166045579268295,
+          "median": 3.156753500000036,
+          "p95": 16.709449000000063
+        },
+        "guiInstructions": {
+          "mean": 69093476.1605691,
+          "median": 31477470.0,
+          "p95": 278825710
+        },
+        "blockCpuMsPerInput": 5.7347702154471545,
+        "blockCpuMsPerInputByPass": [
+          5.706293739837398,
+          5.763246691056911
+        ],
+        "blockGuiInstructionsPerInput": 70557201.17073171,
+        "framesOver16_7Ms": 26,
+        "minCounterRunningFraction": 1,
+        "geometry": {
+          "cardWidth": 933,
+          "cardHeight": 617,
+          "listHeight": 528,
+          "cacheBuffer": 320,
+          "reuseItems": false
+        }
+      },
+      {
+        "dataset": "hyprland",
+        "variant": "stock-batched",
+        "runs": 2,
+        "options": 236,
+        "samples": 492,
+        "frameMs": {
+          "mean": 4.05071708363125,
+          "median": 3.3612265065312386,
+          "p95": 10.591763004660606
+        },
+        "handlerMs": {
+          "mean": 0.8696920585523291,
+          "median": 0.709354005753994,
+          "p95": 1.7452130019664764
+        },
+        "cpuMs": {
+          "mean": 2.3731404959349587,
+          "median": 2.656450500000062,
+          "p95": 4.4186939999999595
+        },
+        "guiInstructions": {
+          "mean": 18097123.109756097,
+          "median": 22695597.5,
+          "p95": 36129108
+        },
+        "blockCpuMsPerInput": 2.8905832845528456,
+        "blockCpuMsPerInputByPass": [
+          2.915321772357723,
+          2.8658447967479677
+        ],
+        "blockGuiInstructionsPerInput": 18967146.87601626,
+        "framesOver16_7Ms": 2,
+        "minCounterRunningFraction": 1,
+        "geometry": {
+          "cardWidth": 933,
+          "cardHeight": 617,
+          "listHeight": 528,
+          "cacheBuffer": 320,
+          "reuseItems": false
+        }
+      },
+      {
+        "dataset": "tmux",
+        "variant": "stock",
+        "runs": 2,
+        "options": 43,
+        "samples": 288,
+        "frameMs": {
+          "mean": 5.399548006657925,
+          "median": 3.832084499299526,
+          "p95": 10.788489997386932
+        },
+        "handlerMs": {
+          "mean": 0.8920602392819192,
+          "median": 0.9792345017194748,
+          "p95": 1.5530159920454025
+        },
+        "cpuMs": {
+          "mean": 2.8802673125,
+          "median": 3.255663500000054,
+          "p95": 3.9671349999999848
+        },
+        "guiInstructions": {
+          "mean": 23455837.072916668,
+          "median": 27959638.5,
+          "p95": 35621101
+        },
+        "blockCpuMsPerInput": 3.481212243055556,
+        "blockCpuMsPerInputByPass": [
+          3.582563090277778,
+          3.3798613958333332
+        ],
+        "blockGuiInstructionsPerInput": 24547711.833333332,
+        "framesOver16_7Ms": 0,
+        "minCounterRunningFraction": 1,
+        "geometry": {
+          "cardWidth": 933,
+          "cardHeight": 617,
+          "listHeight": 528,
+          "cacheBuffer": 320,
+          "reuseItems": false
+        }
+      },
+      {
+        "dataset": "tmux",
+        "variant": "stock-batched",
+        "runs": 2,
+        "options": 43,
+        "samples": 288,
+        "frameMs": {
+          "mean": 5.395513038202706,
+          "median": 3.2139944955706596,
+          "p95": 10.624503001570702
+        },
+        "handlerMs": {
+          "mean": 0.6026929720408387,
+          "median": 0.6695094928145409,
+          "p95": 0.8005569875240326
+        },
+        "cpuMs": {
+          "mean": 2.684570239583334,
+          "median": 2.960339000000033,
+          "p95": 3.5810470000000123
+        },
+        "guiInstructions": {
+          "mean": 18193062.628472224,
+          "median": 21696530.0,
+          "p95": 24063438
+        },
+        "blockCpuMsPerInput": 3.308852604166667,
+        "blockCpuMsPerInputByPass": [
+          3.255477027777778,
+          3.3622281805555554
+        ],
+        "blockGuiInstructionsPerInput": 19234900.756944444,
+        "framesOver16_7Ms": 0,
+        "minCounterRunningFraction": 1,
+        "geometry": {
+          "cardWidth": 933,
+          "cardHeight": 617,
+          "listHeight": 528,
+          "cacheBuffer": 320,
+          "reuseItems": false
+        }
+      },
+      {
+        "dataset": "herdr",
+        "variant": "stock",
+        "runs": 2,
+        "options": 49,
+        "samples": 396,
+        "frameMs": {
+          "mean": 5.020297413447288,
+          "median": 3.5174549967050552,
+          "p95": 10.485094994306564
+        },
+        "handlerMs": {
+          "mean": 0.8004830024308629,
+          "median": 0.7315229922533035,
+          "p95": 1.6774929910898209
+        },
+        "cpuMs": {
+          "mean": 2.4322828005050474,
+          "median": 2.4503314999999475,
+          "p95": 4.140925000000038
+        },
+        "guiInstructions": {
+          "mean": 18594012.896464646,
+          "median": 16948154.0,
+          "p95": 38732504
+        },
+        "blockCpuMsPerInput": 3.00958995959596,
+        "blockCpuMsPerInputByPass": [
+          2.9926615606060616,
+          3.0265183585858586
+        ],
+        "blockGuiInstructionsPerInput": 19494419.184343435,
+        "framesOver16_7Ms": 1,
+        "minCounterRunningFraction": 1,
+        "geometry": {
+          "cardWidth": 933,
+          "cardHeight": 617,
+          "listHeight": 528,
+          "cacheBuffer": 320,
+          "reuseItems": false
+        }
+      },
+      {
+        "dataset": "herdr",
+        "variant": "stock-batched",
+        "runs": 2,
+        "options": 49,
+        "samples": 396,
+        "frameMs": {
+          "mean": 5.030227711631192,
+          "median": 3.028987005352974,
+          "p95": 10.566263005137444
+        },
+        "handlerMs": {
+          "mean": 0.5153109666449253,
+          "median": 0.5459069982171059,
+          "p95": 0.8319270014762878
+        },
+        "cpuMs": {
+          "mean": 2.1628185833333355,
+          "median": 2.259287000000029,
+          "p95": 3.457618000000025
+        },
+        "guiInstructions": {
+          "mean": 13962315.974747475,
+          "median": 13947968.0,
+          "p95": 24255704
+        },
+        "blockCpuMsPerInput": 2.7149142474747476,
+        "blockCpuMsPerInputByPass": [
+          2.720445267676768,
+          2.7093832272727276
+        ],
+        "blockGuiInstructionsPerInput": 14836818.772727273,
+        "framesOver16_7Ms": 2,
+        "minCounterRunningFraction": 1,
+        "geometry": {
+          "cardWidth": 933,
+          "cardHeight": 617,
+          "listHeight": 528,
+          "cacheBuffer": 320,
+          "reuseItems": false
+        }
+      }
+    ]
+  }
+]
