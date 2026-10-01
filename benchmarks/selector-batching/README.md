@@ -1,6 +1,6 @@
 # Selector batching on current Omarchy
 
-Appending filtered rows once instead of individually cuts Hyprland selector filtering CPU work by about half in this run. The production change is three added lines and one replacement in `shell/plugins/menu/Menu.qml`; it preserves stock search, ordering, roles, layout, and selection behavior. The regular non-selector menu already appends an array.
+Appending filtered rows once instead of individually cuts Hyprland selector filtering CPU work by about half in this run. The production change is three added lines and one replacement in `shell/plugins/menu/Menu.qml`; it preserves stock search, ordering, roles, layout, and selection behavior. The regular non-selector menu still appends rows individually; this patch only batches selector rows.
 
 The stock source is Omarchy `quattro` at `c5b4db77d68e7fbce5cf11120712ea322557e967`. The small batching patch is committed separately as `d7f3bff7`. This evidence branch keeps the harness, fixtures, and results out of the production PR's diff.
 
